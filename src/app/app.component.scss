@@ -33,6 +33,10 @@
   }
 
   mat-sidenav-container {
-      margin-top: 0 !important;
+    margin-top: 0 !important;
+
+    mat-sidenav-content {
+      padding: 5px 25px;
+    }
   }
 }

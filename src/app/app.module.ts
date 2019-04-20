@@ -12,12 +12,22 @@ import {
   MatToolbarModule,
   MatSidenavModule,
   MatIconModule,
-  MatListModule
+  MatListModule,
+  MatFormFieldModule,
+  MatInputModule
 } from '@angular/material';
+import { LoginComponent } from './login/login.component';
+import { WelcomeComponent } from './welcome/welcome.component';
+import { SignupComponent } from './signup/signup.component';
+import { FeedComponent } from './feed/feed.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    LoginComponent,
+    WelcomeComponent,
+    SignupComponent,
+    FeedComponent
   ],
   imports: [
     BrowserModule,
@@ -27,7 +37,9 @@ import {
     MatToolbarModule,
     MatSidenavModule,
     MatIconModule,
-    MatListModule
+    MatListModule,
+    MatFormFieldModule,
+    MatInputModule
   ],
   providers: [],
   bootstrap: [AppComponent]
