@@ -1,26 +1,51 @@
 .login-form-parent {
-    position: absolute;
-    top: 50%;
+	position: absolute;
+	top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%);
-    border: 1px solid rgba(0,0,0,.2);
-    border-radius: 5px;
+    width: 250px;
+	transform: translate(-50%, -50%);
+	border: 1px solid rgba(0, 0, 0, 0.1);
+	border-radius: 5px;
+	background-color: white;
     padding: 25px;
-
-    .lock-icon-parent {
-        text-align: center;
-        padding: 0 0 15px 0;
+    
+    mat-form-field {
+        width: 100%;
     }
 
-    .login-signup {
-        a {
-            text-decoration: none;
-            float: left;
-            font-size: 14px;
-            padding-top: 8px;
-        }
-        button {
-            float: right;
-        }
-    }
+	.lock-icon-parent {
+		text-align: center;
+		padding: 0 0 20px 0;
+		color: rgba(0, 0, 0, 0.8);
+		font-family: "Raleway", sans-serif;
+		font-size: 20px;
+
+		strong {
+			font-family: "Raleway", sans-serif;
+		}
+	}
+
+	.remember-me {
+		font-size: 14px;
+		margin-bottom: 25px;
+		color: rgba(0, 0, 0, 0.5);
+	}
+
+	.login-signup {
+		a {
+			text-decoration: none;
+			float: left;
+			font-size: 14px;
+			padding-top: 8px;
+		}
+		button {
+			float: right;
+		}
+	}
+}
+
+.box-shadow {
+	-webkit-box-shadow: 0px 10px 26px -6px rgba(0, 0, 0, 0.2);
+	-moz-box-shadow: 0px 10px 26px -6px rgba(0, 0, 0, 0.2);
+	box-shadow: 0px 10px 26px -6px rgba(0, 0, 0, 0.2);
 }
