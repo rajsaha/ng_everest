@@ -1,3 +1,47 @@
-<p>
-  signup works!
-</p>
+<div class="parent">
+  <div class="signup-form-parent box-shadow">
+    <div class="lock-icon-parent">
+      Signup to <strong>Everest</strong>
+    </div>
+    <div class="row">
+      <form [formGroup]="signUpForm" (ngSubmit)="onSubmit()">
+        <div class="col-xs-12">
+          <mat-form-field appearance="outline">
+            <mat-label>E-mail</mat-label>
+            <input matInput formControlName="email" />
+          </mat-form-field>
+        </div>
+
+        <div class="col-xs-12">
+          <mat-form-field appearance="outline">
+            <mat-label>Username</mat-label>
+            <input matInput formControlName="username" />
+          </mat-form-field>
+        </div>
+
+        <div class="col-xs-12">
+          <mat-form-field appearance="outline">
+            <mat-label>Password</mat-label>
+            <input matInput type="password" formControlName="password" />
+          </mat-form-field>
+        </div>
+
+        <div class="col-xs-12">
+          <mat-form-field appearance="outline">
+            <mat-label>Retype password</mat-label>
+            <input matInput type="password" formControlName="password_2" />
+          </mat-form-field>
+
+          <div class="remember-me">
+            <mat-checkbox>Remember Me</mat-checkbox>
+          </div>
+
+          <div class="login-signup">
+            <a routerLink="/login">Login</a>
+            <button mat-raised-button color="primary">Sign Up</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

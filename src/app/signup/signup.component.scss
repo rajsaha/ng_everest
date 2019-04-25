@@ -1,0 +1,52 @@
+.parent {
+	width: 100%;
+	height: 100%;
+	background-image: url(../../assets/mountains-cutout.webp);
+	background-size: 100%;
+	background-position: bottom;
+	background-repeat: no-repeat;
+	.signup-form-parent {
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		width: 250px;
+		transform: translate(-50%, -50%);
+		border-radius: 5px;
+		background-color: white;
+		padding: 25px;
+		
+		mat-form-field {
+			width: 100%;
+		}
+	
+		.lock-icon-parent {
+			text-align: center;
+			padding: 0 0 20px 0;
+			color: rgba(0, 0, 0, 0.8);
+			font-family: "Raleway", sans-serif;
+			font-size: 20px;
+	
+			strong {
+				font-family: "Raleway", sans-serif;
+			}
+		}
+	
+		.remember-me {
+			font-size: 14px;
+			margin-bottom: 25px;
+			color: rgba(0, 0, 0, 0.5);
+		}
+	
+		.login-signup {
+			a {
+				text-decoration: none;
+				float: left;
+				font-size: 14px;
+				padding-top: 8px;
+			}
+			button {
+				float: right;
+			}
+		}
+	}
+}
