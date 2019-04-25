@@ -9,6 +9,12 @@
           <mat-form-field appearance="outline">
             <mat-label>E-mail</mat-label>
             <input matInput formControlName="email" />
+            <mat-error *ngIf="signUpForm.controls['email'].hasError('email') && !signUpForm.controls['email'].hasError('required')">
+              Please enter a valid email address
+            </mat-error>
+            <mat-error *ngIf="signUpForm.controls['email'].hasError('required')">
+              Email is <strong>required</strong>
+            </mat-error>
           </mat-form-field>
         </div>
 
@@ -16,6 +22,12 @@
           <mat-form-field appearance="outline">
             <mat-label>Username</mat-label>
             <input matInput formControlName="username" />
+            <mat-error *ngIf="signUpForm.controls['username'].hasError('minlength') && !signUpForm.controls['username'].hasError('required')">
+              Username must be <strong>4</strong> letters or more
+            </mat-error>
+            <mat-error *ngIf="signUpForm.controls['username'].hasError('required')">
+              Username is <strong>required</strong>
+            </mat-error>
           </mat-form-field>
         </div>
 
@@ -23,18 +35,26 @@
           <mat-form-field appearance="outline">
             <mat-label>Password</mat-label>
             <input matInput type="password" formControlName="password" />
+            <mat-error *ngIf="signUpForm.controls['password'].hasError('required')">
+              Password is <strong>required</strong>
+            </mat-error>
+            <mat-error *ngIf="signUpForm.controls['password'].hasError('passwordNotStrong')">
+              {{ signUpForm.controls['password'].errors.error_message }}
+            </mat-error>
+            <mat-error *ngIf="signUpForm.controls['password'].hasError('minlength')">
+              Password must be at least 4 characters
+            </mat-error>
           </mat-form-field>
         </div>
 
         <div class="col-xs-12">
           <mat-form-field appearance="outline">
-            <mat-label>Retype password</mat-label>
-            <input matInput type="password" formControlName="password_2" />
+            <mat-label>Re-type password</mat-label>
+            <input matInput type="password" formControlName="confirm_password" />
+            <mat-error *ngIf="signUpForm.controls['confirm_password'].hasError('passwordNotEquivalent')">
+              Passwords don't match
+            </mat-error>
           </mat-form-field>
-
-          <div class="remember-me">
-            <mat-checkbox>Remember Me</mat-checkbox>
-          </div>
 
           <div class="login-signup">
             <a routerLink="/login">Login</a>
