@@ -50,21 +50,25 @@
     </div>
   </div>
 
+  <div class="timestamp">
+    <small><strong>{{ timestamp }}</strong></small>
+  </div>
+
   <!-- Controls -->
   <div class="controls clearfix">
     <div class="row">
       <div class="col-4">
-        <button class="btn btn-like">
+        <button mat-button class="btn btn-like">
           <fa-icon [icon]="faThumbsUp"></fa-icon>
         </button>
       </div>
       <div class="col-4">
-        <button class="btn btn-comment">
+        <button mat-button class="btn btn-comment">
           <fa-icon [icon]="faComment"></fa-icon>
         </button>
       </div>
       <div class="col-4">
-        <button class="btn btn-atc">
+        <button mat-button class="btn btn-atc">
           <fa-icon [icon]="faPlus"></fa-icon>
         </button>
       </div>
@@ -76,15 +80,15 @@
     <div class="row">
       <div class="col-12">
         <div class="comment" *ngFor="let comment of allComments">
-          <p class="username"><strong>{{ comment.username }}</strong></p>
-          <p class="text">{{ comment.content }}</p>
+          <span class="username"><strong>{{ comment.username }}</strong></span>
+          <span class="text">{{ comment.content }}</span>
         </div>
       </div>
     </div>
   </div>
 
   <!-- Add Comment -->
-  <div class="add-comment">
+  <div class="add-comment clearfix">
     <form [formGroup]="commentForm">
       <mat-form-field appearance="outline">
         <textarea matInput placeholder="Leave a comment" formControlName="comment"></textarea>

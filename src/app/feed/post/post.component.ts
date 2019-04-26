@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { faThumbsUp, faComment, faPlus } from '@fortawesome/free-solid-svg-icons';
-import { FormBuilder, Validators, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup } from '@angular/forms';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-post',
@@ -17,7 +18,7 @@ export class PostComponent implements OnInit {
   tags = [];
   description: string;
   image: string;
-  timestamp: Date;
+  timestamp: any;
   allComments = [];
 
   // Icons
@@ -33,6 +34,7 @@ export class PostComponent implements OnInit {
   ngOnInit() {
     this.populatePost();
     this.init_comment_form();
+    console.table(this.data);
   }
 
   populatePost() {
@@ -42,7 +44,7 @@ export class PostComponent implements OnInit {
     this.tags = this.data.tags;
     this.description = this.data.description;
     this.image = this.data.image;
-    this.timestamp = this.data.timestamp;
+    this.timestamp = moment(this.data.timestamp.$date).fromNow();
     this.allComments = this.data.all_comments;
   }
 
