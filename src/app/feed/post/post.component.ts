@@ -34,7 +34,6 @@ export class PostComponent implements OnInit {
   ngOnInit() {
     this.populatePost();
     this.init_comment_form();
-    console.table(this.data);
   }
 
   populatePost() {
