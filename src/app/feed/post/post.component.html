@@ -82,4 +82,14 @@
       </div>
     </div>
   </div>
+
+  <!-- Add Comment -->
+  <div class="add-comment">
+    <form [formGroup]="commentForm">
+      <mat-form-field appearance="outline">
+        <textarea matInput placeholder="Leave a comment" formControlName="comment"></textarea>
+      </mat-form-field>
+      <button *ngIf="commentForm.controls['comment'].value != ''" mat-raised-button color="primary">Add Comment</button>
+    </form>
+  </div>
 </div>
