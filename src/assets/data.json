@@ -10,7 +10,7 @@
             "username": "everest",
             "url": "https://www.youtube.com/watch?v=hXfigUyeHaY",
             "title": "Get started with Angular 2",
-            "tags": "javascript, angular 2",
+            "tags": ["javascript", "angular 2"],
             "description": "thenewboston has been on YouTube for over a decade now. His tutorial videos have helped me through actual couses in university.",
             "image": "https://i.ytimg.com/vi/hXfigUyeHaY/maxresdefault.jpg",
             "timestamp": {
@@ -28,7 +28,7 @@
             "username": "everest",
             "url": "https://blog.hubspot.com/marketing/typography-terms-introduction",
             "title": "Typography 101",
-            "tags": "typography",
+            "tags": ["typography"],
             "description": "Are you interested in fonts and typography? This is one of the best links I've found on the web.",
             "image": "https://blog.hubspot.com/hubfs/typography-for-beginners.jpg?t=1525548538883",
             "timestamp": {
@@ -48,7 +48,7 @@
             "username": "Teddy",
             "url": "https://www.youtube.com/watch?v=QJ9ygdD2sIY",
             "title": "UI Design Tutorial",
-            "tags": "ui design",
+            "tags": ["ui design"],
             "description": "Great for beginners trying to understand the basics of designing user interface.",
             "image": "https://i.imgur.com/Twp8iFo.png",
             "timestamp": {
@@ -67,6 +67,48 @@
                 }
             ],
             "__v": 0
+        },
+        {
+            "_id": {
+                "$oid": "5af04b7f6b7a4030946e68d8"
+            },
+            "recommended_by": [
+                "jonsnow",
+                "bruce_wayne"
+            ],
+            "username": "bruce_wayne",
+            "url": "https://www.youtube.com/watch?v=sh-MQboWJug",
+            "title": "A look at TensorFlow's inception model",
+            "tags": ["tensorflow", "google", "deep learning"],
+            "description": "Just a trippy look into the mind of a machine.",
+            "image": "https://i.ytimg.com/vi/sh-MQboWJug/maxresdefault.jpg",
+            "timestamp": {
+                "$date": "2018-05-07T12:50:07.162Z"
+            },
+            "all_comments": [
+                {
+                    "_id": {
+                        "$oid": "5b226e12d468e14b67bb16fe"
+                    },
+                    "username": "bruce_wayne",
+                    "content": "Deep learning is great for crime fighting!",
+                    "timestamp": {
+                        "$date": "2018-06-14T13:30:58.985Z"
+                    }
+                },
+                {
+                    "_id": {
+                        "$oid": "5c23bf475403142f78d99598"
+                    },
+                    "username": "bruce_wayne",
+                    "content": "Adding a comment",
+                    "timestamp": {
+                        "$date": "2018-12-26T17:49:59.165Z"
+                    }
+                }
+            ],
+            "__v": 0,
+            "recommended_by_count": 2
         }
     ]
 }

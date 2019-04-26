@@ -7,13 +7,12 @@ import { GetFeedService } from '../services/data/get-feed.service';
   styleUrls: ['./feed.component.scss']
 })
 export class FeedComponent implements OnInit {
-  data = [];
+  posts = [];
   constructor(private getFeedService: GetFeedService) { }
 
   ngOnInit() {
     this.getFeedService.getFeed().subscribe((res: any) => {
-      console.table(res.data);
-      this.data = res;
+      this.posts = res.data;
     });
   }
 

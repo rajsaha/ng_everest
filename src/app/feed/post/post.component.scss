@@ -1,0 +1,95 @@
+@import "../../../../node_modules/bootstrap/dist/css/bootstrap.min.css";
+
+.post {
+    border: 1px solid rgba(0, 0, 0, .1);
+    border-radius: 5px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 15px;
+    max-width: 500px;
+    background-color: white;
+
+    .header {
+        padding: 15px;
+        font-size: 14px;
+    }
+
+    .image {
+        img {
+            width: 100%;
+            display: block;
+        }
+    }
+
+    .title {
+        padding: 20px 15px 10px 15px;
+
+        strong {
+            font-family: 'Raleway', sans-serif;
+        }
+    }
+
+    .tags {
+        padding: 10px 15px;
+        overflow-wrap: break-word;
+        word-wrap: break-word;
+        .tag {
+            a {
+                strong {
+                    color: rgba(0, 0, 0, .8);
+                    border-radius: 5px;
+                    cursor: pointer;
+                    font-size: 12px;
+                    margin-right: 5px; 
+                }
+            }
+        }
+    }
+
+    .description {
+        padding: 15px;
+
+        p {
+            font-family: 'Raleway', sans-serif;
+            font-weight: 200;
+            margin-bottom: 0;
+        }
+    }
+
+    .controls {
+        padding: 15px 15px 10px 15px;
+
+        .btn {
+            font-size: 12px;
+            width: 100%;
+        }
+
+        .btn-like {
+            fa-icon {
+                color: rgba(0,0,0,.1);
+            }
+        }
+
+        .btn-comment {
+            fa-icon {
+                color: rgba(0,0,0,.1);
+            }
+        }
+
+        .btn-atc {
+            fa-icon {
+                color: rgba(0,0,0,.1);
+            }
+        }
+    }
+
+    .all-comments {
+        background-color: rgba(0, 0, 0, .1);
+        padding: 15px 15px 0 15px;
+
+        .comment {
+            font-size: 14px;
+        }
+    }
+}
+
