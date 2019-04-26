@@ -26,11 +26,12 @@
 
         strong {
             font-family: 'Raleway', sans-serif;
+            font-size: 20px;
         }
     }
 
     .tags {
-        padding: 10px 15px;
+        padding: 10px 15px 5px 15px;
         overflow-wrap: break-word;
         word-wrap: break-word;
         .tag {
@@ -51,7 +52,6 @@
         line-height: 25px;
 
         p {
-            font-family: 'Raleway', sans-serif;
             font-weight: 200;
             margin-bottom: 0;
         }
@@ -85,7 +85,7 @@
     }
 
     .all-comments {
-        background-color: rgba(0, 0, 0, .05);
+        background-color: #FAFAFA;
         margin-top: 10px;
         padding: 15px 15px 0 15px;
 
@@ -104,8 +104,10 @@
     }
 
     .timestamp {
+        color: #EEE;
         padding-left: 15px;
         margin-bottom: 15px;
+        text-transform: uppercase;
     }
 
     .add-comment {
