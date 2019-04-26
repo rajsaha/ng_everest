@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
 // Angular Material
 import {
@@ -22,6 +23,7 @@ import { LoginComponent } from './login/login.component';
 import { WelcomeComponent } from './welcome/welcome.component';
 import { SignupComponent } from './signup/signup.component';
 import { FeedComponent } from './feed/feed.component';
+import { PostComponent } from './feed/post/post.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +31,8 @@ import { FeedComponent } from './feed/feed.component';
     LoginComponent,
     WelcomeComponent,
     SignupComponent,
-    FeedComponent
+    FeedComponent,
+    PostComponent
   ],
   imports: [
     BrowserModule,
@@ -43,7 +46,8 @@ import { FeedComponent } from './feed/feed.component';
     MatFormFieldModule,
     MatInputModule,
     MatCheckboxModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

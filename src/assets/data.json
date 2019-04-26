@@ -1,0 +1,72 @@
+{
+    "data": [
+        {
+            "_id": {
+                "$oid": "5aeef313d1d4a4385a311523"
+            },
+            "recommended_by": [
+                "dave_mustaine"
+            ],
+            "username": "everest",
+            "url": "https://www.youtube.com/watch?v=hXfigUyeHaY",
+            "title": "Get started with Angular 2",
+            "tags": "javascript, angular 2",
+            "description": "thenewboston has been on YouTube for over a decade now. His tutorial videos have helped me through actual couses in university.",
+            "image": "https://i.ytimg.com/vi/hXfigUyeHaY/maxresdefault.jpg",
+            "timestamp": {
+                "$date": "2018-05-06T12:20:35.129Z"
+            },
+            "all_comments": [],
+            "__v": 0,
+            "recommended_by_count": 1
+        },
+        {
+            "_id": {
+                "$oid": "5aeef42dd1d4a4385a311525"
+            },
+            "recommended_by": [],
+            "username": "everest",
+            "url": "https://blog.hubspot.com/marketing/typography-terms-introduction",
+            "title": "Typography 101",
+            "tags": "typography",
+            "description": "Are you interested in fonts and typography? This is one of the best links I've found on the web.",
+            "image": "https://blog.hubspot.com/hubfs/typography-for-beginners.jpg?t=1525548538883",
+            "timestamp": {
+                "$date": "2018-05-06T12:25:17.718Z"
+            },
+            "all_comments": [],
+            "__v": 0
+        },
+        {
+            "_id": {
+                "$oid": "5af33cb9afc94d2c0dd301ff"
+            },
+            "recommended_by": [
+                "everest"
+            ],
+            "recommended_by_count": 1,
+            "username": "Teddy",
+            "url": "https://www.youtube.com/watch?v=QJ9ygdD2sIY",
+            "title": "UI Design Tutorial",
+            "tags": "ui design",
+            "description": "Great for beginners trying to understand the basics of designing user interface.",
+            "image": "https://i.imgur.com/Twp8iFo.png",
+            "timestamp": {
+                "$date": "2018-05-09T18:23:53.790Z"
+            },
+            "all_comments": [
+                {
+                    "_id": {
+                        "$oid": "5b97e9cb5189d51ca88969df"
+                    },
+                    "username": "everest",
+                    "content": "This is pretty cool!",
+                    "timestamp": {
+                        "$date": "2018-09-11T16:14:03.640Z"
+                    }
+                }
+            ],
+            "__v": 0
+        }
+    ]
+}
