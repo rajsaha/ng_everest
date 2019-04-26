@@ -9,13 +9,15 @@
   </div>
 
   <!-- Image -->
-  <div class="image">
-    <div class="row">
-      <div class="col-12">
-        <img [src]="image" [alt]="title">
+  <a [href]="url" target="_blank">
+    <div class="image">
+      <div class="row">
+        <div class="col-12">
+          <img [src]="image" [alt]="title">
+        </div>
       </div>
     </div>
-  </div>
+  </a>
 
   <!-- Title -->
   <div class="title">
@@ -52,13 +54,19 @@
   <div class="controls clearfix">
     <div class="row">
       <div class="col-4">
-        <button class="btn btn-like"><fa-icon [icon]="faThumbsUp"></fa-icon></button>
+        <button class="btn btn-like">
+          <fa-icon [icon]="faThumbsUp"></fa-icon>
+        </button>
       </div>
       <div class="col-4">
-        <button class="btn btn-comment"><fa-icon [icon]="faComment"></fa-icon></button>
+        <button class="btn btn-comment">
+          <fa-icon [icon]="faComment"></fa-icon>
+        </button>
       </div>
       <div class="col-4">
-        <button class="btn btn-atc"><fa-icon [icon]="faPlus"></fa-icon></button>
+        <button class="btn btn-atc">
+          <fa-icon [icon]="faPlus"></fa-icon>
+        </button>
       </div>
     </div>
   </div>
