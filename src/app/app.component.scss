@@ -14,6 +14,33 @@
     }
   }
 
+  .profile-container {
+    width: 100%;
+
+    span {
+      float: right;
+      padding-top: 5px;
+      margin-right: 45px;
+      font-size: 14px;
+    }
+
+    button {
+      float: right;
+    }
+
+    .profile-image {
+      width: 40px;
+      height: 40px;
+      border: 1px solid rgba(0,0,0,.2);
+      border-radius: 50%;
+      float: right;
+      img {
+        border-radius: 50%;
+        width: 100%;
+      }
+    }
+  }
+
   .is-mobile {
     .toolbar {
       position: fixed;
@@ -36,4 +63,8 @@
   mat-sidenav-container {
     margin-top: 0 !important;
   }
+}
+
+.thick-border {
+  border: 1px solid rgba(0,0,0,1) !important;
 }

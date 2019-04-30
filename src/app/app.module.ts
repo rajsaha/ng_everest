@@ -20,12 +20,14 @@ import {
   MatFormFieldModule,
   MatInputModule,
   MatCheckboxModule,
+  MatMenuModule
 } from '@angular/material';
 import { LoginComponent } from './login/login.component';
 import { WelcomeComponent } from './welcome/welcome.component';
 import { SignupComponent } from './signup/signup.component';
 import { FeedComponent } from './feed/feed.component';
 import { PostComponent } from './feed/post/post.component';
+import { ProfileComponent } from './profile/profile.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +36,8 @@ import { PostComponent } from './feed/post/post.component';
     WelcomeComponent,
     SignupComponent,
     FeedComponent,
-    PostComponent
+    PostComponent,
+    ProfileComponent
   ],
   imports: [
     BrowserModule,
@@ -48,6 +51,7 @@ import { PostComponent } from './feed/post/post.component';
     MatFormFieldModule,
     MatInputModule,
     MatCheckboxModule,
+    MatMenuModule,
     ReactiveFormsModule,
     HttpClientModule,
     FontAwesomeModule

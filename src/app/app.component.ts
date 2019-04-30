@@ -1,5 +1,6 @@
 import { ChangeDetectorRef, Component, OnDestroy } from '@angular/core';
 import { MediaMatcher } from '@angular/cdk/layout';
+import { faUser, faSignOutAlt, faStream } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-root',
@@ -8,6 +9,10 @@ import { MediaMatcher } from '@angular/cdk/layout';
 })
 export class AppComponent implements OnDestroy {
   mobileQuery: MediaQueryList;
+
+  faUser = faUser;
+  faSignOutAlt = faSignOutAlt;
+  faStream = faStream;
 
   private _mobileQueryListener: () => void;
 
