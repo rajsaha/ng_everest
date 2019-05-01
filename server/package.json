@@ -1,0 +1,33 @@
+{
+  "name": "everest_backend",
+  "version": "1.0.0",
+  "description": "Backend for Everest",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rajsaha/everest_v2.git"
+  },
+  "keywords": [
+    "everest",
+    "nodejs",
+    "angular",
+    "mongodb"
+  ],
+  "author": "Raj Narayan Saha",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/rajsaha/everest_v2/issues"
+  },
+  "homepage": "https://github.com/rajsaha/everest_v2#readme",
+  "dependencies": {
+    "express": "^4.16.4",
+    "morgan": "^1.9.1"
+  },
+  "devDependencies": {
+    "nodemon": "^1.19.0"
+  }
+}
