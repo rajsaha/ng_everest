@@ -14,15 +14,20 @@
     }
   }
 
+  .toolbar {
+    box-shadow: 0 8px 20px 0 rgba(218,224,235,.6);
+    z-index: 100;
+
+    .app-name {
+      font-family: 'Raleway', sans-serif;
+      font-weight: 200;
+      text-transform: uppercase;
+      letter-spacing: 10px;
+    }
+  }
+
   .profile-container {
     width: 100%;
-
-    span {
-      float: right;
-      padding-top: 5px;
-      margin-right: 45px;
-      font-size: 14px;
-    }
 
     button {
       float: right;

@@ -3,10 +3,9 @@
     <button mat-icon-button (click)="snav.toggle()">
       <mat-icon>menu</mat-icon>
     </button>
-    <h1>Everest</h1>
+    <h1 class="app-name">Everest</h1>
     <div class="profile-container">
       <div class="profile-image" [matMenuTriggerFor]="menu">
-        <span>Username</span>
         <img src="../assets/portrait.jpg" alt="portrait">
       </div>
       <mat-menu #menu="matMenu">
