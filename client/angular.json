@@ -62,7 +62,8 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "everest:build"
+            "browserTarget": "everest:build",
+            "port": 4444
           },
           "configurations": {
             "production": {
