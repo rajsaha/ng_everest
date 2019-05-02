@@ -20,7 +20,8 @@ import {
   MatFormFieldModule,
   MatInputModule,
   MatCheckboxModule,
-  MatMenuModule
+  MatMenuModule,
+  MatSelectModule
 } from '@angular/material';
 import { LoginComponent } from './login/login.component';
 import { WelcomeComponent } from './welcome/welcome.component';
@@ -52,6 +53,7 @@ import { ProfileComponent } from './profile/profile.component';
     MatInputModule,
     MatCheckboxModule,
     MatMenuModule,
+    MatSelectModule,
     ReactiveFormsModule,
     HttpClientModule,
     FontAwesomeModule
