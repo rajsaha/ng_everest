@@ -1,5 +1,6 @@
 <div class="profile-container">
   <mat-tab-group>
+    <!-- Collections -->
     <mat-tab label="Collections">
       <div class="section">
         <div class="section-header">
@@ -7,6 +8,16 @@
         </div>
       </div>
     </mat-tab>
+
+    <mat-tab label="Followers">
+      <div class="section">
+        <div class="section-header">
+          <h4>Followers</h4>
+        </div>
+      </div>
+    </mat-tab>
+
+    <!-- Profile Management -->
     <mat-tab label="Profile Management">
       <div class="section">
         <div class="section-header">
@@ -15,48 +26,55 @@
 
         <div class="section-content">
           <h6>Public Information</h6>
-          <mat-form-field appearance="outline">
-            <mat-label>Name</mat-label>
-            <input matInput placeholder="Name">
-          </mat-form-field>
 
-          <mat-form-field appearance="outline">
-            <mat-label>Username</mat-label>
-            <input matInput placeholder="Username">
-          </mat-form-field>
+          <form [formGroup]="profileForm" (ngSubmit)="saveProfileForm()">
+            <mat-form-field appearance="outline">
+              <mat-label>Name</mat-label>
+              <input matInput placeholder="Name" formControlName="name">
+            </mat-form-field>
 
-          <mat-form-field appearance="outline">
-            <mat-label>Website</mat-label>
-            <input matInput placeholder="http://www.website.com">
-          </mat-form-field>
+            <mat-form-field appearance="outline">
+              <mat-label>Username</mat-label>
+              <input matInput placeholder="Username" formControlName="username">
+            </mat-form-field>
 
-          <mat-form-field appearance="outline">
-            <mat-label>Bio</mat-label>
-            <input matInput placeholder="Your biography">
-          </mat-form-field>
+            <mat-form-field appearance="outline">
+              <mat-label>Website</mat-label>
+              <input matInput placeholder="http://www.website.com" formControlName="website">
+            </mat-form-field>
 
-          <h6>Private Information</h6>
-          <mat-form-field appearance="outline">
-            <mat-label>Email</mat-label>
-            <input matInput placeholder="Email">
-          </mat-form-field>
+            <mat-form-field appearance="outline">
+              <mat-label>Bio</mat-label>
+              <textarea matInput placeholder="Your biography" formControlName="bio"></textarea>
+            </mat-form-field>
 
-          <mat-form-field appearance="outline">
-            <mat-label>Phone Number</mat-label>
-            <input matInput placeholder="Email">
-          </mat-form-field>
+            <h6>Private Information</h6>
+            <mat-form-field appearance="outline">
+              <mat-label>Email</mat-label>
+              <input matInput placeholder="Email" formControlName="email">
+            </mat-form-field>
 
-          <mat-form-field appearance="outline">
-            <mat-label>Gender</mat-label>
-            <mat-select>
-              <mat-option value="m">
-                Male
-              </mat-option>
-              <mat-option value="f">
-                Female
-              </mat-option>
-            </mat-select>
-          </mat-form-field>
+            <mat-form-field appearance="outline">
+              <mat-label>Phone Number</mat-label>
+              <input matInput placeholder="0123456789" formControlName="phoneNumber">
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+              <mat-label>Gender</mat-label>
+              <mat-select formControlName="gender">
+                <mat-option value="m">
+                  Male
+                </mat-option>
+                <mat-option value="f">
+                  Female
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+
+            <div class="form-button-container clearfix">
+              <button mat-raised-button color="primary">Save</button>
+            </div>
+          </form>
         </div>
       </div>
 
@@ -65,20 +83,26 @@
           <h4>Change Password</h4>
         </div>
         <div class="section-content">
-          <mat-form-field appearance="outline">
-            <mat-label>Current Password</mat-label>
-            <input matInput placeholder="">
-          </mat-form-field>
+          <form [formGroup]="passwordForm" (ngSubmit)="changePasswordForm()">
+            <mat-form-field appearance="outline">
+              <mat-label>Current Password</mat-label>
+              <input matInput placeholder="" formControlName="currentPass">
+            </mat-form-field>
 
-          <mat-form-field appearance="outline">
-            <mat-label>New Password</mat-label>
-            <input matInput placeholder="">
-          </mat-form-field>
+            <mat-form-field appearance="outline">
+              <mat-label>New Password</mat-label>
+              <input matInput placeholder="" formControlName="newPass">
+            </mat-form-field>
 
-          <mat-form-field appearance="outline">
-            <mat-label>Confirm New Password</mat-label>
-            <input matInput placeholder="">
-          </mat-form-field>
+            <mat-form-field appearance="outline">
+              <mat-label>Confirm New Password</mat-label>
+              <input matInput placeholder="" formControlName="newPassConfirm">
+            </mat-form-field>
+
+            <div class="form-button-container clearfix">
+              <button mat-raised-button color="primary">Save</button>
+            </div>
+          </form>
         </div>
       </div>
 

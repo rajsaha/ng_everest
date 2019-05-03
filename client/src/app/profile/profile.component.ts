@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder } from '@angular/forms';
 
 @Component({
   selector: 'app-profile',
@@ -6,10 +7,33 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./profile.component.scss']
 })
 export class ProfileComponent implements OnInit {
+  profileForm = this.fb.group({
+    name: [''],
+    username: [''],
+    website: [''],
+    bio: [''],
+    email: [''],
+    phoneNumber: [''],
+    gender: ['']
+  });
 
-  constructor() { }
+  passwordForm = this.fb.group({
+    currentPass: [''],
+    newPass: [''],
+    newPassConfirm: ['']
+  });
+
+  constructor(private fb: FormBuilder) { }
 
   ngOnInit() {
+  }
+
+  saveProfileForm() {
+    console.log(this.profileForm.value);
+  }
+
+  changePasswordForm() {
+    console.log(this.passwordForm.value);
   }
 
 }
