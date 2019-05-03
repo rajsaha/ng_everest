@@ -21,7 +21,8 @@ import {
   MatInputModule,
   MatCheckboxModule,
   MatMenuModule,
-  MatSelectModule
+  MatSelectModule,
+  MatTabsModule
 } from '@angular/material';
 import { LoginComponent } from './login/login.component';
 import { WelcomeComponent } from './welcome/welcome.component';
@@ -54,6 +55,7 @@ import { ProfileComponent } from './profile/profile.component';
     MatCheckboxModule,
     MatMenuModule,
     MatSelectModule,
+    MatTabsModule,
     ReactiveFormsModule,
     HttpClientModule,
     FontAwesomeModule
