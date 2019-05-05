@@ -89,11 +89,11 @@
   </div>
 
   <!-- Add Comment -->
-  <div class="add-comment clearfix">
+  <div class="add-comment">
     <form [formGroup]="commentForm">
       <textarea matInput placeholder="Leave a comment" autosize formControlName="comment"></textarea>
-      <button *ngIf="commentForm.controls['comment'].value != ''" mat-raised-button color="primary">
-        <fa-icon [icon]="faPaperPlane"></fa-icon>
+      <button *ngIf="commentForm.controls['comment'].value != ''">
+        <fa-icon [icon]="faReply"></fa-icon>
       </button>
     </form>
   </div>

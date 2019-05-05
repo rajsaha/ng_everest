@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { faThumbsUp, faComment, faPlus, faPaperPlane } from '@fortawesome/free-solid-svg-icons';
+import { faThumbsUp, faComment, faPlus, faReply } from '@fortawesome/free-solid-svg-icons';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import * as moment from 'moment';
 
@@ -25,7 +25,7 @@ export class PostComponent implements OnInit {
   faThumbsUp = faThumbsUp;
   faComment = faComment;
   faPlus = faPlus;
-  faPaperPlane = faPaperPlane;
+  faReply = faReply;
 
   // Form
   commentForm: FormGroup;

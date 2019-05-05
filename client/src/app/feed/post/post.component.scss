@@ -59,7 +59,7 @@
     }
 
     .controls {
-        padding: 0 15px 0 15px;
+        padding: 0 15px 10px 15px;
 
         .btn {
             font-size: 14px;
@@ -93,7 +93,7 @@
     .all-comments {
         border-top: 1px solid rgba(0,0,0,0.1);
         margin-top: 10px;
-        padding: 20px 15px 0 15px;
+        padding: 15px 15px 0 15px;
 
         .comment {
             font-size: 14px;
@@ -112,14 +112,16 @@
     .timestamp {
         color: rgba(0,0,0,.3);
         padding-left: 15px;
-        margin-bottom: 15px;
+        margin-bottom: 10px;
         text-transform: lowercase;
     }
 
     .add-comment {
-        padding: 15px 15px 0 15px;
+        border-top: 1px solid rgba(0,0,0,.1);
+        padding: 20px 15px 0 15px;
+        position: relative;
         textarea {
-            width: 100% !important;
+            width: 90% !important;
             border-style: none; 
 	        border: 0;
             border-color: transparent;
@@ -133,16 +135,20 @@
         }
 
         button {
-            border-radius: 4px;
-            width: 25px;
-            height: 25px;
-            float: right;
-            margin-bottom: 15px;
+            background-color: transparent;
+            border: none;
             font-size: 14px;
             opacity: 0;
-            box-shadow: 0 3px 1px -2px rgba(0,0,0,.2), 0 2px 2px 0 rgba(0,0,0,.14), 0 1px 5px 0 rgba(0,0,0,.12);
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
             animation: buttonAppear 0.1s ease-in-out;
             animation-fill-mode: forwards;
+
+            fa-icon {
+                color: rgba(0,0,0,.5);
+            }
         }
     }
 }
