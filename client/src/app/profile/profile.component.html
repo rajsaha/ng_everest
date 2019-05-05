@@ -1,5 +1,5 @@
 <div class="profile-container">
-  <mat-tab-group>
+  <mat-tab-group mat-align-tabs="center">
     <!-- Collections -->
     <mat-tab label="Collections">
       <div class="section">
@@ -57,18 +57,6 @@
             <mat-form-field appearance="outline">
               <mat-label>Phone Number</mat-label>
               <input matInput placeholder="0123456789" formControlName="phoneNumber">
-            </mat-form-field>
-
-            <mat-form-field appearance="outline">
-              <mat-label>Gender</mat-label>
-              <mat-select formControlName="gender">
-                <mat-option value="m">
-                  Male
-                </mat-option>
-                <mat-option value="f">
-                  Female
-                </mat-option>
-              </mat-select>
             </mat-form-field>
 
             <div class="form-button-container clearfix">

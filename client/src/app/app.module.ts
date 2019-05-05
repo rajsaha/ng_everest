@@ -9,6 +9,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { AutosizeModule } from 'ngx-autosize';
 
 // Angular Material
 import {
@@ -22,7 +23,8 @@ import {
   MatCheckboxModule,
   MatMenuModule,
   MatSelectModule,
-  MatTabsModule
+  MatTabsModule,
+  MatBadgeModule
 } from '@angular/material';
 import { LoginComponent } from './login/login.component';
 import { WelcomeComponent } from './welcome/welcome.component';
@@ -56,9 +58,11 @@ import { ProfileComponent } from './profile/profile.component';
     MatMenuModule,
     MatSelectModule,
     MatTabsModule,
+    MatBadgeModule,
     ReactiveFormsModule,
     HttpClientModule,
-    FontAwesomeModule
+    FontAwesomeModule,
+    AutosizeModule
   ],
   providers: [],
   bootstrap: [AppComponent]

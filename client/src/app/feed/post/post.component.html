@@ -50,20 +50,21 @@
     </div>
   </div>
 
+  <!-- Timestamp -->
   <div class="timestamp">
-    <small><strong>{{ timestamp }}</strong></small>
+    <small>{{ timestamp }}</small>
   </div>
 
   <!-- Controls -->
   <div class="controls clearfix">
     <div class="row">
       <div class="col-4">
-        <button mat-button class="btn btn-like">
+        <button mat-button class="btn btn-like" [ngClass]="{ 'is-liked': isLiked }" (click)="isLiked = !isLiked">
           <fa-icon [icon]="faThumbsUp"></fa-icon>
         </button>
       </div>
       <div class="col-4">
-        <button mat-button class="btn btn-comment">
+        <button mat-button class="btn btn-comment" [ngClass]="{ 'show-comments': showComments }" (click)="showComments = !showComments">
           <fa-icon [icon]="faComment"></fa-icon>
         </button>
       </div>
@@ -76,7 +77,7 @@
   </div>
 
   <!-- All Comments -->
-  <div class="all-comments" *ngIf="allComments.length > 0">
+  <div class="all-comments" *ngIf="allComments.length > 0 && showComments">
     <div class="row">
       <div class="col-12">
         <div class="comment" *ngFor="let comment of allComments">
@@ -90,10 +91,10 @@
   <!-- Add Comment -->
   <div class="add-comment clearfix">
     <form [formGroup]="commentForm">
-      <mat-form-field appearance="outline">
-        <textarea matInput placeholder="Leave a comment" formControlName="comment"></textarea>
-      </mat-form-field>
-      <button *ngIf="commentForm.controls['comment'].value != ''" mat-raised-button color="primary">Add Comment</button>
+      <textarea matInput placeholder="Leave a comment" autosize formControlName="comment"></textarea>
+      <button *ngIf="commentForm.controls['comment'].value != ''" mat-raised-button color="primary">
+        <fa-icon [icon]="faPaperPlane"></fa-icon>
+      </button>
     </form>
   </div>
 </div>

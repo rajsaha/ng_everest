@@ -66,6 +66,11 @@
             width: 100%;
         }
 
+        .btn:focus {
+            outline: 0;
+            box-shadow: none;
+        }
+
         .btn-like {
             fa-icon {
                 color: rgba(0,0,0,.2);
@@ -86,9 +91,9 @@
     }
 
     .all-comments {
-        background-color: #FAFAFA;
+        border-top: 1px solid rgba(0,0,0,0.1);
         margin-top: 10px;
-        padding: 15px 15px 0 15px;
+        padding: 20px 15px 0 15px;
 
         .comment {
             font-size: 14px;
@@ -105,23 +110,33 @@
     }
 
     .timestamp {
-        color: rgba(0,0,0,.2);
+        color: rgba(0,0,0,.3);
         padding-left: 15px;
         margin-bottom: 15px;
-        text-transform: uppercase;
+        text-transform: lowercase;
     }
 
     .add-comment {
         padding: 15px 15px 0 15px;
-        mat-form-field {
-            width: 100%;
+        textarea {
+            width: 100% !important;
+            border-style: none; 
+	        border: 0;
+            border-color: transparent;
             font-size: 14px;
+            resize: none;
+        }
+
+        textarea:focus {
+            outline: 0;
+            border: 0;
         }
 
         button {
             border-radius: 4px;
+            width: 25px;
+            height: 25px;
             float: right;
-            padding: 10px;
             margin-bottom: 15px;
             font-size: 14px;
             opacity: 0;
@@ -130,6 +145,22 @@
             animation-fill-mode: forwards;
         }
     }
+}
+
+.is-liked {
+    fa-icon {
+        color: blue !important;
+    }
+}
+
+.show-comments {
+    fa-icon {
+        color: rgba(0,0,0,.5) !important;
+    }
+}
+
+textarea {
+    border: none !important;
 }
 
 @keyframes buttonAppear {

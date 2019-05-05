@@ -13,8 +13,7 @@ export class ProfileComponent implements OnInit {
     website: [''],
     bio: [''],
     email: [''],
-    phoneNumber: [''],
-    gender: ['']
+    phoneNumber: ['']
   });
 
   passwordForm = this.fb.group({
