@@ -121,7 +121,7 @@
         padding: 20px 15px 0 15px;
         position: relative;
         textarea {
-            width: 90% !important;
+            width: 100% !important;
             border-style: none; 
 	        border: 0;
             border-color: transparent;
@@ -138,11 +138,8 @@
             background-color: transparent;
             border: none;
             font-size: 14px;
+            float: right;
             opacity: 0;
-            position: absolute;
-            right: 15px;
-            top: 50%;
-            transform: translateY(-50%);
             animation: buttonAppear 0.1s ease-in-out;
             animation-fill-mode: forwards;
 

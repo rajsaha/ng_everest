@@ -64,7 +64,8 @@
         </button>
       </div>
       <div class="col-4">
-        <button mat-button class="btn btn-comment" [ngClass]="{ 'show-comments': showComments }" (click)="showComments = !showComments">
+        <button mat-button class="btn btn-comment" [ngClass]="{ 'show-comments': showComments }"
+          (click)="showComments = !showComments">
           <fa-icon [icon]="faComment"></fa-icon>
         </button>
       </div>
@@ -91,10 +92,16 @@
   <!-- Add Comment -->
   <div class="add-comment">
     <form [formGroup]="commentForm">
-      <textarea matInput placeholder="Leave a comment" autosize formControlName="comment"></textarea>
-      <button *ngIf="commentForm.controls['comment'].value != ''">
-        <fa-icon [icon]="faReply"></fa-icon>
-      </button>
+      <div class="row">
+        <div [ngClass]="commentForm.controls['comment'].value != '' ? 'col-10' : 'col-12'">
+          <textarea matInput placeholder="Leave a comment" autosize formControlName="comment"></textarea>
+        </div>
+        <div class="col-2 text-center" *ngIf="commentForm.controls['comment'].value != ''">
+          <button>
+            <fa-icon [icon]="faReply"></fa-icon>
+          </button>
+        </div>
+      </div>
     </form>
   </div>
 </div>
