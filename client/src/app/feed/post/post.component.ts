@@ -58,4 +58,16 @@ export class PostComponent implements OnInit {
     });
   }
 
+  addComment() {
+    console.log(this.commentForm.value);
+  }
+
+  textareaEnterPressed($event: KeyboardEvent) {
+    $event.preventDefault()
+    $event.stopPropagation()
+
+    // handle form submission
+    console.log(this.commentForm.value);
+  }
+
 }
