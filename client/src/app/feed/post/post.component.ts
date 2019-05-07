@@ -1,13 +1,16 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { faThumbsUp, faComment, faPlus, faReply } from '@fortawesome/free-solid-svg-icons';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { MatDialog } from '@angular/material';
 import * as moment from 'moment';
+import { AtcComponent } from './atc/atc.component';
 
 @Component({
   selector: 'app-post',
   templateUrl: './post.component.html',
   styleUrls: ['./post.component.scss']
 })
+
 export class PostComponent implements OnInit {
   @Input() data: any;
 
@@ -30,11 +33,13 @@ export class PostComponent implements OnInit {
   // Form
   commentForm: FormGroup;
 
-  //Toggles
+  // Toggles
   isLiked = false;
   showComments = false;
 
-  constructor(private fb: FormBuilder) { }
+  constructor(
+    private fb: FormBuilder,
+    public dialog: MatDialog) { }
 
   ngOnInit() {
     this.populatePost();
@@ -70,4 +75,17 @@ export class PostComponent implements OnInit {
     console.log(this.commentForm.value);
   }
 
+  openDialog() {
+    const dialogRef = this.dialog.open(AtcComponent, {
+      data: {
+        url: this.url,
+        title: this.title,
+        image: this.image
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+    });
+  }
 }
