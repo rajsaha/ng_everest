@@ -37,9 +37,7 @@ export class PostComponent implements OnInit {
   isLiked = false;
   showComments = false;
 
-  constructor(
-    private fb: FormBuilder,
-    public dialog: MatDialog) { }
+  constructor(private fb: FormBuilder, public dialog: MatDialog) { }
 
   ngOnInit() {
     this.populatePost();

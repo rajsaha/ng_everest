@@ -1,5 +1,6 @@
 import { Component, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { faPlusCircle } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-atc',
@@ -17,6 +18,8 @@ export class AtcComponent {
       name: 'Collection 2'
     }
   ];
+
+  faPlusCircle = faPlusCircle;
 
   constructor(
     public dialogRef: MatDialogRef<AtcComponent>, @Inject(MAT_DIALOG_DATA) public data) { }

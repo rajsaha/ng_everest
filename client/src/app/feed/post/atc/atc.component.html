@@ -1,5 +1,8 @@
-<h1 mat-dialog-title>Add to Collection</h1>
-<p>
+<h1 mat-dialog-title><fa-icon [icon]="faPlusCircle"></fa-icon> Add to Collection</h1>
+<div class="dialog-image">
+  <img [src]="data.image" alt="Image">
+</div>
+<p class="dialog-title">
   <strong>{{ data.title }}</strong>
 </p>
 <div mat-dialog-content>

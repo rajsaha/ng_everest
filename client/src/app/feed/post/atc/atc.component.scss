@@ -1,0 +1,17 @@
+.dialog-image {
+    max-width: 400px;
+    img {
+        border-radius: 3px;
+        max-width: 100%;
+    }
+}
+
+.dialog-title {
+    strong {
+        font-family: 'Raleway', sans-serif;
+    }
+}
+
+mat-form-field {
+    width: 100% !important;
+}
