@@ -65,12 +65,12 @@
       </div>
       <div class="col-4">
         <button mat-button class="btn btn-comment" [ngClass]="{ 'show-comments': showComments }"
-          (click)="showComments = !showComments">
+          (click)="showComments = !showComments" [disabled]="!allComments.length > 0">
           <fa-icon [icon]="faComment"></fa-icon>
         </button>
       </div>
       <div class="col-4">
-        <button mat-button class="btn btn-atc">
+        <button mat-button class="btn btn-atc" (click)="openDialog()">
           <fa-icon [icon]="faPlus"></fa-icon>
         </button>
       </div>

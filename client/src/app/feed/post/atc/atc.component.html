@@ -1,0 +1,18 @@
+<h1 mat-dialog-title>Add to Collection</h1>
+<p>
+  <strong>{{ data.title }}</strong>
+</p>
+<div mat-dialog-content>
+  <mat-form-field appearance="outline">
+    <mat-label>Collections</mat-label>
+    <mat-select>
+      <mat-option *ngFor="let data of mockData" [value]="data.name">
+        {{ data.name }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">Cancel</button>
+  <button mat-button (click)="onYesClick()" cdkFocusInitial>Ok</button>
+</div>
