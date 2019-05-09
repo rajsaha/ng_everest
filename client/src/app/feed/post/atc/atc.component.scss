@@ -1,3 +1,12 @@
+.mat-dialog-title {
+    text-transform: uppercase;
+
+    fa-icon {
+        color: rgba(0,0,0,.7);
+        margin-right: 10px;
+    }
+}
+
 .dialog-image {
     max-width: 400px;
     img {
