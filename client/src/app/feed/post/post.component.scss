@@ -14,6 +14,16 @@
         padding: 15px;
         font-size: 14px;
         border-bottom: 1px solid #EEE;
+
+        .post-menu {
+            display: inline;
+            cursor: pointer;
+
+            fa-icon {
+                float: right;
+                color: rgba(0, 0, 0, .5);
+            }
+        }
     }
 
     .image {

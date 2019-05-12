@@ -4,6 +4,9 @@
     <div class="row">
       <div class="col-12">
         <strong>{{ username }}</strong>
+        <div class="post-menu" (click)="openPostDialog()">
+          <fa-icon [icon]="faEllipsisV"></fa-icon>
+        </div>
       </div>
     </div>
   </div>
@@ -70,7 +73,7 @@
         </button>
       </div>
       <div class="col-4">
-        <button mat-button class="btn btn-atc" (click)="openDialog()">
+        <button mat-button class="btn btn-atc" (click)="openCollectionsDialog()">
           <fa-icon [icon]="faPlus"></fa-icon>
         </button>
       </div>

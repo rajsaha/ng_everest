@@ -1,0 +1,42 @@
+.mat-dialog-title {
+    text-transform: uppercase;
+
+    fa-icon {
+        color: rgba(0,0,0,.7);
+        margin-right: 10px;
+    }
+}
+
+.options {
+    .top {
+        button {
+            display: block;
+            width: 100%;
+            margin-bottom: 5px;
+        }
+    }
+}
+
+.btn-cancel {
+    height: 30px;
+    width: 30px;
+    border-radius: 50px;
+    border: none;
+    background: firebrick;
+}
+
+.btn-share {
+    height: 30px;
+    width: 30px;
+    border-radius: 50px;
+    border: none;
+    background: greenyellow;
+}
+
+.btn-copy {
+    height: 30px;
+    width: 30px;
+    border-radius: 50px;
+    border: none;
+    background: blue;
+}

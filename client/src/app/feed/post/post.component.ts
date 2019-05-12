@@ -1,9 +1,10 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { faThumbsUp, faComment, faPlus, faReply } from '@fortawesome/free-solid-svg-icons';
+import { faThumbsUp, faComment, faPlus, faReply, faEllipsisV } from '@fortawesome/free-solid-svg-icons';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatDialog } from '@angular/material';
 import * as moment from 'moment';
 import { AtcComponent } from './atc/atc.component';
+import { PoComponent } from './po/po.component';
 
 @Component({
   selector: 'app-post',
@@ -29,6 +30,7 @@ export class PostComponent implements OnInit {
   faComment = faComment;
   faPlus = faPlus;
   faReply = faReply;
+  faEllipsisV = faEllipsisV;
 
   // Form
   commentForm: FormGroup;
@@ -73,7 +75,19 @@ export class PostComponent implements OnInit {
     console.log(this.commentForm.value);
   }
 
-  openDialog() {
+  openPostDialog() {
+    const dialogRef = this.dialog.open(PoComponent, {
+      data: {
+        username: this.username
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+    });
+  }
+
+  openCollectionsDialog() {
     const dialogRef = this.dialog.open(AtcComponent, {
       data: {
         url: this.url,

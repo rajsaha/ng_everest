@@ -25,7 +25,8 @@ import {
   MatSelectModule,
   MatTabsModule,
   MatBadgeModule,
-  MatDialogModule
+  MatDialogModule,
+  MatSnackBarModule
 } from '@angular/material';
 import { LoginComponent } from './login/login.component';
 import { WelcomeComponent } from './welcome/welcome.component';
@@ -34,6 +35,7 @@ import { FeedComponent } from './feed/feed.component';
 import { PostComponent } from './feed/post/post.component';
 import { ProfileComponent } from './profile/profile.component';
 import { AtcComponent } from './feed/post/atc/atc.component';
+import { PoComponent } from './feed/post/po/po.component';
 
 @NgModule({
   declarations: [
@@ -44,7 +46,8 @@ import { AtcComponent } from './feed/post/atc/atc.component';
     FeedComponent,
     PostComponent,
     ProfileComponent,
-    AtcComponent
+    AtcComponent,
+    PoComponent
   ],
   imports: [
     BrowserModule,
@@ -63,6 +66,7 @@ import { AtcComponent } from './feed/post/atc/atc.component';
     MatTabsModule,
     MatBadgeModule,
     MatDialogModule,
+    MatSnackBarModule,
     ReactiveFormsModule,
     HttpClientModule,
     FontAwesomeModule,
@@ -70,6 +74,6 @@ import { AtcComponent } from './feed/post/atc/atc.component';
   ],
   providers: [],
   bootstrap: [AppComponent],
-  entryComponents: [AtcComponent]
+  entryComponents: [AtcComponent, PoComponent]
 })
 export class AppModule { }

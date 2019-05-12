@@ -1,0 +1,13 @@
+<h1 mat-dialog-title>
+  <fa-icon [icon]="faCog"></fa-icon>Post Options
+</h1>
+<div class="options">
+  <div class="top">
+    <button mat-stroked-button color="warn">Report Post</button>
+    <button mat-stroked-button>Unfollow '{{ data.username }}'</button>
+    <button mat-stroked-button>Go to Post</button>
+    <button mat-stroked-button>Share</button>
+    <button mat-stroked-button (click)="openSnackBar('Copied link to post', '')">Copy Link</button>
+    <button mat-stroked-button (click)="onNoClick()">Cancel</button>
+  </div>
+</div>
