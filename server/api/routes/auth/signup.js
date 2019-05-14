@@ -4,9 +4,10 @@ const mongoose = require('mongoose');
 
 const User = require('../../../models/User');
 
-router.post('/signup', (req, res, next) => {
+router.post('/', (req, res, next) => {
     const user = new User({
         _id: new mongoose.Types.ObjectId(),
+        email: req.body.email,
         username: req.body.username,
         password: req.body.password
     });
@@ -18,7 +19,8 @@ router.post('/signup', (req, res, next) => {
         console.error(err);
     });
     res.status(200).json({
-        message: 'Handling POST request to /auth/signup'
+        message: 'Handling POST request to /auth/signup',
+        result: user
     });
 });
 

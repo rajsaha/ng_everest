@@ -5,11 +5,14 @@ const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 
 const loginRoute = require('./api/routes/auth/login');
+const signUpRoute = require('./api/routes/auth/signup');
 
-const mongodb_connection_string = 'mongodb+srv://raj:' + process.env.MONGO_ATLAS_PW + '@everest-xvhve.mongodb.net/test?retryWrites=true';
+const mongodb_connection_string = `mongodb://${process.env.MLAB_U}:${process.env.MLAB_PW}@ds121321.mlab.com:21321/ng_everest`;
 
 mongoose.connect(mongodb_connection_string, {
     useNewUrlParser: true
+}).then((res) => {
+    console.log('Connected to database');
 });
 
 mongoose.connection.on('error', (err) => {
@@ -32,6 +35,7 @@ app.use((req, res, next) => {
 
 // Routes which should handle requests
 app.use('/login', loginRoute);
+app.use('/signup', signUpRoute);
 
 app.use((req, res, next) => {
     const error = new Error('Not found');

@@ -1,5 +1,6 @@
 {
     "env": {
-        "MONGO_ATLAS_PW": "6ynY7r#jTcjB"
+        "MLAB_U": "ng_everest",
+        "MLAB_PW": "1ng_everest1"
     }
 }
