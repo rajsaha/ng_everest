@@ -18,12 +18,17 @@ export class ValidationService {
 
   checkPasswordStrength(passwordKey: any) {
     const passwordInput = passwordKey.value;
-    const strongRegEx = new RegExp('^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})');
+    const strongRegEx = new RegExp('(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*]).{6,}');
     if (strongRegEx.test(passwordInput.password)) {
       return null;
     } else {
       let message = '';
       const password = passwordInput.password;
+
+      if (!password.match(/[{6,}]/)) {
+        message = 'At least 6 characters required';
+      }
+
       if (!password.match(/[a-z]/)) {
         message = 'At least 1 lowercase character required';
       }

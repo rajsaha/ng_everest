@@ -14,13 +14,16 @@ router.post('/', (req, res, next) => {
     user.save()
     .then(result => {
         console.log(result);
+        res.status(200).json({
+            message: 'Handling POST request to /auth/signup',
+            result: user
+        });
     })
     .catch(err => {
         console.error(err);
-    });
-    res.status(200).json({
-        message: 'Handling POST request to /auth/signup',
-        result: user
+        res.status(500).json({
+            error: err
+        });
     });
 });
 
