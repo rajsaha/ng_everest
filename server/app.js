@@ -19,6 +19,8 @@ mongoose.connection.on('error', (err) => {
     console.log(`Mongoose connection error: ${err}`);
 });
 
+mongoose.set('useCreateIndex', true);
+
 app.use(morgan('dev'));
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
