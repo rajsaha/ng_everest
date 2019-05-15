@@ -2,7 +2,6 @@ const express = require('express');
 const router = express.Router();
 const mongoose = require('mongoose');
 const Validation = require('../../../services/validation/validation');
-
 const User = require('../../../models/User');
 
 router.post('/', (req, res, next) => {
