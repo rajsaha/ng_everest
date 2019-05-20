@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+const bcryptjs = require('bcryptjs');
 const User = require('../../../models/User');
 
 router.post('/', (req, res, next) => {
@@ -8,28 +9,29 @@ router.post('/', (req, res, next) => {
         password: req.body.password
     };
 
-    User.findOne({
-        username: loginCred.username,
-        password: loginCred.password
-    }).then((result) => {
-        if (result) {
-            res.status(200).json({
-                message: 'Handling POST request to /login',
-                result: result
-            });
-        } else {
-            res.status(404).json({
+    User.findOne({ username: loginCred.username }).then((data) => {
+        // If data is null
+        if (!data) {
+            return res.status(400).json({
                 message: 'User not found'
             });
         }
-    }).catch(err => {
-        console.error(err);
-        res.status(500).json({
-            error: err
+
+        // If password is invalid
+        if (!bcryptjs.compareSync(loginCred.password, data.password)) {
+            return res.status(400).json({
+                message: 'Password is invalid'
+            });
+        }
+
+        return res.status(200).json({
+            message: 'Logged in successfully'
+        });        
+    }).catch((err) => {
+        return res.status(404).json({
+            error: err.message
         });
     });
-
-
 });
 
 module.exports = router;
