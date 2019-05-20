@@ -1,4 +1,5 @@
 var mongoose = require('mongoose');
+const bcryptjs = require('bcryptjs');
 
 var UserSchema = new mongoose.Schema({
     _id: mongoose.Schema.Types.ObjectId,
@@ -42,6 +43,10 @@ var UserSchema = new mongoose.Schema({
         default: 0
     }
 });
+
+UserSchema.methods.comparePassword = (candidatePassword, password, callback) => {
+    return callback(null, bcryptjs.compareSync(candidatePassword, password));
+};
 
 var User = mongoose.model('User', UserSchema);
 module.exports = User;
