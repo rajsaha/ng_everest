@@ -36,6 +36,7 @@ import { PostComponent } from './feed/post/post.component';
 import { ProfileComponent } from './profile/profile.component';
 import { AtcComponent } from './feed/post/atc/atc.component';
 import { PoComponent } from './feed/post/po/po.component';
+import { LoginSnackbarComponent } from './login/login-snackbar/login-snackbar.component';
 
 @NgModule({
   declarations: [
@@ -47,7 +48,8 @@ import { PoComponent } from './feed/post/po/po.component';
     PostComponent,
     ProfileComponent,
     AtcComponent,
-    PoComponent
+    PoComponent,
+    LoginSnackbarComponent
   ],
   imports: [
     BrowserModule,
@@ -74,6 +76,6 @@ import { PoComponent } from './feed/post/po/po.component';
   ],
   providers: [],
   bootstrap: [AppComponent],
-  entryComponents: [AtcComponent, PoComponent]
+  entryComponents: [AtcComponent, PoComponent, LoginSnackbarComponent]
 })
 export class AppModule { }

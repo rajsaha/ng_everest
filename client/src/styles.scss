@@ -3,7 +3,7 @@
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
 
 * {
-    font-family: 'Roboto', sans-serif;
+	font-family: "Roboto", sans-serif;
 }
 
 .box-shadow {
@@ -13,7 +13,7 @@
 }
 
 .active {
-	background-color: rgba(0,0,0,.1);
+	background-color: rgba(0, 0, 0, 0.1);
 	font-weight: bold;
 }
 
@@ -41,5 +41,14 @@ mat-nav-list {
 	display: block;
 	height: 0;
 	clear: both;
- }
+}
 
+.green-snackbar {
+	background-color: #09af00;
+	color: white;
+}
+
+.red-snackbar {
+	background-color: #F44336;
+	color: white;
+}
