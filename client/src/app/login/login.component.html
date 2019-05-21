@@ -1,6 +1,6 @@
 <div class="parent">
   <div class="login-form-parent box-shadow">
-    <div class="lock-icon-parent">
+    <div class="title">
         Login to <strong>Everest</strong>
     </div>
     <div class="row">
@@ -24,13 +24,9 @@
             </mat-error>
           </mat-form-field>
     
-          <div class="remember-me">
-              <mat-checkbox>Remember Me</mat-checkbox>
-          </div>
-    
           <div class="login-signup">
             <a routerLink="/signup">Sign Up</a>
-            <button mat-raised-button color="primary">Login</button>
+            <button mat-raised-button color="primary" [disabled]="loggingIn">Login</button>
           </div>
         </div>
       </form>

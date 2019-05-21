@@ -11,6 +11,7 @@ import { LoginSnackbarComponent } from './login-snackbar/login-snackbar.componen
 })
 export class LoginComponent implements OnInit {
   loginForm: FormGroup;
+  loggingIn = false;
 
   constructor(private fb: FormBuilder, 
     private loginService: LoginService,
@@ -28,7 +29,9 @@ export class LoginComponent implements OnInit {
   }
 
   login() {
+    this.loggingIn = true;
     this.loginService.login(this.loginForm.value).then((res) => {
+      this.loggingIn = false;
       if (!res.error) {
         this.openSnackBar({
           message: {
