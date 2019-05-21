@@ -5,36 +5,35 @@ const bcryptjs = require('bcryptjs');
 const Validation = require('../../../services/validation/validation');
 const User = require('../../../models/User');
 
-router.post('/', (req, res, next) => {
-    const signup_validation_result = Validation.SignUpDataValidation(req.body.email, req.body.username, req.body.password);
-    signup_validation_result.then((response) => {
-        if (response.status) {
-            const hashedPass = bcryptjs.hashSync(req.body.password, 10);
-            const user = new User({
-                _id: new mongoose.Types.ObjectId(),
-                email: req.body.email,
-                username: req.body.username,
-                password: hashedPass
+router.post('/', async (req, res, next) => {
+    const signup_validation_result = Validation.SignUpDataValidation(req.body.email, req.body.username, req.body.password).then((response) => {
+        return response.status
+    });
+
+    if (signup_validation_result) {
+        const user = new User({
+            _id: new mongoose.Types.ObjectId(),
+            email: req.body.email,
+            username: req.body.username,
+            password: req.body.password
+        });
+
+        try {
+            const result = await user.save();
+            res.status(200).json({
+                result: result
             });
-            user.save()
-                .then(result => {
-                    res.status(200).json({
-                        message: 'Handling POST request to /auth/signup',
-                        result: result
-                    });
-                })
-                .catch(err => {
-                    res.status(500).json({
-                        error: err.message
-                    });
-                });
-        } else {
+        } catch (error) {
             res.status(500).json({
-                error: 'Validation failed',
-                messages: response.messages
+                error: error.message
             });
         }
-    });
+    } else {
+        res.status(500).json({
+            error: 'Validation failed',
+            messages: response.messages
+        });
+    }
 });
 
 module.exports = router;

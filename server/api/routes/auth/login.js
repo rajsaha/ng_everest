@@ -20,7 +20,7 @@ router.post('/', async (req, res, next) => {
         }
 
         // Compare plaintext password with hash
-        user.comparePassword(loginCred.password, user.password, (error, match) => {
+        user.comparePassword(loginCred.password, (error, match) => {
             if (!match) {
                 return res.status(400).json({
                     error: error,

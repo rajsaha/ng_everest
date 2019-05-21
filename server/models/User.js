@@ -44,8 +44,16 @@ var UserSchema = new mongoose.Schema({
     }
 });
 
-UserSchema.methods.comparePassword = (candidatePassword, password, callback) => {
-    return callback(null, bcryptjs.compareSync(candidatePassword, password));
+UserSchema.pre('save', function (next) {
+    if (!this.isModified('password')) {
+        return next();
+    }
+    this.password = bcryptjs.hashSync(this.password, 10);
+    next();
+});
+
+UserSchema.methods.comparePassword = function (password, callback) {
+    return callback(null, bcryptjs.compareSync(password, this.password));
 };
 
 var User = mongoose.model('User', UserSchema);
