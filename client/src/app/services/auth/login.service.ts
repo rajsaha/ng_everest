@@ -9,7 +9,7 @@ export class LoginService {
 
   constructor(private http: HttpClient) { }
 
-  login(loginCred: Object): Promise<any> {
+  login(loginCred: object): Promise<any> {
     return new Promise(resolve => {
       this.http
         .post(`${ENV.API_URL}/login`, loginCred)
