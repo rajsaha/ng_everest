@@ -6,6 +6,7 @@ import { WelcomeComponent } from './welcome/welcome.component';
 import { FeedComponent } from './feed/feed.component';
 import { ProfileComponent } from './profile/profile.component';
 import { AuthGuardService } from './services/auth/auth-guard.service';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
 const routes: Routes = [
   {
@@ -16,6 +17,10 @@ const routes: Routes = [
   {
     path: 'welcome',
     component: WelcomeComponent
+  },
+  {
+    path: '404',
+    component: PageNotFoundComponent
   },
   {
     path: 'login',
@@ -34,6 +39,10 @@ const routes: Routes = [
     path: 'profile',
     component: ProfileComponent,
     canActivate: [AuthGuardService]
+  },
+  {
+    path: '**',
+    redirectTo: '404'
   }
 ];
 

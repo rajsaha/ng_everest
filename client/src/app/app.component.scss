@@ -1,76 +1,79 @@
 .app-container {
-  display: flex;
-  flex-direction: column;
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  overflow-x: hidden;
+	display: flex;
+	flex-direction: column;
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	overflow-x: hidden;
 
-  h1 {
-    .app-name {
-      margin-left: 8px;
-    }
-  }
+	h1 {
+		.app-name {
+			margin-left: 8px;
+		}
+	}
 
-  .toolbar {
-    box-shadow: 0 8px 20px 0 rgba(218,224,235,.6);
-    z-index: 100;
+	.toolbar {
+		box-shadow: 0 8px 20px 0 rgba(218, 224, 235, 0.6);
+		z-index: 100;
 
-    .app-name {
-      font-family: 'Raleway', sans-serif;
-      font-weight: 200;
-      text-transform: uppercase;
-      letter-spacing: 10px;
-    }
-  }
+		.app-name {
+			a {
+				font-family: "Raleway", sans-serif;
+				font-weight: 200;
+				text-transform: uppercase;
+        letter-spacing: 10px;
+        text-decoration: none;
+			}
+		}
+	}
 
-  .profile-container {
-    width: 100%;
+	.profile-container {
+		width: 100%;
 
-    button {
-      float: right;
-    }
+		button {
+			float: right;
+		}
 
-    .profile-image {
-      width: 40px;
-      height: 40px;
-      border: 1px solid rgba(0,0,0,.2);
-      border-radius: 50%;
-      float: right;
-      cursor: pointer;
-      img {
-        border-radius: 50%;
-        width: 100%;
-      }
-    }
-  }
+		.profile-image {
+			width: 40px;
+			height: 40px;
+			border: 1px solid rgba(0, 0, 0, 0.2);
+			border-radius: 50%;
+			float: right;
+			cursor: pointer;
+			img {
+				border-radius: 50%;
+				width: 100%;
+			}
+		}
+	}
 
-  .is-mobile {
-    .toolbar {
-      position: fixed;
-      z-index: 2;
-    }
+	.is-mobile {
+		.toolbar {
+			position: fixed;
+			z-index: 2;
+		}
 
-    .sidenav-container {
-      flex: 1 0 auto;
-    }
-  }
+		.sidenav-container {
+			flex: 1 0 auto;
+		}
+	}
 
-  .sidenav-container {
-    flex: 1;
-  }
+	.sidenav-container {
+		flex: 1;
+	}
 
-  mat-sidenav {
-    padding: 15px 25px 0 25px !important;
-  }
+	mat-sidenav {
+		padding: 15px 25px 0 25px !important;
+	}
 
-  mat-sidenav-container {
-    margin-top: 0 !important;
-  }
+	mat-sidenav-container {
+		margin-top: 0 !important;
+	}
 }
 
 .thick-border {
-  border: 1px solid rgba(0,0,0,1) !important;
+	border: 1px solid rgba(0, 0, 0, 1) !important;
 }
