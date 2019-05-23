@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
+import { Router } from '@angular/router';
 import { LoginService } from '@services/auth/login.service';
 import { MatSnackBar } from '@angular/material';
 import { LoginSnackbarComponent } from './login-snackbar/login-snackbar.component';
@@ -13,9 +14,10 @@ export class LoginComponent implements OnInit {
   loginForm: FormGroup;
   loggingIn = false;
 
-  constructor(private fb: FormBuilder, 
-    private loginService: LoginService,
-    private snackBar: MatSnackBar) { }
+  constructor(private router: Router,
+              private fb: FormBuilder,
+              private loginService: LoginService,
+              private snackBar: MatSnackBar) { }
 
   ngOnInit() {
     this.init_login_form();
@@ -40,6 +42,7 @@ export class LoginComponent implements OnInit {
           },
           class: 'green-snackbar',
         });
+        this.router.navigate(['feed']);
       } else {
         this.openSnackBar({
           message: {

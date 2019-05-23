@@ -1,9 +1,12 @@
 const User = require('../../models/User');
+const jwt = require('jsonwebtoken');
+const fs = require('fs');
 
 const Login = (() => {
     const login = async (username, password) => {
         try {
             const user = await User.findOne({ username: username }).exec();
+            const RSA_PRIVATE_KEY = fs.readFileSync(require('path').resolve(__dirname, '../../key/private.pem'));
 
             // If no username found
             if (!user) {
@@ -19,9 +22,16 @@ const Login = (() => {
             });
 
             if (match) {
+                const jwtBearerToken = jwt.sign({}, RSA_PRIVATE_KEY, {
+                    algorithm: 'RS256',
+                    expiresIn: "2d",
+                    subject: user._id.toString()
+                });
                 return {
                     message: "Logged in",
-                    username: username
+                    token: jwtBearerToken,
+                    username: user.username,
+                    expiresIn: 172800000
                 }
             } else {
                 return {

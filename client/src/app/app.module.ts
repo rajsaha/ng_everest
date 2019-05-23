@@ -37,6 +37,7 @@ import { ProfileComponent } from './profile/profile.component';
 import { AtcComponent } from './feed/post/atc/atc.component';
 import { PoComponent } from './feed/post/po/po.component';
 import { LoginSnackbarComponent } from './login/login-snackbar/login-snackbar.component';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
 @NgModule({
   declarations: [
@@ -49,7 +50,8 @@ import { LoginSnackbarComponent } from './login/login-snackbar/login-snackbar.co
     ProfileComponent,
     AtcComponent,
     PoComponent,
-    LoginSnackbarComponent
+    LoginSnackbarComponent,
+    PageNotFoundComponent
   ],
   imports: [
     BrowserModule,

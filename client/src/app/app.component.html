@@ -10,7 +10,7 @@
       </div>
       <mat-menu #menu="matMenu">
         <button mat-menu-item routerLink="/profile" routerLinkActive="active"><fa-icon [icon]="faUser"></fa-icon>&nbsp;&nbsp;View Profile</button>
-        <button mat-menu-item><fa-icon [icon]="faSignOutAlt"></fa-icon>&nbsp;&nbsp;Logout</button>
+        <button mat-menu-item (click)="logout()"><fa-icon [icon]="faSignOutAlt"></fa-icon>&nbsp;&nbsp;Logout</button>
       </mat-menu>
     </div>
   </mat-toolbar>
