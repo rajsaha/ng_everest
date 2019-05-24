@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { ProfileService } from '@services/profile/profile.service';
+import { SnackbarService } from '@services/general/snackbar.service';
 
 @Component({
   selector: 'app-profile',
@@ -30,7 +31,9 @@ export class ProfileComponent implements OnInit {
     newPassConfirm: ['']
   });
 
-  constructor(private fb: FormBuilder, private profileService: ProfileService) { }
+  constructor(private fb: FormBuilder, 
+              private profileService: ProfileService,
+              private snackbarService: SnackbarService) { }
 
   ngOnInit() {
     this.username = localStorage.getItem('username');
@@ -41,9 +44,24 @@ export class ProfileComponent implements OnInit {
   }
 
   saveProfileForm() {
-    console.log(this.profileForm.value);
     this.profileService.updateProfileData(this.profileForm.value).then((res) => {
-      console.log(res);
+      if (!res.error) {
+        this.snackbarService.openSnackBar({
+          message: {
+            message: 'Profile data saved!',
+            error: false
+          },
+          class: 'green-snackbar',
+        });
+      } else {
+        this.snackbarService.openSnackBar({
+          message: {
+            message: `Error: ${res.error}!`,
+            error: true
+          },
+          class: 'red-snackbar',
+        });
+      }
     });
   }
 

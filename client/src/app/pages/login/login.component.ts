@@ -5,6 +5,7 @@ import { LoginService } from '@services/auth/login.service';
 import { CommunicationService } from '@services/general/communication.service';
 import { MatSnackBar } from '@angular/material';
 import { SnackbarComponent } from '../general/snackbar/snackbar.component';
+import { SnackbarService } from '@services/general/snackbar.service';
 
 @Component({
   selector: 'app-login',
@@ -19,6 +20,7 @@ export class LoginComponent implements OnInit {
               private fb: FormBuilder,
               private loginService: LoginService,
               private communicationService: CommunicationService,
+              private snackbarService: SnackbarService,
               private snackBar: MatSnackBar) { }
 
   ngOnInit() {
@@ -37,7 +39,7 @@ export class LoginComponent implements OnInit {
     this.loginService.login(this.loginForm.value).then((res) => {
       this.loggingIn = false;
       if (!res.error) {
-        this.openSnackBar({
+        this.snackbarService.openSnackBar({
           message: {
             message: `Welcome back, ${res.username}!`,
             error: false
@@ -47,7 +49,7 @@ export class LoginComponent implements OnInit {
         this.communicationService.changeAuthState(true);
         this.router.navigate(['feed']);
       } else {
-        this.openSnackBar({
+        this.snackbarService.openSnackBar({
           message: {
             message: `Error: ${res.error}!`,
             error: true
@@ -55,14 +57,6 @@ export class LoginComponent implements OnInit {
           class: 'red-snackbar',
         });
       }
-    });
-  }
-
-  openSnackBar(data: any) {
-    this.snackBar.openFromComponent(SnackbarComponent, {
-      data: data.message,
-      duration: 2000,
-      panelClass: [data.class]
     });
   }
 

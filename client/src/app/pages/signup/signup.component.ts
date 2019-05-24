@@ -5,6 +5,7 @@ import { ValidationService } from '../../services/forms/validation.service';
 import { SignupService } from '@services/signup/signup.service';
 import { MatSnackBar } from '@angular/material';
 import { SnackbarComponent } from '../general/snackbar/snackbar.component';
+import { SnackbarService } from '@services/general/snackbar.service';
 
 @Component({
   selector: 'app-signup',
@@ -20,6 +21,7 @@ export class SignupComponent implements OnInit {
     private router: Router,
     private fb: FormBuilder, 
     private validationService: ValidationService,
+    private snackbarService: SnackbarService,
     private signUpService: SignupService,
     private snackBar: MatSnackBar) { }
 
@@ -33,7 +35,7 @@ export class SignupComponent implements OnInit {
       this.signUpService.signUp(this.signUpForm.value).then((res) => {
         this.signingUp = false;
         if (!res.error) {
-          this.openSnackBar({
+          this.snackbarService.openSnackBar({
             message: {
               message: `Hello, ${res.username}!`,
               error: false
@@ -42,7 +44,7 @@ export class SignupComponent implements OnInit {
           });
           this.router.navigate(['feed']);
         } else {
-          this.openSnackBar({
+          this.snackbarService.openSnackBar({
             message: {
               message: `Error: ${res.error}!`,
               error: true
@@ -61,14 +63,6 @@ export class SignupComponent implements OnInit {
       password: ['', [Validators.required, Validators.minLength(4)]],
       confirm_password: ['']
     }, { validator: [this.validationService.matchingConfirmPasswords, this.validationService.checkPasswordStrength] });
-  }
-
-  openSnackBar(data: any) {
-    this.snackBar.openFromComponent(SnackbarComponent, {
-      data: data.message,
-      duration: 2000,
-      panelClass: [data.class]
-    });
   }
 
 }
