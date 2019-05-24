@@ -7,13 +7,16 @@ import { FormBuilder } from '@angular/forms';
   styleUrls: ['./profile.component.scss']
 })
 export class ProfileComponent implements OnInit {
+  profilePicForm = this.fb.group({
+
+  });
+
   profileForm = this.fb.group({
     name: [''],
-    username: [''],
+    username: [{value: '' , disabled: true}],
     website: [''],
     bio: [''],
-    email: [''],
-    phoneNumber: ['']
+    email: ['']
   });
 
   passwordForm = this.fb.group({
@@ -24,8 +27,7 @@ export class ProfileComponent implements OnInit {
 
   constructor(private fb: FormBuilder) { }
 
-  ngOnInit() {
-  }
+  ngOnInit() { }
 
   saveProfileForm() {
     console.log(this.profileForm.value);

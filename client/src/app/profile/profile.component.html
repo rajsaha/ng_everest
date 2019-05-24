@@ -29,13 +29,13 @@
 
           <form [formGroup]="profileForm" (ngSubmit)="saveProfileForm()">
             <mat-form-field appearance="outline">
-              <mat-label>Name</mat-label>
-              <input matInput placeholder="Name" formControlName="name">
+              <mat-label>Username</mat-label>
+              <input matInput placeholder="Username" formControlName="username">
             </mat-form-field>
 
             <mat-form-field appearance="outline">
-              <mat-label>Username</mat-label>
-              <input matInput placeholder="Username" formControlName="username">
+              <mat-label>Name</mat-label>
+              <input matInput placeholder="Name" formControlName="name">
             </mat-form-field>
 
             <mat-form-field appearance="outline">
@@ -45,18 +45,13 @@
 
             <mat-form-field appearance="outline">
               <mat-label>Bio</mat-label>
-              <textarea matInput placeholder="Your biography" formControlName="bio"></textarea>
+              <textarea matInput placeholder="Tell us something about yourself" formControlName="bio"></textarea>
             </mat-form-field>
 
             <h6>Private Information</h6>
             <mat-form-field appearance="outline">
               <mat-label>Email</mat-label>
               <input matInput placeholder="Email" formControlName="email">
-            </mat-form-field>
-
-            <mat-form-field appearance="outline">
-              <mat-label>Phone Number</mat-label>
-              <input matInput placeholder="0123456789" formControlName="phoneNumber">
             </mat-form-field>
 
             <div class="form-button-container clearfix">

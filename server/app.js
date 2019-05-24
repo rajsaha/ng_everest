@@ -1,12 +1,16 @@
+// Packages
 const express = require('express');
 const app = express();
 const morgan = require('morgan');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 
+// Routes
 const loginRoute = require('./api/routes/auth/login');
 const signUpRoute = require('./api/routes/auth/signup');
+const profileRoute = require('./api/routes/profile/profile');
 
+// Mongodb connection string
 const mongodb_connection_string = `mongodb://${process.env.MLAB_U}:${process.env.MLAB_PW}@ds121321.mlab.com:21321/ng_everest`;
 
 mongoose.connect(mongodb_connection_string, {
@@ -15,6 +19,7 @@ mongoose.connect(mongodb_connection_string, {
     console.log('Connected to database');
 });
 
+//! If mongodb connection fails
 mongoose.connection.on('error', (err) => {
     console.log(`Mongoose connection error: ${err}`);
 });
@@ -25,6 +30,7 @@ app.use(morgan('dev'));
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 
+// Handling CORS
 app.use((req, res, next) => {
     res.header('Access-Control-Allow-Origin', '*');
     res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
@@ -38,6 +44,7 @@ app.use((req, res, next) => {
 // Routes which should handle requests
 app.use('/login', loginRoute);
 app.use('/signup', signUpRoute);
+app.use('/profile', profileRoute);
 
 app.use((req, res, next) => {
     const error = new Error('Not found');
