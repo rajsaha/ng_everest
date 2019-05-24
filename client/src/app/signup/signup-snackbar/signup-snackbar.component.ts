@@ -3,11 +3,11 @@ import { MAT_SNACK_BAR_DATA } from '@angular/material';
 import { faCheckCircle, faTimesCircle } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
-  selector: 'app-login-snackbar',
-  templateUrl: './login-snackbar.component.html',
-  styleUrls: ['./login-snackbar.component.scss']
+  selector: 'app-signup-snackbar',
+  templateUrl: './signup-snackbar.component.html',
+  styleUrls: ['./signup-snackbar.component.scss']
 })
-export class LoginSnackbarComponent implements OnInit {
+export class SignupSnackbarComponent implements OnInit {
   // Icons
   faCheckCircle = faCheckCircle;
   faTimesCircle = faTimesCircle;

@@ -3,21 +3,21 @@ let username_regex = /.{4,}/;
 let password_regex = /(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*]).{6,}/;
 
 const Validation = (() => {
-    const SignUpDataValidation = async (email, username, password) => {
+    const SignUpDataValidation = async (data) => {
         let messages = [];
-        if (!email_regex.test(email)) {
+        if (!email_regex.test(data.email)) {
             messages.push('Email format invalid');
         }
 
-        if (!username_regex.test(username)) {
+        if (!username_regex.test(data.username)) {
             messages.push('Username invalid');
         }
 
-        if (!password_regex.test(password)) {
+        if (!password_regex.test(data.password)) {
             messages.push('Password format invalid');
         }
 
-        if (email_regex.test(email) && username_regex.test(username) && password_regex.test(password)) {
+        if (email_regex.test(data.email) && username_regex.test(data.username) && password_regex.test(data.password)) {
             return {
                 status: true
             };

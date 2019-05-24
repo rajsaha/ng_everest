@@ -1,6 +1,10 @@
-import { Component, OnInit, OnChanges } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
+import { Router } from '@angular/router';
 import { ValidationService } from '../services/forms/validation.service';
+import { SignupService } from '@services/signup/signup.service';
+import { MatSnackBar } from '@angular/material';
+import { SignupSnackbarComponent } from './signup-snackbar/signup-snackbar.component';
 
 @Component({
   selector: 'app-signup',
@@ -10,15 +14,43 @@ import { ValidationService } from '../services/forms/validation.service';
 export class SignupComponent implements OnInit {
   signUpForm: FormGroup;
   isDisabled = true;
-  constructor(private fb: FormBuilder, private validationService: ValidationService) { }
+  signingUp = false;
+
+  constructor(
+    private router: Router,
+    private fb: FormBuilder, 
+    private validationService: ValidationService,
+    private signUpService: SignupService,
+    private snackBar: MatSnackBar) { }
 
   ngOnInit() {
     this.init_signup_form();
   }
 
   onSubmit() {
+    this.signingUp = true;
     if (this.signUpForm.valid) {
-      console.log(this.signUpForm.value);
+      this.signUpService.signUp(this.signUpForm.value).then((res) => {
+        this.signingUp = false;
+        if (!res.error) {
+          this.openSnackBar({
+            message: {
+              message: `Hello, ${res.username}!`,
+              error: false
+            },
+            class: 'green-snackbar',
+          });
+          this.router.navigate(['feed']);
+        } else {
+          this.openSnackBar({
+            message: {
+              message: `Error: ${res.error}!`,
+              error: true
+            },
+            class: 'red-snackbar',
+          });
+        }
+      });
     }
   }
 
@@ -29,6 +61,14 @@ export class SignupComponent implements OnInit {
       password: ['', [Validators.required, Validators.minLength(4)]],
       confirm_password: ['']
     }, { validator: [this.validationService.matchingConfirmPasswords, this.validationService.checkPasswordStrength] });
+  }
+
+  openSnackBar(data: any) {
+    this.snackBar.openFromComponent(SignupSnackbarComponent, {
+      data: data.message,
+      duration: 2000,
+      panelClass: [data.class]
+    });
   }
 
 }

@@ -12,4 +12,13 @@ router.get('/get-user-data/:username', checkIfAuthenticated, async (req, res, ne
     }
 });
 
+router.post('/update-user-data', async (req, res, next) => {
+    try {
+        const response = await Profile.updateProfileData(req.body);
+        res.status(200).json(response);
+    } catch (err) {
+        console.error(`Error: ${err.message}`);
+    }
+});
+
 module.exports = router;

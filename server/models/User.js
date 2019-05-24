@@ -23,15 +23,10 @@ var UserSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    bio: {
-        type: String
-    },
-    website: {
-        type: String,
-        trim: true
-    },
+    bio: String,
+    website: String,
     interests: {
-        type: String,
+        type: [String],
         trim: true
     },
     collections: [

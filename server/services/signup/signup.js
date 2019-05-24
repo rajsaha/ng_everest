@@ -3,14 +3,14 @@ const mongoose = require('mongoose');
 const Validation = require('../validation/validation');
 
 const Signup = (() => {
-    const signup = async (email, username, password) => {
-        return await Validation.SignUpDataValidation(email, username, password).then(async (res) => {
+    const signup = async (data) => {
+        return await Validation.SignUpDataValidation(data).then(async (res) => {
             if (res.status) {
                 const user = new User({
                     _id: new mongoose.Types.ObjectId(),
-                    email: email,
-                    username: username,
-                    password: password
+                    email: data.email,
+                    username: data.username,
+                    password: data.password
                 });
 
                 try {

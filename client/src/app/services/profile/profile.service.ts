@@ -17,4 +17,12 @@ export class ProfileService {
       });
     });
   }
+
+  updateProfileData(data: any): Promise<any> {
+    return new Promise(resolve => {
+      this.http.post(`${ENV.API_URL}/profile/update-user-data`, data).subscribe((response: any) => {
+        resolve(response);
+      });
+    });
+  }
 }

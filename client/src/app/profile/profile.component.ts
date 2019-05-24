@@ -9,8 +9,14 @@ import { ProfileService } from '@services/profile/profile.service';
 })
 export class ProfileComponent implements OnInit {
   username: string;
+  userId: string;
+  name: string;
+  website: string;
+  bio: string;
+  email: string;
 
   profileForm = this.fb.group({
+    _id: [''],
     name: [''],
     username: [{value: '' , disabled: true}],
     website: [''],
@@ -28,16 +34,17 @@ export class ProfileComponent implements OnInit {
 
   ngOnInit() {
     this.username = localStorage.getItem('username');
+    this.userId = localStorage.getItem('userId');
 
     // Get User Data
     this.getUserData();
-
-    //Init Form Data
-    this.initFormData();
   }
 
   saveProfileForm() {
     console.log(this.profileForm.value);
+    this.profileService.updateProfileData(this.profileForm.value).then((res) => {
+      console.log(res);
+    });
   }
 
   changePasswordForm() {
@@ -45,12 +52,24 @@ export class ProfileComponent implements OnInit {
   }
 
   getUserData() {
-    this.profileService.getProfileData(this.username).then((res) => {
-      console.table(res);
+    this.profileService.getProfileData(this.username).then((res: any) => {
+      this.initFormData({
+        _id: res.userData._id,
+        username: res.userData.username,
+        name: res.userData.name,
+        website: res.userData.website,
+        bio: res.userData.bio,
+        email: res.userData.email
+      });
     });
   }
 
-  initFormData() {
-    this.profileForm.controls['username'].patchValue(this.username);
+  initFormData(data: any) {
+    this.profileForm.controls['_id'].patchValue(data._id);
+    this.profileForm.controls['username'].patchValue(data.username);
+    this.profileForm.controls['name'].patchValue(data.name);
+    this.profileForm.controls['website'].patchValue(data.website);
+    this.profileForm.controls['bio'].patchValue(data.bio);
+    this.profileForm.controls['email'].patchValue(data.email);
   }
 }

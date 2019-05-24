@@ -58,7 +58,7 @@
 
           <div class="login-signup">
             <a routerLink="/login">Login</a>
-            <button mat-raised-button color="primary">Sign Up</button>
+            <button mat-raised-button color="primary" [disabled]="signingUp">Sign Up</button>
           </div>
         </div>
       </form>

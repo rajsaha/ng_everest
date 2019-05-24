@@ -40,6 +40,7 @@ import { AtcComponent } from './feed/post/atc/atc.component';
 import { PoComponent } from './feed/post/po/po.component';
 import { LoginSnackbarComponent } from './login/login-snackbar/login-snackbar.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { SignupSnackbarComponent } from './signup/signup-snackbar/signup-snackbar.component';
 
 @NgModule({
   declarations: [
@@ -53,7 +54,8 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
     AtcComponent,
     PoComponent,
     LoginSnackbarComponent,
-    PageNotFoundComponent
+    PageNotFoundComponent,
+    SignupSnackbarComponent
   ],
   imports: [
     BrowserModule,
@@ -86,6 +88,6 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
     }
   ],
   bootstrap: [AppComponent],
-  entryComponents: [AtcComponent, PoComponent, LoginSnackbarComponent]
+  entryComponents: [AtcComponent, PoComponent, LoginSnackbarComponent, SignupSnackbarComponent]
 })
 export class AppModule { }
