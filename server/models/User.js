@@ -23,6 +23,13 @@ var UserSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    bio: {
+        type: String
+    },
+    website: {
+        type: String,
+        trim: true
+    },
     interests: {
         type: String,
         trim: true
@@ -34,6 +41,10 @@ var UserSchema = new mongoose.Schema({
         }
     ],
     followers: {
+        type: [String],
+        default: 'everest'
+    },
+    following: {
         type: [String],
         default: 'everest'
     },

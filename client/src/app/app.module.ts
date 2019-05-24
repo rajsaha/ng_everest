@@ -1,5 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { AuthInterceptorService } from '@services/auth/auth-interceptor.service';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -76,7 +78,13 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
     FontAwesomeModule,
     AutosizeModule
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptorService,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent],
   entryComponents: [AtcComponent, PoComponent, LoginSnackbarComponent]
 })

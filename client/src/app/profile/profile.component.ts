@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
+import { ProfileService } from '@services/profile/profile.service';
 
 @Component({
   selector: 'app-profile',
@@ -7,9 +8,7 @@ import { FormBuilder } from '@angular/forms';
   styleUrls: ['./profile.component.scss']
 })
 export class ProfileComponent implements OnInit {
-  profilePicForm = this.fb.group({
-
-  });
+  username: string;
 
   profileForm = this.fb.group({
     name: [''],
@@ -25,9 +24,17 @@ export class ProfileComponent implements OnInit {
     newPassConfirm: ['']
   });
 
-  constructor(private fb: FormBuilder) { }
+  constructor(private fb: FormBuilder, private profileService: ProfileService) { }
 
-  ngOnInit() { }
+  ngOnInit() {
+    this.username = localStorage.getItem('username');
+
+    // Get User Data
+    this.getUserData();
+
+    //Init Form Data
+    this.initFormData();
+  }
 
   saveProfileForm() {
     console.log(this.profileForm.value);
@@ -37,4 +44,13 @@ export class ProfileComponent implements OnInit {
     console.log(this.passwordForm.value);
   }
 
+  getUserData() {
+    this.profileService.getProfileData(this.username).then((res) => {
+      console.table(res);
+    });
+  }
+
+  initFormData() {
+    this.profileForm.controls['username'].patchValue(this.username);
+  }
 }

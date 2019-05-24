@@ -31,6 +31,7 @@ const Login = (() => {
                     message: "Logged in",
                     token: jwtBearerToken,
                     username: user.username,
+                    userId: user._id,
                     expiresIn: 172800000
                 }
             } else {
