@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
-import { ValidationService } from '../services/forms/validation.service';
+import { ValidationService } from '../../services/forms/validation.service';
 import { SignupService } from '@services/signup/signup.service';
 import { MatSnackBar } from '@angular/material';
-import { SignupSnackbarComponent } from './signup-snackbar/signup-snackbar.component';
+import { SnackbarComponent } from '../general/snackbar/snackbar.component';
 
 @Component({
   selector: 'app-signup',
@@ -64,7 +64,7 @@ export class SignupComponent implements OnInit {
   }
 
   openSnackBar(data: any) {
-    this.snackBar.openFromComponent(SignupSnackbarComponent, {
+    this.snackBar.openFromComponent(SnackbarComponent, {
       data: data.message,
       duration: 2000,
       panelClass: [data.class]

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { GetFeedService } from '../services/data/get-feed.service';
+import { GetFeedService } from '../../services/data/get-feed.service';
 
 @Component({
   selector: 'app-feed',

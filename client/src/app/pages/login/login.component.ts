@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { LoginService } from '@services/auth/login.service';
 import { CommunicationService } from '@services/general/communication.service';
 import { MatSnackBar } from '@angular/material';
-import { LoginSnackbarComponent } from './login-snackbar/login-snackbar.component';
+import { SnackbarComponent } from '../general/snackbar/snackbar.component';
 
 @Component({
   selector: 'app-login',
@@ -59,7 +59,7 @@ export class LoginComponent implements OnInit {
   }
 
   openSnackBar(data: any) {
-    this.snackBar.openFromComponent(LoginSnackbarComponent, {
+    this.snackBar.openFromComponent(SnackbarComponent, {
       data: data.message,
       duration: 2000,
       panelClass: [data.class]

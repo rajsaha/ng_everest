@@ -17,7 +17,8 @@ const Signup = (() => {
                     await user.save();
                     return {
                         status: 200,
-                        message: "Signup successful"
+                        message: "Signup successful",
+                        username: data.username
                     };
                 } catch (error) {
                     return {

@@ -1,12 +1,12 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { LoginComponent } from './login/login.component';
-import { SignupComponent } from './signup/signup.component';
-import { WelcomeComponent } from './welcome/welcome.component';
-import { FeedComponent } from './feed/feed.component';
-import { ProfileComponent } from './profile/profile.component';
+import { LoginComponent } from './pages/login/login.component';
+import { SignupComponent } from './pages/signup/signup.component';
+import { WelcomeComponent } from './pages/welcome/welcome.component';
+import { FeedComponent } from './pages/feed/feed.component';
+import { ProfileComponent } from './pages/profile/profile.component';
 import { AuthGuardService } from './services/auth/auth-guard.service';
-import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { PageNotFoundComponent } from './pages/page-not-found/page-not-found.component';
 
 const routes: Routes = [
   {

@@ -30,17 +30,16 @@ import {
   MatDialogModule,
   MatSnackBarModule
 } from '@angular/material';
-import { LoginComponent } from './login/login.component';
-import { WelcomeComponent } from './welcome/welcome.component';
-import { SignupComponent } from './signup/signup.component';
-import { FeedComponent } from './feed/feed.component';
-import { PostComponent } from './feed/post/post.component';
-import { ProfileComponent } from './profile/profile.component';
-import { AtcComponent } from './feed/post/atc/atc.component';
-import { PoComponent } from './feed/post/po/po.component';
-import { LoginSnackbarComponent } from './login/login-snackbar/login-snackbar.component';
-import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
-import { SignupSnackbarComponent } from './signup/signup-snackbar/signup-snackbar.component';
+import { LoginComponent } from './pages/login/login.component';
+import { WelcomeComponent } from './pages/welcome/welcome.component';
+import { SignupComponent } from './pages/signup/signup.component';
+import { FeedComponent } from './pages/feed/feed.component';
+import { PostComponent } from './pages/feed/post/post.component';
+import { ProfileComponent } from './pages/profile/profile.component';
+import { AtcComponent } from './pages/feed/post/atc/atc.component';
+import { PoComponent } from './pages/feed/post/po/po.component';
+import { PageNotFoundComponent } from './pages/page-not-found/page-not-found.component';
+import { SnackbarComponent } from './pages/general/snackbar/snackbar.component';
 
 @NgModule({
   declarations: [
@@ -53,9 +52,8 @@ import { SignupSnackbarComponent } from './signup/signup-snackbar/signup-snackba
     ProfileComponent,
     AtcComponent,
     PoComponent,
-    LoginSnackbarComponent,
     PageNotFoundComponent,
-    SignupSnackbarComponent
+    SnackbarComponent
   ],
   imports: [
     BrowserModule,
@@ -88,6 +86,6 @@ import { SignupSnackbarComponent } from './signup/signup-snackbar/signup-snackba
     }
   ],
   bootstrap: [AppComponent],
-  entryComponents: [AtcComponent, PoComponent, LoginSnackbarComponent, SignupSnackbarComponent]
+  entryComponents: [AtcComponent, PoComponent, SnackbarComponent]
 })
 export class AppModule { }
