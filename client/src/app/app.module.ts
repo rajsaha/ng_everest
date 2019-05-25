@@ -28,7 +28,8 @@ import {
   MatTabsModule,
   MatBadgeModule,
   MatDialogModule,
-  MatSnackBarModule
+  MatSnackBarModule,
+  MatProgressBarModule
 } from '@angular/material';
 import { LoginComponent } from './pages/login/login.component';
 import { WelcomeComponent } from './pages/welcome/welcome.component';
@@ -73,6 +74,7 @@ import { SnackbarComponent } from './pages/general/snackbar/snackbar.component';
     MatBadgeModule,
     MatDialogModule,
     MatSnackBarModule,
+    MatProgressBarModule,
     ReactiveFormsModule,
     HttpClientModule,
     FontAwesomeModule,

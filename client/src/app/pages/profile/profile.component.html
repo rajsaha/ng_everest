@@ -1,3 +1,5 @@
+<mat-progress-bar mode="query" *ngIf="isLoading">
+</mat-progress-bar>
 <div class="profile-container">
   <mat-tab-group mat-align-tabs="center">
     <!-- Collections -->
@@ -55,7 +57,7 @@
             </mat-form-field>
 
             <div class="form-button-container clearfix">
-              <button mat-raised-button color="primary">Save</button>
+              <button mat-raised-button color="primary" [disabled]="isProfileSaveButtonDisabled">Save</button>
             </div>
           </form>
         </div>

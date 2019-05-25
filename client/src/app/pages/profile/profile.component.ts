@@ -9,12 +9,17 @@ import { SnackbarService } from '@services/general/snackbar.service';
   styleUrls: ['./profile.component.scss']
 })
 export class ProfileComponent implements OnInit {
+  // Profile data
   username: string;
   userId: string;
   name: string;
   website: string;
   bio: string;
   email: string;
+
+  // Toggles
+  isLoading = false;
+  isProfileSaveButtonDisabled = false;
 
   profileForm = this.fb.group({
     _id: [''],
@@ -31,7 +36,7 @@ export class ProfileComponent implements OnInit {
     newPassConfirm: ['']
   });
 
-  constructor(private fb: FormBuilder, 
+  constructor(private fb: FormBuilder,
               private profileService: ProfileService,
               private snackbarService: SnackbarService) { }
 
@@ -71,6 +76,8 @@ export class ProfileComponent implements OnInit {
 
   getUserData() {
     this.profileService.getProfileData(this.username).then((res: any) => {
+      this.isLoading = true;
+      this.isProfileSaveButtonDisabled = true;
       this.initFormData({
         _id: res.userData._id,
         username: res.userData.username,
@@ -83,11 +90,13 @@ export class ProfileComponent implements OnInit {
   }
 
   initFormData(data: any) {
-    this.profileForm.controls['_id'].patchValue(data._id);
-    this.profileForm.controls['username'].patchValue(data.username);
-    this.profileForm.controls['name'].patchValue(data.name);
-    this.profileForm.controls['website'].patchValue(data.website);
-    this.profileForm.controls['bio'].patchValue(data.bio);
-    this.profileForm.controls['email'].patchValue(data.email);
+    this.isLoading = false;
+    this.isProfileSaveButtonDisabled = false;
+    this.profileForm.controls._id.patchValue(data._id);
+    this.profileForm.controls.username.patchValue(data.username);
+    this.profileForm.controls.name.patchValue(data.name);
+    this.profileForm.controls.website.patchValue(data.website);
+    this.profileForm.controls.bio.patchValue(data.bio);
+    this.profileForm.controls.email.patchValue(data.email);
   }
 }
