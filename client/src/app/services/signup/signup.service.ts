@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Router } from '@angular/router';
 import { environment as ENV } from '@environments/environment';
 
 @Injectable({
@@ -7,7 +8,7 @@ import { environment as ENV } from '@environments/environment';
 })
 export class SignupService {
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private router: Router) { }
 
   signUp(data: any): Promise<any> {
     return new Promise(resolve => {
@@ -15,5 +16,11 @@ export class SignupService {
         resolve(response);
       });
     });
+  }
+
+  redirectIfLoggedIn() {
+    if (localStorage.getItem('token')) {
+      this.router.navigate(['feed']);
+    }
   }
 }

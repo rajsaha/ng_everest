@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment as ENV } from '@environments/environment';
+import { Router } from '@angular/router';
 import * as moment from 'moment';
 
 @Injectable({
@@ -8,7 +9,7 @@ import * as moment from 'moment';
 })
 export class LoginService {
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private router: Router) { }
 
   login(loginCred: object): Promise<any> {
     return new Promise(resolve => {
@@ -51,5 +52,11 @@ export class LoginService {
     const expiration = localStorage.getItem('expires_at');
     const expiresAt = JSON.parse(expiration);
     return moment(expiresAt);
+  }
+
+  redirectIfLoggedIn() {
+    if (localStorage.getItem('token')) {
+      this.router.navigate(['feed']);
+    }
   }
 }

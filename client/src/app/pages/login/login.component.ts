@@ -3,8 +3,6 @@ import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { LoginService } from '@services/auth/login.service';
 import { CommunicationService } from '@services/general/communication.service';
-import { MatSnackBar } from '@angular/material';
-import { SnackbarComponent } from '../general/snackbar/snackbar.component';
 import { SnackbarService } from '@services/general/snackbar.service';
 
 @Component({
@@ -20,10 +18,10 @@ export class LoginComponent implements OnInit {
               private fb: FormBuilder,
               private loginService: LoginService,
               private communicationService: CommunicationService,
-              private snackbarService: SnackbarService,
-              private snackBar: MatSnackBar) { }
+              private snackbarService: SnackbarService) { }
 
   ngOnInit() {
+    this.loginService.redirectIfLoggedIn();
     this.init_login_form();
   }
 
