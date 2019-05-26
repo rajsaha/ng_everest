@@ -13,6 +13,7 @@ import { SnackbarService } from '@services/general/snackbar.service';
 export class LoginComponent implements OnInit {
   loginForm: FormGroup;
   loggingIn = false;
+  isLoading = false;
 
   constructor(private router: Router,
               private fb: FormBuilder,
@@ -34,7 +35,9 @@ export class LoginComponent implements OnInit {
 
   login() {
     this.loggingIn = true;
+    this.isLoading = true;
     this.loginService.login(this.loginForm.value).then((res) => {
+      this.isLoading = false;
       this.loggingIn = false;
       if (!res.error) {
         this.snackbarService.openSnackBar({
