@@ -29,7 +29,9 @@ import {
   MatBadgeModule,
   MatDialogModule,
   MatSnackBarModule,
-  MatProgressBarModule
+  MatProgressBarModule,
+  MatTooltipModule,
+  MatDividerModule
 } from '@angular/material';
 import { LoginComponent } from './pages/login/login.component';
 import { WelcomeComponent } from './pages/welcome/welcome.component';
@@ -77,6 +79,8 @@ import { CpiComponent } from './pages/profile/cpi/cpi.component';
     MatDialogModule,
     MatSnackBarModule,
     MatProgressBarModule,
+    MatTooltipModule,
+    MatDividerModule,
     ReactiveFormsModule,
     HttpClientModule,
     FontAwesomeModule,

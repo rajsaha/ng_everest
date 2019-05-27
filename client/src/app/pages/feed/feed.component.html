@@ -1,3 +1,16 @@
 <div class="feed-container">
   <app-post *ngFor="let post of posts" [data]="post"></app-post>
-</div> 
+
+  <div class="add-content-buttons">
+    <button class="fab-add-content" mat-fab color="primary" (click)="isFabActive = !isFabActive"
+      [ngClass]="isFabActive ? 'animation-rotate90Clockwise' : 'animation-rotate90AntiClockwise'">
+      <fa-icon [icon]="faPlus"></fa-icon>
+    </button>
+    <button class="fab-add-post" mat-mini-fab matTooltipPosition="left" [ngClass]="isFabActive ? 'animation-appearFromBottom' : 'animation-disappearFromTop'" matTooltip="Add a Post">
+      <fa-icon [icon]="faLink"></fa-icon>
+    </button>
+    <button class="fab-add-document" mat-mini-fab matTooltipPosition="left" [ngClass]="isFabActive ? 'animation-appearFromBottom2' : 'animation-disappearFromTop2'" matTooltip="Add a Document">
+      <fa-icon [icon]="faFile"></fa-icon>
+    </button>
+  </div>
+</div>

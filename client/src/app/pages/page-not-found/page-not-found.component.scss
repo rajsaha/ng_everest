@@ -1,7 +1,32 @@
-.page-not-found {
+.container {
     width: 100%;
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
+    height: 100%;
+	background-image: url(../../../assets/mountains-cutout.webp);
+	background-size: 100%;
+	background-position: bottom;
+    background-repeat: no-repeat;
+    position: relative;
+	.page-not-found {
+		background-color: white;
+		border-radius: 5px;
+        width: 250px;
+        height: 250px;
+		position: absolute;
+		left: 50%;
+		top: 50%;
+		transform: translate(-50%, -50%);
+		padding: 25px;
+		text-align: center;
+		box-shadow: 0 8px 20px 0 rgba(218, 224, 235, 0.6);
+
+		h1 {
+            font-size: 5rem;
+            margin-top: 25px;
+            margin-bottom: 0;
+		}
+
+		button {
+			text-transform: uppercase;
+		}
+	}
 }

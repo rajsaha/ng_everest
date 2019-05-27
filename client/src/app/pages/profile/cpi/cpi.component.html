@@ -1,9 +1,11 @@
+<h1 mat-dialog-title>Change Profile Image</h1>
+
 <div class="image">
   <img [src]="data.image ? data.image : defaultProfileImage" alt="">
 </div>
 
 <div class="controls">
-  <button mat-flat-button color="primary"><fa-icon [icon]="faCloudUploadAlt"></fa-icon>Upload</button>
-  <button mat-flat-button color="accent">Clear</button>
+  <button mat-flat-button>Upload</button>
+  <button mat-flat-button>Clear</button>
   <button mat-button (click)="onNoClick()">Close</button>
 </div>

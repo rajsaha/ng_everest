@@ -1,3 +1,132 @@
-.feed-container {
-    padding: 15px;
+$init_bottom: 15px;
+$space_between_fab_buttons: 75px;
+$fab_button_1_position: $init_bottom + $space_between_fab_buttons;
+
+%posFixed {
+    position: fixed;
+    right: 25px;
+    z-index: -10;
 }
+
+.feed-container {
+	padding: 15px;
+
+	.add-content-buttons {
+		.fab-add-content {
+			position: fixed;
+			bottom: 15px;
+            right: 15px;
+            z-index: 100;
+		}
+
+		.fab-add-post {
+            @extend %posFixed;
+            bottom: $fab_button_1_position;
+        }
+        
+        .fab-add-document {
+            @extend %posFixed;
+            bottom: $fab_button_1_position * 2;
+        }
+	}
+}
+
+.animation-rotate90Clockwise {
+	animation: rotate90Clockwise 0.2s ease-in-out;
+	animation-fill-mode: forwards;
+}
+
+.animation-rotate90AntiClockwise {
+	animation: rotate90AntiClockwise 0.2s ease-in-out;
+	animation-fill-mode: forwards;
+}
+
+.animation-appearFromBottom {
+    animation: appearFromBottom 0.2s ease-in-out;
+    animation-fill-mode: forwards;
+}
+
+.animation-disappearFromTop {
+    animation: disappearFromTop 0.2s ease-in-out;
+    animation-fill-mode: forwards;
+}
+
+.animation-appearFromBottom2 {
+    animation: appearFromBottom2 0.3s ease-in-out;
+    animation-fill-mode: forwards;
+}
+
+.animation-disappearFromTop2 {
+    animation: disappearFromTop2 0.4s ease-in-out;
+    animation-fill-mode: forwards;
+}
+
+@keyframes rotate90Clockwise {
+	0% {
+		transform: rotate(0deg);
+	}
+
+	100% {
+		transform: rotate(90deg);
+	}
+}
+
+@keyframes rotate90AntiClockwise {
+	0% {
+		transform: rotate(90deg);
+	}
+
+	100% {
+		transform: rotate(0deg);
+	}
+}
+
+@keyframes appearFromBottom {
+    0% {
+        bottom: -100px;
+        opacity: 0;
+    }
+
+    100% {
+        bottom: $fab_button_1_position;
+        opacity: 1;
+    }
+} 
+
+@keyframes disappearFromTop {
+    0% {
+        bottom: $fab_button_1_position;
+        opacity: 1;
+    }
+
+    100% {
+        bottom: -100px;
+        opacity: 0;
+    }
+}
+
+@keyframes appearFromBottom2 {
+    0% {
+        bottom: -100px;
+        opacity: 0;
+    }
+
+    100% {
+        bottom: $fab_button_1_position * 1.6;
+        opacity: 1;
+    }
+} 
+
+@keyframes disappearFromTop2 {
+    0% {
+        bottom: $fab_button_1_position * 1.6;
+        opacity: 1;
+    }
+
+    100% {
+        bottom: -100px;
+        opacity: 0;
+    }
+}
+
+

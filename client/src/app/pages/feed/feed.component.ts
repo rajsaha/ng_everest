@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { GetFeedService } from '../../services/data/get-feed.service';
+import { faPlus, faLink, faFile } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-feed',
@@ -8,6 +9,13 @@ import { GetFeedService } from '../../services/data/get-feed.service';
 })
 export class FeedComponent implements OnInit {
   posts = [];
+  isFabActive = false;
+
+  // Icons
+  faPlus = faPlus;
+  faLink = faLink;
+  faFile = faFile;
+
   constructor(private getFeedService: GetFeedService) { }
 
   ngOnInit() {

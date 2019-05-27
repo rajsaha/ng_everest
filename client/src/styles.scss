@@ -7,10 +7,15 @@
 }
 
 a {
-	&:active, &:focus {
+	&:active,
+	&:focus {
 		outline: none;
 		outline-style: none;
 	}
+}
+
+button:focus {
+	outline: 0;
 }
 
 .box-shadow {
@@ -56,6 +61,6 @@ mat-nav-list {
 }
 
 .red-snackbar {
-	background-color: #F44336;
+	background-color: #f44336;
 	color: white;
 }

@@ -20,22 +20,22 @@
     </mat-tab>
 
     <!-- Profile Management -->
-    <mat-tab label="Profile Management">
+    <mat-tab label="Profile">
       <div class="section">
+        <div class="profile-picture">
+          <img [src]="image ? image : defaultProfileImage" alt="" (click)="openCpiDialog()">
+          <div class="text">
+            <p>{{ profileForm.controls.username.value }}</p>
+            <p>{{ profileForm.controls.email.value }}</p>
+          </div>
+        </div>
+        <mat-divider></mat-divider>
         <div class="section-header">
           <h4>Personal Information</h4>
         </div>
 
         <div class="section-content">
           <h6>Public Information</h6>
-
-          <div class="profile-picture">
-            <img [src]="image ? image : defaultProfileImage" alt="" (click)="openCpiDialog()">
-            <div class="text">
-              <p>{{ profileForm.controls.username.value }}</p>
-              <p>{{ profileForm.controls.email.value }}</p>
-            </div>
-          </div>
 
           <form [formGroup]="profileForm" (ngSubmit)="saveProfileForm()">
 

@@ -19,10 +19,6 @@ const routes: Routes = [
     component: WelcomeComponent
   },
   {
-    path: '404',
-    component: PageNotFoundComponent
-  },
-  {
     path: 'login',
     component: LoginComponent,
   },
@@ -43,7 +39,11 @@ const routes: Routes = [
   {
     path: '**',
     redirectTo: '404'
-  }
+  },
+  {
+    path: '**',
+    component: PageNotFoundComponent
+  },
 ];
 
 @NgModule({
