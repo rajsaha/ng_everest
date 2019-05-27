@@ -1,0 +1,22 @@
+.image {
+    margin-bottom: 25px;
+	img {
+        display: block;
+		width: 200px;
+        border-radius: 50%;
+        margin-left: auto;
+        margin-right: auto;
+	}
+}
+
+.controls {
+    button {
+        &:not(:last-child) {
+            margin-right: 5px;
+        }
+
+        fa-icon {
+            margin-right: 5px;
+        }
+    }
+}

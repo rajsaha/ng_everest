@@ -19,8 +19,15 @@
       "dom"
     ],
     "paths": {
-      "@environments/*": ["src/environments/*"],
-      "@services/*": ["src/app/services/*"]
+      "@environments/*": [
+        "src/environments/*"
+      ],
+      "@services/*": [
+        "src/app/services/*"
+      ],
+      "@assets/*": [
+        "src/assets"
+      ]
     }
   }
 }

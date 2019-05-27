@@ -23,6 +23,7 @@ var UserSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    image: String,
     bio: String,
     website: String,
     interests: {

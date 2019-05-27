@@ -1,0 +1,9 @@
+<div class="image">
+  <img [src]="data.image ? data.image : defaultProfileImage" alt="">
+</div>
+
+<div class="controls">
+  <button mat-flat-button color="primary"><fa-icon [icon]="faCloudUploadAlt"></fa-icon>Upload</button>
+  <button mat-flat-button color="accent">Clear</button>
+  <button mat-button (click)="onNoClick()">Close</button>
+</div>

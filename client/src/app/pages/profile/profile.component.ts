@@ -2,12 +2,16 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { ProfileService } from '@services/profile/profile.service';
 import { SnackbarService } from '@services/general/snackbar.service';
+import { MatDialog } from '@angular/material';
+import { faEdit, faTrash } from '@fortawesome/free-solid-svg-icons';
+import { CpiComponent } from './cpi/cpi.component';
 
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.scss']
 })
+
 export class ProfileComponent implements OnInit {
   // Profile data
   username: string;
@@ -16,10 +20,16 @@ export class ProfileComponent implements OnInit {
   website: string;
   bio: string;
   email: string;
+  image: string;
+  defaultProfileImage = '../../../assets/portrait.jpg';
 
   // Toggles
   isLoading = false;
   isProfileSaveButtonDisabled = false;
+
+  // Icons
+  faEdit = faEdit;
+  faTrash = faTrash;
 
   profileForm = this.fb.group({
     _id: [''],
@@ -38,7 +48,8 @@ export class ProfileComponent implements OnInit {
 
   constructor(private fb: FormBuilder,
               private profileService: ProfileService,
-              private snackbarService: SnackbarService) { }
+              private snackbarService: SnackbarService,
+              public dialog: MatDialog) { }
 
   ngOnInit() {
     this.username = localStorage.getItem('username');
@@ -92,11 +103,24 @@ export class ProfileComponent implements OnInit {
   initFormData(data: any) {
     this.isLoading = false;
     this.isProfileSaveButtonDisabled = false;
+    this.image = data.image;
     this.profileForm.controls._id.patchValue(data._id);
     this.profileForm.controls.username.patchValue(data.username);
     this.profileForm.controls.name.patchValue(data.name);
     this.profileForm.controls.website.patchValue(data.website);
     this.profileForm.controls.bio.patchValue(data.bio);
     this.profileForm.controls.email.patchValue(data.email);
+  }
+
+  openCpiDialog() {
+    const dialogRef = this.dialog.open(CpiComponent, {
+        data: {
+          image: this.image
+        }
+      });
+  
+      dialogRef.afterClosed().subscribe(result => {
+        console.log('The dialog was closed');
+      });
   }
 }

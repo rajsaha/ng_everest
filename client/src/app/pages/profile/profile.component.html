@@ -29,11 +29,15 @@
         <div class="section-content">
           <h6>Public Information</h6>
 
+          <div class="profile-picture">
+            <img [src]="image ? image : defaultProfileImage" alt="" (click)="openCpiDialog()">
+            <div class="text">
+              <p>{{ profileForm.controls.username.value }}</p>
+              <p>{{ profileForm.controls.email.value }}</p>
+            </div>
+          </div>
+
           <form [formGroup]="profileForm" (ngSubmit)="saveProfileForm()">
-            <mat-form-field appearance="outline">
-              <mat-label>Username</mat-label>
-              <input matInput placeholder="Username" formControlName="username">
-            </mat-form-field>
 
             <mat-form-field appearance="outline">
               <mat-label>Name</mat-label>

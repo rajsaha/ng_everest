@@ -41,6 +41,7 @@ import { AtcComponent } from './pages/feed/post/atc/atc.component';
 import { PoComponent } from './pages/feed/post/po/po.component';
 import { PageNotFoundComponent } from './pages/page-not-found/page-not-found.component';
 import { SnackbarComponent } from './pages/general/snackbar/snackbar.component';
+import { CpiComponent } from './pages/profile/cpi/cpi.component';
 
 @NgModule({
   declarations: [
@@ -54,7 +55,8 @@ import { SnackbarComponent } from './pages/general/snackbar/snackbar.component';
     AtcComponent,
     PoComponent,
     PageNotFoundComponent,
-    SnackbarComponent
+    SnackbarComponent,
+    CpiComponent
   ],
   imports: [
     BrowserModule,
@@ -88,6 +90,6 @@ import { SnackbarComponent } from './pages/general/snackbar/snackbar.component';
     }
   ],
   bootstrap: [AppComponent],
-  entryComponents: [AtcComponent, PoComponent, SnackbarComponent]
+  entryComponents: [AtcComponent, PoComponent, SnackbarComponent, CpiComponent]
 })
 export class AppModule { }
