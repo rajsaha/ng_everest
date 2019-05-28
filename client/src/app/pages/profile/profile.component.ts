@@ -3,7 +3,7 @@ import { FormBuilder } from '@angular/forms';
 import { ProfileService } from '@services/profile/profile.service';
 import { SnackbarService } from '@services/general/snackbar.service';
 import { MatDialog } from '@angular/material';
-import { faEdit, faTrash } from '@fortawesome/free-solid-svg-icons';
+import { faEdit, faTrash, faEye, faExternalLinkAlt } from '@fortawesome/free-solid-svg-icons';
 import { CpiComponent } from './cpi/cpi.component';
 
 @Component({
@@ -26,10 +26,13 @@ export class ProfileComponent implements OnInit {
   // Toggles
   isLoading = false;
   isProfileSaveButtonDisabled = false;
+  isPublicView = true;
 
   // Icons
   faEdit = faEdit;
   faTrash = faTrash;
+  faEye = faEye;
+  faExternalLinkAlt = faExternalLinkAlt;
 
   profileForm = this.fb.group({
     _id: [''],
@@ -69,6 +72,10 @@ export class ProfileComponent implements OnInit {
           },
           class: 'green-snackbar',
         });
+        this.name = res.newData.name;
+        this.website = res.newData.website;
+        this.email = res.newData.email;
+        this.bio = res.newData.bio;
       } else {
         this.snackbarService.openSnackBar({
           message: {
@@ -103,7 +110,16 @@ export class ProfileComponent implements OnInit {
   initFormData(data: any) {
     this.isLoading = false;
     this.isProfileSaveButtonDisabled = false;
+
+    this.userId = data._id;
     this.image = data.image;
+    this.username = data.username;
+    this.name = data.name;
+    this.website = data.website;
+    this.bio = data.bio;
+    this.email = data.email;
+
+    // Form Control Values
     this.profileForm.controls._id.patchValue(data._id);
     this.profileForm.controls.username.patchValue(data.username);
     this.profileForm.controls.name.patchValue(data.name);

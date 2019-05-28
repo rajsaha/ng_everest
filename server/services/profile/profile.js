@@ -32,7 +32,8 @@ const Profile = (() => {
             }).exec();
 
             return {
-                message: 'User details updated'
+                message: 'User details updated',
+                newData: data
             }
         } catch (err) {
             return {

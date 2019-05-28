@@ -21,92 +21,117 @@
 
     <!-- Profile Management -->
     <mat-tab label="Profile">
-      <div class="section">
-        <div class="profile-picture">
-          <img [src]="image ? image : defaultProfileImage" alt="" (click)="openCpiDialog()">
-          <div class="text">
-            <p>{{ profileForm.controls.username.value }}</p>
-            <p>{{ profileForm.controls.email.value }}</p>
+      <div class="public-view" *ngIf="isPublicView">
+        <div class="section">
+          <div class="profile-picture">
+            <img [src]="image ? image : defaultProfileImage" style="cursor: inherit; border: none;">
+            <div class="text">
+              <p>{{ username }}</p>
+              <p>{{ email }}</p>
+            </div>
+            <div class="view-public" matTooltip="Edit Profile" matRipple (click)="isPublicView = false">
+              <fa-icon [icon]="faEdit"></fa-icon>
+            </div>
+          </div>
+          <mat-divider></mat-divider>
+          <div class="public-view-content">
+            <h1>{{ name }}&nbsp;<a [href]="website" target="_blank"><fa-icon [icon]="faExternalLinkAlt"></fa-icon></a></h1>
+            <p class="bio">{{ bio }}</p>
           </div>
         </div>
-        <mat-divider></mat-divider>
-        <div class="section-header">
-          <h4>Personal Information</h4>
-        </div>
-
-        <div class="section-content">
-          <h6>Public Information</h6>
-
-          <form [formGroup]="profileForm" (ngSubmit)="saveProfileForm()">
-
-            <mat-form-field appearance="outline">
-              <mat-label>Name</mat-label>
-              <input matInput placeholder="Name" formControlName="name">
-            </mat-form-field>
-
-            <mat-form-field appearance="outline">
-              <mat-label>Website</mat-label>
-              <input matInput placeholder="http://www.website.com" formControlName="website">
-            </mat-form-field>
-
-            <mat-form-field appearance="outline">
-              <mat-label>Bio</mat-label>
-              <textarea matInput placeholder="Tell us something about yourself" formControlName="bio"></textarea>
-            </mat-form-field>
-
-            <h6>Private Information</h6>
-            <mat-form-field appearance="outline">
-              <mat-label>Email</mat-label>
-              <input matInput placeholder="Email" formControlName="email">
-            </mat-form-field>
-
-            <div class="form-button-container clearfix">
-              <button mat-raised-button color="primary" [disabled]="isProfileSaveButtonDisabled">Save</button>
-            </div>
-          </form>
-        </div>
       </div>
 
-      <div class="section">
-        <div class="section-header">
-          <h4>Change Password</h4>
-        </div>
-        <div class="section-content">
-          <form [formGroup]="passwordForm" (ngSubmit)="changePasswordForm()">
-            <mat-form-field appearance="outline">
-              <mat-label>Current Password</mat-label>
-              <input matInput placeholder="" formControlName="currentPass">
-            </mat-form-field>
-
-            <mat-form-field appearance="outline">
-              <mat-label>New Password</mat-label>
-              <input matInput placeholder="" formControlName="newPass">
-            </mat-form-field>
-
-            <mat-form-field appearance="outline">
-              <mat-label>Confirm New Password</mat-label>
-              <input matInput placeholder="" formControlName="newPassConfirm">
-            </mat-form-field>
-
-            <div class="form-button-container clearfix">
-              <button mat-raised-button color="primary">Save</button>
+      <div class="change-profile-data" *ngIf="!isPublicView">
+        <div class="section">
+          <div class="profile-picture">
+            <img [src]="image ? image : defaultProfileImage" alt="" (click)="openCpiDialog()">
+            <div class="text">
+              <p>{{ profileForm.controls.username.value }}</p>
+              <p>{{ profileForm.controls.email.value }}</p>
             </div>
-          </form>
-        </div>
-      </div>
+            <div class="view-public" matTooltip="View Public Profile" matRipple (click)="isPublicView = true">
+              <fa-icon [icon]="faEye"></fa-icon>
+            </div>
+          </div>
+          <mat-divider></mat-divider>
+          <div class="section-header">
+            <h4>Personal Information</h4>
+          </div>
 
-      <div class="section">
-        <div class="section-header">
-          <h4>Privacy</h4>
+          <div class="section-content">
+            <h6>Public Information</h6>
+
+            <form [formGroup]="profileForm" (ngSubmit)="saveProfileForm()">
+
+              <mat-form-field appearance="outline">
+                <mat-label>Name</mat-label>
+                <input matInput placeholder="Name" formControlName="name">
+              </mat-form-field>
+
+              <mat-form-field appearance="outline">
+                <mat-label>Website</mat-label>
+                <input matInput placeholder="http://www.website.com" formControlName="website">
+              </mat-form-field>
+
+              <mat-form-field appearance="outline">
+                <mat-label>Bio</mat-label>
+                <textarea matInput placeholder="Tell us something about yourself" formControlName="bio"></textarea>
+              </mat-form-field>
+
+              <h6>Private Information</h6>
+              <mat-form-field appearance="outline">
+                <mat-label>Email</mat-label>
+                <input matInput placeholder="Email" formControlName="email">
+              </mat-form-field>
+
+              <div class="form-button-container clearfix">
+                <button mat-raised-button color="primary" [disabled]="isProfileSaveButtonDisabled">Save</button>
+              </div>
+            </form>
+          </div>
         </div>
 
-        <div class="section-content">
-          <h6>Delete Account</h6>
-          <mat-form-field appearance="outline">
-            <mat-label>Username</mat-label>
-            <input matInput placeholder="Write your username">
-            <mat-hint>Write your username to confirm account deletion</mat-hint>
-          </mat-form-field>
+        <div class="section">
+          <div class="section-header">
+            <h4>Change Password</h4>
+          </div>
+          <div class="section-content">
+            <form [formGroup]="passwordForm" (ngSubmit)="changePasswordForm()">
+              <mat-form-field appearance="outline">
+                <mat-label>Current Password</mat-label>
+                <input matInput placeholder="" formControlName="currentPass">
+              </mat-form-field>
+
+              <mat-form-field appearance="outline">
+                <mat-label>New Password</mat-label>
+                <input matInput placeholder="" formControlName="newPass">
+              </mat-form-field>
+
+              <mat-form-field appearance="outline">
+                <mat-label>Confirm New Password</mat-label>
+                <input matInput placeholder="" formControlName="newPassConfirm">
+              </mat-form-field>
+
+              <div class="form-button-container clearfix">
+                <button mat-raised-button color="primary">Save</button>
+              </div>
+            </form>
+          </div>
+        </div>
+
+        <div class="section">
+          <div class="section-header">
+            <h4>Privacy</h4>
+          </div>
+
+          <div class="section-content">
+            <h6>Delete Account</h6>
+            <mat-form-field appearance="outline">
+              <mat-label>Username</mat-label>
+              <input matInput placeholder="Write your username">
+              <mat-hint>Write your username to confirm account deletion</mat-hint>
+            </mat-form-field>
+          </div>
         </div>
       </div>
     </mat-tab>
