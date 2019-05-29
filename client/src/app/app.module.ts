@@ -32,7 +32,8 @@ import {
   MatProgressBarModule,
   MatTooltipModule,
   MatDividerModule,
-  MatRippleModule
+  MatRippleModule,
+  MatChipsModule
 } from '@angular/material';
 import { LoginComponent } from './pages/login/login.component';
 import { WelcomeComponent } from './pages/welcome/welcome.component';
@@ -83,6 +84,7 @@ import { CpiComponent } from './pages/profile/cpi/cpi.component';
     MatTooltipModule,
     MatDividerModule,
     MatRippleModule,
+    MatChipsModule,
     ReactiveFormsModule,
     HttpClientModule,
     FontAwesomeModule,

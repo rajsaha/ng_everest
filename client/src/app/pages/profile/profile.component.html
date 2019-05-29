@@ -35,7 +35,9 @@
           </div>
           <mat-divider></mat-divider>
           <div class="public-view-content">
-            <h1>{{ name }}&nbsp;<a [href]="website" target="_blank"><fa-icon [icon]="faExternalLinkAlt"></fa-icon></a></h1>
+            <h1>{{ name }}&nbsp;<a [href]="website" target="_blank">
+                <fa-icon [icon]="faExternalLinkAlt"></fa-icon>
+              </a></h1>
             <p class="bio">{{ bio }}</p>
           </div>
         </div>
@@ -76,6 +78,20 @@
               <mat-form-field appearance="outline">
                 <mat-label>Bio</mat-label>
                 <textarea matInput placeholder="Tell us something about yourself" formControlName="bio"></textarea>
+              </mat-form-field>
+
+              <mat-form-field appearance="outline">
+                <mat-label>Interests</mat-label>
+                <mat-chip-list #chipList aria-label="Interest selection">
+                  <mat-chip *ngFor="let interest of interests" [selectable]="selectable" [removable]="removable"
+                    (removed)="removeInterest(interest)">
+                    {{ interest }}
+                    <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+                  </mat-chip>
+                  <input placeholder="Add an Interest" [matChipInputFor]="chipList"
+                    [matChipInputSeparatorKeyCodes]="separatorKeysCodes" [matChipInputAddOnBlur]="addOnBlur"
+                    (matChipInputTokenEnd)="addInterest($event)" formControlName="interests">
+                </mat-chip-list>
               </mat-form-field>
 
               <h6>Private Information</h6>

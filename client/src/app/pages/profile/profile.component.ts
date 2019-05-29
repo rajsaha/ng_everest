@@ -5,6 +5,8 @@ import { SnackbarService } from '@services/general/snackbar.service';
 import { MatDialog } from '@angular/material';
 import { faEdit, faTrash, faEye, faExternalLinkAlt } from '@fortawesome/free-solid-svg-icons';
 import { CpiComponent } from './cpi/cpi.component';
+import { COMMA, ENTER } from '@angular/cdk/keycodes';
+import { MatChipInputEvent } from '@angular/material/chips';
 
 @Component({
   selector: 'app-profile',
@@ -21,6 +23,7 @@ export class ProfileComponent implements OnInit {
   bio: string;
   email: string;
   image: string;
+  interests = [];
   defaultProfileImage = '../../../assets/portrait.jpg';
 
   // Toggles
@@ -34,13 +37,20 @@ export class ProfileComponent implements OnInit {
   faEye = faEye;
   faExternalLinkAlt = faExternalLinkAlt;
 
+  readonly separatorKeysCodes: number[] = [ENTER, COMMA];
+  visible = true;
+  selectable = true;
+  removable = true;
+  addOnBlur = true;
+
   profileForm = this.fb.group({
     _id: [''],
     name: [''],
-    username: [{value: '' , disabled: true}],
+    username: [{ value: '', disabled: true }],
     website: [''],
     bio: [''],
-    email: ['']
+    email: [''],
+    interests: []
   });
 
   passwordForm = this.fb.group({
@@ -63,29 +73,30 @@ export class ProfileComponent implements OnInit {
   }
 
   saveProfileForm() {
-    this.profileService.updateProfileData(this.profileForm.value).then((res) => {
-      if (!res.error) {
-        this.snackbarService.openSnackBar({
-          message: {
-            message: 'Profile data saved!',
-            error: false
-          },
-          class: 'green-snackbar',
-        });
-        this.name = res.newData.name;
-        this.website = res.newData.website;
-        this.email = res.newData.email;
-        this.bio = res.newData.bio;
-      } else {
-        this.snackbarService.openSnackBar({
-          message: {
-            message: `Error: ${res.error}!`,
-            error: true
-          },
-          class: 'red-snackbar',
-        });
-      }
-    });
+    console.log(this.profileForm.value);
+    // this.profileService.updateProfileData(this.profileForm.value).then((res) => {
+    //   if (!res.error) {
+    //     this.snackbarService.openSnackBar({
+    //       message: {
+    //         message: 'Profile data saved!',
+    //         error: false
+    //       },
+    //       class: 'green-snackbar',
+    //     });
+    //     this.name = res.newData.name;
+    //     this.website = res.newData.website;
+    //     this.email = res.newData.email;
+    //     this.bio = res.newData.bio;
+    //   } else {
+    //     this.snackbarService.openSnackBar({
+    //       message: {
+    //         message: `Error: ${res.error}!`,
+    //         error: true
+    //       },
+    //       class: 'red-snackbar',
+    //     });
+    //   }
+    // });
   }
 
   changePasswordForm() {
@@ -96,6 +107,7 @@ export class ProfileComponent implements OnInit {
     this.profileService.getProfileData(this.username).then((res: any) => {
       this.isLoading = true;
       this.isProfileSaveButtonDisabled = true;
+      this.interests = res.userData.interests;
       this.initFormData({
         _id: res.userData._id,
         username: res.userData.username,
@@ -130,13 +142,36 @@ export class ProfileComponent implements OnInit {
 
   openCpiDialog() {
     const dialogRef = this.dialog.open(CpiComponent, {
-        data: {
-          image: this.image
-        }
-      });
-  
-      dialogRef.afterClosed().subscribe(result => {
-        console.log('The dialog was closed');
-      });
+      data: {
+        image: this.image
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+    });
+  }
+
+  addInterest(event: MatChipInputEvent): void {
+    const input = event.input;
+    const value = event.value;
+
+    // Add our fruit
+    if ((value || '').trim()) {
+      this.interests.push(value);
+    }
+
+    // Reset the input value
+    if (input) {
+      input.value = '';
+    }
+  }
+
+  removeInterest(interest): void {
+    const index = this.interests.indexOf(interest);
+
+    if (index >= 0) {
+      this.interests.splice(index, 1);
+    }
   }
 }
