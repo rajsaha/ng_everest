@@ -50,7 +50,7 @@ export class ProfileComponent implements OnInit {
     website: [''],
     bio: [''],
     email: [''],
-    interests: []
+    interests: ['']
   });
 
   passwordForm = this.fb.group({
@@ -73,7 +73,15 @@ export class ProfileComponent implements OnInit {
   }
 
   saveProfileForm() {
-    console.log(this.profileForm.value);
+    const data = {
+      name: this.profileForm.controls.name.value,
+      website: this.profileForm.controls.name.value,
+      bio: this.profileForm.controls.bio.value,
+      interests: this.interests,
+      email: this.profileForm.controls.email.value
+    };
+
+    console.log(data);
     // this.profileService.updateProfileData(this.profileForm.value).then((res) => {
     //   if (!res.error) {
     //     this.snackbarService.openSnackBar({
