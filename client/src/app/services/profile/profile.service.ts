@@ -25,4 +25,12 @@ export class ProfileService {
       });
     });
   }
+
+  removeInterest(data: any): Promise<any> {
+    return new Promise(resolve => {
+      this.http.post(`${ENV.API_URL}/profile/remove-user-interest`, data).subscribe((response: any) => {
+        resolve(response);
+      });
+    });
+  }
 }

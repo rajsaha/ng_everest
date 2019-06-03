@@ -26,10 +26,12 @@ var UserSchema = new mongoose.Schema({
     image: String,
     bio: String,
     website: String,
-    interests: {
-        type: [String],
-        trim: true
-    },
+    interests: [
+        {
+            type: [String],
+            trim: true
+        }
+    ],
     collections: [
         {
             title: String,

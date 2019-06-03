@@ -1,7 +1,7 @@
 <mat-progress-bar mode="query" *ngIf="isLoading">
 </mat-progress-bar>
 <div class="profile-container">
-  <mat-tab-group mat-align-tabs="center">
+  <mat-tab-group mat-align-tabs="center" (selectedTabChange)="tabClick($event)">
     <!-- Collections -->
     <mat-tab label="Collections">
       <div class="section">
@@ -90,7 +90,7 @@
                   </mat-chip>
                   <input placeholder="Add an Interest" [matChipInputFor]="chipList"
                     [matChipInputSeparatorKeyCodes]="separatorKeysCodes" [matChipInputAddOnBlur]="addOnBlur"
-                    (matChipInputTokenEnd)="addInterest($event)" formControlName="interests">
+                    (matChipInputTokenEnd)="addInterest($event)">
                 </mat-chip-list>
               </mat-form-field>
 

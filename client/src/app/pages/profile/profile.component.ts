@@ -44,13 +44,11 @@ export class ProfileComponent implements OnInit {
   addOnBlur = true;
 
   profileForm = this.fb.group({
-    _id: [''],
     name: [''],
     username: [{ value: '', disabled: true }],
     website: [''],
     bio: [''],
-    email: [''],
-    interests: ['']
+    email: ['']
   });
 
   passwordForm = this.fb.group({
@@ -74,37 +72,33 @@ export class ProfileComponent implements OnInit {
 
   saveProfileForm() {
     const data = {
+      id: this.userId,
       name: this.profileForm.controls.name.value,
-      website: this.profileForm.controls.name.value,
+      website: this.profileForm.controls.website.value,
       bio: this.profileForm.controls.bio.value,
       interests: this.interests,
       email: this.profileForm.controls.email.value
     };
 
-    console.log(data);
-    // this.profileService.updateProfileData(this.profileForm.value).then((res) => {
-    //   if (!res.error) {
-    //     this.snackbarService.openSnackBar({
-    //       message: {
-    //         message: 'Profile data saved!',
-    //         error: false
-    //       },
-    //       class: 'green-snackbar',
-    //     });
-    //     this.name = res.newData.name;
-    //     this.website = res.newData.website;
-    //     this.email = res.newData.email;
-    //     this.bio = res.newData.bio;
-    //   } else {
-    //     this.snackbarService.openSnackBar({
-    //       message: {
-    //         message: `Error: ${res.error}!`,
-    //         error: true
-    //       },
-    //       class: 'red-snackbar',
-    //     });
-    //   }
-    // });
+    this.profileService.updateProfileData(data).then((res) => {
+      if (!res.error) {
+        this.snackbarService.openSnackBar({
+          message: {
+            message: 'Profile data saved!',
+            error: false
+          },
+          class: 'green-snackbar',
+        });
+      } else {
+        this.snackbarService.openSnackBar({
+          message: {
+            message: `Error: ${res.error}!`,
+            error: true
+          },
+          class: 'red-snackbar',
+        });
+      }
+    });
   }
 
   changePasswordForm() {
@@ -117,7 +111,6 @@ export class ProfileComponent implements OnInit {
       this.isProfileSaveButtonDisabled = true;
       this.interests = res.userData.interests;
       this.initFormData({
-        _id: res.userData._id,
         username: res.userData.username,
         name: res.userData.name,
         website: res.userData.website,
@@ -131,7 +124,6 @@ export class ProfileComponent implements OnInit {
     this.isLoading = false;
     this.isProfileSaveButtonDisabled = false;
 
-    this.userId = data._id;
     this.image = data.image;
     this.username = data.username;
     this.name = data.name;
@@ -140,7 +132,6 @@ export class ProfileComponent implements OnInit {
     this.email = data.email;
 
     // Form Control Values
-    this.profileForm.controls._id.patchValue(data._id);
     this.profileForm.controls.username.patchValue(data.username);
     this.profileForm.controls.name.patchValue(data.name);
     this.profileForm.controls.website.patchValue(data.website);
@@ -177,9 +168,31 @@ export class ProfileComponent implements OnInit {
 
   removeInterest(interest): void {
     const index = this.interests.indexOf(interest);
+    const data = {
+      id: this.userId,
+      interest
+    };
 
-    if (index >= 0) {
-      this.interests.splice(index, 1);
+    this.profileService.removeInterest(data).then((res: any) => {
+      if (res.error) {
+        this.snackbarService.openSnackBar({
+          message: {
+            message: 'Something went wrong!',
+            error: true
+          },
+          class: 'red-snackbar',
+        });
+      } else {
+        if (index >= 0) {
+          this.interests.splice(index, 1);
+        }
+      }
+    });
+  }
+
+  tabClick(event) {
+    if (event.index === 2) {
+      this.getUserData();
     }
   }
 }
