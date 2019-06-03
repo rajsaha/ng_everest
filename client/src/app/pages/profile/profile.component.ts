@@ -31,6 +31,8 @@ export class ProfileComponent implements OnInit {
   isProfileSaveButtonDisabled = false;
   isPublicView = true;
 
+  profileProgress = 0;
+
   // Icons
   faEdit = faEdit;
   faTrash = faTrash;

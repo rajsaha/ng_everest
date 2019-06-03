@@ -62,7 +62,7 @@ const Profile = (() => {
 
     const removeInterest = async (data) => {
         try {
-            const user = await User.updateOne({ _id: data.id }, { $pop: { interests: data.interest } }).exec();
+            const user = await User.updateOne({ _id: data.id }, { $pull: { interests: data.interest } }).exec();
             return {
                 message: `${data.interest} removed`
             }

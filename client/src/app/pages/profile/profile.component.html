@@ -35,11 +35,16 @@
           </div>
           <mat-divider></mat-divider>
           <div class="public-view-content">
-            <h1>{{ name }}&nbsp;<a [href]="website" target="_blank">
+            <h1 *ngIf="name">{{ name }}&nbsp;<a *ngIf="website" [href]="website" target="_blank">
                 <fa-icon [icon]="faExternalLinkAlt"></fa-icon>
               </a></h1>
-            <p class="bio">{{ bio }}</p>
+            <p class="bio" *ngIf="bio">{{ bio }}</p>
+            <mat-chip-list *ngIf="interests">
+              <mat-chip *ngFor="let interest of interests">{{ interest }}</mat-chip>
+            </mat-chip-list>
           </div>
+          <button mat-raised-button *ngIf="profileProgress < 100" color="accent">Complete your Profile</button>
+          <mat-progress-bar *ngIf="profileProgress < 100" mode="determinate" value="40"></mat-progress-bar>
         </div>
       </div>
 

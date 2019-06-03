@@ -1,6 +1,5 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
-import { faCog } from '@fortawesome/free-solid-svg-icons';
 import { MatSnackBar } from '@angular/material';
 
 @Component({
@@ -9,8 +8,6 @@ import { MatSnackBar } from '@angular/material';
   styleUrls: ['./po.component.scss']
 })
 export class PoComponent implements OnInit {
-  // Icons
-  faCog = faCog;
 
   constructor(
     public dialogRef: MatDialogRef<PoComponent>, 
