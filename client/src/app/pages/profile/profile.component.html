@@ -33,7 +33,10 @@
               <fa-icon [icon]="faEdit"></fa-icon>
             </div>
           </div>
+
           <mat-divider></mat-divider>
+          
+          <!--* Public view of profile -->
           <div class="public-view-content">
             <h1 *ngIf="name">{{ name }}&nbsp;<a *ngIf="website" [href]="website" target="_blank">
                 <fa-icon [icon]="faExternalLinkAlt"></fa-icon>
@@ -43,8 +46,13 @@
               <mat-chip *ngFor="let interest of interests">{{ interest }}</mat-chip>
             </mat-chip-list>
           </div>
-          <button mat-raised-button *ngIf="profileProgress < 100" color="accent">Complete your Profile</button>
-          <mat-progress-bar *ngIf="profileProgress < 100" mode="determinate" value="40"></mat-progress-bar>
+          <button 
+          mat-raised-button 
+          *ngIf="profileProgress < 100" 
+          color="accent" 
+          class="complete-profile-button"
+          (click)="isPublicView = false">Complete your Profile</button>
+          <mat-progress-bar *ngIf="profileProgress < 100" mode="determinate" [value]="profileProgress"></mat-progress-bar>
         </div>
       </div>
 
@@ -56,7 +64,7 @@
               <p>{{ profileForm.controls.username.value }}</p>
               <p>{{ profileForm.controls.email.value }}</p>
             </div>
-            <div class="view-public" matTooltip="View Public Profile" matRipple (click)="isPublicView = true">
+            <div class="view-public" matTooltip="View Public Profile" matRipple (click)="isPublicView = true; getUserData();">
               <fa-icon [icon]="faEye"></fa-icon>
             </div>
           </div>

@@ -7,7 +7,7 @@
     "runtimeArgs": [
         "--inspect=4000"
     ],
-    "program": "${workspaceFolder}\\server\\server.js",
+    "program": "${workspaceFolder}/server/server.js",
     "port": 4000,
     "restart": true,
     "env": {

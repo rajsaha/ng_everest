@@ -119,6 +119,10 @@ export class ProfileComponent implements OnInit {
         bio: res.userData.bio,
         email: res.userData.email
       });
+
+      // Calculate profile progress
+      this.profileProgress = 0;
+      this.calculateProgress();
     });
   }
 
@@ -195,6 +199,32 @@ export class ProfileComponent implements OnInit {
   tabClick(event) {
     if (event.index === 2) {
       this.getUserData();
+    }
+  }
+
+  calculateProgress() {
+    if (this.name) {
+      this.profileProgress += 25;
+    } else {
+      this.profileProgress -= 25;
+    }
+
+    if (this.bio) {
+      this.profileProgress += 25;
+    } else {
+      this.profileProgress -= 25;
+    }
+
+    if (this.website) {
+      this.profileProgress += 25;
+    } else {
+      this.profileProgress -= 25;
+    }
+
+    if (this.interests.length > 0) {
+      this.profileProgress += 25;
+    } else {
+      this.profileProgress -= 25;
     }
   }
 }
