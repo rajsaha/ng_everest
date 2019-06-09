@@ -53,6 +53,16 @@
                 }
             }
 
+            .toggle-profile-view {
+                color: rgba(0, 0, 0, .8);
+                position: absolute;
+                top: 50%;
+                transform: translateY(-50%);
+                right: 0;
+                width: 100px;
+                font-size: 12px;
+            }
+
             img {
                 border: 3px solid transparent;
                 border-radius: 50%;
@@ -99,11 +109,19 @@
         .public-view-content {
             h1 {
                 font-weight: 300;
+                margin-bottom: 5px;
+                margin-right: 5px;
+                display: inline-flex;
+            }
 
-                fa-icon {
-                    font-size: 16px;
-                    margin-top: -2px;
-                }
+            a {
+                background-color: rgba(0, 0, 0, .5);
+                border-radius: 15px;
+                color: white;
+                padding: 5px 10px;
+                text-decoration: none;
+                font-size: 12px;
+                display: inline-flex;
             }
 
             .bio {
@@ -111,9 +129,14 @@
             }
         }
 
-        .complete-profile-button {
+        mat-progress-bar {
             margin-top: 25px;
-            margin-bottom: 20px;
+            margin-bottom: 5px;
+        }
+
+        .complete-profile-label {
+            font-size: 12px;
+            color: rgba(0, 0, 0, .3);
         }
     }
 

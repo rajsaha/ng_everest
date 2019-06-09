@@ -29,30 +29,24 @@
               <p>{{ username }}</p>
               <p>{{ email }}</p>
             </div>
-            <div class="view-public" matTooltip="Edit Profile" matRipple (click)="isPublicView = false">
-              <fa-icon [icon]="faEdit"></fa-icon>
-            </div>
+            <button class="toggle-profile-view" mat-stroked-button (click)="isPublicView = false">Edit Profile</button>
           </div>
 
           <mat-divider></mat-divider>
           
           <!--* Public view of profile -->
           <div class="public-view-content">
-            <h1 *ngIf="name">{{ name }}&nbsp;<a *ngIf="website" [href]="website" target="_blank">
-                <fa-icon [icon]="faExternalLinkAlt"></fa-icon>
-              </a></h1>
+            <h1 *ngIf="name">{{ name }}</h1>
+            <a *ngIf="website" [href]="website" target="_blank">
+              <fa-icon [icon]="faExternalLinkAlt"></fa-icon>&nbsp; Website
+            </a>
             <p class="bio" *ngIf="bio">{{ bio }}</p>
             <mat-chip-list *ngIf="interests">
               <mat-chip *ngFor="let interest of interests">{{ interest }}</mat-chip>
             </mat-chip-list>
           </div>
-          <button 
-          mat-raised-button 
-          *ngIf="profileProgress < 100" 
-          color="accent" 
-          class="complete-profile-button"
-          (click)="isPublicView = false">Complete your Profile</button>
           <mat-progress-bar *ngIf="profileProgress < 100" mode="determinate" [value]="profileProgress"></mat-progress-bar>
+          <small *ngIf="profileProgress < 100" class="complete-profile-label">Profile Completion: {{ profileProgress }}%</small>
         </div>
       </div>
 
@@ -64,9 +58,7 @@
               <p>{{ profileForm.controls.username.value }}</p>
               <p>{{ profileForm.controls.email.value }}</p>
             </div>
-            <div class="view-public" matTooltip="View Public Profile" matRipple (click)="isPublicView = true; getUserData();">
-              <fa-icon [icon]="faEye"></fa-icon>
-            </div>
+            <button class="toggle-profile-view" mat-stroked-button (click)="isPublicView = true; getUserData();">View Profile</button>
           </div>
           <mat-divider></mat-divider>
           <div class="section-header">

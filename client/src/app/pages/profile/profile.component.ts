@@ -204,27 +204,31 @@ export class ProfileComponent implements OnInit {
 
   calculateProgress() {
     if (this.name) {
-      this.profileProgress += 25;
-    } else {
-      this.profileProgress -= 25;
+      this.alterProgress(true);
     }
 
     if (this.bio) {
-      this.profileProgress += 25;
-    } else {
-      this.profileProgress -= 25;
+      this.alterProgress(true);
     }
 
     if (this.website) {
-      this.profileProgress += 25;
-    } else {
-      this.profileProgress -= 25;
+      this.alterProgress(true);
     }
 
     if (this.interests.length > 0) {
-      this.profileProgress += 25;
+      this.alterProgress(true);
+    }
+  }
+
+  alterProgress(bool: boolean) {
+    if (bool) {
+      if (this.profileProgress < 100) {
+        this.profileProgress += 25;
+      }
     } else {
-      this.profileProgress -= 25;
+      if (this.profileProgress > 0) {
+        this.profileProgress -= 25;
+      }
     }
   }
 }
