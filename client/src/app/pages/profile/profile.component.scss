@@ -37,22 +37,6 @@
                 }
             }
 
-            .view-public {
-                background-color: rgba(0, 0, 0, .05);
-                border-radius: 50%;
-                cursor: pointer;
-                position: absolute;
-                padding: 10px;
-                top: 50%;
-                transform: translateY(-50%);
-                right: 25px;
-                transition: background-color .2s ease-in-out;
-
-                &:hover {
-                    background-color: rgba(0, 0, 0, .1);
-                }
-            }
-
             .toggle-profile-view {
                 color: rgba(0, 0, 0, .8);
                 position: absolute;
@@ -109,19 +93,27 @@
         .public-view-content {
             h1 {
                 font-weight: 300;
-                margin-bottom: 5px;
+                margin-bottom: 0;
                 margin-right: 5px;
+                margin-top: 0px;
                 display: inline-flex;
+                line-height: 1;
             }
 
             a {
-                background-color: rgba(0, 0, 0, .5);
+                background-color: rgba(0, 0, 0, 0.4);
                 border-radius: 15px;
                 color: white;
                 padding: 5px 10px;
                 text-decoration: none;
                 font-size: 12px;
                 display: inline-flex;
+                line-height: 1;
+                transition: background-color 0.3s ease-in-out;
+
+                &:hover {
+                    background-color: rgba(0, 0, 0, 0.8);
+                }
             }
 
             .bio {

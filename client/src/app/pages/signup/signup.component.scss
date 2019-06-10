@@ -5,6 +5,7 @@
 	background-size: 100%;
 	background-position: bottom;
 	background-repeat: no-repeat;
+	transition: height 0.2s ease-in-out;
 	.signup-form-parent {
 		position: absolute;
 		top: 50%;
@@ -17,6 +18,16 @@
 		
 		mat-form-field {
 			width: 100%;
+		}
+
+		.password-rules {
+			border: 1px solid rgba(0, 0, 0, .1);
+			border-radius: 5px;
+			margin-bottom: 25px;
+
+			ul {
+				list-style: none;
+			}
 		}
 	
 		.lock-icon-parent {

@@ -1,8 +1,9 @@
 <mat-progress-bar mode="query" *ngIf="isLoading">
 </mat-progress-bar>
+
 <div class="profile-container">
   <mat-tab-group mat-align-tabs="center" (selectedTabChange)="tabClick($event)">
-    <!-- Collections -->
+    <!-- * Collections -->
     <mat-tab label="Collections">
       <div class="section">
         <div class="section-header">
@@ -11,6 +12,7 @@
       </div>
     </mat-tab>
 
+    <!-- * Followers -->
     <mat-tab label="Followers">
       <div class="section">
         <div class="section-header">
@@ -19,7 +21,7 @@
       </div>
     </mat-tab>
 
-    <!-- Profile Management -->
+    <!-- * Profile Management -->
     <mat-tab label="Profile">
       <div class="public-view" *ngIf="isPublicView">
         <div class="section">
@@ -45,6 +47,8 @@
               <mat-chip *ngFor="let interest of interests">{{ interest }}</mat-chip>
             </mat-chip-list>
           </div>
+
+          <!-- * Progress Bar -->
           <mat-progress-bar *ngIf="profileProgress < 100" mode="determinate" [value]="profileProgress"></mat-progress-bar>
           <small *ngIf="profileProgress < 100" class="complete-profile-label">Profile Completion: {{ profileProgress }}%</small>
         </div>
