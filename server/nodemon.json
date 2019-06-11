@@ -1,9 +1,7 @@
 {
     "env": {
         "MLAB_U": "ng_everest",
-        "MLAB_PW": "1ng_everest1"
-    },
-    "imgur": {
+        "MLAB_PW": "1ng_everest1",
         "IMAGE_UPLOAD_URL": "https://api.imgur.com/3/upload",
         "IMAGE_DELETE_URL": "https://api.imgur.com/3/image",
         "CLIENT_ID": "546c25a59c58ad7",

@@ -1,4 +1,5 @@
 const User = require('../../models/User');
+const axios = require('axios');
 
 const Profile = (() => {
     const getProfileData = async (username) => {
@@ -75,8 +76,27 @@ const Profile = (() => {
     }
 
     const saveProfilePhoto = async (data) => {
+        console.log(data);
         try {
-            
+            const savePhoto = axios.create({
+                headers: {
+                    'Authorization': `Client-ID ${process.env.CLIENT_ID}`
+                }
+            });
+            savePhoto
+            .post(process.env.IMAGE_UPLOAD_URL, data)
+            .then((response) => {
+                return {
+                    message: response
+                };
+            })
+            .catch((error) => {
+                console.log(error);
+                return {
+                    error: error
+                };
+            });
+
         } catch (err) {
             console.log(err);
             return {
@@ -88,7 +108,8 @@ const Profile = (() => {
     return {
         getProfileData,
         updateProfileData,
-        removeInterest
+        removeInterest,
+        saveProfilePhoto
     }
 })();
 
