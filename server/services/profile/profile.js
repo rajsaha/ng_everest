@@ -74,6 +74,17 @@ const Profile = (() => {
         }
     }
 
+    const saveProfilePhoto = async (data) => {
+        try {
+            
+        } catch (err) {
+            console.log(err);
+            return {
+                error: err.message
+            };
+        }
+    }
+
     return {
         getProfileData,
         updateProfileData,

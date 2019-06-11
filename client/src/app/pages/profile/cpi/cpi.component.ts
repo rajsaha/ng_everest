@@ -1,6 +1,7 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, Inject, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { SnackbarService } from '@services/general/snackbar.service';
+import { faTrash } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-cpi',
@@ -11,6 +12,8 @@ export class CpiComponent implements OnInit {
   defaultProfileImage = '../../../../assets/portrait.jpg';
   userImage: any;
   isNewImage = false;
+  faTrash = faTrash;
+  @ViewChild('fileInput') fileInput: ElementRef;
 
   constructor(public dialogRef: MatDialogRef<CpiComponent>,
               @Inject(MAT_DIALOG_DATA) public data,
@@ -21,8 +24,9 @@ export class CpiComponent implements OnInit {
   }
 
   onFileSelected(files) {
-    if (files.length === 0)
+    if (files.length === 0) {
       return;
+    }
 
     const mimeType = files[0].type;
     if (mimeType.match(/image\/*/) == null) {
@@ -36,16 +40,21 @@ export class CpiComponent implements OnInit {
       return;
     }
     this.isNewImage = true;
-    let reader = new FileReader();
+    const reader = new FileReader();
     reader.readAsDataURL(files[0]);
-    reader.onload = (_event) => {
+    reader.onload = (event) => {
       this.userImage = reader.result;
-    }
+    };
   }
 
   clearImage() {
-    this.isNewImage = false;
-    this.userImage = null;
+    if (this.isNewImage) {
+      this.isNewImage = false;
+      this.userImage = null;
+      this.fileInput.nativeElement.value = '';
+    } else {
+      // Handle deletion of uploaded image
+    }
   }
 
   onNoClick() {

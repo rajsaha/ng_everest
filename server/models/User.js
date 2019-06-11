@@ -23,21 +23,30 @@ var UserSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    image: String,
+    image: {
+        link: {
+            type: String,
+            required: true
+        },
+        id: {
+            type: String,
+            required: true
+        },
+        deleteHash: {
+            type: String,
+            required: true
+        }
+    },
     bio: String,
     website: String,
-    interests: [
-        {
-            type: [String],
-            trim: true
-        }
-    ],
-    collections: [
-        {
-            title: String,
-            resources: [String]
-        }
-    ],
+    interests: [{
+        type: [String],
+        trim: true
+    }],
+    collections: [{
+        title: String,
+        resources: [String]
+    }],
     followers: {
         type: [String],
         default: 'everest'
