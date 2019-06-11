@@ -1,11 +1,13 @@
 <h1 mat-dialog-title>Change Profile Image</h1>
 
 <div class="image">
-  <img [src]="data.image ? data.image : defaultProfileImage" alt="">
+  <img [src]="userImage ? userImage : defaultProfileImage" alt="">
 </div>
 
 <div class="controls">
-  <button mat-flat-button>Upload</button>
-  <button mat-flat-button>Clear</button>
+  <input hidden (change)="onFileSelected(fileInput.files)" #fileInput type="file" id="file">
+  <button mat-flat-button (click)="fileInput.click()" *ngIf="!isNewImage">Upload</button>
+  <button mat-flat-button color="primary" *ngIf="isNewImage">Save</button>
+  <button mat-flat-button (click)="clearImage()" *ngIf="isNewImage">Clear</button>
   <button mat-button (click)="onNoClick()">Close</button>
 </div>
