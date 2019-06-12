@@ -1,7 +1,8 @@
 import { Component, Inject, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { SnackbarService } from '@services/general/snackbar.service';
-import { faTrash } from '@fortawesome/free-solid-svg-icons';
+import { faEdit } from '@fortawesome/free-solid-svg-icons';
+import { ProfileService } from '@services/profile/profile.service';
 
 @Component({
   selector: 'app-cpi',
@@ -12,12 +13,13 @@ export class CpiComponent implements OnInit {
   defaultProfileImage = '../../../../assets/portrait.jpg';
   userImage: any;
   isNewImage = false;
-  faTrash = faTrash;
+  faEdit = faEdit;
   @ViewChild('fileInput') fileInput: ElementRef;
 
   constructor(public dialogRef: MatDialogRef<CpiComponent>,
               @Inject(MAT_DIALOG_DATA) public data,
-              private snackbarService: SnackbarService) { }
+              private snackbarService: SnackbarService,
+              private profileService: ProfileService) { }
 
   ngOnInit() {
     this.userImage = this.data.image;
@@ -63,6 +65,28 @@ export class CpiComponent implements OnInit {
 
   onYesClick() {
     this.dialogRef.close();
+  }
+
+  saveProfilePhoto() {
+    this.profileService.saveProfilePhoto(this.userImage).then((res) => {
+      if (!res.error) {
+        this.snackbarService.openSnackBar({
+          message: {
+            message: 'Profile photo updated!',
+            error: false
+          },
+          class: 'green-snackbar',
+        });
+      } else {
+        this.snackbarService.openSnackBar({
+          message: {
+            message: `Error: ${res.error}!`,
+            error: true
+          },
+          class: 'red-snackbar',
+        });
+      }
+    });
   }
 
 }

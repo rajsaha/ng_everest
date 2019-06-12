@@ -83,6 +83,7 @@ export class ProfileComponent implements OnInit {
     };
 
     this.profileService.updateProfileData(data).then((res) => {
+      console.log(res);
       if (!res.error) {
         this.snackbarService.openSnackBar({
           message: {

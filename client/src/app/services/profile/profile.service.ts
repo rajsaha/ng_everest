@@ -33,4 +33,12 @@ export class ProfileService {
       });
     });
   }
+
+  saveProfilePhoto(data: any): Promise<any> {
+    return new Promise(resolve => {
+      this.http.post(`${ENV.API_URL}/profile/save-profile-photo`, data).subscribe((response: any) => {
+        resolve(response);
+      });
+    });
+  }
 }

@@ -76,7 +76,6 @@ const Profile = (() => {
     }
 
     const saveProfilePhoto = async (data) => {
-        console.log(data);
         try {
             const savePhoto = axios.create({
                 headers: {
@@ -91,9 +90,9 @@ const Profile = (() => {
                 };
             })
             .catch((error) => {
-                console.log(error);
+                console.error(error);
                 return {
-                    error: error
+                    message: `Error: ${error.response.status} - ${error.response.statusText}`
                 };
             });
 
