@@ -34,9 +34,11 @@ export class ProfileService {
     });
   }
 
-  saveProfilePhoto(data: any): Promise<any> {
+  saveProfilePhoto(image: File): Promise<any> {
+    const formData = new FormData();
+    formData.append('image', image);
     return new Promise(resolve => {
-      this.http.post(`${ENV.API_URL}/profile/save-profile-photo`, data).subscribe((response: any) => {
+      this.http.post(`${ENV.API_URL}/profile/save-profile-photo`, formData).subscribe((response: any) => {
         resolve(response);
       });
     });
