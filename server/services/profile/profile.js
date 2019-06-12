@@ -76,6 +76,7 @@ const Profile = (() => {
     }
 
     const saveProfilePhoto = async (data) => {
+        console.log(data);
         try {
             const savePhoto = axios.create({
                 headers: {

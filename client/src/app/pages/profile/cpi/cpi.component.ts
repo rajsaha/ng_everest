@@ -1,8 +1,12 @@
 import { Component, Inject, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { SnackbarService } from '@services/general/snackbar.service';
-import { faEdit } from '@fortawesome/free-solid-svg-icons';
+import { faTrash } from '@fortawesome/free-solid-svg-icons';
 import { ProfileService } from '@services/profile/profile.service';
+
+class ImageSnippet {
+  constructor(public src: string, public file: File) {}
+}
 
 @Component({
   selector: 'app-cpi',
@@ -13,8 +17,9 @@ export class CpiComponent implements OnInit {
   defaultProfileImage = '../../../../assets/portrait.jpg';
   userImage: any;
   isNewImage = false;
-  faEdit = faEdit;
-  @ViewChild('fileInput') fileInput: ElementRef;
+  faTrash = faTrash;
+  selectedFile: ImageSnippet;
+  @ViewChild('imageInput') imageInput: ElementRef;
 
   constructor(public dialogRef: MatDialogRef<CpiComponent>,
               @Inject(MAT_DIALOG_DATA) public data,
@@ -25,35 +30,24 @@ export class CpiComponent implements OnInit {
     this.userImage = this.data.image;
   }
 
-  onFileSelected(files) {
-    if (files.length === 0) {
-      return;
-    }
-
-    const mimeType = files[0].type;
-    if (mimeType.match(/image\/*/) == null) {
-      this.snackbarService.openSnackBar({
-        message: {
-          message: 'Please upload an image',
-          error: true
-        },
-        class: 'red-snackbar',
-      });
-      return;
-    }
+  onFileSelected(imageInput: any) {
     this.isNewImage = true;
+    const file: File = imageInput.files[0];
     const reader = new FileReader();
-    reader.readAsDataURL(files[0]);
-    reader.onload = (event) => {
-      this.userImage = reader.result;
-    };
+
+    reader.addEventListener('load', (event: any) => {
+      this.selectedFile = new ImageSnippet(event.target.result, file);
+      this.userImage = event.target.result;
+    });
+
+    reader.readAsDataURL(file);
   }
 
   clearImage() {
     if (this.isNewImage) {
       this.isNewImage = false;
       this.userImage = null;
-      this.fileInput.nativeElement.value = '';
+      this.imageInput.nativeElement.value = '';
     } else {
       // Handle deletion of uploaded image
     }
@@ -68,7 +62,7 @@ export class CpiComponent implements OnInit {
   }
 
   saveProfilePhoto() {
-    this.profileService.saveProfilePhoto(this.userImage).then((res) => {
+    this.profileService.saveProfilePhoto(this.selectedFile.file).then((res) => {
       if (!res.error) {
         this.snackbarService.openSnackBar({
           message: {
