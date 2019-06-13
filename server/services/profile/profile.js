@@ -84,29 +84,30 @@ const Profile = (() => {
     const saveProfilePhoto = async (data) => {
         try {
             const replacedBase64String = data.replace(/^data:image\/[a-z]+;base64,/, "");
-            let buff = new Buffer(replacedBase64String);
-            let base64Image = buff.toString('base64');
             const savePhoto = axios.create({
                 headers: {
                     'Authorization': `Client-ID ${process.env.CLIENT_ID}`
                 }
             });
 
-            const package = {
-                image: base64Image,
-                type: 'base64',
-                title: 'Imgur'
-            };
-
             savePhoto
-                .post(process.env.IMAGE_UPLOAD_URL, package)
+                .post(process.env.IMAGE_UPLOAD_URL, replacedBase64String)
                 .then((response) => {
+                    console.log(`Image uploaded with id: ${response.data.data.id}`);
                     return {
-                        message: response
+                        message: {
+                            status: 200,
+                            error: false,
+                            data: {
+                                id: response.data.data.id,
+                                deleteHash: response.data.data.deleteHash,
+                                link: response.data.data.link
+                            }
+                        }
                     };
                 })
                 .catch((error) => {
-                    console.log(error);
+                    console.log(`Error: ${error.response.status} - ${error.response.statusText}`);
                     return {
                         message: `Error: ${error.response.status} - ${error.response.statusText}`
                     };

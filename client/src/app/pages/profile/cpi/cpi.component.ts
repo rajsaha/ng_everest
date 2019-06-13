@@ -63,16 +63,7 @@ export class CpiComponent implements OnInit {
 
   saveProfilePhoto() {
     this.profileService.saveProfilePhoto({ image: this.userImage }).then((res) => {
-      console.log(res);
-      if (res === null) {
-        this.snackbarService.openSnackBar({
-          message: {
-            message: `Something went wrong!`,
-            error: true
-          },
-          class: 'red-snackbar',
-        });
-      } else if (!res.error) {
+      if (!res.error) {
         this.snackbarService.openSnackBar({
           message: {
             message: 'Profile photo updated!',
@@ -80,6 +71,7 @@ export class CpiComponent implements OnInit {
           },
           class: 'green-snackbar',
         });
+        this.dialogRef.close();
       } else {
         this.snackbarService.openSnackBar({
           message: {
