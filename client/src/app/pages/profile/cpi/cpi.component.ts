@@ -33,7 +33,7 @@ export class CpiComponent implements OnInit {
   onFileSelected(imageInput: any) {
     this.isNewImage = true;
     const file: File = imageInput.files[0];
-    const reader = new FileReader();
+    const reader: FileReader = new FileReader();
 
     reader.addEventListener('load', (event: any) => {
       this.selectedFile = new ImageSnippet(event.target.result, file);
@@ -62,8 +62,17 @@ export class CpiComponent implements OnInit {
   }
 
   saveProfilePhoto() {
-    this.profileService.saveProfilePhoto(this.selectedFile.file).then((res) => {
-      if (!res.error) {
+    this.profileService.saveProfilePhoto({ image: this.userImage }).then((res) => {
+      console.log(res);
+      if (res === null) {
+        this.snackbarService.openSnackBar({
+          message: {
+            message: `Something went wrong!`,
+            error: true
+          },
+          class: 'red-snackbar',
+        });
+      } else if (!res.error) {
         this.snackbarService.openSnackBar({
           message: {
             message: 'Profile photo updated!',
@@ -74,7 +83,7 @@ export class CpiComponent implements OnInit {
       } else {
         this.snackbarService.openSnackBar({
           message: {
-            message: `Error: ${res.error}!`,
+            message: `Something went wrong!`,
             error: true
           },
           class: 'red-snackbar',

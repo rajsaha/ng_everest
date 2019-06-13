@@ -63,7 +63,13 @@ const Profile = (() => {
 
     const removeInterest = async (data) => {
         try {
-            const user = await User.updateOne({ _id: data.id }, { $pull: { interests: data.interest } }).exec();
+            const user = await User.updateOne({
+                _id: data.id
+            }, {
+                $pull: {
+                    interests: data.interest
+                }
+            }).exec();
             return {
                 message: `${data.interest} removed`
             }
@@ -76,26 +82,35 @@ const Profile = (() => {
     }
 
     const saveProfilePhoto = async (data) => {
-        console.log(data);
         try {
+            const replacedBase64String = data.replace(/^data:image\/[a-z]+;base64,/, "");
+            let buff = new Buffer(replacedBase64String);
+            let base64Image = buff.toString('base64');
             const savePhoto = axios.create({
                 headers: {
                     'Authorization': `Client-ID ${process.env.CLIENT_ID}`
                 }
             });
+
+            const package = {
+                image: base64Image,
+                type: 'base64',
+                title: 'Imgur'
+            };
+
             savePhoto
-            .post(process.env.IMAGE_UPLOAD_URL, data)
-            .then((response) => {
-                return {
-                    message: response
-                };
-            })
-            .catch((error) => {
-                console.error(error);
-                return {
-                    message: `Error: ${error.response.status} - ${error.response.statusText}`
-                };
-            });
+                .post(process.env.IMAGE_UPLOAD_URL, package)
+                .then((response) => {
+                    return {
+                        message: response
+                    };
+                })
+                .catch((error) => {
+                    console.log(error);
+                    return {
+                        message: `Error: ${error.response.status} - ${error.response.statusText}`
+                    };
+                });
 
         } catch (err) {
             console.log(err);

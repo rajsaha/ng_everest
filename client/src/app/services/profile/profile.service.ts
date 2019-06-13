@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment as ENV } from '@environments/environment';
 
 @Injectable({
@@ -34,11 +34,13 @@ export class ProfileService {
     });
   }
 
-  saveProfilePhoto(image: File): Promise<any> {
-    const formData = new FormData();
-    formData.append('image', image);
+  saveProfilePhoto(data: any): Promise<any> {
+    // const headers = new HttpHeaders().append('Content-Type', 'multipart/form-data');
+    // const headers = new HttpHeaders().append('Content-Type', 'application/json');
+    // const formData: FormData = new FormData();
+    // formData.append('image', image);
     return new Promise(resolve => {
-      this.http.post(`${ENV.API_URL}/profile/save-profile-photo`, formData).subscribe((response: any) => {
+      this.http.post(`${ENV.API_URL}/profile/save-profile-photo`, data).subscribe((response: any) => {
         resolve(response);
       });
     });
