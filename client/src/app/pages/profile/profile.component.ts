@@ -23,6 +23,8 @@ export class ProfileComponent implements OnInit {
   bio: string;
   email: string;
   image: string;
+  imageId: string;
+  deleteHash: string;
   interests = [];
   defaultProfileImage = '../../../assets/portrait.jpg';
 
@@ -109,10 +111,13 @@ export class ProfileComponent implements OnInit {
 
   getUserData() {
     this.profileService.getProfileData(this.username).then((res: any) => {
+      console.log(res);
       this.isLoading = true;
       this.isProfileSaveButtonDisabled = true;
       this.interests = res.userData.interests;
       this.image = res.userData.image.link ? res.userData.image.link : this.defaultProfileImage;
+      this.imageId = res.userData.image.id;
+      this.deleteHash = res.userData.image.deletehash;
       this.initFormData({
         username: res.userData.username,
         name: res.userData.name,
@@ -148,7 +153,9 @@ export class ProfileComponent implements OnInit {
   openCpiDialog() {
     const dialogRef = this.dialog.open(CpiComponent, {
       data: {
-        image: this.image
+        image: this.image,
+        imageId: this.imageId,
+        deleteHash: this.deleteHash
       }
     });
 

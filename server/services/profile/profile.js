@@ -93,11 +93,12 @@ const Profile = (() => {
             savePhoto
                 .post(process.env.IMAGE_UPLOAD_URL, replacedBase64String)
                 .then(async (response) => {
+                    console.log(response.data);
                     try {
                         const query = {
                             _id: id
                         };
-    
+
                         const update = {
                             $set: {
                                 image: {
@@ -114,12 +115,12 @@ const Profile = (() => {
                         const user = await User.updateOne(query, update).exec();
                         console.log(`Image uploaded with id: ${response.data.data.id}`);
                         return {
+                            error: false,
                             message: {
                                 status: 200,
-                                error: false,
                                 data: {
                                     id: response.data.data.id,
-                                    deleteHash: response.data.data.deleteHash,
+                                    deleteHash: response.data.data.deletehash,
                                     link: response.data.data.link
                                 }
                             }
@@ -146,11 +147,62 @@ const Profile = (() => {
         }
     }
 
+    const deleteProfilePhoto = async (id, deleteHash) => {
+        try {
+            const deletePhoto = axios.create({
+                headers: {
+                    'Authorization': `Client-ID ${process.env.CLIENT_ID}`
+                }
+            });
+            deletePhoto
+                .delete(`${process.env.IMAGE_DELETE_URL}/${deleteHash}`)
+                .then(async (response) => {
+                    const query = {
+                        _id: id
+                    };
+
+                    const update = {
+                        $set: {
+                            image: {
+                                link: null,
+                                id: null,
+                                deleteHash: null
+                            }
+                        },
+                        safe: {
+                            new: true,
+                            upsert: true
+                        }
+                    };
+                    const user = await User.updateOne(query, update).exec();
+                    console.log(`Image deleted`);
+                    return {
+                        error: false,
+                        message: {
+                            status: 200
+                        }
+                    };
+                })
+                .catch((error) => {
+                    console.log(`Error: ${error.response.status} - ${error.response.statusText}`);
+                    return {
+                        message: `Error: ${error.response.status} - ${error.response.statusText}`
+                    };
+                });
+        } catch (err) {
+            console.log(err);
+            return {
+                error: err.message
+            };
+        }
+    }
+
     return {
         getProfileData,
         updateProfileData,
         removeInterest,
-        saveProfilePhoto
+        saveProfilePhoto,
+        deleteProfilePhoto
     }
 })();
 

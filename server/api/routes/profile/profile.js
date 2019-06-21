@@ -2,8 +2,6 @@ const express = require('express');
 const router = express.Router();
 const Profile = require('../../../services/profile/profile');
 const checkIfAuthenticated = require('../../../services/auth/checkIfAuthorized');
-const multer = require('multer');
-let upload = multer({ dest: 'uploads/' });
 
 router.get('/get-user-data/:username', checkIfAuthenticated, async (req, res, next) => {
     try {
@@ -35,6 +33,15 @@ router.post('/remove-user-interest', async (req, res, next) => {
 router.post('/save-profile-photo', async (req, res, next) => {
     try {
         const response = await Profile.saveProfilePhoto(req.body.id, req.body.image);
+        res.status(200).json(response);
+    } catch (err) {
+        console.error(err);
+    }
+});
+
+router.delete('/delete-profile-photo', async (req, res, next) => {
+    try {
+        const response = await Profile.deleteProfilePhoto(req.body.id, req.body.imageId);
         res.status(200).json(response);
     } catch (err) {
         console.error(err);

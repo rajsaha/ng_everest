@@ -35,12 +35,16 @@ export class ProfileService {
   }
 
   saveProfilePhoto(data: any): Promise<any> {
-    // const headers = new HttpHeaders().append('Content-Type', 'multipart/form-data');
-    // const headers = new HttpHeaders().append('Content-Type', 'application/json');
-    // const formData: FormData = new FormData();
-    // formData.append('image', image);
     return new Promise(resolve => {
       this.http.post(`${ENV.API_URL}/profile/save-profile-photo`, data).subscribe((response: any) => {
+        resolve(response);
+      });
+    });
+  }
+
+  deleteProfilePhoto(data: any): Promise<any> {
+    return new Promise(resolve => {
+      this.http.post(`${ENV.API_URL}/profile/delete-profile-photo`, data).subscribe((response: any) => {
         resolve(response);
       });
     });

@@ -5,7 +5,7 @@ import { faTrash } from '@fortawesome/free-solid-svg-icons';
 import { ProfileService } from '@services/profile/profile.service';
 
 class ImageSnippet {
-  constructor(public src: string, public file: File) {}
+  constructor(public src: string, public file: File) { }
 }
 
 @Component({
@@ -22,13 +22,19 @@ export class CpiComponent implements OnInit {
   faTrash = faTrash;
 
   userId: string;
+  imageId: string;
+  deleteHash: string;
   selectedFile: ImageSnippet;
   @ViewChild('imageInput') imageInput: ElementRef;
 
   constructor(public dialogRef: MatDialogRef<CpiComponent>,
               @Inject(MAT_DIALOG_DATA) public data,
               private snackbarService: SnackbarService,
-              private profileService: ProfileService) { }
+              private profileService: ProfileService) {
+                console.log(data);
+    this.imageId = data.imageId;
+    this.deleteHash = data.deleteHash;
+  }
 
   ngOnInit() {
     this.userId = localStorage.getItem('userId');
@@ -55,6 +61,7 @@ export class CpiComponent implements OnInit {
       this.imageInput.nativeElement.value = '';
     } else {
       // Handle deletion of uploaded image
+      this.deleteProfilePhoto();
     }
   }
 
@@ -89,4 +96,26 @@ export class CpiComponent implements OnInit {
     });
   }
 
+  deleteProfilePhoto() {
+    this.profileService.deleteProfilePhoto({ id: this.userId, deleteHash: this.deleteHash }).then((res) => {
+      if (!res.error) {
+        this.snackbarService.openSnackBar({
+          message: {
+            message: 'Profile photo updated!',
+            error: false
+          },
+          class: 'green-snackbar',
+        });
+        this.dialogRef.close();
+      } else {
+        this.snackbarService.openSnackBar({
+          message: {
+            message: `Something went wrong!`,
+            error: true
+          },
+          class: 'red-snackbar',
+        });
+      }
+    });
+  }
 }
