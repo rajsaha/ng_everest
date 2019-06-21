@@ -6,7 +6,7 @@
     <h1 class="app-name"><a routerLink="/feed">Everest</a></h1>
     <div class="profile-container">
       <div class="profile-image" [matMenuTriggerFor]="menu">
-        <img src="../assets/portrait.jpg" alt="portrait">
+        <img [src]="image ? image : defaultProfileImage" alt="portrait">
       </div>
       <mat-menu #menu="matMenu">
         <button mat-menu-item routerLink="/profile" routerLinkActive="active"><fa-icon [icon]="faUser"></fa-icon>&nbsp;&nbsp;View Profile</button>

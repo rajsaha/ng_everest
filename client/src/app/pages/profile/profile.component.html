@@ -26,7 +26,7 @@
       <div class="public-view" *ngIf="isPublicView">
         <div class="section">
           <div class="profile-picture">
-            <img [src]="image ? image : defaultProfileImage" style="cursor: inherit; border: none;">
+            <img [src]="image" style="cursor: inherit; border: none;">
             <div class="text">
               <p>{{ username }}</p>
               <p>{{ email }}</p>
@@ -57,7 +57,7 @@
       <div class="change-profile-data" *ngIf="!isPublicView">
         <div class="section">
           <div class="profile-picture">
-            <img [src]="image ? image : defaultProfileImage" alt="" (click)="openCpiDialog()">
+            <img [src]="image" alt="" (click)="openCpiDialog()">
             <div class="text">
               <p>{{ profileForm.controls.username.value }}</p>
               <p>{{ profileForm.controls.email.value }}</p>

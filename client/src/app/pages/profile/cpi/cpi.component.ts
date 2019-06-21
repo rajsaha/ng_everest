@@ -17,7 +17,11 @@ export class CpiComponent implements OnInit {
   defaultProfileImage = '../../../../assets/portrait.jpg';
   userImage: any;
   isNewImage = false;
+
+  // Icons
   faTrash = faTrash;
+
+  userId: string;
   selectedFile: ImageSnippet;
   @ViewChild('imageInput') imageInput: ElementRef;
 
@@ -27,6 +31,7 @@ export class CpiComponent implements OnInit {
               private profileService: ProfileService) { }
 
   ngOnInit() {
+    this.userId = localStorage.getItem('userId');
     this.userImage = this.data.image;
   }
 
@@ -62,7 +67,7 @@ export class CpiComponent implements OnInit {
   }
 
   saveProfilePhoto() {
-    this.profileService.saveProfilePhoto({ image: this.userImage }).then((res) => {
+    this.profileService.saveProfilePhoto({ id: this.userId, image: this.userImage }).then((res) => {
       if (!res.error) {
         this.snackbarService.openSnackBar({
           message: {

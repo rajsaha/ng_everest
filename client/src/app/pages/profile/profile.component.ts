@@ -83,7 +83,6 @@ export class ProfileComponent implements OnInit {
     };
 
     this.profileService.updateProfileData(data).then((res) => {
-      console.log(res);
       if (!res.error) {
         this.snackbarService.openSnackBar({
           message: {
@@ -113,6 +112,7 @@ export class ProfileComponent implements OnInit {
       this.isLoading = true;
       this.isProfileSaveButtonDisabled = true;
       this.interests = res.userData.interests;
+      this.image = res.userData.image.link ? res.userData.image.link : this.defaultProfileImage;
       this.initFormData({
         username: res.userData.username,
         name: res.userData.name,
@@ -131,7 +131,6 @@ export class ProfileComponent implements OnInit {
     this.isLoading = false;
     this.isProfileSaveButtonDisabled = false;
 
-    this.image = data.image;
     this.username = data.username;
     this.name = data.name;
     this.website = data.website;

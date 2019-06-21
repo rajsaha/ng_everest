@@ -81,7 +81,7 @@ const Profile = (() => {
         }
     }
 
-    const saveProfilePhoto = async (data) => {
+    const saveProfilePhoto = async (id, data) => {
         try {
             const replacedBase64String = data.replace(/^data:image\/[a-z]+;base64,/, "");
             const savePhoto = axios.create({
@@ -92,19 +92,44 @@ const Profile = (() => {
 
             savePhoto
                 .post(process.env.IMAGE_UPLOAD_URL, replacedBase64String)
-                .then((response) => {
-                    console.log(`Image uploaded with id: ${response.data.data.id}`);
-                    return {
-                        message: {
-                            status: 200,
-                            error: false,
-                            data: {
-                                id: response.data.data.id,
-                                deleteHash: response.data.data.deleteHash,
-                                link: response.data.data.link
+                .then(async (response) => {
+                    try {
+                        const query = {
+                            _id: id
+                        };
+    
+                        const update = {
+                            $set: {
+                                image: {
+                                    link: response.data.data.link,
+                                    id: response.data.data.id,
+                                    deleteHash: response.data.data.deleteHash
+                                }
+                            },
+                            safe: {
+                                new: true,
+                                upsert: true
                             }
-                        }
-                    };
+                        };
+                        const user = await User.updateOne(query, update).exec();
+                        console.log(`Image uploaded with id: ${response.data.data.id}`);
+                        return {
+                            message: {
+                                status: 200,
+                                error: false,
+                                data: {
+                                    id: response.data.data.id,
+                                    deleteHash: response.data.data.deleteHash,
+                                    link: response.data.data.link
+                                }
+                            }
+                        };
+                    } catch (err) {
+                        console.log(err);
+                        return {
+                            error: err.message
+                        };
+                    }
                 })
                 .catch((error) => {
                     console.log(`Error: ${error.response.status} - ${error.response.statusText}`);

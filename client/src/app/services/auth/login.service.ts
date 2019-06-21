@@ -17,20 +17,21 @@ export class LoginService {
         .post(`${ENV.API_URL}/login`, loginCred)
         .subscribe((response: any) => {
           if (!response.error) {
-            this.setSession(response.token, response.expiresIn, response.username, response.userId);
+            this.setSession(response.token, response.expiresIn, response.username, response.userId, response.image);
           }
           resolve(response);
         });
     });
   }
 
-  private setSession(token, expiresIn, username, userId) {
+  private setSession(token, expiresIn, username, userId, image) {
     const expiresAt = moment().add(expiresIn, 'milliseconds');
 
     localStorage.setItem('token', token);
     localStorage.setItem('expires_at', JSON.stringify(expiresAt.valueOf()));
     localStorage.setItem('username', username);
     localStorage.setItem('userId', userId);
+    localStorage.setItem('profileImage', image);
   }
 
   logout() {
@@ -38,6 +39,7 @@ export class LoginService {
     localStorage.removeItem('expires_at');
     localStorage.removeItem('username');
     localStorage.removeItem('userId');
+    localStorage.removeItem('profileImage');
   }
 
   public isLoggedIn() {

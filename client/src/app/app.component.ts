@@ -13,6 +13,8 @@ import { CommunicationService } from '@services/general/communication.service';
 export class AppComponent implements OnInit, OnDestroy {
   mobileQuery: MediaQueryList;
   isLoggedIn = false;
+  image: string;
+  defaultProfileImage = '../assets/portrait.jpg';
 
   // Icons
   faUser = faUser;
@@ -36,6 +38,7 @@ export class AppComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.isLoggedIn = this.loginService.isLoggedIn();
+    this.image = localStorage.getItem('profileImage');
   }
 
   logout() {

@@ -34,7 +34,7 @@ router.post('/remove-user-interest', async (req, res, next) => {
 
 router.post('/save-profile-photo', async (req, res, next) => {
     try {
-        const response = await Profile.saveProfilePhoto(req.body.image);
+        const response = await Profile.saveProfilePhoto(req.body.id, req.body.image);
         res.status(200).json(response);
     } catch (err) {
         console.error(err);
