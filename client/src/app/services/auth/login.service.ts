@@ -31,7 +31,9 @@ export class LoginService {
     localStorage.setItem('expires_at', JSON.stringify(expiresAt.valueOf()));
     localStorage.setItem('username', username);
     localStorage.setItem('userId', userId);
-    localStorage.setItem('profileImage', image);
+    if (image) {
+      localStorage.setItem('profileImage', image);
+    }
   }
 
   logout() {

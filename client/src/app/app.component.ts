@@ -14,6 +14,7 @@ export class AppComponent implements OnInit, OnDestroy {
   mobileQuery: MediaQueryList;
   isLoggedIn = false;
   image: string;
+  localStorageImage: string;
   defaultProfileImage = '../assets/portrait.jpg';
 
   // Icons
@@ -38,7 +39,9 @@ export class AppComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.isLoggedIn = this.loginService.isLoggedIn();
-    this.image = localStorage.getItem('profileImage');
+    this.localStorageImage = localStorage.getItem('profileImage');
+    this.image = this.localStorageImage ? this.localStorageImage : this.defaultProfileImage;
+    console.log(this.image);
   }
 
   logout() {

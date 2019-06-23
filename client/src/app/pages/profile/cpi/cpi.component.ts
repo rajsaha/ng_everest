@@ -82,7 +82,7 @@ export class CpiComponent implements OnInit {
         },
         class: 'green-snackbar',
       });
-      localStorage.setItem('profileImage', image);
+      localStorage.setItem('profileImage', this.userImage);
       this.dialogRef.close();
     } else {
       this.snackbarService.openSnackBar({
