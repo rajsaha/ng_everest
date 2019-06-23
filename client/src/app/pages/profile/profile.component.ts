@@ -111,13 +111,12 @@ export class ProfileComponent implements OnInit {
 
   getUserData() {
     this.profileService.getProfileData(this.username).then((res: any) => {
-      console.log(res);
       this.isLoading = true;
       this.isProfileSaveButtonDisabled = true;
       this.interests = res.userData.interests;
       this.image = res.userData.image.link ? res.userData.image.link : this.defaultProfileImage;
       this.imageId = res.userData.image.id;
-      this.deleteHash = res.userData.image.deletehash;
+      this.deleteHash = res.userData.image.deleteHash;
       this.initFormData({
         username: res.userData.username,
         name: res.userData.name,

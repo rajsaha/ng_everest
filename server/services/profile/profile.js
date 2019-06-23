@@ -7,8 +7,8 @@ const Profile = (() => {
             const user = await User.findOne({
                 username: username
             }, {
-                'password': 0
-            }).exec();
+                    'password': 0
+                }).exec();
             return {
                 userData: user
             }
@@ -66,10 +66,10 @@ const Profile = (() => {
             const user = await User.updateOne({
                 _id: data.id
             }, {
-                $pull: {
-                    interests: data.interest
-                }
-            }).exec();
+                    $pull: {
+                        interests: data.interest
+                    }
+                }).exec();
             return {
                 message: `${data.interest} removed`
             }
@@ -90,55 +90,39 @@ const Profile = (() => {
                 }
             });
 
-            savePhoto
-                .post(process.env.IMAGE_UPLOAD_URL, replacedBase64String)
-                .then(async (response) => {
-                    console.log(response.data);
-                    try {
-                        const query = {
-                            _id: id
-                        };
+            const savePhotoResponse = await savePhoto.post(process.env.IMAGE_UPLOAD_URL, replacedBase64String);
+            console.log(savePhotoResponse);
+            const query = {
+                _id: id
+            };
 
-                        const update = {
-                            $set: {
-                                image: {
-                                    link: response.data.data.link,
-                                    id: response.data.data.id,
-                                    deleteHash: response.data.data.deleteHash
-                                }
-                            },
-                            safe: {
-                                new: true,
-                                upsert: true
-                            }
-                        };
-                        const user = await User.updateOne(query, update).exec();
-                        console.log(`Image uploaded with id: ${response.data.data.id}`);
-                        return {
-                            error: false,
-                            message: {
-                                status: 200,
-                                data: {
-                                    id: response.data.data.id,
-                                    deleteHash: response.data.data.deletehash,
-                                    link: response.data.data.link
-                                }
-                            }
-                        };
-                    } catch (err) {
-                        console.log(err);
-                        return {
-                            error: err.message
-                        };
+            const update = {
+                $set: {
+                    image: {
+                        link: savePhotoResponse.data.data.link,
+                        id: savePhotoResponse.data.data.id,
+                        deleteHash: savePhotoResponse.data.data.deletehash
                     }
-                })
-                .catch((error) => {
-                    console.log(`Error: ${error.response.status} - ${error.response.statusText}`);
-                    return {
-                        message: `Error: ${error.response.status} - ${error.response.statusText}`
-                    };
-                });
+                },
+                safe: {
+                    new: true,
+                    upsert: true
+                }
+            };
 
+            await User.updateOne(query, update).exec();
+            console.log(`Image uploaded with id: ${savePhotoResponse.data.data.id}`);
+            return {
+                message: {
+                    error: false,
+                    status: 200,
+                    data: {
+                        id: savePhotoResponse.data.data.id,
+                        deleteHash: savePhotoResponse.data.data.deletehash,
+                        link: savePhotoResponse.data.data.link
+                    }
+                }
+            };
         } catch (err) {
             console.log(err);
             return {
@@ -154,41 +138,35 @@ const Profile = (() => {
                     'Authorization': `Client-ID ${process.env.CLIENT_ID}`
                 }
             });
-            deletePhoto
-                .delete(`${process.env.IMAGE_DELETE_URL}/${deleteHash}`)
-                .then(async (response) => {
-                    const query = {
-                        _id: id
-                    };
 
-                    const update = {
-                        $set: {
-                            image: {
-                                link: null,
-                                id: null,
-                                deleteHash: null
-                            }
-                        },
-                        safe: {
-                            new: true,
-                            upsert: true
-                        }
-                    };
-                    const user = await User.updateOne(query, update).exec();
-                    console.log(`Image deleted`);
-                    return {
-                        error: false,
-                        message: {
-                            status: 200
-                        }
-                    };
-                })
-                .catch((error) => {
-                    console.log(`Error: ${error.response.status} - ${error.response.statusText}`);
-                    return {
-                        message: `Error: ${error.response.status} - ${error.response.statusText}`
-                    };
-                });
+            await deletePhoto.delete(`${process.env.IMAGE_DELETE_URL}/${deleteHash}`);
+
+            const query = {
+                _id: id
+            };
+
+            const update = {
+                $set: {
+                    image: {
+                        link: null,
+                        id: null,
+                        deleteHash: null
+                    }
+                },
+                safe: {
+                    new: true,
+                    upsert: true
+                }
+            };
+
+            await User.updateOne(query, update).exec();
+            console.log(`Image deleted`);
+            return {
+                message: {
+                    error: false,
+                    status: 200
+                }
+            };
         } catch (err) {
             console.log(err);
             return {

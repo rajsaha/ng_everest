@@ -39,9 +39,9 @@ router.post('/save-profile-photo', async (req, res, next) => {
     }
 });
 
-router.delete('/delete-profile-photo', async (req, res, next) => {
+router.delete('/delete-profile-photo/:id/:deleteHash', async (req, res, next) => {
     try {
-        const response = await Profile.deleteProfilePhoto(req.body.id, req.body.imageId);
+        const response = await Profile.deleteProfilePhoto(req.params.id, req.params.deleteHash);
         res.status(200).json(response);
     } catch (err) {
         console.error(err);

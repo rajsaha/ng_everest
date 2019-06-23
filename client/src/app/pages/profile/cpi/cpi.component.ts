@@ -28,10 +28,9 @@ export class CpiComponent implements OnInit {
   @ViewChild('imageInput') imageInput: ElementRef;
 
   constructor(public dialogRef: MatDialogRef<CpiComponent>,
-              @Inject(MAT_DIALOG_DATA) public data,
-              private snackbarService: SnackbarService,
-              private profileService: ProfileService) {
-                console.log(data);
+    @Inject(MAT_DIALOG_DATA) public data,
+    private snackbarService: SnackbarService,
+    private profileService: ProfileService) {
     this.imageId = data.imageId;
     this.deleteHash = data.deleteHash;
   }
@@ -73,49 +72,50 @@ export class CpiComponent implements OnInit {
     this.dialogRef.close();
   }
 
-  saveProfilePhoto() {
-    this.profileService.saveProfilePhoto({ id: this.userId, image: this.userImage }).then((res) => {
-      if (!res.error) {
-        this.snackbarService.openSnackBar({
-          message: {
-            message: 'Profile photo updated!',
-            error: false
-          },
-          class: 'green-snackbar',
-        });
-        this.dialogRef.close();
-      } else {
-        this.snackbarService.openSnackBar({
-          message: {
-            message: `Something went wrong!`,
-            error: true
-          },
-          class: 'red-snackbar',
-        });
-      }
-    });
+  async saveProfilePhoto() {
+    const response = await this.profileService.saveProfilePhoto({ id: this.userId, image: this.userImage });
+    if (!response.error) {
+      this.snackbarService.openSnackBar({
+        message: {
+          message: 'Profile photo updated!',
+          error: false
+        },
+        class: 'green-snackbar',
+      });
+      localStorage.setItem('profileImage', image);
+      this.dialogRef.close();
+    } else {
+      this.snackbarService.openSnackBar({
+        message: {
+          message: `Something went wrong!`,
+          error: true
+        },
+        class: 'red-snackbar',
+      });
+    }
   }
 
-  deleteProfilePhoto() {
-    this.profileService.deleteProfilePhoto({ id: this.userId, deleteHash: this.deleteHash }).then((res) => {
-      if (!res.error) {
-        this.snackbarService.openSnackBar({
-          message: {
-            message: 'Profile photo updated!',
-            error: false
-          },
-          class: 'green-snackbar',
-        });
-        this.dialogRef.close();
-      } else {
-        this.snackbarService.openSnackBar({
-          message: {
-            message: `Something went wrong!`,
-            error: true
-          },
-          class: 'red-snackbar',
-        });
-      }
-    });
+  async deleteProfilePhoto() {
+    const response = await this.profileService.deleteProfilePhoto({ id: this.userId, deleteHash: this.deleteHash });
+    if (!response.error) {
+      this.snackbarService.openSnackBar({
+        message: {
+          message: 'Profile photo deleted!',
+          error: false
+        },
+        class: 'green-snackbar',
+      });
+
+      localStorage.removeItem('profileImage');
+      this.dialogRef.close();
+    } else {
+      this.snackbarService.openSnackBar({
+        message: {
+          message: `Something went wrong!`,
+          error: true
+        },
+        class: 'red-snackbar',
+      });
+    }
   }
 }
