@@ -4,12 +4,16 @@
   <img [src]="userImage ? userImage : defaultProfileImage" alt="">
   <div class="delete-user-image" matRipple *ngIf="imageFromDB || isNewImage" (click)="clearImage()">
     <fa-icon [icon]="faTrash"></fa-icon>
-  </div> 
+  </div>
 </div>
 
 <div class="controls">
   <input hidden (change)="onFileSelected(imageInput)" #imageInput type="file" id="file" accept="image/*">
   <button mat-flat-button (click)="imageInput.click()" *ngIf="!isNewImage">Upload</button>
-  <button mat-flat-button color="primary" *ngIf="isNewImage" (click)="saveProfilePhoto()">Save</button>
+  <button mat-flat-button color="primary" *ngIf="isNewImage" (click)="saveProfilePhoto()">
+    <mat-progress-spinner *ngIf="isSavingPhoto" class="example-margin" color="accent" mode="indeterminate" value="50">
+    </mat-progress-spinner>
+    Save
+  </button>
   <button mat-button (click)="onNoClick()">Close</button>
 </div>

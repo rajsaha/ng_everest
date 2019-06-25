@@ -18,6 +18,7 @@ export class CpiComponent implements OnInit {
   userImage: any;
   isNewImage = false;
   imageFromDB = false;
+  isSavingPhoto = true;
 
   // Icons
   faTrash = faTrash;
@@ -78,7 +79,15 @@ export class CpiComponent implements OnInit {
   }
 
   async saveProfilePhoto() {
+    // * Pre api call
+    this.isSavingPhoto = true;
+    this.dialogRef.disableClose = true;
     const response = await this.profileService.saveProfilePhoto({ id: this.userId, image: this.userImage });
+
+    // * Post api call
+    this.dialogRef.disableClose = false;
+    this.isSavingPhoto = false;
+
     if (!response.error) {
       this.snackbarService.openSnackBar({
         message: {
@@ -101,7 +110,15 @@ export class CpiComponent implements OnInit {
   }
 
   async deleteProfilePhoto() {
+    // * Pre api call
+    this.isSavingPhoto = true;
+    this.dialogRef.disableClose = true;
     const response = await this.profileService.deleteProfilePhoto({ id: this.userId, deleteHash: this.deleteHash });
+
+    // * Post api call
+    this.dialogRef.disableClose = false;
+    this.isSavingPhoto = false;
+
     if (!response.error) {
       this.snackbarService.openSnackBar({
         message: {
