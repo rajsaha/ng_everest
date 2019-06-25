@@ -18,7 +18,7 @@ export class CpiComponent implements OnInit {
   userImage: any;
   isNewImage = false;
   imageFromDB = false;
-  isSavingPhoto = true;
+  isSavingPhoto = false;
 
   // Icons
   faTrash = faTrash;

@@ -11,9 +11,15 @@
   <input hidden (change)="onFileSelected(imageInput)" #imageInput type="file" id="file" accept="image/*">
   <button mat-flat-button (click)="imageInput.click()" *ngIf="!isNewImage">Upload</button>
   <button mat-flat-button color="primary" *ngIf="isNewImage" (click)="saveProfilePhoto()">
-    <mat-progress-spinner *ngIf="isSavingPhoto" class="example-margin" color="accent" mode="indeterminate" value="50">
+    <mat-progress-spinner 
+    *ngIf="isSavingPhoto" 
+    class="example-margin" 
+    color="accent" 
+    mode="indeterminate" 
+    value="50"
+    diameter="25">
     </mat-progress-spinner>
-    Save
+    <span *ngIf="!isSavingPhoto">Save</span>
   </button>
   <button mat-button (click)="onNoClick()">Close</button>
 </div>
