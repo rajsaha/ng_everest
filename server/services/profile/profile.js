@@ -175,12 +175,26 @@ const Profile = (() => {
         }
     }
 
+    const getProfilePhoto = async (username) => {
+        try {
+            const user = await User.findOne({username: username}).select('image').exec();
+            return {
+                image: user
+            }
+        } catch (err) {
+            return {
+                error: err.message
+            };
+        }
+    }
+
     return {
         getProfileData,
         updateProfileData,
         removeInterest,
         saveProfilePhoto,
-        deleteProfilePhoto
+        deleteProfilePhoto,
+        getProfilePhoto
     }
 })();
 

@@ -41,7 +41,6 @@ export class AppComponent implements OnInit, OnDestroy {
     this.isLoggedIn = this.loginService.isLoggedIn();
     this.localStorageImage = localStorage.getItem('profileImage');
     this.image = this.localStorageImage ? this.localStorageImage : this.defaultProfileImage;
-    console.log(this.image);
   }
 
   logout() {

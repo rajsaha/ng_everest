@@ -154,14 +154,13 @@ export class ProfileComponent implements OnInit {
   openCpiDialog() {
     const dialogRef = this.dialog.open(CpiComponent, {
       data: {
-        image: this.uploadedImage,
-        imageId: this.imageId,
-        deleteHash: this.deleteHash
+        username: this.username
       }
     });
 
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
+    dialogRef.afterClosed().subscribe(async (result) => {
+      const imageLink = await this.profileService.getProfilePhoto(this.username);
+      this.image = imageLink.image.image.link ? imageLink.image.image.link : this.defaultProfileImage;
     });
   }
 

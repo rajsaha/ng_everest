@@ -17,6 +17,7 @@ export class CpiComponent implements OnInit {
   defaultProfileImage = '../../../../assets/portrait.jpg';
   userImage: any;
   isNewImage = false;
+  imageFromDB = false;
 
   // Icons
   faTrash = faTrash;
@@ -27,17 +28,21 @@ export class CpiComponent implements OnInit {
   selectedFile: ImageSnippet;
   @ViewChild('imageInput') imageInput: ElementRef;
 
-  constructor(public dialogRef: MatDialogRef<CpiComponent>,
+  constructor(
+    public dialogRef: MatDialogRef<CpiComponent>,
     @Inject(MAT_DIALOG_DATA) public data,
     private snackbarService: SnackbarService,
     private profileService: ProfileService) {
-    this.imageId = data.imageId;
-    this.deleteHash = data.deleteHash;
+    this.profileService.getProfilePhoto(data.username).then((res) => {
+      this.userImage = res.image.image.link ? res.image.image.link : this.defaultProfileImage;
+      this.deleteHash = res.image.image.deleteHash;
+      this.imageId = res.image.image.id;
+      this.imageFromDB = res.image.image.link ? true : false;
+    });
   }
 
   ngOnInit() {
     this.userId = localStorage.getItem('userId');
-    this.userImage = this.data.image;
   }
 
   onFileSelected(imageInput: any) {

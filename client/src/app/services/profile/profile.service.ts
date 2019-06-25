@@ -53,4 +53,13 @@ export class ProfileService {
         });
     });
   }
+
+  getProfilePhoto(data: any): Promise<any> {
+    return new Promise(resolve => {
+      this.http.get(`${ENV.API_URL}/profile/get-profile-photo/${data}`)
+        .subscribe((response: any) => {
+          resolve(response);
+        });
+    });
+  }
 }

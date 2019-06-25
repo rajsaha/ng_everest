@@ -48,4 +48,13 @@ router.delete('/delete-profile-photo/:id/:deleteHash', async (req, res, next) =>
     }
 });
 
+router.get('/get-profile-photo/:username', async (req, res, next) => {
+    try {
+        const response = await Profile.getProfilePhoto(req.params.username);
+        res.status(200).json(response);
+    } catch (err) {
+        console.error(err);
+    }
+});
+
 module.exports = router;
