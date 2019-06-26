@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { ProfileService } from '@services/profile/profile.service';
 import { SnackbarService } from '@services/general/snackbar.service';
 import { MatDialog } from '@angular/material';
@@ -7,6 +7,7 @@ import { faEdit, faTrash, faEye, faExternalLinkAlt } from '@fortawesome/free-sol
 import { CpiComponent } from './cpi/cpi.component';
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { MatChipInputEvent } from '@angular/material/chips';
+import { ValidationService } from '@services/forms/validation.service';
 
 @Component({
   selector: 'app-profile',
@@ -56,15 +57,12 @@ export class ProfileComponent implements OnInit {
     email: ['']
   });
 
-  passwordForm = this.fb.group({
-    currentPass: [''],
-    newPass: [''],
-    newPassConfirm: ['']
-  });
+  passwordForm: FormGroup;
 
   constructor(private fb: FormBuilder,
               private profileService: ProfileService,
               private snackbarService: SnackbarService,
+              private validationService: ValidationService,
               public dialog: MatDialog) { }
 
   ngOnInit() {
@@ -73,6 +71,18 @@ export class ProfileComponent implements OnInit {
 
     // Get User Data
     this.getUserData();
+
+    // Init Password Form
+    this.initPasswordForm();
+  }
+
+  initPasswordForm() {
+    this.passwordForm = this.fb.group({
+      currentPass: [''],
+      password: ['', [Validators.required, Validators.minLength(4)]],
+      confirm_password: [''],
+      username: [this.username]
+    }, { validator: [this.validationService.matchingConfirmPasswords, this.validationService.checkPasswordStrength]});
   }
 
   saveProfileForm() {
@@ -106,8 +116,28 @@ export class ProfileComponent implements OnInit {
     });
   }
 
-  changePasswordForm() {
-    console.log(this.passwordForm.value);
+  async changePasswordForm() {
+    if (this.passwordForm.valid) {
+      const response = await this.profileService.updatePassword(this.passwordForm.value);
+
+      if (!response.error) {
+        this.snackbarService.openSnackBar({
+          message: {
+            message: 'Password updated!',
+            error: false
+          },
+          class: 'green-snackbar',
+        });
+      } else {
+        this.snackbarService.openSnackBar({
+          message: {
+            message: `Error: ${response.error}!`,
+            error: true
+          },
+          class: 'red-snackbar',
+        });
+      }
+    }
   }
 
   getUserData() {

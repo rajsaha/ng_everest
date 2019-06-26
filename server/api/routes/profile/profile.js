@@ -57,4 +57,13 @@ router.get('/get-profile-photo/:username', async (req, res, next) => {
     }
 });
 
+router.post('/update-password', async (req, res, next) => {
+    try {
+        const response = await Profile.changePassword(req.body);
+        res.status(200).json(response);
+    } catch (err) {
+        console.error(err);
+    }
+});
+
 module.exports = router;

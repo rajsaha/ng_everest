@@ -124,17 +124,26 @@
             <form [formGroup]="passwordForm" (ngSubmit)="changePasswordForm()">
               <mat-form-field appearance="outline">
                 <mat-label>Current Password</mat-label>
-                <input matInput placeholder="" formControlName="currentPass">
+                <input matInput placeholder="" formControlName="currentPass" type="password">
               </mat-form-field>
 
               <mat-form-field appearance="outline">
                 <mat-label>New Password</mat-label>
-                <input matInput placeholder="" formControlName="newPass">
+                <input matInput placeholder="" formControlName="password" type="password">
+                <mat-error *ngIf="passwordForm.controls['password'].hasError('passwordNotStrong')">
+                  {{ passwordForm.controls['password'].errors.error_message }}
+                </mat-error>
+                <mat-error *ngIf="passwordForm.controls['password'].hasError('minlength')">
+                  Password must be at least 4 characters
+                </mat-error>
               </mat-form-field>
 
               <mat-form-field appearance="outline">
                 <mat-label>Confirm New Password</mat-label>
-                <input matInput placeholder="" formControlName="newPassConfirm">
+                <input matInput placeholder="" formControlName="confirm_password" type="password">
+                <mat-error *ngIf="passwordForm.controls['confirm_password'].hasError('passwordNotEquivalent')">
+                  Passwords don't match
+                </mat-error>
               </mat-form-field>
 
               <div class="form-button-container clearfix">

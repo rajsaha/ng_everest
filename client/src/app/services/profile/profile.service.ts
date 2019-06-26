@@ -62,4 +62,13 @@ export class ProfileService {
         });
     });
   }
+
+  updatePassword(data: any): Promise<any> {
+    return new Promise(resolve => {
+      this.http.post(`${ENV.API_URL}/profile/update-password`, data)
+        .subscribe((response: any) => {
+          resolve(response);
+        });
+    });
+  }
 }

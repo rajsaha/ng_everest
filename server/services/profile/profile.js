@@ -1,5 +1,6 @@
 const User = require('../../models/User');
 const axios = require('axios');
+const bcryptjs = require('bcryptjs');
 
 const Profile = (() => {
     const getProfileData = async (username) => {
@@ -91,7 +92,6 @@ const Profile = (() => {
             });
 
             const savePhotoResponse = await savePhoto.post(process.env.IMAGE_UPLOAD_URL, replacedBase64String);
-            console.log(savePhotoResponse);
             const query = {
                 _id: id
             };
@@ -188,13 +188,62 @@ const Profile = (() => {
         }
     }
 
+    const changePassword = async (data) => {
+        try {
+            const user = await User.findOne({ username: data.username }).exec();
+
+            // * If no username found
+            if (!user) {
+                return {
+                    status: 404,
+                    error: "The username does not exist"
+                };
+            }
+
+            // * Compare plaintext password with hash
+            const match = user.comparePassword(data.currentPass, (error, match) => {
+                return match;
+            });
+
+            if (match) {
+                let newPassword = bcryptjs.hashSync(data.password, 10);
+                const update = {
+                    $set: {
+                        password: newPassword
+                    },
+                    safe: {
+                        new: true,
+                        upsert: true
+                    }
+                };
+                
+                await User.updateOne({ username: data.username }, update).exec();
+                return {
+                    error: false,
+                    status: 200,
+                    message: 'Password updated'
+                }
+            } else {
+                return {
+                    status: 400,
+                    error: 'Username/password invalid'
+                }
+            }
+        } catch (err) {
+            return {
+                error: err.message
+            };
+        }
+    }
+
     return {
         getProfileData,
         updateProfileData,
         removeInterest,
         saveProfilePhoto,
         deleteProfilePhoto,
-        getProfilePhoto
+        getProfilePhoto,
+        changePassword
     }
 })();
 
