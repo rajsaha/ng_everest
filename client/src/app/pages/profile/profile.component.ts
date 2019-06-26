@@ -34,6 +34,7 @@ export class ProfileComponent implements OnInit {
   isLoading = false;
   isProfileSaveButtonDisabled = false;
   isPublicView = true;
+  isDeleteable = false;
 
   profileProgress = 0;
 
@@ -57,6 +58,10 @@ export class ProfileComponent implements OnInit {
     email: ['']
   });
 
+  deleteAccountForm = this.fb.group({
+    username: ['']
+  });
+
   passwordForm: FormGroup;
 
   constructor(private fb: FormBuilder,
@@ -74,6 +79,8 @@ export class ProfileComponent implements OnInit {
 
     // Init Password Form
     this.initPasswordForm();
+
+    this.onDeleteAccountFormChanges();
   }
 
   initPasswordForm() {
@@ -267,5 +274,19 @@ export class ProfileComponent implements OnInit {
         this.profileProgress -= 25;
       }
     }
+  }
+
+  openConfirmAccountDeletionDialog() {
+    console.log(this.deleteAccountForm.value);
+  }
+
+  onDeleteAccountFormChanges() {
+    this.deleteAccountForm.valueChanges.subscribe(val => {
+      if (val.username === this.username) {
+        this.isDeleteable = true;
+      } else {
+        this.isDeleteable = false;
+      }
+    });
   }
 }
