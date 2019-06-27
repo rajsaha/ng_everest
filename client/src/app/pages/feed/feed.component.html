@@ -6,10 +6,20 @@
       [ngClass]="isFabActive ? 'animation-rotate90Clockwise' : 'animation-rotate90AntiClockwise'">
       <fa-icon [icon]="faPlus"></fa-icon>
     </button>
-    <button class="fab-add-post" mat-mini-fab matTooltip="Add a Post" matTooltipPosition="left" [ngClass]="isFabActive ? 'animation-appearFromBottom' : 'animation-disappearFromTop'">
+    <button 
+    class="fab-add-post" 
+    mat-mini-fab 
+    matTooltip="Add a Post" 
+    matTooltipPosition="left" 
+    [ngClass]="isFabActive ? 'animation-scaleAppear' : 'animation-scaleDisappear'">
       <fa-icon [icon]="faLink"></fa-icon>
     </button>
-    <button class="fab-add-document" mat-mini-fab matTooltipPosition="left" [ngClass]="isFabActive ? 'animation-appearFromBottom2' : 'animation-disappearFromTop2'" matTooltip="Add a Document">
+    <button 
+    class="fab-add-document" 
+    mat-mini-fab 
+    matTooltip="Add a Document" 
+    matTooltipPosition="left" 
+    [ngClass]="isFabActive ? 'animation-scaleAppear' : 'animation-scaleDisappear'">
       <fa-icon [icon]="faFile"></fa-icon>
     </button>
   </div>

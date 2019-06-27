@@ -22,11 +22,12 @@ $fab_button_1_position: $init_bottom + $space_between_fab_buttons;
 		.fab-add-post {
             @extend %posFixed;
             bottom: $fab_button_1_position;
+            animation-delay: -0.1s;
         }
         
         .fab-add-document {
             @extend %posFixed;
-            bottom: $fab_button_1_position * 2;
+            bottom: $fab_button_1_position * 1.6;
         }
 	}
 }
@@ -41,23 +42,13 @@ $fab_button_1_position: $init_bottom + $space_between_fab_buttons;
 	animation-fill-mode: forwards;
 }
 
-.animation-appearFromBottom {
-    animation: appearFromBottom 0.2s ease-in-out;
+.animation-scaleAppear {
+    animation: scaleAppear 0.2s ease-in-out;
     animation-fill-mode: forwards;
 }
 
-.animation-disappearFromTop {
-    animation: disappearFromTop 0.2s ease-in-out;
-    animation-fill-mode: forwards;
-}
-
-.animation-appearFromBottom2 {
-    animation: appearFromBottom2 0.3s ease-in-out;
-    animation-fill-mode: forwards;
-}
-
-.animation-disappearFromTop2 {
-    animation: disappearFromTop2 0.4s ease-in-out;
+.animation-scaleDisappear {
+    animation: scaleDisappear 0.2s ease-in-out;
     animation-fill-mode: forwards;
 }
 
@@ -81,51 +72,23 @@ $fab_button_1_position: $init_bottom + $space_between_fab_buttons;
 	}
 }
 
-@keyframes appearFromBottom {
+@keyframes scaleAppear {
     0% {
-        bottom: -100px;
-        opacity: 0;
+        transform: scale(0);
     }
 
     100% {
-        bottom: $fab_button_1_position;
-        opacity: 1;
-    }
-} 
-
-@keyframes disappearFromTop {
-    0% {
-        bottom: $fab_button_1_position;
-        opacity: 1;
-    }
-
-    100% {
-        bottom: -100px;
-        opacity: 0;
+        transform: scale(1);
     }
 }
 
-@keyframes appearFromBottom2 {
+@keyframes scaleDisappear {
     0% {
-        bottom: -100px;
-        opacity: 0;
+        transform: scale(1);
     }
 
     100% {
-        bottom: $fab_button_1_position * 1.6;
-        opacity: 1;
-    }
-} 
-
-@keyframes disappearFromTop2 {
-    0% {
-        bottom: $fab_button_1_position * 1.6;
-        opacity: 1;
-    }
-
-    100% {
-        bottom: -100px;
-        opacity: 0;
+        transform: scale(0);
     }
 }
 
