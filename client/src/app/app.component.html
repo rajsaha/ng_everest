@@ -5,8 +5,7 @@
     </button>
     <h1 class="app-name"><a routerLink="/feed">Everest</a></h1>
     <div class="profile-container">
-      <div class="profile-image" [matMenuTriggerFor]="menu">
-        <img [src]="image" alt="portrait">
+      <div class="profile-image" [matMenuTriggerFor]="menu" [ngStyle]="{ 'background-image': 'url(' + image  +')' }">
       </div>
       <mat-menu #menu="matMenu">
         <button mat-menu-item routerLink="/profile" routerLinkActive="active"><fa-icon [icon]="faUser"></fa-icon>&nbsp;&nbsp;View Profile</button>

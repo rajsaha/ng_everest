@@ -47,7 +47,8 @@
                 font-size: 12px;
             }
 
-            img {
+            .image-container {
+                background-size: contain;
                 border: 3px solid transparent;
                 border-radius: 50%;
                 cursor: pointer;

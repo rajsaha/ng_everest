@@ -1,7 +1,6 @@
 <h1 mat-dialog-title>Change Profile Image</h1>
 
-<div class="image">
-  <img [src]="userImage ? userImage : defaultProfileImage" alt="">
+<div class="image" [ngStyle]="{ 'background-image': 'url(' + (userImage ? userImage : defaultProfileImage)  +')' }">
   <div class="delete-user-image" matRipple *ngIf="imageFromDB || isNewImage" (click)="clearImage()">
     <fa-icon [icon]="faTrash"></fa-icon>
   </div>
