@@ -4,6 +4,8 @@ import { faUpload } from '@fortawesome/free-solid-svg-icons';
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { MatChipInputEvent } from '@angular/material/chips';
 import { ValidationService } from '@services/forms/validation.service';
+import { delay } from 'rxjs/internal/operators';
+import { ResourceService } from '@services/resource/resource.service';
 
 @Component({
   selector: 'app-share-resource',
@@ -23,10 +25,14 @@ export class ShareResourceComponent implements OnInit {
   removable = true;
   addOnBlur = true;
 
-  constructor(private fb: FormBuilder, private validationService: ValidationService) { }
+  constructor(
+    private fb: FormBuilder, 
+    private validationService: ValidationService,
+    private resourceService: ResourceService) { }
 
   ngOnInit() {
     this.initShareResourceForm();
+    this.onURLOnChanges();
   }
 
   initShareResourceForm() {
@@ -64,6 +70,12 @@ export class ShareResourceComponent implements OnInit {
     if (this.shareResourceForm.valid) {
       console.log(this.shareResourceForm.value);
     }
+  }
+
+  onURLOnChanges() {
+    this.shareResourceForm.controls.url.valueChanges.pipe(delay(3000)).subscribe(val => {
+      this.resourceService.getOpenGraphData(val);
+    });
   }
 
 }
