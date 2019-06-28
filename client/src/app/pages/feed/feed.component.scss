@@ -23,11 +23,13 @@ $fab_button_1_position: $init_bottom + $space_between_fab_buttons;
             @extend %posFixed;
             bottom: $fab_button_1_position;
             animation-delay: -0.1s;
+            z-index: 100;
         }
         
         .fab-add-document {
             @extend %posFixed;
             bottom: $fab_button_1_position * 1.6;
+            z-index: 100;
         }
 	}
 }

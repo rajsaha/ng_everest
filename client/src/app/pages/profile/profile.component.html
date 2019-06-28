@@ -1,7 +1,7 @@
 <mat-progress-bar mode="query" *ngIf="isLoading">
 </mat-progress-bar>
 
-<div class="profile-container">
+<div class="section-container">
   <mat-tab-group mat-align-tabs="center" (selectedTabChange)="tabClick($event)">
     <!-- * Collections -->
     <mat-tab label="Collections">
@@ -166,7 +166,9 @@
                 <input matInput placeholder="Write your username" formControlName="username">
                 <mat-hint>Write your username to confirm account deletion</mat-hint>
               </mat-form-field>
-              <button mat-raised-button color="accent" *ngIf="isDeleteable">Delete</button>
+              <div class="form-button-container clearfix">
+                <button mat-raised-button color="accent" *ngIf="isDeleteable">Delete</button>
+              </div>
             </form>
           </div>
         </div>

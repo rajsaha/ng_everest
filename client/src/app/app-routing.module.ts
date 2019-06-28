@@ -7,6 +7,7 @@ import { FeedComponent } from './pages/feed/feed.component';
 import { ProfileComponent } from './pages/profile/profile.component';
 import { AuthGuardService } from './services/auth/auth-guard.service';
 import { PageNotFoundComponent } from './pages/page-not-found/page-not-found.component';
+import { ShareResourceComponent } from './pages/share-resource/share-resource.component';
 
 const routes: Routes = [
   {
@@ -29,6 +30,11 @@ const routes: Routes = [
   {
     path: 'feed',
     component: FeedComponent,
+    canActivate: [AuthGuardService]
+  },
+  {
+    path: 'share-resource',
+    component: ShareResourceComponent,
     canActivate: [AuthGuardService]
   },
   {
