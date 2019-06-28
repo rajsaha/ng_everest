@@ -10,6 +10,7 @@ const mongoose = require('mongoose');
 const loginRoute = require('./api/routes/auth/login');
 const signUpRoute = require('./api/routes/auth/signup');
 const profileRoute = require('./api/routes/profile/profile');
+const resourceRoute = require('./api/routes/resource/share');
 
 // Mongodb connection string
 const mongodb_connection_string = `mongodb://${process.env.MLAB_U}:${process.env.MLAB_PW}@ds121321.mlab.com:21321/ng_everest`;
@@ -51,6 +52,7 @@ app.use((req, res, next) => {
 app.use('/login', loginRoute);
 app.use('/signup', signUpRoute);
 app.use('/profile', profileRoute);
+app.use('/resource', resourceRoute);
 
 app.use((req, res, next) => {
     const error = new Error('Not found');
