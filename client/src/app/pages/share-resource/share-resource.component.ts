@@ -3,6 +3,7 @@ import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { faUpload } from '@fortawesome/free-solid-svg-icons';
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { MatChipInputEvent } from '@angular/material/chips';
+import { ValidationService } from '@services/forms/validation.service';
 
 @Component({
   selector: 'app-share-resource',
@@ -22,7 +23,7 @@ export class ShareResourceComponent implements OnInit {
   removable = true;
   addOnBlur = true;
 
-  constructor(private fb: FormBuilder) { }
+  constructor(private fb: FormBuilder, private validationService: ValidationService) { }
 
   ngOnInit() {
     this.initShareResourceForm();
@@ -31,10 +32,10 @@ export class ShareResourceComponent implements OnInit {
   initShareResourceForm() {
     this.shareResourceForm = this.fb.group({
       isCustomImage: [''],
-      url: [''],
-      title: [''],
-      description: ['']
-    });
+      url: ['', Validators.required],
+      title: ['', [Validators.required]],
+      description: ['', [Validators.required]]
+    }, { validator: [this.validationService.checkValidURL]});
   }
 
   addTag(event: MatChipInputEvent): void {

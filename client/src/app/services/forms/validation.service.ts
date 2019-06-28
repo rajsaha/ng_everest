@@ -48,4 +48,14 @@ export class ValidationService {
       return passwordKey.controls.password.setErrors({ passwordNotStrong: true, error_message: message });
     }
   }
+
+  checkValidURL(shareResourceForm: any) {
+    const validURLRegex = /^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\(\)\*\+,;=.]+$/;
+    if (validURLRegex.test(shareResourceForm.value.url)) {
+      return null;
+    } else {
+      const message = 'URL Invalid';
+      return shareResourceForm.controls.url.setErrors({ urlInvalid: true, error_message: message });
+    }
+  }
 }
