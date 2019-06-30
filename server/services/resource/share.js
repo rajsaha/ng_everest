@@ -2,11 +2,21 @@ const ogs = require('open-graph-scraper');
 
 const Share = (() => {
     const shareResource = async (url) => {
-        console.log(url);
-        ogs({ 'url': url }, function (error, results) {
-            console.log('error:', error); // This is returns true or false. True if there was a error. The error it self is inside the results object.
-            console.log('results:', results);
-        });
+        const response = await ogs({ 'url': url });
+        
+        if (!response) {
+            return {
+                message: response
+            }
+        } else {
+            return {
+                message: {
+                    error: false,
+                    status: 200,
+                    data: response
+                }
+            }
+        }
     }
 
     return {

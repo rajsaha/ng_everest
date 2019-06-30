@@ -1,3 +1,4 @@
+<mat-progress-bar mode="query" *ngIf="isLoading"></mat-progress-bar>
 <div class="section-container">
   <div class="section">
     <div class="section-header">
@@ -5,11 +6,25 @@
     </div>
 
     <div class="section-content">
-      <div class="resource-image" matRipple *ngIf="shareResourceForm.controls.isCustomImage.value === true">
-        <p>
+      <div class="custom-image" 
+      (click)="imageInput.click()" 
+      matRipple 
+      *ngIf="shareResourceForm.controls.isCustomImage.value"
+      [ngStyle]="{ 'background-image': 'url(' + image + ')' }">
+        <p *ngIf="!image">
           <fa-icon [icon]="faUpload"></fa-icon>&nbsp;Click here to upload a custom image
         </p>
+        <input hidden (change)="onFileSelected(imageInput)" #imageInput type="file" accept="image/*">
       </div>
+
+      <div class="resource-image" 
+      *ngIf="!shareResourceForm.controls.isCustomImage.value" 
+      [ngStyle]="{ 'background-image': 'url(' + ogImage + ')' }">
+        <p *ngIf="!ogImage">
+          If your link has an <a href="http://ogp.me/" target="_blank">Open Graph</a> image, it'll appear here
+        </p>
+      </div>
+
 
       <form [formGroup]="shareResourceForm" (ngSubmit)="submitShareResourceForm()">
         <div class="mat-checkbox-container">
@@ -19,7 +34,7 @@
           <mat-label>Link</mat-label>
           <input matInput placeholder="Paste your link here" formControlName="url">
           <mat-error *ngIf="shareResourceForm.controls['url'].hasError('urlInvalid')">
-            Invalid link 
+            Invalid link
           </mat-error>
         </mat-form-field>
 
