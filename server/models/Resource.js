@@ -14,11 +14,14 @@ var ResourceSchema = new mongoose.Schema({
         required: true,
         trim: true
     },
-    tags: {
+    type: {
         type: String,
-        required: true,
-        trim: true
+        required: true
     },
+    tags: [{
+        type: [String],
+        trim: true
+    }],
     description: {
         type: String,
         required: true,

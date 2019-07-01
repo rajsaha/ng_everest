@@ -22,6 +22,7 @@ export class ShareResourceComponent implements OnInit {
   selectedFile: any;
   @ViewChild('imageInput') imageInput: ElementRef;
   image: any;
+  username: string;
 
   // Icons
   faUpload = faUpload;
@@ -49,6 +50,7 @@ export class ShareResourceComponent implements OnInit {
     private snackbarService: SnackbarService) { }
 
   ngOnInit() {
+    this.username = localStorage.getItem('username');
     this.initShareResourceForm();
     this.onURLOnChanges();
   }
@@ -59,7 +61,9 @@ export class ShareResourceComponent implements OnInit {
       url: ['', Validators.required],
       title: ['', [Validators.required]],
       description: ['', [Validators.required]],
-      image: ['']
+      image: [''],
+      username: [this.username],
+      type: ['ext-content']
     }, { validator: [this.validationService.checkValidURL]});
   }
 
@@ -85,9 +89,15 @@ export class ShareResourceComponent implements OnInit {
     }
   }
 
-  submitShareResourceForm() {
+  async submitShareResourceForm() {
     if (this.shareResourceForm.valid) {
-      console.log(this.shareResourceForm.value);
+      const data = {
+        formData: this.shareResourceForm.value,
+        tags: this.tags
+      };
+
+      const response = await this.resourceService.shareResource(data);
+      console.log(response);
     }
   }
 
@@ -98,9 +108,9 @@ export class ShareResourceComponent implements OnInit {
         const response = await this.resourceService.getOpenGraphData({
           url: val
         });
-  
+
         this.isLoading = false;
-  
+
         if (!response) {
           this.snackbarService.openSnackBar({
             message: {
@@ -113,7 +123,7 @@ export class ShareResourceComponent implements OnInit {
           this.ogTitle = response.message.data.data.ogTitle;
           this.ogDescription = response.message.data.data.ogDescription;
           this.ogImage = response.message.data.data.ogImage.url;
-  
+
           this.shareResourceForm.controls.title.patchValue(this.ogTitle);
           this.shareResourceForm.controls.description.patchValue(this.ogDescription);
           this.shareResourceForm.controls.image.patchValue(this.ogImage);

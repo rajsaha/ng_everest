@@ -12,7 +12,8 @@
     mat-mini-fab 
     matTooltip="Share a Resource" 
     matTooltipPosition="left"
-    [ngClass]="isFabActive ? 'animation-scaleAppear' : 'animation-scaleDisappear'">
+    [ngClass]="isFabActive ? 'animation-scaleAppear' : 'animation-scaleDisappear'"
+    [ngStyle]="{'animation-delay': isFabActive ? '-0.1s' : '0s'}">
       <fa-icon [icon]="faLink"></fa-icon>
     </button>
     <button 
@@ -20,7 +21,8 @@
     mat-mini-fab 
     matTooltip="Add a Document" 
     matTooltipPosition="left" 
-    [ngClass]="isFabActive ? 'animation-scaleAppear' : 'animation-scaleDisappear'">
+    [ngClass]="isFabActive ? 'animation-scaleAppear' : 'animation-scaleDisappear'"
+    [ngStyle]="{'animation-delay': isFabActive ? '0s' : '-0.1s'}">
       <fa-icon [icon]="faFile"></fa-icon>
     </button>
   </div>

@@ -22,7 +22,6 @@ $fab_button_1_position: $init_bottom + $space_between_fab_buttons;
 		.fab-add-post {
             @extend %posFixed;
             bottom: $fab_button_1_position;
-            animation-delay: -0.1s;
             z-index: 100;
         }
         
@@ -45,12 +44,12 @@ $fab_button_1_position: $init_bottom + $space_between_fab_buttons;
 }
 
 .animation-scaleAppear {
-    animation: scaleAppear 0.2s ease-in-out;
+    animation: scaleAppear 0.3s cubic-bezier(.92,.32,.29,.89);
     animation-fill-mode: forwards;
 }
 
 .animation-scaleDisappear {
-    animation: scaleDisappear 0.2s ease-in-out;
+    animation: scaleDisappear 0.3s cubic-bezier(.92,.32,.29,.89);
     animation-fill-mode: forwards;
 }
 
@@ -60,13 +59,13 @@ $fab_button_1_position: $init_bottom + $space_between_fab_buttons;
 	}
 
 	100% {
-		transform: rotate(90deg);
+		transform: rotate(135deg);
 	}
 }
 
 @keyframes rotate90AntiClockwise {
 	0% {
-		transform: rotate(90deg);
+		transform: rotate(135deg);
 	}
 
 	100% {
@@ -77,6 +76,10 @@ $fab_button_1_position: $init_bottom + $space_between_fab_buttons;
 @keyframes scaleAppear {
     0% {
         transform: scale(0);
+    }
+
+    50% {
+        transform: scale(1.1);
     }
 
     100% {
