@@ -91,13 +91,22 @@ export class ShareResourceComponent implements OnInit {
 
   async submitShareResourceForm() {
     if (this.shareResourceForm.valid) {
-      const data = {
-        formData: this.shareResourceForm.value,
-        tags: this.tags
-      };
+      if (this.shareResourceForm.controls.isCustomImage) {
+        const data = {
+          formData: this.shareResourceForm.value,
+          tags: this.tags
+        };
 
-      const response = await this.resourceService.shareResource(data);
-      console.log(response);
+        const response = await this.resourceService.shareResource(data);
+      } else {
+        const data = {
+          formData: this.shareResourceForm.value,
+          tags: this.tags,
+          customImage: this.image
+        };
+
+        const response = await this.resourceService.shareResource(data);
+      }
     }
   }
 
