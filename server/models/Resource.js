@@ -32,6 +32,10 @@ var ResourceSchema = new mongoose.Schema({
         required: true,
         trim: true
     },
+    deleteHash: {
+        type: String,
+        trim: true
+    },
     timestamp: {
         type: Date,
         default: Date.now
