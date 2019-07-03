@@ -147,7 +147,7 @@ export class ProfileComponent implements OnInit {
     }
   }
 
-  getUserData() {
+  async getUserData() {
     this.profileService.getProfileData(this.username).then((res: any) => {
       this.isLoading = true;
       this.isProfileSaveButtonDisabled = true;

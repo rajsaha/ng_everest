@@ -6,20 +6,16 @@
     </div>
 
     <div class="section-content">
-      <div class="custom-image" 
-      (click)="imageInput.click()" 
-      matRipple 
-      *ngIf="shareResourceForm.controls.isCustomImage.value"
-      [ngStyle]="{ 'background-image': 'url(' + image + ')' }">
+      <div class="custom-image" (click)="imageInput.click()" matRipple
+        *ngIf="shareResourceForm.controls.isCustomImage.value" [ngStyle]="{ 'background-image': 'url(' + image + ')' }">
         <p *ngIf="!image">
           <fa-icon [icon]="faUpload"></fa-icon>&nbsp;Click here to upload a custom image
         </p>
         <input hidden (change)="onFileSelected(imageInput)" #imageInput type="file" accept="image/*">
       </div>
 
-      <div class="resource-image" 
-      *ngIf="!shareResourceForm.controls.isCustomImage.value" 
-      [ngStyle]="{ 'background-image': 'url(' + ogImage + ')' }">
+      <div class="resource-image" *ngIf="!shareResourceForm.controls.isCustomImage.value"
+        [ngStyle]="{ 'background-image': 'url(' + ogImage + ')' }">
         <p *ngIf="!ogImage">
           If your link has an <a href="http://ogp.me/" target="_blank">Open Graph</a> image, it'll appear here
         </p>
@@ -60,6 +56,17 @@
               [matChipInputSeparatorKeyCodes]="separatorKeysCodes" [matChipInputAddOnBlur]="addOnBlur"
               (matChipInputTokenEnd)="addTag($event)">
           </mat-chip-list>
+        </mat-form-field>
+
+        <h6>Add to collection</h6>
+        <mat-form-field appearance="outline">
+          <mat-label>Collections</mat-label>
+          <input type="text" placeholder="Select or Create New" matInput [matAutocomplete]="auto" formControlName="collectionName">
+          <mat-autocomplete #auto="matAutocomplete">
+            <mat-option *ngFor="let name of collectionNames" [value]="name">
+              {{name}}
+            </mat-option>
+          </mat-autocomplete>
         </mat-form-field>
 
         <div class="form-button-container clearfix">

@@ -1,12 +1,13 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
-import { faUpload } from '@fortawesome/free-solid-svg-icons';
+import { faUpload, faPlusCircle } from '@fortawesome/free-solid-svg-icons';
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { MatChipInputEvent } from '@angular/material/chips';
 import { ValidationService } from '@services/forms/validation.service';
 import { delay } from 'rxjs/internal/operators';
 import { ResourceService } from '@services/resource/resource.service';
 import { SnackbarService } from '@services/general/snackbar.service';
+import { CollectionService } from '@services/collection/collection.service';
 
 class ImageSnippet {
   constructor(public src: string, public file: File) { }
@@ -23,9 +24,11 @@ export class ShareResourceComponent implements OnInit {
   @ViewChild('imageInput') imageInput: ElementRef;
   image: any;
   username: string;
+  collectionNames = [];
 
   // Icons
   faUpload = faUpload;
+  faPlusCircle = faPlusCircle;
 
   // Toggles
   isLoading = false;
@@ -44,15 +47,17 @@ export class ShareResourceComponent implements OnInit {
   ogImage: string;
 
   constructor(
-    private fb: FormBuilder, 
+    private fb: FormBuilder,
     private validationService: ValidationService,
     private resourceService: ResourceService,
+    private collectionService: CollectionService,
     private snackbarService: SnackbarService) { }
 
   ngOnInit() {
     this.username = localStorage.getItem('username');
     this.initShareResourceForm();
     this.onURLOnChanges();
+    this.getCollectionNames();
   }
 
   initShareResourceForm() {
@@ -63,7 +68,8 @@ export class ShareResourceComponent implements OnInit {
       description: ['', [Validators.required]],
       image: [''],
       username: [this.username],
-      type: ['ext-content']
+      type: ['ext-content'],
+      collectionName: ['']
     }, { validator: [this.validationService.checkValidURL]});
   }
 
@@ -161,4 +167,10 @@ export class ShareResourceComponent implements OnInit {
     reader.readAsDataURL(file);
   }
 
+  async getCollectionNames() {
+    const response = await this.collectionService.getCollectionNames({username: this.username});
+    if (response.collections) {
+      console.log(response.collections);
+    }
+  }
 }

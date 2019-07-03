@@ -34,7 +34,8 @@ import {
   MatDividerModule,
   MatRippleModule,
   MatChipsModule,
-  MatProgressSpinnerModule
+  MatProgressSpinnerModule,
+  MatAutocompleteModule
 } from '@angular/material';
 import { LoginComponent } from './pages/login/login.component';
 import { WelcomeComponent } from './pages/welcome/welcome.component';
@@ -45,7 +46,7 @@ import { ProfileComponent } from './pages/profile/profile.component';
 import { AtcComponent } from './pages/feed/post/atc/atc.component';
 import { PoComponent } from './pages/feed/post/po/po.component';
 import { PageNotFoundComponent } from './pages/page-not-found/page-not-found.component';
-import { SnackbarComponent } from './pages/general/snackbar/snackbar.component';
+import { SnackbarComponent } from './general/snackbar/snackbar.component';
 import { CpiComponent } from './pages/profile/cpi/cpi.component';
 import { ShareResourceComponent } from './pages/share-resource/share-resource.component';
 import { ManageResourcesComponent } from './pages/manage-resources/manage-resources.component';
@@ -71,6 +72,7 @@ import { ManageResourcesComponent } from './pages/manage-resources/manage-resour
     BrowserModule,
     BrowserAnimationsModule,
     AppRoutingModule,
+    // * Angular Material Modules
     MatButtonModule,
     MatToolbarModule,
     MatSidenavModule,
@@ -91,6 +93,8 @@ import { ManageResourcesComponent } from './pages/manage-resources/manage-resour
     MatRippleModule,
     MatChipsModule,
     MatProgressSpinnerModule,
+    MatAutocompleteModule,
+    // ! End of Material Angular Modules
     ReactiveFormsModule,
     HttpClientModule,
     FontAwesomeModule,
