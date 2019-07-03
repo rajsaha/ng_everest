@@ -92,13 +92,7 @@ export class ShareResourceComponent implements OnInit {
   async submitShareResourceForm() {
     if (this.shareResourceForm.valid) {
       if (this.shareResourceForm.controls.isCustomImage) {
-        const data = {
-          formData: this.shareResourceForm.value,
-          tags: this.tags
-        };
-
-        const response = await this.resourceService.shareResource(data);
-      } else {
+        this.isLoading = true;
         const data = {
           formData: this.shareResourceForm.value,
           tags: this.tags,
@@ -106,6 +100,18 @@ export class ShareResourceComponent implements OnInit {
         };
 
         const response = await this.resourceService.shareResource(data);
+        this.isLoading = false;
+        console.log(response);
+      } else {
+        this.isLoading = true;
+        const data = {
+          formData: this.shareResourceForm.value,
+          tags: this.tags,
+        };
+
+        const response = await this.resourceService.shareResource(data);
+        this.isLoading = false;
+        console.log(response);
       }
     }
   }

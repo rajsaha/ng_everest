@@ -8,6 +8,7 @@ import { ProfileComponent } from './pages/profile/profile.component';
 import { AuthGuardService } from './services/auth/auth-guard.service';
 import { PageNotFoundComponent } from './pages/page-not-found/page-not-found.component';
 import { ShareResourceComponent } from './pages/share-resource/share-resource.component';
+import { ManageResourcesComponent } from './pages/manage-resources/manage-resources.component';
 
 const routes: Routes = [
   {
@@ -35,6 +36,11 @@ const routes: Routes = [
   {
     path: 'share-resource',
     component: ShareResourceComponent,
+    canActivate: [AuthGuardService]
+  },
+  {
+    path: 'manage-resources',
+    component: ManageResourcesComponent,
     canActivate: [AuthGuardService]
   },
   {

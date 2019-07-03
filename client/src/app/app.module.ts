@@ -48,6 +48,7 @@ import { PageNotFoundComponent } from './pages/page-not-found/page-not-found.com
 import { SnackbarComponent } from './pages/general/snackbar/snackbar.component';
 import { CpiComponent } from './pages/profile/cpi/cpi.component';
 import { ShareResourceComponent } from './pages/share-resource/share-resource.component';
+import { ManageResourcesComponent } from './pages/manage-resources/manage-resources.component';
 
 @NgModule({
   declarations: [
@@ -63,7 +64,8 @@ import { ShareResourceComponent } from './pages/share-resource/share-resource.co
     PageNotFoundComponent,
     SnackbarComponent,
     CpiComponent,
-    ShareResourceComponent
+    ShareResourceComponent,
+    ManageResourcesComponent
   ],
   imports: [
     BrowserModule,

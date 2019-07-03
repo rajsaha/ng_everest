@@ -1,4 +1,6 @@
 const ogs = require('open-graph-scraper');
+const mongoose = require('mongoose');
+const axios = require('axios');
 const Resource = require('../../models/Resource');
 
 const Share = (() => {
@@ -37,11 +39,7 @@ const Share = (() => {
                     description: data.formData.description,
                     image: saveCustomImageForResourceResponse.data.data.link,
                     deleteHash: saveCustomImageForResourceResponse.data.data.deletehash,
-                    $addToSet: {
-                        tags: {
-                            $each: data.tags
-                        }
-                    },
+                    tags: data.tags
                 });
     
                 await resource.save();
@@ -62,12 +60,9 @@ const Share = (() => {
                     title: data.formData.title,
                     type: data.formData.type,
                     description: data.formData.description,
-                    image: data.formData.ogImage,
-                    $addToSet: {
-                        tags: {
-                            $each: data.tags
-                        }
-                    },
+                    image: data.formData.image,
+                    deleteHash: null,
+                    tags: data.tags
                 });
     
                 await resource.save();
