@@ -6,6 +6,7 @@ var CollectionSchema = new mongoose.Schema({
     },
     title: {
         type: String,
+        unique: true,
         trim: true
     },
     resources: [{

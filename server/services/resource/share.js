@@ -2,6 +2,7 @@ const ogs = require('open-graph-scraper');
 const mongoose = require('mongoose');
 const axios = require('axios');
 const Resource = require('../../models/Resource');
+const Collection = require('../collection/collection');
 
 const Share = (() => {
     const getOpenGraphData = async (url) => {
@@ -41,8 +42,28 @@ const Share = (() => {
                     deleteHash: saveCustomImageForResourceResponse.data.data.deletehash,
                     tags: data.tags
                 });
-    
+
                 await resource.save();
+
+                if (data.formData.collectionName) {
+                    const collection = await Collection.getCollectionByTitle(data.formData.collectionName);
+                    console.log(collection);
+                    if (collection) {
+                        // * Push into existing collection
+                        await Collection.pushIntoCollection({
+                            title: data.formData.title,
+                            resourceId: resource._id
+                        });
+                    } else {
+                        // * Create new collection and push resource into it
+                        await Collection.createCollectionAndPushResource({
+                            username: data.formData.username,
+                            title: data.formData.title,
+                            resourceId: resource._id
+                        });
+                    }
+                }
+
                 return {
                     message: {
                         error: false,
@@ -64,8 +85,30 @@ const Share = (() => {
                     deleteHash: null,
                     tags: data.tags
                 });
-    
+
                 await resource.save();
+
+                if (data.formData.collectionName) {
+                    const collection = await Collection.getCollectionByTitle({
+                        title: data.formData.collectionName
+                    });
+                    console.log(collection);
+                    if (collection) {
+                        // * Push into existing collection
+                        await Collection.pushIntoCollection({
+                            title: data.formData.collectionName,
+                            resourceId: resource._id
+                        });
+                    } else {
+                        // * Create new collection and push resource into it
+                        await Collection.createCollectionAndPushResource({
+                            username: data.formData.username,
+                            title: data.formData.collectionName,
+                            resourceId: resource._id
+                        });
+                    }
+                }
+
                 return {
                     message: {
                         error: false,
