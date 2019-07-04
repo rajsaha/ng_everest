@@ -35,8 +35,10 @@ const Collection = (() => {
             };
 
             const update = {
-                $addToSet: {
-                    interests: data.resourceId
+                $set: {
+                    $push: {
+                        resources: data.resourceId
+                    }
                 },
                 safe: {
                     new: true,
@@ -44,7 +46,7 @@ const Collection = (() => {
                 }
             };
 
-            await _Collection.updateOne(query, update).exec();
+            const pushIntoCollectionResult = await _Collection.updateOne(query, update).exec();
 
             return {
                 message: {
@@ -64,7 +66,6 @@ const Collection = (() => {
     }
 
     const createCollectionAndPushResource = async (data) => {
-        console.log(data);
         try {
             // * Create new collection
             const collection = new _Collection({
@@ -77,12 +78,12 @@ const Collection = (() => {
             
             // * Push resource id into collection
             const query = {
-                _id: collection._id
+                _id: collection.id
             };
 
             const update = {
-                $addToSet: {
-                    interests: data.resourceId
+                $push: {
+                    resources: data.resourceId
                 },
                 safe: {
                     new: true,
@@ -90,7 +91,7 @@ const Collection = (() => {
                 }
             };
 
-            await _Collection.updateOne(query, update).exec(); 
+            await _Collection.findOneAndUpdate(query, update).exec(); 
 
             return {
                 message: {

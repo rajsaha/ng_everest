@@ -52,14 +52,14 @@ const Share = (() => {
                         // * Push into existing collection
                         await Collection.pushIntoCollection({
                             title: data.formData.title,
-                            resourceId: resource._id
+                            resourceId: resource.id
                         });
                     } else {
                         // * Create new collection and push resource into it
                         await Collection.createCollectionAndPushResource({
                             username: data.formData.username,
                             title: data.formData.title,
-                            resourceId: resource._id
+                            resourceId: resource.id
                         });
                     }
                 }
@@ -89,22 +89,19 @@ const Share = (() => {
                 await resource.save();
 
                 if (data.formData.collectionName) {
-                    const collection = await Collection.getCollectionByTitle({
-                        title: data.formData.collectionName
-                    });
-                    console.log(collection);
-                    if (collection) {
+                    const collection = await Collection.getCollectionByTitle(data.formData.collectionName);
+                    if (collection.collection) {
                         // * Push into existing collection
                         await Collection.pushIntoCollection({
                             title: data.formData.collectionName,
-                            resourceId: resource._id
+                            resourceId: resource.id
                         });
                     } else {
                         // * Create new collection and push resource into it
                         await Collection.createCollectionAndPushResource({
                             username: data.formData.username,
                             title: data.formData.collectionName,
-                            resourceId: resource._id
+                            resourceId: resource.id
                         });
                     }
                 }

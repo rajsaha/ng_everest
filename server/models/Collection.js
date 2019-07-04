@@ -2,11 +2,13 @@ var mongoose = require('mongoose');
 var CollectionSchema = new mongoose.Schema({
     username: {
         type: String,
+        required: true,
         trim: true
     },
     title: {
         type: String,
         unique: true,
+        required: true,
         trim: true
     },
     resources: [{
