@@ -11,7 +11,7 @@ export class ResourceService {
 
   getOpenGraphData(url: any): Promise<any> {
     return new Promise(resolve => {
-      this.http.post(`${ENV.API_URL}/resource/get-opengraph-data`, url)
+      this.http.post(`${ENV.API_URL}/resource/share/get-opengraph-data`, url)
         .subscribe((response: any) => {
           resolve(response);
         });
@@ -20,7 +20,16 @@ export class ResourceService {
 
   shareResource(data: any): Promise<any> {
     return new Promise(resolve => {
-      this.http.post(`${ENV.API_URL}/resource/share-resource`, data)
+      this.http.post(`${ENV.API_URL}/resource/share/share-resource`, data)
+        .subscribe((response: any) => {
+          resolve(response);
+        });
+    });
+  }
+
+  getAllResources(data: any): Promise<any> {
+    return new Promise(resolve => {
+      this.http.post(`${ENV.API_URL}/resource/get/all`, data)
         .subscribe((response: any) => {
           resolve(response);
         });

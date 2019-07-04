@@ -47,11 +47,10 @@ const Share = (() => {
 
                 if (data.formData.collectionName) {
                     const collection = await Collection.getCollectionByTitle(data.formData.collectionName);
-                    console.log(collection);
-                    if (collection) {
+                    if (collection.collection) {
                         // * Push into existing collection
                         await Collection.pushIntoCollection({
-                            title: data.formData.title,
+                            title: data.formData.collectionName,
                             resourceId: resource.id
                         });
                     } else {
