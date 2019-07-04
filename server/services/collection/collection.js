@@ -35,10 +35,8 @@ const Collection = (() => {
             };
 
             const update = {
-                $set: {
-                    $push: {
-                        resources: data.resourceId
-                    }
+                $push: {
+                    resources: data.resourceId
                 },
                 safe: {
                     new: true,
@@ -46,7 +44,7 @@ const Collection = (() => {
                 }
             };
 
-            const pushIntoCollectionResult = await _Collection.updateOne(query, update).exec();
+            const pushIntoCollectionResult = await _Collection.findOneAndUpdate(query, update).exec();
 
             return {
                 message: {

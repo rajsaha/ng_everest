@@ -17,7 +17,8 @@ const collectionRoute = require('./api/routes/collection/collection');
 const mongodb_connection_string = `mongodb://${process.env.MLAB_U}:${process.env.MLAB_PW}@ds121321.mlab.com:21321/ng_everest`;
 
 mongoose.connect(mongodb_connection_string, {
-    useNewUrlParser: true
+    useNewUrlParser: true,
+    useFindAndModify: false
 }).then((res) => {
     console.log('Connected to database');
 });

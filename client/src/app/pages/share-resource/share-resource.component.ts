@@ -1,4 +1,5 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { Router } from '@angular/router';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { faUpload, faPlusCircle } from '@fortawesome/free-solid-svg-icons';
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
@@ -51,7 +52,8 @@ export class ShareResourceComponent implements OnInit {
     private validationService: ValidationService,
     private resourceService: ResourceService,
     private collectionService: CollectionService,
-    private snackbarService: SnackbarService) { }
+    private snackbarService: SnackbarService,
+    private router: Router) { }
 
   ngOnInit() {
     this.username = localStorage.getItem('username');
@@ -70,7 +72,7 @@ export class ShareResourceComponent implements OnInit {
       username: [this.username],
       type: ['ext-content'],
       collectionName: ['']
-    }, { validator: [this.validationService.checkValidURL]});
+    }, { validator: [this.validationService.checkValidURL] });
   }
 
   addTag(event: MatChipInputEvent): void {
@@ -108,6 +110,25 @@ export class ShareResourceComponent implements OnInit {
 
         const response = await this.resourceService.shareResource(data);
         this.isLoading = false;
+
+        if (!response.error) {
+          this.snackbarService.openSnackBar({
+            message: {
+              message: 'Resource saved!',
+              error: false
+            },
+            class: 'green-snackbar',
+          });
+          this.router.navigate(['/feed']);
+        } else {
+          this.snackbarService.openSnackBar({
+            message: {
+              message: `Error: ${response.error}!`,
+              error: true
+            },
+            class: 'red-snackbar',
+          });
+        }
       } else {
         const data = {
           formData: this.shareResourceForm.value,
@@ -116,6 +137,25 @@ export class ShareResourceComponent implements OnInit {
 
         const response = await this.resourceService.shareResource(data);
         this.isLoading = false;
+
+        if (!response.error) {
+          this.snackbarService.openSnackBar({
+            message: {
+              message: 'Resource saved!',
+              error: false
+            },
+            class: 'green-snackbar',
+          });
+          this.router.navigate(['/feed']);
+        } else {
+          this.snackbarService.openSnackBar({
+            message: {
+              message: `Error: ${response.error}!`,
+              error: true
+            },
+            class: 'red-snackbar',
+          });
+        }
       }
     }
   }
@@ -166,9 +206,11 @@ export class ShareResourceComponent implements OnInit {
   }
 
   async getCollectionNames() {
-    const response = await this.collectionService.getCollectionNames({username: this.username});
+    const response = await this.collectionService.getCollectionNames({ username: this.username });
     if (response.collections) {
-      console.log(response.collections);
+      for (const item of response.collections) {
+        this.collectionNames.push(item.title);
+      }
     }
   }
 }
