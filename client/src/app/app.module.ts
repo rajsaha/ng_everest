@@ -50,6 +50,7 @@ import { SnackbarComponent } from './general/snackbar/snackbar.component';
 import { CpiComponent } from './pages/profile/cpi/cpi.component';
 import { ShareResourceComponent } from './pages/share-resource/share-resource.component';
 import { ManageResourcesComponent } from './pages/manage-resources/manage-resources.component';
+import { TruncatePipe } from './pipe/truncate';
 
 @NgModule({
   declarations: [
@@ -66,7 +67,8 @@ import { ManageResourcesComponent } from './pages/manage-resources/manage-resour
     SnackbarComponent,
     CpiComponent,
     ShareResourceComponent,
-    ManageResourcesComponent
+    ManageResourcesComponent,
+    TruncatePipe
   ],
   imports: [
     BrowserModule,

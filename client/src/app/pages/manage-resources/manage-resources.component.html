@@ -4,7 +4,7 @@
     <mat-tab label="Resources">
       <div class="section">
         <div class="section-header">
-          <h4>Resources</h4>
+          <h4>Manage Resources</h4>
         </div>
 
         <div class="section-content">
@@ -20,20 +20,20 @@
 
           <div class="list-of-resources">
             <div class="resource" *ngFor="let post of posts">
-              <div class="image" [ngStyle]="{ 'background-image': 'url(' + post.image  +')' }"></div>
+              <img class="image" [src]="post.image">
               <div class="details">
-                <h4>{{ post.title | slice:0:40 }}</h4>
-                <p>{{ post.description | slice:0:40 }}</p>
+                <h4>{{ post.title }}</h4>
+                <p>{{ post.description | truncate:[40] }}</p>
                 <div class="actions">
-                  <button mat-stroked-button>
+                  <button mat-button>
                     <fa-icon [icon]="faEye"></fa-icon>
                   </button>
 
-                  <button mat-stroked-button>
+                  <button mat-button>
                     <fa-icon [icon]="faEdit"></fa-icon>
                   </button>
 
-                  <button mat-stroked-button>
+                  <button mat-button color="warn">
                     <fa-icon [icon]="faTrashAlt"></fa-icon>
                   </button>
                 </div>
