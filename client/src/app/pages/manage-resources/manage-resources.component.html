@@ -6,6 +6,42 @@
         <div class="section-header">
           <h4>Resources</h4>
         </div>
+
+        <div class="section-content">
+          <form [formGroup]="searchForm">
+            <mat-form-field appearance="outline">
+              <mat-label>Search</mat-label>
+              <mat-icon matPrefix>
+                <fa-icon [icon]="faSearch"></fa-icon>
+              </mat-icon>
+              <input matInput placeholder="Search for your resources" formControlName="query">
+            </mat-form-field>
+          </form>
+
+          <div class="list-of-resources">
+            <div class="resource" *ngFor="let post of posts">
+              <div class="image" [ngStyle]="{ 'background-image': 'url(' + post.image  +')' }"></div>
+              <div class="details">
+                <h4>{{ post.title | slice:0:40 }}</h4>
+                <p>{{ post.description | slice:0:40 }}</p>
+                <div class="actions">
+                  <button mat-stroked-button>
+                    <fa-icon [icon]="faEye"></fa-icon>
+                  </button>
+
+                  <button mat-stroked-button>
+                    <fa-icon [icon]="faEdit"></fa-icon>
+                  </button>
+
+                  <button mat-stroked-button>
+                    <fa-icon [icon]="faTrashAlt"></fa-icon>
+                  </button>
+                </div>
+              </div>
+              <div class="stats"></div>
+            </div>
+          </div>
+        </div>
       </div>
     </mat-tab>
 

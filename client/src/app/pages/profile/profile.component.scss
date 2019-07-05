@@ -26,6 +26,7 @@
             }
 
             .toggle-profile-view {
+                display: none;
                 color: rgba(0, 0, 0, .8);
                 position: absolute;
                 top: 50%;
@@ -49,6 +50,11 @@
                     border-color: #2196F3;
                 }
             }
+        }
+
+        .toggle-profile-view-sm {
+            width: 100%;
+            margin-bottom: 15px;
         }
 
         .public-view-content {
@@ -95,5 +101,21 @@
 
     mat-divider {
         margin-bottom: 15px;
+    }
+}
+
+@media (min-width: 768px) {
+    .section-container {
+        .section {
+            .profile-picture {
+                .toggle-profile-view {
+                    display: inherit;
+                }
+            }
+
+            .toggle-profile-view-sm {
+                display: none;
+            }
+        }
     }
 }
