@@ -51,6 +51,7 @@ import { CpiComponent } from './pages/profile/cpi/cpi.component';
 import { ShareResourceComponent } from './pages/share-resource/share-resource.component';
 import { ManageResourcesComponent } from './pages/manage-resources/manage-resources.component';
 import { TruncatePipe } from './pipe/truncate';
+import { DrComponent } from './pages/manage-resources/dr/dr.component';
 
 @NgModule({
   declarations: [
@@ -68,7 +69,8 @@ import { TruncatePipe } from './pipe/truncate';
     CpiComponent,
     ShareResourceComponent,
     ManageResourcesComponent,
-    TruncatePipe
+    TruncatePipe,
+    DrComponent
   ],
   imports: [
     BrowserModule,

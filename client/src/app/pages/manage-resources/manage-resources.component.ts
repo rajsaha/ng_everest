@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, Validators, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { faSearch, faEye, faEdit, faTrashAlt } from '@fortawesome/free-solid-svg-icons';
 import { ResourceService } from '@services/resource/resource.service';
+import { MatDialog } from '@angular/material';
 
 @Component({
   selector: 'app-manage-resources',
@@ -20,7 +21,10 @@ export class ManageResourcesComponent implements OnInit {
   username: any;
   posts: any;
 
-  constructor(private fb: FormBuilder, private resourceService: ResourceService) { }
+  constructor(
+    private fb: FormBuilder,
+    private resourceService: ResourceService,
+    public dialog: MatDialog) { }
 
   ngOnInit() {
     this.username = localStorage.getItem('username');
@@ -42,5 +46,4 @@ export class ManageResourcesComponent implements OnInit {
       console.error(err);
     }
   }
-
 }
