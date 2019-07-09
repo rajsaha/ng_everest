@@ -18,29 +18,7 @@
             </mat-form-field>
           </form>
 
-          <div class="list-of-resources">
-            <div class="resource" *ngFor="let post of posts">
-              <img class="image" [src]="post.image">
-              <div class="details">
-                <h4>{{ post.title }}</h4>
-                <p>{{ post.description | truncate:[40] }}</p>
-                <div class="actions">
-                  <button mat-button>
-                    <fa-icon [icon]="faEye"></fa-icon>
-                  </button>
-
-                  <button mat-button>
-                    <fa-icon [icon]="faEdit"></fa-icon>
-                  </button>
-
-                  <button mat-button color="warn">
-                    <fa-icon [icon]="faTrashAlt"></fa-icon>
-                  </button>
-                </div>
-              </div>
-              <div class="stats"></div>
-            </div>
-          </div>
+          <app-resource *ngFor="let resource of resources" [data]="resource"></app-resource>
         </div>
       </div>
     </mat-tab>

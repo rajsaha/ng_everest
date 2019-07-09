@@ -1,0 +1,21 @@
+<div class="resource">
+  <img class="image" [src]="data.image">
+  <div class="details">
+    <h4>{{ data.title }}</h4>
+    <p>{{ data.description | truncate:[40] }}</p>
+    <div class="actions">
+      <button mat-button>
+        <fa-icon [icon]="faEye"></fa-icon>
+      </button>
+
+      <button mat-button>
+        <fa-icon [icon]="faEdit"></fa-icon>
+      </button>
+
+      <button mat-button color="warn">
+        <fa-icon [icon]="faTrashAlt"></fa-icon>
+      </button>
+    </div>
+  </div>
+  <div class="stats"></div>
+</div>

@@ -52,6 +52,7 @@ import { ShareResourceComponent } from './pages/share-resource/share-resource.co
 import { ManageResourcesComponent } from './pages/manage-resources/manage-resources.component';
 import { TruncatePipe } from './pipe/truncate';
 import { DrComponent } from './general/dialogs/dr/dr.component';
+import { ResourceComponent } from './general/resource/resource.component';
 
 @NgModule({
   declarations: [
@@ -70,7 +71,8 @@ import { DrComponent } from './general/dialogs/dr/dr.component';
     ShareResourceComponent,
     ManageResourcesComponent,
     TruncatePipe,
-    DrComponent
+    DrComponent,
+    ResourceComponent
   ],
   imports: [
     BrowserModule,

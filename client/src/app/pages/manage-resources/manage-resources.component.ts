@@ -19,7 +19,7 @@ export class ManageResourcesComponent implements OnInit {
 
   searchForm: FormGroup;
   username: any;
-  posts: any;
+  resources: any;
 
   constructor(
     private fb: FormBuilder,
@@ -41,7 +41,7 @@ export class ManageResourcesComponent implements OnInit {
   async getAllResources() {
     try {
       const response = await this.resourceService.getAllResources({username: this.username});
-      this.posts = response.resources;
+      this.resources = response.resources;
     } catch (err) {
       console.error(err);
     }
