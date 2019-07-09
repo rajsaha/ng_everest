@@ -62,10 +62,16 @@
     .description {
         padding: 15px;
         line-height: 25px;
+        transition: height 0.2s ease-in-out;
 
         p {
             font-size: 14px;
             margin-bottom: 0;
+
+            span {
+                cursor: pointer;
+                color: rgb(30, 90, 255);
+            }
         }
     }
 

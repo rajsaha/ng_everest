@@ -39,6 +39,7 @@ export class PostComponent implements OnInit {
   isLiked = false;
   showComments = false;
   isSeeMore = false;
+  truncateValue = 150;
 
   constructor(private fb: FormBuilder, public dialog: MatDialog) { }
 
@@ -104,8 +105,13 @@ export class PostComponent implements OnInit {
   }
 
   checkIfDescriptionTooLong(text: string) {
-    if (text.length > 200) {
+    if (text.length > this.truncateValue) {
       this.isSeeMore = true;
     }
+  }
+
+  seeMore() {
+    this.truncateValue = 1000;
+    this.isSeeMore = false;
   }
 }

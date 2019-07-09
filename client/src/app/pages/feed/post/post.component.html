@@ -47,7 +47,8 @@
     <div class="row">
       <div class="col-12">
         <p>
-          {{ description }}
+          {{ description | truncate:[truncateValue] }}
+          <span *ngIf="isSeeMore" (click)="seeMore()" class="see-more">See More</span>
         </p>
       </div>
     </div>
