@@ -27,7 +27,7 @@ export class CpiComponent implements OnInit {
   imageId: string;
   deleteHash: string;
   selectedFile: ImageSnippet;
-  @ViewChild('imageInput') imageInput: ElementRef;
+  @ViewChild('imageInput', { static: true }) imageInput: ElementRef;
 
   constructor(
     public dialogRef: MatDialogRef<CpiComponent>,

@@ -38,12 +38,14 @@ export class PostComponent implements OnInit {
   // Toggles
   isLiked = false;
   showComments = false;
+  isSeeMore = false;
 
   constructor(private fb: FormBuilder, public dialog: MatDialog) { }
 
   ngOnInit() {
     this.populatePost();
     this.init_comment_form();
+    this.checkIfDescriptionTooLong(this.description);
   }
 
   populatePost() {
@@ -99,5 +101,11 @@ export class PostComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
     });
+  }
+
+  checkIfDescriptionTooLong(text: string) {
+    if (text.length > 200) {
+      this.isSeeMore = true;
+    }
   }
 }
