@@ -41,17 +41,17 @@ import { LoginComponent } from './pages/login/login.component';
 import { WelcomeComponent } from './pages/welcome/welcome.component';
 import { SignupComponent } from './pages/signup/signup.component';
 import { FeedComponent } from './pages/feed/feed.component';
-import { PostComponent } from './pages/feed/post/post.component';
+import { PostComponent } from './general/post/post.component';
 import { ProfileComponent } from './pages/profile/profile.component';
-import { AtcComponent } from './pages/feed/post/atc/atc.component';
-import { PoComponent } from './pages/feed/post/po/po.component';
+import { AtcComponent } from './general/dialogs/atc/atc.component';
+import { PoComponent } from './general/dialogs/po/po.component';
 import { PageNotFoundComponent } from './pages/page-not-found/page-not-found.component';
 import { SnackbarComponent } from './general/snackbar/snackbar.component';
-import { CpiComponent } from './pages/profile/cpi/cpi.component';
+import { CpiComponent } from './general/dialogs/cpi/cpi.component';
 import { ShareResourceComponent } from './pages/share-resource/share-resource.component';
 import { ManageResourcesComponent } from './pages/manage-resources/manage-resources.component';
 import { TruncatePipe } from './pipe/truncate';
-import { DrComponent } from './pages/manage-resources/dr/dr.component';
+import { DrComponent } from './general/dialogs/dr/dr.component';
 
 @NgModule({
   declarations: [

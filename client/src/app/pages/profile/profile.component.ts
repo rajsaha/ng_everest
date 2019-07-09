@@ -4,7 +4,7 @@ import { ProfileService } from '@services/profile/profile.service';
 import { SnackbarService } from '@services/general/snackbar.service';
 import { MatDialog } from '@angular/material';
 import { faEdit, faTrash, faEye, faExternalLinkAlt } from '@fortawesome/free-solid-svg-icons';
-import { CpiComponent } from './cpi/cpi.component';
+import { CpiComponent } from '../../general/dialogs/cpi/cpi.component';
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { MatChipInputEvent } from '@angular/material/chips';
 import { ValidationService } from '@services/forms/validation.service';

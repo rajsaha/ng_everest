@@ -3,8 +3,8 @@ import { faThumbsUp, faComment, faPlus, faReply, faEllipsisV } from '@fortawesom
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatDialog } from '@angular/material';
 import * as moment from 'moment';
-import { AtcComponent } from './atc/atc.component';
-import { PoComponent } from './po/po.component';
+import { AtcComponent } from '../dialogs/atc/atc.component';
+import { PoComponent } from '../dialogs/po/po.component';
 
 @Component({
   selector: 'app-post',
