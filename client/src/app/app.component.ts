@@ -23,7 +23,7 @@ export class AppComponent implements OnInit, OnDestroy {
   faStream = faStream;
   faShareAlt = faShareAlt;
 
-  private _mobileQueryListener: () => void;
+  private mobileQueryListener: () => void;
 
   constructor(changeDetectorRef: ChangeDetectorRef,
               media: MediaMatcher,
@@ -31,8 +31,8 @@ export class AppComponent implements OnInit, OnDestroy {
               private loginService: LoginService,
               private communicationService: CommunicationService) {
     this.mobileQuery = media.matchMedia('(max-width: 600px)');
-    this._mobileQueryListener = () => changeDetectorRef.detectChanges();
-    this.mobileQuery.addListener(this._mobileQueryListener);
+    this.mobileQueryListener = () => changeDetectorRef.detectChanges();
+    this.mobileQuery.addListener(this.mobileQueryListener);
     this.communicationService.authState.subscribe((res) => {
       this.isLoggedIn = res;
     });
@@ -51,6 +51,6 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.mobileQuery.removeListener(this._mobileQueryListener);
+    this.mobileQuery.removeListener(this.mobileQueryListener);
   }
 }

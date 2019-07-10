@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { faEye, faEdit, faTrashAlt } from '@fortawesome/free-solid-svg-icons';
 import { MatDialog } from '@angular/material';
 import * as moment from 'moment';
+import { DrComponent } from '../dialogs/dr/dr.component';
 
 @Component({
   selector: 'app-resource',
@@ -29,10 +30,11 @@ export class ResourceComponent implements OnInit {
   constructor(public dialog: MatDialog) { }
 
   ngOnInit() {
+    this.populateResource();
   }
 
   populateResource() {
-    this.id = this.data.id;
+    this.id = this.data._id;
     this.url = this.data.url;
     this.title = this.data.title;
     this.tags = this.data.tags;
@@ -40,6 +42,19 @@ export class ResourceComponent implements OnInit {
     this.image = this.data.image;
     this.timestamp = moment(this.data.timestamp.$date).fromNow();
     this.allComments = this.data.comments;
+  }
+
+  openDrDialog() {
+    const dialogRef = this.dialog.open(DrComponent, {
+      data: {
+        id: this.id,
+        title: this.title
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(async (result) => {
+      console.log('Delete resource dialog closed');
+    });
   }
 
 }

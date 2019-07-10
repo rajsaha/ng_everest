@@ -114,6 +114,6 @@ import { ResourceComponent } from './general/resource/resource.component';
     }
   ],
   bootstrap: [AppComponent],
-  entryComponents: [AtcComponent, PoComponent, SnackbarComponent, CpiComponent]
+  entryComponents: [AtcComponent, PoComponent, SnackbarComponent, CpiComponent, DrComponent]
 })
 export class AppModule { }
