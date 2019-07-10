@@ -12,6 +12,7 @@ const signUpRoute = require('./api/routes/auth/signup');
 const profileRoute = require('./api/routes/profile/profile');
 const resourceShareRoute = require('./api/routes/resource/share');
 const resourceGetRoute = require('./api/routes/resource/get');
+const resourceDeleteRoute = require('./api/routes/resource/delete');
 const collectionRoute = require('./api/routes/collection/collection');
 
 // Mongodb connection string
@@ -57,6 +58,7 @@ app.use('/signup', signUpRoute);
 app.use('/profile', profileRoute);
 app.use('/resource/share', resourceShareRoute);
 app.use('/resource/get', resourceGetRoute);
+app.use('/resource/delete', resourceDeleteRoute);
 app.use('/collection', collectionRoute);
 
 app.use((req, res, next) => {

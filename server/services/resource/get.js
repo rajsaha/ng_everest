@@ -1,10 +1,6 @@
-const ogs = require('open-graph-scraper');
-const mongoose = require('mongoose');
-const axios = require('axios');
 const _Resource = require('../../models/Resource');
-const Collection = require('../collection/collection');
 
-const Resource = (() => {
+const ResourceGet = (() => {
     const getAllResources = async (data) => {
         try {
             const resources = await _Resource.find({username: data.username}).exec();
@@ -23,4 +19,4 @@ const Resource = (() => {
     }
 })()
 
-module.exports = Resource;
+module.exports = ResourceGet;

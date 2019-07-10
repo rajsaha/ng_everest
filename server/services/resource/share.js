@@ -4,7 +4,7 @@ const axios = require('axios');
 const Resource = require('../../models/Resource');
 const Collection = require('../collection/collection');
 
-const Share = (() => {
+const ResourceShare = (() => {
     const getOpenGraphData = async (url) => {
         const response = await ogs({
             'url': url
@@ -140,4 +140,4 @@ const Share = (() => {
     }
 })()
 
-module.exports = Share;
+module.exports = ResourceShare;
