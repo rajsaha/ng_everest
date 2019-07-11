@@ -52,9 +52,15 @@ export class ResourceComponent implements OnInit {
       }
     });
 
+    this.sendBackId();
+
     dialogRef.afterClosed().subscribe(async (result) => {
       console.log('Delete resource dialog closed');
     });
+  }
+
+  sendBackId() {
+    this.id;
   }
 
 }

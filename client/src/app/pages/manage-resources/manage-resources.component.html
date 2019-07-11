@@ -18,7 +18,7 @@
             </mat-form-field>
           </form>
 
-          <app-resource *ngFor="let resource of resources" [data]="resource"></app-resource>
+          <app-resource *ngFor="let resource of resources" [data]="resource" (selectedId)="sendBackId($event)"></app-resource>
         </div>
       </div>
     </mat-tab>

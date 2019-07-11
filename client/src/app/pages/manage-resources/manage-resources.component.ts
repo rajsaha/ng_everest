@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { faSearch, faEye, faEdit, faTrashAlt } from '@fortawesome/free-solid-svg-icons';
 import { ResourceService } from '@services/resource/resource.service';
@@ -20,6 +20,8 @@ export class ManageResourcesComponent implements OnInit {
   searchForm: FormGroup;
   username: any;
   resources: any;
+
+  @Output() selectedId = new EventEmitter<string>();
 
   constructor(
     private fb: FormBuilder,

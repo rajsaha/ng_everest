@@ -16,9 +16,7 @@ export class DrComponent implements OnInit {
     private resourceService: ResourceService,
     private snackbarService: SnackbarService) { }
 
-  ngOnInit() {
-    console.log(this.data);
-  }
+  ngOnInit() {}
 
   onNoClick() {
     this.dialogRef.close();
