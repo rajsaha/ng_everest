@@ -35,4 +35,13 @@ export class ResourceService {
         });
     });
   }
+
+  deleteResource(data: any): Promise<any> {
+    return new Promise(resolve => {
+      this.http.post(`${ENV.API_URL}/resource/delete`, data)
+        .subscribe((response: any) => {
+          resolve(response);
+        });
+    });
+  }
 }

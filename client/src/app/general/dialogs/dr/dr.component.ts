@@ -1,5 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { ResourceService } from '@services/resource/resource.service';
+import { SnackbarService } from '@services/general/snackbar.service';
 
 @Component({
   selector: 'app-dr',
@@ -10,7 +12,9 @@ export class DrComponent implements OnInit {
 
   constructor(
     public dialogRef: MatDialogRef<DrComponent>,
-    @Inject(MAT_DIALOG_DATA) public data) { }
+    @Inject(MAT_DIALOG_DATA) public data,
+    private resourceService: ResourceService,
+    private snackbarService: SnackbarService) { }
 
   ngOnInit() {
     console.log(this.data);
@@ -20,7 +24,27 @@ export class DrComponent implements OnInit {
     this.dialogRef.close();
   }
 
-  onYesClick() {
+  async onYesClick() {
+    const response = await this.resourceService.deleteResource({id: this.data.id});
+
+    if (!response.error) {
+      this.snackbarService.openSnackBar({
+        message: {
+          message: 'Resource deleted!',
+          error: false
+        },
+        class: 'green-snackbar',
+      });
+      this.dialogRef.close();
+    } else {
+      this.snackbarService.openSnackBar({
+        message: {
+          message: `Something went wrong!`,
+          error: true
+        },
+        class: 'red-snackbar',
+      });
+    }
     this.dialogRef.close();
   }
 
