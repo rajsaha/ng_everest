@@ -33,7 +33,7 @@ export class DrComponent implements OnInit {
         },
         class: 'green-snackbar',
       });
-      this.dialogRef.close();
+      this.dialogRef.close(this.data.id);
     } else {
       this.snackbarService.openSnackBar({
         message: {
@@ -42,8 +42,9 @@ export class DrComponent implements OnInit {
         },
         class: 'red-snackbar',
       });
+
+      this.dialogRef.close();
     }
-    this.dialogRef.close();
   }
 
 }

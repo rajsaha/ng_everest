@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { faEye, faEdit, faTrashAlt } from '@fortawesome/free-solid-svg-icons';
 import { MatDialog } from '@angular/material';
 import * as moment from 'moment';
@@ -11,6 +11,7 @@ import { DrComponent } from '../dialogs/dr/dr.component';
 })
 export class ResourceComponent implements OnInit {
   @Input() data: any;
+  @Output() drResponse: EventEmitter<number> = new EventEmitter();
 
   // Data
   id: string;
@@ -52,15 +53,9 @@ export class ResourceComponent implements OnInit {
       }
     });
 
-    this.sendBackId();
-
     dialogRef.afterClosed().subscribe(async (result) => {
-      console.log('Delete resource dialog closed');
+      this.drResponse.emit(result);
     });
-  }
-
-  sendBackId() {
-    this.id;
   }
 
 }

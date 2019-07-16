@@ -1,8 +1,8 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { faSearch, faEye, faEdit, faTrashAlt } from '@fortawesome/free-solid-svg-icons';
 import { ResourceService } from '@services/resource/resource.service';
-import { MatDialog } from '@angular/material';
+import { UtilityService } from '@services/general/utility.service';
 
 @Component({
   selector: 'app-manage-resources',
@@ -21,12 +21,10 @@ export class ManageResourcesComponent implements OnInit {
   username: any;
   resources: any;
 
-  @Output() selectedId = new EventEmitter<string>();
-
   constructor(
     private fb: FormBuilder,
     private resourceService: ResourceService,
-    public dialog: MatDialog) { }
+    private utilityService: UtilityService) { }
 
   ngOnInit() {
     this.username = localStorage.getItem('username');
@@ -46,6 +44,17 @@ export class ManageResourcesComponent implements OnInit {
       this.resources = response.resources;
     } catch (err) {
       console.error(err);
+    }
+  }
+
+  drResponseHandler(result: number) {
+    if (result) {
+      for (const {item, index} of this.utilityService.toItemIndexes(this.resources)) {
+        if (result === item._id) {
+          this.resources.splice(index, 1);
+          return;
+        }
+      }
     }
   }
 }
