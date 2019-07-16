@@ -14,15 +14,17 @@ export class ViewResourceComponent implements OnInit {
 
   ngOnInit() {
     this.router.params.subscribe((params) => {
-      this.id = params.id;
-      this.getResource();
+      this.getResource(params.id);
     });
   }
 
-  async getResource() {
-    const response = await this.resourceService.getResource({id: this.id});
-    this.resource = response.resource;
-    console.log(this.resource);
+  async getResource(id: string) {
+    try {
+      const response = await this.resourceService.getResource({id: id});
+      this.resource = response.resource;
+    } catch (err) {
+      console.error(err);
+    }
   }
 
 }
