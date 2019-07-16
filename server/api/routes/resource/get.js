@@ -12,4 +12,13 @@ router.post('/all', checkIfAuthenticated, async (req, res, next) => {
     }
 });
 
+router.get('/one/:id', checkIfAuthenticated, async (req, res, next) => {
+    try {
+        const response = await ResourceGet.getResource(req.params.id);
+        res.status(200).json(response);
+    } catch (err) {
+        console.error(`Error: ${err.message}`);
+    }
+});
+
 module.exports = router;

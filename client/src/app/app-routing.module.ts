@@ -9,6 +9,7 @@ import { AuthGuardService } from './services/auth/auth-guard.service';
 import { PageNotFoundComponent } from './pages/page-not-found/page-not-found.component';
 import { ShareResourceComponent } from './pages/share-resource/share-resource.component';
 import { ManageResourcesComponent } from './pages/manage-resources/manage-resources.component';
+import { ViewResourceComponent } from './pages/view-resource/view-resource.component';
 
 const routes: Routes = [
   {
@@ -41,6 +42,11 @@ const routes: Routes = [
   {
     path: 'manage-resources',
     component: ManageResourcesComponent,
+    canActivate: [AuthGuardService]
+  },
+  {
+    path: 'view-resource/:id',
+    component: ViewResourceComponent,
     canActivate: [AuthGuardService]
   },
   {

@@ -33,6 +33,7 @@ export class ShareResourceComponent implements OnInit {
 
   // Toggles
   isLoading = false;
+  isDisabled = false;
 
   // Tags
   tags = [];
@@ -100,6 +101,7 @@ export class ShareResourceComponent implements OnInit {
   async submitShareResourceForm() {
     if (this.shareResourceForm.valid) {
       this.isLoading = true;
+      this.isDisabled = true;
 
       if (this.shareResourceForm.controls.isCustomImage) {
         const data = {
@@ -128,6 +130,7 @@ export class ShareResourceComponent implements OnInit {
             },
             class: 'red-snackbar',
           });
+          this.isDisabled = false;
         }
       } else {
         const data = {
@@ -137,6 +140,7 @@ export class ShareResourceComponent implements OnInit {
 
         const response = await this.resourceService.shareResource(data);
         this.isLoading = false;
+        this.isDisabled = true;
 
         if (!response.error) {
           this.snackbarService.openSnackBar({
@@ -155,6 +159,7 @@ export class ShareResourceComponent implements OnInit {
             },
             class: 'red-snackbar',
           });
+          this.isDisabled = false;
         }
       }
     }

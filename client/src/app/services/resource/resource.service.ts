@@ -36,6 +36,15 @@ export class ResourceService {
     });
   }
 
+  getResource(data: any): Promise<any> {
+    return new Promise(resolve => {
+      this.http.get(`${ENV.API_URL}/resource/get/one/${data.id}`)
+        .subscribe((response: any) => {
+          resolve(response);
+        });
+    });
+  }
+
   deleteResource(data: any): Promise<any> {
     return new Promise(resolve => {
       this.http.post(`${ENV.API_URL}/resource/delete`, data)

@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { faEye, faEdit, faTrashAlt } from '@fortawesome/free-solid-svg-icons';
+import { faEye, faEdit, faTrashAlt, faExternalLinkAlt } from '@fortawesome/free-solid-svg-icons';
 import { MatDialog } from '@angular/material';
 import * as moment from 'moment';
 import { DrComponent } from '../dialogs/dr/dr.component';
@@ -27,6 +27,7 @@ export class ResourceComponent implements OnInit {
   faEye = faEye;
   faEdit = faEdit;
   faTrashAlt = faTrashAlt;
+  faExternalLinkAlt = faExternalLinkAlt;
 
   constructor(public dialog: MatDialog) { }
 

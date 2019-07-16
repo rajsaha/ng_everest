@@ -5,11 +5,15 @@
     <p>{{ data.description | truncate:[40] }}</p>
     <div class="actions">
       <button mat-button>
-        <fa-icon [icon]="faEye"></fa-icon>
+        <a [routerLink]="['/view-resource/', id]"><fa-icon [icon]="faEye"></fa-icon></a>
       </button>
 
       <button mat-button>
         <fa-icon [icon]="faEdit"></fa-icon>
+      </button>
+
+      <button mat-button>
+        <a [href]="data.url" target="_blank"><fa-icon [icon]="faExternalLinkAlt"></fa-icon></a>
       </button>
 
       <button mat-button color="warn" (click)="openDrDialog()">

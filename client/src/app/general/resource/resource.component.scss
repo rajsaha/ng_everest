@@ -20,7 +20,9 @@
 
 		.actions {
 			button {
-				margin-right: 5px;
+				a {
+					color: inherit;
+				}
 			}
 		}
 	}

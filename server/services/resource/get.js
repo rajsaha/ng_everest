@@ -10,12 +10,26 @@ const ResourceGet = (() => {
         } catch (err) {
             return {
                 error: err.message
-            };
+            }
+        }
+    }
+
+    const getResource = async (data) => {
+        try {
+            const resource = await _Resource.findById(data).exec();
+            return {
+                resource: resource
+            }
+        } catch (err) {
+            return {
+                error: err.message
+            }
         }
     }
 
     return {
-        getAllResources
+        getAllResources,
+        getResource
     }
 })()
 
