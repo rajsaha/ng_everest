@@ -9,6 +9,7 @@ import { delay } from 'rxjs/internal/operators';
 import { ResourceService } from '@services/resource/resource.service';
 import { SnackbarService } from '@services/general/snackbar.service';
 import { CollectionService } from '@services/collection/collection.service';
+import { isArray } from 'util';
 
 class ImageSnippet {
   constructor(public src: string, public file: File) { }
@@ -186,7 +187,11 @@ export class ShareResourceComponent implements OnInit {
         } else {
           this.ogTitle = response.message.data.data.ogTitle;
           this.ogDescription = response.message.data.data.ogDescription;
-          this.ogImage = response.message.data.data.ogImage.url;
+          if (isArray(response.message.data.data.ogImage)) {
+            this.ogImage = response.message.data.data.ogImage[0].url;
+          } else {
+            this.ogImage = response.message.data.data.ogImage.url;
+          }
 
           this.shareResourceForm.controls.title.patchValue(this.ogTitle);
           this.shareResourceForm.controls.description.patchValue(this.ogDescription);
