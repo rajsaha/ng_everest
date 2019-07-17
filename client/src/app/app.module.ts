@@ -54,6 +54,7 @@ import { TruncatePipe } from './pipe/truncate';
 import { DrComponent } from './general/dialogs/dr/dr.component';
 import { ResourceComponent } from './general/resource/resource.component';
 import { ViewResourceComponent } from './pages/view-resource/view-resource.component';
+import { EditResourceComponent } from './pages/edit-resource/edit-resource.component';
 
 @NgModule({
   declarations: [
@@ -74,7 +75,8 @@ import { ViewResourceComponent } from './pages/view-resource/view-resource.compo
     TruncatePipe,
     DrComponent,
     ResourceComponent,
-    ViewResourceComponent
+    ViewResourceComponent,
+    EditResourceComponent
   ],
   imports: [
     BrowserModule,

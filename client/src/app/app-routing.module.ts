@@ -10,6 +10,7 @@ import { PageNotFoundComponent } from './pages/page-not-found/page-not-found.com
 import { ShareResourceComponent } from './pages/share-resource/share-resource.component';
 import { ManageResourcesComponent } from './pages/manage-resources/manage-resources.component';
 import { ViewResourceComponent } from './pages/view-resource/view-resource.component';
+import { EditResourceComponent } from './pages/edit-resource/edit-resource.component';
 
 const routes: Routes = [
   {
@@ -47,6 +48,11 @@ const routes: Routes = [
   {
     path: 'view-resource/:id',
     component: ViewResourceComponent,
+    canActivate: [AuthGuardService]
+  },
+  {
+    path: 'edit-resource/:id',
+    component: EditResourceComponent,
     canActivate: [AuthGuardService]
   },
   {

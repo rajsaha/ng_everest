@@ -8,13 +8,15 @@ import { MatSnackBar } from '@angular/material';
   styleUrls: ['./po.component.scss']
 })
 export class PoComponent implements OnInit {
+  id: string;
 
   constructor(
-    public dialogRef: MatDialogRef<PoComponent>, 
+    public dialogRef: MatDialogRef<PoComponent>,
     @Inject(MAT_DIALOG_DATA) public data,
     private snackBar: MatSnackBar) { }
 
   ngOnInit() {
+    this.id = this.data.id;
   }
 
   onNoClick() {

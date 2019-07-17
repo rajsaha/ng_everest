@@ -4,17 +4,19 @@
     <h4>{{ data.title }}</h4>
     <p>{{ data.description | truncate:[40] }}</p>
     <div class="actions">
-      <button mat-button>
-        <a [routerLink]="['/view-resource/', id]"><fa-icon [icon]="faEye"></fa-icon></a>
+      <button [routerLink]="['/view-resource/', id]" mat-button>
+        <fa-icon [icon]="faEye"></fa-icon>
       </button>
 
       <button mat-button>
         <fa-icon [icon]="faEdit"></fa-icon>
       </button>
 
-      <button mat-button>
-        <a [href]="data.url" target="_blank"><fa-icon [icon]="faExternalLinkAlt"></fa-icon></a>
-      </button>
+      <a [href]="data.url" target="_blank">
+        <button mat-button>
+          <fa-icon [icon]="faExternalLinkAlt"></fa-icon>
+        </button>
+      </a>
 
       <button mat-button color="warn" (click)="openDrDialog()">
         <fa-icon [icon]="faTrashAlt"></fa-icon>

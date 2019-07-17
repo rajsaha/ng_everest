@@ -16,6 +16,7 @@ export class PostComponent implements OnInit {
   @Input() data: any;
 
   // Data
+  id: string;
   username: string;
   url: string;
   title: string;
@@ -50,6 +51,7 @@ export class PostComponent implements OnInit {
   }
 
   populatePost() {
+    this.id = this.data._id;
     this.username = this.data.username;
     this.url = this.data.url;
     this.title = this.data.title;
@@ -71,8 +73,8 @@ export class PostComponent implements OnInit {
   }
 
   textareaEnterPressed($event: KeyboardEvent) {
-    $event.preventDefault()
-    $event.stopPropagation()
+    $event.preventDefault();
+    $event.stopPropagation();
 
     // handle form submission
     console.log(this.commentForm.value);
@@ -81,11 +83,12 @@ export class PostComponent implements OnInit {
   openPostDialog() {
     const dialogRef = this.dialog.open(PoComponent, {
       data: {
+        id: this.id,
         username: this.username
       }
     });
 
-    dialogRef.afterClosed().subscribe(result => {
+    dialogRef.afterClosed().subscribe(() => {
       console.log('The dialog was closed');
     });
   }
@@ -99,7 +102,7 @@ export class PostComponent implements OnInit {
       }
     });
 
-    dialogRef.afterClosed().subscribe(result => {
+    dialogRef.afterClosed().subscribe(() => {
       console.log('The dialog was closed');
     });
   }
