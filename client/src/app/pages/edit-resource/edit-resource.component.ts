@@ -1,5 +1,5 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, OnInit, ViewChild, ElementRef, Input } from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { faUpload, faPlusCircle } from '@fortawesome/free-solid-svg-icons';
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
@@ -22,7 +22,8 @@ class ImageSnippet {
 })
 
 export class EditResourceComponent implements OnInit {
-  shareResourceForm: FormGroup;
+  resource: any;
+  editResourceForm: FormGroup;
   selectedFile: any;
   @ViewChild('imageInput', { static: false }) imageInput: ElementRef;
   image: any;
@@ -36,6 +37,7 @@ export class EditResourceComponent implements OnInit {
   // Toggles
   isLoading = false;
   isDisabled = false;
+  isUrlDisabled = true;
 
   // Tags
   tags = [];
@@ -56,19 +58,24 @@ export class EditResourceComponent implements OnInit {
     private resourceService: ResourceService,
     private collectionService: CollectionService,
     private snackbarService: SnackbarService,
-    private router: Router) { }
+    private router: Router,
+    private route: ActivatedRoute) { }
 
   ngOnInit() {
+    this.route.params.subscribe((params) => {
+      this.getResource(params.id);
+      this.getCollectionTitle(params.id);
+    });
     this.username = localStorage.getItem('username');
-    this.initShareResourceForm();
+    this.initEditResourceForm();
     this.onURLOnChanges();
     this.getCollectionNames();
   }
 
-  initShareResourceForm() {
-    this.shareResourceForm = this.fb.group({
+  initEditResourceForm() {
+    this.editResourceForm = this.fb.group({
       isCustomImage: [''],
-      url: ['', Validators.required],
+      url: [{value: '', disabled: this.isUrlDisabled}, Validators.required],
       title: ['', [Validators.required]],
       description: ['', [Validators.required]],
       image: [''],
@@ -100,14 +107,14 @@ export class EditResourceComponent implements OnInit {
     }
   }
 
-  async submitShareResourceForm() {
-    if (this.shareResourceForm.valid) {
+  async submiteditResourceForm() {
+    if (this.editResourceForm.valid) {
       this.isLoading = true;
       this.isDisabled = true;
 
-      if (this.shareResourceForm.controls.isCustomImage) {
+      if (this.editResourceForm.controls.isCustomImage) {
         const data = {
-          formData: this.shareResourceForm.value,
+          formData: this.editResourceForm.value,
           tags: this.tags,
           customImage: this.image
         };
@@ -136,7 +143,7 @@ export class EditResourceComponent implements OnInit {
         }
       } else {
         const data = {
-          formData: this.shareResourceForm.value,
+          formData: this.editResourceForm.value,
           tags: this.tags,
         };
 
@@ -168,9 +175,12 @@ export class EditResourceComponent implements OnInit {
   }
 
   async onURLOnChanges() {
-    this.shareResourceForm.controls.url.valueChanges.pipe(delay(3000)).subscribe(async (val) => {
+    if (this.isUrlDisabled) {
+      return;
+    }
+    this.editResourceForm.controls.url.valueChanges.pipe(delay(3000)).subscribe(async (val) => {
       this.isLoading = true;
-      if (this.shareResourceForm.controls.url.valid) {
+      if (this.editResourceForm.controls.url.valid) {
         const response = await this.resourceService.getOpenGraphData({
           url: val
         });
@@ -194,9 +204,9 @@ export class EditResourceComponent implements OnInit {
             this.ogImage = response.message.data.data.ogImage.url;
           }
 
-          this.shareResourceForm.controls.title.patchValue(this.ogTitle);
-          this.shareResourceForm.controls.description.patchValue(this.ogDescription);
-          this.shareResourceForm.controls.image.patchValue(this.ogImage);
+          this.editResourceForm.controls.title.patchValue(this.ogTitle);
+          this.editResourceForm.controls.description.patchValue(this.ogDescription);
+          this.editResourceForm.controls.image.patchValue(this.ogImage);
         }
       } else {
         this.isLoading = false;
@@ -223,6 +233,29 @@ export class EditResourceComponent implements OnInit {
         this.collectionNames.push(item.title);
       }
     }
+  }
+
+  async getResource(id: string) {
+    try {
+      const response = await this.resourceService.getResource({id});
+      this.resource = response.resource;
+      this.setValues(this.resource);
+    } catch (err) {
+      console.error(err);
+    }
+  }
+
+  async getCollectionTitle(resourceId: string) {
+    let collection = await this.collectionService.getCollectionTitleByResourceId({resourceId});
+    this.editResourceForm.controls.collectionName.patchValue(collection.collection.title);
+  }
+
+  setValues(data: any) {
+    this.editResourceForm.controls.url.patchValue(data.url);
+    this.editResourceForm.controls.title.patchValue(data.title);
+    this.editResourceForm.controls.description.patchValue(data.description);
+    this.tags = data.tags;
+    this.ogImage = data.image;
   }
 
 }

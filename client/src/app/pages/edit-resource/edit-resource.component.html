@@ -2,19 +2,19 @@
 <div class="section-container">
   <div class="section">
     <div class="section-header">
-      <h4>Share a Resource</h4>
+      <h4>Edit Resource</h4>
     </div>
 
     <div class="section-content">
       <div class="custom-image" (click)="imageInput.click()" matRipple
-        *ngIf="shareResourceForm.controls.isCustomImage.value" [ngStyle]="{ 'background-image': 'url(' + image + ')' }">
+        *ngIf="editResourceForm.controls.isCustomImage.value" [ngStyle]="{ 'background-image': 'url(' + image + ')' }">
         <p *ngIf="!image">
           <fa-icon [icon]="faUpload"></fa-icon>&nbsp;Click here to upload a custom image
         </p>
         <input hidden (change)="onFileSelected(imageInput)" #imageInput type="file" accept="image/*">
       </div>
 
-      <div class="resource-image" *ngIf="!shareResourceForm.controls.isCustomImage.value"
+      <div class="resource-image" *ngIf="!editResourceForm.controls.isCustomImage.value"
         [ngStyle]="{ 'background-image': 'url(' + ogImage + ')' }">
         <p *ngIf="!ogImage">
           If your link has an <a href="http://ogp.me/" target="_blank">Open Graph</a> image, it'll appear here
@@ -22,14 +22,14 @@
       </div>
 
 
-      <form [formGroup]="shareResourceForm" (ngSubmit)="submitShareResourceForm()">
+      <form [formGroup]="editResourceForm" (ngSubmit)="submiteditResourceForm()">
         <div class="mat-checkbox-container">
           <mat-checkbox formControlName="isCustomImage">Use custom image</mat-checkbox>
         </div>
         <mat-form-field appearance="outline">
           <mat-label>Link</mat-label>
           <input matInput placeholder="Paste your link here" formControlName="url">
-          <mat-error *ngIf="shareResourceForm.controls['url'].hasError('urlInvalid')">
+          <mat-error *ngIf="editResourceForm.controls['url'].hasError('urlInvalid')">
             Invalid link
           </mat-error>
         </mat-form-field>
@@ -72,7 +72,7 @@
         </mat-form-field>
 
         <div class="form-button-container clearfix">
-          <button mat-raised-button color="primary" [disabled]="isDisabled">Share</button>
+          <button mat-raised-button color="primary" [disabled]="isDisabled">Done</button>
         </div>
       </form>
     </div>

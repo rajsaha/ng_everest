@@ -15,6 +15,19 @@ const Collection = (() => {
         }
     }
 
+    const getCollectionNameByResourceId = async (resourceId) => {
+        try {
+            const collection = await _Collection.findOne({resources: resourceId}).select('title').exec();
+            return {
+                collection: collection
+            }
+        } catch (err) {
+            return {
+                error: err.message
+            }
+        }
+    }
+
     const getCollectionByTitle = async (title) => {
         try {
             const collection = await _Collection.findOne({title: title}).exec();
@@ -65,6 +78,7 @@ const Collection = (() => {
 
     const createCollectionAndPushResource = async (data) => {
         try {
+            // TODO: Check if collection exists
             // * Create new collection
             const collection = new _Collection({
                 _id: new mongoose.Types.ObjectId(),
@@ -110,6 +124,7 @@ const Collection = (() => {
 
     return {
         getCollectionNames,
+        getCollectionNameByResourceId,
         getCollectionByTitle,
         pushIntoCollection,
         createCollectionAndPushResource
