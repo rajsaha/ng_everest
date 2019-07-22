@@ -9,9 +9,12 @@ export class ResourceService {
 
   constructor(private http: HttpClient) { }
 
+  // * Used in share resource / edit resource page
+  // * to retrieve open graph data which contains
+  // * site image, title, and other accompanying data
   getOpenGraphData(url: any): Promise<any> {
     return new Promise(resolve => {
-      this.http.post(`${ENV.API_URL}/resource/share/get-opengraph-data`, url)
+      this.http.post(`${ENV.API_URL}/resource/get-opengraph-data`, url)
         .subscribe((response: any) => {
           resolve(response);
         });
@@ -20,7 +23,7 @@ export class ResourceService {
 
   shareResource(data: any): Promise<any> {
     return new Promise(resolve => {
-      this.http.post(`${ENV.API_URL}/resource/share/share-resource`, data)
+      this.http.post(`${ENV.API_URL}/resource/share-resource`, data)
         .subscribe((response: any) => {
           resolve(response);
         });
@@ -51,6 +54,15 @@ export class ResourceService {
         .subscribe((response: any) => {
           resolve(response);
         });
+    });
+  }
+
+  removeTag(data: any): Promise<any> {
+    return new Promise(resolve => {
+      this.http.post(`${ENV.API_URL}/resource/edit/remove-tag`, data)
+      .subscribe((response: any) => {
+        resolve(response);
+      });
     });
   }
 }

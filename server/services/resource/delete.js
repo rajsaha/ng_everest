@@ -5,7 +5,7 @@ const DeleteResource = (() => {
     const deleteResource = async (data) => {
         try {
             const resource = await _Resource.findById(data.id).exec();
-
+            // TODO: Delete resource from all collections
             if (resource && resource.deleteHash) {
                 // Delete image from imgur
                 await Imgur.deleteImage(resource.deleteHash);

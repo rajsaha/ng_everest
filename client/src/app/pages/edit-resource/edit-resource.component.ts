@@ -75,7 +75,7 @@ export class EditResourceComponent implements OnInit {
   initEditResourceForm() {
     this.editResourceForm = this.fb.group({
       isCustomImage: [''],
-      url: [{value: '', disabled: this.isUrlDisabled}, Validators.required],
+      url: [{ value: '', disabled: this.isUrlDisabled }, Validators.required],
       title: ['', [Validators.required]],
       description: ['', [Validators.required]],
       image: [''],
@@ -100,77 +100,69 @@ export class EditResourceComponent implements OnInit {
     }
   }
 
-  removeTag(tag): void {
+  async removeTag(tag) {
     const index = this.tags.indexOf(tag);
-    if (index >= 0) {
-      this.tags.splice(index, 1);
+    const data = {
+      id: this.resource._id,
+      tag
+    }
+
+    const res = await this.resourceService.removeTag(data);
+    if (res.error) {
+      this.snackbarService.openSnackBar({
+        message: {
+          message: 'Something went wrong!',
+          error: true
+        },
+        class: 'red-snackbar',
+      });
+    } else {
+      if (index >= 0) {
+        this.tags.splice(index, 1);
+      }
     }
   }
 
-  async submiteditResourceForm() {
+  async submitEditResourceForm() {
     if (this.editResourceForm.valid) {
       this.isLoading = true;
       this.isDisabled = true;
-
+      let data = {};
       if (this.editResourceForm.controls.isCustomImage) {
-        const data = {
+        data = {
           formData: this.editResourceForm.value,
           tags: this.tags,
           customImage: this.image
         };
-
-        const response = await this.resourceService.shareResource(data);
-        this.isLoading = false;
-
-        if (!response.error) {
-          this.snackbarService.openSnackBar({
-            message: {
-              message: 'Resource saved!',
-              error: false
-            },
-            class: 'green-snackbar',
-          });
-          this.router.navigate(['/feed']);
-        } else {
-          this.snackbarService.openSnackBar({
-            message: {
-              message: `Error: ${response.error}!`,
-              error: true
-            },
-            class: 'red-snackbar',
-          });
-          this.isDisabled = false;
-        }
       } else {
-        const data = {
+        data = {
           formData: this.editResourceForm.value,
-          tags: this.tags,
+          tags: this.tags
         };
-
-        const response = await this.resourceService.shareResource(data);
-        this.isLoading = false;
-        this.isDisabled = true;
-
-        if (!response.error) {
-          this.snackbarService.openSnackBar({
-            message: {
-              message: 'Resource saved!',
-              error: false
-            },
-            class: 'green-snackbar',
-          });
-          this.router.navigate(['/feed']);
-        } else {
-          this.snackbarService.openSnackBar({
-            message: {
-              message: `Error: ${response.error}!`,
-              error: true
-            },
-            class: 'red-snackbar',
-          });
-          this.isDisabled = false;
-        }
       }
+
+      const response = await this.resourceService.shareResource(data);
+      this.isLoading = false;
+
+      if (!response.error) {
+        this.snackbarService.openSnackBar({
+          message: {
+            message: 'Resource saved!',
+            error: false
+          },
+          class: 'green-snackbar',
+        });
+        this.router.navigate(['/feed']);
+      } else {
+        this.snackbarService.openSnackBar({
+          message: {
+            message: `Error: ${response.error}!`,
+            error: true
+          },
+          class: 'red-snackbar',
+        });
+      }
+      this.isDisabled = false;
     }
   }
 
@@ -237,7 +229,7 @@ export class EditResourceComponent implements OnInit {
 
   async getResource(id: string) {
     try {
-      const response = await this.resourceService.getResource({id});
+      const response = await this.resourceService.getResource({ id });
       this.resource = response.resource;
       this.setValues(this.resource);
     } catch (err) {
@@ -246,7 +238,7 @@ export class EditResourceComponent implements OnInit {
   }
 
   async getCollectionTitle(resourceId: string) {
-    let collection = await this.collectionService.getCollectionTitleByResourceId({resourceId});
+    let collection = await this.collectionService.getCollectionTitleByResourceId({ resourceId });
     this.editResourceForm.controls.collectionName.patchValue(collection.collection.title);
   }
 

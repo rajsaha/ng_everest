@@ -65,10 +65,10 @@ export class ProfileComponent implements OnInit {
   passwordForm: FormGroup;
 
   constructor(private fb: FormBuilder,
-              private profileService: ProfileService,
-              private snackbarService: SnackbarService,
-              private validationService: ValidationService,
-              public dialog: MatDialog) { }
+    private profileService: ProfileService,
+    private snackbarService: SnackbarService,
+    private validationService: ValidationService,
+    public dialog: MatDialog) { }
 
   ngOnInit() {
     this.username = localStorage.getItem('username');
@@ -89,10 +89,10 @@ export class ProfileComponent implements OnInit {
       password: ['', [Validators.required, Validators.minLength(4)]],
       confirm_password: [''],
       username: [this.username]
-    }, { validator: [this.validationService.matchingConfirmPasswords, this.validationService.checkPasswordStrength]});
+    }, { validator: [this.validationService.matchingConfirmPasswords, this.validationService.checkPasswordStrength] });
   }
 
-  saveProfileForm() {
+  async saveProfileForm() {
     const data = {
       id: this.userId,
       name: this.profileForm.controls.name.value,
@@ -102,25 +102,25 @@ export class ProfileComponent implements OnInit {
       email: this.profileForm.controls.email.value
     };
 
-    this.profileService.updateProfileData(data).then((res) => {
-      if (!res.error) {
-        this.snackbarService.openSnackBar({
-          message: {
-            message: 'Profile data saved!',
-            error: false
-          },
-          class: 'green-snackbar',
-        });
-      } else {
-        this.snackbarService.openSnackBar({
-          message: {
-            message: `Error: ${res.error}!`,
-            error: true
-          },
-          class: 'red-snackbar',
-        });
-      }
-    });
+    const res = await this.profileService.updateProfileData(data);
+
+    if (!res.error) {
+      this.snackbarService.openSnackBar({
+        message: {
+          message: 'Profile data saved!',
+          error: false
+        },
+        class: 'green-snackbar',
+      });
+    } else {
+      this.snackbarService.openSnackBar({
+        message: {
+          message: `Error: ${res.error}!`,
+          error: true
+        },
+        class: 'red-snackbar',
+      });
+    }
   }
 
   async changePasswordForm() {
@@ -148,26 +148,26 @@ export class ProfileComponent implements OnInit {
   }
 
   async getUserData() {
-    this.profileService.getProfileData(this.username).then((res: any) => {
-      this.isLoading = true;
-      this.isProfileSaveButtonDisabled = true;
-      this.interests = res.userData.interests;
-      this.image = res.userData.image.link ? res.userData.image.link : this.defaultProfileImage;
-      this.uploadedImage = res.userData.image.link;
-      this.imageId = res.userData.image.id;
-      this.deleteHash = res.userData.image.deleteHash;
-      this.initFormData({
-        username: res.userData.username,
-        name: res.userData.name,
-        website: res.userData.website,
-        bio: res.userData.bio,
-        email: res.userData.email
-      });
+    const res = await this.profileService.getProfileData(this.username);
 
-      // Calculate profile progress
-      this.profileProgress = 0;
-      this.calculateProgress();
+    this.isLoading = true;
+    this.isProfileSaveButtonDisabled = true;
+    this.interests = res.userData.interests;
+    this.image = res.userData.image.link ? res.userData.image.link : this.defaultProfileImage;
+    this.uploadedImage = res.userData.image.link;
+    this.imageId = res.userData.image.id;
+    this.deleteHash = res.userData.image.deleteHash;
+    this.initFormData({
+      username: res.userData.username,
+      name: res.userData.name,
+      website: res.userData.website,
+      bio: res.userData.bio,
+      email: res.userData.email
     });
+
+    // Calculate profile progress
+    this.profileProgress = 0;
+    this.calculateProgress();
   }
 
   initFormData(data: any) {
@@ -216,28 +216,28 @@ export class ProfileComponent implements OnInit {
     }
   }
 
-  removeInterest(interest): void {
+  async removeInterest(interest) {
     const index = this.interests.indexOf(interest);
     const data = {
       id: this.userId,
       interest
     };
 
-    this.profileService.removeInterest(data).then((res: any) => {
-      if (res.error) {
-        this.snackbarService.openSnackBar({
-          message: {
-            message: 'Something went wrong!',
-            error: true
-          },
-          class: 'red-snackbar',
-        });
-      } else {
-        if (index >= 0) {
-          this.interests.splice(index, 1);
-        }
+    const res = await this.profileService.removeInterest(data);
+
+    if (res.error) {
+      this.snackbarService.openSnackBar({
+        message: {
+          message: 'Something went wrong!',
+          error: true
+        },
+        class: 'red-snackbar',
+      });
+    } else {
+      if (index >= 0) {
+        this.interests.splice(index, 1);
       }
-    });
+    }
   }
 
   tabClick(event) {

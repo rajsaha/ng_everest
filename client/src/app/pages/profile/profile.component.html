@@ -3,15 +3,6 @@
 
 <div class="section-container">
   <mat-tab-group mat-align-tabs="center" (selectedTabChange)="tabClick($event)">
-    <!-- * Followers -->
-    <mat-tab label="Followers">
-      <div class="section">
-        <div class="section-header">
-          <h4>Followers</h4>
-        </div>
-      </div>
-    </mat-tab>
-
     <!-- * Profile Management -->
     <mat-tab label="Profile">
       <div class="public-view" *ngIf="isPublicView">
@@ -164,6 +155,15 @@
               </div>
             </form>
           </div>
+        </div>
+      </div>
+    </mat-tab>
+
+    <!-- * Followers -->
+    <mat-tab label="Followers">
+      <div class="section">
+        <div class="section-header">
+          <h4>Followers</h4>
         </div>
       </div>
     </mat-tab>

@@ -10,9 +10,7 @@ const mongoose = require('mongoose');
 const loginRoute = require('./api/routes/auth/login');
 const signUpRoute = require('./api/routes/auth/signup');
 const profileRoute = require('./api/routes/profile/profile');
-const resourceShareRoute = require('./api/routes/resource/share');
-const resourceGetRoute = require('./api/routes/resource/get');
-const resourceDeleteRoute = require('./api/routes/resource/delete');
+const resourceRoute = require('./api/routes/resource/resource');
 const collectionRoute = require('./api/routes/collection/collection');
 
 // Mongodb connection string
@@ -56,9 +54,7 @@ app.use((req, res, next) => {
 app.use('/login', loginRoute);
 app.use('/signup', signUpRoute);
 app.use('/profile', profileRoute);
-app.use('/resource/share', resourceShareRoute);
-app.use('/resource/get', resourceGetRoute);
-app.use('/resource/delete', resourceDeleteRoute);
+app.use('/resource', resourceRoute);
 app.use('/collection', collectionRoute);
 
 app.use((req, res, next) => {
