@@ -9,7 +9,9 @@ const DeleteResource = (() => {
             if (resource && resource.deleteHash) {
                 // Delete image from imgur
                 await Imgur.deleteImage(resource.deleteHash);
-                await _Resource.findOneAndRemove({_id: data.id}).exec();
+                await _Resource.findOneAndRemove({
+                    _id: data.id
+                }).exec();
                 return {
                     message: {
                         error: false,
@@ -17,7 +19,9 @@ const DeleteResource = (() => {
                     }
                 }
             } else if (resource) {
-                await _Resource.findOneAndRemove({_id: data.id}).exec();
+                await _Resource.findOneAndRemove({
+                    _id: data.id
+                }).exec();
                 return {
                     message: {
                         error: false,
@@ -36,8 +40,31 @@ const DeleteResource = (() => {
         }
     }
 
+    const deleteImgurImageFromResource = async (data) => {
+        try {
+            await Imgur.deleteImage(data.deleteHash);
+            const query = {
+                _id: _id
+            };
+            const update = {
+                $set: {
+                    deleteHash: null
+                },
+                safe: {
+                    new: true,
+                    upsert: true
+                }
+            };
+            await _Resource.updateOne(query, update).exec();
+            return true
+        } catch (err) {
+            return false
+        }
+    }
+
     return {
-        deleteResource
+        deleteResource,
+        deleteImgurImageFromResource
     }
 })()
 

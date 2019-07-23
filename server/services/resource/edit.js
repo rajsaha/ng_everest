@@ -4,14 +4,12 @@ const Imgur = require('../imgur/imgur');
 const EditResource = (() => {
     const updateResource = async (data) => {
         try {
-            // TODO: Regardless of whether the user is uploading
-            // TODO: <continued> a custom image or if it's an ogImage,
-            // TODO: <continued> check if resource has a deleteHash value.
-            // TODO: <continued> IF YES, do image deletion first.
             // * Handle user uploading custom image
             if (data.customImage) {
                 // * Get response from imgur
-                const saveCustomImageForResourceResponse = await saveCustomImageForResource(data.customImage);
+                // * If deleteHash not null, delete image
+                const checkForDeleteHashResult = await checkForDeleteHash(data.id);
+                const saveCustomImageForResourceResponse = await Imgur.saveImage(data.customImage);
                 const update = {
                     username: data.formData.username,
                     url: data.formData.url,
@@ -100,6 +98,16 @@ const EditResource = (() => {
                 status: 500,
                 error: error.message
             };
+        }
+    }
+
+    const checkForDeleteHash = async (id) => {
+        const resource = await _Resource.findById(id).exec();
+        if (resource && resource.deleteHash) {
+            await Imgur.deleteHash(resource.deleteHash);
+            return true;
+        } else {
+            return false;
         }
     }
 

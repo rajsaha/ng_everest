@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 const axios = require('axios');
 const Resource = require('../../models/Resource');
 const Collection = require('../collection/collection');
+const Imgur = require('../imgur/imgur');
 
 const ResourceShare = (() => {
     const getOpenGraphData = async (url) => {
@@ -30,7 +31,7 @@ const ResourceShare = (() => {
             // * Handle user uploading custom image
             if (data.customImage) {
                 // * Get response from imgur
-                const saveCustomImageForResourceResponse = await saveCustomImageForResource(data.customImage);
+                const saveCustomImageForResourceResponse = await Imgur.saveImage(data.customImage);
                 const resource = new Resource({
                     _id: new mongoose.Types.ObjectId(),
                     username: data.formData.username,
@@ -121,17 +122,6 @@ const ResourceShare = (() => {
                 error: error.message
             };
         }
-    }
-
-    const saveCustomImageForResource = async (image) => {
-        const replacedBase64String = image.replace(/^data:image\/[a-z]+;base64,/, "");
-        const savePhoto = axios.create({
-            headers: {
-                'Authorization': `Client-ID ${process.env.CLIENT_ID}`
-            }
-        });
-        const savePhotoResponse = await savePhoto.post(process.env.IMAGE_UPLOAD_URL, replacedBase64String);
-        return savePhotoResponse;
     }
 
     return {

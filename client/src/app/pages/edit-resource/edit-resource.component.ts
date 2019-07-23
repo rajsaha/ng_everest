@@ -238,7 +238,7 @@ export class EditResourceComponent implements OnInit {
   }
 
   async getCollectionTitle(resourceId: string) {
-    let collection = await this.collectionService.getCollectionTitleByResourceId({ resourceId });
+    const collection = await this.collectionService.getCollectionTitleByResourceId({ resourceId });
     this.editResourceForm.controls.collectionName.patchValue(collection.collection.title);
   }
 
