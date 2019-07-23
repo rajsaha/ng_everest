@@ -13,7 +13,8 @@ var CollectionSchema = new mongoose.Schema({
     },
     resources: [{
         type: [String],
-        trim: true
+        trim: true,
+        unique: true
     }],
     timestamp: {
         type: Date,
