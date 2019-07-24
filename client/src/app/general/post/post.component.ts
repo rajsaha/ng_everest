@@ -96,6 +96,7 @@ export class PostComponent implements OnInit {
   openCollectionsDialog() {
     const dialogRef = this.dialog.open(AtcComponent, {
       data: {
+        id: this.id,
         url: this.url,
         title: this.title,
         image: this.image

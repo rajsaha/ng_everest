@@ -5,17 +5,23 @@
 <p class="dialog-title">
   <strong>{{ data.title }}</strong>
 </p>
-<div mat-dialog-content>
-  <mat-form-field appearance="outline">
-    <mat-label>Collections</mat-label>
-    <mat-select>
-      <mat-option *ngFor="let data of mockData" [value]="data.name">
-        {{ data.name }}
-      </mat-option>
-    </mat-select>
-  </mat-form-field>
-</div>
-<div mat-dialog-actions>
-  <button mat-button (click)="onNoClick()">Cancel</button>
-  <button mat-button (click)="onYesClick()" cdkFocusInitial>Ok</button>
-</div>
+<form [formGroup]="addToCollectionForm">
+  <div mat-dialog-content>
+    <mat-form-field appearance="outline">
+      <mat-label>Collections</mat-label>
+      <input type="text" placeholder="Select or Create New" matInput [matAutocomplete]="auto"
+        formControlName="collectionName">
+      <mat-autocomplete #auto="matAutocomplete">
+        <mat-optgroup label="Existing Collections">
+          <mat-option *ngFor="let name of collectionNames" [value]="name">
+            {{name}}
+          </mat-option>
+        </mat-optgroup>
+      </mat-autocomplete>
+    </mat-form-field>
+  </div>
+  <div mat-dialog-actions>
+    <button mat-button (click)="onNoClick()">Cancel</button>
+    <button mat-button (click)="onYesClick()" cdkFocusInitial>Ok</button>
+  </div>
+</form>

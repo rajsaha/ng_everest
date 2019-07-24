@@ -35,4 +35,13 @@ export class CollectionService {
         });
     });
   }
+
+  checkForResourceInCollection(data: any): Promise<any> {
+    return new Promise(resolve => {
+      this.http.post(`${ENV.API_URL}/collection/check-for-resource-in-collection`, data)
+        .subscribe((response: any) => {
+          resolve(response);
+        });
+    });
+  }
 }

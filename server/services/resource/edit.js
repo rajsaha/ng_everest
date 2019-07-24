@@ -55,9 +55,8 @@ const EditResource = (() => {
             if (data.formData.collectionName) {
                 const collection = await CollectionService.getCollectionByTitle(data.formData.collectionName);
                 const resource = await CollectionService.checkForResourceInCollection(data.formData.id);
-
                 // * If collection exists and resource does NOT exist in collection
-                if (collection.collection && !resource) {
+                if (collection.collection && !resource.isInCollection) {
                     // * Push into existing collection
                     await CollectionService.pushIntoCollection({
                         title: data.formData.collectionName,
@@ -67,7 +66,7 @@ const EditResource = (() => {
                     // * Create new collection and push resource into it
                     await CollectionService.createCollectionAndPushResource({
                         username: data.formData.username,
-                        title: data.formData.title,
+                        title: data.formData.collectionName,
                         resourceId: data.formData.id
                     });
                 }

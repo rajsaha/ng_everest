@@ -123,8 +123,15 @@ const Collection = (() => {
 
     const checkForResourceInCollection = async (id) => {
         const response = await _Collection.find({resources: id}).exec();
-        if (response) return true;
-        return false;
+        if (response) {
+            return {
+                isInCollection: true,
+                response
+            }
+        }
+        return {
+            isInCollection: false
+        };
     }
 
     return {

@@ -21,4 +21,13 @@ router.post('/get-collection-title-by-resource-id', checkIfAuthenticated, async 
     }
 });
 
+router.post('/check-for-resource-in-collection', checkIfAuthenticated, async (req, res, next) => {
+    try {
+        const response = await Collection.checkForResourceInCollection(req.body.id);
+        res.status(200).json(response);
+    } catch (err) {
+        console.error(`Error: ${err.message}`);
+    }
+});
+
 module.exports = router;
