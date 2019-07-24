@@ -1,7 +1,7 @@
 const ogs = require('open-graph-scraper');
 const mongoose = require('mongoose');
 const Resource = require('../../models/Resource');
-const Collection = require('../collection/collection');
+const CollectionService = require('../collection/collection');
 const Imgur = require('../imgur/imgur');
 
 const ResourceShare = (() => {
@@ -56,16 +56,16 @@ const ResourceShare = (() => {
             await resource.save();
 
             if (data.formData.collectionName) {
-                const collection = await Collection.getCollectionByTitle(data.formData.collectionName);
+                const collection = await CollectionService.getCollectionByTitle(data.formData.collectionName);
                 if (collection.collection) {
                     // * Push into existing collection
-                    await Collection.pushIntoCollection({
+                    await CollectionService.pushIntoCollection({
                         title: data.formData.collectionName,
                         resourceId: resource.id
                     });
                 } else {
                     // * Create new collection and push resource into it
-                    await Collection.createCollectionAndPushResource({
+                    await CollectionService.createCollectionAndPushResource({
                         username: data.formData.username,
                         title: data.formData.title,
                         resourceId: resource.id

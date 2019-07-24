@@ -74,8 +74,9 @@ export class EditResourceComponent implements OnInit {
 
   initEditResourceForm() {
     this.editResourceForm = this.fb.group({
+      id: [''],
       isCustomImage: [''],
-      url: [{ value: '', disabled: this.isUrlDisabled }, Validators.required],
+      url: [{disabled: this.isUrlDisabled }, Validators.required],
       title: ['', [Validators.required]],
       description: ['', [Validators.required]],
       image: [''],
@@ -105,7 +106,7 @@ export class EditResourceComponent implements OnInit {
     const data = {
       id: this.resource._id,
       tag
-    }
+    };
 
     const res = await this.resourceService.removeTag(data);
     if (res.error) {
@@ -141,7 +142,7 @@ export class EditResourceComponent implements OnInit {
         };
       }
 
-      const response = await this.resourceService.shareResource(data);
+      const response = await this.resourceService.editResource(data);
       this.isLoading = false;
 
       if (!response.error) {
@@ -152,7 +153,7 @@ export class EditResourceComponent implements OnInit {
           },
           class: 'green-snackbar',
         });
-        this.router.navigate(['/feed']);
+        this.router.navigate([`/view-resource/${this.resource._id}`]);
       } else {
         this.snackbarService.openSnackBar({
           message: {
@@ -243,9 +244,11 @@ export class EditResourceComponent implements OnInit {
   }
 
   setValues(data: any) {
+    this.editResourceForm.controls.id.patchValue(data._id);
     this.editResourceForm.controls.url.patchValue(data.url);
     this.editResourceForm.controls.title.patchValue(data.title);
     this.editResourceForm.controls.description.patchValue(data.description);
+    this.editResourceForm.controls.image.patchValue(data.image);
     this.tags = data.tags;
     this.ogImage = data.image;
   }

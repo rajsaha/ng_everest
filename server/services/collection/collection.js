@@ -78,7 +78,6 @@ const Collection = (() => {
 
     const createCollectionAndPushResource = async (data) => {
         try {
-            // TODO: Check if collection exists
             // * Create new collection
             const collection = new _Collection({
                 _id: new mongoose.Types.ObjectId(),
@@ -122,12 +121,19 @@ const Collection = (() => {
         }
     }
 
+    const checkForResourceInCollection = async (id) => {
+        const response = await _Collection.find({resources: id}).exec();
+        if (response) return true;
+        return false;
+    }
+
     return {
         getCollectionNames,
         getCollectionNameByResourceId,
         getCollectionByTitle,
         pushIntoCollection,
-        createCollectionAndPushResource
+        createCollectionAndPushResource,
+        checkForResourceInCollection
     }
 })()
 

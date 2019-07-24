@@ -1,8 +1,9 @@
 const _Resource = require('../../models/Resource');
+const CollectionService = require('../collection/collection');
 const Imgur = require('../imgur/imgur');
 
 const EditResource = (() => {
-    const updateResource = async (data) => {
+    const editResource = async (data) => {
         try {
             let saveCustomImageForResourceResponse = null;
             let image = null;
@@ -10,6 +11,14 @@ const EditResource = (() => {
 
             // * Handle user uploading custom image
             if (data.customImage) {
+                // * If deleteHash not null, delete image
+                const checkForDeleteHashResult = await checkForDeleteHash(data.formData.id);
+                if (checkForDeleteHashResult) {
+                    console.log('Resource had deleteHash');
+                } else {
+                    console.log('Resource did not have deleteHash');
+                }
+
                 // * Get image link and delete hash from imgur
                 saveCustomImageForResourceResponse = await Imgur.saveImage(data.customImage);
                 image = saveCustomImageForResourceResponse.data.data.link;
@@ -18,21 +27,13 @@ const EditResource = (() => {
                 image = data.formData.image;
             }
 
-            // * If deleteHash not null, delete image
-            const checkForDeleteHashResult = await checkForDeleteHash(data.id);
-            if (checkForDeleteHashResult) {
-                console.log('Resource had deleteHash');
-            } else {
-                console.log('Resource did not have deleteHash');
-            }
-
             const query = {
-                _id: data.id
+                _id: data.formData.id
             }
 
             const update = {
                 $set: {
-                    url: data.formData.url ? data.formData : '',
+                    url: data.formData.url ? data.formData.url : '',
                     title: data.formData.title ? data.formData.title : '',
                     description: data.formData.description ? data.formData.description : '',
                     image: image,
@@ -50,23 +51,24 @@ const EditResource = (() => {
             };
 
             // * Run update
-            const resoure = await _Resource.updateOne(query, update).exec();
+            const resource = await _Resource.updateOne(query, update).exec();
 
             // * Put resource into collection or not
             if (data.formData.collectionName) {
-                const collection = await Collection.getCollectionByTitle(data.formData.collectionName);
-                if (collection.collection) {
+                const collection = await CollectionService.getCollectionByTitle(data.formData.collectionName);
+                const resource = await CollectionService.checkForResourceInCollection(data.formData.id);
+                if (collection.collection && !resource) {
                     // * Push into existing collection
-                    await Collection.pushIntoCollection({
+                    await CollectionService.pushIntoCollection({
                         title: data.formData.collectionName,
-                        resourceId: resource.id
+                        resourceId: data.formData.id
                     });
                 } else {
                     // * Create new collection and push resource into it
-                    await Collection.createCollectionAndPushResource({
+                    await CollectionService.createCollectionAndPushResource({
                         username: data.formData.username,
                         title: data.formData.title,
-                        resourceId: resource.id
+                        resourceId: data.formData.id
                     });
                 }
             }
@@ -81,6 +83,7 @@ const EditResource = (() => {
                 }
             };
         } catch (error) {
+            console.error(error);
             return {
                 status: 500,
                 error: error.message
@@ -103,10 +106,10 @@ const EditResource = (() => {
             const resource = await _Resource.updateOne({
                 _id: data.id
             }, {
-                    $pull: {
-                        tags: data.tag
-                    }
-                }).exec();
+                $pull: {
+                    tags: data.tag
+                }
+            }).exec();
             return {
                 message: `${data.tag} removed`
             }
@@ -119,7 +122,7 @@ const EditResource = (() => {
     }
 
     return {
-        updateResource,
+        editResource,
         removeTag
     }
 })()
