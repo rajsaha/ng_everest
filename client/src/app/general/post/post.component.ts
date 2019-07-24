@@ -58,7 +58,7 @@ export class PostComponent implements OnInit {
     this.tags = this.data.tags;
     this.description = this.data.description;
     this.image = this.data.image;
-    this.timestamp = moment(this.data.timestamp.$date).fromNow();
+    this.timestamp = moment(this.data.timestamp).fromNow();
     this.allComments = this.data.comments;
   }
 

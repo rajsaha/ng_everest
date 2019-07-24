@@ -236,7 +236,9 @@ export class EditResourceComponent implements OnInit {
 
   async getResource(id: string) {
     try {
+      this.isLoading = true;
       const response = await this.resourceService.getResource({ id });
+      this.isLoading = false;
       this.resource = response.resource;
       this.setValues(this.resource);
     } catch (err) {
