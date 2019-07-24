@@ -28,7 +28,7 @@
         </div>
         <mat-form-field appearance="outline">
           <mat-label>Link</mat-label>
-          <input matInput placeholder="Paste your link here" formControlName="url">
+          <input matInput placeholder="Paste your link here" formControlName="url" (focus)="onFocus()">
           <mat-error *ngIf="editResourceForm.controls['url'].hasError('urlInvalid')">
             Invalid link
           </mat-error>

@@ -15,8 +15,6 @@ const EditResource = (() => {
                 const checkForDeleteHashResult = await checkForDeleteHash(data.formData.id);
                 if (checkForDeleteHashResult) {
                     console.log('Resource had deleteHash');
-                } else {
-                    console.log('Resource did not have deleteHash');
                 }
 
                 // * Get image link and delete hash from imgur
@@ -57,6 +55,8 @@ const EditResource = (() => {
             if (data.formData.collectionName) {
                 const collection = await CollectionService.getCollectionByTitle(data.formData.collectionName);
                 const resource = await CollectionService.checkForResourceInCollection(data.formData.id);
+
+                // * If collection exists and resource does NOT exist in collection
                 if (collection.collection && !resource) {
                     // * Push into existing collection
                     await CollectionService.pushIntoCollection({

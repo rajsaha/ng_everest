@@ -207,6 +207,12 @@ export class EditResourceComponent implements OnInit {
     });
   }
 
+  onFocus() {
+    this.isUrlDisabled = false;
+    this.onURLOnChanges();
+    console.log('input box enabled');
+  }
+
   onFileSelected(imageInput: any) {
     const file: File = imageInput.files[0];
     const reader: FileReader = new FileReader();

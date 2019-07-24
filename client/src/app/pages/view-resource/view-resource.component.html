@@ -1,3 +1,8 @@
 <div class="padding-15">
-    <app-post *ngIf="resource" [data]="resource"></app-post>
+  <app-post *ngIf="resource" [data]="resource"></app-post>
+  <div class="edit-resource-container">
+    <button mat-fab color="primary" [routerLink]="['/edit-resource/', id]">
+      <fa-icon [icon]="faPen"></fa-icon>
+    </button>
+  </div>
 </div>
