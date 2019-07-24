@@ -3,7 +3,7 @@ const _Resource = require('../../models/Resource');
 const ResourceGet = (() => {
     const getAllResources = async (data) => {
         try {
-            const resources = await _Resource.find({username: data.username}).exec();
+            const resources = await _Resource.find({username: data.username}).sort({timestamp: -1}).exec();
             return {
                 resources: resources
             }
