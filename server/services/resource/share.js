@@ -67,7 +67,7 @@ const ResourceShare = (() => {
                     // * Create new collection and push resource into it
                     await CollectionService.createCollectionAndPushResource({
                         username: data.formData.username,
-                        title: data.formData.title,
+                        title: data.formData.collectionName,
                         resourceId: resource.id
                     });
                 }

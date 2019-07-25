@@ -57,7 +57,7 @@ const Collection = (() => {
                 }
             };
 
-            const pushIntoCollectionResult = await _Collection.findOneAndUpdate(query, update).exec();
+            await _Collection.findOneAndUpdate(query, update).exec();
 
             return {
                 message: {
