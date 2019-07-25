@@ -54,14 +54,24 @@ const EditResource = (() => {
             // * Put resource into collection or not
             if (data.formData.collectionName) {
                 const collection = await CollectionService.getCollectionByTitle(data.formData.collectionName);
-                const resource = await CollectionService.checkForResourceInCollection(data.formData.id);
-                // * If collection exists and resource does NOT exist in collection
-                if (collection.collection && !resource.isInCollection) {
-                    // * Push into existing collection
-                    await CollectionService.pushIntoCollection({
-                        title: data.formData.collectionName,
+                const resource = await CollectionService.checkForResourceInAnyCollection(data.formData.id);
+
+                // * Delete resource from existing collection
+                if (resource.isInCollection && data.formData.collectionName !== resource.response[0].title) {
+                    await CollectionService.deleteResourceFromCollection({
+                        collectionId: resource.response[0].id,
                         resourceId: data.formData.id
                     });
+                }
+                // * If collection exists and resource does NOT exist in collection
+                if (collection.collection !== null) {
+                    if (collection.collection.title === data.formData.collectionName) {
+                        // * Push into existing collection
+                        await CollectionService.pushIntoCollection({
+                            title: data.formData.collectionName,
+                            resourceId: data.formData.id
+                        });
+                    }
                 } else {
                     // * Create new collection and push resource into it
                     await CollectionService.createCollectionAndPushResource({
@@ -102,7 +112,7 @@ const EditResource = (() => {
 
     const removeTag = async (data) => {
         try {
-            const resource = await _Resource.updateOne({
+            await _Resource.updateOne({
                 _id: data.id
             }, {
                 $pull: {

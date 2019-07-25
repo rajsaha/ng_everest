@@ -4,7 +4,9 @@ const _Collection = require('../../models/Collection');
 const Collection = (() => {
     const getCollectionNames = async (username) => {
         try {
-            const collection = await _Collection.find({username: username}).select('title').exec();
+            const collection = await _Collection.find({
+                username: username
+            }).select('title').exec();
             return {
                 collections: collection
             }
@@ -17,7 +19,9 @@ const Collection = (() => {
 
     const getCollectionNameByResourceId = async (resourceId) => {
         try {
-            const collection = await _Collection.findOne({resources: resourceId}).select('title').exec();
+            const collection = await _Collection.findOne({
+                resources: resourceId
+            }).select('title').exec();
             return {
                 collection: collection
             }
@@ -30,7 +34,9 @@ const Collection = (() => {
 
     const getCollectionByTitle = async (title) => {
         try {
-            const collection = await _Collection.findOne({title: title}).exec();
+            const collection = await _Collection.findOne({
+                title: title
+            }).exec();
             return {
                 collection: collection
             }
@@ -80,13 +86,12 @@ const Collection = (() => {
         try {
             // * Create new collection
             const collection = new _Collection({
-                _id: new mongoose.Types.ObjectId(),
                 username: data.username,
                 title: data.title
-            }); 
+            });
 
             await collection.save();
-            
+
             // * Push resource id into collection
             const query = {
                 _id: collection.id
@@ -102,7 +107,7 @@ const Collection = (() => {
                 }
             };
 
-            await _Collection.findOneAndUpdate(query, update).exec(); 
+            await _Collection.findOneAndUpdate(query, update).exec();
 
             return {
                 message: {
@@ -114,6 +119,7 @@ const Collection = (() => {
                 }
             };
         } catch (error) {
+            console.error(error);
             return {
                 status: 500,
                 error: error.message
@@ -121,9 +127,11 @@ const Collection = (() => {
         }
     }
 
-    const checkForResourceInCollection = async (id) => {
-        const response = await _Collection.find({resources: id}).exec();
-        if (response) {
+    const checkForResourceInAnyCollection = async (id) => {
+        const response = await _Collection.find({
+            resources: id
+        }).exec();
+        if (response.length > 0) {
             return {
                 isInCollection: true,
                 response
@@ -134,13 +142,28 @@ const Collection = (() => {
         };
     }
 
+    const deleteResourceFromCollection = async (data) => {
+        const response = await _Collection.updateOne({
+            _id: data.collectionId
+        }, {
+            $pull: {
+                resources: data.resourceId
+            }
+        }).exec();
+        if (response) {
+            return true;
+        }
+        return false;
+    }
+
     return {
         getCollectionNames,
         getCollectionNameByResourceId,
         getCollectionByTitle,
         pushIntoCollection,
         createCollectionAndPushResource,
-        checkForResourceInCollection
+        checkForResourceInAnyCollection,
+        deleteResourceFromCollection
     }
 })()
 
