@@ -2,6 +2,8 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { CollectionService } from '@services/collection/collection.service';
+import { ResourceService } from '@services/resource/resource.service';
+import { SnackbarService } from '@services/general/snackbar.service';
 
 @Component({
   selector: 'app-atc',
@@ -18,7 +20,9 @@ export class AtcComponent implements OnInit {
   constructor(
     public dialogRef: MatDialogRef<AtcComponent>,
     @Inject(MAT_DIALOG_DATA) public data,
+    private resourceService: ResourceService,
     private collectionService: CollectionService,
+    private snackbarService: SnackbarService,
     private fb: FormBuilder) { }
 
   ngOnInit() {
@@ -26,6 +30,7 @@ export class AtcComponent implements OnInit {
     this.getCollectionNames();
     this.checkForResourceInCollection();
     this.initAddToCollectionForm();
+    this.getCollectionTitle(this.data.id);
   }
 
   onNoClick() {
@@ -52,7 +57,43 @@ export class AtcComponent implements OnInit {
   }
 
   async checkForResourceInCollection() {
-    const response = await this.collectionService.checkForResourceInCollection({id: this.data.id});
+    const response = await this.collectionService.checkForResourceInCollection({ id: this.data.id });
     console.log(response);
+  }
+
+  async getCollectionTitle(resourceId: string) {
+    const collection = await this.collectionService.getCollectionTitleByResourceId({ resourceId });
+    if (collection.collection) {
+      this.addToCollectionForm.controls.collectionName.patchValue(collection.collection.title);
+    }
+  }
+
+  async submitAddToCollectionForm() {
+    if (this.addToCollectionForm.valid) {
+      const response: any = this.resourceService.editResourceCollection({
+        collectionName: this.data.title,
+        resourceId: this.data.id,
+        username: this.username
+      });
+
+      if (!response.error) {
+        this.snackbarService.openSnackBar({
+          message: {
+            message: 'Resource saved!',
+            error: false
+          },
+          class: 'green-snackbar',
+        });
+        this.dialogRef.close();
+      } else {
+        this.snackbarService.openSnackBar({
+          message: {
+            message: `Error: ${response.error}!`,
+            error: true
+          },
+          class: 'red-snackbar',
+        });
+      }
+    }
   }
 }

@@ -53,33 +53,11 @@ const EditResource = (() => {
 
             // * Put resource into collection or not
             if (data.formData.collectionName) {
-                const collection = await CollectionService.getCollectionByTitle(data.formData.collectionName);
-                const resource = await CollectionService.checkForResourceInAnyCollection(data.formData.id);
-
-                // * Delete resource from existing collection
-                if (resource.isInCollection && data.formData.collectionName !== resource.response[0].title) {
-                    await CollectionService.deleteResourceFromCollection({
-                        collectionId: resource.response[0].id,
-                        resourceId: data.formData.id
-                    });
-                }
-                // * If collection exists and resource does NOT exist in collection
-                if (collection.collection !== null) {
-                    if (collection.collection.title === data.formData.collectionName) {
-                        // * Push into existing collection
-                        await CollectionService.pushIntoCollection({
-                            title: data.formData.collectionName,
-                            resourceId: data.formData.id
-                        });
-                    }
-                } else {
-                    // * Create new collection and push resource into it
-                    await CollectionService.createCollectionAndPushResource({
-                        username: data.formData.username,
-                        title: data.formData.collectionName,
-                        resourceId: data.formData.id
-                    });
-                }
+                await editResourceCollection({
+                    collectionName: data.formData.collectionName,
+                    resourceId: data.formData.id,
+                    username: data.formData.username
+                });
             }
 
             return {
@@ -100,13 +78,48 @@ const EditResource = (() => {
         }
     }
 
-    const checkForDeleteHash = async (id) => {
-        const resource = await _Resource.findById(id).exec();
-        if (resource && resource.deleteHash) {
-            await Imgur.deleteHash(resource.deleteHash);
-            return true;
+    const editResourceCollection = async (data) => {
+        const collection = await CollectionService.getCollectionByTitle(data.collectionName);
+        const resource = await CollectionService.checkForResourceInAnyCollection(data.resourceId);
+
+        // * Delete resource from existing collection
+        if (resource.isInCollection && data.collectionName !== resource.response[0].title) {
+            await CollectionService.deleteResourceFromCollection({
+                collectionId: resource.response[0].id,
+                resourceId: data.resourceId
+            });
+        }
+        // * If collection exists and resource does NOT exist in collection
+        if (collection.collection !== null) {
+            if (collection.collection.title === data.collectionName) {
+                // * Push into existing collection
+                await CollectionService.pushIntoCollection({
+                    title: data.collectionName,
+                    resourceId: data.resourceId
+                });
+            }
         } else {
-            return false;
+            // * Create new collection and push resource into it
+            await CollectionService.createCollectionAndPushResource({
+                username: data.username,
+                title: data.collectionName,
+                resourceId: data.resourceId
+            });
+        }
+    }
+
+    const checkForDeleteHash = async (id) => {
+        try {
+            const resource = await _Resource.findById(id).exec();
+            if (resource && resource.deleteHash) {
+                await Imgur.deleteHash(resource.deleteHash);
+                return true;
+            } else {
+                return false;
+            }
+        } catch (error) {
+            console.error(error);
+            return;
         }
     }
 
@@ -132,6 +145,7 @@ const EditResource = (() => {
 
     return {
         editResource,
+        editResourceCollection,
         removeTag
     }
 })()
