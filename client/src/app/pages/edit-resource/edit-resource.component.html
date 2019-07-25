@@ -63,7 +63,7 @@
           <mat-label>Collections</mat-label>
           <input type="text" placeholder="Select or Create New" matInput [matAutocomplete]="auto" formControlName="collectionName">
           <mat-autocomplete #auto="matAutocomplete">
-            <mat-optgroup label="Existing Collections">
+            <mat-optgroup label="Move to Existing Collections">
               <mat-option *ngFor="let name of collectionNames" [value]="name">
                 {{name}}
               </mat-option>
