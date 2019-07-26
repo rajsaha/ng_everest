@@ -27,15 +27,15 @@ export class CollectionComponent implements OnInit {
     }
 
     if (result.images[1]) {
-      this.image1 = result.images[1].image;
+      this.image2 = result.images[1].image;
     }
 
     if (result.images[2]) {
-      this.image1 = result.images[2].image;
+      this.image3 = result.images[2].image;
     }
 
     if (result.images[3]) {
-      this.image1 = result.images[3].image;
+      this.image4 = result.images[3].image;
     }
   }
 }

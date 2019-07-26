@@ -23,6 +23,9 @@ $block-border: 1px solid white;
         
         .block {
             background-color: rgba(231, 231, 231, 1);
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center center;
             width: $block-width;
             height: $block-height;
 

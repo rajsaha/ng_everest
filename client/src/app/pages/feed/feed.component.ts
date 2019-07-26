@@ -11,6 +11,7 @@ export class FeedComponent implements OnInit {
   posts = [];
   isFabActive = false;
   username: string;
+  isLoading = false;
 
   // Icons
   faPlus = faPlus;
@@ -26,7 +27,9 @@ export class FeedComponent implements OnInit {
 
   async getAllResources() {
     try {
+      this.isLoading = true;
       const response = await this.resourceService.getAllResources({username: this.username});
+      this.isLoading = false;
       this.posts = response.resources;
     } catch (err) {
       console.error(err);
