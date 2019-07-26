@@ -71,7 +71,7 @@ export class AtcComponent implements OnInit {
   async submitAddToCollectionForm() {
     if (this.addToCollectionForm.valid) {
       const response: any = this.resourceService.editResourceCollection({
-        collectionName: this.data.title,
+        collectionName: this.addToCollectionForm.controls.collectionName.value,
         resourceId: this.data.id,
         username: this.username
       });
