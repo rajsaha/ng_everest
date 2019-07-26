@@ -48,6 +48,15 @@ export class ResourceService {
     });
   }
 
+  getFourImages(data: any): Promise<any> {
+    return new Promise(resolve => {
+      this.http.post(`${ENV.API_URL}/resource/get/four-images-for-collection`, data)
+        .subscribe((response: any) => {
+          resolve(response);
+        });
+    });
+  }
+
   deleteResource(data: any): Promise<any> {
     return new Promise(resolve => {
       this.http.post(`${ENV.API_URL}/resource/delete`, data)

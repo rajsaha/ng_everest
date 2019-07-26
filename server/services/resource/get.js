@@ -27,9 +27,35 @@ const ResourceGet = (() => {
         }
     }
 
+    const getFourImages = async (data) => {
+        try {
+            let images = [];
+            let promises = [];
+            for (let item of data) {
+                promises.push(getResourceImage(item));
+            }
+            images = await Promise.all(promises);
+            return {
+                images
+            }
+        } catch (err) {
+            return {
+                error: err.message
+            }
+        }
+    }
+
+    function getResourceImage(resourceId) {
+        return new Promise((resolve, reject) => {
+            const result = _Resource.findById(resourceId).select('image').exec();
+            resolve(result);
+        });
+    }
+
     return {
         getAllResources,
-        getResource
+        getResource,
+        getFourImages
     }
 })()
 
