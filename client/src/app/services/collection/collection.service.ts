@@ -9,6 +9,15 @@ export class CollectionService {
 
   constructor(private http: HttpClient) { }
 
+  getCollections(data: any): Promise<any> {
+    return new Promise(resolve => {
+      this.http.post(`${ENV.API_URL}/collection/get-collections`, data)
+        .subscribe((response: any) => {
+          resolve(response);
+        });
+    });
+  }
+
   getCollectionNames(data: any): Promise<any> {
     return new Promise(resolve => {
       this.http.post(`${ENV.API_URL}/collection/get-collection-names`, data)

@@ -1,0 +1,13 @@
+<div class="collection-container">
+  <div class="collection">
+    <div class="block"></div>
+    <div class="block"></div>
+    <div class="block"></div>
+    <div class="block"></div>
+  </div>
+
+  <p class="collection-name">{{ data.title | truncate:[17] }}</p>
+  <p class="no-of-resources">
+      <small>{{ data.resources.length }} {{ data.resources.length >= 0 ? 'resource' : 'resources'}}</small>
+  </p>
+</div>

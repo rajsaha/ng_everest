@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { GetFeedService } from '../../services/data/get-feed.service';
 import { faPlus, faLink, faFile } from '@fortawesome/free-solid-svg-icons';
 import { ResourceService } from '@services/resource/resource.service';
 

@@ -2,6 +2,21 @@ const mongoose = require('mongoose');
 const _Collection = require('../../models/Collection');
 
 const Collection = (() => {
+    const getCollections = async (username) => {
+        try {
+            const collections = await _Collection.find({
+                username: username
+            }).exec();
+            return {
+                collections: collections
+            }
+        } catch (err) {
+            return {
+                error: err.message
+            }
+        }
+    }
+
     const getCollectionNames = async (username) => {
         try {
             const collection = await _Collection.find({
@@ -157,6 +172,7 @@ const Collection = (() => {
     }
 
     return {
+        getCollections,
         getCollectionNames,
         getCollectionNameByResourceId,
         getCollectionByTitle,

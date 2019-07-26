@@ -55,6 +55,7 @@ import { DrComponent } from './general/dialogs/dr/dr.component';
 import { ResourceComponent } from './general/resource/resource.component';
 import { ViewResourceComponent } from './pages/view-resource/view-resource.component';
 import { EditResourceComponent } from './pages/edit-resource/edit-resource.component';
+import { CollectionComponent } from './general/collection/collection.component';
 
 @NgModule({
   declarations: [
@@ -76,7 +77,8 @@ import { EditResourceComponent } from './pages/edit-resource/edit-resource.compo
     DrComponent,
     ResourceComponent,
     ViewResourceComponent,
-    EditResourceComponent
+    EditResourceComponent,
+    CollectionComponent
   ],
   imports: [
     BrowserModule,

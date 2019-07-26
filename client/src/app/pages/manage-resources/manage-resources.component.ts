@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { faSearch, faEye, faEdit, faTrashAlt } from '@fortawesome/free-solid-svg-icons';
 import { ResourceService } from '@services/resource/resource.service';
 import { UtilityService } from '@services/general/utility.service';
+import { CollectionService } from '@services/collection/collection.service';
 
 @Component({
   selector: 'app-manage-resources',
@@ -17,23 +18,31 @@ export class ManageResourcesComponent implements OnInit {
   faEdit = faEdit;
   faTrashAlt = faTrashAlt;
 
-  searchForm: FormGroup;
+  resourceSearchForm: FormGroup;
+  collectionSearchForm: FormGroup;
   username: any;
   resources: any;
+  collections: any;
 
   constructor(
     private fb: FormBuilder,
     private resourceService: ResourceService,
+    private collectionService: CollectionService,
     private utilityService: UtilityService) { }
 
   ngOnInit() {
     this.username = localStorage.getItem('username');
-    this.initSearchForm();
+    this.initForms();
     this.getAllResources();
+    this.getAllCollections();
   }
 
-  initSearchForm() {
-    this.searchForm = this.fb.group({
+  initForms() {
+    this.resourceSearchForm = this.fb.group({
+      query: ['']
+    });
+
+    this.collectionSearchForm = this.fb.group({
       query: ['']
     });
   }
@@ -42,6 +51,15 @@ export class ManageResourcesComponent implements OnInit {
     try {
       const response = await this.resourceService.getAllResources({username: this.username});
       this.resources = response.resources;
+    } catch (err) {
+      console.error(err);
+    }
+  }
+
+  async getAllCollections() {
+    try {
+      const response = await this.collectionService.getCollections({username: this.username});
+      this.collections = response.collections;
     } catch (err) {
       console.error(err);
     }

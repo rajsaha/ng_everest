@@ -8,7 +8,7 @@
         </div>
 
         <div class="section-content">
-          <form [formGroup]="searchForm">
+          <form [formGroup]="resourceSearchForm">
             <mat-form-field appearance="outline">
               <mat-label>Search</mat-label>
               <mat-icon matPrefix>
@@ -18,7 +18,8 @@
             </mat-form-field>
           </form>
 
-          <app-resource *ngFor="let resource of resources" [data]="resource" (drResponse)="drResponseHandler($event)"></app-resource>
+          <app-resource *ngFor="let resource of resources" [data]="resource" (drResponse)="drResponseHandler($event)">
+          </app-resource>
         </div>
       </div>
     </mat-tab>
@@ -28,6 +29,21 @@
       <div class="section">
         <div class="section-header">
           <h4>Collections</h4>
+        </div>
+
+        <div class="section-content">
+          <form [formGroup]="collectionSearchForm">
+            <mat-form-field appearance="outline">
+              <mat-label>Search</mat-label>
+              <mat-icon matPrefix>
+                <fa-icon [icon]="faSearch"></fa-icon>
+              </mat-icon>
+              <input matInput placeholder="Search for your resources" formControlName="query">
+            </mat-form-field>
+          </form>
+          <div class="list-of-collections">
+              <app-collection *ngFor="let collection of collections" [data]="collection"></app-collection>
+          </div>
         </div>
       </div>
     </mat-tab>
