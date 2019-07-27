@@ -42,18 +42,21 @@ const routes: Routes = [
   },
   {
     path: 'manage-resources',
-    component: ManageResourcesComponent,
-    canActivate: [AuthGuardService]
-  },
-  {
-    path: 'view-resource/:id',
-    component: ViewResourceComponent,
-    canActivate: [AuthGuardService]
-  },
-  {
-    path: 'edit-resource/:id',
-    component: EditResourceComponent,
-    canActivate: [AuthGuardService]
+    canActivate: [AuthGuardService],
+    children: [
+      {
+        path: '',
+        component: ManageResourcesComponent,
+      },
+      {
+        path: 'edit/:id',
+        component: EditResourceComponent
+      },
+      {
+        path: 'view/:id',
+        component: ViewResourceComponent
+      }
+    ]
   },
   {
     path: 'profile',

@@ -79,7 +79,7 @@ export class AtcComponent implements OnInit {
       if (!response.error) {
         this.snackbarService.openSnackBar({
           message: {
-            message: 'Resource saved!',
+            message: `Resource added to ${this.addToCollectionForm.controls.collectionName.value}`,
             error: false
           },
           class: 'green-snackbar',

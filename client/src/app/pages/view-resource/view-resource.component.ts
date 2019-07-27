@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ResourceService } from '@services/resource/resource.service';
 import { faPen } from '@fortawesome/free-solid-svg-icons';
 
@@ -15,10 +15,13 @@ export class ViewResourceComponent implements OnInit {
   // Icons
   faPen = faPen;
 
-  constructor(private router: ActivatedRoute, private resourceService: ResourceService) { }
+  constructor(
+    private route: ActivatedRoute, 
+    private resourceService: ResourceService,
+    private router: Router) { }
 
   ngOnInit() {
-    this.router.params.subscribe((params) => {
+    this.route.params.subscribe((params) => {
       this.id = params.id;
       this.getResource(params.id);
     });
@@ -31,6 +34,10 @@ export class ViewResourceComponent implements OnInit {
     } catch (err) {
       console.error(err);
     }
+  }
+
+  goToEdit() {
+    this.router.navigate(['edit', this.id], {relativeTo: this.route.parent});
   }
 
 }
