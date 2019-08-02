@@ -56,6 +56,7 @@ import { ResourceComponent } from './general/resource/resource.component';
 import { ViewResourceComponent } from './pages/view-resource/view-resource.component';
 import { EditResourceComponent } from './pages/edit-resource/edit-resource.component';
 import { CollectionComponent } from './general/collection/collection.component';
+import { ViewCollectionComponent } from './pages/view-collection/view-collection.component';
 
 @NgModule({
   declarations: [
@@ -78,7 +79,8 @@ import { CollectionComponent } from './general/collection/collection.component';
     ResourceComponent,
     ViewResourceComponent,
     EditResourceComponent,
-    CollectionComponent
+    CollectionComponent,
+    ViewCollectionComponent
   ],
   imports: [
     BrowserModule,

@@ -51,7 +51,7 @@
           <mat-form-field appearance="outline">
             <mat-label>Re-type password</mat-label>
             <input matInput type="password" formControlName="confirm_password" />
-            <mat-error *ngIf="signUpForm.controls['confirm_password'].hasError('passwordNotEquivalent')">
+            <mat-error *ngIf="signUpForm.controls['confirm_password'].hasErrors('passwordNotEquivalent')">
               Passwords don't match
             </mat-error>
           </mat-form-field>

@@ -1,4 +1,5 @@
 const _Resource = require('../../models/Resource');
+const mongoose = require('mongoose');
 
 const ResourceGet = (() => {
     const getAllResources = async (data) => {
@@ -19,6 +20,31 @@ const ResourceGet = (() => {
             const resource = await _Resource.findById(data).exec();
             return {
                 resource: resource
+            }
+        } catch (err) {
+            return {
+                error: err.message
+            }
+        }
+    }
+
+    const getMultipleResources = async (data) => {
+        try {
+            const getQueries = (data) => {
+                let mongooseQueryArray = [];
+                for (let resourceId of data) {
+                    mongooseQueryArray.push(mongoose.Types.ObjectId(resourceId));
+                }
+                return mongooseQueryArray;
+            }
+        
+            const resources = await _Resource.find({
+                '_id': { $in: [
+                    ...getQueries(data)
+                ]}
+            }).exec();
+            return {
+                resources
             }
         } catch (err) {
             return {
@@ -55,6 +81,7 @@ const ResourceGet = (() => {
     return {
         getAllResources,
         getResource,
+        getMultipleResources,
         getFourImages
     }
 })()

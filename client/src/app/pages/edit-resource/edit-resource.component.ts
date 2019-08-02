@@ -153,7 +153,7 @@ export class EditResourceComponent implements OnInit {
           },
           class: 'green-snackbar',
         });
-        this.router.navigate([`/view-resource/${this.resource._id}`]);
+        this.router.navigate([`/view/resource/${this.resource._id}`]);
       } else {
         this.snackbarService.openSnackBar({
           message: {

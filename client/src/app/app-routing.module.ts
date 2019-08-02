@@ -11,6 +11,7 @@ import { ShareResourceComponent } from './pages/share-resource/share-resource.co
 import { ManageResourcesComponent } from './pages/manage-resources/manage-resources.component';
 import { ViewResourceComponent } from './pages/view-resource/view-resource.component';
 import { EditResourceComponent } from './pages/edit-resource/edit-resource.component';
+import { ViewCollectionComponent } from './pages/view-collection/view-collection.component';
 
 const routes: Routes = [
   {
@@ -49,12 +50,16 @@ const routes: Routes = [
         component: ManageResourcesComponent,
       },
       {
-        path: 'edit/:id',
+        path: 'resource/edit/:id',
         component: EditResourceComponent
       },
       {
-        path: 'view/:id',
+        path: 'resource/view/:id',
         component: ViewResourceComponent
+      },
+      {
+        path: 'view/collection/:id',
+        component: ViewCollectionComponent
       }
     ]
   },

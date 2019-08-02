@@ -18,6 +18,15 @@ export class CollectionService {
     });
   }
 
+  getCollectionById(data: any): Promise<any> {
+    return new Promise(resolve => {
+      this.http.post(`${ENV.API_URL}/collection/get-collection-by-id`, data)
+        .subscribe((response: any) => {
+          resolve(response);
+        });
+    });
+  }
+
   getCollectionNames(data: any): Promise<any> {
     return new Promise(resolve => {
       this.http.post(`${ENV.API_URL}/collection/get-collection-names`, data)

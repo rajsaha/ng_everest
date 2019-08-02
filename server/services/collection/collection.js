@@ -62,6 +62,19 @@ const Collection = (() => {
         }
     }
 
+    const getCollectionById = async (id) => {
+        try {
+            const collection = await _Collection.findById(id).exec();
+            return {
+                collection: collection
+            }
+        } catch (err) {
+            return {
+                error: err.message
+            };
+        }
+    }
+
     const pushIntoCollection = async (data) => {
         try {
             const query = {
@@ -176,6 +189,7 @@ const Collection = (() => {
         getCollectionNames,
         getCollectionNameByResourceId,
         getCollectionByTitle,
+        getCollectionById,
         pushIntoCollection,
         createCollectionAndPushResource,
         checkForResourceInAnyCollection,

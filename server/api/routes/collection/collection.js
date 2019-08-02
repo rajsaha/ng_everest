@@ -12,6 +12,15 @@ router.post('/get-collections', checkIfAuthenticated, async (req, res, next) => 
     }
 });
 
+router.post('/get-collection-by-id', checkIfAuthenticated, async (req, res, next) => {
+    try {
+        const response = await Collection.getCollectionById(req.body.id);
+        res.status(200).json(response);
+    } catch (err) {
+        console.error(`Error: ${err.message}`);
+    }
+});
+
 router.post('/get-collection-names', checkIfAuthenticated, async (req, res, next) => {
     try {
         const response = await Collection.getCollectionNames(req.body.username);

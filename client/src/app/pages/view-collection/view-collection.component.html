@@ -1,0 +1,9 @@
+<div class="section-container">
+    <div class="collection-data" *ngIf="collection">
+        <h1 class="title" contenteditable="true">{{ collection.title }}</h1>
+
+        <div class="resources" *ngFor="let resource of resources">
+            <app-resource [data]="resource"></app-resource>
+        </div>
+    </div>
+</div>
