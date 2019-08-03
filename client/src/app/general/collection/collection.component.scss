@@ -17,7 +17,7 @@ $block-border: 1px solid white;
     
     .collection {
         display: inline-grid;
-        grid-column: 2;
+        grid-template-columns: $block-width $block-width;
         margin-bottom: 5px;
         place-self: center stretch;
         
