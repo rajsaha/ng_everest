@@ -6,14 +6,35 @@ $block-width: 50%;
             transition: all 0.2s ease-in-out;
             &:focus {
                 background-color: white;
-                border-radius: 3px;
+                border-radius: 10px;
                 padding: 15px;
+            }
+
+            &:hover {
+                fa-icon {
+                    transition: opacity 0.2s ease-in;
+                    opacity: 1;
+                }
+            }
+
+            &:focus {
+                fa-icon {
+                    opacity: 0;
+                }
+            }
+
+            fa-icon {
+                color: rgba(0, 0, 0, .6);
+                margin-left: 5px;
+                font-size: 15px;
+                opacity: 0;
+                margin-top: -5px;
             }
         }
 
         .resources {
             display: grid;
-            grid-template-columns: repeat(2, 1fr);
+            grid-template-columns: 1fr 1fr;
             grid-gap: 10px;
         }
     }

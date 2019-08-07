@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { CollectionService } from '@services/collection/collection.service';
 import { ResourceService } from '@services/resource/resource.service';
+import { faPen } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-view-collection',
@@ -12,6 +13,9 @@ export class ViewCollectionComponent implements OnInit {
   id: string;
   collection: any;
   resources: any;
+
+  // Icons
+  faPen = faPen;
 
   constructor(
     private route: ActivatedRoute,
