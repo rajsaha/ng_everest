@@ -102,8 +102,8 @@ mat-nav-list {
 .resource-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(286px, 1fr));
-  grid-gap: 5px;
   grid-auto-flow: dense;
+  grid-column-gap: 5px;
 }
 
 .section-container {
@@ -118,7 +118,6 @@ mat-nav-list {
     max-width: 600px;
     margin-left: auto;
     margin-right: auto;
-    margin-bottom: 30px;
 
     .section-header {
       text-transform: uppercase;

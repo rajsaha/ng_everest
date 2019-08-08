@@ -1,14 +1,15 @@
 <mat-progress-bar mode="query" *ngIf="isLoading">
 </mat-progress-bar>
 
-<div class="section-container">
-  <mat-tab-group mat-align-tabs="center" (selectedTabChange)="tabClick($event)">
-    <!-- * Profile Management -->
-    <mat-tab label="Profile">
-      <div class="public-view" *ngIf="isPublicView">
+<mat-tab-group mat-align-tabs="center" (selectedTabChange)="tabClick($event)">
+  <!-- * Profile Management -->
+  <mat-tab label="Profile">
+    <div class="public-view" *ngIf="isPublicView">
+      <div class="section-container">
         <div class="section">
           <div class="profile-picture">
-            <div class="image-container" [ngStyle]="{ 'background-image': 'url(' + image  +')', 'cursor': 'inherit', 'border': 'none' }"></div> 
+            <div class="image-container"
+              [ngStyle]="{ 'background-image': 'url(' + image  +')', 'cursor': 'inherit', 'border': 'none' }"></div>
             <div class="text">
               <p>{{ username }}</p>
               <p>{{ email }}</p>
@@ -18,7 +19,7 @@
           <button class="toggle-profile-view-sm" mat-stroked-button (click)="isPublicView = false">Edit Profile</button>
 
           <mat-divider></mat-divider>
-          
+
           <!--* Public view of profile -->
           <div class="public-view-content">
             <h1 *ngIf="name">{{ name }}</h1>
@@ -32,22 +33,29 @@
           </div>
 
           <!-- * Progress Bar -->
-          <mat-progress-bar *ngIf="profileProgress < 100" mode="determinate" [value]="profileProgress"></mat-progress-bar>
-          <small *ngIf="profileProgress < 100" class="complete-profile-label">Profile Completion: {{ profileProgress }}%</small>
+          <mat-progress-bar *ngIf="profileProgress < 100" mode="determinate" [value]="profileProgress">
+          </mat-progress-bar>
+          <small *ngIf="profileProgress < 100" class="complete-profile-label">Profile Completion:
+            {{ profileProgress }}%</small>
         </div>
       </div>
+    </div>
 
-      <div class="change-profile-data" *ngIf="!isPublicView">
+    <div class="change-profile-data" *ngIf="!isPublicView">
+      <div class="section-container">
         <div class="section">
           <div class="profile-picture">
-            <div class="image-container" [ngStyle]="{ 'background-image': 'url(' + image  +')' }" (click)="openCpiDialog()"></div> 
+            <div class="image-container" [ngStyle]="{ 'background-image': 'url(' + image  +')' }"
+              (click)="openCpiDialog()"></div>
             <div class="text">
               <p>{{ profileForm.controls.username.value }}</p>
               <p>{{ profileForm.controls.email.value }}</p>
             </div>
-            <button class="toggle-profile-view" mat-stroked-button (click)="isPublicView = true; getUserData();">View Profile</button>
+            <button class="toggle-profile-view" mat-stroked-button (click)="isPublicView = true; getUserData();">View
+              Profile</button>
           </div>
-          <button class="toggle-profile-view-sm" mat-stroked-button (click)="isPublicView = true; getUserData();">View Profile</button>
+          <button class="toggle-profile-view-sm" mat-stroked-button (click)="isPublicView = true; getUserData();">View
+            Profile</button>
           <mat-divider></mat-divider>
           <div class="section-header">
             <h4>Personal Information</h4>
@@ -99,7 +107,9 @@
             </form>
           </div>
         </div>
+      </div>
 
+      <div class="section-container">
         <div class="section">
           <div class="section-header">
             <h4>Change Password</h4>
@@ -136,7 +146,9 @@
             </form>
           </div>
         </div>
+      </div>
 
+      <div class="section-container">
         <div class="section">
           <div class="section-header">
             <h4>Privacy</h4>
@@ -157,15 +169,15 @@
           </div>
         </div>
       </div>
-    </mat-tab>
+    </div>
+  </mat-tab>
 
-    <!-- * Followers -->
-    <mat-tab label="Followers">
-      <div class="section">
-        <div class="section-header">
-          <h4>Followers</h4>
-        </div>
+  <!-- * Followers -->
+  <mat-tab label="Followers">
+    <div class="section">
+      <div class="section-header">
+        <h4>Followers</h4>
       </div>
-    </mat-tab>
-  </mat-tab-group>
-</div>
+    </div>
+  </mat-tab>
+</mat-tab-group>

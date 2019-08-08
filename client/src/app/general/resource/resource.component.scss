@@ -1,15 +1,21 @@
 .resource {
-	width: 286px;
+	cursor: pointer;
+	width: 275px;
 	max-width: 300px;
 	box-shadow: 0 8px 20px 0 rgba(197, 197, 197, 0.6);
 	background-color: white;
 	border-radius: 5px;
-    margin-bottom: 25px;
+	margin-bottom: 25px;
+	transition: box-shadow 0.2s ease-in;
+	
+	&:hover {
+		box-shadow: 0 22px 32px 0 rgba(197, 197, 197, 0.6);
+	}
 
 	.image {
 		border-top-left-radius: 5px;
 		border-top-right-radius: 5px;
-		width: 286px;
+		width: 275px;
 		max-width: 300px;
 		object-fit: cover;
 	}
