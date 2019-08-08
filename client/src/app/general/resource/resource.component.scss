@@ -1,21 +1,21 @@
 .resource {
-	display: inline-flex;
-	width: 100%;
-	border: 1px solid rgba(14, 13, 13, 0.158);
+	width: 286px;
+	max-width: 300px;
+	box-shadow: 0 8px 20px 0 rgba(197, 197, 197, 0.6);
 	background-color: white;
 	border-radius: 5px;
     margin-bottom: 25px;
 
 	.image {
-		display: none;
 		border-top-left-radius: 5px;
-		border-bottom-left-radius: 5px;
-		max-width: 200px;
+		border-top-right-radius: 5px;
+		width: 286px;
+		max-width: 300px;
 		object-fit: cover;
 	}
 
 	.details {
-		padding: 15px;
+		padding: 0 15px 15px 15px;
 
 		.actions {
 			a {

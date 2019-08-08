@@ -2,7 +2,7 @@
     <div class="collection-data" *ngIf="collection">
         <h1 class="title" contenteditable="true">{{ collection.title }}<fa-icon [icon]="faPen"></fa-icon></h1>
 
-        <div class="resources">
+        <div class="resource-grid">
             <app-resource *ngFor="let resource of resources" [data]="resource"></app-resource>
         </div>
     </div>
