@@ -8,7 +8,7 @@
       <small>{{ timestamp }}</small>
     </div>
     <div class="post-menu" (click)="openPostDialog()">
-      <fa-icon [icon]="faEllipsisH"></fa-icon>
+      <fa-icon [icon]="faEllipsisV"></fa-icon>
     </div>
   </div>
 
@@ -22,6 +22,15 @@
   <!-- Title -->
   <div class="title">
     <strong>{{ title }}</strong>
+    <div class="collection-badge-false" *ngIf="!isInCollection">
+      <fa-icon [icon]="faPlus"></fa-icon> Add to Collection
+    </div>
+
+    <div class="collection-badge-true" *ngIf="isInCollection">
+      Added
+      <div class="triangle-1"></div>
+      <div class="triangle-2"></div>
+    </div>
   </div>
 
   <!-- Tags -->

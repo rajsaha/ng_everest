@@ -1,11 +1,12 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { faThumbsUp, faComment, faPlus, faReply, faEllipsisH } from '@fortawesome/free-solid-svg-icons';
+import { faThumbsUp, faComment, faPlus, faReply, faEllipsisV } from '@fortawesome/free-solid-svg-icons';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatDialog } from '@angular/material';
 import * as moment from 'moment';
 import { AtcComponent } from '../dialogs/atc/atc.component';
 import { PoComponent } from '../dialogs/po/po.component';
 import { ResourceService } from '@services/resource/resource.service';
+import { CollectionService } from '@services/collection/collection.service';
 
 @Component({
   selector: 'app-post',
@@ -33,12 +34,13 @@ export class PostComponent implements OnInit {
   faComment = faComment;
   faPlus = faPlus;
   faReply = faReply;
-  faEllipsisH = faEllipsisH;
+  faEllipsisV = faEllipsisV;
 
   // Form
   commentForm: FormGroup;
 
   // Toggles
+  isInCollection = true;
   isLiked = false;
   showComments = false;
   isSeeMore = false;
@@ -47,10 +49,13 @@ export class PostComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     public dialog: MatDialog,
-    private resourceService: ResourceService) { }
+    private resourceService: ResourceService,
+    private collectionService: CollectionService) { }
 
   async ngOnInit() {
     await this.populatePost();
+    await this.getUserImage(this.data.username);
+    await this.checkIfPostInCollection(this.data._id);
     this.checkIfDescriptionTooLong(this.description);
   }
 
@@ -65,13 +70,18 @@ export class PostComponent implements OnInit {
     this.timestamp = moment(this.data.timestamp).fromNow();
     this.allComments = this.data.comments;
     this.init_comment_form();
-
-    await this.getUserImage(this.username);
   }
 
   async getUserImage(username) {
     const result = await this.resourceService.getUserImage(username);
     this.userImage = result.image;
+  }
+
+  async checkIfPostInCollection(id) {
+    const result = await this.collectionService.checkForResourceInCollection(id);
+    if (result.isInCollection) {
+      this.isInCollection = true;
+    }
   }
 
   init_comment_form() {
