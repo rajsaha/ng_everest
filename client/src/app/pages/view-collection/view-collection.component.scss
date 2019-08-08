@@ -3,6 +3,7 @@ $block-width: 50%;
 .section-container {
     .collection-data {
         .title {
+            position: relative;
             transition: all 0.2s ease-in-out;
             &:focus {
                 background-color: white;
@@ -24,6 +25,9 @@ $block-width: 50%;
             }
 
             fa-icon {
+                position: absolute;
+                right: 15px;
+                top: 15px;
                 color: rgba(0, 0, 0, .6);
                 margin-left: 5px;
                 font-size: 15px;

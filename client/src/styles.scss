@@ -3,142 +3,159 @@
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
 
 * {
-	font-family: "Roboto", sans-serif;
+  font-family: "Roboto", sans-serif;
 }
 
 a {
-	&:active,
-	&:focus {
-		outline: none;
-		outline-style: none;
-	}
+
+  &:active,
+  &:focus {
+    outline: none;
+    outline-style: none;
+  }
 }
 
 button:focus {
-	outline: 0;
+  outline: 0;
 }
 
 .box-shadow {
-	-webkit-box-shadow: 0px 10px 26px -6px rgba(0, 0, 0, 0.2);
-	-moz-box-shadow: 0px 10px 26px -6px rgba(0, 0, 0, 0.2);
-	box-shadow: 0px 10px 26px -6px rgba(0, 0, 0, 0.2);
+  -webkit-box-shadow: 0px 10px 26px -6px rgba(0, 0, 0, 0.2);
+  -moz-box-shadow: 0px 10px 26px -6px rgba(0, 0, 0, 0.2);
+  box-shadow: 0px 10px 26px -6px rgba(0, 0, 0, 0.2);
 }
 
 .active {
-	background-color: rgba(0, 0, 0, 0.1);
-	font-weight: bold;
+  background-color: rgba(0, 0, 0, 0.1);
+  font-weight: bold;
 }
 
 .active-sidenav {
-	font-weight: bold;
+  font-weight: bold;
+}
+
+.mat-drawer-content {
+  background-color: #DEE8FF;
 }
 
 mat-nav-list {
-	min-width: 200px;
+  min-width: 200px;
 
-	a {
-		display: block;
-		padding: 15px 0;
-	}
+  a {
+    display: block;
+    padding: 15px 0;
+  }
 }
 
 .float-right {
-	margin-left: auto;
-	display: inline-block;
+  margin-left: auto;
+  display: inline-block;
 }
 
 .clearfix:after {
-	content: " "; /* Older browser do not support empty content */
-	visibility: hidden;
-	display: block;
-	height: 0;
-	clear: both;
+  content: " ";
+  /* Older browser do not support empty content */
+  visibility: hidden;
+  display: block;
+  height: 0;
+  clear: both;
 }
 
 .green-snackbar {
-	background-color: #09af00;
-	color: white;
+  background-color: #09af00;
+  color: white;
 }
 
 .red-snackbar {
-	background-color: #f44336;
-	color: white;
+  background-color: #f44336;
+  color: white;
 }
 
 // Animation
-@keyframes placeHolderShimmer{
-    0%{
-        background-position: -468px 0
-    }
-    100%{
-        background-position: 468px 0
-    }
+@keyframes placeHolderShimmer {
+  0% {
+    background-position: -468px 0
+  }
+
+  100% {
+    background-position: 468px 0
+  }
 }
 
 .animated-background {
-    animation-duration: 1.25s;
-    animation-fill-mode: forwards;
-    animation-iteration-count: infinite;
-    animation-name: placeHolderShimmer;
-    animation-timing-function: linear;
-    background: #F6F6F6;
-    background: linear-gradient(to right, #F6F6F6 8%, #F0F0F0 18%, #F6F6F6 33%);
-    background-size: 800px 104px;
-    height: 96px;
-    position: relative;
+  animation-duration: 1.25s;
+  animation-fill-mode: forwards;
+  animation-iteration-count: infinite;
+  animation-name: placeHolderShimmer;
+  animation-timing-function: linear;
+  background: #F6F6F6;
+  background: linear-gradient(to right, #F6F6F6 8%, #F0F0F0 18%, #F6F6F6 33%);
+  background-size: 800px 104px;
+  height: 96px;
+  position: relative;
 }
 
 .padding-15 {
-    padding: 15px;
+  padding: 15px;
+}
+
+.w-100 {
+  width: 100%;
+}
+
+.resource-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(286px, 1fr));
+  grid-auto-flow: dense;
+  grid-column-gap: 5px;
 }
 
 .section-container {
-	padding: 15px 15px 15px 25px;
+  padding: 15px 15px 15px 25px;
 
-	.section {
-        margin-top: 15px;
-        border-radius: 5px;
-        box-shadow: 0 8px 20px 0 rgba(218,224,235,.6);
-        background-color: white;
-        padding: 2px 15px 15px 15px;
-        max-width: 600px;
-        margin-left: auto;
-        margin-right: auto;
-		margin-bottom: 30px;
+  .section {
+    margin-top: 15px;
+    border-radius: 5px;
+    box-shadow: 0 8px 20px 0 rgba(218, 224, 235, .6);
+    background-color: white;
+    padding: 2px 15px 15px 15px;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
 
-		.section-header {
-            text-transform: uppercase;
-            margin-bottom: 15px;
+    .section-header {
+      text-transform: uppercase;
+      margin-bottom: 15px;
 
-            h4 {
-                font-family: 'Noto Sans SC', sans-serif;
-                margin-bottom: 10px;
-            }
-		}
-		
-		.section-content {
-            h6 {
-                font-family: 'Noto Sans SC', sans-serif;
-                text-transform: uppercase;
-                margin-top: 25px;
-            }
+      h4 {
+        font-family: 'Noto Sans SC', sans-serif;
+        margin-bottom: 10px;
+      }
+    }
 
-            mat-form-field {
-                display: block;
-                width: 100%;
-			}
-			
-			.mat-checkbox-container {
-				margin-bottom: 15px;
-				font-size: 14px;
-			}
+    .section-content {
+      h6 {
+        font-family: 'Noto Sans SC', sans-serif;
+        text-transform: uppercase;
+        margin-top: 25px;
+      }
 
-            .form-button-container {
-                button {
-                    float: right;
-                }
-            }
+      mat-form-field {
+        display: block;
+        width: 100%;
+      }
+
+      .mat-checkbox-container {
+        margin-bottom: 15px;
+        font-size: 14px;
+      }
+
+      .form-button-container {
+        button {
+          float: right;
         }
+      }
+    }
 
-	}
+  }
 }

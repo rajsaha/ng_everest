@@ -1,19 +1,16 @@
-.section-container {
-    .section {
-        .section-content {
-            mat-icon {
-                font-size: 16px;
-                color: rgba(0, 0, 0, .8);
+.search {
+  mat-form-field {
+    margin-top: 15px;
+    width: 100%;
+  }
 
-                fa-icon {
-                    position: absolute;
-                    top: 2px;
-                }
-            }
+  mat-icon {
+    font-size: 16px;
+    color: rgba(0, 0, 0, .8);
 
-            .list-of-collections {
-                text-align: center;
-            }
-        }
+    fa-icon {
+      position: absolute;
+      top: 2px;
     }
+  }
 }

@@ -1,213 +1,293 @@
-@import "../../../../node_modules/bootstrap/dist/css/bootstrap.min.css";
-
 .post {
-    border: 1px solid #EEE;
-    border-radius: 5px;
-    margin-left: auto;
-    margin-right: auto;
-    margin-bottom: 25px;
-    max-width: 600px;
-    background-color: white;
-    box-shadow: 0 8px 20px 0 rgba(218,224,235,.6);
+  border: 1px solid #EEE;
+  border-radius: 5px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 25px;
+  max-width: 600px;
+  background-color: white;
+  box-shadow: 0 8px 20px 0 rgba(218, 224, 235, .6);
 
-    .header {
-        padding: 15px;
-        font-size: 14px;
-        border-bottom: 1px solid #EEE;
+  .header {
+    display: grid;
+    grid-template-columns: 50px 1fr 1fr;
+    padding: 10px 15px;
+    font-size: 14px;
+    border-bottom: 1px solid #EEE;
 
-        .post-menu {
-            display: inline;
-            cursor: pointer;
-
-            fa-icon {
-                float: right;
-                color: rgba(0, 0, 0, .5);
-            }
-        }
+    .user-image {
+      background-size: contain;
+      width: 40px;
+      height: 40px;
+      border: 1px solid rgba(0, 0, 0, 0.2);
+      border-radius: 50%;
+      cursor: pointer;
     }
 
-    .image {
-        img {
-            width: 100%;
-            display: block;
-        }
-    }
+    .uploader-info {
+      align-self: center;
 
-    .title {
-        padding: 20px 15px 10px 15px;
-
-        strong {
-            font-family: 'Noto Sans SC', sans-serif;
-            font-size: 16px;
-        }
-    }
-
-    .tags {
-        padding: 10px 15px 5px 15px;
-        overflow-wrap: break-word;
-        word-wrap: break-word;
-        .tag {
-            a {
-                strong {
-                    color: rgba(0, 0, 0, .8);
-                    border-radius: 5px;
-                    cursor: pointer;
-                    font-size: 12px;
-                    margin-right: 5px; 
-                }
-            }
-        }
-    }
-
-    .description {
-        padding: 15px;
-        line-height: 25px;
-        transition: height 0.2s ease-in-out;
-
-        p {
-            font-size: 14px;
-            margin-bottom: 0;
-
-            span {
-                cursor: pointer;
-                color: rgb(30, 90, 255);
-            }
-        }
-    }
-
-    .controls {
-        padding: 0 15px 10px 15px;
-
-        .btn {
-            font-size: 14px;
-            width: 100%;
-        }
-
-        .btn:focus {
-            outline: 0;
-            box-shadow: none;
-        }
-
-        .btn-like {
-            fa-icon {
-                color: rgba(0,0,0,.2);
-            }
-        }
-
-        .btn-comment {
-            fa-icon {
-                color: rgba(0,0,0,.2);
-            }
-        }
-
-        .btn-atc {
-            fa-icon {
-                color: rgba(0,0,0,.2);
-            }
-        }
-    }
-
-    .all-comments {
-        border-top: 1px solid rgba(0,0,0,0.1);
-        margin-top: 10px;
-        padding: 15px 15px 0 15px;
-
-        .comment {
-            font-size: 14px;
-            margin-bottom: 15px;
-
-            .username {
-                margin-right: 5px;
-            }
-
-            .text {
-                margin-bottom: 0;
-            }
-        }
-    }
-
-    .timestamp {
-        color: rgba(0,0,0,.3);
-        padding-left: 15px;
-        margin-bottom: 10px;
+      small {
+        display: block;
+        margin-top: 5px;
+        color: rgba(0, 0, 0, .3);
         text-transform: lowercase;
+      }
     }
 
-    .add-comment {
-        border-top: 1px solid rgba(0,0,0,.1);
-        padding: 20px 15px 0 15px;
-        position: relative;
-        textarea {
-            width: 100% !important;
-            border-style: none; 
-	        border: 0;
-            border-color: transparent;
-            font-size: 14px;
-            resize: none;
-        }
+    .post-menu {
+      cursor: pointer;
+      align-self: center;
 
-        textarea:focus {
-            outline: 0;
-            border: 0;
-        }
-
-        button {
-            background-color: transparent;
-            border: none;
-            font-size: 14px;
-            float: right;
-            margin-top: 0;
-            opacity: 0;
-            animation: buttonAppear 0.1s ease-in-out;
-            animation-fill-mode: forwards;
-
-            fa-icon {
-                color: rgba(0,0,0,.5);
-            }
-        }
+      fa-icon {
+        float: right;
+        color: rgba(0, 0, 0, .5);
+      }
     }
+  }
+
+  .image {
+    img {
+      width: 100%;
+      display: block;
+    }
+  }
+
+  .title {
+    padding: 20px 15px 10px 15px;
+    position: relative;
+
+    strong {
+      font-family: 'Noto Sans SC', sans-serif;
+      font-size: 16px;
+      text-transform: uppercase;
+    }
+
+    .collection-badge-false {
+      position: absolute;
+      top: 15px;
+      right: 0;
+      padding: 15px 10px;
+      background-color: #FF795A;
+      border-top-left-radius: 5px;
+      border-bottom-left-radius: 5px;
+      box-shadow: 0 8px 20px 0 rgba(255, 121, 90, .5);
+      color: white;
+      cursor: pointer;
+      font-size: 10px;
+    }
+
+    .collection-badge-true {
+      position: absolute;
+      top: 15px;
+      right: 0;
+      padding: 15px 10px;
+      background-color: #FFA25A;
+      border-top-left-radius: 5px;
+      border-bottom-left-radius: 5px;
+      box-shadow: 0 8px 20px 0 rgba(255, 121, 90, .5);
+      color: white;
+      cursor: pointer;
+      font-size: 10px;
+    }
+
+    .triangle-1 {
+      position: absolute;
+      top: 0;
+      right: 46px;
+      width: 0;
+      height: 0;
+      border-top: 25px solid #FFA25A;
+      border-left: 25px solid transparent;
+    }
+
+    .triangle-2 {
+      position: absolute;
+      top: 16px;
+      right: 46px;
+      width: 0;
+      height: 0;
+      border-bottom: 25px solid #FFA25A;
+      border-left: 25px solid transparent;
+    }
+  }
+
+  .tags {
+    padding: 0 15px 0 15px;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+
+    .tag {
+      a {
+        strong {
+          color: #FE685F;
+          border-radius: 5px;
+          cursor: pointer;
+          font-size: 12px;
+          font-weight: bold;
+          margin-right: 5px;
+        }
+      }
+    }
+  }
+
+  .description {
+    padding: 0 15px 15px 15px;
+    line-height: 25px;
+    transition: height 0.2s ease-in-out;
+
+    p {
+      font-size: 14px;
+      margin-bottom: 5px;
+    }
+
+    span {
+      text-align: center;
+      display: block;
+      font-weight: bold;
+      cursor: pointer;
+      color: #481A89;
+      font-size: 12px;
+    }
+  }
+
+  .controls {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-self: center;
+    justify-self: center;
+    padding: 0 15px 10px 15px;
+
+    .btn {
+      font-size: 14px;
+      width: 100%;
+    }
+
+    .btn:focus {
+      outline: 0;
+      box-shadow: none;
+    }
+
+    .btn-like {
+      fa-icon {
+        color: rgba(0, 0, 0, .2);
+      }
+    }
+
+    .btn-comment {
+      fa-icon {
+        color: rgba(0, 0, 0, .2);
+      }
+    }
+
+    .btn-atc {
+      fa-icon {
+        color: rgba(0, 0, 0, .2);
+      }
+    }
+  }
+
+  .all-comments {
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    margin-top: 10px;
+    padding: 15px 15px 0 15px;
+
+    .comment {
+      font-size: 14px;
+      margin-bottom: 15px;
+
+      .username {
+        margin-right: 5px;
+      }
+
+      .text {
+        margin-bottom: 0;
+      }
+    }
+  }
+
+  .add-comment {
+    border-top: 1px solid rgba(0, 0, 0, .1);
+    padding: 20px 15px 0 15px;
+    position: relative;
+
+    textarea {
+      width: 100% !important;
+      border-style: none;
+      border: 0;
+      border-color: transparent;
+      font-size: 14px;
+      resize: none;
+    }
+
+    textarea:focus {
+      outline: 0;
+      border: 0;
+    }
+
+    button {
+      position: absolute;
+      border-radius: 50%;
+      box-shadow: 0 8px 20px 0 rgba(72, 26, 137, .5);
+      width: 25px;
+      height: 25px;
+      right: 15px;
+      top: 20px;
+      background-color: #481A89;
+      border: none;
+      font-size: 12px;
+      margin-top: 0;
+      opacity: 0;
+      animation: buttonAppear 0.1s ease-in-out;
+      animation-fill-mode: forwards;
+
+      fa-icon {
+        color: white;
+      }
+    }
+  }
 }
 
 .is-liked {
-    fa-icon {
-        color: blue !important;
-    }
+  fa-icon {
+    color: blue !important;
+  }
 }
 
 .show-comments {
-    fa-icon {
-        color: rgba(0,0,0,.5) !important;
-    }
+  fa-icon {
+    color: rgba(0, 0, 0, .5) !important;
+  }
 }
 
 textarea {
-    border: none !important;
+  border: none !important;
 }
 
 @keyframes buttonAppear {
-    0% {
-        opacity: 0;
-        transform: scale(0);
-    }
+  0% {
+    opacity: 0;
+    transform: scale(0);
+  }
 
-    100% {
-        opacity: 1;
-        transform: scale(1.0);
-    }
+  100% {
+    opacity: 1;
+    transform: scale(1.0);
+  }
 }
 
 @media (min-width: 768px) {
-    .post {
-        .title {
-            strong {
-                font-size: 20px;
-            }
-        }
-
-        .description {
-            p {
-                font-size: 16px;
-            }
-        }
+  .post {
+    .title {
+      strong {
+        font-size: 20px;
+      }
     }
+
+    .description {
+      p {
+        font-size: 16px;
+      }
+    }
+  }
 }

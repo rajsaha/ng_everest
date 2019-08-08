@@ -5,6 +5,8 @@ import { MatDialog } from '@angular/material';
 import * as moment from 'moment';
 import { AtcComponent } from '../dialogs/atc/atc.component';
 import { PoComponent } from '../dialogs/po/po.component';
+import { ResourceService } from '@services/resource/resource.service';
+import { CollectionService } from '@services/collection/collection.service';
 
 @Component({
   selector: 'app-post',
@@ -23,6 +25,7 @@ export class PostComponent implements OnInit {
   tags = [];
   description: string;
   image: string;
+  userImage: string;
   timestamp: any;
   allComments = [];
 
@@ -37,20 +40,25 @@ export class PostComponent implements OnInit {
   commentForm: FormGroup;
 
   // Toggles
+  isInCollection = false;
   isLiked = false;
   showComments = false;
   isSeeMore = false;
   truncateValue = 150;
 
-  constructor(private fb: FormBuilder, public dialog: MatDialog) { }
+  constructor(
+    private fb: FormBuilder,
+    public dialog: MatDialog,
+    private resourceService: ResourceService,
+    private collectionService: CollectionService) { }
 
-  ngOnInit() {
-    this.populatePost();
-    this.init_comment_form();
+  async ngOnInit() {
+    await this.populatePost();
+    await this.getUserImage(this.data.username);
     this.checkIfDescriptionTooLong(this.description);
   }
 
-  populatePost() {
+  async populatePost() {
     this.id = this.data._id;
     this.username = this.data.username;
     this.url = this.data.url;
@@ -60,6 +68,21 @@ export class PostComponent implements OnInit {
     this.image = this.data.image;
     this.timestamp = moment(this.data.timestamp).fromNow();
     this.allComments = this.data.comments;
+    this.init_comment_form();
+  }
+
+  async getUserImage(username) {
+    const result = await this.resourceService.getUserImage(username);
+    this.userImage = result.image;
+  }
+
+  async checkIfPostInCollection() {
+    const result = await this.collectionService.checkForResourceInCollection(this.data._id);
+    if (result.isInCollection) {
+      return true;
+    }
+
+    return false;
   }
 
   init_comment_form() {
