@@ -1,110 +1,77 @@
 <div class="post">
   <!-- Header -->
   <div class="header">
-    <div class="row">
-      <div class="col-12">
-        <strong>{{ username }}</strong>
-        <div class="post-menu" (click)="openPostDialog()">
-          <fa-icon [icon]="faEllipsisV"></fa-icon>
-        </div>
-      </div>
+    <div class="user-image" [ngStyle]="{ 'background-image': 'url(' + userImage  +')' }">
+    </div>
+    <div class="uploader-info">
+      <strong>{{ username }}</strong>
+      <small>{{ timestamp }}</small>
+    </div>
+    <div class="post-menu" (click)="openPostDialog()">
+      <fa-icon [icon]="faEllipsisH"></fa-icon>
     </div>
   </div>
 
   <!-- Image -->
   <a [href]="url" target="_blank">
     <div class="image">
-      <div class="row">
-        <div class="col-12">
-          <img [src]="image" [alt]="title">
-        </div>
-      </div>
+      <img [src]="image" [alt]="title">
     </div>
   </a>
 
   <!-- Title -->
   <div class="title">
-    <div class="row">
-      <div class="col-12">
-        <strong>{{ title }}</strong>
-      </div>
-    </div>
+    <strong>{{ title }}</strong>
   </div>
 
   <!-- Tags -->
   <div class="tags">
-    <div class="row">
-      <div class="col-12">
-        <div class="tag">
-          <a *ngFor="let tag of tags"><strong>#{{ tag }}</strong></a>
-        </div>
-      </div>
+    <div class="tag">
+      <a *ngFor="let tag of tags"><strong>#{{ tag }}</strong></a>
     </div>
   </div>
 
   <!-- Description -->
   <div class="description">
-    <div class="row">
-      <div class="col-12">
-        <p>
-          {{ description | truncate:[truncateValue] }}
-          <span *ngIf="isSeeMore" (click)="seeMore()" class="see-more">See More</span>
-        </p>
-      </div>
-    </div>
-  </div>
-
-  <!-- Timestamp -->
-  <div class="timestamp">
-    <small>{{ timestamp }}</small>
+    <p>
+      {{ description | truncate:[truncateValue] }}
+      <span *ngIf="isSeeMore" (click)="seeMore()" class="see-more">See More</span>
+    </p>
   </div>
 
   <!-- Controls -->
-  <div class="controls clearfix">
-    <div class="row">
-      <div class="col-4">
-        <button mat-button class="btn btn-like" [ngClass]="{ 'is-liked': isLiked }" (click)="isLiked = !isLiked">
-          <fa-icon [icon]="faThumbsUp"></fa-icon>
-        </button>
-      </div>
-      <div class="col-4">
-        <button mat-button class="btn btn-comment" [ngClass]="{ 'show-comments': showComments }"
-          (click)="showComments = !showComments" [disabled]="!allComments.length > 0">
-          <fa-icon [icon]="faComment"></fa-icon>
-        </button>
-      </div>
-      <div class="col-4">
+  <div class="controls">
+    <button mat-button class="btn btn-like" [ngClass]="{ 'is-liked': isLiked }" (click)="isLiked = !isLiked">
+      <fa-icon [icon]="faThumbsUp"></fa-icon>
+    </button>
+    <button mat-button class="btn btn-comment" [ngClass]="{ 'show-comments': showComments }"
+      (click)="showComments = !showComments" [disabled]="!allComments.length > 0">
+      <fa-icon [icon]="faComment"></fa-icon>
+    </button>
+    <!-- <div class="col-4">
         <button mat-button class="btn btn-atc" (click)="openCollectionsDialog()">
           <fa-icon [icon]="faPlus"></fa-icon>
         </button>
-      </div>
-    </div>
+      </div> -->
   </div>
 
   <!-- All Comments -->
   <div class="all-comments" *ngIf="allComments.length > 0 && showComments">
-    <div class="row">
-      <div class="col-12">
-        <div class="comment" *ngFor="let comment of allComments">
-          <span class="username"><strong>{{ comment.username }}</strong></span>
-          <span class="text">{{ comment.content }}</span>
-        </div>
-      </div>
+    <div class="comment" *ngFor="let comment of allComments">
+      <span class="username"><strong>{{ comment.username }}</strong></span>
+      <span class="text">{{ comment.content }}</span>
     </div>
   </div>
 
   <!-- Add Comment -->
   <div class="add-comment">
     <form [formGroup]="commentForm" (ngSubmit)="addComment()">
-      <div class="row">
-        <div [ngClass]="commentForm.controls['comment'].value != '' ? 'col-10' : 'col-12'">
-          <textarea matInput placeholder="Leave a comment" autosize formControlName="comment" (keydown.enter)="textareaEnterPressed($event)"></textarea>
-        </div>
-        <div class="col-2 text-center" *ngIf="commentForm.controls['comment'].value != ''">
-          <button>
-            <fa-icon [icon]="faReply"></fa-icon>
-          </button>
-        </div>
+      <div>
+        <textarea matInput placeholder="Leave a comment" autosize formControlName="comment"
+          (keydown.enter)="textareaEnterPressed($event)"></textarea>
+        <button *ngIf="!commentForm.controls['comment'].value">
+          <fa-icon [icon]="faReply"></fa-icon>
+        </button>
       </div>
     </form>
   </div>

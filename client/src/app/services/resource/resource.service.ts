@@ -66,6 +66,15 @@ export class ResourceService {
     });
   }
 
+  getUserImage(data: any): Promise<any> {
+    return new Promise(resolve => {
+      this.http.get(`${ENV.API_URL}/resource/get/user-image/${data}`)
+        .subscribe((response: any) => {
+          resolve(response);
+        });
+    });
+  }
+
   deleteResource(data: any): Promise<any> {
     return new Promise(resolve => {
       this.http.post(`${ENV.API_URL}/resource/delete`, data)

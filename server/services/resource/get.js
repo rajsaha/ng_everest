@@ -1,4 +1,5 @@
 const _Resource = require('../../models/Resource');
+const User = require('../../models/User');
 const mongoose = require('mongoose');
 
 const ResourceGet = (() => {
@@ -78,11 +79,23 @@ const ResourceGet = (() => {
         });
     }
 
+    const getProfileImageByUsername = async (username) => {
+        try {
+            const user = await User.findOne({username}).select('image').exec();
+            return { image: user.image.link }
+        } catch (err) {
+            return {
+                error: err.message
+            }
+        }
+    }
+
     return {
         getAllResources,
         getResource,
         getMultipleResources,
-        getFourImages
+        getFourImages,
+        getProfileImageByUsername
     }
 })()
 

@@ -1,10 +1,11 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { faThumbsUp, faComment, faPlus, faReply, faEllipsisV } from '@fortawesome/free-solid-svg-icons';
+import { faThumbsUp, faComment, faPlus, faReply, faEllipsisH } from '@fortawesome/free-solid-svg-icons';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatDialog } from '@angular/material';
 import * as moment from 'moment';
 import { AtcComponent } from '../dialogs/atc/atc.component';
 import { PoComponent } from '../dialogs/po/po.component';
+import { ResourceService } from '@services/resource/resource.service';
 
 @Component({
   selector: 'app-post',
@@ -23,6 +24,7 @@ export class PostComponent implements OnInit {
   tags = [];
   description: string;
   image: string;
+  userImage: string;
   timestamp: any;
   allComments = [];
 
@@ -31,7 +33,7 @@ export class PostComponent implements OnInit {
   faComment = faComment;
   faPlus = faPlus;
   faReply = faReply;
-  faEllipsisV = faEllipsisV;
+  faEllipsisH = faEllipsisH;
 
   // Form
   commentForm: FormGroup;
@@ -42,15 +44,17 @@ export class PostComponent implements OnInit {
   isSeeMore = false;
   truncateValue = 150;
 
-  constructor(private fb: FormBuilder, public dialog: MatDialog) { }
+  constructor(
+    private fb: FormBuilder,
+    public dialog: MatDialog,
+    private resourceService: ResourceService) { }
 
-  ngOnInit() {
-    this.populatePost();
-    this.init_comment_form();
+  async ngOnInit() {
+    await this.populatePost();
     this.checkIfDescriptionTooLong(this.description);
   }
 
-  populatePost() {
+  async populatePost() {
     this.id = this.data._id;
     this.username = this.data.username;
     this.url = this.data.url;
@@ -60,6 +64,14 @@ export class PostComponent implements OnInit {
     this.image = this.data.image;
     this.timestamp = moment(this.data.timestamp).fromNow();
     this.allComments = this.data.comments;
+    this.init_comment_form();
+
+    await this.getUserImage(this.username);
+  }
+
+  async getUserImage(username) {
+    const result = await this.resourceService.getUserImage(username);
+    this.userImage = result.image;
   }
 
   init_comment_form() {
