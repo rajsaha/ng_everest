@@ -40,7 +40,7 @@ export class PostComponent implements OnInit {
   commentForm: FormGroup;
 
   // Toggles
-  isInCollection = true;
+  isInCollection = false;
   isLiked = false;
   showComments = false;
   isSeeMore = false;
@@ -55,7 +55,6 @@ export class PostComponent implements OnInit {
   async ngOnInit() {
     await this.populatePost();
     await this.getUserImage(this.data.username);
-    await this.checkIfPostInCollection(this.data._id);
     this.checkIfDescriptionTooLong(this.description);
   }
 
@@ -77,11 +76,13 @@ export class PostComponent implements OnInit {
     this.userImage = result.image;
   }
 
-  async checkIfPostInCollection(id) {
-    const result = await this.collectionService.checkForResourceInCollection(id);
+  async checkIfPostInCollection() {
+    const result = await this.collectionService.checkForResourceInCollection(this.data._id);
     if (result.isInCollection) {
-      this.isInCollection = true;
+      return true;
     }
+
+    return false;
   }
 
   init_comment_form() {

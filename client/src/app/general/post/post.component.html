@@ -22,11 +22,11 @@
   <!-- Title -->
   <div class="title">
     <strong>{{ title }}</strong>
-    <div class="collection-badge-false" *ngIf="!isInCollection">
+    <div class="collection-badge-false" *ngIf="!checkIfPostInCollection()">
       <fa-icon [icon]="faPlus"></fa-icon> Add to Collection
     </div>
 
-    <div class="collection-badge-true" *ngIf="isInCollection">
+    <div class="collection-badge-true" *ngIf="checkIfPostInCollection()">
       Added
       <div class="triangle-1"></div>
       <div class="triangle-2"></div>
