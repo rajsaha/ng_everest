@@ -56,6 +56,7 @@ export class PostComponent implements OnInit {
     await this.populatePost();
     await this.getUserImage(this.data.username);
     this.checkIfDescriptionTooLong(this.description);
+    await this.checkIfPostInCollection(this.data._id);
   }
 
   async populatePost() {
@@ -76,13 +77,11 @@ export class PostComponent implements OnInit {
     this.userImage = result.image;
   }
 
-  async checkIfPostInCollection() {
-    const result = await this.collectionService.checkForResourceInCollection(this.data._id);
+  async checkIfPostInCollection(id: string) {
+    const result = await this.collectionService.checkForResourceInCollection({ id });
     if (result.isInCollection) {
-      return true;
+      this.isInCollection = true;
     }
-
-    return false;
   }
 
   init_comment_form() {
@@ -126,8 +125,13 @@ export class PostComponent implements OnInit {
       }
     });
 
-    dialogRef.afterClosed().subscribe(() => {
-      console.log('The dialog was closed');
+    dialogRef.afterClosed().subscribe(async (result: any) => {
+      if (result && result.added) {
+        const res = await this.collectionService.checkForResourceInCollection({ id: this.id });
+        if (res) {
+          this.isInCollection = true;
+        }
+      }
     });
   }
 

@@ -4,7 +4,11 @@
     <h4>{{ data.title }}</h4>
     <p>{{ data.description | truncate:[40] }}</p>
     <div class="actions">
-      <button [routerLink]="['resource/edit/', id]" mat-button>
+      <button *ngIf="!isInCollectionPage" [routerLink]="['../resource/edit/', id]" mat-button>
+        <fa-icon [icon]="faEdit"></fa-icon>
+      </button>
+
+      <button *ngIf="isInCollectionPage" (click)="goToEdit()" mat-button>
         <fa-icon [icon]="faEdit"></fa-icon>
       </button>
 
@@ -14,8 +18,12 @@
         </button>
       </a>
 
-      <button mat-button color="warn" (click)="openDrDialog()">
+      <button *ngIf="!isInCollectionPage" mat-button color="warn" (click)="openDrDialog()">
         <fa-icon [icon]="faTrashAlt"></fa-icon>
+      </button>
+
+      <button *ngIf="isInCollectionPage" mat-button color="warn" (click)="deleteResourceFromCollection()">
+        <fa-icon [icon]="faFolderMinus"></fa-icon>
       </button>
     </div>
   </div>

@@ -1,5 +1,5 @@
 <div class="post">
-  <!-- Header -->
+  <!-- * Header -->
   <div class="header">
     <div class="user-image" [ngStyle]="{ 'background-image': 'url(' + userImage  +')' }">
     </div>
@@ -12,35 +12,33 @@
     </div>
   </div>
 
-  <!-- Image -->
+  <!-- * Image -->
   <a [href]="url" target="_blank">
     <div class="image">
       <img [src]="image" [alt]="title">
     </div>
   </a>
 
-  <!-- Title -->
-  <div class="title">
+  <!-- * Title -->
+  <div class="title" [ngStyle]="{'grid-template-columns': isInCollection ? '1fr 45px' : '1fr 106px'}">
     <strong>{{ title }}</strong>
-    <div class="collection-badge-false" *ngIf="!checkIfPostInCollection()">
+    <div class="collection-badge-false" *ngIf="!isInCollection" matRipple (click)="openCollectionsDialog()">
       <fa-icon [icon]="faPlus"></fa-icon> Add to Collection
     </div>
 
-    <div class="collection-badge-true" *ngIf="checkIfPostInCollection()">
-      Added
-      <div class="triangle-1"></div>
-      <div class="triangle-2"></div>
+    <div class="collection-badge-true" *ngIf="isInCollection" matRipple (click)="openCollectionsDialog()">
+      &nbsp;&nbsp;&nbsp;&nbsp;Added
     </div>
   </div>
 
-  <!-- Tags -->
+  <!-- * Tags -->
   <div class="tags">
     <div class="tag">
       <a *ngFor="let tag of tags"><strong>#{{ tag }}</strong></a>
     </div>
   </div>
 
-  <!-- Description -->
+  <!-- * Description -->
   <div class="description">
     <p>
       {{ description | truncate:[truncateValue] }}
@@ -48,7 +46,7 @@
     <span *ngIf="isSeeMore" (click)="seeMore()" class="see-more">See More</span>
   </div>
 
-  <!-- Controls -->
+  <!-- * Controls -->
   <div class="controls">
     <button mat-button class="btn btn-like" [ngClass]="{ 'is-liked': isLiked }" (click)="isLiked = !isLiked">
       <fa-icon [icon]="faThumbsUp"></fa-icon>
@@ -57,14 +55,9 @@
       (click)="showComments = !showComments" [disabled]="!allComments.length > 0">
       <fa-icon [icon]="faComment"></fa-icon>
     </button>
-    <!-- <div class="col-4">
-        <button mat-button class="btn btn-atc" (click)="openCollectionsDialog()">
-          <fa-icon [icon]="faPlus"></fa-icon>
-        </button>
-      </div> -->
   </div>
 
-  <!-- All Comments -->
+  <!-- * All Comments -->
   <div class="all-comments" *ngIf="allComments.length > 0 && showComments">
     <div class="comment" *ngFor="let comment of allComments">
       <span class="username"><strong>{{ comment.username }}</strong></span>
@@ -72,7 +65,7 @@
     </div>
   </div>
 
-  <!-- Add Comment -->
+  <!-- * Add Comment -->
   <div class="add-comment">
     <form [formGroup]="commentForm" (ngSubmit)="addComment()">
       <div>

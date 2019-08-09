@@ -1,8 +1,10 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { faEye, faEdit, faTrashAlt, faExternalLinkAlt } from '@fortawesome/free-solid-svg-icons';
+import { faEye, faEdit, faTrashAlt, faExternalLinkAlt, faTimes, faFolderMinus } from '@fortawesome/free-solid-svg-icons';
 import { MatDialog } from '@angular/material';
 import * as moment from 'moment';
 import { DrComponent } from '../dialogs/dr/dr.component';
+import { CollectionService } from '@services/collection/collection.service';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-resource',
@@ -11,7 +13,9 @@ import { DrComponent } from '../dialogs/dr/dr.component';
 })
 export class ResourceComponent implements OnInit {
   @Input() data: any;
-  @Output() drResponse: EventEmitter<number> = new EventEmitter();
+  @Input() collectionId: string;
+  @Input() isInCollectionPage: boolean;
+  @Output() drResponse: EventEmitter<any> = new EventEmitter();
 
   // Data
   id: string;
@@ -28,8 +32,14 @@ export class ResourceComponent implements OnInit {
   faEdit = faEdit;
   faTrashAlt = faTrashAlt;
   faExternalLinkAlt = faExternalLinkAlt;
+  faTimes = faTimes;
+  faFolderMinus = faFolderMinus;
 
-  constructor(public dialog: MatDialog) { }
+  constructor(
+    public dialog: MatDialog,
+    private collectionService: CollectionService,
+    private route: Router,
+    private router: ActivatedRoute) { }
 
   ngOnInit() {
     this.populateResource();
@@ -54,9 +64,20 @@ export class ResourceComponent implements OnInit {
       }
     });
 
-    dialogRef.afterClosed().subscribe(async (result) => {
-      this.drResponse.emit(result);
+    dialogRef.afterClosed().subscribe(async () => {
+      this.drResponse.emit();
     });
+  }
+
+  async deleteResourceFromCollection() {
+    const result = await this.collectionService.deleteResourceFromCollection({resourceId: this.id, collectionId: this.collectionId});
+    if (result) {
+      this.drResponse.emit(this.id);
+    }
+  }
+
+  goToEdit() {
+    this.route.navigate(['resource/edit/', this.id], { relativeTo: this.router.parent});
   }
 
 }
