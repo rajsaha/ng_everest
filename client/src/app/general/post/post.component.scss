@@ -1,3 +1,21 @@
+%badge {
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+  color: white;
+  cursor: pointer;
+  font-size: 10px;
+  box-shadow: 0 8px 20px 0 rgba(255, 121, 90, .5);
+  grid-column-end: -1;
+  grid-row-end: 1;
+  justify-self: end;
+  align-self: center;
+  padding: 8px;
+}
+
+%triangle {
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%, 25% 50%);
+}
+
 .post {
   border: 1px solid #EEE;
   border-radius: 5px;
@@ -54,8 +72,9 @@
   }
 
   .title {
-    padding: 20px 15px 10px 15px;
-    position: relative;
+    display: grid;
+    grid-auto-flow: dense;
+    padding: 20px 0 10px 15px;
 
     strong {
       font-family: 'Noto Sans SC', sans-serif;
@@ -64,51 +83,14 @@
     }
 
     .collection-badge-false {
-      position: absolute;
-      top: 15px;
-      right: 0;
-      padding: 15px 10px;
+      @extend %badge; 
       background-color: #FF795A;
-      border-top-left-radius: 5px;
-      border-bottom-left-radius: 5px;
-      box-shadow: 0 8px 20px 0 rgba(255, 121, 90, .5);
-      color: white;
-      cursor: pointer;
-      font-size: 10px;
     }
 
     .collection-badge-true {
-      position: absolute;
-      top: 15px;
-      right: 0;
-      padding: 15px 10px;
+      @extend %badge;
+      @extend %triangle;
       background-color: #FFA25A;
-      border-top-left-radius: 5px;
-      border-bottom-left-radius: 5px;
-      box-shadow: 0 8px 20px 0 rgba(255, 121, 90, .5);
-      color: white;
-      cursor: pointer;
-      font-size: 10px;
-    }
-
-    .triangle-1 {
-      position: absolute;
-      top: 0;
-      right: 46px;
-      width: 0;
-      height: 0;
-      border-top: 25px solid #FFA25A;
-      border-left: 25px solid transparent;
-    }
-
-    .triangle-2 {
-      position: absolute;
-      top: 16px;
-      right: 46px;
-      width: 0;
-      height: 0;
-      border-bottom: 25px solid #FFA25A;
-      border-left: 25px solid transparent;
     }
   }
 

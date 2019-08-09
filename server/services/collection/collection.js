@@ -156,6 +156,7 @@ const Collection = (() => {
     }
 
     const checkForResourceInAnyCollection = async (id) => {
+        console.log(id);
         const response = await _Collection.find({
             resources: id
         }).exec();

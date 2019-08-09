@@ -84,7 +84,7 @@ export class AtcComponent implements OnInit {
           },
           class: 'green-snackbar',
         });
-        this.dialogRef.close();
+        this.dialogRef.close(true);
       } else {
         this.snackbarService.openSnackBar({
           message: {
