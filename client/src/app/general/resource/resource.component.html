@@ -14,7 +14,11 @@
         </button>
       </a>
 
-      <button mat-button color="warn" (click)="openDrDialog()">
+      <button *ngIf="!isInCollectionPage" mat-button color="warn" (click)="openDrDialog()">
+        <fa-icon [icon]="faTrashAlt"></fa-icon>
+      </button>
+
+      <button *ngIf="isInCollectionPage" mat-button color="warn" (click)="deleteResourceFromCollection()">
         <fa-icon [icon]="faTrashAlt"></fa-icon>
       </button>
     </div>

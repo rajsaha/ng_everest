@@ -78,7 +78,7 @@ export class PostComponent implements OnInit {
   }
 
   async checkIfPostInCollection(id: string) {
-    const result = await this.collectionService.checkForResourceInCollection({id});
+    const result = await this.collectionService.checkForResourceInCollection({ id });
     if (result.isInCollection) {
       this.isInCollection = true;
     }
@@ -125,9 +125,12 @@ export class PostComponent implements OnInit {
       }
     });
 
-    dialogRef.afterClosed().subscribe(async (result: boolean) => {
-      if (result) {
-        await this.checkIfPostInCollection(this.id);
+    dialogRef.afterClosed().subscribe(async (result: any) => {
+      if (result && result.added) {
+        const res = await this.collectionService.checkForResourceInCollection({ id: this.id });
+        if (res) {
+          this.isInCollection = true;
+        }
       }
     });
   }

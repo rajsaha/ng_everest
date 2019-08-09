@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { CollectionService } from '@services/collection/collection.service';
 import { ResourceService } from '@services/resource/resource.service';
 import { faPen } from '@fortawesome/free-solid-svg-icons';
+import { UtilityService } from '@services/general/utility.service';
 
 @Component({
   selector: 'app-view-collection',
@@ -12,7 +13,7 @@ import { faPen } from '@fortawesome/free-solid-svg-icons';
 export class ViewCollectionComponent implements OnInit {
   id: string;
   collection: any;
-  resources: any;
+  resources = [];
 
   // Icons
   faPen = faPen;
@@ -20,7 +21,8 @@ export class ViewCollectionComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private collectionService: CollectionService,
-    private resourceService: ResourceService) { }
+    private resourceService: ResourceService,
+    private utilityService: UtilityService) { }
 
   ngOnInit() {
     this.route.params.subscribe((params) => {
@@ -40,5 +42,14 @@ export class ViewCollectionComponent implements OnInit {
   async getMultipleResources(data) {
     const result = await this.resourceService.getMultipleResources(data);
     this.resources = result.resources;
+  }
+
+  drResponseHandler(result: string) {
+    for (const {item, index} of this.utilityService.toItemIndexes(this.resources)) {
+      if (result === item._id) {
+        this.resources.splice(index, 1);
+        return;
+      }
+    }
   }
 }

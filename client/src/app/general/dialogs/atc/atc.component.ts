@@ -58,7 +58,6 @@ export class AtcComponent implements OnInit {
 
   async checkForResourceInCollection() {
     const response = await this.collectionService.checkForResourceInCollection({ id: this.data.id });
-    console.log(response);
   }
 
   async getCollectionTitle(resourceId: string) {
@@ -84,7 +83,7 @@ export class AtcComponent implements OnInit {
           },
           class: 'green-snackbar',
         });
-        this.dialogRef.close(true);
+        this.dialogRef.close({added: true});
       } else {
         this.snackbarService.openSnackBar({
           message: {

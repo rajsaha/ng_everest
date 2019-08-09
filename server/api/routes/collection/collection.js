@@ -48,4 +48,13 @@ router.post('/check-for-resource-in-collection', checkIfAuthenticated, async (re
     }
 });
 
+router.post('/delete-resource-from-collection', checkIfAuthenticated, async (req, res, next) => {
+    try {
+        const response = await Collection.deleteResourceFromCollection(req.body);
+        res.status(200).json(response);
+    } catch (err) {
+        console.error(`Error: ${err.message}`);
+    }
+});
+
 module.exports = router;

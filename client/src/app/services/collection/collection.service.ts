@@ -62,4 +62,13 @@ export class CollectionService {
         });
     });
   }
+
+  deleteResourceFromCollection(data: any): Promise<any> {
+    return new Promise(resolve => {
+      this.http.post(`${ENV.API_URL}/collection/delete-resource-from-collection`, data)
+        .subscribe((response: any) => {
+          resolve(response);
+        });
+    });
+  }
 }
