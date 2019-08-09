@@ -1,9 +1,10 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { faEye, faEdit, faTrashAlt, faExternalLinkAlt, faTimes } from '@fortawesome/free-solid-svg-icons';
+import { faEye, faEdit, faTrashAlt, faExternalLinkAlt, faTimes, faFolderMinus } from '@fortawesome/free-solid-svg-icons';
 import { MatDialog } from '@angular/material';
 import * as moment from 'moment';
 import { DrComponent } from '../dialogs/dr/dr.component';
 import { CollectionService } from '@services/collection/collection.service';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-resource',
@@ -32,8 +33,13 @@ export class ResourceComponent implements OnInit {
   faTrashAlt = faTrashAlt;
   faExternalLinkAlt = faExternalLinkAlt;
   faTimes = faTimes;
+  faFolderMinus = faFolderMinus;
 
-  constructor(public dialog: MatDialog, private collectionService: CollectionService) { }
+  constructor(
+    public dialog: MatDialog,
+    private collectionService: CollectionService,
+    private route: Router,
+    private router: ActivatedRoute) { }
 
   ngOnInit() {
     this.populateResource();
@@ -68,6 +74,10 @@ export class ResourceComponent implements OnInit {
     if (result) {
       this.drResponse.emit(this.id);
     }
+  }
+
+  goToEdit() {
+    this.route.navigate(['resource/edit/', this.id], { relativeTo: this.router.parent});
   }
 
 }
