@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { ValidationService } from '../../services/forms/validation.service';
 import { SignupService } from '@services/signup/signup.service';
 import { SnackbarService } from '@services/general/snackbar.service';
+import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-signup',
@@ -14,6 +15,9 @@ export class SignupComponent implements OnInit {
   signUpForm: FormGroup;
   isDisabled = true;
   signingUp = false;
+
+  // Icons
+  faArrowRight = faArrowRight;
 
   constructor(
     private router: Router,

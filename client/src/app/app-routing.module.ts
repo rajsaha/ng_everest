@@ -57,11 +57,11 @@ const routes: Routes = [
   },
   {
     path: '',
-    redirectTo: 'welcome/login',
+    redirectTo: 'login',
     pathMatch: 'full'
   },
   {
-    path: 'welcome',
+    path: '',
     component: NoAuthComponent,
     children: [
       {
