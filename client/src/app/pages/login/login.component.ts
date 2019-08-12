@@ -37,6 +37,10 @@ export class LoginComponent implements OnInit {
     });
   }
 
+  get loginFormControls() {
+    return this.loginForm.controls;
+  }
+
   login() {
     this.loggingIn = true;
     this.isLoading = true;
