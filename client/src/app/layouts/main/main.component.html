@@ -1,0 +1,42 @@
+<div class="app-container" [class.is-mobile]="mobileQuery.matches">
+    <mat-toolbar class="toolbar">
+        <button mat-icon-button (click)="snav.toggle()">
+            <mat-icon>menu</mat-icon>
+        </button>
+        <h1 class="app-name"><a routerLink="/">Everest</a></h1>
+        <div class="profile-container">
+            <div class="profile-image" [matMenuTriggerFor]="menu"
+                [ngStyle]="{ 'background-image': 'url(' + image  +')' }">
+            </div>
+            <mat-menu #menu="matMenu">
+                <button mat-menu-item routerLink="/profile" routerLinkActive="active">
+                    <fa-icon [icon]="faUser"></fa-icon>&nbsp;&nbsp;View Profile
+                </button>
+                <button mat-menu-item routerLink="/manage-resources" routerLinkActive="active">
+                    <fa-icon [icon]="faStream"></fa-icon>&nbsp;&nbsp;Manage Resources
+                </button>
+                <button mat-menu-item (click)="logout()">
+                    <fa-icon [icon]="faSignOutAlt"></fa-icon>&nbsp;&nbsp;Logout
+                </button>
+            </mat-menu>
+        </div>
+    </mat-toolbar>
+
+    <mat-sidenav-container class="sidenav-container" [style.marginTop.px]="mobileQuery.matches ? 56 : 0">
+        <mat-sidenav #snav [mode]="mobileQuery.matches ? 'over' : 'side'" [fixedInViewport]="mobileQuery.matches"
+            fixedTopGap="56">
+            <mat-nav-list>
+                <a routerLink="/feed" routerLinkActive="active-sidenav">
+                    <fa-icon [icon]="faStream"></fa-icon>&nbsp;&nbsp;Feed
+                </a>
+                <a routerLink="/share-resource" routerLinkActive="active-sidenav">
+                    <fa-icon [icon]="faShareAlt"></fa-icon>&nbsp;&nbsp;Share Resource
+                </a>
+            </mat-nav-list>
+        </mat-sidenav>
+
+        <mat-sidenav-content>
+            <router-outlet></router-outlet>
+        </mat-sidenav-content>
+    </mat-sidenav-container>
+</div>

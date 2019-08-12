@@ -43,7 +43,7 @@
           </form>
           <div class="list-of-collections">
             <app-collection *ngFor="let collection of collections" [data]="collection"
-              [routerLink]="['view/collection/', collection._id]"></app-collection>
+              [routerLink]="['collection/', collection._id]"></app-collection>
           </div>
         </div>
       </div>

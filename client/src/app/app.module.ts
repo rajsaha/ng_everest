@@ -50,13 +50,16 @@ import { SnackbarComponent } from './general/snackbar/snackbar.component';
 import { CpiComponent } from './general/dialogs/cpi/cpi.component';
 import { ShareResourceComponent } from './pages/share-resource/share-resource.component';
 import { ManageResourcesComponent } from './pages/manage-resources/manage-resources.component';
-import { TruncatePipe } from './pipe/truncate';
+import { TruncatePipe } from './pipes/truncate';
 import { DrComponent } from './general/dialogs/dr/dr.component';
 import { ResourceComponent } from './general/resource/resource.component';
 import { ViewResourceComponent } from './pages/view-resource/view-resource.component';
 import { EditResourceComponent } from './pages/edit-resource/edit-resource.component';
 import { CollectionComponent } from './general/collection/collection.component';
 import { ViewCollectionComponent } from './pages/view-collection/view-collection.component';
+import { CustomButtonComponent } from './components/custom-button/custom-button.component';
+import { MainComponent } from './layouts/main/main.component';
+import { NoAuthComponent } from './layouts/no-auth/no-auth.component';
 
 @NgModule({
   declarations: [
@@ -80,7 +83,10 @@ import { ViewCollectionComponent } from './pages/view-collection/view-collection
     ViewResourceComponent,
     EditResourceComponent,
     CollectionComponent,
-    ViewCollectionComponent
+    ViewCollectionComponent,
+    CustomButtonComponent,
+    MainComponent,
+    NoAuthComponent
   ],
   imports: [
     BrowserModule,

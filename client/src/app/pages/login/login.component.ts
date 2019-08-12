@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { LoginService } from '@services/auth/login.service';
 import { CommunicationService } from '@services/general/communication.service';
 import { SnackbarService } from '@services/general/snackbar.service';
+import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-login',
@@ -14,6 +15,9 @@ export class LoginComponent implements OnInit {
   loginForm: FormGroup;
   loggingIn = false;
   isLoading = false;
+
+  // Icons
+  faArrowRight = faArrowRight;
 
   constructor(private router: Router,
               private fb: FormBuilder,
@@ -48,7 +52,7 @@ export class LoginComponent implements OnInit {
           class: 'green-snackbar',
         });
         this.communicationService.changeAuthState(true);
-        this.router.navigate(['feed']);
+        this.router.navigate(['']);
       } else {
         this.snackbarService.openSnackBar({
           message: {
