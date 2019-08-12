@@ -16,7 +16,7 @@ $image-height: 300px;
 		padding: 25px;
 		position: relative;
 		
-		.mobile-bg {
+		.mobile-bg-signup {
 			width: $image-width;
 			position: fixed;
 			top: 0;
@@ -26,6 +26,29 @@ $image-height: 300px;
 				position: fixed;
 				top: -7rem;
 				right: -2rem;
+				width: $image-width;
+				height: $image-height;
+				background-color: rgba(255, 162, 90, .1);
+				border-radius: 50%;
+			}
+
+			img {
+				width: 100%;
+			}
+		}
+
+		.mobile-bg-login {
+			width: $image-width;
+			position: fixed;
+			bottom: -13rem;
+			left: 50%;
+			transform: translateX(-50%);
+
+			.circle {
+				position: fixed;
+				bottom: -1rem;
+				left: 2rem;
+				transform: translateX(-50%);
 				width: $image-width;
 				height: $image-height;
 				background-color: rgba(255, 162, 90, .1);
@@ -122,7 +145,11 @@ $image-height: 300px;
 	.no-auth-layout {
 		grid-template-columns: 1fr 1fr;
 		.left {
-			.mobile-bg {
+			.mobile-bg-signup {
+				display: none;
+			}
+
+			.mobile-bg-login {
 				display: none;
 			}
 		}

@@ -3,10 +3,16 @@
 
 <div class="no-auth-layout">
     <div class="left">
-        <div class="mobile-bg">
+        <div class="mobile-bg-signup" *ngIf="currentUrl === '/signup'">
             <div class="circle"></div>
             <img [src]="image" alt="Mountains">
         </div>
+
+        <div class="mobile-bg-login" *ngIf="currentUrl === '/login'">
+            <div class="circle"></div>
+            <img [src]="image" alt="Mountains">
+        </div>
+
         <h1>Everest</h1>
         <p>Free academic resoures curated by the community
             for the community
