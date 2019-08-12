@@ -46,7 +46,7 @@ export class MainComponent implements OnInit, OnDestroy {
 
   logout() {
     this.loginService.logout();
-    this.router.navigate(['welcome/login']);
+    this.router.navigate(['login']);
     this.isLoggedIn = false;
   }
 
