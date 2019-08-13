@@ -33,7 +33,7 @@ const routes: Routes = [
         component: ShareResourceComponent,
       },
       {
-        path: 'manage-resources',
+        path: 'manage',
         children: [
           {
             path: '',
@@ -73,13 +73,13 @@ const routes: Routes = [
         component: SignupComponent
       }
   ]
-  }, 
+  },
   {
     path: '**',
     redirectTo: '404'
   },
   {
-    path: '**',
+    path: '404',
     component: PageNotFoundComponent
   },
 ];

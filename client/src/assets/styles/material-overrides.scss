@@ -1,12 +1,31 @@
 .mat-form-field-appearance-outline {
-    .mat-form-field-outline {
-        box-shadow: 0 10px 16px rgba(0, 0, 0, .1);
-        background-color: white;
-        border-radius: 4px;
-        color: white;
-    }
-    
-    .mat-form-field-outline-thick {
-        color: rgb(72, 26, 137) !important;
-    }
+  .mat-form-field-outline {
+    box-shadow: 0 10px 16px rgba(0, 0, 0, .1);
+    background-color: white;
+    border-radius: 4px;
+    color: white;
+  }
+
+  .mat-form-field-outline-thick {
+    color: rgb(72, 26, 137) !important;
+  }
+}
+
+.mat-drawer-content {
+  background-color: #DEE8FF;
+}
+
+mat-nav-list {
+  min-width: 200px;
+
+  a {
+    display: block;
+    padding: 15px 0;
+  }
+}
+
+.mat-fab {
+  .mat-button-wrapper {
+    line-height: 27px !important;
+  }
 }

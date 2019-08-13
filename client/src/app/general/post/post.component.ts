@@ -53,10 +53,17 @@ export class PostComponent implements OnInit {
     private collectionService: CollectionService) { }
 
   async ngOnInit() {
-    await this.populatePost();
-    await this.getUserImage(this.data.username);
-    this.checkIfDescriptionTooLong(this.description);
-    await this.checkIfPostInCollection(this.data._id);
+    try {
+      await Promise.all([
+        this.populatePost(),
+        this.getUserImage(this.data.username),
+        this.checkIfPostInCollection(this.data._id),
+        this.init_comment_form(),
+        this.checkIfDescriptionTooLong(this.description)
+      ]);
+    } catch (err) {
+      throw new Error(err);
+    }
   }
 
   async populatePost() {
@@ -69,7 +76,6 @@ export class PostComponent implements OnInit {
     this.image = this.data.image;
     this.timestamp = moment(this.data.timestamp).fromNow();
     this.allComments = this.data.comments;
-    this.init_comment_form();
   }
 
   async getUserImage(username) {
@@ -84,7 +90,7 @@ export class PostComponent implements OnInit {
     }
   }
 
-  init_comment_form() {
+  async init_comment_form() {
     this.commentForm = this.fb.group({
       comment: ['']
     });
@@ -135,7 +141,7 @@ export class PostComponent implements OnInit {
     });
   }
 
-  checkIfDescriptionTooLong(text: string) {
+  async checkIfDescriptionTooLong(text: string) {
     if (text.length > this.truncateValue) {
       this.isSeeMore = true;
     }

@@ -37,7 +37,7 @@ export class ViewResourceComponent implements OnInit {
   }
 
   goToEdit() {
-    this.router.navigate(['/manage-resources/resource/edit', this.id]);
+    this.router.navigate(['/manage/resource/edit', this.id]);
   }
 
 }

@@ -25,7 +25,8 @@ export class MainComponent implements OnInit, OnDestroy {
 
   private mobileQueryListener: () => void;
 
-  constructor(changeDetectorRef: ChangeDetectorRef,
+  constructor(
+    changeDetectorRef: ChangeDetectorRef,
     media: MediaMatcher,
     private router: Router,
     private loginService: LoginService,

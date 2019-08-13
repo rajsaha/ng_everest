@@ -12,7 +12,7 @@
                 <button mat-menu-item routerLink="/profile" routerLinkActive="active">
                     <fa-icon [icon]="faUser"></fa-icon>&nbsp;&nbsp;View Profile
                 </button>
-                <button mat-menu-item routerLink="/manage-resources" routerLinkActive="active">
+                <button mat-menu-item routerLink="/manage" routerLinkActive="active">
                     <fa-icon [icon]="faStream"></fa-icon>&nbsp;&nbsp;Manage Resources
                 </button>
                 <button mat-menu-item (click)="logout()">
@@ -26,7 +26,7 @@
         <mat-sidenav #snav [mode]="mobileQuery.matches ? 'over' : 'side'" [fixedInViewport]="mobileQuery.matches"
             fixedTopGap="56">
             <mat-nav-list>
-                <a routerLink="/feed" routerLinkActive="active-sidenav">
+                <a routerLink="/" routerLinkActive="active-sidenav">
                     <fa-icon [icon]="faStream"></fa-icon>&nbsp;&nbsp;Feed
                 </a>
                 <a routerLink="/share-resource" routerLinkActive="active-sidenav">
