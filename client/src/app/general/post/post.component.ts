@@ -126,8 +126,7 @@ export class PostComponent implements OnInit {
       data: {
         id: this.id,
         url: this.url,
-        title: this.title,
-        image: this.image
+        title: this.title
       }
     });
 

@@ -25,12 +25,19 @@ export class AtcComponent implements OnInit {
     private snackbarService: SnackbarService,
     private fb: FormBuilder) { }
 
-  ngOnInit() {
+  async ngOnInit() {
     this.username = localStorage.getItem('username');
-    this.getCollectionNames();
-    this.checkForResourceInCollection();
-    this.initAddToCollectionForm();
-    this.getCollectionTitle(this.data.id);
+
+    try {
+      await Promise.all([
+        this.getCollectionNames(),
+        this.checkForResourceInCollection(),
+        this.initAddToCollectionForm(),
+        this.getCollectionTitle(this.data.id)
+      ]);
+    } catch (err) {
+      throw new Error(err);
+    }
   }
 
   onNoClick() {
@@ -41,7 +48,7 @@ export class AtcComponent implements OnInit {
     this.dialogRef.close();
   }
 
-  initAddToCollectionForm() {
+  async initAddToCollectionForm() {
     this.addToCollectionForm = this.fb.group({
       collectionName: ['']
     });

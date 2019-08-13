@@ -1,14 +1,10 @@
-<h1 mat-dialog-title>Add to Collection</h1>
-<div class="dialog-image">
-  <img [src]="data.image" alt="Image">
-</div>
 <p class="dialog-title">
   <strong>{{ data.title }}</strong>
 </p>
 <form [formGroup]="addToCollectionForm">
   <div mat-dialog-content>
     <mat-form-field appearance="outline">
-      <mat-label>Collections</mat-label>
+      <mat-label>Add to Collection</mat-label>
       <input type="text" placeholder="Select or Create New" matInput [matAutocomplete]="auto"
         formControlName="collectionName">
       <mat-autocomplete #auto="matAutocomplete">
