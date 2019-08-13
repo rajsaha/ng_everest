@@ -30,14 +30,13 @@ export class ManageResourcesComponent implements OnInit {
     private collectionService: CollectionService,
     private utilityService: UtilityService) { }
 
-  ngOnInit() {
+  async ngOnInit() {
     this.username = localStorage.getItem('username');
-    this.initForms();
-    this.getAllResources();
-    this.getAllCollections();
+
+    await Promise.all([this.initForms(), this.getAllResources(), this.getAllCollections()]);
   }
 
-  initForms() {
+  async initForms() {
     this.resourceSearchForm = this.fb.group({
       query: ['']
     });

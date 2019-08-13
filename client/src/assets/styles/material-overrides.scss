@@ -3,7 +3,8 @@
     box-shadow: 0 10px 16px rgba(0, 0, 0, .1);
     background-color: white;
     border-radius: 4px;
-    color: white;
+    color: transparent;
+    transition: opacity 0s !important;
   }
 
   .mat-form-field-outline-thick {
