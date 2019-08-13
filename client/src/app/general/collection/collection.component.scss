@@ -4,65 +4,69 @@ $block-radius: 5px;
 $block-border: 1px solid white;
 
 .collection-container {
-    border: 1px solid rgb(235, 235, 235);
-    border-radius: 5px;
-    cursor: pointer;
-    display: inline-block;
-    margin: 0.5rem;
-    transition: all 0.2s ease-in-out;
+  border: 1px solid rgb(235, 235, 235);
+  border-radius: 5px;
+  cursor: pointer;
+  display: inline-block;
+  margin: 0.5rem;
+  transition: all 0.2s ease-in-out;
 
-    &:hover {
-        box-shadow: 0 8px 20px 0 rgba(218, 224, 235, 0.6);
+  &:hover {
+    box-shadow: 0 8px 20px 0 rgba(218, 224, 235, 0.6);
+  }
+
+  .collection {
+    display: inline-grid;
+    grid-template-columns: $block-width $block-width;
+    place-self: center stretch;
+
+    .block {
+      background-color: rgba(231, 231, 231, 1);
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-position: center center;
+      width: $block-width;
+      height: $block-height;
+
+      &:nth-child(1) {
+        border-right: $block-border;
+        border-bottom: $block-border;
+        border-top-left-radius: $block-radius;
+        border-bottom-left-radius: 0;
+        border-top-right-radius: 0;
+        border-bottom-right-radius: 0;
+      }
+
+      &:nth-child(2) {
+        border-left: $block-border;
+        border-top-left-radius: 0;
+        border-bottom-left-radius: 0;
+        border-top-right-radius: $block-radius;
+        border-bottom-right-radius: 0;
+      }
+
+      &:nth-child(4) {
+        border-left: $block-border;
+      }
     }
-    
-    .collection {
-        display: inline-grid;
-        grid-template-columns: $block-width $block-width;
-        margin-bottom: 5px;
-        place-self: center stretch;
-        
-        .block {
-            background-color: rgba(231, 231, 231, 1);
-            background-size: cover;
-            background-repeat: no-repeat;
-            background-position: center center;
-            width: $block-width;
-            height: $block-height;
+  }
 
-            &:nth-child(1) {
-                border-right: $block-border;
-                border-bottom: $block-border;
-                border-top-left-radius: $block-radius;
-                border-bottom-left-radius: 0;
-                border-top-right-radius: 0;
-                border-bottom-right-radius: 0;
-            }
-
-            &:nth-child(2) {
-                border-left: $block-border;
-                border-top-left-radius: 0;
-                border-bottom-left-radius: 0;
-                border-top-right-radius: $block-radius;
-                border-bottom-right-radius: 0;
-            }
-
-            &:nth-child(4) {
-                border-left: $block-border;
-            }
-        }
-    }
-
+  .bottom-section {
+    background-color: white;
+    border-bottom-right-radius: 5px;
+    border-bottom-left-radius: 5px;
     p {
-        padding-left: 10px;
-        margin-top: 8px;
-        margin-bottom: 0;
+      padding: 10px 0 0 10px;
+      margin-top: 0;
+      margin-bottom: 0;
 
-        &.collection-name {
-            font-weight: bold;
-        }
+      &.collection-name {
+        font-weight: bold;
+      }
 
-        &.no-of-resources {
-            padding-bottom: 15px;
-        }
+      &.no-of-resources {
+        padding-bottom: 15px;
+      }
     }
+  }
 }
