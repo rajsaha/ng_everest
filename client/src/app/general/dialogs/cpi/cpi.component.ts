@@ -35,10 +35,12 @@ export class CpiComponent implements OnInit {
     private snackbarService: SnackbarService,
     private profileService: ProfileService) {
     this.profileService.getProfilePhoto(data.username).then((res) => {
-      this.userImage = res.image.image.link ? res.image.image.link : this.defaultProfileImage;
-      this.deleteHash = res.image.image.deleteHash;
-      this.imageId = res.image.image.id;
-      this.imageFromDB = res.image.image.link ? true : false;
+      if (res.image.image) {
+        this.userImage = res.image.image.link ? res.image.image.link : this.defaultProfileImage;
+        this.deleteHash = res.image.image.deleteHash;
+        this.imageId = res.image.image.id;
+        this.imageFromDB = res.image.image.link ? true : false;
+      }
     });
   }
 

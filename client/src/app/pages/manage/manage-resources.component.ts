@@ -33,7 +33,7 @@ export class ManageResourcesComponent implements OnInit {
   async ngOnInit() {
     this.username = localStorage.getItem('username');
 
-    await Promise.all([this.initForms(), this.getAllResources(), this.getAllCollections()]);
+    await Promise.all([this.initForms(), this.getUserResources(), this.getAllCollections()]);
   }
 
   async initForms() {
@@ -46,9 +46,9 @@ export class ManageResourcesComponent implements OnInit {
     });
   }
 
-  async getAllResources() {
+  async getUserResources() {
     try {
-      const response = await this.resourceService.getAllResources({username: this.username});
+      const response = await this.resourceService.getUserResources({username: this.username});
       this.resources = response.resources;
     } catch (err) {
       console.error(err);

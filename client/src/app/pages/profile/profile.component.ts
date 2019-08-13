@@ -23,7 +23,7 @@ export class ProfileComponent implements OnInit {
   website: string;
   bio: string;
   email: string;
-  image: string;
+  image = '../../../assets/portrait.jpg';
   uploadedImage: string;
   imageId: string;
   deleteHash: string;
@@ -71,12 +71,12 @@ export class ProfileComponent implements OnInit {
     private validationService: ValidationService,
     public dialog: MatDialog) { }
 
-  ngOnInit() {
+  async ngOnInit() {
     this.username = localStorage.getItem('username');
     this.userId = localStorage.getItem('userId');
 
     // Get User Data
-    this.getUserData();
+    await this.getUserData();
 
     // Init Password Form
     this.initPasswordForm();
@@ -154,10 +154,14 @@ export class ProfileComponent implements OnInit {
     this.isLoading = true;
     this.isProfileSaveButtonDisabled = true;
     this.interests = res.userData.interests;
-    this.image = res.userData.image.link ? res.userData.image.link : this.defaultProfileImage;
-    this.uploadedImage = res.userData.image.link;
-    this.imageId = res.userData.image.id;
-    this.deleteHash = res.userData.image.deleteHash;
+
+    if (res.userData.image) {
+      this.image = res.userData.image.link ? res.userData.image.link : this.defaultProfileImage;
+      this.uploadedImage = res.userData.image.link;
+      this.imageId = res.userData.image.id;
+      this.deleteHash = res.userData.image.deleteHash;
+    }
+    
     this.initFormData({
       username: res.userData.username,
       name: res.userData.name,

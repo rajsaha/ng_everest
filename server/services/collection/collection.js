@@ -155,9 +155,10 @@ const Collection = (() => {
         }
     }
 
-    const checkForResourceInAnyCollection = async (id) => {
+    const checkForResourceInAnyCollection = async (data) => {
         const response = await _Collection.find({
-            resources: id
+            resources: data.id,
+            username: data.username
         }).exec();
         if (response.length > 0) {
             return {

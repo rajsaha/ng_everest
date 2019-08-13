@@ -41,7 +41,7 @@ router.post('/get-collection-title-by-resource-id', checkIfAuthenticated, async 
 
 router.post('/check-for-resource-in-collection', checkIfAuthenticated, async (req, res, next) => {
     try {
-        const response = await Collection.checkForResourceInAnyCollection(req.body.id);
+        const response = await Collection.checkForResourceInAnyCollection(req.body);
         res.status(200).json(response);
     } catch (err) {
         console.error(`Error: ${err.message}`);

@@ -7,9 +7,18 @@ const ResourceEdit = require('../../../services/resource/edit');
 const checkIfAuthenticated = require('../../../services/auth/checkIfAuthorized');
 
 // * Get calls
-router.post('/get/all', checkIfAuthenticated, async (req, res, next) => {
+router.get('/get/all', checkIfAuthenticated, async (req, res, next) => {
     try {
-        const response = await ResourceGet.getAllResources(req.body);
+        const response = await ResourceGet.getAllResources();
+        res.status(200).json(response);
+    } catch (err) {
+        console.error(`Error: ${err.message}`);
+    }
+});
+
+router.get('/get/all/:username', checkIfAuthenticated, async (req, res, next) => {
+    try {
+        const response = await ResourceGet.getUserResources(req.params.username);
         res.status(200).json(response);
     } catch (err) {
         console.error(`Error: ${err.message}`);

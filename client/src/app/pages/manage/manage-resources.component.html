@@ -20,6 +20,10 @@
         <app-resource *ngFor="let resource of resources" [data]="resource" (drResponse)="drResponseHandler($event)">
         </app-resource>
       </div>
+
+      <div *ngIf="resources && resources.length === 0">
+        You haven't shared any resources yet
+      </div>
     </div>
   </mat-tab>
 

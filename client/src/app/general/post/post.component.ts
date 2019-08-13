@@ -17,6 +17,8 @@ import { CollectionService } from '@services/collection/collection.service';
 export class PostComponent implements OnInit {
   @Input() data: any;
 
+  currentUser: string;
+
   // Data
   id: string;
   username: string;
@@ -53,11 +55,12 @@ export class PostComponent implements OnInit {
     private collectionService: CollectionService) { }
 
   async ngOnInit() {
+    this.currentUser = localStorage.getItem('username');
     try {
       await Promise.all([
         this.populatePost(),
         this.getUserImage(this.data.username),
-        this.checkIfPostInCollection(this.data._id),
+        this.checkIfPostInCollection(this.data._id, this.data.username),
         this.init_comment_form(),
         this.checkIfDescriptionTooLong(this.description)
       ]);
@@ -83,8 +86,8 @@ export class PostComponent implements OnInit {
     this.userImage = result.image;
   }
 
-  async checkIfPostInCollection(id: string) {
-    const result = await this.collectionService.checkForResourceInCollection({ id });
+  async checkIfPostInCollection(id: string, username: string) {
+    const result = await this.collectionService.checkForResourceInCollection({ id, username: this.currentUser });
     if (result.isInCollection) {
       this.isInCollection = true;
     }

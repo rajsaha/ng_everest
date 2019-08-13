@@ -30,9 +30,18 @@ export class ResourceService {
     });
   }
 
-  getAllResources(data: any): Promise<any> {
+  getUserResources(data: any): Promise<any> {
     return new Promise(resolve => {
-      this.http.post(`${ENV.API_URL}/resource/get/all`, data)
+      this.http.get(`${ENV.API_URL}/resource/get/all/${data.username}`)
+        .subscribe((response: any) => {
+          resolve(response);
+        });
+    });
+  }
+
+  getAllResources(): Promise<any> {
+    return new Promise(resolve => {
+      this.http.get(`${ENV.API_URL}/resource/get/all`)
         .subscribe((response: any) => {
           resolve(response);
         });

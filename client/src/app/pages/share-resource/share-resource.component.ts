@@ -122,7 +122,7 @@ export class ShareResourceComponent implements OnInit {
             },
             class: 'green-snackbar',
           });
-          this.router.navigate(['/feed']);
+          this.router.navigate(['/']);
         } else {
           this.snackbarService.openSnackBar({
             message: {

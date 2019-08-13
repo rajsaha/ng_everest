@@ -26,8 +26,10 @@
       <fa-icon [icon]="faPlus"></fa-icon> Add to Collection
     </div>
 
-    <div class="collection-badge-true" *ngIf="isInCollection" matRipple (click)="openCollectionsDialog()">
-      &nbsp;&nbsp;&nbsp;&nbsp;Added
+    <div class="collection-badge-true-parent">
+      <div class="collection-badge-true" *ngIf="isInCollection" matRipple (click)="openCollectionsDialog()">
+        &nbsp;&nbsp;&nbsp;&nbsp;Added
+      </div>
     </div>
   </div>
 

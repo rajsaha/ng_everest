@@ -3,9 +3,22 @@ const User = require('../../models/User');
 const mongoose = require('mongoose');
 
 const ResourceGet = (() => {
-    const getAllResources = async (data) => {
+    const getAllResources = async () => {
         try {
-            const resources = await _Resource.find({username: data.username}).sort({timestamp: -1}).exec();
+            const resources = await _Resource.find().sort({timestamp: -1}).exec();
+            return {
+                resources: resources
+            }
+        } catch (err) {
+            return {
+                error: err.message
+            }
+        }
+    }
+
+    const getUserResources = async (username) => {
+        try {
+            const resources = await _Resource.find({username}).sort({timestamp: -1}).exec();
             return {
                 resources: resources
             }
@@ -92,6 +105,7 @@ const ResourceGet = (() => {
 
     return {
         getAllResources,
+        getUserResources,
         getResource,
         getMultipleResources,
         getFourImages,
