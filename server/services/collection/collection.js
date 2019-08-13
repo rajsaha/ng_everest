@@ -184,6 +184,14 @@ const Collection = (() => {
         return false;
     }
 
+    const deleteCollection = async (id) => {
+        const response = await _Collection.deleteOne({_id: id}).exec();
+        if (response) {
+            return true;
+        }
+        return false;
+    }
+
     return {
         getCollections,
         getCollectionNames,
@@ -193,7 +201,8 @@ const Collection = (() => {
         pushIntoCollection,
         createCollectionAndPushResource,
         checkForResourceInAnyCollection,
-        deleteResourceFromCollection
+        deleteResourceFromCollection,
+        deleteCollection
     }
 })()
 

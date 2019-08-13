@@ -60,6 +60,7 @@ import { ViewCollectionComponent } from './pages/view-collection/view-collection
 import { CustomButtonComponent } from './components/custom-button/custom-button.component';
 import { MainComponent } from './layouts/main/main.component';
 import { NoAuthComponent } from './layouts/no-auth/no-auth.component';
+import { DcComponent } from './general/dialogs/dc/dc.component';
 
 @NgModule({
   declarations: [
@@ -86,7 +87,8 @@ import { NoAuthComponent } from './layouts/no-auth/no-auth.component';
     ViewCollectionComponent,
     CustomButtonComponent,
     MainComponent,
-    NoAuthComponent
+    NoAuthComponent,
+    DcComponent
   ],
   imports: [
     BrowserModule,
@@ -128,6 +130,6 @@ import { NoAuthComponent } from './layouts/no-auth/no-auth.component';
     }
   ],
   bootstrap: [AppComponent],
-  entryComponents: [AtcComponent, PoComponent, SnackbarComponent, CpiComponent, DrComponent]
+  entryComponents: [AtcComponent, PoComponent, SnackbarComponent, CpiComponent, DrComponent, DcComponent]
 })
 export class AppModule { }

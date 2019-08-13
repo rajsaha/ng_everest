@@ -1,45 +1,35 @@
-$block-width: 50%;
-
 .section-container {
-    .collection-data {
-        .title {
-            position: relative;
-            transition: all 0.2s ease-in-out;
-            &:focus {
-                background-color: white;
-                border-radius: 10px;
-                padding: 15px;
-            }
+  .collection-data {
+    margin-bottom: 25px;
+    .collection-header {
+      display: grid;
+      grid-template-columns: 1fr 20px;
 
-            &:hover {
-                fa-icon {
-                    transition: opacity 0.2s ease-in;
-                    opacity: 1;
-                }
-            }
+      .title {
+        transition: all 0.2s ease-in-out;
 
-            &:focus {
-                fa-icon {
-                    opacity: 0;
-                }
-            }
+        &:focus {
+          background-color: white;
+          border-radius: 10px;
+          padding: 15px;
 
-            fa-icon {
-                position: absolute;
-                right: 15px;
-                top: 15px;
-                color: rgba(0, 0, 0, .6);
-                margin-left: 5px;
-                font-size: 15px;
-                opacity: 0;
-                margin-top: -5px;
-            }
+          .fa-edit {
+            opacity: 0;
+          }
         }
+      }
 
-        .resources {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            grid-gap: 10px;
-        }
+      .fa-edit {
+          color: rgba(0, 0, 0, .7);
+          grid-column: span end;
+          align-self: center;
+          justify-self: center;
+          font-size: 12px;
+      }
     }
+
+    .delete {
+      width: 250px;
+    }
+  }
 }

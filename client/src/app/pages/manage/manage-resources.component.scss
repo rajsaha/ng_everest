@@ -15,14 +15,6 @@
   }
 }
 
-.resource-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(286px, 1fr));
-  grid-auto-flow: dense;
-  grid-column-gap: 5px;
-  justify-items: center;
-}
-
 .list-of-collections {
   max-width: 100%;
   display: grid;

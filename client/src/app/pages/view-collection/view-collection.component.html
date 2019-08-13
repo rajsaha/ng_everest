@@ -1,6 +1,9 @@
 <div class="section-container">
     <div class="collection-data" *ngIf="collection">
-        <h1 class="title" contenteditable="true">{{ collection.title }}<fa-icon [icon]="faPen"></fa-icon></h1>
+        <div class="collection-header">
+            <h1 class="title" contenteditable="true">{{ collection.title }}</h1>
+            <fa-icon class="fa-edit" [icon]="faPen"></fa-icon>
+        </div>
 
         <div class="resource-grid">
             <app-resource 
@@ -13,6 +16,10 @@
 
         <div *ngIf="resources.length === 0">
             <p>This collection is empty</p>
+        </div>
+
+        <div class="delete" (click)="openDcDialog()">
+            <app-custom-button buttonLabel="Delete Collection" size="small" backgroundColor="delete"></app-custom-button>
         </div>
     </div>
 </div>

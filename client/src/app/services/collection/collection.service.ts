@@ -71,4 +71,13 @@ export class CollectionService {
         });
     });
   }
+
+  deleteCollection(id: string): Promise<any> {
+    return new Promise(resolve => {
+      this.http.get(`${ENV.API_URL}/collection/delete-collection/${id}`)
+        .subscribe((response: any) => {
+          resolve(response);
+        });
+    });
+  }
 }

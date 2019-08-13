@@ -4,13 +4,11 @@ $button-text-color: white;
 
 .custom-button {
     border-radius: 50px;
-    background-color: $button-bg-color;
     border: 0;
     box-shadow: 0 13px 26px rgba(255, 121, 90, 0.5);
     color: $button-text-color;
     cursor: pointer;
     font-family: 'Montserrat', sans-serif;
-    padding: 15px 100px;
     transition: all 0.2s ease-in;
     width: 100%;
 
