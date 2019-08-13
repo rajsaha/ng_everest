@@ -64,7 +64,8 @@ export class ProfileComponent implements OnInit {
 
   passwordForm: FormGroup;
 
-  constructor(private fb: FormBuilder,
+  constructor(
+    private fb: FormBuilder,
     private profileService: ProfileService,
     private snackbarService: SnackbarService,
     private validationService: ValidationService,

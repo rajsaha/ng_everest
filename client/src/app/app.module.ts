@@ -49,7 +49,7 @@ import { PageNotFoundComponent } from './pages/page-not-found/page-not-found.com
 import { SnackbarComponent } from './general/snackbar/snackbar.component';
 import { CpiComponent } from './general/dialogs/cpi/cpi.component';
 import { ShareResourceComponent } from './pages/share-resource/share-resource.component';
-import { ManageResourcesComponent } from './pages/manage-resources/manage-resources.component';
+import { ManageResourcesComponent } from './pages/manage/manage-resources.component';
 import { TruncatePipe } from './pipes/truncate';
 import { DrComponent } from './general/dialogs/dr/dr.component';
 import { ResourceComponent } from './general/resource/resource.component';
