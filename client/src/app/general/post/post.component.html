@@ -50,7 +50,10 @@
 
   <!-- * Controls -->
   <div class="controls">
-    <button mat-button class="btn btn-like" [ngClass]="{ 'is-liked': isLiked }" (click)="isLiked = !isLiked">
+    <button *ngIf="isLiked" mat-button class="btn btn-like is-liked" (click)="unlike()">
+      <fa-icon [icon]="faThumbsUp"></fa-icon>
+    </button>
+    <button *ngIf="!isLiked" mat-button class="btn btn-like" (click)="like()">
       <fa-icon [icon]="faThumbsUp"></fa-icon>
     </button>
     <button mat-button class="btn btn-comment" [ngClass]="{ 'show-comments': showComments }"

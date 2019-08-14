@@ -71,4 +71,32 @@ export class UserService {
         });
     });
   }
+
+  // * Like and unlike post
+  likePost(data: any): Promise<any> {
+    return new Promise(resolve => {
+      this.http.post(`${ENV.API_URL}/user/like`, data)
+        .subscribe((response: any) => {
+          resolve(response);
+        });
+    });
+  }
+
+  unLikePost(data: any): Promise<any> {
+    return new Promise(resolve => {
+      this.http.post(`${ENV.API_URL}/user/unlike`, data)
+        .subscribe((response: any) => {
+          resolve(response);
+        });
+    });
+  }
+
+  checkIfPostIsLiked(data: any): Promise<any> {
+    return new Promise(resolve => {
+      this.http.post(`${ENV.API_URL}/user/check-if-post-liked`, data)
+        .subscribe((response: any) => {
+          resolve(response);
+        });
+    });
+  }
 }

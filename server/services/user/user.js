@@ -262,7 +262,7 @@ const Profile = (() => {
     const likePost = async (data) => {
         try {
             const query = {
-                _id: data.id
+                username: data.username
             };
             const update = {
                 $push: {
@@ -287,17 +287,38 @@ const Profile = (() => {
     }
 
     const unlikePost = async (data) => {
-        const response = await User.updateOne({
-            _id: data.id
-        }, {
-            $pull: {
-                resources: data.resourceId
+        try {
+            const response = await User.updateOne({
+                username: data.username
+            }, {
+                $pull: {
+                    recommends: data.resourceId
+                }
+            }).exec();
+            if (response) {
+                return true;
             }
-        }).exec();
-        if (response) {
-            return true;
+            return false;
+        } catch (err) {
+            return {
+                error: err.message
+            };
         }
-        return false;
+    }
+
+    const checkIfPostIsLiked = async (data) => {
+        try {
+            const response = await User.find({username: data.username, recommends: data.resourceId});
+            if (response.length > 0) {
+                return true;
+            }
+
+            return false;
+        } catch (err) {
+            return {
+                error: err.message
+            };
+        }
     }
 
     return {
@@ -309,7 +330,8 @@ const Profile = (() => {
         getProfilePhoto,
         changePassword,
         likePost,
-        unlikePost
+        unlikePost,
+        checkIfPostIsLiked
     }
 })();
 

@@ -7,6 +7,7 @@ import { AtcComponent } from '../dialogs/atc/atc.component';
 import { PoComponent } from '../dialogs/po/po.component';
 import { ResourceService } from '@services/resource/resource.service';
 import { CollectionService } from '@services/collection/collection.service';
+import { UserService } from '@services/user/user.service';
 
 @Component({
   selector: 'app-post',
@@ -52,6 +53,7 @@ export class PostComponent implements OnInit {
     private fb: FormBuilder,
     public dialog: MatDialog,
     private resourceService: ResourceService,
+    private userService: UserService,
     private collectionService: CollectionService) { }
 
   async ngOnInit() {
@@ -61,6 +63,7 @@ export class PostComponent implements OnInit {
         this.populatePost(),
         this.getUserImage(this.data.username),
         this.checkIfPostInCollection(this.data._id, this.data.username),
+        this.checkIfPostIsLiked(this.data._id, this.currentUser),
         this.init_comment_form(),
         this.checkIfDescriptionTooLong(this.description)
       ]);
@@ -91,6 +94,16 @@ export class PostComponent implements OnInit {
     if (result.isInCollection) {
       this.isInCollection = true;
     }
+  }
+
+  async checkIfPostIsLiked(id: string, username: string) {
+    const result = await this.userService.checkIfPostIsLiked({resourceId: id, username});
+    if (result) {
+      this.isLiked = true;
+      return;
+    }
+
+    this.isLiked = false;
   }
 
   async init_comment_form() {
@@ -124,8 +137,26 @@ export class PostComponent implements OnInit {
     });
   }
 
-  async toggleLike() {
-    // *
+  async like() {
+    try {
+      const result = await this.userService.likePost({username: this.currentUser, resourceId: this.id});
+      if (result) {
+        this.isLiked = true;
+      }
+    } catch (err) {
+      console.error(err);
+    }
+  }
+
+  async unlike() {
+    try {
+      const result = await this.userService.unLikePost({username: this.currentUser, resourceId: this.id});
+      if (result) {
+        this.isLiked = false;
+      }
+    } catch (err) {
+      console.error(err);
+    }
   }
 
   openCollectionsDialog() {
