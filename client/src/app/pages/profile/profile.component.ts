@@ -161,7 +161,7 @@ export class ProfileComponent implements OnInit {
       this.imageId = res.userData.image.id;
       this.deleteHash = res.userData.image.deleteHash;
     }
-    
+
     this.initFormData({
       username: res.userData.username,
       name: res.userData.name,

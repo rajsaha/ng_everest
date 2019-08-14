@@ -1,4 +1,5 @@
 const User = require('../../models/User');
+const Imgur = require('../../services/imgur/imgur');
 const axios = require('axios');
 const bcryptjs = require('bcryptjs');
 
@@ -8,8 +9,8 @@ const Profile = (() => {
             const user = await User.findOne({
                 username: username
             }, {
-                    'password': 0
-                }).exec();
+                'password': 0
+            }).exec();
             return {
                 userData: user
             }
@@ -67,10 +68,10 @@ const Profile = (() => {
             const user = await User.updateOne({
                 _id: data.id
             }, {
-                    $pull: {
-                        interests: data.interest
-                    }
-                }).exec();
+                $pull: {
+                    interests: data.interest
+                }
+            }).exec();
             return {
                 message: `${data.interest} removed`
             }
@@ -82,16 +83,12 @@ const Profile = (() => {
         }
     }
 
-    const saveProfilePhoto = async (id, data) => {
+    const saveProfilePhoto = async (id, data, username) => {
         try {
-            const replacedBase64String = data.replace(/^data:image\/[a-z]+;base64,/, "");
-            const savePhoto = axios.create({
-                headers: {
-                    'Authorization': `Client-ID ${process.env.CLIENT_ID}`
-                }
-            });
-
-            const savePhotoResponse = await savePhoto.post(process.env.IMAGE_UPLOAD_URL, replacedBase64String);
+            // * Delete current image if any and save new image
+            const response = await Promise.all([deleteCurrentUserImage(username), Imgur.saveImage(data)]);
+            const savePhotoResponse = response[1];
+            
             const query = {
                 _id: id
             };
@@ -111,7 +108,6 @@ const Profile = (() => {
             };
 
             await User.updateOne(query, update).exec();
-            console.log(`Image uploaded with id: ${savePhotoResponse.data.data.id}`);
             return {
                 message: {
                     error: false,
@@ -177,7 +173,9 @@ const Profile = (() => {
 
     const getProfilePhoto = async (username) => {
         try {
-            const user = await User.findOne({username: username}).select('image').exec();
+            const user = await User.findOne({
+                username: username
+            }).select('image').exec();
             return {
                 image: user
             }
@@ -190,7 +188,9 @@ const Profile = (() => {
 
     const changePassword = async (data) => {
         try {
-            const user = await User.findOne({ username: data.username }).exec();
+            const user = await User.findOne({
+                username: data.username
+            }).exec();
 
             // * If no username found
             if (!user) {
@@ -216,8 +216,10 @@ const Profile = (() => {
                         upsert: true
                     }
                 };
-                
-                await User.updateOne({ username: data.username }, update).exec();
+
+                await User.updateOne({
+                    username: data.username
+                }, update).exec();
                 return {
                     error: false,
                     status: 200,
@@ -229,6 +231,27 @@ const Profile = (() => {
                     error: 'Username/password invalid'
                 }
             }
+        } catch (err) {
+            return {
+                error: err.message
+            };
+        }
+    }
+
+    const deleteCurrentUserImage = async (username) => {
+        try {
+            // * Get user image
+            const user = await User.findOne({
+                username
+            }).select('image').exec();
+
+            if (user && user.image) {
+                // * Delete image from imgur
+                await Imgur.deleteImage(user.image.deleteHash);
+                return true;
+            }
+
+            return false;
         } catch (err) {
             return {
                 error: err.message

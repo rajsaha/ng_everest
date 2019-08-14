@@ -84,7 +84,13 @@ export class CpiComponent implements OnInit {
     // * Pre api call
     this.isSavingPhoto = true;
     this.dialogRef.disableClose = true;
-    const response = await this.profileService.saveProfilePhoto({ id: this.userId, image: this.userImage });
+    const response = await this.profileService.saveProfilePhoto(
+      {
+        id: this.userId,
+        image: this.userImage,
+        username: this.data.username
+      }
+    );
 
     // * Post api call
     this.dialogRef.disableClose = false;
