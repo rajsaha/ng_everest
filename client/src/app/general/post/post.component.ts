@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { faThumbsUp, faComment, faPlus, faReply, faEllipsisV } from '@fortawesome/free-solid-svg-icons';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material';
 import * as moment from 'moment';
 import { AtcComponent } from '../dialogs/atc/atc.component';
@@ -108,20 +108,35 @@ export class PostComponent implements OnInit {
 
   async init_comment_form() {
     this.commentForm = this.fb.group({
-      comment: ['']
+      resourceId: [this.id],
+      username: [this.currentUser],
+      comment: ['', Validators.required]
     });
   }
 
-  addComment() {
-    console.log(this.commentForm.value);
+  async addComment() {
+    const result = await this.resourceService.addComment(this.commentForm.value);
+
+    if (result && result.status) {
+      // * Clear textarea
+      this.commentForm.controls.comment.patchValue('');
+
+      // * Add Comment to allComments array
+      this.allComments.push(result.comment);
+    }
   }
 
-  textareaEnterPressed($event: KeyboardEvent) {
+  formatTime(date: Date) {
+    return moment(date).fromNow();
+  }
+
+  async textareaEnterPressed($event: KeyboardEvent) {
     $event.preventDefault();
     $event.stopPropagation();
 
-    // handle form submission
-    console.log(this.commentForm.value);
+    if (this.commentForm.valid) {
+      await this.addComment();
+    }
   }
 
   openPostDialog() {

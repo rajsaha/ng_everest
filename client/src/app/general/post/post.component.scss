@@ -191,6 +191,12 @@
 			.text {
 				margin-bottom: 0;
 			}
+
+			.comment-timestamp {
+				display: block;
+				margin-top: 2px;
+				font-size: 12px;
+			}
 		}
 	}
 
@@ -238,7 +244,7 @@
 
 .is-liked {
 	fa-icon {
-		color: blue !important;
+		color: rgb(54, 54, 252) !important;
 	}
 }
 

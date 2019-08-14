@@ -143,10 +143,50 @@ const EditResource = (() => {
         }
     }
 
+    const addComment = async (data) => {
+        try {
+            const query = {
+                _id: data.resourceId
+            };
+
+            const comment = {
+                username: data.username,
+                content: data.comment,
+                timestamp: Date.now()
+            };
+
+            const update = {
+                $push: {
+                    comments: comment
+                },
+                safe: {
+                    new: true,
+                    upsert: true
+                }
+            };
+            const response = await _Resource.findOneAndUpdate(query, update).exec();
+
+            if (response) {
+                return {
+                    status: true,
+                    comment 
+                };
+            }
+
+            return false;
+        } catch (err) {
+            console.log(err);
+            return {
+                error: err.message
+            };
+        }
+    }
+
     return {
         editResource,
         editResourceCollection,
-        removeTag
+        removeTag,
+        addComment
     }
 })()
 

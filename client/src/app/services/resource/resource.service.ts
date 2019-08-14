@@ -119,4 +119,13 @@ export class ResourceService {
       });
     });
   }
+
+  addComment(data: any): Promise<any> {
+    return new Promise(resolve => {
+      this.http.post(`${ENV.API_URL}/resource/add-comment`, data)
+      .subscribe((response: any) => {
+        resolve(response);
+      });
+    });
+  }
 }

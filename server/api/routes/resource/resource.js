@@ -118,4 +118,14 @@ router.post('/edit-resource-collection', checkIfAuthenticated, async (req, res, 
     }
 });
 
+// * Add Comment
+router.post('/add-comment', checkIfAuthenticated, async (req, res, next) => {
+    try {
+        const response = await ResourceEdit.addComment(req.body);
+        res.status(200).json(response);
+    } catch (err) {
+        console.error(`Error: ${err.message}`);
+    }
+});
+
 module.exports = router;

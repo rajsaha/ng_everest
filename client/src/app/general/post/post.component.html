@@ -67,6 +67,7 @@
     <div class="comment" *ngFor="let comment of allComments">
       <span class="username"><strong>{{ comment.username }}</strong></span>
       <span class="text">{{ comment.content }}</span>
+      <small class="comment-timestamp">{{ formatTime(comment.timestamp) }}</small>
     </div>
   </div>
 
