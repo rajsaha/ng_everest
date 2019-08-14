@@ -64,7 +64,8 @@ export class AtcComponent implements OnInit {
   }
 
   async checkForResourceInCollection() {
-    const response = await this.collectionService.checkForResourceInCollection({ id: this.data.id });
+    const response = await this.collectionService.checkForResourceInCollection({ id: this.data.id, username: this.username });
+    console.log(response);
   }
 
   async getCollectionTitle(resourceId: string) {
@@ -76,13 +77,15 @@ export class AtcComponent implements OnInit {
 
   async submitAddToCollectionForm() {
     if (this.addToCollectionForm.valid) {
-      const response: any = this.resourceService.editResourceCollection({
+      const response: any = await this.resourceService.editResourceCollection({
         collectionName: this.addToCollectionForm.controls.collectionName.value,
         resourceId: this.data.id,
         username: this.username
       });
 
-      if (!response.error) {
+      console.log(response);
+
+      if (response && !response.error) {
         this.snackbarService.openSnackBar({
           message: {
             message: `Resource added to ${this.addToCollectionForm.controls.collectionName.value}`,
