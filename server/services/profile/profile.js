@@ -88,7 +88,7 @@ const Profile = (() => {
             // * Delete current image if any and save new image
             const response = await Promise.all([deleteCurrentUserImage(username), Imgur.saveImage(data)]);
             const savePhotoResponse = response[1];
-            
+
             const query = {
                 _id: id
             };
@@ -252,6 +252,29 @@ const Profile = (() => {
             }
 
             return false;
+        } catch (err) {
+            return {
+                error: err.message
+            };
+        }
+    }
+
+    const addPostToRecommends = async (data) => {
+        try {
+            const query = {
+                _id: data.id
+            };
+            const update = {
+                $push: {
+                    recommends: data.resourceId
+                },
+                safe: {
+                    new: true,
+                    upsert: true
+                }
+            };
+
+            await User.findOneAndUpdate(query, update).exec();
         } catch (err) {
             return {
                 error: err.message

@@ -124,6 +124,10 @@ export class PostComponent implements OnInit {
     });
   }
 
+  async toggleLike() {
+    // *
+  }
+
   openCollectionsDialog() {
     const dialogRef = this.dialog.open(AtcComponent, {
       data: {
