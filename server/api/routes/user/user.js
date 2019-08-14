@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const Profile = require('../../../services/profile/profile');
+const Profile = require('../../../services/user/user');
 const checkIfAuthenticated = require('../../../services/auth/checkIfAuthorized');
 
 router.get('/get-user-data/:username', checkIfAuthenticated, async (req, res, next) => {

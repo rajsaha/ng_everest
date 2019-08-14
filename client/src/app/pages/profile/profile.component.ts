@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
-import { ProfileService } from '@services/profile/profile.service';
+import { UserService } from '@services/user/user.service';
 import { SnackbarService } from '@services/general/snackbar.service';
 import { MatDialog } from '@angular/material';
 import { faEdit, faTrash, faEye, faExternalLinkAlt } from '@fortawesome/free-solid-svg-icons';
@@ -66,7 +66,7 @@ export class ProfileComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private profileService: ProfileService,
+    private userService: UserService,
     private snackbarService: SnackbarService,
     private validationService: ValidationService,
     public dialog: MatDialog) { }
@@ -103,7 +103,7 @@ export class ProfileComponent implements OnInit {
       email: this.profileForm.controls.email.value
     };
 
-    const res = await this.profileService.updateProfileData(data);
+    const res = await this.userService.updateProfileData(data);
 
     if (!res.error) {
       this.snackbarService.openSnackBar({
@@ -126,7 +126,7 @@ export class ProfileComponent implements OnInit {
 
   async changePasswordForm() {
     if (this.passwordForm.valid) {
-      const response = await this.profileService.updatePassword(this.passwordForm.value);
+      const response = await this.userService.updatePassword(this.passwordForm.value);
 
       if (!response.error) {
         this.snackbarService.openSnackBar({
@@ -149,7 +149,7 @@ export class ProfileComponent implements OnInit {
   }
 
   async getUserData() {
-    const res = await this.profileService.getProfileData(this.username);
+    const res = await this.userService.getProfileData(this.username);
 
     this.isLoading = true;
     this.isProfileSaveButtonDisabled = true;
@@ -201,7 +201,7 @@ export class ProfileComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(async (result) => {
-      const imageLink = await this.profileService.getProfilePhoto(this.username);
+      const imageLink = await this.userService.getProfilePhoto(this.username);
       this.image = imageLink.image.image.link ? imageLink.image.image.link : this.defaultProfileImage;
     });
   }
@@ -228,7 +228,7 @@ export class ProfileComponent implements OnInit {
       interest
     };
 
-    const res = await this.profileService.removeInterest(data);
+    const res = await this.userService.removeInterest(data);
 
     if (res.error) {
       this.snackbarService.openSnackBar({

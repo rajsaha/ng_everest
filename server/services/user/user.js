@@ -1,5 +1,5 @@
 const User = require('../../models/User');
-const Imgur = require('../../services/imgur/imgur');
+const Imgur = require('../imgur/imgur');
 const axios = require('axios');
 const bcryptjs = require('bcryptjs');
 
@@ -259,7 +259,7 @@ const Profile = (() => {
         }
     }
 
-    const addPostToRecommends = async (data) => {
+    const likePost = async (data) => {
         try {
             const query = {
                 _id: data.id
@@ -274,12 +274,30 @@ const Profile = (() => {
                 }
             };
 
-            await User.findOneAndUpdate(query, update).exec();
+            const response = await User.findOneAndUpdate(query, update).exec();
+            if (response) {
+                return true;
+            }
+            return false;
         } catch (err) {
             return {
                 error: err.message
             };
         }
+    }
+
+    const unlikePost = async (data) => {
+        const response = await User.updateOne({
+            _id: data.id
+        }, {
+            $pull: {
+                resources: data.resourceId
+            }
+        }).exec();
+        if (response) {
+            return true;
+        }
+        return false;
     }
 
     return {
@@ -289,7 +307,9 @@ const Profile = (() => {
         saveProfilePhoto,
         deleteProfilePhoto,
         getProfilePhoto,
-        changePassword
+        changePassword,
+        likePost,
+        unlikePost
     }
 })();
 

@@ -2,7 +2,7 @@ import { Component, Inject, OnInit, ViewChild, ElementRef } from '@angular/core'
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { SnackbarService } from '@services/general/snackbar.service';
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
-import { ProfileService } from '@services/profile/profile.service';
+import { UserService } from '@services/user/user.service';
 
 class ImageSnippet {
   constructor(public src: string, public file: File) { }
@@ -33,8 +33,8 @@ export class CpiComponent implements OnInit {
     public dialogRef: MatDialogRef<CpiComponent>,
     @Inject(MAT_DIALOG_DATA) public data,
     private snackbarService: SnackbarService,
-    private profileService: ProfileService) {
-    this.profileService.getProfilePhoto(data.username).then((res) => {
+    private userService: UserService) {
+    this.userService.getProfilePhoto(data.username).then((res) => {
       if (res.image.image) {
         this.userImage = res.image.image.link ? res.image.image.link : this.defaultProfileImage;
         this.deleteHash = res.image.image.deleteHash;
@@ -84,7 +84,7 @@ export class CpiComponent implements OnInit {
     // * Pre api call
     this.isSavingPhoto = true;
     this.dialogRef.disableClose = true;
-    const response = await this.profileService.saveProfilePhoto(
+    const response = await this.userService.saveProfilePhoto(
       {
         id: this.userId,
         image: this.userImage,
@@ -121,7 +121,7 @@ export class CpiComponent implements OnInit {
     // * Pre api call
     this.isSavingPhoto = true;
     this.dialogRef.disableClose = true;
-    const response = await this.profileService.deleteProfilePhoto({ id: this.userId, deleteHash: this.deleteHash });
+    const response = await this.userService.deleteProfilePhoto({ id: this.userId, deleteHash: this.deleteHash });
 
     // * Post api call
     this.dialogRef.disableClose = false;

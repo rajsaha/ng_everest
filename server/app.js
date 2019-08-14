@@ -9,7 +9,7 @@ const mongoose = require('mongoose');
 // Routes
 const loginRoute = require('./api/routes/auth/login');
 const signUpRoute = require('./api/routes/auth/signup');
-const profileRoute = require('./api/routes/profile/profile');
+const userRoute = require('./api/routes/user/user');
 const resourceRoute = require('./api/routes/resource/resource');
 const collectionRoute = require('./api/routes/collection/collection');
 
@@ -53,7 +53,7 @@ app.use((req, res, next) => {
 // Routes which should handle requests
 app.use('/login', loginRoute);
 app.use('/signup', signUpRoute);
-app.use('/profile', profileRoute);
+app.use('/user', userRoute);
 app.use('/resource', resourceRoute);
 app.use('/collection', collectionRoute);
 

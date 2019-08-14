@@ -1,17 +1,17 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { environment as ENV } from '@environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
-export class ProfileService {
+export class UserService {
 
   constructor(private http: HttpClient) { }
 
   getProfileData(username: string): Promise<any> {
     return new Promise(resolve => {
-      this.http.get(`${ENV.API_URL}/profile/get-user-data/${username}`)
+      this.http.get(`${ENV.API_URL}/user/get-user-data/${username}`)
         .subscribe((response: any) => {
           resolve(response);
         });
@@ -20,7 +20,7 @@ export class ProfileService {
 
   updateProfileData(data: any): Promise<any> {
     return new Promise(resolve => {
-      this.http.post(`${ENV.API_URL}/profile/update-user-data`, data)
+      this.http.post(`${ENV.API_URL}/user/update-user-data`, data)
         .subscribe((response: any) => {
           resolve(response);
         });
@@ -29,7 +29,7 @@ export class ProfileService {
 
   removeInterest(data: any): Promise<any> {
     return new Promise(resolve => {
-      this.http.post(`${ENV.API_URL}/profile/remove-user-interest`, data)
+      this.http.post(`${ENV.API_URL}/user/remove-user-interest`, data)
         .subscribe((response: any) => {
           resolve(response);
         });
@@ -38,7 +38,7 @@ export class ProfileService {
 
   saveProfilePhoto(data: any): Promise<any> {
     return new Promise(resolve => {
-      this.http.post(`${ENV.API_URL}/profile/save-profile-photo`, data)
+      this.http.post(`${ENV.API_URL}/user/save-profile-photo`, data)
         .subscribe((response: any) => {
           resolve(response);
         });
@@ -47,7 +47,7 @@ export class ProfileService {
 
   deleteProfilePhoto(data: any): Promise<any> {
     return new Promise(resolve => {
-      this.http.delete(`${ENV.API_URL}/profile/delete-profile-photo/${data.id}/${data.deleteHash}`)
+      this.http.delete(`${ENV.API_URL}/user/delete-profile-photo/${data.id}/${data.deleteHash}`)
         .subscribe((response: any) => {
           resolve(response);
         });
@@ -56,7 +56,7 @@ export class ProfileService {
 
   getProfilePhoto(data: any): Promise<any> {
     return new Promise(resolve => {
-      this.http.get(`${ENV.API_URL}/profile/get-profile-photo/${data}`)
+      this.http.get(`${ENV.API_URL}/user/get-profile-photo/${data}`)
         .subscribe((response: any) => {
           resolve(response);
         });
@@ -65,7 +65,7 @@ export class ProfileService {
 
   updatePassword(data: any): Promise<any> {
     return new Promise(resolve => {
-      this.http.post(`${ENV.API_URL}/profile/update-password`, data)
+      this.http.post(`${ENV.API_URL}/user/update-password`, data)
         .subscribe((response: any) => {
           resolve(response);
         });
