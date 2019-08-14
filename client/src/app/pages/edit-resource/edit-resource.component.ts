@@ -62,14 +62,15 @@ export class EditResourceComponent implements OnInit {
     private route: ActivatedRoute) { }
 
   ngOnInit() {
-    this.route.params.subscribe((params) => {
-      this.getResource(params.id);
-      this.getCollectionTitle(params.id);
-    });
     this.username = localStorage.getItem('username');
-    this.initEditResourceForm();
-    this.onURLOnChanges();
-    this.getCollectionNames();
+    this.route.params.subscribe(async (params) => {
+      await Promise.all([
+        this.getResource(params.id),
+        this.getCollectionTitle(params.id),
+        this.initEditResourceForm(),
+        this.onURLOnChanges(),
+        this.getCollectionNames()]);
+    });
   }
 
   initEditResourceForm() {
@@ -210,7 +211,6 @@ export class EditResourceComponent implements OnInit {
   onFocus() {
     this.isUrlDisabled = false;
     this.onURLOnChanges();
-    console.log('input box enabled');
   }
 
   onFileSelected(imageInput: any) {
@@ -248,6 +248,7 @@ export class EditResourceComponent implements OnInit {
 
   async getCollectionTitle(resourceId: string) {
     const collection = await this.collectionService.getCollectionTitleByResourceId({ resourceId });
+    console.log(collection);
     if (collection.collection) {
       this.editResourceForm.controls.collectionName.patchValue(collection.collection.title);
     }

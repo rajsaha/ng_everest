@@ -32,10 +32,11 @@ const Collection = (() => {
         }
     }
 
-    const getCollectionNameByResourceId = async (resourceId) => {
+    const getCollectionNameByResourceId = async (data) => {
         try {
             const collection = await _Collection.findOne({
-                resources: resourceId
+                username: data.username,
+                resources: data.resourceId
             }).select('title').exec();
             return {
                 collection: collection

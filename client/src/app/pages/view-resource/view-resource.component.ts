@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ResourceService } from '@services/resource/resource.service';
 import { faPen } from '@fortawesome/free-solid-svg-icons';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-view-resource',
@@ -11,6 +12,8 @@ import { faPen } from '@fortawesome/free-solid-svg-icons';
 export class ViewResourceComponent implements OnInit {
   id: string;
   resource: any;
+  currentUser: string;
+  isEditable = false;
 
   // Icons
   faPen = faPen;
@@ -18,10 +21,12 @@ export class ViewResourceComponent implements OnInit {
   constructor(
     private route: ActivatedRoute, 
     private resourceService: ResourceService,
-    private router: Router) { }
+    private router: Router,
+    private location: Location) { }
 
   ngOnInit() {
     this.route.params.subscribe((params) => {
+      this.currentUser = localStorage.getItem('username');
       this.id = params.id;
       this.getResource(params.id);
     });
@@ -31,6 +36,7 @@ export class ViewResourceComponent implements OnInit {
     try {
       const response = await this.resourceService.getResource({id});
       this.resource = response.resource;
+      this.checkIfEditable(this.resource.username);
     } catch (err) {
       console.error(err);
     }
@@ -38,6 +44,12 @@ export class ViewResourceComponent implements OnInit {
 
   goToEdit() {
     this.router.navigate(['/manage/resource/edit', this.id]);
+  }
+
+  checkIfEditable(username) {
+    if (this.currentUser === username) {
+      this.isEditable = true;
+    }
   }
 
 }

@@ -167,12 +167,14 @@ export class ShareResourceComponent implements OnInit {
   }
 
   async onURLOnChanges() {
-    this.shareResourceForm.controls.url.valueChanges.pipe(delay(3000)).subscribe(async (val) => {
+    this.shareResourceForm.controls.url.valueChanges.pipe(delay(1000)).subscribe(async (val) => {
       this.isLoading = true;
       if (this.shareResourceForm.controls.url.valid) {
         const response = await this.resourceService.getOpenGraphData({
           url: val
         });
+
+        console.log(response);
 
         this.isLoading = false;
 
@@ -187,7 +189,7 @@ export class ShareResourceComponent implements OnInit {
         } else {
           this.ogTitle = response.message.data.data.ogTitle;
           this.ogDescription = response.message.data.data.ogDescription;
-          if (isArray(response.message.data.data.ogImage)) {
+          if (isArray(response.message.data.data.ogImage) && response.message.data.data.ogImage.length > 0) {
             this.ogImage = response.message.data.data.ogImage[0].url;
           } else {
             this.ogImage = response.message.data.data.ogImage.url;
@@ -196,6 +198,16 @@ export class ShareResourceComponent implements OnInit {
           this.shareResourceForm.controls.title.patchValue(this.ogTitle);
           this.shareResourceForm.controls.description.patchValue(this.ogDescription);
           this.shareResourceForm.controls.image.patchValue(this.ogImage);
+
+          if (!this.ogImage) {
+            this.snackbarService.openSnackBar({
+              message: {
+                message: 'This resource has no image',
+                error: false
+              },
+              class: 'red-snackbar'
+            });
+          }
         }
       } else {
         this.isLoading = false;

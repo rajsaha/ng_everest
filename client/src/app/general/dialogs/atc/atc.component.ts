@@ -68,7 +68,7 @@ export class AtcComponent implements OnInit {
   }
 
   async getCollectionTitle(resourceId: string) {
-    const collection = await this.collectionService.getCollectionTitleByResourceId({ resourceId });
+    const collection = await this.collectionService.getCollectionTitleByResourceId({ username: this.username, resourceId });
     if (collection.collection) {
       this.addToCollectionForm.controls.collectionName.patchValue(collection.collection.title);
     }

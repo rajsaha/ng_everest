@@ -33,7 +33,9 @@
 		border-bottom: 1px solid #eee;
 
 		.user-image {
-			background-size: contain;
+			background-size: cover;
+			background-repeat: no-repeat;
+			background-position: center center;
 			width: 40px;
 			height: 40px;
 			border: 1px solid rgba(0, 0, 0, 0.2);

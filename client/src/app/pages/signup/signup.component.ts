@@ -39,12 +39,12 @@ export class SignupComponent implements OnInit {
         if (!res.error) {
           this.snackbarService.openSnackBar({
             message: {
-              message: `Hello, ${res.username}!`,
+              message: `Hello, ${res.username}. You can login now.`,
               error: false
             },
             class: 'green-snackbar',
           });
-          this.router.navigate(['/']);
+          this.router.navigate(['/login']);
         } else {
           this.snackbarService.openSnackBar({
             message: {

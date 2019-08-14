@@ -5,7 +5,7 @@
   <div class="top">
     <button mat-stroked-button color="warn">Report Post</button>
     <button mat-stroked-button>Unfollow '{{ data.username }}'</button>
-    <button mat-stroked-button [routerLink]="['/view-resource/', id]">Go to Post</button>
+    <button mat-stroked-button [routerLink]="['/view/', id]">Go to Post</button>
     <button mat-stroked-button>Share</button>
     <button mat-stroked-button (click)="openSnackBar('Copied link to post', '')">Copy Link</button>
     <button mat-stroked-button (click)="onNoClick()">Cancel</button>
