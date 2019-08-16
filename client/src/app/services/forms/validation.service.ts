@@ -4,7 +4,6 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class ValidationService {
-
   constructor() { }
 
   matchingConfirmPasswords(passwordKey: any) {
@@ -17,6 +16,13 @@ export class ValidationService {
   }
 
   checkPasswordStrength(passwordKey: any) {
+    let messages: Array<string> = [];
+    const messageChars = 'At least 6 characters required';
+    const messageLC = 'At least 1 lowercase character required';
+    const messageUC = 'At least 1 uppercase character required';
+    const messageNum = 'At least 1 numeric character required';
+    const messageSpecial = 'At least 1 special character required';
+
     const passwordInput = passwordKey.value;
     const strongRegEx = new RegExp('(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*]).{6,}');
     if (strongRegEx.test(passwordInput.password)) {
@@ -26,26 +32,41 @@ export class ValidationService {
       const password = passwordInput.password;
 
       if (!password.match(/[{6,}]/)) {
-        message = 'At least 6 characters required';
+        messages.push(messageChars);
+      } else {
+        const index = messages.indexOf(messageChars);
+        messages.splice(index, 1);
       }
 
       if (!password.match(/[a-z]/)) {
-        message = 'At least 1 lowercase character required';
+        messages.push(messageLC);
+      } else {
+        const index = messages.indexOf(messageLC);
+        messages.splice(index, 1);
       }
 
       if (!password.match(/[A-Z]/)) {
-        message = 'At least 1 uppercase character required';
+        messages.push(messageUC);
+      } else {
+        const index = messages.indexOf(messageUC);
+        messages.splice(index, 1);
       }
 
       if (!password.match(/[0-9]/)) {
-        message = 'At least 1 numeric character required';
+        messages.push(messageNum);
+      } else {
+        const index = messages.indexOf(messageNum);
+        messages.splice(index, 1);
       }
 
       if (!password.match(/[!@#\$%\^&]/)) {
-        message = 'At least 1 special character required';
+        messages.push(messageSpecial);
+      } else {
+        const index = messages.indexOf(messageSpecial);
+        messages.splice(index, 1);
       }
 
-      return passwordKey.controls.password.setErrors({ passwordNotStrong: true, error_message: message });
+      return passwordKey.controls.password.setErrors({ passwordNotStrong: true, messages });
     }
   }
 

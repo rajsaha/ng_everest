@@ -28,16 +28,24 @@
     <mat-form-field appearance="outline">
       <mat-label>Password</mat-label>
       <input matInput type="password" formControlName="password" />
-      <mat-error *ngIf="signUpForm.controls['password'].hasError('required')">
+      <!-- <mat-error *ngIf="signUpForm.controls['password'].hasError('required')">
         Password is <strong>required</strong>
       </mat-error>
       <mat-error *ngIf="signUpForm.controls['password'].hasError('passwordNotStrong')">
         {{ signUpForm.controls['password'].errors.error_message }}
-      </mat-error>
+      </mat-error> -->
       <mat-error *ngIf="signUpForm.controls['password'].hasError('minlength')">
         Password must be at least 4 characters
       </mat-error>
     </mat-form-field>
+
+    <div class="password-check-list" *ngIf="signUpForm.controls['password'].dirty && signUpForm.controls['password'].hasError('passwordNotStrong')">
+      <ul *ngIf="signUpForm.controls['password'].errors.messages">
+        <li *ngFor="let message of signUpForm.controls['password'].errors.messages">
+            <span *ngIf="message"><fa-icon [icon]="faTimes"></fa-icon>{{ message }}</span>
+        </li>
+      </ul>
+    </div>
 
     <mat-form-field appearance="outline">
       <mat-label>Re-type password</mat-label>

@@ -1,53 +1,36 @@
-.parent {
-	width: 100%;
-	height: 100%;
-	background-image: url(../../../assets/mountains-cutout.webp);
-	background-size: 100%;
-	background-position: bottom;
-	background-repeat: no-repeat;
-	transition: height 0.2s ease-in-out;
-	.signup-form-parent {
-		position: absolute;
-		top: 50%;
-		left: 50%;
-		width: 250px;
-		transform: translate(-50%, -50%);
-		border-radius: 5px;
-		background-color: white;
-		padding: 25px;
-		
-		mat-form-field {
-			width: 100%;
-		}
-	
-		.lock-icon-parent {
-			text-align: center;
-			padding: 0 0 20px 0;
-			color: rgba(0, 0, 0, 0.8);
-			font-family: "Raleway", sans-serif;
-			font-size: 20px;
-	
-			strong {
-				font-family: "Raleway", sans-serif;
+.password-check-list {
+	padding: 1px 15px;
+	background-color: white;
+	box-shadow: 0 13px 23px rgba(0, 0, 0, .1);
+	border-bottom-left-radius: 5px;
+	border-bottom-right-radius: 5px;
+	margin-bottom: 25px;
+	margin-top: -25px;
+	animation: slideDown 0.2s ease-in-out;
+	animation-fill-mode: forwards;
+	ul {
+		padding-left: 0;
+		list-style: none;
+
+		li {
+			font-size: 12px;
+			color: #ff5722;
+			fa-icon {
+				color: #ff845f;
+				margin-right: 10px;
 			}
 		}
-	
-		.remember-me {
-			font-size: 14px;
-			margin-bottom: 25px;
-			color: rgba(0, 0, 0, 0.5);
-		}
-	
-		.login-signup {
-			a {
-				text-decoration: none;
-				float: left;
-				font-size: 14px;
-				padding-top: 8px;
-			}
-			button {
-				float: right;
-			}
-		}
+	}
+}
+
+@keyframes slideDown {
+	0% {
+		transform: translateY(-25px);
+		opacity: 0;
+	}
+
+	100% {
+		transform: translateY(0);
+		opacity: 1;
 	}
 }

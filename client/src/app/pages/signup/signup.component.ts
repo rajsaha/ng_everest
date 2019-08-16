@@ -4,7 +4,8 @@ import { Router } from '@angular/router';
 import { ValidationService } from '../../services/forms/validation.service';
 import { SignupService } from '@services/signup/signup.service';
 import { SnackbarService } from '@services/general/snackbar.service';
-import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
+import { faArrowRight, faTimes } from '@fortawesome/free-solid-svg-icons';
+import { faCheckCircle } from '@fortawesome/free-regular-svg-icons';
 
 @Component({
   selector: 'app-signup',
@@ -18,10 +19,12 @@ export class SignupComponent implements OnInit {
 
   // Icons
   faArrowRight = faArrowRight;
+  faCheckCircle = faCheckCircle;
+  faTimes = faTimes;
 
   constructor(
     private router: Router,
-    private fb: FormBuilder, 
+    private fb: FormBuilder,
     private validationService: ValidationService,
     private snackbarService: SnackbarService,
     private signUpService: SignupService) { }
