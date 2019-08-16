@@ -1,7 +1,8 @@
 import { ChangeDetectorRef, Component, OnInit, OnDestroy } from '@angular/core';
 import { MediaMatcher } from '@angular/cdk/layout';
 import { Router } from '@angular/router';
-import { faUser, faSignOutAlt, faStream, faShareAlt } from '@fortawesome/free-solid-svg-icons';
+import { faUser, faSignOutAlt, faStream, faShareAlt, faBorderAll } from '@fortawesome/free-solid-svg-icons';
+import { faSquare } from '@fortawesome/free-regular-svg-icons';
 import { LoginService } from '@services/auth/login.service';
 import { CommunicationService } from '@services/general/communication.service';
 
@@ -22,6 +23,8 @@ export class MainComponent implements OnInit, OnDestroy {
   faSignOutAlt = faSignOutAlt;
   faStream = faStream;
   faShareAlt = faShareAlt;
+  faSquare = faSquare;
+  faBorderAll = faBorderAll;
 
   private mobileQueryListener: () => void;
 

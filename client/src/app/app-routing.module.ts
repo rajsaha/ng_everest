@@ -52,8 +52,12 @@ const routes: Routes = [
             ]
           },
           {
+            path: 'collection',
+            component: ManageCollectionsComponent
+          },
+          {
             path: 'collection/:id',
-            component: ViewCollectionComponent
+            component: ViewCollectionComponent,
           }
         ]
       },
