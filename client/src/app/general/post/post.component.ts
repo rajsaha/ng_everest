@@ -31,6 +31,7 @@ export class PostComponent implements OnInit {
   userImage: string;
   timestamp: any;
   allComments = [];
+  recommended_by_count: number;
 
   // Icons
   faThumbsUp = faThumbsUp;
@@ -82,6 +83,7 @@ export class PostComponent implements OnInit {
     this.image = this.data.image;
     this.timestamp = moment(this.data.timestamp).fromNow();
     this.allComments = this.data.comments;
+    this.recommended_by_count = this.data.recommended_by_count;
   }
 
   async getUserImage(username) {
@@ -157,6 +159,7 @@ export class PostComponent implements OnInit {
       const result = await this.userService.likePost({username: this.currentUser, resourceId: this.id});
       if (result) {
         this.isLiked = true;
+        this.recommended_by_count++;
       }
     } catch (err) {
       console.error(err);
@@ -168,6 +171,7 @@ export class PostComponent implements OnInit {
       const result = await this.userService.unLikePost({username: this.currentUser, resourceId: this.id});
       if (result) {
         this.isLiked = false;
+        this.recommended_by_count--;
       }
     } catch (err) {
       console.error(err);

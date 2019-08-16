@@ -1,4 +1,5 @@
 const User = require('../../models/User');
+const Resource = require('../../models/Resource');
 const Imgur = require('../imgur/imgur');
 const axios = require('axios');
 const bcryptjs = require('bcryptjs');
@@ -275,9 +276,35 @@ const Profile = (() => {
             };
 
             const response = await User.findOneAndUpdate(query, update).exec();
+            const response2 = await incrementResourceLikeCount(data.resourceId);
+            if (response && response2) {
+                return true;
+            }
+            return false;
+        } catch (err) {
+            return {
+                error: err.message
+            };
+        }
+    }
+
+    const incrementResourceLikeCount = async (resourceId) => {
+        try {
+            const query = {
+                _id: resourceId
+            };
+
+            const update = {
+                $inc: {
+                    recommended_by_count: 1
+                }
+            };
+
+            const response = await Resource.findOneAndUpdate(query, update);
             if (response) {
                 return true;
             }
+
             return false;
         } catch (err) {
             return {
@@ -295,9 +322,35 @@ const Profile = (() => {
                     recommends: data.resourceId
                 }
             }).exec();
+            const response2 = await decrementResourceLikeCount(data.resourceId);
+            if (response && response2) {
+                return true;
+            }
+            return false;
+        } catch (err) {
+            return {
+                error: err.message
+            };
+        }
+    }
+
+    const decrementResourceLikeCount = async (resourceId) => {
+        try {
+            const query = {
+                _id: resourceId
+            };
+
+            const update = {
+                $inc: {
+                    recommended_by_count: -1
+                }
+            };
+
+            const response = await Resource.findOneAndUpdate(query, update);
             if (response) {
                 return true;
             }
+
             return false;
         } catch (err) {
             return {

@@ -51,14 +51,16 @@
   <!-- * Controls -->
   <div class="controls">
     <button *ngIf="isLiked" mat-button class="btn btn-like is-liked" (click)="unlike()">
-      <fa-icon [icon]="faThumbsUp"></fa-icon>
+      <fa-icon [icon]="faThumbsUp"></fa-icon><span *ngIf="recommended_by_count > 0" class="count">{{ recommended_by_count }}</span>
     </button>
+
     <button *ngIf="!isLiked" mat-button class="btn btn-like" (click)="like()">
-      <fa-icon [icon]="faThumbsUp"></fa-icon>
+      <fa-icon [icon]="faThumbsUp"></fa-icon><span *ngIf="recommended_by_count > 0" class="count">{{ recommended_by_count }}</span>
     </button>
-    <button mat-button class="btn btn-comment" [ngClass]="{ 'has-comments': allComments.length > 0 }"
+
+    <button mat-button class="btn btn-comment"
       (click)="showComments = !showComments" [disabled]="!allComments.length > 0">
-      <fa-icon [icon]="faComment"></fa-icon>
+      <fa-icon [icon]="faComment"></fa-icon><span *ngIf="allComments.length > 0" class="count">{{ allComments.length }}</span>
     </button>
   </div>
 

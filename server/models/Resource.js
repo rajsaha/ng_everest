@@ -48,7 +48,6 @@ var ResourceSchema = new mongoose.Schema({
             default: Date.now
         }
     }],
-    recommended_by: [String],
     recommended_by_count: {
         type: Number,
         default: 0

@@ -15,6 +15,16 @@
 	clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%, 25% 50%);
 }
 
+%count {
+	padding: 0 8px;
+	background-color: #dee8ff;
+	border-radius: 20px;
+	color: #481a89;
+	font-size: 10px;
+	font-weight: bold;
+	margin-left: 5px;
+}
+
 .post {
 	border: 1px solid #eee;
 	border-radius: 5px;
@@ -91,12 +101,12 @@
 		}
 
 		.collection-badge-true-parent {
-      filter: drop-shadow(0 13px 26px rgba(255, 162, 90, 1));
+			filter: drop-shadow(0 5px 10px rgba(255, 162, 90, 1));
 			.collection-badge-true {
 				@extend %badge;
 				@extend %triangle;
-        background-color: #ffa25a;
-        padding: 8px 45px 8px 8px;
+				background-color: #ffa25a;
+				padding: 8px 45px 8px 8px;
 			}
 		}
 	}
@@ -161,12 +171,22 @@
 		.btn-like {
 			fa-icon {
 				color: rgba(0, 0, 0, 0.2);
+				vertical-align: top;
+			}
+
+			.count {
+				@extend %count;
 			}
 		}
 
 		.btn-comment {
 			fa-icon {
-				color: rgba(0, 0, 0, 0.2);
+				color: #c8c4d1;
+				vertical-align: top;
+			}
+
+			.count {
+				@extend %count;
 			}
 		}
 
@@ -246,13 +266,7 @@
 
 .is-liked {
 	fa-icon {
-		color: rgb(54, 54, 252) !important;
-	}
-}
-
-.has-comments {
-	fa-icon {
-		color: rgba(0, 0, 0, 1) !important;
+		color: #ffa25a !important;
 	}
 }
 
