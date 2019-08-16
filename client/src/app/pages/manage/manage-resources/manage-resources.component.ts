@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
-import { faSearch, faEye, faEdit, faTrashAlt } from '@fortawesome/free-solid-svg-icons';
+import { FormGroup, FormBuilder } from '@angular/forms';
 import { ResourceService } from '@services/resource/resource.service';
 import { UtilityService } from '@services/general/utility.service';
-import { CollectionService } from '@services/collection/collection.service';
+import { faSearch } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-manage-resources',
@@ -11,37 +10,25 @@ import { CollectionService } from '@services/collection/collection.service';
   styleUrls: ['./manage-resources.component.scss']
 })
 export class ManageResourcesComponent implements OnInit {
+  username: string;
+  resources: any;
+  resourceSearchForm: FormGroup;
 
   // Icons
   faSearch = faSearch;
-  faEye = faEye;
-  faEdit = faEdit;
-  faTrashAlt = faTrashAlt;
-
-  resourceSearchForm: FormGroup;
-  collectionSearchForm: FormGroup;
-  username: any;
-  resources: any;
-  collections: any;
 
   constructor(
     private fb: FormBuilder,
     private resourceService: ResourceService,
-    private collectionService: CollectionService,
     private utilityService: UtilityService) { }
 
   async ngOnInit() {
     this.username = localStorage.getItem('username');
-
-    await Promise.all([this.initForms(), this.getUserResources(), this.getAllCollections()]);
+    await Promise.all([this.initResourceSearchForm(), this.getUserResources()]);
   }
 
-  async initForms() {
+  async initResourceSearchForm() {
     this.resourceSearchForm = this.fb.group({
-      query: ['']
-    });
-
-    this.collectionSearchForm = this.fb.group({
       query: ['']
     });
   }
@@ -50,15 +37,6 @@ export class ManageResourcesComponent implements OnInit {
     try {
       const response = await this.resourceService.getUserResources({username: this.username});
       this.resources = response.resources;
-    } catch (err) {
-      console.error(err);
-    }
-  }
-
-  async getAllCollections() {
-    try {
-      const response = await this.collectionService.getCollections({username: this.username});
-      this.collections = response.collections;
     } catch (err) {
       console.error(err);
     }
@@ -74,4 +52,5 @@ export class ManageResourcesComponent implements OnInit {
       }
     }
   }
+
 }

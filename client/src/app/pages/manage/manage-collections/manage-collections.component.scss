@@ -1,0 +1,24 @@
+.search {
+  mat-form-field {
+    margin-top: 15px;
+    width: 100%;
+  }
+
+  mat-icon {
+    font-size: 16px;
+    color: rgba(0, 0, 0, .8);
+
+    fa-icon {
+      position: absolute;
+      top: 2px;
+    }
+  }
+}
+
+.list-of-collections {
+  max-width: 100%;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  ;
+  justify-items: center;
+}

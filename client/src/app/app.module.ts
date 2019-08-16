@@ -49,7 +49,7 @@ import { PageNotFoundComponent } from './pages/page-not-found/page-not-found.com
 import { SnackbarComponent } from './general/snackbar/snackbar.component';
 import { CpiComponent } from './general/dialogs/cpi/cpi.component';
 import { ShareResourceComponent } from './pages/share-resource/share-resource.component';
-import { ManageResourcesComponent } from './pages/manage/manage-resources.component';
+import { ManageComponent } from './pages/manage/manage.component';
 import { TruncatePipe } from './pipes/truncate';
 import { DrComponent } from './general/dialogs/dr/dr.component';
 import { ResourceComponent } from './general/resource/resource.component';
@@ -61,6 +61,8 @@ import { CustomButtonComponent } from './components/custom-button/custom-button.
 import { MainComponent } from './layouts/main/main.component';
 import { NoAuthComponent } from './layouts/no-auth/no-auth.component';
 import { DcComponent } from './general/dialogs/dc/dc.component';
+import { ManageResourcesComponent } from './pages/manage/manage-resources/manage-resources.component';
+import { ManageCollectionsComponent } from './pages/manage/manage-collections/manage-collections.component';
 
 @NgModule({
   declarations: [
@@ -77,7 +79,7 @@ import { DcComponent } from './general/dialogs/dc/dc.component';
     SnackbarComponent,
     CpiComponent,
     ShareResourceComponent,
-    ManageResourcesComponent,
+    ManageComponent,
     TruncatePipe,
     DrComponent,
     ResourceComponent,
@@ -88,7 +90,9 @@ import { DcComponent } from './general/dialogs/dc/dc.component';
     CustomButtonComponent,
     MainComponent,
     NoAuthComponent,
-    DcComponent
+    DcComponent,
+    ManageResourcesComponent,
+    ManageCollectionsComponent
   ],
   imports: [
     BrowserModule,
