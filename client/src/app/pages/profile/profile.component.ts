@@ -50,18 +50,11 @@ export class ProfileComponent implements OnInit {
   removable = true;
   addOnBlur = true;
 
-  profileForm = this.fb.group({
-    name: [''],
-    username: [{ value: '', disabled: true }],
-    website: [''],
-    bio: [''],
-    email: ['']
-  });
-
   deleteAccountForm = this.fb.group({
     username: ['']
   });
 
+  profileForm: FormGroup;
   passwordForm: FormGroup;
 
   constructor(
@@ -75,13 +68,24 @@ export class ProfileComponent implements OnInit {
     this.username = localStorage.getItem('username');
     this.userId = localStorage.getItem('userId');
 
+    // Init Forms
+    this.initProfileForm();
+    this.initPasswordForm();
+
     // Get User Data
     await this.getUserData();
 
-    // Init Password Form
-    this.initPasswordForm();
-
     this.onDeleteAccountFormChanges();
+  }
+
+  initProfileForm() {
+    this.profileForm = this.fb.group({
+      name: [''],
+      username: [{ value: '', disabled: true }],
+      website: [''],
+      bio: [''],
+      email: ['']
+    });
   }
 
   initPasswordForm() {

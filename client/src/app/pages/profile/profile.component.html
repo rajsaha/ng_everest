@@ -65,7 +65,6 @@
             <h6>Public Information</h6>
 
             <form [formGroup]="profileForm" (ngSubmit)="saveProfileForm()">
-
               <mat-form-field appearance="outline">
                 <mat-label>Name</mat-label>
                 <input matInput placeholder="Name" formControlName="name">
@@ -108,65 +107,67 @@
           </div>
         </div>
       </div>
+    </div>
 
-      <div class="section-container">
-        <div class="section">
-          <div class="section-header">
-            <h4>Change Password</h4>
-          </div>
-          <div class="section-content">
-            <form [formGroup]="passwordForm" (ngSubmit)="changePasswordForm()">
-              <mat-form-field appearance="outline">
-                <mat-label>Current Password</mat-label>
-                <input matInput placeholder="" formControlName="currentPass" type="password">
-              </mat-form-field>
+    <!-- Change Password -->
+    <div class="section-container">
+      <div class="section">
+        <div class="section-header">
+          <h4>Change Password</h4>
+        </div>
+        <div class="section-content">
+          <form [formGroup]="passwordForm" (ngSubmit)="changePasswordForm()">
+            <mat-form-field appearance="outline">
+              <mat-label>Current Password</mat-label>
+              <input matInput placeholder="" formControlName="currentPass" type="password">
+            </mat-form-field>
 
-              <mat-form-field appearance="outline">
-                <mat-label>New Password</mat-label>
-                <input matInput placeholder="" formControlName="password" type="password">
-                <mat-error *ngIf="passwordForm.controls['password'].hasError('passwordNotStrong')">
-                  {{ passwordForm.controls['password'].errors.error_message }}
-                </mat-error>
-                <mat-error *ngIf="passwordForm.controls['password'].hasError('minlength')">
-                  Password must be at least 4 characters
-                </mat-error>
-              </mat-form-field>
+            <mat-form-field appearance="outline">
+              <mat-label>New Password</mat-label>
+              <input matInput placeholder="" formControlName="password" type="password">
+              <mat-error *ngIf="passwordForm.controls['password'].hasError('passwordNotStrong')">
+                {{ passwordForm.controls['password'].errors.error_message }}
+              </mat-error>
+              <mat-error *ngIf="passwordForm.controls['password'].hasError('minlength')">
+                Password must be at least 4 characters
+              </mat-error>
+            </mat-form-field>
 
-              <mat-form-field appearance="outline">
-                <mat-label>Confirm New Password</mat-label>
-                <input matInput placeholder="" formControlName="confirm_password" type="password">
-                <mat-error *ngIf="passwordForm.controls['confirm_password'].hasError('passwordNotEquivalent')">
-                  Passwords don't match
-                </mat-error>
-              </mat-form-field>
+            <mat-form-field appearance="outline">
+              <mat-label>Confirm New Password</mat-label>
+              <input matInput placeholder="" formControlName="confirm_password" type="password">
+              <mat-error *ngIf="passwordForm.controls['confirm_password'].hasError('passwordNotEquivalent')">
+                Passwords don't match
+              </mat-error>
+            </mat-form-field>
 
-              <div class="form-button-container clearfix">
-                <button mat-raised-button color="primary">Save</button>
-              </div>
-            </form>
-          </div>
+            <div class="form-button-container clearfix">
+              <button mat-raised-button color="primary">Save</button>
+            </div>
+          </form>
         </div>
       </div>
+    </div>
 
-      <div class="section-container">
-        <div class="section">
-          <div class="section-header">
-            <h4>Privacy</h4>
-          </div>
+    <!-- Privacy -->
+    <div class="section-container">
+      <div class="section">
+        <div class="section-header">
+          <h4>Privacy</h4>
+        </div>
 
-          <div class="section-content">
-            <h6>Delete Account</h6>
-            <form [formGroup]="deleteAccountForm" (ngSubmit)="openConfirmAccountDeletionDialog()">
-              <mat-form-field appearance="outline">
-                <mat-label>Username</mat-label>
-                <input matInput placeholder="Write your username" formControlName="username">
-                <mat-hint>Write your username to confirm account deletion</mat-hint>
-              </mat-form-field>
-              <div class="form-button-container clearfix">
-                <button mat-raised-button color="accent" *ngIf="isDeleteable">Delete</button>
-              </div>
-            </form>
-          </div>
+        <div class="section-content">
+          <h6>Delete Account</h6>
+          <form [formGroup]="deleteAccountForm" (ngSubmit)="openConfirmAccountDeletionDialog()">
+            <mat-form-field appearance="outline">
+              <mat-label>Username</mat-label>
+              <input matInput placeholder="Write your username" formControlName="username">
+              <mat-hint>Write your username to confirm account deletion</mat-hint>
+            </mat-form-field>
+            <div class="form-button-container clearfix">
+              <button mat-raised-button color="accent" *ngIf="isDeleteable">Delete</button>
+            </div>
+          </form>
         </div>
       </div>
     </div>

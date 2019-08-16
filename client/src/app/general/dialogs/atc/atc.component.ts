@@ -97,7 +97,7 @@ export class AtcComponent implements OnInit {
       } else {
         this.snackbarService.openSnackBar({
           message: {
-            message: `Error: ${response.error}!`,
+            message: `Something went wrong!`,
             error: true
           },
           class: 'red-snackbar',

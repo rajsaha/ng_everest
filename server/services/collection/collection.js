@@ -48,10 +48,11 @@ const Collection = (() => {
         }
     }
 
-    const getCollectionByTitle = async (title) => {
+    const getCollectionByTitle = async (data) => {
         try {
             const collection = await _Collection.findOne({
-                title: title
+                title: data.collectionName,
+                username: data.username
             }).exec();
             return {
                 collection: collection

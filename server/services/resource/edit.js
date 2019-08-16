@@ -79,32 +79,43 @@ const EditResource = (() => {
     }
 
     const editResourceCollection = async (data) => {
-        const collection = await CollectionService.getCollectionByTitle(data.collectionName);
-        const resource = await CollectionService.checkForResourceInAnyCollection(data.resourceId);
+        try {
+            const collection = await CollectionService.getCollectionByTitle({collectionName: data.collectionName, username: data.username});
+            const resource = await CollectionService.checkForResourceInAnyCollection({id: data.resourceId, username: data.username});
 
-        // * Delete resource from existing collection
-        if (resource.isInCollection && data.collectionName !== resource.response[0].title) {
-            await CollectionService.deleteResourceFromCollection({
-                collectionId: resource.response[0].id,
-                resourceId: data.resourceId
-            });
-        }
-        // * If collection exists and resource does NOT exist in collection
-        if (collection.collection !== null) {
-            if (collection.collection.title === data.collectionName) {
-                // * Push into existing collection
-                await CollectionService.pushIntoCollection({
-                    title: data.collectionName,
+            // * Delete resource from existing collection
+            if (resource.isInCollection && data.collectionName !== resource.response[0].title) {
+                await CollectionService.deleteResourceFromCollection({
+                    collectionId: resource.response[0].id,
                     resourceId: data.resourceId
                 });
             }
-        } else {
-            // * Create new collection and push resource into it
-            await CollectionService.createCollectionAndPushResource({
-                username: data.username,
-                title: data.collectionName,
-                resourceId: data.resourceId
-            });
+            // * If collection exists and resource does NOT exist in collection
+            if (collection.collection !== null) {
+                if (collection.collection.title === data.collectionName) {
+                    // * Push into existing collection
+                    await CollectionService.pushIntoCollection({
+                        title: data.collectionName,
+                        resourceId: data.resourceId
+                    });
+                }
+
+                return true;
+            } else {
+                // * Create new collection and push resource into it
+                await CollectionService.createCollectionAndPushResource({
+                    username: data.username,
+                    title: data.collectionName,
+                    resourceId: data.resourceId
+                });
+
+                return true;
+            }
+        } catch (err) {
+            console.log(err);
+            return {
+                error: err.message
+            };
         }
     }
 
@@ -169,7 +180,7 @@ const EditResource = (() => {
             if (response) {
                 return {
                     status: true,
-                    comment 
+                    comment
                 };
             }
 
