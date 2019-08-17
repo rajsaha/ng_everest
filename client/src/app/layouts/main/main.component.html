@@ -1,7 +1,7 @@
 <div class="app-container" [class.is-mobile]="mobileQuery.matches">
     <mat-toolbar class="toolbar">
-        <button mat-icon-button (click)="snav.toggle()">
-            <mat-icon>menu</mat-icon>
+        <button mat-icon-button (click)="snav.toggle(); isMenuActive = !isMenuActive">
+            <mat-icon>{{ isMenuActive ? 'clear' : 'menu' }}</mat-icon>
         </button>
         <h1 class="app-name"><a routerLink="/">Everest</a></h1>
         <div class="profile-container">

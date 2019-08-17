@@ -18,6 +18,9 @@ export class MainComponent implements OnInit, OnDestroy {
   localStorageImage: string;
   defaultProfileImage = '../assets/portrait.jpg';
 
+  // Toggles
+  isMenuActive = false;
+
   // Icons
   faUser = faUser;
   faSignOutAlt = faSignOutAlt;
