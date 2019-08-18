@@ -77,7 +77,7 @@ export class ResourceComponent implements OnInit {
   }
 
   goToEdit() {
-    this.route.navigate(['resource/edit/', this.id], { relativeTo: this.router.parent});
+    this.route.navigate(['resource/edit/', this.id]);
   }
 
 }
