@@ -9,7 +9,7 @@
             <app-resource 
             *ngFor="let resource of resources" 
             [data]="resource" 
-            [isInCollectionPage]="true"
+            [whichPage]="2"
             (drResponse)="drResponseHandler($event)"
             [collectionId]="id"></app-resource>
         </div>

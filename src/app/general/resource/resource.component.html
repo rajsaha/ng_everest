@@ -4,11 +4,7 @@
     <h4>{{ data.title }}</h4>
     <p>{{ data.description | truncate:[40] }}</p>
     <div class="actions">
-      <button *ngIf="!isInCollectionPage" [routerLink]="['resource/edit/', id]" mat-button>
-        <fa-icon [icon]="faEdit"></fa-icon>
-      </button>
-
-      <button *ngIf="isInCollectionPage" (click)="goToEdit()" mat-button>
+      <button (click)="goToEdit()" mat-button>
         <fa-icon [icon]="faEdit"></fa-icon>
       </button>
 

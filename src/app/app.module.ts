@@ -10,33 +10,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 
-import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { AutosizeModule } from 'ngx-autosize';
-
-// Angular Material
-import {
-  MatButtonModule,
-  MatToolbarModule,
-  MatSidenavModule,
-  MatIconModule,
-  MatListModule,
-  MatFormFieldModule,
-  MatInputModule,
-  MatCheckboxModule,
-  MatMenuModule,
-  MatSelectModule,
-  MatTabsModule,
-  MatBadgeModule,
-  MatDialogModule,
-  MatSnackBarModule,
-  MatProgressBarModule,
-  MatTooltipModule,
-  MatDividerModule,
-  MatRippleModule,
-  MatChipsModule,
-  MatProgressSpinnerModule,
-  MatAutocompleteModule
-} from '@angular/material';
 import { LoginComponent } from './pages/login/login.component';
 import { WelcomeComponent } from './pages/welcome/welcome.component';
 import { SignupComponent } from './pages/signup/signup.component';
@@ -49,20 +23,14 @@ import { PageNotFoundComponent } from './pages/page-not-found/page-not-found.com
 import { SnackbarComponent } from './general/snackbar/snackbar.component';
 import { CpiComponent } from './general/dialogs/cpi/cpi.component';
 import { ShareResourceComponent } from './pages/share-resource/share-resource.component';
-import { ManageComponent } from './pages/manage/manage.component';
-import { TruncatePipe } from './pipes/truncate';
-import { DrComponent } from './general/dialogs/dr/dr.component';
-import { ResourceComponent } from './general/resource/resource.component';
 import { ViewResourceComponent } from './pages/view-resource/view-resource.component';
-import { EditResourceComponent } from './pages/edit-resource/edit-resource.component';
-import { CollectionComponent } from './general/collection/collection.component';
-import { ViewCollectionComponent } from './pages/view-collection/view-collection.component';
-import { CustomButtonComponent } from './components/custom-button/custom-button.component';
 import { MainComponent } from './layouts/main/main.component';
 import { NoAuthComponent } from './layouts/no-auth/no-auth.component';
-import { DcComponent } from './general/dialogs/dc/dc.component';
-import { ManageResourcesComponent } from './pages/manage/manage-resources/manage-resources.component';
-import { ManageCollectionsComponent } from './pages/manage/manage-collections/manage-collections.component';
+import { ManageModule } from './modules/manage/manage.module';
+import { CommonModule } from '@angular/common';
+import { MaterialModule } from './modules/material/material.module';
+import { GeneralModule } from './modules/general/general.module';
+import { DialogsModule } from './modules/dialogs/dialogs.module';
 
 @NgModule({
   declarations: [
@@ -73,58 +41,27 @@ import { ManageCollectionsComponent } from './pages/manage/manage-collections/ma
     FeedComponent,
     PostComponent,
     ProfileComponent,
-    AtcComponent,
     PoComponent,
     PageNotFoundComponent,
-    SnackbarComponent,
     CpiComponent,
     ShareResourceComponent,
-    ManageComponent,
-    TruncatePipe,
-    DrComponent,
-    ResourceComponent,
     ViewResourceComponent,
-    EditResourceComponent,
-    CollectionComponent,
-    ViewCollectionComponent,
-    CustomButtonComponent,
     MainComponent,
-    NoAuthComponent,
-    DcComponent,
-    ManageResourcesComponent,
-    ManageCollectionsComponent
+    NoAuthComponent
   ],
   imports: [
+    CommonModule,
     BrowserModule,
     BrowserAnimationsModule,
     AppRoutingModule,
-    // * Angular Material Modules
-    MatButtonModule,
-    MatToolbarModule,
-    MatSidenavModule,
-    MatIconModule,
-    MatListModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatCheckboxModule,
-    MatMenuModule,
-    MatSelectModule,
-    MatTabsModule,
-    MatBadgeModule,
-    MatDialogModule,
-    MatSnackBarModule,
-    MatProgressBarModule,
-    MatTooltipModule,
-    MatDividerModule,
-    MatRippleModule,
-    MatChipsModule,
-    MatProgressSpinnerModule,
-    MatAutocompleteModule,
-    // ! End of Material Angular Modules
     ReactiveFormsModule,
     HttpClientModule,
-    FontAwesomeModule,
-    AutosizeModule
+    AutosizeModule,
+    // * Custom Modules
+    MaterialModule,
+    ManageModule,
+    DialogsModule,
+    GeneralModule
   ],
   providers: [
     {
@@ -134,6 +71,6 @@ import { ManageCollectionsComponent } from './pages/manage/manage-collections/ma
     }
   ],
   bootstrap: [AppComponent],
-  entryComponents: [AtcComponent, PoComponent, SnackbarComponent, CpiComponent, DrComponent, DcComponent]
+  entryComponents: [AtcComponent, PoComponent, SnackbarComponent, CpiComponent]
 })
 export class AppModule { }

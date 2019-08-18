@@ -14,7 +14,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 export class ResourceComponent implements OnInit {
   @Input() data: any;
   @Input() collectionId: string;
-  @Input() isInCollectionPage: boolean;
+  @Input() whichPage: number;
   @Output() drResponse: EventEmitter<any> = new EventEmitter();
 
   // Data
@@ -77,7 +77,7 @@ export class ResourceComponent implements OnInit {
   }
 
   goToEdit() {
-    this.route.navigate(['resource/edit/', this.id]);
+    this.route.navigate(['resource/', this.id], { relativeTo: this.router.parent });
   }
 
 }
