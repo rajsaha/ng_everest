@@ -71,8 +71,8 @@
           </mat-autocomplete>
         </mat-form-field>
 
-        <div class="form-button-container clearfix" id="done-button">
-          <button mat-raised-button color="primary" [disabled]="isDisabled">Done</button>
+        <div class="form-button-container">
+          <app-custom-button buttonLabel="Done" [isDisabled]="isDisabled" size="small"></app-custom-button>
         </div>
       </form>
     </div>

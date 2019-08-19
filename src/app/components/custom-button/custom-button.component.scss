@@ -5,14 +5,17 @@ $button-text-color: white;
 .custom-button {
     border-radius: 50px;
     border: 0;
-    box-shadow: 0 13px 26px rgba(255, 121, 90, 0.5);
     color: $button-text-color;
-    cursor: pointer;
     font-family: 'Montserrat', sans-serif;
     transition: all 0.2s ease-in;
     width: 100%;
 
     &:hover {
-        background-color: $button-bg-color-hover;
+        background-color: $button-bg-color-hover !important;
     }
+}
+
+.not-disabled {
+    box-shadow: 0 13px 26px rgba(255, 121, 90, 0.5);
+    cursor: pointer;
 }

@@ -13,11 +13,12 @@ export class CustomButtonComponent implements OnInit {
 
   bgColor: string;
   padding: string;
+  fontSize: string;
   constructor() { }
 
   ngOnInit() {
     this.setBgColor();
-    this.setSize();
+    this.setSizes();
   }
 
   setBgColor() {
@@ -29,18 +30,25 @@ export class CustomButtonComponent implements OnInit {
         this.bgColor = '#FF795A';
         break;
     }
+
+    if (this.isDisabled) {
+      this.bgColor = 'transparent !important';
+    }
   }
 
-  setSize() {
+  setSizes() {
     switch (this.size) {
       case 'large':
         this.padding = '15px 100px';
+        this.fontSize = 'inherit';
         break;
       case 'small':
-        this.padding = '15px 50px';
+        this.padding = '10px 50px';
+        this.fontSize = '14px';
         break;
       default:
         this.padding = '15px 100px';
+        this.fontSize = 'inherit';
         break;
     }
   }

@@ -100,8 +100,8 @@
                 <input matInput placeholder="Email" formControlName="email">
               </mat-form-field>
 
-              <div class="form-button-container clearfix">
-                <button mat-raised-button color="primary" [disabled]="isProfileSaveButtonDisabled">Save</button>
+              <div class="form-button-container">
+                  <app-custom-button buttonLabel="Save" [isDisabled]="isProfileSaveButtonDisabled" size="small"></app-custom-button>
               </div>
             </form>
           </div>
@@ -141,8 +141,8 @@
               </mat-error>
             </mat-form-field>
 
-            <div class="form-button-container clearfix">
-              <button mat-raised-button color="primary">Save</button>
+            <div class="form-button-container">
+                <app-custom-button buttonLabel="Save" size="small"></app-custom-button>
             </div>
           </form>
         </div>
@@ -165,7 +165,7 @@
               <mat-hint>Write your username to confirm account deletion</mat-hint>
             </mat-form-field>
             <div class="form-button-container clearfix">
-              <button mat-raised-button color="accent" *ngIf="isDeleteable">Delete</button>
+                <app-custom-button buttonLabel="Delete" *ngIf="isDeleteable" size="small" [backgroundColor]="delete"></app-custom-button>
             </div>
           </form>
         </div>

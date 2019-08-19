@@ -39,9 +39,7 @@
 			}
 
 			.form-button-container {
-				button {
-					float: right;
-				}
+				margin-left: auto;
 			}
 		}
 	}
@@ -50,5 +48,13 @@
 @media (min-width: 768px) {
 	.section-container {
 		padding: 15px 15px 15px 25px;
+
+		.section {
+			.section-content {
+				.form-button-container {
+					width: 150px;
+				}
+			}
+		}
 	}
 }
