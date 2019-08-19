@@ -15,6 +15,7 @@ export class ResourceComponent implements OnInit {
   @Input() data: any;
   @Input() collectionId: string;
   @Input() whichPage: number;
+  @Input() isInCollectionPage: boolean;
   @Output() drResponse: EventEmitter<any> = new EventEmitter();
 
   // Data

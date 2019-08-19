@@ -7,24 +7,21 @@
       [ngClass]="isFabActive ? 'animation-rotate90Clockwise' : 'animation-rotate90AntiClockwise'">
       <fa-icon [icon]="faPlus"></fa-icon>
     </button>
-    <button 
-    routerLink="/share-resource"
-    class="fab-add-post" 
-    mat-mini-fab 
-    matTooltip="Share a Resource" 
-    matTooltipPosition="left"
-    [ngClass]="isFabActive ? 'animation-scaleAppear' : 'animation-scaleDisappear'"
-    [ngStyle]="{'animation-delay': isFabActive ? '-0.1s' : '0s'}">
-      <fa-icon [icon]="faLink"></fa-icon>
-    </button>
-    <button 
-    class="fab-add-document" 
-    mat-mini-fab 
-    matTooltip="Add a Document" 
-    matTooltipPosition="left" 
-    [ngClass]="isFabActive ? 'animation-scaleAppear' : 'animation-scaleDisappear'"
-    [ngStyle]="{'animation-delay': isFabActive ? '0s' : '-0.1s'}">
-      <fa-icon [icon]="faFile"></fa-icon>
-    </button>
+
+    <div class="fab-add-post" [ngClass]="isFabActive ? 'animation-scaleAppear' : 'animation-scaleDisappear'"
+      [ngStyle]="{'animation-delay': isFabActive ? '-0.1s' : '0s'}">
+      <span>Share Resource</span>
+      <button routerLink="/share-resource" mat-mini-fab>
+        <fa-icon [icon]="faLink"></fa-icon>
+      </button>
+    </div>
+
+    <div class="fab-add-document" [ngClass]="isFabActive ? 'animation-scaleAppear' : 'animation-scaleDisappear'"
+      [ngStyle]="{'animation-delay': isFabActive ? '0s' : '-0.1s'}">
+      <span>Write an Article</span>
+      <button mat-mini-fab>
+        <fa-icon [icon]="faFile"></fa-icon>
+      </button>
+    </div>
   </div>
 </div>

@@ -1,6 +1,6 @@
 $init_bottom: 15px;
 $space_between_fab_buttons: 75px;
-$fab_button_1_position: $init_bottom + $space_between_fab_buttons;
+$fab_button_1_position: $init_bottom+$space_between_fab_buttons;
 
 %posFixed {
     position: fixed;
@@ -8,69 +8,85 @@ $fab_button_1_position: $init_bottom + $space_between_fab_buttons;
     z-index: -10;
 }
 
-.feed-container {
-	padding: 15px;
+%mini-fab-container {
+    span {
+        border-radius: 5px;
+        background-color: white;
+        background-clip: padding-box;
+        border: 1px solid #FF795A;
+        box-shadow: 0px 3px 5px -1px rgba(0, 0, 0, 0.2), 0px 6px 10px 0px rgba(0, 0, 0, 0.14), 0px 1px 18px 0px rgba(0, 0, 0, 0.12);
+        font-size: 12px;
+        font-weight: bold;
+        margin-right: 8px;
+        padding: 5px 15px;
+    }
+}
 
-	.add-content-buttons {
-		.fab-add-content {
-			position: fixed;
-			bottom: 15px;
+.feed-container {
+    padding: 15px;
+
+    .add-content-buttons {
+        .fab-add-content {
+            position: fixed;
+            bottom: 15px;
             right: 15px;
             z-index: 100;
-		}
+        }
 
-		.fab-add-post {
+        .fab-add-post {
+            @extend %mini-fab-container;
             @extend %posFixed;
             bottom: $fab_button_1_position;
             z-index: 100;
         }
-        
+
         .fab-add-document {
+            @extend %mini-fab-container;
             @extend %posFixed;
             bottom: $fab_button_1_position * 1.6;
             z-index: 100;
         }
-	}
+    }
 }
 
 .animation-rotate90Clockwise {
-	animation: rotate90Clockwise 0.2s ease-in-out;
-	animation-fill-mode: forwards;
+    animation: rotate90Clockwise 0.2s ease-in-out;
+    animation-fill-mode: forwards;
 }
 
 .animation-rotate90AntiClockwise {
-	animation: rotate90AntiClockwise 0.2s ease-in-out;
-	animation-fill-mode: forwards;
+    animation: rotate90AntiClockwise 0.2s ease-in-out;
+    animation-fill-mode: forwards;
 }
 
 .animation-scaleAppear {
-    animation: scaleAppear 0.3s cubic-bezier(.92,.32,.29,.89);
+    animation: scaleAppear 0.3s cubic-bezier(.92, .32, .29, .89);
     animation-fill-mode: forwards;
 }
 
 .animation-scaleDisappear {
-    animation: scaleDisappear 0.3s cubic-bezier(.92,.32,.29,.89);
+    animation: scaleDisappear 0.3s cubic-bezier(.92, .32, .29, .89);
     animation-fill-mode: forwards;
 }
 
 @keyframes rotate90Clockwise {
-	0% {
-		transform: rotate(0deg);
-	}
+    0% {
+        transform: rotate(0deg);
+    }
 
-	100% {
-		transform: rotate(135deg);
-	}
+    100% {
+        transform: rotate(135deg);
+    }
 }
 
 @keyframes rotate90AntiClockwise {
-	0% {
-		transform: rotate(135deg);
-	}
+    0% {
+        transform: rotate(135deg);
+    }
 
-	100% {
-		transform: rotate(0deg);
-	}
+    100% {
+        transform: rotate(0deg);
+    }
 }
 
 @keyframes scaleAppear {
@@ -96,5 +112,3 @@ $fab_button_1_position: $init_bottom + $space_between_fab_buttons;
         transform: scale(0);
     }
 }
-
-

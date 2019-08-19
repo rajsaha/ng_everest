@@ -1,17 +1,20 @@
 <div class="section-container">
     <div class="collection-data" *ngIf="collection">
         <div class="collection-header">
-            <h1 class="title" contenteditable="true">{{ collection.title }}</h1>
-            <fa-icon class="fa-edit" [icon]="faPen"></fa-icon>
+            <form [formGroup]="changeCollectionTitleForm">
+                <mat-form-field>
+                    <input type="text" matInput formControlName="title">
+                    <mat-icon matSuffix>
+                        <fa-icon [icon]="faEdit"></fa-icon>
+                    </mat-icon>
+                    <mat-hint>Change your collection title</mat-hint>
+                </mat-form-field>
+            </form>
         </div>
 
         <div class="resource-grid">
-            <app-resource 
-            *ngFor="let resource of resources" 
-            [data]="resource" 
-            [whichPage]="2"
-            (drResponse)="drResponseHandler($event)"
-            [collectionId]="id"></app-resource>
+            <app-resource *ngFor="let resource of resources" [data]="resource" [whichPage]="2"
+                [isInCollectionPage]="true" (drResponse)="drResponseHandler($event)" [collectionId]="id"></app-resource>
         </div>
 
         <div *ngIf="resources.length === 0">
@@ -19,7 +22,8 @@
         </div>
 
         <div class="delete" (click)="openDcDialog()">
-            <app-custom-button buttonLabel="Delete Collection" size="small" backgroundColor="delete"></app-custom-button>
+            <app-custom-button buttonLabel="Delete Collection" size="small" backgroundColor="delete">
+            </app-custom-button>
         </div>
     </div>
 </div>

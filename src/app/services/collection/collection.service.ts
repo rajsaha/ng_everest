@@ -80,4 +80,13 @@ export class CollectionService {
         });
     });
   }
+
+  changeCollectionTitle(data: any): Promise<any> {
+    return new Promise(resolve => {
+      this.http.post(`${ENV.API_URL}/collection/change-collection-title`, data)
+        .subscribe((response: any) => {
+          resolve(response);
+        });
+    });
+  }
 }

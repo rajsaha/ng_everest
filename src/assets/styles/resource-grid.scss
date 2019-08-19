@@ -10,5 +10,6 @@
 @media (min-width: 768px) {
   .resource-grid {
     justify-items: start;
+    grid-template-columns: repeat(auto-fit, 286px);
   }
 }

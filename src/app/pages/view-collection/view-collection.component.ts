@@ -1,11 +1,13 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { CollectionService } from '@services/collection/collection.service';
 import { ResourceService } from '@services/resource/resource.service';
-import { faPen } from '@fortawesome/free-solid-svg-icons';
+import { faPen, faEdit } from '@fortawesome/free-solid-svg-icons';
 import { UtilityService } from '@services/general/utility.service';
 import { MatDialog } from '@angular/material';
 import { DcComponent } from 'src/app/general/dialogs/dc/dc.component';
+import { FormGroup, FormBuilder } from '@angular/forms';
+import { delay } from 'rxjs/internal/operators';
 
 @Component({
   selector: 'app-view-collection',
@@ -17,18 +19,23 @@ export class ViewCollectionComponent implements OnInit {
   collection: any;
   resources = [];
   @Output() dcResponse: EventEmitter<any> = new EventEmitter();
+  changeCollectionTitleForm: FormGroup;
 
   // Icons
   faPen = faPen;
+  faEdit = faEdit;
 
   constructor(
     private route: ActivatedRoute,
     private collectionService: CollectionService,
     private resourceService: ResourceService,
     private utilityService: UtilityService,
-    public dialog: MatDialog) { }
+    public dialog: MatDialog,
+    private fb: FormBuilder) { }
 
   ngOnInit() {
+    this.initCollectionTitleForm();
+    this.onCollectionTitleFormChange();
     this.route.params.subscribe((params) => {
       this.id = params.id;
       this.getCollection(this.id);
@@ -38,6 +45,7 @@ export class ViewCollectionComponent implements OnInit {
   async getCollection(id: string) {
     const result = await this.collectionService.getCollectionById({ id });
     this.collection = result.collection;
+    this.changeCollectionTitleForm.controls.title.patchValue(result.collection.title);
     if (this.collection.resources.length > 0) {
       await this.getMultipleResources(this.collection.resources);
     }
@@ -67,6 +75,19 @@ export class ViewCollectionComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(async () => {
       this.dcResponse.emit();
+    });
+  }
+
+  initCollectionTitleForm() {
+    this.changeCollectionTitleForm = this.fb.group({
+      title: ['']
+    });
+  }
+
+  onCollectionTitleFormChange() {
+    this.changeCollectionTitleForm.get('title').valueChanges.pipe(delay(1500)).subscribe(async (title) => {
+      const result = await this.collectionService.changeCollectionTitle({id: this.collection._id, title});
+      console.log(result);
     });
   }
 }

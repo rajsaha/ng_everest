@@ -65,7 +65,6 @@ export class AtcComponent implements OnInit {
 
   async checkForResourceInCollection() {
     const response = await this.collectionService.checkForResourceInCollection({ id: this.data.id, username: this.username });
-    console.log(response);
   }
 
   async getCollectionTitle(resourceId: string) {
