@@ -1,0 +1,95 @@
+.post {
+    border: 1px solid white;
+    border-radius: 5px;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 600px;
+
+    .header {
+        display: grid;
+        grid-template-columns: 50px 1fr 1fr;
+        padding: 10px 15px;
+        border-bottom: 1px solid #eee;
+
+        .user-image {
+            width: 40px;
+            height: 40px;
+            border: 1px solid white;
+            border-radius: 50%;
+        }
+
+        .uploader-info {
+            align-self: center;
+            height: 100%;
+            
+            .username {
+                width: 100px;
+                height: 10px;
+                background: #777;
+                margin-bottom: 15px;
+            }
+
+            .date {
+                width: 50px;
+                height: 10px;
+                background: #777;
+            }
+        }
+
+        .post-menu {
+            align-self: center;
+
+            fa-icon {
+                float: right;
+                color: rgba(0, 0, 0, 0.5);
+            }
+        }
+    }
+
+    .image {
+        height: 250px;
+        border-bottom: 1px solid white;
+    }
+
+    .title {
+        margin: 15px 15px 15px 15px;
+        width: 100px;
+        height: 20px;
+        border-radius: 10px;
+    }
+
+    .description {
+        padding: 0 15px 15px 15px;
+        line-height: 25px;
+    }
+}
+
+.comment {
+    height: 10px;
+    background: #777;
+    margin-bottom: 15px;
+    border-radius: 5px;
+}
+
+@keyframes fullView {
+    100% {
+        width: 100%;
+    }
+}
+
+
+.animate {
+    animation: shimmer 2s infinite linear;
+    background: linear-gradient(to right, #eff1f3 4%, #e2e2e2 25%, #eff1f3 36%);
+    background-size: 1000px 100%;
+}
+
+@keyframes shimmer {
+    0% {
+        background-position: -1000px 0;
+    }
+
+    100% {
+        background-position: 1000px 0;
+    }
+}

@@ -23,29 +23,30 @@ $fab_button_1_position: $init_bottom+$space_between_fab_buttons;
 }
 
 .feed-container {
+    height: 100%;
     padding: 15px;
+}
 
-    .add-content-buttons {
-        .fab-add-content {
-            position: fixed;
-            bottom: 15px;
-            right: 15px;
-            z-index: 100;
-        }
+.add-content-buttons {
+    .fab-add-content {
+        position: fixed;
+        bottom: 15px;
+        right: 15px;
+        z-index: 100;
+    }
 
-        .fab-add-post {
-            @extend %mini-fab-container;
-            @extend %posFixed;
-            bottom: $fab_button_1_position;
-            z-index: 100;
-        }
+    .fab-add-post {
+        @extend %mini-fab-container;
+        @extend %posFixed;
+        bottom: $fab_button_1_position;
+        z-index: 100;
+    }
 
-        .fab-add-document {
-            @extend %mini-fab-container;
-            @extend %posFixed;
-            bottom: $fab_button_1_position * 1.6;
-            z-index: 100;
-        }
+    .fab-add-document {
+        @extend %mini-fab-container;
+        @extend %posFixed;
+        bottom: $fab_button_1_position * 1.6;
+        z-index: 100;
     }
 }
 

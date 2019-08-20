@@ -39,9 +39,9 @@ export class ResourceService {
     });
   }
 
-  getAllResources(): Promise<any> {
+  getAllResources(start: number, end: number): Promise<any> {
     return new Promise(resolve => {
-      this.http.get(`${ENV.API_URL}/resource/get/all`)
+      this.http.get(`${ENV.API_URL}/resource/get/all/${start}/${end}`)
         .subscribe((response: any) => {
           resolve(response);
         });

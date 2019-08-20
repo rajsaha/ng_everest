@@ -7,6 +7,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 
@@ -31,6 +32,7 @@ import { CommonModule } from '@angular/common';
 import { MaterialModule } from './modules/material/material.module';
 import { GeneralModule } from './modules/general/general.module';
 import { DialogsModule } from './modules/dialogs/dialogs.module';
+import { LoadingPostComponent } from './components/loading-post/loading-post.component';
 
 @NgModule({
   declarations: [
@@ -47,7 +49,8 @@ import { DialogsModule } from './modules/dialogs/dialogs.module';
     ShareResourceComponent,
     ViewResourceComponent,
     MainComponent,
-    NoAuthComponent
+    NoAuthComponent,
+    LoadingPostComponent
   ],
   imports: [
     CommonModule,
@@ -74,3 +77,5 @@ import { DialogsModule } from './modules/dialogs/dialogs.module';
   entryComponents: [AtcComponent, PoComponent, SnackbarComponent, CpiComponent]
 })
 export class AppModule { }
+
+platformBrowserDynamic().bootstrapModule(AppModule);
