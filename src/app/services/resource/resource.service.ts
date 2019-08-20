@@ -128,4 +128,13 @@ export class ResourceService {
       });
     });
   }
+
+  searchForUserResources(data: any): Promise<any> {
+    return new Promise(resolve => {
+      this.http.post(`${ENV.API_URL}/resource/search-for-user-resources`, data)
+      .subscribe((response: any) => {
+        resolve(response);
+      });
+    });
+  }
 }
