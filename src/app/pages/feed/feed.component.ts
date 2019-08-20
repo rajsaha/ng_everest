@@ -11,7 +11,7 @@ export class FeedComponent implements OnInit {
   posts = [];
   isFabActive = false;
   username: string;
-  isLoading = true;
+  isLoading = false;
 
   // Icons
   faPlus = faPlus;
