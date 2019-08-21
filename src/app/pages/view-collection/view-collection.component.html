@@ -12,9 +12,13 @@
             </form>
         </div>
 
-        <div class="resource-grid">
+        <div class="resource-grid" *ngIf="!isLoading">
             <app-resource *ngFor="let resource of resources" [data]="resource" [whichPage]="2"
                 [isInCollectionPage]="true" (drResponse)="drResponseHandler($event)" [collectionId]="id"></app-resource>
+        </div>
+
+        <div class="resource-grid">
+            <app-loading *ngIf="isLoading" type="resource"></app-loading>
         </div>
 
         <div *ngIf="resources.length === 0">

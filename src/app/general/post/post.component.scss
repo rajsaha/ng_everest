@@ -78,8 +78,16 @@
 
 	.image {
 		img {
+			max-width: 100%;
 			width: 100%;
 			display: block;
+			height: auto;
+
+			&::before {
+				display: block;
+				content: '';
+				padding-top: calc(100% * 2 / 3);
+			}
 		}
 	}
 

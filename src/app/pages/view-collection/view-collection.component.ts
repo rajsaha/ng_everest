@@ -25,6 +25,9 @@ export class ViewCollectionComponent implements OnInit {
   faPen = faPen;
   faEdit = faEdit;
 
+  // Toggles
+  isLoading = false;
+
   constructor(
     private route: ActivatedRoute,
     private collectionService: CollectionService,
@@ -43,12 +46,14 @@ export class ViewCollectionComponent implements OnInit {
   }
 
   async getCollection(id: string) {
+    this.isLoading = true;
     const result = await this.collectionService.getCollectionById({ id });
     this.collection = result.collection;
     this.changeCollectionTitleForm.controls.title.patchValue(result.collection.title);
     if (this.collection.resources.length > 0) {
       await this.getMultipleResources(this.collection.resources);
     }
+    this.isLoading = false;
   }
 
   async getMultipleResources(data) {

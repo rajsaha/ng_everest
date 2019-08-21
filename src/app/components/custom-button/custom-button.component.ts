@@ -11,9 +11,16 @@ export class CustomButtonComponent implements OnInit {
   @Input() backgroundColor: string;
   @Input() size: string;
 
+  // Toggles
+  isDelete = false;
+
+  // Styles
   bgColor: string;
+  border: string;
   padding: string;
   fontSize: string;
+  color = 'white';
+  boxShadow = 'box-shadow: 0 13px 26px rgba(255, 121, 90, 0.5)';
   constructor() { }
 
   ngOnInit() {
@@ -24,7 +31,11 @@ export class CustomButtonComponent implements OnInit {
   setBgColor() {
     switch (this.backgroundColor) {
       case 'delete':
-        this.bgColor = 'red';
+        this.isDelete = true;
+        this.bgColor = 'transparent';
+        this.border = '1px solid red';
+        this.boxShadow = 'none';
+        this.color = 'black';
         break;
       default:
         this.bgColor = '#FF795A';
@@ -33,6 +44,7 @@ export class CustomButtonComponent implements OnInit {
 
     if (this.isDisabled) {
       this.bgColor = 'transparent !important';
+      this.boxShadow = 'none';
     }
   }
 

@@ -16,7 +16,7 @@
           </mat-form-field>
         </form>
       </div>
-      <div class="list-of-collections">
+      <div class="list-of-collections" *ngIf="!isLoading">
         <app-collection *ngFor="let collection of collections" [data]="collection"
           [routerLink]="[collectionUrl, collection._id]"></app-collection>
       </div>

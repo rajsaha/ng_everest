@@ -1,8 +1,16 @@
 <button 
 matRipple 
 class="custom-button"
-[ngClass]="isDisabled ? '' : 'not-disabled'" 
+[ngClass]="{'not-disabled': isDisabled, 'delete-button': isDelete}" 
 [disabled]="isDisabled" 
-[ngStyle]="{'background-color': bgColor, 'padding': padding, 'font-size': fontSize}">
+[ngStyle]="
+{
+  'background-color': bgColor, 
+  'padding': padding, 
+  'font-size': fontSize,
+  'color': color, 
+  'border': border,
+  'box-shadow': boxShadow
+}">
   {{ buttonLabel }}
 </button>
