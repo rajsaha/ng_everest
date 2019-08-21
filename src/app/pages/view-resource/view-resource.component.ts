@@ -18,6 +18,9 @@ export class ViewResourceComponent implements OnInit {
   // Icons
   faPen = faPen;
 
+  // Toggles
+  isLoading = false;
+
   constructor(
     private route: ActivatedRoute, 
     private resourceService: ResourceService,
@@ -34,7 +37,9 @@ export class ViewResourceComponent implements OnInit {
 
   async getResource(id: string) {
     try {
+      this.isLoading = true;
       const response = await this.resourceService.getResource({id});
+      this.isLoading = false;
       this.resource = response.resource;
       this.checkIfEditable(this.resource.username);
     } catch (err) {

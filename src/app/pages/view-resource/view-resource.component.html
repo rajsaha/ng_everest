@@ -1,5 +1,6 @@
 <div class="padding-15">
   <app-post *ngIf="resource" [data]="resource"></app-post>
+  <app-loading *ngIf="isLoading"></app-loading>
   <div class="edit-resource-container" *ngIf="isEditable">
     <button mat-fab color="primary" (click)="goToEdit()">
       <fa-icon [icon]="faPen"></fa-icon>

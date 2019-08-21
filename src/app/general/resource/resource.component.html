@@ -1,5 +1,5 @@
 <div class="resource">
-  <img class="image" [src]="data.image" [routerLink]="['/view/', id]">
+  <img class="image" *ngIf="data.image" [src]="data.image" [routerLink]="['/view/', id]">
   <div class="details">
     <h4>{{ data.title }}</h4>
     <p>{{ data.description | truncate:[40] }}</p>

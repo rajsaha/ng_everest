@@ -1,7 +1,7 @@
 <div class="post">
   <!-- * Header -->
   <div class="header">
-    <div class="user-image" [ngStyle]="{ 'background-image': 'url(' + userImage  +')' }">
+    <div class="user-image" *ngIf="userImage" [ngStyle]="{ 'background-image': 'url(' + userImage  +')' }">
     </div>
     <div class="uploader-info">
       <span>{{ username }}</span>
@@ -14,7 +14,7 @@
 
   <!-- * Image -->
   <a [href]="url" target="_blank">
-    <div class="image">
+    <div class="image" *ngIf="image">
       <img [src]="image" [alt]="title">
     </div>
   </a>

@@ -19,6 +19,12 @@
 		width: 275px;
 		max-width: 300px;
 		object-fit: cover;
+
+		&::before {
+			display: block;
+			content: '';
+			padding-top: calc(100% * 2 / 3);
+		}
 	}
 
 	.details {

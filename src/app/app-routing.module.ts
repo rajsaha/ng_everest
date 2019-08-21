@@ -60,7 +60,8 @@ const routes: Routes = [
   },
   {
     path: '**',
-    redirectTo: '404'
+    redirectTo: '404',
+    pathMatch: 'full'
   },
   {
     path: '404',

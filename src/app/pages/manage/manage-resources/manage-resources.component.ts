@@ -3,7 +3,7 @@ import { FormGroup, FormBuilder } from '@angular/forms';
 import { ResourceService } from '@services/resource/resource.service';
 import { UtilityService } from '@services/general/utility.service';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
-import { delay } from 'rxjs/internal/operators';
+import { delay, debounceTime } from 'rxjs/internal/operators';
 
 @Component({
   selector: 'app-manage-resources',
@@ -68,7 +68,7 @@ export class ManageResourcesComponent implements OnInit {
   }
 
   onResourceSearchFormChange() {
-    this.resourceSearchForm.get('query').valueChanges.pipe(delay(1500)).subscribe(async (query) => {
+    this.resourceSearchForm.get('query').valueChanges.pipe(debounceTime(300), delay(1500)).subscribe(async (query) => {
       const searchResult = await this.resourceService.searchForUserResources({username: this.username, query});
       this.resources = searchResult.resources;
     });
