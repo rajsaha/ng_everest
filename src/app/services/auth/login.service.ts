@@ -60,7 +60,7 @@ export class LoginService {
 
   redirectIfLoggedIn() {
     if (localStorage.getItem('token')) {
-      this.router.navigate(['feed']);
+      this.router.navigate(['']);
     }
   }
 }
