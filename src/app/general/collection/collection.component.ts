@@ -9,10 +9,10 @@ import { ResourceService } from '@services/resource/resource.service';
 export class CollectionComponent implements OnInit {
 
   @Input() data: any;
-  image1: string;
-  image2: string;
-  image3: string;
-  image4: string;
+  image1 = '';
+  image2 = '';
+  image3 = '';
+  image4 = '';
 
   constructor(private resourceService: ResourceService) { }
 

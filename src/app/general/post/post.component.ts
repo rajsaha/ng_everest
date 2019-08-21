@@ -27,8 +27,8 @@ export class PostComponent implements OnInit {
   title: string;
   tags = [];
   description: string;
-  image: string;
-  userImage: string;
+  image = '';
+  userImage = '';
   timestamp: any;
   allComments = [];
   recommended_by_count: number;

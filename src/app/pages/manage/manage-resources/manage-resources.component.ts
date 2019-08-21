@@ -69,7 +69,9 @@ export class ManageResourcesComponent implements OnInit {
 
   onResourceSearchFormChange() {
     this.resourceSearchForm.get('query').valueChanges.pipe(debounceTime(300), delay(1500)).subscribe(async (query) => {
+      this.isLoading = true;
       const searchResult = await this.resourceService.searchForUserResources({username: this.username, query});
+      this.isLoading = false;
       this.resources = searchResult.resources;
     });
   }

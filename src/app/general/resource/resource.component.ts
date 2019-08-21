@@ -24,7 +24,7 @@ export class ResourceComponent implements OnInit {
   title: string;
   tags = [];
   description: string;
-  image: string;
+  image = '';
   timestamp: any;
   allComments = [];
 
