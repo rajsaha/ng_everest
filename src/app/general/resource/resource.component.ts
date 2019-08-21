@@ -27,6 +27,8 @@ export class ResourceComponent implements OnInit {
   image = '';
   timestamp: any;
   allComments = [];
+  resourceUser: string;
+  currentUser: string;
 
   // Icons
   faEye = faEye;
@@ -43,11 +45,13 @@ export class ResourceComponent implements OnInit {
     private router: ActivatedRoute) { }
 
   ngOnInit() {
+    this.currentUser = localStorage.getItem('username');
     this.populateResource();
   }
 
   populateResource() {
     this.id = this.data._id;
+    this.resourceUser = this.data.username;
     this.url = this.data.url;
     this.title = this.data.title;
     this.tags = this.data.tags;

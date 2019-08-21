@@ -238,6 +238,12 @@ export class EditResourceComponent implements OnInit {
     try {
       this.isLoading = true;
       const response = await this.resourceService.getResource({ id });
+
+      // * Redirect if resource belongs to someone else
+      if (this.username !== response.resource.username) {
+        this.router.navigate(['/']);
+      }
+
       this.isLoading = false;
       this.resource = response.resource;
       this.setValues(this.resource);

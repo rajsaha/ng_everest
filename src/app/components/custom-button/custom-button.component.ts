@@ -33,9 +33,9 @@ export class CustomButtonComponent implements OnInit {
       case 'delete':
         this.isDelete = true;
         this.bgColor = 'transparent';
-        this.border = '1px solid red';
+        this.border = '1px solid tomato';
         this.boxShadow = 'none';
-        this.color = 'black';
+        this.color = 'rgba(0, 0, 0, .8)';
         break;
       default:
         this.bgColor = '#FF795A';
