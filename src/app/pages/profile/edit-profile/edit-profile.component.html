@@ -1,0 +1,110 @@
+<div class="public-view" *ngIf="isPublicView">
+    <div class="section-container">
+        <div class="section">
+            <div class="profile-picture">
+                <div class="image-container"
+                    [ngStyle]="{ 'background-image': 'url(' + image  +')', 'cursor': 'inherit', 'border': 'none' }">
+                </div>
+                <div class="text">
+                    <p>{{ username }}</p>
+                    <p>{{ email }}</p>
+                </div>
+                <button class="toggle-profile-view" mat-stroked-button (click)="isPublicView = false">Edit
+                    Profile</button>
+            </div>
+            <button class="toggle-profile-view-sm" mat-stroked-button (click)="isPublicView = false">Edit
+                Profile</button>
+
+            <mat-divider></mat-divider>
+
+            <!--* Public view of profile -->
+            <div class="public-view-content">
+                <h1 *ngIf="name">{{ name }}</h1>
+                <a *ngIf="website" [href]="website" target="_blank">
+                    <fa-icon [icon]="faExternalLinkAlt"></fa-icon>&nbsp; Website
+                </a>
+                <p class="bio" *ngIf="bio">{{ bio }}</p>
+                <mat-chip-list *ngIf="interests">
+                    <mat-chip *ngFor="let interest of interests">{{ interest }}</mat-chip>
+                </mat-chip-list>
+            </div>
+
+            <!-- * Progress Bar -->
+            <mat-progress-bar *ngIf="profileProgress < 100" mode="determinate" [value]="profileProgress">
+            </mat-progress-bar>
+            <small *ngIf="profileProgress < 100" class="complete-profile-label">Profile Completion:
+                {{ profileProgress }}%</small>
+        </div>
+    </div>
+</div>
+
+<div class="change-profile-data" *ngIf="!isPublicView">
+    <div class="section-container">
+        <div class="section">
+            <div class="profile-picture">
+                <div class="image-container" [ngStyle]="{ 'background-image': 'url(' + image  +')' }"
+                    (click)="openCpiDialog()"></div>
+                <div class="text">
+                    <p>{{ profileForm.controls.username.value }}</p>
+                    <p>{{ profileForm.controls.email.value }}</p>
+                </div>
+                <button class="toggle-profile-view" mat-stroked-button
+                    (click)="isPublicView = true; getUserData();">View
+                    Profile</button>
+            </div>
+            <button class="toggle-profile-view-sm" mat-stroked-button (click)="isPublicView = true; getUserData();">View
+                Profile</button>
+            <mat-divider></mat-divider>
+            <div class="section-header">
+                <h4>Personal Information</h4>
+            </div>
+
+            <div class="section-content">
+                <h6>Public Information</h6>
+
+                <form [formGroup]="profileForm" (ngSubmit)="saveProfileForm()">
+                    <mat-form-field appearance="outline">
+                        <mat-label>Name</mat-label>
+                        <input matInput placeholder="Name" formControlName="name">
+                    </mat-form-field>
+
+                    <mat-form-field appearance="outline">
+                        <mat-label>Website</mat-label>
+                        <input matInput placeholder="http://www.website.com" formControlName="website">
+                    </mat-form-field>
+
+                    <mat-form-field appearance="outline">
+                        <mat-label>Bio</mat-label>
+                        <textarea matInput placeholder="Tell us something about yourself"
+                            formControlName="bio"></textarea>
+                    </mat-form-field>
+
+                    <mat-form-field appearance="outline">
+                        <mat-label>Interests</mat-label>
+                        <mat-chip-list #chipList aria-label="Interest selection">
+                            <mat-chip *ngFor="let interest of interests" [selectable]="selectable"
+                                [removable]="removable" (removed)="removeInterest(interest)">
+                                {{ interest }}
+                                <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+                            </mat-chip>
+                            <input placeholder="Add an Interest" [matChipInputFor]="chipList"
+                                [matChipInputSeparatorKeyCodes]="separatorKeysCodes" [matChipInputAddOnBlur]="addOnBlur"
+                                (matChipInputTokenEnd)="addInterest($event)">
+                        </mat-chip-list>
+                    </mat-form-field>
+
+                    <h6>Private Information</h6>
+                    <mat-form-field appearance="outline">
+                        <mat-label>Email</mat-label>
+                        <input matInput placeholder="Email" formControlName="email">
+                    </mat-form-field>
+
+                    <div class="form-button-container">
+                        <app-custom-button buttonLabel="Save" [isDisabled]="isProfileSaveButtonDisabled" size="small">
+                        </app-custom-button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

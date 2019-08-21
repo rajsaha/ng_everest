@@ -17,12 +17,10 @@ import { WelcomeComponent } from './pages/welcome/welcome.component';
 import { SignupComponent } from './pages/signup/signup.component';
 import { FeedComponent } from './pages/feed/feed.component';
 import { PostComponent } from './general/post/post.component';
-import { ProfileComponent } from './pages/profile/profile.component';
 import { AtcComponent } from './general/dialogs/atc/atc.component';
 import { PoComponent } from './general/dialogs/po/po.component';
 import { PageNotFoundComponent } from './pages/page-not-found/page-not-found.component';
 import { SnackbarComponent } from './general/snackbar/snackbar.component';
-import { CpiComponent } from './general/dialogs/cpi/cpi.component';
 import { ShareResourceComponent } from './pages/share-resource/share-resource.component';
 import { ViewResourceComponent } from './pages/view-resource/view-resource.component';
 import { MainComponent } from './layouts/main/main.component';
@@ -41,10 +39,8 @@ import { DialogsModule } from './modules/dialogs/dialogs.module';
     SignupComponent,
     FeedComponent,
     PostComponent,
-    ProfileComponent,
     PoComponent,
     PageNotFoundComponent,
-    CpiComponent,
     ShareResourceComponent,
     ViewResourceComponent,
     MainComponent,
@@ -72,7 +68,7 @@ import { DialogsModule } from './modules/dialogs/dialogs.module';
     }
   ],
   bootstrap: [AppComponent],
-  entryComponents: [AtcComponent, PoComponent, SnackbarComponent, CpiComponent]
+  entryComponents: [AtcComponent, PoComponent, SnackbarComponent]
 })
 export class AppModule { }
 

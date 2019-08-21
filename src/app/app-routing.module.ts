@@ -35,8 +35,8 @@ const routes: Routes = [
       },
       {
         path: 'profile',
-        component: ProfileComponent,
-      },
+        loadChildren: 'src/app/modules/profile/profile.module#ProfileModule'
+      }
     ]
   },
   {
