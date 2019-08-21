@@ -1,19 +1,19 @@
-$block-width: 5.6rem;
-$block-height: 5.6rem;
+$block-width: 6.2rem;
+$block-height: 6.2rem;
 $block-radius: 5px;
 $block-border: 1px solid white;
 
 .collection-container {
   border: 1px solid rgb(235, 235, 235);
   border-radius: 5px;
+  box-shadow: 0 8px 20px 0 rgba(197, 197, 197, 0.6);
   cursor: pointer;
   display: inline-block;
-  margin: 0.5rem;
   transition: all 0.2s ease-in-out;
 
   &:hover {
-    box-shadow: 0 8px 20px 0 rgba(218, 224, 235, 0.6);
-  }
+		box-shadow: 0 22px 32px 0 rgba(197, 197, 197, 0.6);
+	}
 
   .collection {
     display: inline-grid;
@@ -39,6 +39,7 @@ $block-border: 1px solid white;
 
       &:nth-child(2) {
         border-left: $block-border;
+        border-bottom: $block-border;
         border-top-left-radius: 0;
         border-bottom-left-radius: 0;
         border-top-right-radius: $block-radius;

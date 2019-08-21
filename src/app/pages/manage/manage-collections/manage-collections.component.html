@@ -1,25 +1,26 @@
 <div class="section-container">
-  <div class="section">
-    <div class="section-header">
-      <h4>Collections</h4>
-    </div>
+  <div class="search">
+    <form [formGroup]="collectionSearchForm">
+      <mat-form-field appearance="outline">
+        <mat-label>Search</mat-label>
+        <mat-icon matPrefix>
+          <fa-icon [icon]="faSearch"></fa-icon>
+        </mat-icon>
+        <input matInput placeholder="Search for your resources" formControlName="query">
+      </mat-form-field>
+    </form>
+  </div>
 
-    <div class="section-content">
-      <div class="search">
-        <form [formGroup]="collectionSearchForm">
-          <mat-form-field appearance="outline">
-            <mat-label>Search</mat-label>
-            <mat-icon matPrefix>
-              <fa-icon [icon]="faSearch"></fa-icon>
-            </mat-icon>
-            <input matInput placeholder="Search for your resources" formControlName="query">
-          </mat-form-field>
-        </form>
-      </div>
-      <div class="list-of-collections" *ngIf="!isLoading">
-        <app-collection *ngFor="let collection of collections" [data]="collection"
-          [routerLink]="[collectionUrl, collection._id]"></app-collection>
-      </div>
-    </div>
+  <div class="list-of-collections" *ngIf="!isLoading">
+    <app-collection *ngFor="let collection of collections" [data]="collection"
+      [routerLink]="[collectionUrl, collection._id]"></app-collection>
+  </div>
+
+  <div class="list-of-collections" *ngIf="isLoading">
+    <app-loading type="resource"></app-loading>
+  </div>
+
+  <div *ngIf="collections && collections.length === 0">
+    You haven't made a collection yet
   </div>
 </div>
