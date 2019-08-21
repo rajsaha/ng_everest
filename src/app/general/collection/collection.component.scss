@@ -10,6 +10,7 @@ $block-border: 1px solid white;
   cursor: pointer;
   display: inline-block;
   transition: all 0.2s ease-in-out;
+  margin-bottom: 25px;
 
   &:hover {
 		box-shadow: 0 22px 32px 0 rgba(197, 197, 197, 0.6);

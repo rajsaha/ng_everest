@@ -89,4 +89,13 @@ export class CollectionService {
         });
     });
   }
+
+  searchUserCollections(data: any): Promise<any> {
+    return new Promise(resolve => {
+      this.http.post(`${ENV.API_URL}/collection/search-user-collections`, data)
+        .subscribe((response: any) => {
+          resolve(response);
+        });
+    });
+  }
 }

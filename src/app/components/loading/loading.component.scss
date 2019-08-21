@@ -90,6 +90,31 @@
     }
 }
 
+.collection {
+    background-color: white;
+    border-radius: 5px;
+    width: 200px;
+	max-width: 300px;
+    margin-bottom: 25px;
+
+    .image {
+        height: 200px;
+        border-bottom: 1px solid white;
+    }
+
+    .title {
+        margin: 15px 15px 15px 15px;
+        width: 100px;
+        height: 20px;
+        border-radius: 10px;
+    }
+
+    .description {
+        padding: 0 15px 15px 15px;
+        line-height: 25px;
+    }
+}
+
 .comment {
     height: 10px;
     background: #777;
