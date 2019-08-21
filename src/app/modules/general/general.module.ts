@@ -5,9 +5,10 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { TruncatePipe } from 'src/app/pipes/truncate';
 import { SnackbarComponent } from 'src/app/general/snackbar/snackbar.component';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
+import { LoadingComponent } from 'src/app/components/loading/loading.component';
 
 @NgModule({
-  declarations: [CustomButtonComponent, TruncatePipe, SnackbarComponent],
+  declarations: [CustomButtonComponent, TruncatePipe, SnackbarComponent, LoadingComponent],
   imports: [
     CommonModule,
     FontAwesomeModule,
@@ -18,7 +19,8 @@ import { InfiniteScrollModule } from 'ngx-infinite-scroll';
     FontAwesomeModule,
     TruncatePipe,
     SnackbarComponent,
-    InfiniteScrollModule
+    InfiniteScrollModule,
+    LoadingComponent
   ]
 })
 export class GeneralModule { }

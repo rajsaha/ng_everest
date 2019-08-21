@@ -1,6 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { LoadingPostComponent } from './loading-post.component';
+import { LoadingPostComponent } from './loading.component';
 
 describe('LoadingPostComponent', () => {
   let component: LoadingPostComponent;

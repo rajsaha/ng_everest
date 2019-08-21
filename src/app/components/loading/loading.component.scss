@@ -22,7 +22,7 @@
         .uploader-info {
             align-self: center;
             height: 100%;
-            
+
             .username {
                 width: 100px;
                 height: 10px;
@@ -49,6 +49,31 @@
 
     .image {
         height: 250px;
+        border-bottom: 1px solid white;
+    }
+
+    .title {
+        margin: 15px 15px 15px 15px;
+        width: 100px;
+        height: 20px;
+        border-radius: 10px;
+    }
+
+    .description {
+        padding: 0 15px 15px 15px;
+        line-height: 25px;
+    }
+}
+
+.resource {
+    background-color: white;
+    border-radius: 5px;
+    width: 275px;
+	max-width: 300px;
+    margin-bottom: 25px;
+
+    .image {
+        height: 200px;
         border-bottom: 1px solid white;
     }
 

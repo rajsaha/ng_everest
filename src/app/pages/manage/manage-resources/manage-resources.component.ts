@@ -18,6 +18,9 @@ export class ManageResourcesComponent implements OnInit {
   // Icons
   faSearch = faSearch;
 
+  // Toggles
+  isLoading = false;
+
   constructor(
     private fb: FormBuilder,
     private resourceService: ResourceService,
@@ -37,13 +40,16 @@ export class ManageResourcesComponent implements OnInit {
 
   async getUserResources() {
     try {
+      this.isLoading = true;
       const query = this.resourceSearchForm.get('query').value;
       if (query) {
         const searchResult = await this.resourceService.searchForUserResources({username: this.username, query});
+        this.isLoading = false;
         this.resources = searchResult.resources;
         return;
       }
       const response = await this.resourceService.getUserResources({username: this.username});
+      this.isLoading = false;
       this.resources = response.resources;
     } catch (err) {
       console.error(err);

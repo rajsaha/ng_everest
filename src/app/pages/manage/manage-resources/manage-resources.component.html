@@ -13,9 +13,13 @@
   </div>
 
   <!-- * Resource grid -->
-  <div class="resource-grid">
+  <div class="resource-grid" *ngIf="!isLoading">
     <app-resource *ngFor="let resource of resources" [data]="resource" (drResponse)="drResponseHandler($event)" [whichPage]="1">
     </app-resource>
+  </div>
+
+  <div class="resource-grid" *ngIf="isLoading">
+    <app-loading type="resource"></app-loading>
   </div>
 
   <div *ngIf="resources && resources.length === 0">

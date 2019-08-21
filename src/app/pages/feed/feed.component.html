@@ -5,8 +5,8 @@
   [infiniteScrollThrottle]="throttle" 
   (scrolled)="onScrollDown()"
   (scrolledUp)="onUp()">
-  <app-loading-post *ngIf="isLoading"></app-loading-post>
-  <app-loading-post *ngIf="isLoading"></app-loading-post>
+  <app-loading *ngIf="isLoading"></app-loading>
+  <app-loading *ngIf="isLoading"></app-loading>
   <app-post *ngFor="let post of posts" [data]="post"></app-post>
 </div>
 

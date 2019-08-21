@@ -32,7 +32,6 @@ import { CommonModule } from '@angular/common';
 import { MaterialModule } from './modules/material/material.module';
 import { GeneralModule } from './modules/general/general.module';
 import { DialogsModule } from './modules/dialogs/dialogs.module';
-import { LoadingPostComponent } from './components/loading-post/loading-post.component';
 
 @NgModule({
   declarations: [
@@ -49,8 +48,7 @@ import { LoadingPostComponent } from './components/loading-post/loading-post.com
     ShareResourceComponent,
     ViewResourceComponent,
     MainComponent,
-    NoAuthComponent,
-    LoadingPostComponent
+    NoAuthComponent
   ],
   imports: [
     CommonModule,

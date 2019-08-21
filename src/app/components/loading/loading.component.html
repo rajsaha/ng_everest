@@ -1,5 +1,4 @@
-<div class="post">
-    <!-- * Header -->
+<div class="post" *ngIf="type === 'post'">
     <div class="header">
         <div class="user-image animate">
         </div>
@@ -9,15 +8,20 @@
         </div>
     </div>
 
-    <!-- * Image -->
     <a>
         <div class="image"></div>
     </a>
 
-    <!-- * Title -->
     <div class="title animate"></div>
 
-    <!-- * Description -->
+    <div class="description">
+        <div class="comment animate"></div>
+    </div>
+</div>
+
+<div class="resource" *ngIf="type === 'resource'">
+    <div class="image"></div>
+    <div class="title animate"></div>
     <div class="description">
         <div class="comment animate"></div>
     </div>
