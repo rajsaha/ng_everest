@@ -29,14 +29,21 @@ export class PublicProfileComponent implements OnInit {
   // Collections
   collections = [];
 
+  currentUser: string;
+
   // Toggles
   isLoading = false;
+  isFollowed = false;
 
   constructor(private userService: UserService, private router: ActivatedRoute) { }
 
   ngOnInit() {
+    this.currentUser = localStorage.getItem('username');
     this.router.params.subscribe(async (params) => {
-      await this.getPublicProfile(params.id);
+      await Promise.all([
+        this.getPublicProfile(params.id),
+        this.checkIfUserIsFollowed(this.currentUser, params.id)
+      ]);
     });
   }
 
@@ -72,6 +79,39 @@ export class PublicProfileComponent implements OnInit {
 
   setCollections(data: any) {
     this.collections = data;
+  }
+
+  async checkIfUserIsFollowed(currentUser, username) {
+    const result = await this.userService.checkIfUserFollowed({
+      currentUser,
+      username
+    });
+
+    if (result) {
+      this.isFollowed = true;
+    }
+  }
+
+  async follow() {
+    const result = await this.userService.followUser({
+      currentUser: this.currentUser,
+      username: this.username
+    });
+
+    if (result) {
+      this.isFollowed = true;
+    }
+  }
+
+  async unfollow() {
+    const result = await this.userService.unfollowUser({
+      currentUser: this.currentUser,
+      username: this.username
+    });
+
+    if (result) {
+      this.isFollowed = false;
+    }
   }
 
 }

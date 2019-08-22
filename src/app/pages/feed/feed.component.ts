@@ -27,13 +27,17 @@ export class FeedComponent implements OnInit {
 
   ngOnInit() {
     this.username = localStorage.getItem('username');
-    this.getAllResources(0, 4);
+    this.getAllResources({
+      start: 0,
+      end: 4,
+      username: this.username
+    });
   }
 
-  async getAllResources(start, end) {
+  async getAllResources(data: any) {
     try {
       this.isLoading = true;
-      const response = await this.resourceService.getAllResources(start, end);
+      const response = await this.resourceService.getAllResources(data);
       this.isLoading = false;
       this.posts = response.resources;
     } catch (err) {

@@ -108,4 +108,32 @@ export class UserService {
         });
     });
   }
+
+  // * Follow / unfollow calls
+  followUser(data: any): Promise<any> {
+    return new Promise(resolve => {
+      this.http.post(`${ENV.API_URL}/user/follow`, data)
+        .subscribe((response: any) => {
+          resolve(response);
+        });
+    });
+  }
+
+  unfollowUser(data: any): Promise<any> {
+    return new Promise(resolve => {
+      this.http.post(`${ENV.API_URL}/user/unfollow`, data)
+        .subscribe((response: any) => {
+          resolve(response);
+        });
+    });
+  }
+
+  checkIfUserFollowed(data: any): Promise<any> {
+    return new Promise(resolve => {
+      this.http.post(`${ENV.API_URL}/user/check-if-user-followed`, data)
+        .subscribe((response: any) => {
+          resolve(response);
+        });
+    });
+  }
 }

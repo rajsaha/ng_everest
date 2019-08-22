@@ -8,9 +8,11 @@
                     <p>{{ username }}</p>
                     <p>{{ email }}</p>
                 </div>
-                <button class="follow-user" mat-stroked-button>Follow</button>
+                <button class="follow-user" mat-stroked-button color="primary" (click)="follow()" *ngIf="!isFollowed">Follow</button>
+                <button class="follow-user" mat-stroked-button color="primary" (click)="unfollow()" *ngIf="isFollowed">Unfollow</button>
             </div>
-            <button class="follow-user-sm" mat-stroked-button>Follow</button>
+            <button class="follow-user-sm" mat-stroked-button (click)="follow()" *ngIf="!isFollowed" color="primary">Follow</button>
+            <button class="follow-user-sm" mat-stroked-button (click)="unfollow()" *ngIf="isFollowed">Unfollow</button>
 
             <!--* Public view of profile -->
             <div class="public-view-content">
