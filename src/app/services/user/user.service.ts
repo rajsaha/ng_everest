@@ -18,6 +18,15 @@ export class UserService {
     });
   }
 
+  getPublicProfile(username: string): Promise<any> {
+    return new Promise(resolve => {
+      this.http.get(`${ENV.API_URL}/user/get-public-profile/${username}`)
+        .subscribe((response: any) => {
+          resolve(response);
+        });
+    });
+  }
+
   updateProfileData(data: any): Promise<any> {
     return new Promise(resolve => {
       this.http.post(`${ENV.API_URL}/user/update-user-data`, data)

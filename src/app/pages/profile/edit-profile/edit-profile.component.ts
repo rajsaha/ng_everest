@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { faEdit, faTrash, faEye, faExternalLinkAlt } from '@fortawesome/free-solid-svg-icons';
+import { faExternalLinkAlt } from '@fortawesome/free-solid-svg-icons';
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { UserService } from '@services/user/user.service';
@@ -35,9 +35,6 @@ export class EditProfileComponent implements OnInit {
   profileProgress = 0;
 
   // Icons
-  faEdit = faEdit;
-  faTrash = faTrash;
-  faEye = faEye;
   faExternalLinkAlt = faExternalLinkAlt;
 
   readonly separatorKeysCodes: number[] = [ENTER, COMMA];

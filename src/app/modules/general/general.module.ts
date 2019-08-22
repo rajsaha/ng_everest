@@ -6,13 +6,26 @@ import { TruncatePipe } from 'src/app/pipes/truncate';
 import { SnackbarComponent } from 'src/app/general/snackbar/snackbar.component';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { LoadingComponent } from 'src/app/components/loading/loading.component';
+import { ResourceComponent } from 'src/app/general/resource/resource.component';
+import { CollectionComponent } from 'src/app/general/collection/collection.component';
+import { RouterModule } from '@angular/router';
+import { MatButtonModule } from '@angular/material';
 
 @NgModule({
-  declarations: [CustomButtonComponent, TruncatePipe, SnackbarComponent, LoadingComponent],
+  declarations: [
+    CustomButtonComponent,
+    TruncatePipe,
+    SnackbarComponent,
+    LoadingComponent,
+    ResourceComponent,
+    CollectionComponent
+  ],
   imports: [
     CommonModule,
     FontAwesomeModule,
-    InfiniteScrollModule
+    InfiniteScrollModule,
+    RouterModule,
+    MatButtonModule
   ],
   exports: [
     CustomButtonComponent,
@@ -20,7 +33,10 @@ import { LoadingComponent } from 'src/app/components/loading/loading.component';
     TruncatePipe,
     SnackbarComponent,
     InfiniteScrollModule,
-    LoadingComponent
+    RouterModule,
+    LoadingComponent,
+    ResourceComponent,
+    CollectionComponent
   ]
 })
 export class GeneralModule { }

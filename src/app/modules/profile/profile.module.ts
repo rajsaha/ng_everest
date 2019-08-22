@@ -9,16 +9,20 @@ import { DeleteAccountComponent } from 'src/app/pages/profile/delete-account/del
 import { Routes, RouterModule } from '@angular/router';
 import { ProfileComponent } from 'src/app/pages/profile/profile.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { PublicProfileComponent } from 'src/app/pages/profile/public-profile/public-profile.component';
+import { ResourceComponent } from 'src/app/general/resource/resource.component';
+import { CollectionComponent } from 'src/app/general/collection/collection.component';
 
 const routes: Routes = [
   {
-      path: '',
+      path: ':id',
       component: ProfileComponent
   }
 ];
 
 @NgModule({
   declarations: [
+    PublicProfileComponent,
     ProfileComponent,
     EditProfileComponent,
     ChangePasswordComponent,

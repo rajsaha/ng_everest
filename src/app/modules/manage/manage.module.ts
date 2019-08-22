@@ -10,8 +10,6 @@ import { SnackbarComponent } from 'src/app/general/snackbar/snackbar.component';
 import { DrComponent } from 'src/app/general/dialogs/dr/dr.component';
 import { DcComponent } from 'src/app/general/dialogs/dc/dc.component';
 import { CommonModule } from '@angular/common';
-import { ResourceComponent } from 'src/app/general/resource/resource.component';
-import { CollectionComponent } from 'src/app/general/collection/collection.component';
 import { MaterialModule } from 'src/app/modules/material/material.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { GeneralModule } from 'src/app/modules/general/general.module';
@@ -46,9 +44,7 @@ const routes: Routes = [
         ManageResourcesComponent,
         EditResourceComponent,
         ManageCollectionsComponent,
-        ViewCollectionComponent,
-        ResourceComponent,
-        CollectionComponent
+        ViewCollectionComponent
     ],
     imports: [
         CommonModule,

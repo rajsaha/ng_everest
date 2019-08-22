@@ -1,23 +1,11 @@
 <mat-progress-bar mode="query" *ngIf="isLoading">
 </mat-progress-bar>
 
-<mat-tab-group mat-align-tabs="center">
-  <!-- * Profile Management -->
-  <mat-tab label="Profile">
-    <!-- * Edit Profile -->
-    <app-edit-profile></app-edit-profile>
-    <!-- * Change Password -->
-    <app-change-password></app-change-password>
-    <!-- * Delete Account -->
-    <app-delete-account></app-delete-account>
-  </mat-tab>
-
-  <!-- * Followers -->
-  <mat-tab label="Followers">
-    <div class="section">
-      <div class="section-header">
-        <h4>Followers</h4>
-      </div>
-    </div>
-  </mat-tab>
-</mat-tab-group>
+<!-- * Public Profile -->
+<app-public-profile *ngIf="!isSelf"></app-public-profile>
+<!-- * Edit Profile -->
+<app-edit-profile *ngIf="isSelf"></app-edit-profile>
+<!-- * Change Password -->
+<app-change-password *ngIf="isSelf"></app-change-password>
+<!-- * Delete Account -->
+<app-delete-account *ngIf="isSelf"></app-delete-account>

@@ -3,8 +3,8 @@
   <div class="details">
     <h4>{{ data.title }}</h4>
     <p>{{ data.description | truncate:[40] }}</p>
-    <div class="actions">
-      <button *ngIf="currentUser === resourceUser" (click)="goToEdit()" mat-button>
+    <div class="actions" *ngIf="currentUser === resourceUser">
+      <button (click)="goToEdit()" mat-button>
         <fa-icon [icon]="faEdit"></fa-icon>
       </button>
 

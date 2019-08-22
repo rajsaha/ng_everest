@@ -18,6 +18,8 @@ export class MainComponent implements OnInit, OnDestroy {
   localStorageImage: string;
   defaultProfileImage = '../assets/portrait.jpg';
 
+  username: string;
+
   // Toggles
   isMenuActive = false;
 
@@ -46,6 +48,7 @@ export class MainComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
+    this.username = localStorage.getItem('username');
     this.isLoggedIn = this.loginService.isLoggedIn();
     this.localStorageImage = localStorage.getItem('profileImage');
     this.image = this.localStorageImage ? this.localStorageImage : this.defaultProfileImage;

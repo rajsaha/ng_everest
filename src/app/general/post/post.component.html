@@ -1,7 +1,9 @@
 <div class="post">
   <!-- * Header -->
   <div class="header">
-    <div class="user-image" [ngStyle]="{ 'background-image': 'url(' + userImage  +')' }">
+    <div class="user-image" 
+    [routerLink]="['/profile/', username]"
+    [ngStyle]="{ 'background-image': 'url(' + userImage  +')' }">
     </div>
     <div class="uploader-info">
       <span>{{ username }}</span>
