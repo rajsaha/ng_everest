@@ -3,7 +3,6 @@ import { Routes, RouterModule } from '@angular/router';
 import { LoginComponent } from './pages/login/login.component';
 import { SignupComponent } from './pages/signup/signup.component';
 import { FeedComponent } from './pages/feed/feed.component';
-import { ProfileComponent } from './pages/profile/profile.component';
 import { AuthGuardService } from './services/auth/auth-guard.service';
 import { PageNotFoundComponent } from './pages/page-not-found/page-not-found.component';
 import { ShareResourceComponent } from './pages/share-resource/share-resource.component';

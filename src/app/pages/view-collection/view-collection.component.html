@@ -1,6 +1,7 @@
 <div class="section-container">
     <div class="collection-data" *ngIf="collection">
         <div class="collection-header">
+            <small class="username" [routerLink]="['/profile', collection.username]">{{ collection.username }}'s collection</small>
             <form [formGroup]="changeCollectionTitleForm">
                 <mat-form-field>
                     <input type="text" matInput formControlName="title">
