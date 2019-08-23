@@ -25,7 +25,7 @@ const routes: Routes = [
         component: ManageResourcesComponent,
     },
     {
-        path: 'resource/edit/:id',
+        path: 'resource/edit/:resourceId',
         component: EditResourceComponent
     },
     {

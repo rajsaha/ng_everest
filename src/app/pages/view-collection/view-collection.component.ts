@@ -43,7 +43,7 @@ export class ViewCollectionComponent implements OnInit {
     this.initCollectionTitleForm();
     this.onCollectionTitleFormChange();
     this.route.params.subscribe(async (params) => {
-      this.id = params.id;
+      this.id = params.collectionId;
       await Promise.all([
         this.getCollection(this.id),
         this.checkIfMine(this.currentUser, this.id)

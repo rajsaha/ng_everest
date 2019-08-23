@@ -65,8 +65,8 @@ export class EditResourceComponent implements OnInit {
     this.username = localStorage.getItem('username');
     this.route.params.subscribe(async (params) => {
       await Promise.all([
-        this.getResource(params.id),
-        this.getCollectionTitle(params.id),
+        this.getResource(params.resourceId),
+        this.getCollectionTitle(params.resourceId),
         this.initEditResourceForm(),
         this.onURLOnChanges(),
         this.getCollectionNames()]);
@@ -254,7 +254,6 @@ export class EditResourceComponent implements OnInit {
 
   async getCollectionTitle(resourceId: string) {
     const collection = await this.collectionService.getCollectionTitleByResourceId({ resourceId });
-    console.log(collection);
     if (collection.collection) {
       this.editResourceForm.controls.collectionName.patchValue(collection.collection.title);
     }

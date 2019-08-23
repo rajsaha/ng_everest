@@ -30,8 +30,8 @@ export class ViewResourceComponent implements OnInit {
   ngOnInit() {
     this.route.params.subscribe((params) => {
       this.currentUser = localStorage.getItem('username');
-      this.id = params.id;
-      this.getResource(params.id);
+      this.id = params.resourceId;
+      this.getResource(params.resourceId);
     });
   }
 

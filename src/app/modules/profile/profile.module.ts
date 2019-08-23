@@ -15,7 +15,7 @@ import { ViewResourceComponent } from 'src/app/pages/view-resource/view-resource
 
 const routes: Routes = [
   {
-      path: ':id',
+      path: ':username',
       children: [
         {
           path: '',
@@ -23,11 +23,11 @@ const routes: Routes = [
           pathMatch: 'full'
         },
         {
-          path: 'resource/:id',
+          path: 'resource/:resourceId',
           component: ViewResourceComponent
         },
         {
-          path: 'collection/:id',
+          path: 'collection/:collectionId',
           component: ViewCollectionComponent
         }
       ]

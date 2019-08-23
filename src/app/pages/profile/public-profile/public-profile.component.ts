@@ -42,8 +42,8 @@ export class PublicProfileComponent implements OnInit {
     this.currentUser = localStorage.getItem('username');
     this.router.params.subscribe(async (params) => {
       await Promise.all([
-        this.getPublicProfile(params.id),
-        this.checkIfUserIsFollowed(this.currentUser, params.id)
+        this.getPublicProfile(params.username),
+        this.checkIfUserIsFollowed(this.currentUser, params.username)
       ]);
     });
   }

@@ -21,7 +21,7 @@ export class ProfileComponent implements OnInit {
 
   checkIfSelf() {
     this.router.params.subscribe((param) => {
-      this.paramUsername = param.id;
+      this.paramUsername = param.username;
       if (this.paramUsername === this.username) {
         this.isSelf = true;
       }
