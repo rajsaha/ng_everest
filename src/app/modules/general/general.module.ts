@@ -8,26 +8,38 @@ import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { LoadingComponent } from 'src/app/components/loading/loading.component';
 import { ResourceComponent } from 'src/app/general/resource/resource.component';
 import { CollectionComponent } from 'src/app/general/collection/collection.component';
+import { ViewCollectionComponent } from 'src/app/pages/view-collection/view-collection.component';
 import { RouterModule } from '@angular/router';
-import { MatButtonModule } from '@angular/material';
+import { MatButtonModule, MatIconModule, MatFormFieldModule, MatInputModule } from '@angular/material';
+import { ReactiveFormsModule } from '@angular/forms';
+import { ViewResourceComponent } from 'src/app/pages/view-resource/view-resource.component';
+import { PostComponent } from 'src/app/general/post/post.component';
 
 @NgModule({
   declarations: [
+    PostComponent,
     CustomButtonComponent,
     TruncatePipe,
     SnackbarComponent,
     LoadingComponent,
     ResourceComponent,
-    CollectionComponent
+    CollectionComponent,
+    ViewCollectionComponent,
+    ViewResourceComponent
   ],
   imports: [
     CommonModule,
     FontAwesomeModule,
     InfiniteScrollModule,
     RouterModule,
-    MatButtonModule
+    MatButtonModule,
+    MatIconModule,
+    MatFormFieldModule,
+    MatInputModule,
+    ReactiveFormsModule
   ],
   exports: [
+    PostComponent,
     CustomButtonComponent,
     FontAwesomeModule,
     TruncatePipe,
@@ -36,7 +48,9 @@ import { MatButtonModule } from '@angular/material';
     RouterModule,
     LoadingComponent,
     ResourceComponent,
-    CollectionComponent
+    CollectionComponent,
+    ViewCollectionComponent,
+    ViewResourceComponent
   ]
 })
 export class GeneralModule { }

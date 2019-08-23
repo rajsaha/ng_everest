@@ -98,4 +98,13 @@ export class CollectionService {
         });
     });
   }
+
+  checkIfMine(data: any): Promise<any> {
+    return new Promise(resolve => {
+      this.http.post(`${ENV.API_URL}/collection/check-if-mine`, data)
+        .subscribe((response: any) => {
+          resolve(response);
+        });
+    });
+  }
 }

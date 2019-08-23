@@ -14,7 +14,7 @@
 
   <!-- * Resource grid -->
   <div class="resource-grid" *ngIf="!isLoading">
-    <app-resource *ngFor="let resource of resources" [data]="resource" (drResponse)="drResponseHandler($event)" [whichPage]="1">
+    <app-resource *ngFor="let resource of resources" [data]="resource" (drResponse)="drResponseHandler($event)" isInCollectionPage="false" self="true">
     </app-resource>
   </div>
 

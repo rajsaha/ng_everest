@@ -14,8 +14,8 @@ import { Router, ActivatedRoute } from '@angular/router';
 export class ResourceComponent implements OnInit {
   @Input() data: any;
   @Input() collectionId: string;
-  @Input() whichPage: number;
-  @Input() isInCollectionPage: boolean;
+  @Input() isInCollectionPage = false;
+  @Input() self = false;
   @Output() drResponse: EventEmitter<any> = new EventEmitter();
 
   // Data
@@ -81,8 +81,12 @@ export class ResourceComponent implements OnInit {
     }
   }
 
+  goToView() {
+    this.route.navigate([`/profile/${this.resourceUser}/resource/${this.id}`], { relativeTo: this.router.parent });
+  }
+
   goToEdit() {
-    this.route.navigate(['resource/', this.id], { relativeTo: this.router.parent });
+    this.route.navigate(['resource/edit/', this.id], { relativeTo: this.router.parent });
   }
 
 }

@@ -6,7 +6,6 @@ import { FeedComponent } from './pages/feed/feed.component';
 import { AuthGuardService } from './services/auth/auth-guard.service';
 import { PageNotFoundComponent } from './pages/page-not-found/page-not-found.component';
 import { ShareResourceComponent } from './pages/share-resource/share-resource.component';
-import { ViewResourceComponent } from './pages/view-resource/view-resource.component';
 import { MainComponent } from './layouts/main/main.component';
 import { NoAuthComponent } from './layouts/no-auth/no-auth.component';
 
@@ -19,10 +18,6 @@ const routes: Routes = [
       {
         path: '',
         component: FeedComponent,
-      },
-      {
-        path: 'view/:id',
-        component: ViewResourceComponent
       },
       {
         path: 'share-resource',

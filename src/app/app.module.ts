@@ -16,13 +16,11 @@ import { LoginComponent } from './pages/login/login.component';
 import { WelcomeComponent } from './pages/welcome/welcome.component';
 import { SignupComponent } from './pages/signup/signup.component';
 import { FeedComponent } from './pages/feed/feed.component';
-import { PostComponent } from './general/post/post.component';
 import { AtcComponent } from './general/dialogs/atc/atc.component';
 import { PoComponent } from './general/dialogs/po/po.component';
 import { PageNotFoundComponent } from './pages/page-not-found/page-not-found.component';
 import { SnackbarComponent } from './general/snackbar/snackbar.component';
 import { ShareResourceComponent } from './pages/share-resource/share-resource.component';
-import { ViewResourceComponent } from './pages/view-resource/view-resource.component';
 import { MainComponent } from './layouts/main/main.component';
 import { NoAuthComponent } from './layouts/no-auth/no-auth.component';
 import { ManageModule } from './modules/manage/manage.module';
@@ -38,11 +36,9 @@ import { DialogsModule } from './modules/dialogs/dialogs.module';
     WelcomeComponent,
     SignupComponent,
     FeedComponent,
-    PostComponent,
     PoComponent,
     PageNotFoundComponent,
     ShareResourceComponent,
-    ViewResourceComponent,
     MainComponent,
     NoAuthComponent
   ],

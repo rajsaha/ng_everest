@@ -12,8 +12,7 @@
   </div>
 
   <div class="list-of-collections" *ngIf="!isLoading">
-    <app-collection *ngFor="let collection of collections" [data]="collection"
-      [routerLink]="[collectionUrl, collection._id]"></app-collection>
+    <app-collection *ngFor="let collection of collections" [data]="collection"></app-collection>
   </div>
 
   <div class="list-of-collections" *ngIf="isLoading">

@@ -2,7 +2,7 @@
     <div class="collection-data" *ngIf="collection">
         <div class="collection-header">
             <small class="username" [routerLink]="['/profile', collection.username]">{{ collection.username }}'s collection</small>
-            <form [formGroup]="changeCollectionTitleForm">
+            <form [formGroup]="changeCollectionTitleForm" *ngIf="isMine">
                 <mat-form-field>
                     <input type="text" matInput formControlName="title">
                     <mat-icon matSuffix>
@@ -11,11 +11,12 @@
                     <mat-hint>Change your collection title</mat-hint>
                 </mat-form-field>
             </form>
+            <h2 *ngIf="!isMine">{{ changeCollectionTitleForm.get('title').value }}</h2>
         </div>
 
         <div class="resource-grid" *ngIf="!isLoading">
-            <app-resource *ngFor="let resource of resources" [data]="resource" [whichPage]="2"
-                [isInCollectionPage]="true" (drResponse)="drResponseHandler($event)" [collectionId]="id"></app-resource>
+            <app-resource *ngFor="let resource of resources" [data]="resource"
+                isInCollectionPage="true" (drResponse)="drResponseHandler($event)" [collectionId]="id"></app-resource>
         </div>
 
         <div class="resource-grid">
@@ -26,7 +27,7 @@
             <p>This collection is empty</p>
         </div>
 
-        <div class="delete" (click)="openDcDialog()">
+        <div class="delete" (click)="openDcDialog()" *ngIf="isMine">
             <app-custom-button buttonLabel="Delete Collection" size="small" backgroundColor="delete">
             </app-custom-button>
         </div>

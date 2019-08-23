@@ -10,13 +10,27 @@ import { Routes, RouterModule } from '@angular/router';
 import { ProfileComponent } from 'src/app/pages/profile/profile.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { PublicProfileComponent } from 'src/app/pages/profile/public-profile/public-profile.component';
-import { ResourceComponent } from 'src/app/general/resource/resource.component';
-import { CollectionComponent } from 'src/app/general/collection/collection.component';
+import { ViewCollectionComponent } from 'src/app/pages/view-collection/view-collection.component';
+import { ViewResourceComponent } from 'src/app/pages/view-resource/view-resource.component';
 
 const routes: Routes = [
   {
       path: ':id',
-      component: ProfileComponent
+      children: [
+        {
+          path: '',
+          component: ProfileComponent,
+          pathMatch: 'full'
+        },
+        {
+          path: 'resource/:id',
+          component: ViewResourceComponent
+        },
+        {
+          path: 'collection/:id',
+          component: ViewCollectionComponent
+        }
+      ]
   }
 ];
 

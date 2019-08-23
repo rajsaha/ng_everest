@@ -14,7 +14,7 @@ export class ManageCollectionsComponent implements OnInit {
   username: string;
   collections: any;
   collectionSearchForm: FormGroup;
-  collectionUrl = './collection';
+  collectionUrl = 'collection/';
 
   // Toggles
   isLoading = false;

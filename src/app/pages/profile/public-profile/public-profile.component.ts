@@ -30,6 +30,7 @@ export class PublicProfileComponent implements OnInit {
   collections = [];
 
   currentUser: string;
+  collectionUrl = './collection';
 
   // Toggles
   isLoading = false;

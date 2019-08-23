@@ -35,7 +35,11 @@
         <div class="section-container">
             <!-- * Resource grid -->
             <div class="resource-grid" *ngIf="!isLoading">
-                <app-resource *ngFor="let resource of resources" [data]="resource" [whichPage]="1">
+                <app-resource 
+                *ngFor="let resource of resources" 
+                [data]="resource" 
+                isInCollectionPage="false" 
+                self="false">
                 </app-resource>
             </div>
 
@@ -53,8 +57,7 @@
     <mat-tab label="Collections">
         <div class="section-container">
             <div class="list-of-collections" *ngIf="!isLoading">
-                <app-collection *ngFor="let collection of collections" [data]="collection"
-                    [routerLink]="[collectionUrl, collection._id]"></app-collection>
+                <app-collection *ngFor="let collection of collections" [data]="collection"></app-collection>
             </div>
 
             <div class="list-of-collections" *ngIf="isLoading">

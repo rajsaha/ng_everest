@@ -25,16 +25,12 @@ const routes: Routes = [
         component: ManageResourcesComponent,
     },
     {
-        path: 'resource/:id',
+        path: 'resource/edit/:id',
         component: EditResourceComponent
     },
     {
         path: 'collection',
         component: ManageCollectionsComponent
-    },
-    {
-        path: 'collection/:id',
-        component: ViewCollectionComponent,
     }
 ];
 
@@ -43,8 +39,7 @@ const routes: Routes = [
         ManageComponent,
         ManageResourcesComponent,
         EditResourceComponent,
-        ManageCollectionsComponent,
-        ViewCollectionComponent
+        ManageCollectionsComponent
     ],
     imports: [
         CommonModule,

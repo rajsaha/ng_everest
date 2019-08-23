@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ResourceService } from '@services/resource/resource.service';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-collection',
@@ -14,7 +15,10 @@ export class CollectionComponent implements OnInit {
   image3 = '';
   image4 = '';
 
-  constructor(private resourceService: ResourceService) { }
+  constructor(
+    private resourceService: ResourceService,
+    private route: Router,
+    private router: ActivatedRoute) { }
 
   async ngOnInit() {
     await this.getFourImages();
@@ -37,5 +41,9 @@ export class CollectionComponent implements OnInit {
     if (result.images[3]) {
       this.image4 = result.images[3].image;
     }
+  }
+
+  goToCollection() {
+    this.route.navigate([`/profile/${this.data.username}/collection/${this.data._id}`], { relativeTo: this.router.parent });
   }
 }

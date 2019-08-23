@@ -18,6 +18,7 @@ export class ViewCollectionComponent implements OnInit {
   id: string;
   collection: any;
   resources = [];
+  currentUser: string;
   @Output() dcResponse: EventEmitter<any> = new EventEmitter();
   changeCollectionTitleForm: FormGroup;
 
@@ -27,6 +28,7 @@ export class ViewCollectionComponent implements OnInit {
 
   // Toggles
   isLoading = false;
+  isMine = false;
 
   constructor(
     private route: ActivatedRoute,
@@ -37,11 +39,15 @@ export class ViewCollectionComponent implements OnInit {
     private fb: FormBuilder) { }
 
   ngOnInit() {
+    this.currentUser = localStorage.getItem('username');
     this.initCollectionTitleForm();
     this.onCollectionTitleFormChange();
-    this.route.params.subscribe((params) => {
+    this.route.params.subscribe(async (params) => {
       this.id = params.id;
-      this.getCollection(this.id);
+      await Promise.all([
+        this.getCollection(this.id),
+        this.checkIfMine(this.currentUser, this.id)
+      ]);
     });
   }
 
@@ -94,5 +100,9 @@ export class ViewCollectionComponent implements OnInit {
       const result = await this.collectionService.changeCollectionTitle({id: this.collection._id, title});
       console.log(result);
     });
+  }
+
+  async checkIfMine(username: string, id: string) {
+    this.isMine = await this.collectionService.checkIfMine({ username, id});
   }
 }
