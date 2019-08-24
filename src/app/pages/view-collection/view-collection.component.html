@@ -15,8 +15,12 @@
         </div>
 
         <div class="resource-grid" *ngIf="!isLoading">
-            <app-resource *ngFor="let resource of resources" [data]="resource"
-                isInCollectionPage="true" (drResponse)="drResponseHandler($event)" [collectionId]="id"></app-resource>
+            <app-resource 
+            *ngFor="let resource of resources" 
+            [data]="resource"
+            [isInCollectionPage]="isInCollectionPage" 
+            (drResponse)="drResponseHandler($event)" 
+            [collectionId]="id"></app-resource>
         </div>
 
         <div class="resource-grid">

@@ -14,8 +14,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 export class ResourceComponent implements OnInit {
   @Input() data: any;
   @Input() collectionId: string;
-  @Input() isInCollectionPage = false;
-  @Input() self = false;
+  @Input() isInCollectionPage: boolean;
   @Output() drResponse: EventEmitter<any> = new EventEmitter();
 
   // Data
@@ -28,7 +27,10 @@ export class ResourceComponent implements OnInit {
   timestamp: any;
   allComments = [];
   resourceUser: string;
-  currentUser: string;
+
+  // For permissions
+  loggedInUser: string;
+  routeUser: string;
 
   // Icons
   faEye = faEye;
@@ -45,8 +47,15 @@ export class ResourceComponent implements OnInit {
     private router: ActivatedRoute) { }
 
   ngOnInit() {
-    this.currentUser = localStorage.getItem('username');
+    this.loggedInUser = localStorage.getItem('username');
+    this.getRouteUserId();
     this.populateResource();
+  }
+
+  getRouteUserId() {
+    this.router.parent.params.subscribe((param) => {
+      this.routeUser = param.username;
+    });
   }
 
   populateResource() {
@@ -86,7 +95,7 @@ export class ResourceComponent implements OnInit {
   }
 
   goToEdit() {
-    this.route.navigate(['resource/edit/', this.id], { relativeTo: this.router.parent });
+    this.route.navigate([`/manage/resource/edit/${this.id}`], { relativeTo: this.router.parent });
   }
 
 }

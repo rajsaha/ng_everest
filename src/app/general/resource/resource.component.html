@@ -3,8 +3,8 @@
   <div class="details">
     <h4>{{ data.title }}</h4>
     <p>{{ data.description | truncate:[40] }}</p>
-    <div class="actions" *ngIf="currentUser === resourceUser">
-      <button (click)="goToEdit()" mat-button>
+    <div class="actions">
+      <button (click)="goToEdit()" mat-button *ngIf="loggedInUser === resourceUser">
         <fa-icon [icon]="faEdit"></fa-icon>
       </button>
 
@@ -14,25 +14,13 @@
         </button>
       </a>
 
-      <button *ngIf="!isInCollectionPage" mat-button color="warn" (click)="openDrDialog()">
+      <button *ngIf="!isInCollectionPage && resourceUser === loggedInUser" mat-button color="warn" (click)="openDrDialog()">
         <fa-icon [icon]="faTrashAlt"></fa-icon>
       </button>
 
-      <button *ngIf="isInCollectionPage && self" mat-button color="warn" (click)="deleteResourceFromCollection()">
+      <button *ngIf="isInCollectionPage && routeUser === loggedInUser" mat-button color="warn" (click)="deleteResourceFromCollection()">
         <fa-icon [icon]="faFolderMinus"></fa-icon>
       </button>
-    </div>
-
-    <div class="actions" *ngIf="currentUser !== resourceUser">
-      <a [href]="data.url" target="_blank">
-        <button mat-button>
-          <fa-icon [icon]="faExternalLinkAlt"></fa-icon>
-        </button>
-
-        <button *ngIf="isInCollectionPage && self" mat-button color="warn" (click)="deleteResourceFromCollection()">
-          <fa-icon [icon]="faFolderMinus"></fa-icon>
-        </button>
-      </a>
     </div>
   </div>
   <div class="stats"></div>

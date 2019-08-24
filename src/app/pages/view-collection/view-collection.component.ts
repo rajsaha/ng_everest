@@ -29,6 +29,7 @@ export class ViewCollectionComponent implements OnInit {
   // Toggles
   isLoading = false;
   isMine = false;
+  isInCollectionPage = true;
 
   constructor(
     private route: ActivatedRoute,

@@ -20,6 +20,7 @@ export class ManageResourcesComponent implements OnInit {
 
   // Toggles
   isLoading = false;
+  isInCollectionPage = false;
 
   constructor(
     private fb: FormBuilder,
