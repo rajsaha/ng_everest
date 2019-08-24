@@ -1,4 +1,4 @@
-<div class="public-view">
+<div class="public-view" *ngIf="!isLoading">
     <div class="section-container">
         <div class="section">
             <div class="profile-picture">
@@ -25,6 +25,14 @@
                     <mat-chip *ngFor="let interest of interests">{{ interest }}</mat-chip>
                 </mat-chip-list>
             </div>
+        </div>
+    </div>
+</div>
+
+<div class="public-view" *ngIf="isLoading">
+    <div class="section-container">
+        <div class="section">
+            <app-loading type="profile"></app-loading>
         </div>
     </div>
 </div>

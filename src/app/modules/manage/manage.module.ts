@@ -3,7 +3,6 @@ import { Routes, RouterModule } from '@angular/router';
 import { ManageComponent } from '../../pages/manage/manage.component';
 import { ManageResourcesComponent } from '../../pages/manage/manage-resources/manage-resources.component';
 import { ManageCollectionsComponent } from '../../pages/manage/manage-collections/manage-collections.component';
-import { ViewCollectionComponent } from '../../pages/view-collection/view-collection.component';
 import { EditResourceComponent } from '../../pages/edit-resource/edit-resource.component';
 import { AtcComponent } from 'src/app/general/dialogs/atc/atc.component';
 import { SnackbarComponent } from 'src/app/general/snackbar/snackbar.component';

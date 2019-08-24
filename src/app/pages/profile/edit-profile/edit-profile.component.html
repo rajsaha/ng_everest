@@ -1,4 +1,4 @@
-<div class="public-view" *ngIf="isPublicView">
+<div class="public-view" *ngIf="isPublicView && !isLoading">
     <div class="section-container">
         <div class="section">
             <div class="profile-picture">
@@ -34,6 +34,14 @@
             </mat-progress-bar>
             <small *ngIf="profileProgress < 100" class="complete-profile-label">Profile Completion:
                 {{ profileProgress }}%</small>
+        </div>
+    </div>
+</div>
+
+<div class="public-view" *ngIf="isLoading">
+    <div class="section-container">
+        <div class="section">
+            <app-loading type="profile"></app-loading>
         </div>
     </div>
 </div>
