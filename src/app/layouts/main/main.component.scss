@@ -16,11 +16,14 @@
 	}
 
 	.toolbar {
+		display: grid;
+		grid-template-columns: 50px 1fr 1fr 1fr;
 		background-color: white;
 		box-shadow: 0 2px 16px rgba(0, 0, 0, .1);
 		z-index: 100;
 
 		.app-name {
+			display: none;
 			a {
 				font-family: "Raleway", sans-serif;
 				font-weight: 200;
@@ -29,14 +32,33 @@
 				text-decoration: none;
 			}
 		}
+
+		.search {
+			grid-column-start: auto;
+			justify-self: center;
+			align-self: center;
+	
+			form {
+				margin: 0;
+				
+				input {
+					padding: 8px 5px 5px 5px;
+					font-size: 14px;
+					border: 1px solid rgba(0, 0, 0, .1);
+					border-radius: 5px;
+					width: 100%;
+
+					&::placeholder {
+						color: rgba(0, 0, 0, .7);
+					}
+				}
+			}
+		}
 	}
 
 	.profile-container {
 		width: 100%;
-
-		button {
-			float: right;
-		}
+		grid-column-end: end;
 
 		.profile-image {
 			background-size: cover;
@@ -65,6 +87,14 @@
 
 	.sidenav-container {
 		flex: 1;
+
+		.app-name {
+			font-family: "Raleway", sans-serif;
+			font-weight: 200;
+			text-transform: uppercase;
+			letter-spacing: 10px;
+			text-decoration: none;
+		}
 	}
 
 	mat-sidenav {
@@ -78,4 +108,19 @@
 
 .thick-border {
 	border: 1px solid rgba(0, 0, 0, 1) !important;
+}
+
+@media (min-width: 768px) {
+	.app-container {
+		.sidenav-container {	
+			.app-name {
+				display: none;
+			}
+		}
+		.toolbar {
+			.app-name {
+				display: inherit;
+			}
+		}
+	}
 }
