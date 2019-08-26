@@ -33,10 +33,8 @@ export class MainComponent implements OnInit, OnDestroy {
   faBorderAll = faBorderAll;
   faSearch = faSearch;
 
-  // Search Form
-  searchForm = this.fb.group({
-    query: ['']
-  });
+  // Form
+  searchForm: FormGroup;
 
   private mobileQueryListener: () => void;
 
@@ -60,6 +58,7 @@ export class MainComponent implements OnInit, OnDestroy {
     this.isLoggedIn = this.loginService.isLoggedIn();
     this.localStorageImage = localStorage.getItem('profileImage');
     this.image = this.localStorageImage ? this.localStorageImage : this.defaultProfileImage;
+    this.initSearchForm();
   }
 
   logout() {
@@ -70,5 +69,21 @@ export class MainComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.mobileQuery.removeListener(this.mobileQueryListener);
+  }
+
+  initSearchForm() {
+    this.searchForm = this.fb.group({
+      query: ['']
+    });
+  }
+
+  onSearchFormChanges() {
+    this.searchForm.get('query').valueChanges.subscribe((query) => {
+
+    });
+  }
+
+  get query() {
+    return this.searchForm.get('query').value;
   }
 }

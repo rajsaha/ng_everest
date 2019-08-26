@@ -28,6 +28,7 @@ import { CommonModule } from '@angular/common';
 import { MaterialModule } from './modules/material/material.module';
 import { GeneralModule } from './modules/general/general.module';
 import { DialogsModule } from './modules/dialogs/dialogs.module';
+import { SearchResultComponent } from './components/search-result/search-result.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +41,8 @@ import { DialogsModule } from './modules/dialogs/dialogs.module';
     PageNotFoundComponent,
     ShareResourceComponent,
     MainComponent,
-    NoAuthComponent
+    NoAuthComponent,
+    SearchResultComponent
   ],
   imports: [
     CommonModule,

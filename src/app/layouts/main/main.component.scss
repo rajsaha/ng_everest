@@ -21,6 +21,7 @@
 		background-color: white;
 		box-shadow: 0 2px 16px rgba(0, 0, 0, .1);
 		z-index: 100;
+		position: relative;
 
 		.app-name {
 			display: none;
@@ -54,6 +55,13 @@
 					}
 				}
 			}
+		}
+
+		.search-result {
+			position: absolute;
+			top: 50px;
+			left: 50%;
+			transform: translateX(-50%);
 		}
 	}
 

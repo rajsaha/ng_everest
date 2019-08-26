@@ -9,6 +9,10 @@
                 <input type="text" placeholder="Search" formControlName="query">
             </form>
         </div>
+
+        <div *ngIf="query" class="search-result">
+            <app-search-result></app-search-result>
+        </div>
         <div class="profile-container">
             <div class="profile-image" [matMenuTriggerFor]="menu"
                 [ngStyle]="{ 'background-image': 'url(' + image  +')' }">
