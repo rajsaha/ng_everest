@@ -1,4 +1,4 @@
-<div class="collection-container" (click)="goToCollection()">
+<div class="collection-container" (click)="goToCollection()" *ngIf="!isLoading">
   <div class="collection">
     <div class="block" [ngStyle]="{'background-image': 'url('+ image1 +')'}"></div>
     <div class="block" [ngStyle]="{'background-image': 'url('+ image2 +')'}"></div>
@@ -13,3 +13,5 @@
     </p>
   </div>
 </div>
+
+<app-loading type="collection" *ngIf="isLoading"></app-loading>

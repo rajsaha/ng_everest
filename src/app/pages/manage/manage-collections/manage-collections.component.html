@@ -15,10 +15,6 @@
     <app-collection *ngFor="let collection of collections" [data]="collection"></app-collection>
   </div>
 
-  <div class="list-of-collections" *ngIf="isLoading">
-    <app-loading type="collection"></app-loading>
-  </div>
-
   <div *ngIf="collections && collections.length === 0">
     You haven't made a collection yet
   </div>

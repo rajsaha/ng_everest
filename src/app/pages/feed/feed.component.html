@@ -5,12 +5,10 @@
   [infiniteScrollThrottle]="throttle" 
   (scrolled)="onScrollDown()"
   (scrolledUp)="onUp()">
-  <app-loading *ngIf="isLoading"></app-loading>
-  <app-loading *ngIf="isLoading"></app-loading>
   <app-post *ngFor="let post of posts" [data]="post"></app-post>
 
   <div class="section-container" *ngIf="posts.length === 0">
-    <p>You're really not supposed to see this</p>
+    <p>Nothing here</p>
   </div>
 </div>
 

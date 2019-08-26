@@ -15,13 +15,18 @@ export class CollectionComponent implements OnInit {
   image3 = '';
   image4 = '';
 
+  // Toggles
+  isLoading = false;
+
   constructor(
     private resourceService: ResourceService,
     private route: Router,
     private router: ActivatedRoute) { }
 
   async ngOnInit() {
+    this.isLoading = true;
     await this.getFourImages();
+    this.isLoading = false;
   }
 
   async getFourImages() {

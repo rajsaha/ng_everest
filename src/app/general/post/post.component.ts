@@ -44,6 +44,7 @@ export class PostComponent implements OnInit {
   commentForm: FormGroup;
 
   // Toggles
+  isLoading = false;
   isInCollection = false;
   isLiked = false;
   showComments = false;
@@ -60,6 +61,7 @@ export class PostComponent implements OnInit {
   async ngOnInit() {
     this.currentUser = localStorage.getItem('username');
     try {
+      this.isLoading = true;
       await Promise.all([
         this.populatePost(),
         this.getUserImage(this.data.username),
@@ -68,6 +70,7 @@ export class PostComponent implements OnInit {
         this.init_comment_form(),
         this.checkIfDescriptionTooLong(this.description)
       ]);
+      this.isLoading = false;
     } catch (err) {
       throw new Error(err);
     }

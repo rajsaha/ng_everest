@@ -1,4 +1,4 @@
-<div class="resource">
+<div class="resource" *ngIf="!isLoading">
   <img class="image" [src]="image" (click)="goToView()">
   <div class="details">
     <h4>{{ data.title }}</h4>
@@ -25,3 +25,5 @@
   </div>
   <div class="stats"></div>
 </div>
+
+<app-loading type="resource" *ngIf="isLoading"></app-loading>

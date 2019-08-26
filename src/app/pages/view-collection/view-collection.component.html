@@ -23,10 +23,6 @@
             [collectionId]="id"></app-resource>
         </div>
 
-        <div class="resource-grid">
-            <app-loading *ngIf="isLoading" type="resource"></app-loading>
-        </div>
-
         <div *ngIf="resources.length === 0">
             <p>This collection is empty</p>
         </div>

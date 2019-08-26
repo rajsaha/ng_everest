@@ -40,6 +40,9 @@ export class ResourceComponent implements OnInit {
   faTimes = faTimes;
   faFolderMinus = faFolderMinus;
 
+  // Toggles
+  isLoading = false;
+
   constructor(
     public dialog: MatDialog,
     private collectionService: CollectionService,
@@ -59,6 +62,7 @@ export class ResourceComponent implements OnInit {
   }
 
   populateResource() {
+    this.isLoading = true;
     this.id = this.data._id;
     this.resourceUser = this.data.username;
     this.url = this.data.url;
@@ -68,6 +72,7 @@ export class ResourceComponent implements OnInit {
     this.image = this.data.image;
     this.timestamp = moment(this.data.timestamp.$date).fromNow();
     this.allComments = this.data.comments;
+    this.isLoading = false;
   }
 
   openDrDialog() {

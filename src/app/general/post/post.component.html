@@ -1,4 +1,4 @@
-<div class="post">
+<div class="post" *ngIf="!isLoading">
   <!-- * Header -->
   <div class="header">
     <div class="user-image" 
@@ -88,3 +88,5 @@
     </form>
   </div>
 </div>
+
+<app-loading type="post" *ngIf="isLoading"></app-loading>
