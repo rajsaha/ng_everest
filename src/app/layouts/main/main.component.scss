@@ -34,7 +34,8 @@
 		}
 
 		.search {
-			grid-column-start: auto;
+			grid-column-start: 2;
+    		grid-column-end: 4;
 			justify-self: center;
 			align-self: center;
 	
@@ -120,6 +121,10 @@
 		.toolbar {
 			.app-name {
 				display: inherit;
+			}
+
+			.search {
+				grid-column-start: auto;
 			}
 		}
 	}
