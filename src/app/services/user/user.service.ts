@@ -136,4 +136,13 @@ export class UserService {
         });
     });
   }
+
+  globalSearch(query): Promise<any> {
+    return new Promise(resolve => {
+      this.http.get(`${ENV.API_URL}/user/global-search/${query}`)
+        .subscribe((response: any) => {
+          resolve(response);
+        });
+    });
+  }
 }

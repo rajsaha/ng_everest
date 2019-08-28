@@ -6,6 +6,8 @@ import { faSquare } from '@fortawesome/free-regular-svg-icons';
 import { LoginService } from '@services/auth/login.service';
 import { CommunicationService } from '@services/general/communication.service';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { debounceTime } from 'rxjs/internal/operators';
+import { UserService } from '@services/user/user.service';
 
 @Component({
   selector: 'app-main',
@@ -43,6 +45,7 @@ export class MainComponent implements OnInit, OnDestroy {
     media: MediaMatcher,
     private router: Router,
     private loginService: LoginService,
+    private userService: UserService,
     private communicationService: CommunicationService,
     private fb: FormBuilder) {
     this.mobileQuery = media.matchMedia('(max-width: 600px)');
@@ -59,6 +62,7 @@ export class MainComponent implements OnInit, OnDestroy {
     this.localStorageImage = localStorage.getItem('profileImage');
     this.image = this.localStorageImage ? this.localStorageImage : this.defaultProfileImage;
     this.initSearchForm();
+    this.onSearchFormChanges();
   }
 
   logout() {
@@ -78,8 +82,9 @@ export class MainComponent implements OnInit, OnDestroy {
   }
 
   onSearchFormChanges() {
-    this.searchForm.get('query').valueChanges.subscribe((query) => {
-
+    this.searchForm.get('query').valueChanges.pipe(debounceTime(300)).subscribe(async (query) => {
+      const searchResult = await this.userService.globalSearch(query);
+      console.log(searchResult);
     });
   }
 
