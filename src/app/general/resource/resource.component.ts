@@ -67,11 +67,9 @@ export class ResourceComponent implements OnInit {
     this.resourceUser = this.data.username;
     this.url = this.data.url;
     this.title = this.data.title;
-    this.tags = this.data.tags;
     this.description = this.data.description;
     this.image = this.data.image;
     this.timestamp = moment(this.data.timestamp.$date).fromNow();
-    this.allComments = this.data.comments;
     this.isLoading = false;
   }
 

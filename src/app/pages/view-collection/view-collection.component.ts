@@ -99,7 +99,6 @@ export class ViewCollectionComponent implements OnInit {
   onCollectionTitleFormChange() {
     this.changeCollectionTitleForm.get('title').valueChanges.pipe(delay(1500)).subscribe(async (title) => {
       const result = await this.collectionService.changeCollectionTitle({id: this.collection._id, title});
-      console.log(result);
     });
   }
 
