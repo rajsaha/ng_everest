@@ -84,8 +84,8 @@ export class MainComponent implements OnInit, OnDestroy {
   onSearchFormChanges() {
     this.searchForm.get('query').valueChanges.pipe(debounceTime(300)).subscribe(async (query) => {
       if (query) {
-        const searchResult = await this.userService.globalSearch(encodeURIComponent(query));
-        console.log(searchResult);
+        // const searchResult = await this.userService.globalSearch(encodeURIComponent(query));
+        // console.log(searchResult);
       }
     });
   }
