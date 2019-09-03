@@ -5,9 +5,6 @@ import { faUser, faSignOutAlt, faStream, faShareAlt, faBorderAll, faSearch } fro
 import { faSquare } from '@fortawesome/free-regular-svg-icons';
 import { LoginService } from '@services/auth/login.service';
 import { CommunicationService } from '@services/general/communication.service';
-import { FormBuilder, FormGroup } from '@angular/forms';
-import { debounceTime } from 'rxjs/internal/operators';
-import { UserService } from '@services/user/user.service';
 
 @Component({
   selector: 'app-main',
@@ -16,7 +13,6 @@ import { UserService } from '@services/user/user.service';
 })
 export class MainComponent implements OnInit, OnDestroy {
   mobileQuery: MediaQueryList;
-  isLoggedIn = false;
   image: string;
   localStorageImage: string;
   defaultProfileImage = '../assets/portrait.jpg';
@@ -24,6 +20,7 @@ export class MainComponent implements OnInit, OnDestroy {
   username: string;
 
   // Toggles
+  isLoggedIn = false;
   isMenuActive = false;
 
   // Icons
@@ -35,9 +32,6 @@ export class MainComponent implements OnInit, OnDestroy {
   faBorderAll = faBorderAll;
   faSearch = faSearch;
 
-  // Form
-  searchForm: FormGroup;
-
   private mobileQueryListener: () => void;
 
   constructor(
@@ -45,9 +39,7 @@ export class MainComponent implements OnInit, OnDestroy {
     media: MediaMatcher,
     private router: Router,
     private loginService: LoginService,
-    private userService: UserService,
-    private communicationService: CommunicationService,
-    private fb: FormBuilder) {
+    private communicationService: CommunicationService) {
     this.mobileQuery = media.matchMedia('(max-width: 600px)');
     this.mobileQueryListener = () => changeDetectorRef.detectChanges();
     this.mobileQuery.addListener(this.mobileQueryListener);
@@ -61,8 +53,6 @@ export class MainComponent implements OnInit, OnDestroy {
     this.isLoggedIn = this.loginService.isLoggedIn();
     this.localStorageImage = localStorage.getItem('profileImage');
     this.image = this.localStorageImage ? this.localStorageImage : this.defaultProfileImage;
-    this.initSearchForm();
-    this.onSearchFormChanges();
   }
 
   logout() {
@@ -73,24 +63,5 @@ export class MainComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.mobileQuery.removeListener(this.mobileQueryListener);
-  }
-
-  initSearchForm() {
-    this.searchForm = this.fb.group({
-      query: ['']
-    });
-  }
-
-  onSearchFormChanges() {
-    this.searchForm.get('query').valueChanges.pipe(debounceTime(300)).subscribe(async (query) => {
-      if (query) {
-        // const searchResult = await this.userService.globalSearch(encodeURIComponent(query));
-        // console.log(searchResult);
-      }
-    });
-  }
-
-  get query() {
-    return this.searchForm.get('query').value;
   }
 }

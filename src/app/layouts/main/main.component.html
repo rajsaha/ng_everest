@@ -4,15 +4,9 @@
             <mat-icon>{{ isMenuActive ? 'clear' : 'menu' }}</mat-icon>
         </button>
         <h1 class="app-name"><a routerLink="/">Everest</a></h1>
-        <div class="search">
-            <form [formGroup]="searchForm">
-                <input type="text" placeholder="Search" formControlName="query">
-            </form>
-        </div>
+        
+        <app-search class="search"></app-search>
 
-        <div *ngIf="query" class="search-result">
-            <app-search-result></app-search-result>
-        </div>
         <div class="profile-container">
             <div class="profile-image" [matMenuTriggerFor]="menu"
                 [ngStyle]="{ 'background-image': 'url(' + image  +')' }">

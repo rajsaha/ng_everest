@@ -28,7 +28,7 @@ import { CommonModule } from '@angular/common';
 import { MaterialModule } from './modules/material/material.module';
 import { GeneralModule } from './modules/general/general.module';
 import { DialogsModule } from './modules/dialogs/dialogs.module';
-import { SearchResultComponent } from './components/search-result/search-result.component';
+import { SearchComponent } from './components/search/search.component';
 
 @NgModule({
   declarations: [
@@ -42,7 +42,7 @@ import { SearchResultComponent } from './components/search-result/search-result.
     ShareResourceComponent,
     MainComponent,
     NoAuthComponent,
-    SearchResultComponent
+    SearchComponent
   ],
   imports: [
     CommonModule,

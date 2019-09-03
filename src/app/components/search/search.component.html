@@ -1,0 +1,21 @@
+<div class="search">
+    <form [formGroup]="searchForm" (focus)="isSearchActive = true" (blur)="isSearchActive = false">
+        <input type="text" placeholder="Search" formControlName="query" #query>
+    </form>
+
+    <div class="search-result" *ngIf="isSearchActive">
+        <div class="users">
+            <h3>Users</h3>
+            <div class="user">
+                <div class="item-a"></div>
+                <p class="item-b">Jon Snow</p>
+                <small class="item-c">@johnsnow</small>
+            </div>
+            <div class="user">
+                <div class="item-a"></div>
+                <p class="item-b">Samwell Tarly</p>
+                <small class="item-c">@johnsnow</small>
+            </div>
+        </div>
+    </div>
+</div>
