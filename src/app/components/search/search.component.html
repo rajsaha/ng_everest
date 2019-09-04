@@ -12,9 +12,9 @@
         <div class="section" *ngIf="users.length > 0">
             <h3>Users</h3>
             <div class="item" *ngFor="let user of users" (mousedown)="goToUser(user.username)">
-                <div class="item-a" [ngStyle]="{'background-image': 'url(' + user.image.link  +')'}"></div>
-                <p class="item-b">{{ user.name }}</p>
-                <small class="item-c">@{{ user.username }}</small>
+                <div class="item-a" [ngStyle]="{'background-image': 'url(' + getImageLink(user)  + ')'}"></div>
+                <p class="item-b">{{ user.name ? user.name : 'No Name' }}</p>
+                <small class="item-c">@{{ user.username ? user.username : '...' }}</small>
             </div>
         </div>
         

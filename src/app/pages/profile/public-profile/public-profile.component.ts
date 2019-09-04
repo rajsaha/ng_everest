@@ -70,7 +70,10 @@ export class PublicProfileComponent implements OnInit {
     this.website = data.website;
     this.bio = data.bio;
     this.email = data.email;
-    this.image = data.image.link;
+
+    if (data.image) {
+      this.image = data.image.link;
+    }
     this.interests = data.interests;
   }
 

@@ -56,6 +56,7 @@ export class SearchComponent implements OnInit {
         this.isSearchActive = false;
         this.isLoading = true;
         const searchResult = await this.userService.globalSearch(encodeURIComponent(query));
+
         this.isSearchActive = true;
         this.isLoading = false;
         if (searchResult.users && searchResult.users.users.length > 0) {
@@ -106,6 +107,12 @@ export class SearchComponent implements OnInit {
     const result = await this.resourceService.getResourceImage(resourceId);
     console.log(result);
     return result.image.link;
+  }
+
+  getImageLink(user: any) {
+    if (user && user.image) {
+      return user.image.link;
+    }
   }
 
   goToUser(username: string) {
