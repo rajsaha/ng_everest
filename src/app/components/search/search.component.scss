@@ -31,6 +31,7 @@ $image-height: 50px;
         animation: appear 0.2s ease-in;
         animation-fill-mode: forwards;
         max-height: 500px;
+        max-width: 300px;
         height: auto;
         width: 300px;
         overflow-y: auto;
@@ -39,8 +40,18 @@ $image-height: 50px;
         h3 {
             padding: 0 15px;
         }
+
+        .loading {
+            display: grid;
+            padding: 15px;
+            
+            mat-spinner {
+                justify-self: center;
+                align-self: center;
+            }
+        }
     
-        .user {
+        .item {
             display: grid;
             grid-template-columns: 75px 1fr;
             grid-template-rows: auto;
@@ -72,6 +83,18 @@ $image-height: 50px;
                 background-position: center center;
                 align-self: center;
                 justify-self: center;
+            }
+
+            .item-a.collection-icon-container {
+                position: relative;
+
+                .icon {
+                    color: white;
+                    position: absolute;
+                    top: 55%;
+                    left: 50%;
+                    transform: translate(-50%, -50%);
+                }
             }
     
             .item-b {

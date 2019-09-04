@@ -1,21 +1,50 @@
 <div class="search">
-    <form [formGroup]="searchForm" (focus)="isSearchActive = true" (blur)="isSearchActive = false">
-        <input type="text" placeholder="Search" formControlName="query" #query>
+    <form [formGroup]="searchForm">
+        <input 
+        type="text" 
+        placeholder="Search" 
+        formControlName="query" 
+        (focus)="activateSearch()" 
+        (focusout)="deactivateSearch()">
     </form>
 
-    <div class="search-result" *ngIf="isSearchActive">
-        <div class="users">
+    <div class="search-result" *ngIf="isSearchActive && this.searchForm.get('query').value.length > 0">
+        <div class="section" *ngIf="users.length > 0">
             <h3>Users</h3>
-            <div class="user">
-                <div class="item-a"></div>
-                <p class="item-b">Jon Snow</p>
-                <small class="item-c">@johnsnow</small>
+            <div class="item" *ngFor="let user of users" (mousedown)="goToUser(user.username)">
+                <div class="item-a" [ngStyle]="{'background-image': 'url(' + user.image.link  +')'}"></div>
+                <p class="item-b">{{ user.name }}</p>
+                <small class="item-c">@{{ user.username }}</small>
             </div>
-            <div class="user">
-                <div class="item-a"></div>
-                <p class="item-b">Samwell Tarly</p>
-                <small class="item-c">@johnsnow</small>
+        </div>
+        
+        <div class="section" *ngIf="resources.length > 0">
+            <h3>Resources</h3>
+            <div class="item" *ngFor="let resource of resources" (mousedown)="goToResource(resource.username, resource._id)">
+                <div class="item-a" [ngStyle]="{'background-image': 'url(' + resource.image  +')'}"></div>
+                <p class="item-b">{{ resource.title | truncate:[25] }}</p>
+                <small class="item-c">@{{ resource.username }}</small>
             </div>
+        </div>
+
+        <div class="section" *ngIf="collections.length > 0">
+            <h3>Collections</h3>
+            <div class="item" *ngFor="let collection of collections" (mousedown)="goToCollection(collection.username, collection._id)">
+                <div class="item-a collection-icon-container">
+                    <div class="icon">
+                        <fa-icon [icon]="faBorderAll"></fa-icon>
+                    </div>
+                </div>
+                <p class="item-b">{{ collection.title }}</p>
+                <small class="item-c">@{{ collection.username }}</small>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="search-result" *ngIf="isLoading">
+        <div class="loading">
+            <mat-spinner diameter="25"></mat-spinner>
         </div>
     </div>
 </div>
