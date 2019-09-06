@@ -61,13 +61,18 @@ export class SignupComponent implements OnInit {
     }
   }
 
+  setPasswordStrength(passwordKey: any) {
+    const passwordInput = passwordKey.value;
+    console.log(passwordInput.password);
+  }
+
   init_signup_form() {
     this.signUpForm = this.fb.group({
       email: ['', [Validators.email, Validators.required]],
       username: ['', [Validators.required, Validators.minLength(4)]],
       password: ['', [Validators.required, Validators.minLength(4)]],
       confirm_password: ['']
-    }, { validator: [this.validationService.matchingConfirmPasswords, this.validationService.checkPasswordStrength] });
+    }, { validator: [this.validationService.matchingConfirmPasswords, this.setPasswordStrength] });
   }
 
 }

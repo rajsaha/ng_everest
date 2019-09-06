@@ -117,7 +117,7 @@ export class SearchComponent implements OnInit {
 
   goToUser(username: string) {
     this.isSearchActive = false;
-    this.route.navigate([`/profile/${username}`], { relativeTo: this.router.parent });
+    this.route.navigate([`profile/${username}/`], { relativeTo: this.router.parent });
   }
 
   goToResource(username: string, id: string) {
