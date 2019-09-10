@@ -16,6 +16,7 @@ export class SignupComponent implements OnInit {
   signUpForm: FormGroup;
   isDisabled = true;
   signingUp = false;
+  passwordStrength: any;
 
   // Icons
   faArrowRight = faArrowRight;
@@ -32,6 +33,7 @@ export class SignupComponent implements OnInit {
   ngOnInit() {
     this.signUpService.redirectIfLoggedIn();
     this.init_signup_form();
+    this.onPasswordControlChange();
   }
 
   onSubmit() {
@@ -61,9 +63,13 @@ export class SignupComponent implements OnInit {
     }
   }
 
-  setPasswordStrength(passwordKey: any) {
-    const passwordInput = passwordKey.value;
-    console.log(passwordInput.password);
+  onPasswordControlChange() {
+    this.signUpForm.get('password').valueChanges.subscribe((password) => {
+      const result = this.validationService.getPasswordStrength(password);
+      if (result) {
+        this.passwordStrength = result;
+      }
+    });
   }
 
   init_signup_form() {
@@ -72,7 +78,7 @@ export class SignupComponent implements OnInit {
       username: ['', [Validators.required, Validators.minLength(4)]],
       password: ['', [Validators.required, Validators.minLength(4)]],
       confirm_password: ['']
-    }, { validator: [this.validationService.matchingConfirmPasswords, this.setPasswordStrength] });
+    }, { validator: [this.validationService.matchingConfirmPasswords] });
   }
 
 }

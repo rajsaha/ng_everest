@@ -4,10 +4,28 @@
 <div class="options">
   <div class="top">
     <button mat-stroked-button color="warn">Report Post</button>
-    <button mat-stroked-button>Unfollow '{{ data.username }}'</button>
-    <button mat-stroked-button [routerLink]="['/view/', id]">Go to Post</button>
-    <button mat-stroked-button>Share</button>
-    <button mat-stroked-button (click)="openSnackBar('Copied link to post', '')">Copy Link</button>
-    <button mat-stroked-button (click)="onNoClick()">Cancel</button>
+    <p>
+      Report this post if it contains unlawful or pornographic content
+    </p>
+  </div>
+
+  <div class="opt-buttons-container">
+    <!-- Share -->
+    <div class="opt-button" matRipple>
+      <fa-icon [icon]="faShare"></fa-icon>
+      <p>Share</p>
+    </div>
+
+    <!-- Copy -->
+    <div class="opt-button" matRipple>
+      <fa-icon [icon]="faCopy"></fa-icon>
+      <p>Copy</p>
+    </div>
+
+    <!-- Go to Post -->
+    <div class="opt-button" (click)="goToView()" matRipple>
+      <fa-icon [icon]="faArrowRight"></fa-icon>
+      <p>Post</p>
+    </div>
   </div>
 </div>

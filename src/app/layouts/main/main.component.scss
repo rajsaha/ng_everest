@@ -17,7 +17,7 @@
 
 	.toolbar {
 		display: grid;
-		grid-template-columns: 50px 1fr 250px;
+		grid-template-columns: 50px 1fr 70px;
 		background-color: white;
 		box-shadow: 0 2px 16px rgba(0, 0, 0, .1);
 		z-index: 100;
@@ -102,6 +102,7 @@
 			}
 		}
 		.toolbar {
+			grid-template-columns: 50px 1fr 180px 70px;
 			.app-name {
 				display: inherit;
 			}

@@ -29,10 +29,10 @@
       <mat-label>Password</mat-label>
       <input matInput type="password" formControlName="password" />
       <div class="password-strength" *ngIf="signUpForm.get('password').value">
-        <div class="level"></div>
-        <div class="level"></div>
-        <div class="level"></div>
-        <p>Strength: Weak</p>
+        <div class="level" [ngClass]="{ 'red': passwordStrength.value === 2 }"></div>
+        <div class="level" [ngClass]="{ 'yellow': passwordStrength.value === 1 }"></div>
+        <div class="level" [ngClass]="{ 'green': passwordStrength.value === 0 }"></div>
+        <p>Strength: {{ passwordStrength.strength ? passwordStrength.strength : 'n/a' }}</p>
       </div> 
       <mat-error *ngIf="signUpForm.controls['password'].hasError('minlength')">
         Password must be at least 4 characters
