@@ -49,6 +49,18 @@ $image-height: 50px;
                 justify-self: center;
                 align-self: center;
             }
+
+            fa-icon {
+                color: #ff1744;
+                justify-self: center;
+                align-self: center;
+            }
+
+            p {
+                margin: 0;
+                text-align: center;
+                font-size: 12px;
+            }
         }
     
         .item {

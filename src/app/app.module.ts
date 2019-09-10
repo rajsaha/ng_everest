@@ -12,6 +12,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 
 import { AutosizeModule } from 'ngx-autosize';
+import { MatPasswordStrengthModule } from '@angular-material-extensions/password-strength';
 import { LoginComponent } from './pages/login/login.component';
 import { WelcomeComponent } from './pages/welcome/welcome.component';
 import { SignupComponent } from './pages/signup/signup.component';
@@ -52,6 +53,7 @@ import { SearchComponent } from './components/search/search.component';
     ReactiveFormsModule,
     HttpClientModule,
     AutosizeModule,
+    MatPasswordStrengthModule.forRoot(),
     // * Custom Modules
     MaterialModule,
     ManageModule,

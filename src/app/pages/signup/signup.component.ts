@@ -33,7 +33,6 @@ export class SignupComponent implements OnInit {
   ngOnInit() {
     this.signUpService.redirectIfLoggedIn();
     this.init_signup_form();
-    this.onPasswordControlChange();
   }
 
   onSubmit() {
@@ -61,15 +60,6 @@ export class SignupComponent implements OnInit {
         }
       });
     }
-  }
-
-  onPasswordControlChange() {
-    this.signUpForm.get('password').valueChanges.subscribe((password) => {
-      const result = this.validationService.getPasswordStrength(password);
-      if (result) {
-        this.passwordStrength = result;
-      }
-    });
   }
 
   init_signup_form() {

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { debounceTime } from 'rxjs/internal/operators';
 import { UserService } from '@services/user/user.service';
-import { faBorderAll } from '@fortawesome/free-solid-svg-icons';
+import { faBorderAll, faTimesCircle } from '@fortawesome/free-solid-svg-icons';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ResourceService } from '@services/resource/resource.service';
 
@@ -15,6 +15,7 @@ export class SearchComponent implements OnInit {
 
   // Icons
   faBorderAll = faBorderAll;
+  faTimesCircle = faTimesCircle;
 
   // Form
   searchForm: FormGroup;
