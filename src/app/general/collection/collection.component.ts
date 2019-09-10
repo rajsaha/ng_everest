@@ -49,6 +49,6 @@ export class CollectionComponent implements OnInit {
   }
 
   goToCollection() {
-    this.route.navigate([`/profile/${this.data.username}/collection/${this.data._id}`], { relativeTo: this.router.parent });
+    this.route.navigate([`/profile/user/${this.data.username}/collection/${this.data._id}`], { relativeTo: this.router.parent });
   }
 }
