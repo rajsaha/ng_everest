@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ResourceService } from '@services/resource/resource.service';
 import { faPen } from '@fortawesome/free-solid-svg-icons';
-import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-view-resource',
@@ -22,16 +21,16 @@ export class ViewResourceComponent implements OnInit {
   isLoading = false;
 
   constructor(
-    private route: ActivatedRoute, 
+    private route: ActivatedRoute,
     private resourceService: ResourceService,
-    private router: Router,
-    private location: Location) { }
+    private router: Router) {}
 
   ngOnInit() {
-    this.route.params.subscribe((params) => {
-      this.currentUser = localStorage.getItem('username');
+    this.currentUser = localStorage.getItem('username');
+    this.route.params.subscribe(async (params) => {
+      this.resource = null;
       this.id = params.resourceId;
-      this.getResource(params.resourceId);
+      await this.getResource(params.resourceId);
     });
   }
 
@@ -48,10 +47,10 @@ export class ViewResourceComponent implements OnInit {
   }
 
   goToEdit() {
-    this.router.navigate(['/manage/resource/', this.id]);
+    this.router.navigate(['/manage/resource/edit', this.id]);
   }
 
-  checkIfEditable(username) {
+  checkIfEditable(username: string) {
     if (this.currentUser === username) {
       this.isEditable = true;
     }

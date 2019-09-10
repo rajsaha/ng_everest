@@ -15,7 +15,7 @@ import { ViewResourceComponent } from 'src/app/pages/view-resource/view-resource
 
 const routes: Routes = [
   {
-      path: ':username',
+      path: 'user/:username',
       children: [
         {
           path: '',

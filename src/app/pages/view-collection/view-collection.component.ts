@@ -44,6 +44,7 @@ export class ViewCollectionComponent implements OnInit {
     this.initCollectionTitleForm();
     this.onCollectionTitleFormChange();
     this.route.params.subscribe(async (params) => {
+      this.collection = null;
       this.id = params.collectionId;
       await Promise.all([
         this.getCollection(this.id),

@@ -12,7 +12,7 @@
                 [ngStyle]="{ 'background-image': 'url(' + image  +')' }">
             </div>
             <mat-menu #menu="matMenu">
-                <button mat-menu-item [routerLink]="['/profile/', username]" routerLinkActive="active">
+                <button mat-menu-item [routerLink]="['/profile/user', username]" routerLinkActive="active">
                     <fa-icon [icon]="faUser"></fa-icon>&nbsp;&nbsp;View Profile
                 </button>
                 <button mat-menu-item routerLink="/manage" routerLinkActive="active">

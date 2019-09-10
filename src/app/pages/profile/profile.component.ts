@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-profile',
@@ -12,7 +12,7 @@ export class ProfileComponent implements OnInit {
   paramUsername: string;
   isSelf = false;
 
-  constructor(private router: ActivatedRoute) { }
+  constructor(private route: ActivatedRoute) {}
 
   ngOnInit() {
     this.username = localStorage.getItem('username');
@@ -20,10 +20,12 @@ export class ProfileComponent implements OnInit {
   }
 
   checkIfSelf() {
-    this.router.params.subscribe((param) => {
+    this.route.params.subscribe((param) => {
       this.paramUsername = param.username;
       if (this.paramUsername === this.username) {
         this.isSelf = true;
+      } else {
+        this.isSelf = false;
       }
     });
   }

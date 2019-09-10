@@ -94,7 +94,7 @@ export class ResourceComponent implements OnInit {
   }
 
   goToView() {
-    this.route.navigate([`/profile/${this.resourceUser}/resource/${this.id}`], { relativeTo: this.router.parent });
+    this.route.navigate([`/profile/user/${this.resourceUser}/resource/${this.id}`], { relativeTo: this.router.parent });
   }
 
   goToEdit() {
