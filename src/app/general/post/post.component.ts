@@ -8,6 +8,7 @@ import { PoComponent } from '../dialogs/po/po.component';
 import { ResourceService } from '@services/resource/resource.service';
 import { CollectionService } from '@services/collection/collection.service';
 import { UserService } from '@services/user/user.service';
+import { environment as ENV } from '@environments/environment';
 
 @Component({
   selector: 'app-post',
@@ -51,6 +52,9 @@ export class PostComponent implements OnInit {
   isSeeMore = false;
   truncateValue = 150;
 
+  // Empty states
+  noPhoto = `assets/images/portrait.jpg`;
+
   constructor(
     private fb: FormBuilder,
     public dialog: MatDialog,
@@ -83,7 +87,8 @@ export class PostComponent implements OnInit {
     this.title = this.data.title;
     this.tags = this.data.tags;
     this.description = this.data.description;
-    this.image = this.data.image;
+    this.image = this.data.image ? this.data.image : this.noPhoto;
+    console.log(this.noPhoto);
     this.timestamp = moment(this.data.timestamp).fromNow();
     this.allComments = this.data.comments;
     this.recommended_by_count = this.data.recommended_by_count;
