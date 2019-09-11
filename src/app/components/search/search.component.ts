@@ -53,6 +53,7 @@ export class SearchComponent implements OnInit {
 
   onSearchFormChanges() {
     this.searchForm.get('query').valueChanges.pipe(debounceTime(300)).subscribe(async (query) => {
+      this.clearArrays();
       if (query) {
         this.isSearchActive = false;
         this.isLoading = true;
@@ -76,6 +77,7 @@ export class SearchComponent implements OnInit {
   }
 
   async activateSearch() {
+    this.clearArrays();
     if (this.searchForm.get('query').value) {
       this.isSearchActive = false;
       this.isLoading = true;
@@ -99,6 +101,10 @@ export class SearchComponent implements OnInit {
   deactivateSearch() {
     this.isSearchActive = false;
     this.isLoading = false;
+    this.clearArrays();
+  }
+
+  clearArrays() {
     this.users = [];
     this.resources = [];
     this.collections = [];
