@@ -6,6 +6,7 @@ import { UserService } from '@services/user/user.service';
 import { SnackbarService } from '@services/general/snackbar.service';
 import { MatDialog, MatChipInputEvent } from '@angular/material';
 import { CpiComponent } from 'src/app/general/dialogs/cpi/cpi.component';
+import { environment as ENV } from '@environments/environment';
 
 @Component({
   selector: 'app-edit-profile',
@@ -25,7 +26,7 @@ export class EditProfileComponent implements OnInit {
   imageId: string;
   deleteHash: string;
   interests = [];
-  defaultProfileImage = '../../../assets/portrait.jpg';
+  defaultProfileImage = `${ENV.SITE_URL}/assets/images/portrait.jpg`;
 
   // Toggles
   isLoading = false;
@@ -82,10 +83,12 @@ export class EditProfileComponent implements OnInit {
     this.interests = res.userData.interests;
 
     if (res.userData.image) {
-      this.image = res.userData.image.link ? res.userData.image.link : this.defaultProfileImage;
+      this.image = res.userData.image.link;
       this.uploadedImage = res.userData.image.link;
       this.imageId = res.userData.image.id;
       this.deleteHash = res.userData.image.deleteHash;
+    } else {
+      this.image = this.defaultProfileImage;
     }
 
     this.initFormData({

@@ -5,6 +5,7 @@ import { faUser, faSignOutAlt, faStream, faShareAlt, faBorderAll, faSearch } fro
 import { faSquare } from '@fortawesome/free-regular-svg-icons';
 import { LoginService } from '@services/auth/login.service';
 import { CommunicationService } from '@services/general/communication.service';
+import { environment as ENV } from '@environments/environment';
 
 @Component({
   selector: 'app-main',
@@ -15,7 +16,7 @@ export class MainComponent implements OnInit, OnDestroy {
   mobileQuery: MediaQueryList;
   image: string;
   localStorageImage: string;
-  defaultProfileImage = '../assets/portrait.jpg';
+  defaultProfileImage = `${ENV.SITE_URL}/assets/images/portrait.jpg`;
 
   username: string;
 

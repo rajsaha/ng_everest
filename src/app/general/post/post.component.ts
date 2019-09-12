@@ -53,7 +53,7 @@ export class PostComponent implements OnInit {
   truncateValue = 150;
 
   // Empty states
-  noPhoto = `assets/images/portrait.jpg`;
+  noPhoto = `${ENV.SITE_URL}/assets/images/portrait.jpg`;
 
   constructor(
     private fb: FormBuilder,
@@ -87,8 +87,7 @@ export class PostComponent implements OnInit {
     this.title = this.data.title;
     this.tags = this.data.tags;
     this.description = this.data.description;
-    this.image = this.data.image ? this.data.image : this.noPhoto;
-    console.log(this.noPhoto);
+    this.image = this.data.image;
     this.timestamp = moment(this.data.timestamp).fromNow();
     this.allComments = this.data.comments;
     this.recommended_by_count = this.data.recommended_by_count;
@@ -96,7 +95,7 @@ export class PostComponent implements OnInit {
 
   async getUserImage(username) {
     const result = await this.resourceService.getUserImage(username);
-    this.userImage = result.image;
+    this.userImage = result.image ? result.image : this.noPhoto;
   }
 
   async checkIfPostInCollection(id: string, username: string) {
