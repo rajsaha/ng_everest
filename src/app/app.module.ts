@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, enableProdMode } from '@angular/core';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptorService } from '@services/auth/auth-interceptor.service';
 
@@ -72,4 +72,5 @@ import { SearchComponent } from './components/search/search.component';
 })
 export class AppModule { }
 
+enableProdMode();
 platformBrowserDynamic().bootstrapModule(AppModule);
