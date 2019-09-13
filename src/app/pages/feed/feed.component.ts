@@ -42,13 +42,13 @@ export class FeedComponent implements OnInit {
     }
   }
 
-  onScrollDown(ev) {
-    console.log('scrolled down!!', ev);
+  onScrollDown() {
+    console.log('scrolled down!!');
 
   }
 
-  onUp(ev) {
-    console.log('scrolled up!', ev);
+  onUp() {
+    console.log('scrolled up!');
   }
 
 }
