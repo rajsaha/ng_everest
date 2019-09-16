@@ -1,7 +1,12 @@
 <button 
+mat-button 
 matRipple 
-class="custom-button"
-[ngClass]="{'not-disabled': isDisabled, 'delete-button': isDelete}" 
+class="custom-button" 
+[ngClass]="{
+  'not-disabled': isDisabled, 
+  'delete-button': isDelete,
+  'is-loading': isLoading
+}"
 [disabled]="isDisabled" 
 [ngStyle]="
 {
@@ -10,7 +15,8 @@ class="custom-button"
   'font-size': fontSize,
   'color': color, 
   'border': border,
-  'box-shadow': boxShadow
+  'box-shadow': boxShadow,
+  'font-family': fontFamily
 }">
   {{ buttonLabel }}
 </button>

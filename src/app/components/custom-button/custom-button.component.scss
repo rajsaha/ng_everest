@@ -8,7 +8,6 @@ $button-text-color: white;
     border: 0;
     color: $button-text-color;
     cursor: pointer;
-    font-family: 'Montserrat', sans-serif;
     transition: all 0.2s ease-in;
     width: 100%;
 
@@ -22,9 +21,19 @@ $button-text-color: white;
     cursor: pointer;
 }
 
+.is-loading {
+    background-color: transparent !important;
+    border: 1px solid $button-bg-color !important;
+    color: $button-bg-color !important;
+}
+
 .delete-button {
     &:hover {
         background-color: $button-delete-bg-color-hover !important;
         color: white !important;
     }
+}
+
+mat-progress-spinner {
+    display: inline-block;
 }

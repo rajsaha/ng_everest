@@ -13,8 +13,8 @@ import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
 })
 export class LoginComponent implements OnInit {
   loginForm: FormGroup;
-  loggingIn = false;
-  isLoading = false;
+  loggingIn: boolean;
+  loginButtonText = 'Login';
 
   // Icons
   faArrowRight = faArrowRight;
@@ -41,32 +41,37 @@ export class LoginComponent implements OnInit {
     return this.loginForm.controls;
   }
 
-  login() {
+  async login() {
+    // Handle empty fields
+    if (!this.loginForm.get('username').value && !this.loginForm.get('password').value) {
+      return;
+    }
+
     this.loggingIn = true;
-    this.isLoading = true;
-    this.loginService.login(this.loginForm.value).then((res) => {
-      this.isLoading = false;
-      this.loggingIn = false;
-      if (!res.error) {
-        this.snackbarService.openSnackBar({
-          message: {
-            message: `Welcome back, ${res.username}!`,
-            error: false
-          },
-          class: 'green-snackbar',
-        });
-        this.communicationService.changeAuthState(true);
-        this.router.navigate(['']);
-      } else {
-        this.snackbarService.openSnackBar({
-          message: {
-            message: `Error: ${res.error}!`,
-            error: true
-          },
-          class: 'red-snackbar',
-        });
-      }
-    });
+    this.loginButtonText = 'Logging in...';
+    const response = await this.loginService.login(this.loginForm.value);
+    this.loggingIn = false;
+    this.loginButtonText = 'Login';
+
+    if (!response.error) {
+      this.snackbarService.openSnackBar({
+        message: {
+          message: `Welcome back, ${response.username}!`,
+          error: false
+        },
+        class: 'green-snackbar',
+      });
+      this.communicationService.changeAuthState(true);
+      this.router.navigate(['']);
+    } else {
+      this.snackbarService.openSnackBar({
+        message: {
+          message: `Error: ${response.error}!`,
+          error: true
+        },
+        class: 'red-snackbar',
+      });
+    }
   }
 
 }

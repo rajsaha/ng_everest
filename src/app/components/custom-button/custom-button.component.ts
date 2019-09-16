@@ -7,7 +7,8 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class CustomButtonComponent implements OnInit {
   @Input() buttonLabel: string = null;
-  @Input() isDisabled = false;
+  @Input() isDisabled: boolean = false;
+  @Input() isLoading: boolean = false;
   @Input() backgroundColor: string;
   @Input() size: string;
 
@@ -21,6 +22,7 @@ export class CustomButtonComponent implements OnInit {
   fontSize: string;
   color = 'white';
   boxShadow = 'box-shadow: 0 13px 26px rgba(255, 121, 90, 0.5)';
+  fontFamily = '"Montserrat", sans-serif !important';
   constructor() { }
 
   ngOnInit() {
@@ -55,11 +57,9 @@ export class CustomButtonComponent implements OnInit {
         this.fontSize = 'inherit';
         break;
       case 'small':
-        this.padding = '10px 50px';
         this.fontSize = '14px';
         break;
       default:
-        this.padding = '15px 100px';
         this.fontSize = 'inherit';
         break;
     }

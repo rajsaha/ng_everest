@@ -15,7 +15,7 @@
         Please enter password
       </mat-error>
     </mat-form-field>
-    <app-custom-button buttonLabel="Login" [isDisabled]="loggingIn"></app-custom-button>
+    <app-custom-button [buttonLabel]="loginButtonText" [isDisabled]="loggingIn" [isLoading]="loggingIn"></app-custom-button>
   </form>
 </div>
 
