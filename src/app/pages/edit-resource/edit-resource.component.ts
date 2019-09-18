@@ -29,6 +29,7 @@ export class EditResourceComponent implements OnInit {
   image: any;
   username: string;
   collectionNames = [];
+  submitButtonText = 'Done';
 
   // Icons
   faUpload = faUpload;
@@ -77,7 +78,7 @@ export class EditResourceComponent implements OnInit {
     this.editResourceForm = this.fb.group({
       id: [''],
       isCustomImage: [''],
-      url: [{disabled: this.isUrlDisabled }, Validators.required],
+      url: [{ disabled: this.isUrlDisabled }, Validators.required],
       title: ['', [Validators.required]],
       description: ['', [Validators.required]],
       image: [''],
@@ -126,46 +127,51 @@ export class EditResourceComponent implements OnInit {
   }
 
   async submitEditResourceForm() {
-    if (this.editResourceForm.valid) {
-      this.isLoading = true;
-      this.isDisabled = true;
-      let data = {};
-      if (this.editResourceForm.controls.isCustomImage) {
-        data = {
-          formData: this.editResourceForm.value,
-          tags: this.tags,
-          customImage: this.image
-        };
-      } else {
-        data = {
-          formData: this.editResourceForm.value,
-          tags: this.tags
-        };
-      }
-
-      const response = await this.resourceService.editResource(data);
-      this.isLoading = false;
-
-      if (!response.error) {
-        this.snackbarService.openSnackBar({
-          message: {
-            message: 'Resource saved!',
-            error: false
-          },
-          class: 'green-snackbar',
-        });
-        this.router.navigate([`/view/${this.resource._id}`]);
-      } else {
-        this.snackbarService.openSnackBar({
-          message: {
-            message: `Error: ${response.error}!`,
-            error: true
-          },
-          class: 'red-snackbar',
-        });
-      }
-      this.isDisabled = false;
+    if (!this.editResourceForm.valid) {
+      return;
     }
+
+    this.submitButtonText = 'Saving...';
+    this.isLoading = true;
+    this.isDisabled = true;
+    let data = {};
+    if (this.editResourceForm.controls.isCustomImage) {
+      data = {
+        formData: this.editResourceForm.value,
+        tags: this.tags,
+        customImage: this.image
+      };
+    } else {
+      data = {
+        formData: this.editResourceForm.value,
+        tags: this.tags
+      };
+    }
+
+    const response = await this.resourceService.editResource(data);
+    this.submitButtonText = 'Done';
+    this.isLoading = false;
+    this.isDisabled = false;
+
+    if (!response.error) {
+      this.snackbarService.openSnackBar({
+        message: {
+          message: 'Resource saved!',
+          error: false
+        },
+        class: 'green-snackbar',
+      });
+      this.router.navigate([`/profile/user/${this.username}/resource/${this.resource._id}`], { relativeTo: this.route.parent });
+    } else {
+      this.snackbarService.openSnackBar({
+        message: {
+          message: `Error: ${response.error}!`,
+          error: true
+        },
+        class: 'red-snackbar',
+      });
+    }
+    this.isDisabled = false;
   }
 
   async onURLOnChanges() {
@@ -253,7 +259,8 @@ export class EditResourceComponent implements OnInit {
   }
 
   async getCollectionTitle(resourceId: string) {
-    const collection = await this.collectionService.getCollectionTitleByResourceId({ resourceId });
+    const collection = await this.collectionService.getCollectionTitleByResourceId({ username: this.username, resourceId });
+
     if (collection.collection) {
       this.editResourceForm.controls.collectionName.patchValue(collection.collection.title);
     }

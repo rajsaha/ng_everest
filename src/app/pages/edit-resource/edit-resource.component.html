@@ -1,5 +1,4 @@
-<mat-progress-bar mode="query" *ngIf="isLoading"></mat-progress-bar>
-<div class="section-container" *ngIf="!isLoading">
+<div class="section-container">
   <div class="section">
     <div class="section-header">
       <h4>Edit Resource</h4>
@@ -72,7 +71,7 @@
         </mat-form-field>
 
         <div class="form-button-container">
-          <app-custom-button buttonLabel="Done" [isDisabled]="isDisabled" size="small"></app-custom-button>
+          <app-custom-button [buttonLabel]="submitButtonText" [isDisabled]="isDisabled" [isLoading]="isLoading" size="small"></app-custom-button>
         </div>
       </form>
     </div>
