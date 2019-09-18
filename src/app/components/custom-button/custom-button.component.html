@@ -5,7 +5,8 @@ class="custom-button"
 [ngClass]="{
   'not-disabled': isDisabled, 
   'delete-button': isDelete,
-  'is-loading': isLoading
+  'is-loading': isLoading,
+  'hover': !isLoading
 }"
 [disabled]="isDisabled" 
 [ngStyle]="

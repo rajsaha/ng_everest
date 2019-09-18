@@ -10,7 +10,9 @@ $button-text-color: white;
     cursor: pointer;
     transition: all 0.2s ease-in;
     width: 100%;
+}
 
+.hover {
     &:hover {
         background-color: $button-bg-color-hover !important;
     }

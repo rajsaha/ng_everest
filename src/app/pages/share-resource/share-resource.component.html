@@ -7,7 +7,7 @@
 
     <div class="section-content">
       <div class="custom-image" (click)="imageInput.click()" matRipple
-        *ngIf="shareResourceForm.controls.isCustomImage.value" [ngStyle]="{ 'background-image': 'url(' + image + ')' }">
+        *ngIf="shareResourceForm.controls.isCustomImage.value" [ngStyle]="{ 'background-image': 'url(' + image ? image : '' + ')' }">
         <p *ngIf="!image">
           <fa-icon [icon]="faUpload"></fa-icon>&nbsp;Click here to upload a custom image
         </p>
@@ -29,7 +29,7 @@
         <mat-form-field appearance="outline">
           <mat-label>Link</mat-label>
           <input matInput placeholder="Paste your link here" formControlName="url">
-          <mat-error *ngIf="shareResourceForm.controls['url'].hasError('urlInvalid')">
+          <mat-error *ngIf="shareResourceFormControls.url.hasError('urlInvalid') && shareResourceFormControls.url.dirty">
             Invalid link
           </mat-error>
         </mat-form-field>
@@ -37,11 +37,19 @@
         <mat-form-field appearance="outline">
           <mat-label>Title</mat-label>
           <input matInput placeholder="Give it a title" formControlName="title">
+
+          <mat-error *ngIf="shareResourceFormControls.title.hasError('required') && shareResourceFormControls.title.dirty">
+            Title required
+          </mat-error>
         </mat-form-field>
 
         <mat-form-field appearance="outline">
           <mat-label>Description</mat-label>
           <textarea matInput placeholder="Say something about it" formControlName="description"></textarea>
+
+          <mat-error *ngIf="shareResourceFormControls.description.hasError('required') && shareResourceFormControls.description.dirty">
+            Description required
+          </mat-error>
         </mat-form-field>
 
         <mat-form-field appearance="outline">
@@ -61,18 +69,18 @@
         <h6>Add to collection</h6>
         <mat-form-field appearance="outline">
           <mat-label>Collections</mat-label>
-          <input type="text" placeholder="Select or Create New" matInput [matAutocomplete]="auto" formControlName="collectionName">
+          <input type="text" placeholder="Select or Create New" matInput [matAutocomplete]="auto" formControlName="collectionTitle">
           <mat-autocomplete #auto="matAutocomplete">
             <mat-optgroup label="Existing Collections">
-              <mat-option *ngFor="let name of collectionNames" [value]="name">
-                {{name}}
+              <mat-option *ngFor="let collection of collections" [value]="collection.title">
+                {{ collection.title }}
               </mat-option>
             </mat-optgroup>
           </mat-autocomplete>
         </mat-form-field>
 
         <div class="form-button-container clearfix">
-          <app-custom-button buttonLabel="Share" [isDisabled]="isDisabled" size="small"></app-custom-button>
+          <app-custom-button [buttonLabel]="submitButtonText" [isDisabled]="isDisabled" [isLoading]="isLoading" size="small"></app-custom-button>
         </div>
       </form>
     </div>

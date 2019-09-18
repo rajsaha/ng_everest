@@ -7,8 +7,8 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class CustomButtonComponent implements OnInit {
   @Input() buttonLabel: string = null;
-  @Input() isDisabled: boolean = false;
-  @Input() isLoading: boolean = false;
+  @Input() isDisabled = false;
+  @Input() isLoading = false;
   @Input() backgroundColor: string;
   @Input() size: string;
 
