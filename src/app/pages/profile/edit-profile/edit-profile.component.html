@@ -1,4 +1,4 @@
-<div class="public-view" *ngIf="isPublicView && !isLoading">
+<div class="public-view" *ngIf="isPublicView">
     <div class="section-container">
         <div class="section">
             <div class="profile-picture">
@@ -109,8 +109,8 @@
 
                     <div class="form-button-container">
                         <app-custom-button 
-                        buttonLabel="Save" 
-                        backgroundColor="delete"
+                        [buttonLabel]="submitButtonText" 
+                        [isLoading]="isLoading"
                         [isDisabled]="isProfileSaveButtonDisabled" size="small">
                         </app-custom-button>
                     </div>
