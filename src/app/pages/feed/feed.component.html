@@ -29,7 +29,7 @@
   <div class="fab-add-document" [ngClass]="isFabActive ? 'animation-scaleAppear' : 'animation-scaleDisappear'"
     [ngStyle]="{'animation-delay': isFabActive ? '0s' : '-0.1s'}">
     <span>Write an Article</span>
-    <button mat-mini-fab>
+    <button routerLink="/write" mat-mini-fab>
       <fa-icon [icon]="faFile"></fa-icon>
     </button>
   </div>

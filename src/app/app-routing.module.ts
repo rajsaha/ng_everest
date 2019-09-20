@@ -30,6 +30,10 @@ const routes: Routes = [
       {
         path: 'profile',
         loadChildren: 'src/app/modules/profile/profile.module#ProfileModule'
+      },
+      {
+        path: 'write',
+        loadChildren: 'src/app/modules/write/write.module#WriteModule'
       }
     ]
   },
