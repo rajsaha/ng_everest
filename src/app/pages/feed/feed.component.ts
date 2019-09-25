@@ -49,7 +49,6 @@ export class FeedComponent implements OnInit {
   }
 
   async onScrollDown(ev) {
-    console.log('scrolled down!!', ev);
     await this.loadMorePosts();
   }
 
