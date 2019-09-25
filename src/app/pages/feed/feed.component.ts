@@ -22,33 +22,44 @@ export class FeedComponent implements OnInit {
   scrollDistance = 2;
   scrollUpDistance = 2;
 
+  // Pagination
+  pageNo = 1;
+  size = 3;
+
   constructor(private resourceService: ResourceService) { }
 
-  ngOnInit() {
+  async ngOnInit() {
     this.username = localStorage.getItem('username');
-    this.getAllResources({
-      start: 0,
-      end: 4,
-      username: this.username
-    });
+    await this.getAllResources();
   }
 
-  async getAllResources(data: any) {
+  async getAllResources() {
     try {
-      const response = await this.resourceService.getAllResources(data);
-      this.posts = response.resources;
+      const response = await this.resourceService.getAllResources({
+        pageNo: this.pageNo,
+        size: this.size,
+        username: this.username
+      });
+      for (const resource of response.resources) {
+        this.posts.push(resource);
+      }
     } catch (err) {
       console.error(err);
     }
   }
 
-  onScrollDown(ev) {
+  async onScrollDown(ev) {
     console.log('scrolled down!!', ev);
-
+    await this.loadMorePosts();
   }
 
   onUp(ev) {
     console.log('scrolled up!', ev);
+  }
+
+  async loadMorePosts() {
+    this.pageNo++;
+    await this.getAllResources();
   }
 
 }

@@ -1,11 +1,15 @@
 <div class="feed-container" 
-  infiniteScroll 
+  infinite-scroll 
   [infiniteScrollDistance]="scrollDistance"
   [infiniteScrollUpDistance]="scrollUpDistance" 
   [infiniteScrollThrottle]="throttle" 
   (scrolled)="onScrollDown()"
   (scrolledUp)="onUp()">
   <app-post *ngFor="let post of posts" [data]="post"></app-post>
+
+  <div class="see-more" (click)="loadMorePosts()">
+    See More
+  </div>
 
   <div class="section-container" *ngIf="posts.length === 0">
     <p>Nothing here</p>

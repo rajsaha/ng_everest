@@ -25,6 +25,14 @@ $fab_button_1_position: $init_bottom+$space_between_fab_buttons;
 .feed-container {
     height: 100%;
     padding: 15px;
+
+    .see-more {
+        cursor: pointer;
+        margin: 15px;
+        font-size: 12px;
+        font-weight: bold;
+        text-align: center;
+    }
 }
 
 .add-content-buttons {
