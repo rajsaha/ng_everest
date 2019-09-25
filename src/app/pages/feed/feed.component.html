@@ -1,18 +1,11 @@
-<div class="feed-container" 
-  infinite-scroll 
-  [infiniteScrollDistance]="scrollDistance"
-  [infiniteScrollUpDistance]="scrollUpDistance" 
-  [infiniteScrollThrottle]="throttle" 
-  (scrolled)="onScrollDown()"
-  (scrolledUp)="onUp()">
-  <app-post *ngFor="let post of posts" [data]="post"></app-post>
+<div class="parent">
+  <div class="feed-container" infiniteScroll [infiniteScrollDistance]="2" [infiniteScrollThrottle]="50"
+    (scrolled)="onScrollDown()" [scrollWindow]="false">
+    <app-post *ngFor="let post of posts" [data]="post"></app-post>
 
-  <div class="see-more" (click)="loadMorePosts()">
-    See More
-  </div>
-
-  <div class="section-container" *ngIf="posts.length === 0">
-    <p>Nothing here</p>
+    <div class="section-container" *ngIf="posts.length === 0">
+      <p>Nothing here</p>
+    </div>
   </div>
 </div>
 
