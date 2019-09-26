@@ -1,6 +1,6 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CollectionService } from '@services/collection/collection.service';
 import { ResourceService } from '@services/resource/resource.service';
 import { SnackbarService } from '@services/general/snackbar.service';
@@ -50,7 +50,7 @@ export class AtcComponent implements OnInit {
 
   async initAddToCollectionForm() {
     this.addToCollectionForm = this.fb.group({
-      collectionName: ['']
+      collectionName: ['', Validators.required]
     });
   }
 
@@ -77,12 +77,10 @@ export class AtcComponent implements OnInit {
   async submitAddToCollectionForm() {
     if (this.addToCollectionForm.valid) {
       const response: any = await this.resourceService.editResourceCollection({
-        collectionName: this.addToCollectionForm.controls.collectionName.value,
+        collectionTitle: this.addToCollectionForm.controls.collectionName.value,
         resourceId: this.data.id,
         username: this.username
       });
-
-      console.log(response);
 
       if (response && !response.error) {
         this.snackbarService.openSnackBar({

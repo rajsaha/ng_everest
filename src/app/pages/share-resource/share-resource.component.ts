@@ -5,7 +5,7 @@ import { faUpload, faPlusCircle } from '@fortawesome/free-solid-svg-icons';
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { MatChipInputEvent } from '@angular/material/chips';
 import { ValidationService } from '@services/forms/validation.service';
-import { delay } from 'rxjs/internal/operators';
+import { delay, debounceTime } from 'rxjs/internal/operators';
 import { ResourceService } from '@services/resource/resource.service';
 import { SnackbarService } from '@services/general/snackbar.service';
 import { CollectionService } from '@services/collection/collection.service';
@@ -26,7 +26,8 @@ export class ShareResourceComponent implements OnInit {
   @ViewChild('imageInput', { static: false }) imageInput: ElementRef;
   image: any;
   username: string;
-  collectionNames = [];
+  collections: Array<object> = [];
+  submitButtonText = 'Share';
 
   // Icons
   faUpload = faUpload;
@@ -73,8 +74,13 @@ export class ShareResourceComponent implements OnInit {
       image: [''],
       username: [this.username],
       type: ['ext-content'],
-      collectionName: ['']
+      collectionId: [''],
+      collectionTitle: ['']
     }, { validator: [this.validationService.checkValidURL] });
+  }
+
+  get shareResourceFormControls() {
+    return this.shareResourceForm.controls;
   }
 
   addTag(event: MatChipInputEvent): void {
@@ -100,83 +106,96 @@ export class ShareResourceComponent implements OnInit {
   }
 
   async submitShareResourceForm() {
-    if (this.shareResourceForm.valid) {
+    if (!this.shareResourceForm.valid) {
+      return;
+    }
+
+    if (this.shareResourceForm.controls.isCustomImage) {
       this.isLoading = true;
       this.isDisabled = true;
+      this.submitButtonText = 'Sharing...';
 
-      if (this.shareResourceForm.controls.isCustomImage) {
-        const data = {
-          formData: this.shareResourceForm.value,
-          tags: this.tags,
-          customImage: this.image
-        };
+      const data = {
+        formData: this.shareResourceForm.value,
+        tags: this.tags,
+        customImage: this.image
+      };
 
-        const response = await this.resourceService.shareResource(data);
-        this.isLoading = false;
+      const response = await this.resourceService.shareResource(data);
+      this.isLoading = false;
+      this.isDisabled = false;
+      this.submitButtonText = 'Sharing';
 
-        if (!response.error) {
-          this.snackbarService.openSnackBar({
-            message: {
-              message: 'Resource saved!',
-              error: false
-            },
-            class: 'green-snackbar',
-          });
-          this.router.navigate(['/']);
-        } else {
-          this.snackbarService.openSnackBar({
-            message: {
-              message: `Error: ${response.error}!`,
-              error: true
-            },
-            class: 'red-snackbar',
-          });
-          this.isDisabled = false;
-        }
+      if (!response.error) {
+        this.snackbarService.openSnackBar({
+          message: {
+            message: 'Resource saved!',
+            error: false
+          },
+          class: 'green-snackbar',
+        });
+        this.router.navigate(['/']);
       } else {
-        const data = {
-          formData: this.shareResourceForm.value,
-          tags: this.tags,
-        };
+        this.snackbarService.openSnackBar({
+          message: {
+            message: `Error: ${response.error}!`,
+            error: true
+          },
+          class: 'red-snackbar',
+        });
+        this.isDisabled = false;
+      }
+    } else {
+      this.isLoading = true;
+      this.isDisabled = true;
+      this.submitButtonText = 'Sharing...';
 
-        const response = await this.resourceService.shareResource(data);
-        this.isLoading = false;
-        this.isDisabled = true;
+      const data = {
+        formData: this.shareResourceForm.value,
+        tags: this.tags,
+      };
 
-        if (!response.error) {
-          this.snackbarService.openSnackBar({
-            message: {
-              message: 'Resource saved!',
-              error: false
-            },
-            class: 'green-snackbar',
-          });
-          this.router.navigate(['/']);
-        } else {
-          this.snackbarService.openSnackBar({
-            message: {
-              message: `Error: ${response.error}!`,
-              error: true
-            },
-            class: 'red-snackbar',
-          });
-          this.isDisabled = false;
-        }
+      const response = await this.resourceService.shareResource(data);
+      this.isLoading = false;
+      this.isDisabled = false;
+      this.submitButtonText = 'Sharing';
+
+      if (!response.error) {
+        this.snackbarService.openSnackBar({
+          message: {
+            message: 'Resource saved!',
+            error: false
+          },
+          class: 'green-snackbar',
+        });
+        this.router.navigate(['/']);
+      } else {
+        this.snackbarService.openSnackBar({
+          message: {
+            message: `Error: ${response.error}!`,
+            error: true
+          },
+          class: 'red-snackbar',
+        });
+        this.isDisabled = false;
       }
     }
   }
 
   async onURLOnChanges() {
-    this.shareResourceForm.controls.url.valueChanges.pipe(delay(1000)).subscribe(async (val) => {
+    this.shareResourceForm.controls.url.valueChanges.pipe(debounceTime(1500)).subscribe(async (val) => {
       this.isLoading = true;
+      this.shareResourceForm.get('title').disable;
+      this.shareResourceForm.get('description').disable;
+
       if (this.shareResourceForm.controls.url.valid) {
         const response = await this.resourceService.getOpenGraphData({
           url: val
         });
 
-        console.log(response);
-
         this.isLoading = false;
+        this.shareResourceForm.get('title').enable;
+        this.shareResourceForm.get('description').enable;
 
         if (!response) {
           this.snackbarService.openSnackBar({
@@ -211,6 +230,8 @@ export class ShareResourceComponent implements OnInit {
         }
       } else {
         this.isLoading = false;
+        this.shareResourceForm.get('title').enable;
+        this.shareResourceForm.get('description').enable;
       }
     });
   }
@@ -231,7 +252,10 @@ export class ShareResourceComponent implements OnInit {
     const response = await this.collectionService.getCollectionNames({ username: this.username });
     if (response.collections) {
       for (const item of response.collections) {
-        this.collectionNames.push(item.title);
+        this.collections.push({
+          title: item.title,
+          id: item._id
+        });
       }
     }
   }

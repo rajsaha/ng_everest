@@ -22,9 +22,15 @@ $fab_button_1_position: $init_bottom+$space_between_fab_buttons;
     }
 }
 
-.feed-container {
+.parent {
     height: 100%;
-    padding: 15px;
+    overflow: hidden;
+
+    .feed-container {
+        height: 100%;
+        padding: 15px;
+        overflow-y: scroll;
+    }
 }
 
 .add-content-buttons {

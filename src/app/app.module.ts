@@ -13,6 +13,12 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { AutosizeModule } from 'ngx-autosize';
 import { MatPasswordStrengthModule } from '@angular-material-extensions/password-strength';
+import { ManageModule } from './modules/manage/manage.module';
+import { CommonModule } from '@angular/common';
+import { MaterialModule } from './modules/material/material.module';
+import { GeneralModule } from './modules/general/general.module';
+import { DialogsModule } from './modules/dialogs/dialogs.module';
+
 import { LoginComponent } from './pages/login/login.component';
 import { WelcomeComponent } from './pages/welcome/welcome.component';
 import { SignupComponent } from './pages/signup/signup.component';
@@ -24,11 +30,6 @@ import { SnackbarComponent } from './general/snackbar/snackbar.component';
 import { ShareResourceComponent } from './pages/share-resource/share-resource.component';
 import { MainComponent } from './layouts/main/main.component';
 import { NoAuthComponent } from './layouts/no-auth/no-auth.component';
-import { ManageModule } from './modules/manage/manage.module';
-import { CommonModule } from '@angular/common';
-import { MaterialModule } from './modules/material/material.module';
-import { GeneralModule } from './modules/general/general.module';
-import { DialogsModule } from './modules/dialogs/dialogs.module';
 import { SearchComponent } from './components/search/search.component';
 
 @NgModule({

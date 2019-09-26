@@ -27,6 +27,7 @@ export class EditProfileComponent implements OnInit {
   deleteHash: string;
   interests = [];
   defaultProfileImage = `${ENV.SITE_URL}/assets/images/portrait.jpg`;
+  submitButtonText = 'Save';
 
   // Toggles
   isLoading = false;
@@ -214,7 +215,13 @@ export class EditProfileComponent implements OnInit {
       email: this.profileForm.controls.email.value
     };
 
+    this.isLoading = true;
+    this.submitButtonText = 'Saving...';
+
     const res = await this.userService.updateProfileData(data);
+
+    this.isLoading = false;
+    this.submitButtonText = 'Save';
 
     if (!res.error) {
       this.snackbarService.openSnackBar({

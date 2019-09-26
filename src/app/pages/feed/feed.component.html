@@ -1,14 +1,11 @@
-<div class="feed-container" 
-  infiniteScroll 
-  [infiniteScrollDistance]="scrollDistance"
-  [infiniteScrollUpDistance]="scrollUpDistance" 
-  [infiniteScrollThrottle]="throttle" 
-  (scrolled)="onScrollDown()"
-  (scrolledUp)="onUp()">
-  <app-post *ngFor="let post of posts" [data]="post"></app-post>
+<div class="parent">
+  <div class="feed-container" infiniteScroll [infiniteScrollDistance]="2" [infiniteScrollThrottle]="50"
+    (scrolled)="onScrollDown()" [scrollWindow]="false">
+    <app-post *ngFor="let post of posts" [data]="post"></app-post>
 
-  <div class="section-container" *ngIf="posts.length === 0">
-    <p>Nothing here</p>
+    <div class="section-container" *ngIf="posts.length === 0">
+      <p>Nothing here</p>
+    </div>
   </div>
 </div>
 
@@ -29,7 +26,7 @@
   <div class="fab-add-document" [ngClass]="isFabActive ? 'animation-scaleAppear' : 'animation-scaleDisappear'"
     [ngStyle]="{'animation-delay': isFabActive ? '0s' : '-0.1s'}">
     <span>Write an Article</span>
-    <button mat-mini-fab>
+    <button routerLink="/write" mat-mini-fab>
       <fa-icon [icon]="faFile"></fa-icon>
     </button>
   </div>

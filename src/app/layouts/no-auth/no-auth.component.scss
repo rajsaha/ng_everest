@@ -30,6 +30,7 @@ $image-height: 300px;
 				height: $image-height;
 				background-color: rgba(255, 162, 90, .1);
 				border-radius: 50%;
+				z-index: -100;
 			}
 
 			img {
@@ -53,6 +54,7 @@ $image-height: 300px;
 				height: $image-height;
 				background-color: rgba(255, 162, 90, .1);
 				border-radius: 50%;
+				z-index: -100;
 			}
 
 			img {
