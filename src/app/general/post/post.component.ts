@@ -8,7 +8,7 @@ import { PoComponent } from '../dialogs/po/po.component';
 import { ResourceService } from '@services/resource/resource.service';
 import { CollectionService } from '@services/collection/collection.service';
 import { UserService } from '@services/user/user.service';
-import { environment as ENV } from '@environments/environment';
+import { environment as ENV } from '@environments/environment.prod';
 
 @Component({
   selector: 'app-post',

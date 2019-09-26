@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { faExternalLinkAlt } from '@fortawesome/free-solid-svg-icons';
 import { UserService } from '@services/user/user.service';
 import { ActivatedRoute } from '@angular/router';
-import { environment as ENV } from '@environments/environment';
+import { environment as ENV } from '@environments/environment.prod';
 
 @Component({
   selector: 'app-public-profile',

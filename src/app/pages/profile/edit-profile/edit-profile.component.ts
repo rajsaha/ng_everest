@@ -6,7 +6,7 @@ import { UserService } from '@services/user/user.service';
 import { SnackbarService } from '@services/general/snackbar.service';
 import { MatDialog, MatChipInputEvent } from '@angular/material';
 import { CpiComponent } from 'src/app/general/dialogs/cpi/cpi.component';
-import { environment as ENV } from '@environments/environment';
+import { environment as ENV } from '@environments/environment.prod';
 
 @Component({
   selector: 'app-edit-profile',
