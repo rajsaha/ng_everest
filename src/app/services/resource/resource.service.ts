@@ -32,7 +32,7 @@ export class ResourceService {
 
   getUserResources(data: any): Promise<any> {
     return new Promise(resolve => {
-      this.http.get(`${ENV.API_URL}/resource/get/all/${data.username}`)
+      this.http.post(`${ENV.API_URL}/resource/get/all/${data.username}`, data)
         .subscribe((response: any) => {
           resolve(response);
         });

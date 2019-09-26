@@ -17,6 +17,7 @@ export class FeedComponent implements OnInit {
   faLink = faLink;
   faFile = faFile;
 
+  // Infinite Scroll
   sum = 2;
   throttle = 300;
   scrollDistance = 2;

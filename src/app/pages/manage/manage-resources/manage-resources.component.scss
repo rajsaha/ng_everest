@@ -14,3 +14,12 @@
     }
   }
 }
+
+.parent {
+  height: 100%;
+  overflow: hidden;
+
+  .resource-grid {
+    height: auto;
+  }
+}

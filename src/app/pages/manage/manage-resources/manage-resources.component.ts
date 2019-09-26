@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostListener } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { ResourceService } from '@services/resource/resource.service';
 import { UtilityService } from '@services/general/utility.service';
@@ -12,7 +12,7 @@ import { debounceTime } from 'rxjs/internal/operators';
 })
 export class ManageResourcesComponent implements OnInit {
   username: string;
-  resources: any;
+  resources = [];
   resourceSearchForm: FormGroup;
 
   // Icons
@@ -21,6 +21,16 @@ export class ManageResourcesComponent implements OnInit {
   // Toggles
   isLoading = false;
   isInCollectionPage = false;
+
+  // Infinite Scroll
+  sum = 2;
+  throttle = 300;
+  scrollDistance = 2;
+  scrollUpDistance = 2;
+
+  // Pagination
+  pageNo = 1;
+  size = 8;
 
   constructor(
     private fb: FormBuilder,
@@ -44,17 +54,37 @@ export class ManageResourcesComponent implements OnInit {
       this.isLoading = true;
       const query = this.resourceSearchForm.get('query').value;
       if (query) {
-        const searchResult = await this.resourceService.searchForUserResources({username: this.username, query});
+        const searchResult = await this.resourceService.searchForUserResources({
+          username: this.username,
+          query
+        });
         this.isLoading = false;
         this.resources = searchResult.resources;
         return;
       }
-      const response = await this.resourceService.getUserResources({username: this.username});
+      const response = await this.resourceService.getUserResources({
+        pageNo: this.pageNo,
+        size: this.size,
+        username: this.username
+      });
       this.isLoading = false;
-      this.resources = response.resources;
+
+      for (const resource of response.resources) {
+        this.resources.push(resource);
+      }
     } catch (err) {
       console.error(err);
     }
+  }
+
+  onScrollDown() {
+    console.log('end');
+    // await this.loadMorePosts();
+  }
+
+  async loadMorePosts() {
+    this.pageNo++;
+    await this.getUserResources();
   }
 
   drResponseHandler(result: number) {
