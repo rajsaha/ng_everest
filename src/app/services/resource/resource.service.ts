@@ -48,6 +48,15 @@ export class ResourceService {
     });
   }
 
+  getResourceComments(data: any): Promise<any> {
+    return new Promise(resolve => {
+      this.http.post(`${ENV.API_URL}/resource/get/resource-comments`, data)
+        .subscribe((response: any) => {
+          resolve(response);
+        });
+    });
+  }
+
   getResource(data: any): Promise<any> {
     return new Promise(resolve => {
       this.http.get(`${ENV.API_URL}/resource/get/one/${data.id}`)
