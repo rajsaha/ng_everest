@@ -1,13 +1,13 @@
 <!-- * All Comments -->
 <div class="all-comments" *ngIf="allComments.length > 0">
-  <div class="see-more" *ngIf="allComments.length < count" (click)="getMoreComments()">
-    View {{ count - allComments.length }} more comments
-  </div>
   <div class="comment" *ngFor="let comment of allComments">
     <span class="username"
       ><strong>{{ comment.username }}</strong></span
     >
     <span class="text">{{ comment.content }}</span>
     <small class="comment-timestamp">{{ formatTime(comment.timestamp) }}</small>
+  </div>
+  <div class="see-more" *ngIf="allComments.length < count" (click)="getMoreComments()">
+    View {{ count - allComments.length }} more comments
   </div>
 </div>
