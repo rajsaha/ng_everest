@@ -15,8 +15,9 @@ export class CommentComponent implements OnInit {
   // Pagination
   pageNo = 1;
   size = 3;
+  count = 0;
 
-  constructor(private resourceService: ResourceService) { }
+  constructor(private resourceService: ResourceService) {}
 
   async ngOnInit() {
     await this.getComments();
@@ -29,13 +30,19 @@ export class CommentComponent implements OnInit {
       resourceId: this.resourceId
     });
 
-    for (const comment of response.comments[0].comments) {
+    this.count = response.count;
+
+    for (const comment of response.comments) {
       this.allComments.push(comment);
     }
+  }
+
+  async getMoreComments() {
+    this.pageNo++;
+    await this.getComments();
   }
 
   formatTime(date: Date) {
     return moment(date).fromNow();
   }
-
 }
