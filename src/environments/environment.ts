@@ -4,8 +4,8 @@
 
 export const environment = {
   production: false,
-  API_URL: 'https://ng-everest.herokuapp.com',
-  SITE_URL: 'https://ng-everest-client.herokuapp.com'
+  API_URL: 'http://localhost:4000',
+  SITE_URL: 'http://localhost:4444'
 };
 
 /*
