@@ -31,7 +31,7 @@ export class PostComponent implements OnInit {
   image = '';
   userImage = '';
   timestamp: any;
-  allComments = [];
+  commentCount = 0;
   recommended_by_count: number;
 
   // Icons
@@ -68,6 +68,7 @@ export class PostComponent implements OnInit {
       this.isLoading = true;
       await Promise.all([
         this.populatePost(),
+        this.getCommentsCount(),
         this.getUserImage(this.data.username),
         this.checkIfPostInCollection(this.data._id, this.data.username),
         this.checkIfPostIsLiked(this.data._id, this.currentUser),
@@ -89,8 +90,12 @@ export class PostComponent implements OnInit {
     this.description = this.data.description;
     this.image = this.data.image;
     this.timestamp = moment(this.data.timestamp).fromNow();
-    this.allComments = this.data.comments;
     this.recommended_by_count = this.data.recommended_by_count;
+  }
+
+  async getCommentsCount() {
+    const result = await this.resourceService.getResourceCommentsCount({ resourceId: this.id});
+    this.commentCount = result;
   }
 
   async getUserImage(username) {
@@ -130,8 +135,8 @@ export class PostComponent implements OnInit {
       // * Clear textarea
       this.commentForm.controls.comment.patchValue('');
 
-      // * Add Comment to allComments array
-      this.allComments.push(result.comment);
+      // * Add Comment to commentCount array
+      this.commentCount++;
     }
   }
 

@@ -57,6 +57,15 @@ export class ResourceService {
     });
   }
 
+  getResourceCommentsCount(data: any): Promise<any> {
+    return new Promise(resolve => {
+      this.http.get(`${ENV.API_URL}/resource/get/resource-comments-count/${data.resourceId}`)
+        .subscribe((response: any) => {
+          resolve(response);
+        });
+    });
+  }
+
   getResource(data: any): Promise<any> {
     return new Promise(resolve => {
       this.http.get(`${ENV.API_URL}/resource/get/one/${data.id}`)
