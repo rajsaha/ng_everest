@@ -21,7 +21,7 @@ export class EditProfileComponent implements OnInit {
   website: string;
   bio: string;
   email: string;
-  image = '../../../assets/portrait.jpg';
+  image = '../../../assets/images/portrait.jpg';
   uploadedImage: string;
   imageId: string;
   deleteHash: string;
@@ -52,7 +52,7 @@ export class EditProfileComponent implements OnInit {
     private userService: UserService,
     private snackbarService: SnackbarService,
     public dialog: MatDialog
-  ) { }
+  ) {}
 
   async ngOnInit() {
     this.username = localStorage.getItem('username');
@@ -130,9 +130,13 @@ export class EditProfileComponent implements OnInit {
       }
     });
 
-    dialogRef.afterClosed().subscribe(async (result) => {
-      const imageLink = await this.userService.getProfilePhoto(this.username);
-      this.image = imageLink.image.image.link ? imageLink.image.image.link : this.defaultProfileImage;
+    dialogRef.afterClosed().subscribe(async result => {
+      if (result && result.status) {
+        const imageLink = await this.userService.getProfilePhoto(this.username);
+        this.image = imageLink.image.image.link
+          ? imageLink.image.image.link
+          : this.defaultProfileImage;
+      }
     });
   }
 
@@ -166,7 +170,7 @@ export class EditProfileComponent implements OnInit {
           message: 'Something went wrong!',
           error: true
         },
-        class: 'red-snackbar',
+        class: 'red-snackbar'
       });
     } else {
       if (index >= 0) {
@@ -229,7 +233,7 @@ export class EditProfileComponent implements OnInit {
           message: 'Profile data saved!',
           error: false
         },
-        class: 'green-snackbar',
+        class: 'green-snackbar'
       });
     } else {
       this.snackbarService.openSnackBar({
@@ -237,9 +241,8 @@ export class EditProfileComponent implements OnInit {
           message: `Error: ${res.error}!`,
           error: true
         },
-        class: 'red-snackbar',
+        class: 'red-snackbar'
       });
     }
   }
-
 }

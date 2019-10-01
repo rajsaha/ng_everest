@@ -74,7 +74,9 @@ export class CpiComponent implements OnInit {
   }
 
   onNoClick() {
-    this.dialogRef.close();
+    this.dialogRef.close({
+      status: false
+    });
   }
 
   onYesClick() {
