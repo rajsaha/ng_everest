@@ -14,7 +14,7 @@ export class CommentComponent implements OnInit {
 
   // Pagination
   pageNo = 1;
-  size = 3;
+  size = 5;
   count = 0;
 
   constructor(private resourceService: ResourceService) {}
@@ -44,5 +44,9 @@ export class CommentComponent implements OnInit {
 
   formatTime(date: Date) {
     return moment(date).fromNow();
+  }
+
+  addCommentToArray(comment: any) {
+    this.allComments.push(comment);
   }
 }

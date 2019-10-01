@@ -1,5 +1,11 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { faThumbsUp, faComment, faPlus, faReply, faEllipsisV } from '@fortawesome/free-solid-svg-icons';
+import { Component, OnInit, Input, ViewChild } from '@angular/core';
+import {
+  faThumbsUp,
+  faComment,
+  faPlus,
+  faReply,
+  faEllipsisV
+} from '@fortawesome/free-solid-svg-icons';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material';
 import * as moment from 'moment';
@@ -9,15 +15,18 @@ import { ResourceService } from '@services/resource/resource.service';
 import { CollectionService } from '@services/collection/collection.service';
 import { UserService } from '@services/user/user.service';
 import { environment as ENV } from '@environments/environment';
+import { CommentComponent } from './comment/comment.component';
 
 @Component({
   selector: 'app-post',
   templateUrl: './post.component.html',
   styleUrls: ['./post.component.scss']
 })
-
 export class PostComponent implements OnInit {
   @Input() data: any;
+
+  @ViewChild(CommentComponent, { static: false })
+  commentComponent: CommentComponent;
 
   currentUser: string;
 
@@ -60,7 +69,8 @@ export class PostComponent implements OnInit {
     public dialog: MatDialog,
     private resourceService: ResourceService,
     private userService: UserService,
-    private collectionService: CollectionService) { }
+    private collectionService: CollectionService
+  ) {}
 
   async ngOnInit() {
     this.currentUser = localStorage.getItem('username');
@@ -94,7 +104,9 @@ export class PostComponent implements OnInit {
   }
 
   async getCommentsCount() {
-    const result = await this.resourceService.getResourceCommentsCount({ resourceId: this.id});
+    const result = await this.resourceService.getResourceCommentsCount({
+      resourceId: this.id
+    });
     this.commentCount = result;
   }
 
@@ -104,14 +116,20 @@ export class PostComponent implements OnInit {
   }
 
   async checkIfPostInCollection(id: string, username: string) {
-    const result = await this.collectionService.checkForResourceInCollection({ id, username: this.currentUser });
+    const result = await this.collectionService.checkForResourceInCollection({
+      id,
+      username: this.currentUser
+    });
     if (result.isInCollection) {
       this.isInCollection = true;
     }
   }
 
   async checkIfPostIsLiked(id: string, username: string) {
-    const result = await this.userService.checkIfPostIsLiked({resourceId: id, username});
+    const result = await this.userService.checkIfPostIsLiked({
+      resourceId: id,
+      username
+    });
     if (result) {
       this.isLiked = true;
       return;
@@ -124,20 +142,33 @@ export class PostComponent implements OnInit {
     this.commentForm = this.fb.group({
       resourceId: [this.id],
       username: [this.currentUser],
-      comment: ['', Validators.required]
+      comment: ['', Validators.required],
+      timestamp: [Date.now()]
     });
   }
 
   async addComment() {
-    const result = await this.resourceService.addComment(this.commentForm.value);
+    const result = await this.resourceService.addComment(
+      this.commentForm.value
+    );
 
     if (result && result.status) {
+      // * Add comment to array
+      this.commentComponent.addCommentToArray({
+        username: this.commentFormControls.username.value,
+        content: this.commentFormControls.comment.value,
+        timestamp: this.commentFormControls.timestamp.value
+      });
       // * Clear textarea
       this.commentForm.controls.comment.patchValue('');
 
       // * Add Comment to commentCount array
-      this.commentCount++;
+      await this.getCommentsCount();
     }
+  }
+
+  get commentFormControls() {
+    return this.commentForm.controls;
   }
 
   formatTime(date: Date) {
@@ -168,7 +199,10 @@ export class PostComponent implements OnInit {
 
   async like() {
     try {
-      const result = await this.userService.likePost({username: this.currentUser, resourceId: this.id});
+      const result = await this.userService.likePost({
+        username: this.currentUser,
+        resourceId: this.id
+      });
       if (result) {
         this.isLiked = true;
         this.recommended_by_count++;
@@ -180,7 +214,10 @@ export class PostComponent implements OnInit {
 
   async unlike() {
     try {
-      const result = await this.userService.unLikePost({username: this.currentUser, resourceId: this.id});
+      const result = await this.userService.unLikePost({
+        username: this.currentUser,
+        resourceId: this.id
+      });
       if (result) {
         this.isLiked = false;
         this.recommended_by_count--;
@@ -201,7 +238,9 @@ export class PostComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(async (result: any) => {
       if (result && result.added) {
-        const res = await this.collectionService.checkForResourceInCollection({ id: this.id });
+        const res = await this.collectionService.checkForResourceInCollection({
+          id: this.id
+        });
         if (res) {
           this.isInCollection = true;
         }
