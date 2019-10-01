@@ -6,7 +6,7 @@ import { UserService } from '@services/user/user.service';
 import { SnackbarService } from '@services/general/snackbar.service';
 import { MatDialog, MatChipInputEvent } from '@angular/material';
 import { CpiComponent } from 'src/app/general/dialogs/cpi/cpi.component';
-import { environment as ENV } from '@environments/environment.prod';
+import { environment as ENV } from '@environments/environment';
 
 @Component({
   selector: 'app-edit-profile',
@@ -21,7 +21,7 @@ export class EditProfileComponent implements OnInit {
   website: string;
   bio: string;
   email: string;
-  image = '../../../assets/images/portrait.jpg';
+  image = `${ENV.SITE_URL}/assets/images/portrait.jpg`;
   uploadedImage: string;
   imageId: string;
   deleteHash: string;

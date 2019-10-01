@@ -3,7 +3,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { SnackbarService } from '@services/general/snackbar.service';
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
 import { UserService } from '@services/user/user.service';
-import { environment as ENV } from '@environments/environment.prod';
+import { environment as ENV } from '@environments/environment';
 
 class ImageSnippet {
   constructor(public src: string, public file: File) { }

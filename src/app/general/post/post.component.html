@@ -53,11 +53,11 @@
   <!-- * Controls -->
   <div class="controls">
     <button *ngIf="isLiked" mat-button class="btn btn-like is-liked" (click)="unlike()">
-      <fa-icon [icon]="faThumbsUp"></fa-icon><span *ngIf="recommended_by_count > 0" class="count">{{ recommended_by_count }}</span>
+      <fa-icon [icon]="faThumbsUp"></fa-icon><span *ngIf="recommendedByCount > 0" class="count">{{ recommendedByCount }}</span>
     </button>
 
     <button *ngIf="!isLiked" mat-button class="btn btn-like" (click)="like()">
-      <fa-icon [icon]="faThumbsUp"></fa-icon><span *ngIf="recommended_by_count > 0" class="count">{{ recommended_by_count }}</span>
+      <fa-icon [icon]="faThumbsUp"></fa-icon><span *ngIf="recommendedByCount > 0" class="count">{{ recommendedByCount }}</span>
     </button>
 
     <button mat-button class="btn btn-comment"

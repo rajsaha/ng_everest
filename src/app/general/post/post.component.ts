@@ -15,7 +15,7 @@ import { ResourceService } from '@services/resource/resource.service';
 import { CollectionService } from '@services/collection/collection.service';
 import { UserService } from '@services/user/user.service';
 import { CommentComponent } from './comment/comment.component';
-import { environment as ENV } from '@environments/environment.prod';
+import { environment as ENV } from '@environments/environment';
 
 @Component({
   selector: 'app-post',
@@ -41,7 +41,7 @@ export class PostComponent implements OnInit {
   userImage = '';
   timestamp: any;
   commentCount = 0;
-  recommended_by_count: number;
+  recommendedByCount: number;
 
   // Icons
   faThumbsUp = faThumbsUp;
@@ -100,7 +100,7 @@ export class PostComponent implements OnInit {
     this.description = this.data.description;
     this.image = this.data.image;
     this.timestamp = moment(this.data.timestamp).fromNow();
-    this.recommended_by_count = this.data.recommended_by_count;
+    this.recommendedByCount = this.data.recommended_by_count;
   }
 
   async getCommentsCount() {
@@ -205,7 +205,7 @@ export class PostComponent implements OnInit {
       });
       if (result) {
         this.isLiked = true;
-        this.recommended_by_count++;
+        this.recommendedByCount++;
       }
     } catch (err) {
       console.error(err);
@@ -220,7 +220,7 @@ export class PostComponent implements OnInit {
       });
       if (result) {
         this.isLiked = false;
-        this.recommended_by_count--;
+        this.recommendedByCount--;
       }
     } catch (err) {
       console.error(err);
