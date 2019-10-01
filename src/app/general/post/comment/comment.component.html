@@ -7,7 +7,12 @@
     <span class="text">{{ comment.content }}</span>
     <small class="comment-timestamp">{{ formatTime(comment.timestamp) }}</small>
   </div>
-  <div class="see-more" *ngIf="allComments.length < count" (click)="getMoreComments()">
-    View {{ count - allComments.length }} more comments
-  </div>
+</div>
+
+<div class="see-more" *ngIf="allComments.length < count && !isLoading" (click)="getMoreComments()" matRipple>
+  View {{ count - allComments.length }} more comments
+</div>
+
+<div class="spinner" *ngIf="isLoading">
+  <mat-progress-spinner mode="indeterminate" diameter="25"></mat-progress-spinner>
 </div>

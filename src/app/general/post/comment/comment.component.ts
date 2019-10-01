@@ -16,6 +16,7 @@ export class CommentComponent implements OnInit {
   pageNo = 1;
   size = 5;
   count = 0;
+  isLoading = false;
 
   constructor(private resourceService: ResourceService) {}
 
@@ -38,8 +39,10 @@ export class CommentComponent implements OnInit {
   }
 
   async getMoreComments() {
+    this.isLoading = true;
     this.pageNo++;
     await this.getComments();
+    this.isLoading = false;
   }
 
   formatTime(date: Date) {
