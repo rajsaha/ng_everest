@@ -10,14 +10,16 @@ import { ResourceComponent } from 'src/app/general/resource/resource.component';
 import { CollectionComponent } from 'src/app/general/collection/collection.component';
 import { ViewCollectionComponent } from 'src/app/pages/view-collection/view-collection.component';
 import { RouterModule } from '@angular/router';
-import { MatButtonModule, MatIconModule, MatFormFieldModule, MatInputModule } from '@angular/material';
+import { MatButtonModule, MatIconModule, MatFormFieldModule, MatInputModule, MatProgressSpinnerModule } from '@angular/material';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ViewResourceComponent } from 'src/app/pages/view-resource/view-resource.component';
 import { PostComponent } from 'src/app/general/post/post.component';
+import { CommentComponent } from 'src/app/general/post/comment/comment.component';
 
 @NgModule({
   declarations: [
     PostComponent,
+    CommentComponent,
     CustomButtonComponent,
     TruncatePipe,
     SnackbarComponent,
@@ -36,6 +38,7 @@ import { PostComponent } from 'src/app/general/post/post.component';
     MatIconModule,
     MatFormFieldModule,
     MatInputModule,
+    MatProgressSpinnerModule,
     ReactiveFormsModule
   ],
   exports: [

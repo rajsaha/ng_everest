@@ -61,19 +61,12 @@
     </button>
 
     <button mat-button class="btn btn-comment"
-      (click)="showComments = !showComments" [disabled]="!allComments.length > 0">
-      <fa-icon [icon]="faComment"></fa-icon><span *ngIf="allComments.length > 0" class="count">{{ allComments.length }}</span>
+      (click)="showComments = !showComments" [disabled]="!commentCount > 0">
+      <fa-icon [icon]="faComment"></fa-icon><span *ngIf="commentCount > 0" class="count">{{ commentCount }}</span>
     </button>
   </div>
 
-  <!-- * All Comments -->
-  <div class="all-comments" *ngIf="allComments.length > 0 && showComments">
-    <div class="comment" *ngFor="let comment of allComments">
-      <span class="username"><strong>{{ comment.username }}</strong></span>
-      <span class="text">{{ comment.content }}</span>
-      <small class="comment-timestamp">{{ formatTime(comment.timestamp) }}</small>
-    </div>
-  </div>
+  <app-comment *ngIf="showComments" [resourceId]="id"></app-comment>
 
   <!-- * Add Comment -->
   <div class="add-comment">
