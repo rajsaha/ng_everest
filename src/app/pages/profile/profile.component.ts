@@ -6,7 +6,6 @@ import { ActivatedRoute } from '@angular/router';
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.scss']
 })
-
 export class ProfileComponent implements OnInit {
   username: string;
   paramUsername: string;
@@ -20,7 +19,7 @@ export class ProfileComponent implements OnInit {
   }
 
   checkIfSelf() {
-    this.route.params.subscribe((param) => {
+    this.route.params.subscribe(param => {
       this.paramUsername = param.username;
       if (this.paramUsername === this.username) {
         this.isSelf = true;
