@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import * as BalloonEditor from '@ckeditor/ckeditor5-build-balloon';
-import { Article } from 'src/app/interfaces/article';
+import { environment as ENV } from '@environments/environment';
 
 @Component({
   selector: 'app-write',
@@ -8,32 +7,9 @@ import { Article } from 'src/app/interfaces/article';
   styleUrls: ['./write.component.scss']
 })
 export class WriteComponent implements OnInit {
-  article: Article;
-
-  // Editor
-  Editor = BalloonEditor;
-  editorConfig = {
-    placeholder: 'Share your thoughts...',
-    toolbar: [
-      'heading',
-      '|',
-      'alignment',
-      'bold',
-      'italic',
-      'link',
-      'bulletedList',
-      'numberedList',
-      'blockQuote',
-      'undo',
-      'redo'
-    ]
-  };
+  apiKey = `${ENV.TINYMCE_API_KEY}`;
 
   constructor() {
-    this.article = {
-      title: '',
-      text: ''
-    };
   }
 
   ngOnInit() {

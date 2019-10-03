@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Routes, RouterModule } from '@angular/router';
 import { WriteComponent } from 'src/app/pages/write/write.component';
-import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
+import { EditorModule } from '@tinymce/tinymce-angular';
 
 const routes: Routes = [
   {
@@ -17,7 +17,7 @@ const routes: Routes = [
   ],
   imports: [
     CommonModule,
-    CKEditorModule,
+    EditorModule,
     RouterModule.forChild(routes)
   ],
   exports: [RouterModule]
