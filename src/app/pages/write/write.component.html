@@ -1,1 +1,14 @@
-<editor [apiKey]="apiKey"></editor>
+<div class="section-container">
+  <form [formGroup]="articleForm">
+    <input type="text" formControlName="title" />
+  </form>
+  <editor
+    [init]="tinyMceInit"
+    [(ngModel)]="body"
+    (onGetContent)="handleEvent($event)"
+  ></editor>
+  <app-custom-button
+    [buttonLabel]="saveButtonText"
+    (click)="submitArticle()"
+  ></app-custom-button>
+</div>
