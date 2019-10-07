@@ -1,14 +1,61 @@
 <div class="section-container">
   <form [formGroup]="articleForm">
-    <input type="text" formControlName="title" />
+    <mat-form-field>
+      <mat-label>Give your article a title</mat-label>
+      <input matInput placeholder="Title" formControlName="title" />
+      <mat-error
+        *ngIf="
+          articleFormControls.title.hasError('required') &&
+          articleFormControls.title.dirty
+        "
+      >
+        Please enter title
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Add tags to your article</mat-label>
+      <mat-chip-list #chipList aria-label="Interest selection">
+        <mat-chip
+          *ngFor="let tag of tags"
+          [selectable]="selectable"
+          [removable]="removable"
+          (removed)="removeTag(tag)"
+        >
+          {{ tag }}
+          <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+        </mat-chip>
+        <input
+          placeholder="Add a Tag"
+          [matChipInputFor]="chipList"
+          [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+          [matChipInputAddOnBlur]="addOnBlur"
+          (matChipInputTokenEnd)="addTag($event)"
+        />
+      </mat-chip-list>
+    </mat-form-field>
+
+    <editor
+      [apiKey]="apiKey"
+      [init]="tinyMceInit"
+      [(ngModel)]="body"
+      formControlName="body"
+    ></editor>
+    <mat-error
+      *ngIf="
+        articleFormControls.body.hasError('required') &&
+        articleFormControls.body.dirty
+      "
+    >
+      Your article can't be empty!
+    </mat-error>
   </form>
-  <editor
-    [init]="tinyMceInit"
-    [(ngModel)]="body"
-    (onGetContent)="handleEvent($event)"
-  ></editor>
-  <app-custom-button
-    [buttonLabel]="saveButtonText"
-    (click)="submitArticle()"
-  ></app-custom-button>
+
+  <div class="form-button-container">
+    <app-custom-button
+      [buttonLabel]="saveButtonText"
+      (click)="submitArticle()"
+      size="small"
+    ></app-custom-button>
+  </div>
 </div>

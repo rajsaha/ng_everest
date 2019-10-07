@@ -26,7 +26,6 @@ export class WriteComponent implements OnInit {
 
   constructor(private fb: FormBuilder) {
     this.tinyMceInit = {
-      apiKey: this.apiKey,
       selector: 'textarea',
       height: 470,
       menubar: true,
@@ -66,6 +65,10 @@ export class WriteComponent implements OnInit {
     });
   }
 
+  get articleFormControls() {
+    return this.articleForm.controls;
+  }
+
   addTag(event: MatChipInputEvent): void {
     const input = event.input;
     const value = event.value;
@@ -89,11 +92,8 @@ export class WriteComponent implements OnInit {
   }
 
   submitArticle() {
-    this.articleForm.get('body').patchValue(this.body);
-    console.log(this.articleForm.value);
-  }
-
-  handleEvent(event: any) {
-    this.body = event.event.content;
+    if (this.articleForm.valid) {
+      console.log(this.articleForm.value);
+    }
   }
 }
