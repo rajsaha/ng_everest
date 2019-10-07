@@ -35,7 +35,8 @@ export class ManageResourcesComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private resourceService: ResourceService,
-    private utilityService: UtilityService) { }
+    private utilityService: UtilityService
+  ) {}
 
   async ngOnInit() {
     this.username = localStorage.getItem('username');
@@ -89,7 +90,9 @@ export class ManageResourcesComponent implements OnInit {
 
   drResponseHandler(result: number) {
     if (result) {
-      for (const {item, index} of this.utilityService.toItemIndexes(this.resources)) {
+      for (const { item, index } of this.utilityService.toItemIndexes(
+        this.resources
+      )) {
         if (result === item._id) {
           this.resources.splice(index, 1);
           return;
@@ -99,12 +102,12 @@ export class ManageResourcesComponent implements OnInit {
   }
 
   onResourceSearchFormChange() {
-    this.resourceSearchForm.get('query').valueChanges.pipe(debounceTime(300)).subscribe(async (query) => {
-      this.isLoading = true;
-      const searchResult = await this.resourceService.searchForUserResources({username: this.username, query});
-      this.isLoading = false;
-      this.resources = searchResult.resources;
-    });
+    this.resourceSearchForm
+      .get('query')
+      .valueChanges.pipe(debounceTime(300))
+      .subscribe(async () => {
+        this.resources = [];
+        await this.getUserResources();
+      });
   }
-
 }

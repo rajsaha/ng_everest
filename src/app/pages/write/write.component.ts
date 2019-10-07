@@ -24,45 +24,39 @@ export class WriteComponent implements OnInit {
   removable = true;
   addOnBlur = true;
 
-  constructor(private fb: FormBuilder) {
-    this.tinyMceInit = {
-      selector: 'textarea',
-      height: 470,
-      menubar: true,
-      plugins: [
-        'advlist autolink lists link image charmap print preview anchor',
-        'searchreplace visualblocks fullscreen',
-        'insertdatetime media table',
-        'wordcount'
-      ],
-      toolbar:
-        `undo redo | insert | styleselect |
-        bold italic formatpainter permanentpen pageembed |
-        alignleft aligncenter alignright alignjustify |
-        bullist numlist outdent indent | link image |
-        advcode spellchecker a11ycheck | code | checklist | casechange`,
-      toolbar_drawer: 'sliding',
-      table_toolbar:
-        `tableprops cellprops tabledelete |
-        tableinsertrowbefore tableinsertrowafter tabledeleterow |
-        tableinsertcolbefore tableinsertcolafter tabledeletecol`,
-      powerpaste_allow_local_images: true,
-      powerpaste_word_import: 'prompt',
-      powerpaste_html_import: 'prompt',
-      spellchecker_language: 'en',
-      spellchecker_dialog: true
-    };
-  }
+  constructor(private fb: FormBuilder) {}
 
   ngOnInit() {
     this.initArticleForm();
+    this.initTinyMceEditor();
   }
 
   initArticleForm() {
     this.articleForm = this.fb.group({
       body: ['', Validators.required],
-      title: ['', Validators.required],
+      title: ['', Validators.required]
     });
+  }
+
+  initTinyMceEditor() {
+    this.tinyMceInit = {
+      selector: 'textarea',
+      height: 470,
+      menubar: true,
+      plugins: [
+        'lists link image print preview anchor',
+        'table',
+        'wordcount'
+      ],
+      toolbar: `undo redo | styleselect |
+        bold italic |
+        alignleft aligncenter alignright alignjustify |
+        bullist numlist outdent indent | link image`,
+      toolbar_drawer: 'sliding',
+      table_toolbar: `tableprops cellprops tabledelete |
+        tableinsertrowbefore tableinsertrowafter tabledeleterow |
+        tableinsertcolbefore tableinsertcolafter tabledeletecol`
+    };
   }
 
   get articleFormControls() {
@@ -93,7 +87,12 @@ export class WriteComponent implements OnInit {
 
   submitArticle() {
     if (this.articleForm.valid) {
-      console.log(this.articleForm.value);
+      const payload = {
+        title: this.articleFormControls.title.value,
+        body: this.articleFormControls.body.value,
+        tags: this.tags
+      };
+      console.log(payload);
     }
   }
 }
