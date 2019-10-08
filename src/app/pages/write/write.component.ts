@@ -1,8 +1,15 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { environment as ENV } from '@environments/environment';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { MatChipInputEvent } from '@angular/material';
 import { ENTER, COMMA } from '@angular/cdk/keycodes';
+import { ValidationService } from '@services/forms/validation.service';
+import { HttpClient } from '@angular/common/http';
+import { faUpload } from '@fortawesome/free-solid-svg-icons';
+
+class ImageSnippet {
+  constructor(public src: string, public file: File) { }
+}
 
 @Component({
   selector: 'app-write',
@@ -15,6 +22,9 @@ export class WriteComponent implements OnInit {
   articleForm: FormGroup;
   body: any;
   saveButtonText = 'Save';
+  selectedFile: any;
+  image = '';
+  @ViewChild('imageInput', { static: false }) imageInput: ElementRef;
 
   // Tags
   tags = [];
@@ -24,18 +34,27 @@ export class WriteComponent implements OnInit {
   removable = true;
   addOnBlur = true;
 
-  constructor(private fb: FormBuilder) {}
+  // Icons
+  faUpload = faUpload;
+
+  constructor(
+    private fb: FormBuilder,
+    private validationService: ValidationService,
+    private http: HttpClient) {}
 
   ngOnInit() {
     this.initArticleForm();
     this.initTinyMceEditor();
+    this.onURLOnChanges();
   }
 
   initArticleForm() {
     this.articleForm = this.fb.group({
-      body: ['', Validators.required],
-      title: ['', Validators.required]
-    });
+      description: ['', Validators.required],
+      title: ['', Validators.required],
+      isCustomImage: [''],
+      url: ['']
+    }, { validators: this.validationService.checkValidImageUrl });
   }
 
   initTinyMceEditor() {
@@ -88,11 +107,30 @@ export class WriteComponent implements OnInit {
   submitArticle() {
     if (this.articleForm.valid) {
       const payload = {
-        title: this.articleFormControls.title.value,
-        body: this.articleFormControls.body.value,
+        form: this.articleForm.value,
         tags: this.tags
       };
       console.log(payload);
     }
+  }
+
+  onFileSelected(imageInput: any) {
+    const file: File = imageInput.files[0];
+    const reader: FileReader = new FileReader();
+
+    reader.addEventListener('load', (event: any) => {
+      this.selectedFile = new ImageSnippet(event.target.result, file);
+      this.image = event.target.result;
+    });
+
+    reader.readAsDataURL(file);
+  }
+
+  onURLOnChanges() {
+    this.articleForm.controls.url.valueChanges.subscribe((val) => {
+      if (this.articleForm.controls.url.valid) {
+        this.image = val;
+      }
+    });
   }
 }

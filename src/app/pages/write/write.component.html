@@ -1,61 +1,112 @@
 <div class="section-container">
-  <form [formGroup]="articleForm">
-    <mat-form-field>
-      <mat-label>Give your article a title</mat-label>
-      <input matInput placeholder="Title" formControlName="title" />
-      <mat-error
-        *ngIf="
-          articleFormControls.title.hasError('required') &&
-          articleFormControls.title.dirty
-        "
-      >
-        Please enter title
-      </mat-error>
-    </mat-form-field>
-
-    <mat-form-field>
-      <mat-label>Add tags to your article</mat-label>
-      <mat-chip-list #chipList aria-label="Interest selection">
-        <mat-chip
-          *ngFor="let tag of tags"
-          [selectable]="selectable"
-          [removable]="removable"
-          (removed)="removeTag(tag)"
-        >
-          {{ tag }}
-          <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
-        </mat-chip>
+  <div class="section">
+    <div class="section-content">
+      <form [formGroup]="articleForm">
         <input
-          placeholder="Add a Tag"
-          [matChipInputFor]="chipList"
-          [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
-          [matChipInputAddOnBlur]="addOnBlur"
-          (matChipInputTokenEnd)="addTag($event)"
+          matInput
+          placeholder="Title"
+          formControlName="title"
+          class="input-title"
         />
-      </mat-chip-list>
-    </mat-form-field>
+        <mat-error
+          *ngIf="
+            articleFormControls.title.hasError('required') &&
+            articleFormControls.title.dirty
+          "
+        >
+          Please enter title
+        </mat-error>
 
-    <editor
-      [apiKey]="apiKey"
-      [init]="tinyMceInit"
-      [(ngModel)]="body"
-      formControlName="body"
-    ></editor>
-    <mat-error
-      *ngIf="
-        articleFormControls.body.hasError('required') &&
-        articleFormControls.body.dirty
-      "
-    >
-      Your article can't be empty!
-    </mat-error>
-  </form>
+        <mat-form-field>
+          <mat-label>Add tags to your article</mat-label>
+          <mat-chip-list #chipList aria-label="Interest selection">
+            <mat-chip
+              *ngFor="let tag of tags"
+              [selectable]="selectable"
+              [removable]="removable"
+              (removed)="removeTag(tag)"
+            >
+              {{ tag }}
+              <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+            </mat-chip>
+            <input
+              placeholder="Add a Tag"
+              [matChipInputFor]="chipList"
+              [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+              [matChipInputAddOnBlur]="addOnBlur"
+              (matChipInputTokenEnd)="addTag($event)"
+            />
+          </mat-chip-list>
+        </mat-form-field>
 
-  <div class="form-button-container">
-    <app-custom-button
-      [buttonLabel]="saveButtonText"
-      (click)="submitArticle()"
-      size="small"
-    ></app-custom-button>
+        <mat-form-field *ngIf="!articleFormControls.isCustomImage.value">
+          <mat-label>Link to image</mat-label>
+          <input matInput placeholder="URL" formControlName="url" />
+          <mat-error
+            *ngIf="
+              articleFormControls.url.hasError('imageUrlInvalid') &&
+              articleFormControls.url.dirty
+            "
+          >
+            Please enter a valid link to an image
+          </mat-error>
+        </mat-form-field>
+
+        <div class="mat-checkbox-container">
+          <mat-checkbox formControlName="isCustomImage"
+            >Upload custom feature image</mat-checkbox
+          >
+        </div>
+
+        <div
+          class="custom-image"
+          (click)="imageInput.click()"
+          matRipple
+          *ngIf="articleFormControls.isCustomImage.value"
+          [ngStyle]="{ 'background-image': 'url(' + image + ')' }"
+        >
+          <p *ngIf="!image">
+            <fa-icon [icon]="faUpload"></fa-icon>&nbsp;Click here to upload a
+            custom image
+          </p>
+          <input
+            hidden
+            (change)="onFileSelected(imageInput)"
+            #imageInput
+            type="file"
+            accept="image/*"
+          />
+        </div>
+
+        <div
+          *ngIf="image && !articleFormControls.isCustomImage.value"
+          class="resource-image"
+          [ngStyle]="{ 'background-image': 'url(' + image + ')' }"
+        ></div>
+
+        <editor
+          [apiKey]="apiKey"
+          [init]="tinyMceInit"
+          [(ngModel)]="body"
+          formControlName="description"
+        ></editor>
+        <mat-error
+          *ngIf="
+            articleFormControls.description.hasError('required') &&
+            articleFormControls.description.dirty
+          "
+        >
+          Your article can't be empty!
+        </mat-error>
+      </form>
+
+      <div class="form-button-container">
+        <app-custom-button
+          [buttonLabel]="saveButtonText"
+          (click)="submitArticle()"
+          size="small"
+        ></app-custom-button>
+      </div>
+    </div>
   </div>
 </div>

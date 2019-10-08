@@ -80,4 +80,14 @@ export class ValidationService {
       return shareResourceForm.controls.url.setErrors({ urlInvalid: true, error_message: message });
     }
   }
+
+  checkValidImageUrl(articleForm: any) {
+    const validImageUrlRegex = /^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\(\)\*\+,;=.]+(\.\w{0,6})$/;
+    if (validImageUrlRegex.test(articleForm.value.url)) {
+      return null;
+    } else {
+      const message = 'Please use a direct link to an image';
+      return articleForm.controls.url.setErrors({ imageUrlInvalid: true, error_message: message });
+    }
+  }
 }
