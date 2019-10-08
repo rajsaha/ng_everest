@@ -5,7 +5,7 @@ import { MatChipInputEvent } from '@angular/material';
 import { ENTER, COMMA } from '@angular/cdk/keycodes';
 import { ValidationService } from '@services/forms/validation.service';
 import { HttpClient } from '@angular/common/http';
-import { faUpload } from '@fortawesome/free-solid-svg-icons';
+import { faUpload, faTrashAlt } from '@fortawesome/free-solid-svg-icons';
 
 class ImageSnippet {
   constructor(public src: string, public file: File) { }
@@ -37,6 +37,7 @@ export class WriteComponent implements OnInit {
 
   // Icons
   faUpload = faUpload;
+  faTrashAlt = faTrashAlt;
 
   constructor(
     private fb: FormBuilder,
@@ -133,5 +134,14 @@ export class WriteComponent implements OnInit {
         this.image = val;
       }
     });
+  }
+
+  removeImage(whichImage: string) {
+    if (whichImage === 'image') {
+      this.image = '';
+      this.articleFormControls.url.patchValue('');
+    } else {
+      this.customImage = '';
+    }
   }
 }
