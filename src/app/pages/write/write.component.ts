@@ -24,6 +24,7 @@ export class WriteComponent implements OnInit {
   saveButtonText = 'Save';
   selectedFile: any;
   image = '';
+  customImage = '';
   @ViewChild('imageInput', { static: false }) imageInput: ElementRef;
 
   // Tags
@@ -120,7 +121,7 @@ export class WriteComponent implements OnInit {
 
     reader.addEventListener('load', (event: any) => {
       this.selectedFile = new ImageSnippet(event.target.result, file);
-      this.image = event.target.result;
+      this.customImage = event.target.result;
     });
 
     reader.readAsDataURL(file);
