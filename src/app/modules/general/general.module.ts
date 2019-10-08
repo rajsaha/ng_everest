@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { AutosizeModule } from 'ngx-autosize';
 import { CustomButtonComponent } from 'src/app/components/custom-button/custom-button.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { TruncatePipe } from 'src/app/pipes/truncate';
@@ -31,6 +32,7 @@ import { CommentComponent } from 'src/app/general/post/comment/comment.component
   ],
   imports: [
     CommonModule,
+    AutosizeModule,
     FontAwesomeModule,
     InfiniteScrollModule,
     RouterModule,

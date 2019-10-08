@@ -4,7 +4,6 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { MatChipInputEvent } from '@angular/material';
 import { ENTER, COMMA } from '@angular/cdk/keycodes';
 import { ValidationService } from '@services/forms/validation.service';
-import { HttpClient } from '@angular/common/http';
 import { faUpload, faTrashAlt } from '@fortawesome/free-solid-svg-icons';
 
 class ImageSnippet {
@@ -41,8 +40,7 @@ export class WriteComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private validationService: ValidationService,
-    private http: HttpClient) {}
+    private validationService: ValidationService) {}
 
   ngOnInit() {
     this.initArticleForm();
@@ -55,28 +53,23 @@ export class WriteComponent implements OnInit {
       description: ['', Validators.required],
       title: ['', Validators.required],
       isCustomImage: [''],
-      url: ['']
+      url: [''],
+      type: ['article']
     }, { validators: this.validationService.checkValidImageUrl });
   }
 
   initTinyMceEditor() {
     this.tinyMceInit = {
-      selector: 'textarea',
-      height: 470,
-      menubar: true,
+      selector: '#tinyeditor',
+      height: 600,
       plugins: [
         'lists link image print preview anchor',
         'table',
         'wordcount'
       ],
       toolbar: `undo redo | styleselect |
-        bold italic |
-        alignleft aligncenter alignright alignjustify |
-        bullist numlist outdent indent | link image`,
-      toolbar_drawer: 'sliding',
-      table_toolbar: `tableprops cellprops tabledelete |
-        tableinsertrowbefore tableinsertrowafter tabledeleterow |
-        tableinsertcolbefore tableinsertcolafter tabledeletecol`
+        bold italic | alignleft aligncenter alignright alignjustify |
+        bullist numlist outdent indent | link image`
     };
   }
 

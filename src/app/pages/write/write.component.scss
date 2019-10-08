@@ -1,6 +1,7 @@
 .input-title {
-    margin: 15px 0 5px 0;
     font-size: 40px;
+    resize: none;
+    margin: 15px 0;
 }
 
 .custom-image {
@@ -67,6 +68,6 @@
     }
 }
 
-editor {
+.editor-container {
     margin-bottom: 15px;
 }

@@ -11,7 +11,6 @@ import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 
-import { AutosizeModule } from 'ngx-autosize';
 import { MatPasswordStrengthModule } from '@angular-material-extensions/password-strength';
 import { ManageModule } from './modules/manage/manage.module';
 import { CommonModule } from '@angular/common';
@@ -53,7 +52,6 @@ import { SearchComponent } from './components/search/search.component';
     AppRoutingModule,
     ReactiveFormsModule,
     HttpClientModule,
-    AutosizeModule,
     MatPasswordStrengthModule.forRoot(),
     // * Custom Modules
     MaterialModule,

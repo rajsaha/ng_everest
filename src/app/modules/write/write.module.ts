@@ -6,6 +6,7 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { GeneralModule } from '../general/general.module';
 import { CommonModule } from '@angular/common';
 import { MaterialModule } from '../material/material.module';
+import { AutosizeModule } from 'ngx-autosize';
 
 const routes: Routes = [
   {
@@ -20,6 +21,7 @@ const routes: Routes = [
   ],
   imports: [
     CommonModule,
+    AutosizeModule,
     MaterialModule,
     GeneralModule,
     EditorModule,
