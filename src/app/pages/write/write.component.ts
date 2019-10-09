@@ -5,6 +5,9 @@ import { MatChipInputEvent } from '@angular/material';
 import { ENTER, COMMA } from '@angular/cdk/keycodes';
 import { ValidationService } from '@services/forms/validation.service';
 import { faUpload, faTrashAlt } from '@fortawesome/free-solid-svg-icons';
+import { ResourceService } from '@services/resource/resource.service';
+import { SnackbarService } from '@services/general/snackbar.service';
+import { Router } from '@angular/router';
 
 class ImageSnippet {
   constructor(public src: string, public file: File) { }
@@ -26,6 +29,8 @@ export class WriteComponent implements OnInit {
   image = '';
   customImage = '';
   @ViewChild('imageInput', { static: false }) imageInput: ElementRef;
+  isLoading = false;
+  isDisabled = false;
 
   // Tags
   tags = [];
@@ -41,7 +46,10 @@ export class WriteComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private validationService: ValidationService) {}
+    private validationService: ValidationService,
+    private resourceService: ResourceService,
+    private snackbarService: SnackbarService,
+    private router: Router) {}
 
   ngOnInit() {
     this.username = localStorage.getItem('username');
@@ -105,16 +113,6 @@ export class WriteComponent implements OnInit {
     }
   }
 
-  submitArticle() {
-    if (this.articleForm.valid) {
-      const payload = {
-        form: this.articleForm.value,
-        tags: this.tags
-      };
-      console.log(payload);
-    }
-  }
-
   onFileSelected(imageInput: any) {
     const file: File = imageInput.files[0];
     const reader: FileReader = new FileReader();
@@ -141,6 +139,83 @@ export class WriteComponent implements OnInit {
       this.articleFormControls.url.patchValue('');
     } else {
       this.customImage = '';
+    }
+  }
+
+  async submitArticle() {
+    if (!this.articleForm.valid) {
+      return;
+    }
+
+    if (this.articleForm.controls.isCustomImage) {
+      this.isLoading = true;
+      this.isDisabled = true;
+      this.saveButtonText = 'Saving...';
+
+      const data = {
+        formData: this.articleForm.value,
+        tags: this.tags,
+        customImage: this.image
+      };
+
+      const response = await this.resourceService.shareResource(data);
+      this.isLoading = false;
+      this.isDisabled = false;
+      this.saveButtonText = 'Save';
+
+      if (!response.error) {
+        this.snackbarService.openSnackBar({
+          message: {
+            message: 'Resource saved!',
+            error: false
+          },
+          class: 'green-snackbar',
+        });
+        this.router.navigate(['/']);
+      } else {
+        this.snackbarService.openSnackBar({
+          message: {
+            message: `Error: ${response.error}!`,
+            error: true
+          },
+          class: 'red-snackbar',
+        });
+        this.isDisabled = false;
+      }
+    } else {
+      this.isLoading = true;
+      this.isDisabled = true;
+      this.saveButtonText = 'Sharing...';
+
+      const data = {
+        formData: this.articleForm.value,
+        tags: this.tags,
+      };
+
+      const response = await this.resourceService.shareResource(data);
+      this.isLoading = false;
+      this.isDisabled = false;
+      this.saveButtonText = 'Sharing';
+
+      if (!response.error) {
+        this.snackbarService.openSnackBar({
+          message: {
+            message: 'Resource saved!',
+            error: false
+          },
+          class: 'green-snackbar',
+        });
+        this.router.navigate(['/']);
+      } else {
+        this.snackbarService.openSnackBar({
+          message: {
+            message: `Error: ${response.error}!`,
+            error: true
+          },
+          class: 'red-snackbar',
+        });
+        this.isDisabled = false;
+      }
     }
   }
 }
