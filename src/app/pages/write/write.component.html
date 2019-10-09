@@ -1,9 +1,10 @@
-<div class="section-container">
-  <div class="section">
-    <div class="section-content">
-      <form [formGroup]="articleForm">
+<form [formGroup]="articleForm">
+  <div class="section-container">
+    <div class="section">
+      <div class="section-content">
         <textarea
           autosize
+          style="height: 50px"
           matInput
           placeholder="Title"
           formControlName="title"
@@ -18,6 +19,33 @@
           Please enter title
         </mat-error>
 
+        <div class="editor-container">
+          <editor
+            id="tinyeditor"
+            initialValue=""
+            [apiKey]="apiKey"
+            [init]="tinyMceInit"
+            formControlName="description"
+          ></editor>
+          <mat-error
+            *ngIf="
+              articleFormControls.description.hasError('required') &&
+              articleFormControls.description.dirty
+            "
+          >
+            Your article can't be empty!
+          </mat-error>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-container">
+    <div class="section">
+      <div class="section-header">
+        <h4>Decorate your article</h4>
+      </div>
+      <div class="section-content">
         <mat-form-field>
           <mat-label>Add tags to your article</mat-label>
           <mat-chip-list #chipList aria-label="Interest selection">
@@ -31,7 +59,7 @@
               <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
             </mat-chip>
             <input
-              placeholder="Add a Tag"
+              placeholder="Tag"
               [matChipInputFor]="chipList"
               [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
               [matChipInputAddOnBlur]="addOnBlur"
@@ -41,7 +69,7 @@
         </mat-form-field>
 
         <mat-form-field *ngIf="!articleFormControls.isCustomImage.value">
-          <mat-label>Link to image</mat-label>
+          <mat-label>Give your article an image</mat-label>
           <input matInput placeholder="URL" formControlName="url" />
           <mat-error
             *ngIf="
@@ -101,32 +129,14 @@
           </div>
         </div>
 
-        <div class="editor-container">
-          <editor
-            id="tinyeditor"
-            initialValue=""
-            [apiKey]="apiKey"
-            [init]="tinyMceInit"
-            formControlName="description"
-          ></editor>
-          <mat-error
-            *ngIf="
-              articleFormControls.description.hasError('required') &&
-              articleFormControls.description.dirty
-            "
-          >
-            Your article can't be empty!
-          </mat-error>
+        <div class="form-button-container">
+          <app-custom-button
+            [buttonLabel]="saveButtonText"
+            (click)="submitArticle()"
+            size="small"
+          ></app-custom-button>
         </div>
-      </form>
-
-      <div class="form-button-container">
-        <app-custom-button
-          [buttonLabel]="saveButtonText"
-          (click)="submitArticle()"
-          size="small"
-        ></app-custom-button>
       </div>
     </div>
   </div>
-</div>
+</form>

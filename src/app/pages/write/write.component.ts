@@ -16,6 +16,7 @@ class ImageSnippet {
   styleUrls: ['./write.component.scss']
 })
 export class WriteComponent implements OnInit {
+  username: string;
   apiKey = `${ENV.TINYMCE_API_KEY}`;
   tinyMceInit: any;
   articleForm: FormGroup;
@@ -43,6 +44,7 @@ export class WriteComponent implements OnInit {
     private validationService: ValidationService) {}
 
   ngOnInit() {
+    this.username = localStorage.getItem('username');
     this.initArticleForm();
     this.initTinyMceEditor();
     this.onURLOnChanges();
@@ -50,11 +52,15 @@ export class WriteComponent implements OnInit {
 
   initArticleForm() {
     this.articleForm = this.fb.group({
-      description: ['', Validators.required],
-      title: ['', Validators.required],
       isCustomImage: [''],
       url: [''],
-      type: ['article']
+      title: ['', Validators.required],
+      description: ['', Validators.required],
+      image: [''],
+      username: [this.username],
+      type: ['article'],
+      collectionId: [''],
+      collectionTitle: ['']
     }, { validators: this.validationService.checkValidImageUrl });
   }
 
