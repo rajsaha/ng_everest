@@ -8,6 +8,7 @@ import { faUpload, faTrashAlt } from '@fortawesome/free-solid-svg-icons';
 import { ResourceService } from '@services/resource/resource.service';
 import { SnackbarService } from '@services/general/snackbar.service';
 import { Router } from '@angular/router';
+import { CollectionService } from '@services/collection/collection.service';
 
 class ImageSnippet {
   constructor(public src: string, public file: File) { }
@@ -19,18 +20,21 @@ class ImageSnippet {
   styleUrls: ['./write.component.scss']
 })
 export class WriteComponent implements OnInit {
-  username: string;
   apiKey = `${ENV.TINYMCE_API_KEY}`;
   tinyMceInit: any;
-  articleForm: FormGroup;
-  body: any;
   saveButtonText = 'Save';
   selectedFile: any;
-  image = '';
-  customImage = '';
   @ViewChild('imageInput', { static: false }) imageInput: ElementRef;
   isLoading = false;
   isDisabled = false;
+  collections = [];
+
+  // Article Form
+  username: string;
+  articleForm: FormGroup;
+  image = '';
+  customImage = '';
+  body: any;
 
   // Tags
   tags = [];
@@ -49,6 +53,7 @@ export class WriteComponent implements OnInit {
     private validationService: ValidationService,
     private resourceService: ResourceService,
     private snackbarService: SnackbarService,
+    private collectionService: CollectionService,
     private router: Router) {}
 
   ngOnInit() {
@@ -56,15 +61,15 @@ export class WriteComponent implements OnInit {
     this.initArticleForm();
     this.initTinyMceEditor();
     this.onURLOnChanges();
+    this.getCollectionNames();
   }
 
   initArticleForm() {
     this.articleForm = this.fb.group({
       isCustomImage: [''],
-      url: [''],
+      imageLink: [''],
       title: ['', Validators.required],
-      description: ['', Validators.required],
-      image: [''],
+      body: ['', Validators.required],
       username: [this.username],
       type: ['article'],
       collectionId: [''],
@@ -126,8 +131,8 @@ export class WriteComponent implements OnInit {
   }
 
   onURLOnChanges() {
-    this.articleForm.controls.url.valueChanges.subscribe((val) => {
-      if (this.articleForm.controls.url.valid) {
+    this.articleForm.controls.imageLink.valueChanges.subscribe((val) => {
+      if (this.articleForm.controls.imageLink.valid) {
         this.image = val;
       }
     });
@@ -136,7 +141,7 @@ export class WriteComponent implements OnInit {
   removeImage(whichImage: string) {
     if (whichImage === 'image') {
       this.image = '';
-      this.articleFormControls.url.patchValue('');
+      this.articleFormControls.imageLink.patchValue('');
     } else {
       this.customImage = '';
     }
@@ -155,7 +160,7 @@ export class WriteComponent implements OnInit {
       const data = {
         formData: this.articleForm.value,
         tags: this.tags,
-        customImage: this.image
+        customImage: this.customImage
       };
 
       const response = await this.resourceService.shareResource(data);
@@ -215,6 +220,20 @@ export class WriteComponent implements OnInit {
           class: 'red-snackbar',
         });
         this.isDisabled = false;
+      }
+    }
+  }
+
+  async getCollectionNames() {
+    const response = await this.collectionService.getCollectionNames({
+      username: this.username
+    });
+    if (response.collections) {
+      for (const item of response.collections) {
+        this.collections.push({
+          title: item.title,
+          id: item._id
+        });
       }
     }
   }
