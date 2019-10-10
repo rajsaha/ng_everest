@@ -163,7 +163,7 @@ export class WriteComponent implements OnInit {
         customImage: this.customImage
       };
 
-      const response = await this.resourceService.shareResource(data);
+      const response = await this.resourceService.shareArticle(data);
       this.isLoading = false;
       this.isDisabled = false;
       this.saveButtonText = 'Save';
@@ -197,7 +197,7 @@ export class WriteComponent implements OnInit {
         tags: this.tags,
       };
 
-      const response = await this.resourceService.shareResource(data);
+      const response = await this.resourceService.shareArticle(data);
       this.isLoading = false;
       this.isDisabled = false;
       this.saveButtonText = 'Sharing';
