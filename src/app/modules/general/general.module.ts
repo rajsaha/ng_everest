@@ -16,6 +16,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { ViewResourceComponent } from 'src/app/pages/view-resource/view-resource.component';
 import { PostComponent } from 'src/app/general/post/post.component';
 import { CommentComponent } from 'src/app/general/post/comment/comment.component';
+import { ViewArticleComponent } from 'src/app/pages/view-article/view-article.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { CommentComponent } from 'src/app/general/post/comment/comment.component
     ResourceComponent,
     CollectionComponent,
     ViewCollectionComponent,
-    ViewResourceComponent
+    ViewResourceComponent,
+    ViewArticleComponent
   ],
   imports: [
     CommonModule,
@@ -55,7 +57,8 @@ import { CommentComponent } from 'src/app/general/post/comment/comment.component
     ResourceComponent,
     CollectionComponent,
     ViewCollectionComponent,
-    ViewResourceComponent
+    ViewResourceComponent,
+    ViewArticleComponent
   ]
 })
 export class GeneralModule { }

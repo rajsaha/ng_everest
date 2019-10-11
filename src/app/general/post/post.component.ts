@@ -16,6 +16,7 @@ import { CollectionService } from '@services/collection/collection.service';
 import { UserService } from '@services/user/user.service';
 import { CommentComponent } from './comment/comment.component';
 import { environment as ENV } from '@environments/environment';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-post',
@@ -35,6 +36,7 @@ export class PostComponent implements OnInit {
   username: string;
   url: string;
   title: string;
+  type: string;
   tags = [];
   description: string;
   image = '';
@@ -69,7 +71,9 @@ export class PostComponent implements OnInit {
     public dialog: MatDialog,
     private resourceService: ResourceService,
     private userService: UserService,
-    private collectionService: CollectionService
+    private collectionService: CollectionService,
+    private route: ActivatedRoute,
+    private router: Router
   ) {}
 
   async ngOnInit() {
@@ -96,6 +100,7 @@ export class PostComponent implements OnInit {
     this.username = this.data.username;
     this.url = this.data.url;
     this.title = this.data.title;
+    this.type = this.data.type;
     this.tags = this.data.tags;
     this.description = this.data.description;
     this.image = this.data.image;
@@ -257,5 +262,13 @@ export class PostComponent implements OnInit {
   seeMore() {
     this.truncateValue = 1000;
     this.isSeeMore = false;
+  }
+
+  openResource() {
+    if (this.type === 'ext-content') {
+      window.open(this.url, '_blank');
+    } else {
+      this.router.navigate([`/profile/user/${this.username}/article/${this.id}`], { relativeTo: this.route.parent });
+    }
   }
 }

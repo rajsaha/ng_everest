@@ -1,0 +1,66 @@
+.header {
+    display: grid;
+    grid-template-columns: 50px 1fr 1fr;
+    padding: 10px 0;
+    margin-bottom: 15px;
+    font-size: 14px;
+    border-bottom: 1px solid #eee;
+
+    .user-image {
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center center;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        cursor: pointer;
+    }
+
+    .uploader-info {
+        align-self: center;
+
+        small {
+            display: block;
+            margin-top: 5px;
+            color: rgba(0, 0, 0, 0.3);
+            font-size: 12px;
+            text-transform: lowercase;
+        }
+    }
+
+    .post-menu {
+        cursor: pointer;
+        align-self: center;
+
+        fa-icon {
+            float: right;
+            color: rgba(0, 0, 0, 0.5);
+        }
+    }
+}
+
+.image {
+    img {
+        border-radius: 5px;
+        max-width: 100%;
+        margin-bottom: 25px;
+        width: 100%;
+        display: block;
+        height: auto;
+
+        &::before {
+            display: block;
+            content: '';
+            padding-top: calc(100% * 2 / 3);
+        }
+    }
+}
+
+.title {
+    font-weight: bold;
+    font-size: 25px;
+}
+
+.article {
+    line-height: 25px;
+}

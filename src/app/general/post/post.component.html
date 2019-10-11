@@ -15,7 +15,7 @@
   </div>
 
   <!-- * Image -->
-  <a [href]="url" target="_blank">
+  <a (click)="openResource()" target="_blank">
     <div class="image">
       <img [src]="image" [alt]="title">
     </div>
@@ -35,6 +35,11 @@
     </div>
   </div>
 
+  <!-- * Type -->
+  <div class="type" *ngIf="type === 'article'">
+    {{ type }}
+  </div> 
+
   <!-- * Tags -->
   <div class="tags">
     <div class="tag">
@@ -42,11 +47,20 @@
     </div>
   </div>
 
-  <!-- * Description -->
-  <div class="description">
+  <!-- * Description (Post) -->
+  <div class="description" *ngIf="type === 'ext-content'">
     <p>
       {{ description | truncate:[truncateValue] }}
     </p>
+    <span *ngIf="isSeeMore" (click)="seeMore()" class="see-more">See More</span>
+  </div>
+
+  <!-- * Description (Post) -->
+  <div class="description" *ngIf="type === 'article'">
+    <div [innerHTML]="description | truncate:[truncateValue]"></div>
+    <!-- <p>
+      {{ description | truncate:[truncateValue] }}
+    </p> -->
     <span *ngIf="isSeeMore" (click)="seeMore()" class="see-more">See More</span>
   </div>
 
