@@ -25,6 +25,7 @@ export class EditArticleComponent implements OnInit {
   @ViewChild('imageInput', { static: false }) imageInput: ElementRef;
   selectedFile: any;
   isLoading = false;
+  saveButtonText = 'Save';
 
   // Data
   resourceId: string;
