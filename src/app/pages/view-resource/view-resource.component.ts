@@ -47,7 +47,11 @@ export class ViewResourceComponent implements OnInit {
   }
 
   goToEdit() {
-    this.router.navigate(['/manage/resource/edit', this.id]);
+    if (this.resource.type === 'ext-content') {
+      this.router.navigate(['/manage/resource/edit', this.id]);
+    } else {
+      this.router.navigate(['/manage/article/edit', this.id]);
+    }
   }
 
   checkIfEditable(username: string) {
