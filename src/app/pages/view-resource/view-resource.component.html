@@ -1,5 +1,5 @@
 <div class="padding-15">
-  <app-post *ngIf="resource" [data]="resource"></app-post>
+  <app-post *ngIf="resource" [data]="resource" [noTruncation]="true"></app-post>
   <div class="edit-resource-container" *ngIf="isEditable">
     <button mat-fab color="primary" (click)="goToEdit()">
       <fa-icon [icon]="faPen"></fa-icon>

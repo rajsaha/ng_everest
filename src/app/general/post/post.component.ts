@@ -25,6 +25,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 })
 export class PostComponent implements OnInit {
   @Input() data: any;
+  @Input() noTruncation = false;
 
   @ViewChild(CommentComponent, { static: false })
   commentComponent: CommentComponent;
@@ -254,8 +255,12 @@ export class PostComponent implements OnInit {
   }
 
   async checkIfDescriptionTooLong(text: string) {
-    if (text.length > this.truncateValue) {
-      this.isSeeMore = true;
+    if (!this.noTruncation) {
+      if (text.length > this.truncateValue) {
+        this.isSeeMore = true;
+      }
+    } else {
+      this.truncateValue = 9999999;
     }
   }
 
@@ -268,7 +273,7 @@ export class PostComponent implements OnInit {
     if (this.type === 'ext-content') {
       window.open(this.url, '_blank');
     } else {
-      this.router.navigate([`/profile/user/${this.username}/article/${this.id}`], { relativeTo: this.route.parent });
+      this.router.navigate([`/profile/user/${this.username}/resource/${this.id}`], { relativeTo: this.route.parent });
     }
   }
 }
