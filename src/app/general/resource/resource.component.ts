@@ -22,6 +22,7 @@ export class ResourceComponent implements OnInit {
   url: string;
   title: string;
   tags = [];
+  type: string;
   description: string;
   image = '';
   timestamp: any;
@@ -67,6 +68,7 @@ export class ResourceComponent implements OnInit {
     this.resourceUser = this.data.username;
     this.url = this.data.url;
     this.title = this.data.title;
+    this.type = this.data.type;
     this.description = this.data.description;
     this.image = this.data.image;
     this.timestamp = moment(this.data.timestamp.$date).fromNow();
@@ -98,7 +100,11 @@ export class ResourceComponent implements OnInit {
   }
 
   goToEdit() {
-    this.route.navigate([`/manage/resource/edit/${this.id}`], { relativeTo: this.router.parent });
+    if (this.type === 'ext-content') {
+      this.route.navigate([`/manage/resource/edit/${this.id}`], { relativeTo: this.router.parent });
+    } else {
+      this.route.navigate([`/manage/article/edit/${this.id}`], { relativeTo: this.router.parent });
+    }
   }
 
 }

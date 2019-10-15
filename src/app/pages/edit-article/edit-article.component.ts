@@ -7,10 +7,11 @@ import { faUpload, faTrashAlt } from '@fortawesome/free-solid-svg-icons';
 import { ENTER, COMMA } from '@angular/cdk/keycodes';
 import { MatChipInputEvent } from '@angular/material';
 import { ResourceService } from '@services/resource/resource.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { SnackbarService } from '@services/general/snackbar.service';
 
 class ImageSnippet {
-  constructor(public src: string, public file: File) { }
+  constructor(public src: string, public file: File) {}
 }
 
 @Component({
@@ -21,10 +22,11 @@ class ImageSnippet {
 export class EditArticleComponent implements OnInit {
   apiKey = `${ENV.TINYMCE_API_KEY}`;
   tinyMceInit: any;
-  articleForm: FormGroup;
+  editArticleForm: FormGroup;
   @ViewChild('imageInput', { static: false }) imageInput: ElementRef;
   selectedFile: any;
   isLoading = false;
+  isDisabled = false;
   saveButtonText = 'Save';
 
   // Data
@@ -51,20 +53,23 @@ export class EditArticleComponent implements OnInit {
     private resourceService: ResourceService,
     private collectionService: CollectionService,
     private validationService: ValidationService,
+    private snackbarService: SnackbarService,
     private fb: FormBuilder,
-    private router: ActivatedRoute,
+    private route: ActivatedRoute,
+    private router: Router
   ) {}
 
   ngOnInit() {
+    this.username = localStorage.getItem('username');
     this.initTinyMceEditor();
-    this.initArticleForm();
     this.getCollectionNames();
-    this.onURLOnChanges();
     this.getResourceId();
+    this.initArticleForm();
+    this.onURLOnChanges();
   }
 
   getResourceId() {
-    this.router.params.subscribe(async (params) => {
+    this.route.params.subscribe(async params => {
       this.resourceId = params.resourceId;
       await this.getResource(this.resourceId);
       await this.getCollectionTitle(this.resourceId);
@@ -73,16 +78,17 @@ export class EditArticleComponent implements OnInit {
   }
 
   initArticleForm() {
-    this.articleForm = this.fb.group(
+    this.editArticleForm = this.fb.group(
       {
-        isCustomImage: [''],
-        imageLink: [''],
+        id: this.resourceId,
+        isCustomImage: [false],
+        image: [''],
         title: ['', Validators.required],
-        body: ['', Validators.required],
+        description: ['', Validators.required],
         username: [this.username],
         type: ['article'],
         collectionId: [''],
-        collectionTitle: ['']
+        collectionName: ['']
       },
       { validators: this.validationService.checkValidImageUrl }
     );
@@ -92,24 +98,20 @@ export class EditArticleComponent implements OnInit {
     this.tinyMceInit = {
       selector: '#tinyeditor',
       height: 600,
-      plugins: [
-        'lists link image print preview anchor',
-        'table',
-        'wordcount'
-      ],
+      plugins: ['lists link image print preview anchor', 'table', 'wordcount'],
       toolbar: `undo redo | styleselect |
         bold italic | alignleft aligncenter alignright alignjustify |
         bullist numlist outdent indent | link image`
     };
   }
 
-  get articleFormControls() {
-    return this.articleForm.controls;
+  get editArticleFormControls() {
+    return this.editArticleForm.controls;
   }
 
   onURLOnChanges() {
-    this.articleForm.controls.imageLink.valueChanges.subscribe((val) => {
-      if (this.articleForm.controls.imageLink.valid) {
+    this.editArticleFormControls.image.valueChanges.subscribe(val => {
+      if (this.editArticleFormControls.image.valid) {
         this.image = val;
       }
     });
@@ -118,7 +120,7 @@ export class EditArticleComponent implements OnInit {
   removeImage(whichImage: string) {
     if (whichImage === 'image') {
       this.image = '';
-      this.articleFormControls.imageLink.patchValue('');
+      this.editArticleFormControls.image.patchValue('');
     } else {
       this.customImage = '';
     }
@@ -175,27 +177,83 @@ export class EditArticleComponent implements OnInit {
   async getResource(id: string) {
     try {
       this.isLoading = true;
-      const response = await this.resourceService.getResource({id});
+      const response = await this.resourceService.getResource({ id });
       this.isLoading = false;
       this.resource = response.resource;
-      console.log(this.resource);
     } catch (err) {
       console.error(err);
     }
   }
 
   async getCollectionTitle(resourceId: string) {
-    const collection = await this.collectionService.getCollectionTitleByResourceId({ username: this.username, resourceId });
+    const collection = await this.collectionService.getCollectionTitleByResourceId(
+      { username: this.username, resourceId }
+    );
 
     if (collection.collection) {
-      this.articleFormControls.collectionTitle.patchValue(collection.collection.title);
+      this.editArticleFormControls.collectionName.patchValue(
+        collection.collection.title
+      );
     }
   }
 
   patchArticleForm(data: any) {
-    this.articleFormControls.title.patchValue(data.title);
-    this.articleFormControls.body.patchValue(data.description);
-    this.articleFormControls.imageLink.patchValue(data.image);
+    this.editArticleFormControls.title.patchValue(data.title);
+    this.editArticleFormControls.description.patchValue(data.description);
+    this.editArticleFormControls.image.patchValue(data.image);
     this.tags = data.tags;
+  }
+
+  async submitEditArticleForm() {
+    if (!this.editArticleForm.valid) {
+      return;
+    }
+
+    this.saveButtonText = 'Saving...';
+    this.isLoading = true;
+    this.isDisabled = true;
+    let data = {};
+    if (this.editArticleFormControls.isCustomImage) {
+      data = {
+        formData: this.editArticleForm.value,
+        tags: this.tags,
+        customImage: this.customImage
+      };
+    } else {
+      data = {
+        formData: this.editArticleForm.value,
+        tags: this.tags
+      };
+    }
+
+    console.log(data);
+
+    const response = await this.resourceService.editResource(data);
+    this.saveButtonText = 'Done';
+    this.isLoading = false;
+    this.isDisabled = false;
+
+    if (!response.error) {
+      this.snackbarService.openSnackBar({
+        message: {
+          message: 'Resource saved!',
+          error: false
+        },
+        class: 'green-snackbar'
+      });
+      this.router.navigate(
+        [`/profile/user/${this.username}/resource/${this.resource._id}`],
+        { relativeTo: this.route.parent }
+      );
+    } else {
+      this.snackbarService.openSnackBar({
+        message: {
+          message: `Error: ${response.error}!`,
+          error: true
+        },
+        class: 'red-snackbar'
+      });
+    }
+    this.isDisabled = false;
   }
 }

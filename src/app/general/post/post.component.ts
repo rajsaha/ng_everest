@@ -107,6 +107,10 @@ export class PostComponent implements OnInit {
     this.image = this.data.image;
     this.timestamp = moment(this.data.timestamp).fromNow();
     this.recommendedByCount = this.data.recommended_by_count;
+
+    if (this.type === 'article') {
+      this.truncateValue = 500;
+    }
   }
 
   async getCommentsCount() {
@@ -265,8 +269,12 @@ export class PostComponent implements OnInit {
   }
 
   seeMore() {
-    this.truncateValue = 1000;
-    this.isSeeMore = false;
+    if (this.type === 'article') {
+      this.openResource();
+    } else {
+      this.truncateValue = 1000;
+      this.isSeeMore = false;
+    }
   }
 
   openResource() {

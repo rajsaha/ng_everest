@@ -25,12 +25,12 @@
             initialValue=""
             [apiKey]="apiKey"
             [init]="tinyMceInit"
-            formControlName="body"
+            formControlName="description"
           ></editor>
           <mat-error
             *ngIf="
-              articleFormControls.body.hasError('required') &&
-              articleFormControls.body.dirty
+              articleFormControls.description.hasError('required') &&
+              articleFormControls.description.dirty
             "
           >
             Your article can't be empty!
@@ -70,11 +70,11 @@
 
         <mat-form-field *ngIf="!articleFormControls.isCustomImage.value" appearance="outline">
           <mat-label>Give your article an image</mat-label>
-          <input matInput placeholder="Link to image" formControlName="imageLink" />
+          <input matInput placeholder="Link to image" formControlName="image" />
           <mat-error
             *ngIf="
-              articleFormControls.imageLink.hasError('imageUrlInvalid') &&
-              articleFormControls.imageLink.dirty
+              articleFormControls.image.hasError('imageUrlInvalid') &&
+              articleFormControls.image.dirty
             "
           >
             Please enter a link that ends with .jpg / .png or similar
@@ -119,7 +119,7 @@
           *ngIf="
             image &&
             !articleFormControls.isCustomImage.value &&
-            articleFormControls.imageLink.valid
+            articleFormControls.image.valid
           "
           class="resource-image"
           [ngStyle]="{ 'background-image': 'url(' + image + ')' }"

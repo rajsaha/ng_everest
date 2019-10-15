@@ -83,11 +83,12 @@ export class ValidationService {
 
   checkValidImageUrl(articleForm: any) {
     const validImageUrlRegex = /^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\(\)\*\+,;=.]+(\.\w{0,6})$/;
-    if (validImageUrlRegex.test(articleForm.value.imageLink)) {
+    const image = articleForm.value.image;
+    if (image === '' || validImageUrlRegex.test(image)) {
       return null;
     } else {
       const message = 'Please use a direct link to an image';
-      return articleForm.controls.imageLink.setErrors({ imageUrlInvalid: true, error_message: message });
+      return articleForm.controls.image.setErrors({ imageUrlInvalid: true, error_message: message });
     }
   }
 }

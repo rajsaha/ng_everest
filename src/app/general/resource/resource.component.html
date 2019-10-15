@@ -1,14 +1,15 @@
 <div class="resource" *ngIf="!isLoading">
   <img class="image" [src]="image" (click)="goToView()">
   <div class="details">
-    <h4>{{ data.title }}</h4>
-    <p>{{ data.description | truncate:[40] }}</p>
+    <h4>{{ title }}</h4>
+    <p *ngIf="type === 'ext-content'">{{ description | truncate:[40] }}</p>
+    <div *ngIf="type === 'article'" [innerHtml]="description | truncate:[175]"></div>
     <div class="actions">
       <button (click)="goToEdit()" mat-button *ngIf="loggedInUser === resourceUser">
         <fa-icon [icon]="faEdit"></fa-icon>
       </button>
 
-      <a [href]="data.url" target="_blank">
+      <a [href]="url" target="_blank">
         <button mat-button>
           <fa-icon [icon]="faExternalLinkAlt"></fa-icon>
         </button>

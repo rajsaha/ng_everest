@@ -34,7 +34,6 @@ export class WriteComponent implements OnInit {
   articleForm: FormGroup;
   image = '';
   customImage = '';
-  body: any;
 
   // Tags
   tags = [];
@@ -67,9 +66,9 @@ export class WriteComponent implements OnInit {
   initArticleForm() {
     this.articleForm = this.fb.group({
       isCustomImage: [''],
-      imageLink: [''],
+      image: [''],
       title: ['', Validators.required],
-      body: ['', Validators.required],
+      description: ['', Validators.required],
       username: [this.username],
       type: ['article'],
       collectionId: [''],
@@ -131,8 +130,8 @@ export class WriteComponent implements OnInit {
   }
 
   onURLOnChanges() {
-    this.articleForm.controls.imageLink.valueChanges.subscribe((val) => {
-      if (this.articleForm.controls.imageLink.valid) {
+    this.articleForm.controls.image.valueChanges.subscribe((val) => {
+      if (this.articleForm.controls.image.valid) {
         this.image = val;
       }
     });
@@ -141,7 +140,7 @@ export class WriteComponent implements OnInit {
   removeImage(whichImage: string) {
     if (whichImage === 'image') {
       this.image = '';
-      this.articleFormControls.imageLink.patchValue('');
+      this.articleFormControls.image.patchValue('');
     } else {
       this.customImage = '';
     }
@@ -163,7 +162,7 @@ export class WriteComponent implements OnInit {
         customImage: this.customImage
       };
 
-      const response = await this.resourceService.shareArticle(data);
+      const response = await this.resourceService.shareResource(data);
       this.isLoading = false;
       this.isDisabled = false;
       this.saveButtonText = 'Save';
@@ -197,7 +196,7 @@ export class WriteComponent implements OnInit {
         tags: this.tags,
       };
 
-      const response = await this.resourceService.shareArticle(data);
+      const response = await this.resourceService.shareResource(data);
       this.isLoading = false;
       this.isDisabled = false;
       this.saveButtonText = 'Sharing';

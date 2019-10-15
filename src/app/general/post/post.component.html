@@ -15,7 +15,7 @@
   </div>
 
   <!-- * Image -->
-  <a (click)="openResource()" target="_blank">
+  <a (click)="openResource()" target="_blank" *ngIf="image">
     <div class="image">
       <img [src]="image" [alt]="title">
     </div>
