@@ -226,8 +226,6 @@ export class EditArticleComponent implements OnInit {
       };
     }
 
-    console.log(data);
-
     const response = await this.resourceService.editResource(data);
     this.saveButtonText = 'Done';
     this.isLoading = false;

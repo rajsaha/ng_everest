@@ -18,9 +18,9 @@ export class UserService {
     });
   }
 
-  getPublicProfile(username: string): Promise<any> {
+  getPublicProfile(data: any): Promise<any> {
     return new Promise(resolve => {
-      this.http.get(`${ENV.API_URL}/user/get-public-profile/${username}`)
+      this.http.post(`${ENV.API_URL}/user/get-public-profile`, data)
         .subscribe((response: any) => {
           resolve(response);
         });

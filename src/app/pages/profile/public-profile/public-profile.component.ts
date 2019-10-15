@@ -53,7 +53,7 @@ export class PublicProfileComponent implements OnInit {
 
   async getPublicProfile(username: string) {
     this.isLoading = true;
-    const result = await this.userService.getPublicProfile(username);
+    const result = await this.userService.getPublicProfile({ username, pageNo: 1, size: 5});
     console.log(result);
     this.isLoading = false;
 
