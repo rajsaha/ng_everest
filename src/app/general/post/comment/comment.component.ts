@@ -10,7 +10,7 @@ import * as moment from 'moment';
 export class CommentComponent implements OnInit {
   @Input() resourceId = '';
 
-  allComments = [];
+  private allComments = [];
 
   // Pagination
   pageNo = 1;
@@ -30,6 +30,10 @@ export class CommentComponent implements OnInit {
       size: this.size,
       resourceId: this.resourceId
     });
+
+    if (response.error) {
+      return;
+    }
 
     this.count = response.count;
 

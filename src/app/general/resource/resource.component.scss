@@ -10,7 +10,7 @@
 	position: relative;
 	
 	&:hover {
-		box-shadow: 0 22px 32px 0 rgba(197, 197, 197, 0.6);
+		box-shadow: 0 22px 32px 0 rgba(197, 197, 197, 0.9);
 	}
 
 	.image {
@@ -29,6 +29,14 @@
 
 	.details {
 		padding: 0 15px 15px 15px;
+
+		h4 {
+			margin-bottom: 10px;
+		}
+
+		.type {
+			margin-left: 0;
+		}
 
 		.actions {
 			a {

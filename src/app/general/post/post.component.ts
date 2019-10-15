@@ -60,7 +60,7 @@ export class PostComponent implements OnInit {
   isLoading = false;
   isInCollection = false;
   isLiked = false;
-  showComments = false;
+  showComments = true;
   isSeeMore = false;
   truncateValue = 150;
 
@@ -158,6 +158,7 @@ export class PostComponent implements OnInit {
   }
 
   async addComment() {
+    this.showComments = true;
     const result = await this.resourceService.addComment(
       this.commentForm.value
     );
