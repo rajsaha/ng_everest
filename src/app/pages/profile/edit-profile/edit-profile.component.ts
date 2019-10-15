@@ -21,6 +21,8 @@ export class EditProfileComponent implements OnInit {
   website: string;
   bio: string;
   email: string;
+  followers = [];
+  following = [];
   image = `${ENV.SITE_URL}/assets/images/portrait.jpg`;
   uploadedImage: string;
   imageId: string;
@@ -78,10 +80,13 @@ export class EditProfileComponent implements OnInit {
   async getUserData() {
     this.isLoading = true;
     const res = await this.userService.getProfileData(this.username);
+    console.log(res);
     this.isLoading = false;
 
     this.isProfileSaveButtonDisabled = true;
     this.interests = res.userData.interests;
+    this.followers = res.userData.followers;
+    this.following = res.userData.following;
 
     if (res.userData.image) {
       this.image = res.userData.image.link;

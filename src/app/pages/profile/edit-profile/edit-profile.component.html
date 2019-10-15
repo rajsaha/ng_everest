@@ -27,6 +27,9 @@
                 <mat-chip-list *ngIf="interests">
                     <mat-chip *ngFor="let interest of interests">{{ interest }}</mat-chip>
                 </mat-chip-list>
+                <div class="followers-following" *ngIf="followers && following">
+                    <strong>{{ followers.length }}</strong> followers  |  <strong>{{ following.length }}</strong> following
+                </div>
             </div>
 
             <!-- * Progress Bar -->

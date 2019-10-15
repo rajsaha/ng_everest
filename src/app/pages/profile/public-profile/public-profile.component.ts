@@ -20,6 +20,8 @@ export class PublicProfileComponent implements OnInit {
   website: string;
   bio: string;
   email: string;
+  following = [];
+  followers = [];
   image = `${ENV.SITE_URL}/assets/images/portrait.jpg`;
   interests = [];
   defaultProfileImage = `${ENV.SITE_URL}/assets/images/portrait.jpg`;
@@ -52,6 +54,7 @@ export class PublicProfileComponent implements OnInit {
   async getPublicProfile(username: string) {
     this.isLoading = true;
     const result = await this.userService.getPublicProfile(username);
+    console.log(result);
     this.isLoading = false;
 
     // * Separating the individual parts
@@ -71,6 +74,8 @@ export class PublicProfileComponent implements OnInit {
     this.website = data.website;
     this.bio = data.bio;
     this.email = data.email;
+    this.followers = data.followers;
+    this.following = data.following;
 
     if (data.image) {
       this.image = data.image.link;
