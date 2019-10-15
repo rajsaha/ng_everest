@@ -1,7 +1,9 @@
 <div class="resource" *ngIf="!isLoading">
   <img *ngIf="image" class="image" [src]="image" (click)="goToView()" />
   <div class="details">
-    <h4 [ngStyle]="{ 'padding-top': image ? '' : '15px' }">{{ title }}</h4>
+    <h4 [ngStyle]="{ 'padding-top': image ? '' : '15px' }" (click)="goToView()">
+      {{ title }}
+    </h4>
     <!-- * Type -->
     <div class="type" *ngIf="type === 'article'">
       {{ type }}
@@ -9,7 +11,7 @@
     <p *ngIf="type === 'ext-content'">{{ description | truncate: [40] }}</p>
     <div
       *ngIf="type === 'article'"
-      [innerHtml]="description | truncate: [500]"
+      [innerHtml]="description | truncate: [40]"
     ></div>
     <div class="actions">
       <button
@@ -20,7 +22,7 @@
         <fa-icon [icon]="faEdit"></fa-icon>
       </button>
 
-      <a [href]="url" target="_blank">
+      <a [href]="url" target="_blank" *ngIf="type !== 'article'">
         <button mat-button>
           <fa-icon [icon]="faExternalLinkAlt"></fa-icon>
         </button>
