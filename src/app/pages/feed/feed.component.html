@@ -1,6 +1,12 @@
 <div class="parent">
-  <div class="feed-container" infiniteScroll [infiniteScrollDistance]="2" [infiniteScrollThrottle]="50"
-    (scrolled)="onScrollDown()" [scrollWindow]="false">
+  <div
+    class="feed-container"
+    infiniteScroll
+    [infiniteScrollDistance]="2"
+    [infiniteScrollThrottle]="50"
+    (scrolled)="onScrollDown()"
+    [scrollWindow]="false"
+  >
     <app-post *ngFor="let post of posts" [data]="post"></app-post>
 
     <div class="section-container" *ngIf="posts.length === 0">
@@ -10,21 +16,40 @@
 </div>
 
 <div class="add-content-buttons">
-  <button class="fab-add-content" mat-fab color="primary" (click)="isFabActive = !isFabActive"
-    [ngClass]="isFabActive ? 'animation-rotate90Clockwise' : 'animation-rotate90AntiClockwise'">
+  <button
+    class="fab-add-content"
+    mat-fab
+    color="primary"
+    (click)="isFabActive = !isFabActive"
+    [ngClass]="
+      isFabActive
+        ? 'animation-rotate90Clockwise'
+        : 'animation-rotate90AntiClockwise'
+    "
+  >
     <fa-icon [icon]="faPlus"></fa-icon>
   </button>
 
-  <div class="fab-add-post" [ngClass]="isFabActive ? 'animation-scaleAppear' : 'animation-scaleDisappear'"
-    [ngStyle]="{'animation-delay': isFabActive ? '-0.1s' : '0s'}">
+  <div
+    class="fab-add-post"
+    [ngClass]="
+      isFabActive ? 'animation-scaleAppear' : 'animation-scaleDisappear'
+    "
+    [ngStyle]="{ 'animation-delay': isFabActive ? '-0.1s' : '0s' }"
+  >
     <span>Share Resource</span>
     <button routerLink="/share-resource" mat-mini-fab>
       <fa-icon [icon]="faLink"></fa-icon>
     </button>
   </div>
 
-  <div class="fab-add-document" [ngClass]="isFabActive ? 'animation-scaleAppear' : 'animation-scaleDisappear'"
-    [ngStyle]="{'animation-delay': isFabActive ? '0s' : '-0.1s'}">
+  <div
+    class="fab-add-document"
+    [ngClass]="
+      isFabActive ? 'animation-scaleAppear' : 'animation-scaleDisappear'
+    "
+    [ngStyle]="{ 'animation-delay': isFabActive ? '0s' : '-0.1s' }"
+  >
     <span>Write an Article</span>
     <button routerLink="/write" mat-mini-fab>
       <fa-icon [icon]="faFile"></fa-icon>

@@ -3,6 +3,7 @@ import { faExternalLinkAlt } from '@fortawesome/free-solid-svg-icons';
 import { UserService } from '@services/user/user.service';
 import { ActivatedRoute } from '@angular/router';
 import { environment as ENV } from '@environments/environment';
+import { ResourceService } from '@services/resource/resource.service';
 
 @Component({
   selector: 'app-public-profile',
@@ -39,11 +40,19 @@ export class PublicProfileComponent implements OnInit {
   isLoading = false;
   isFollowed = false;
 
-  constructor(private userService: UserService, private router: ActivatedRoute) { }
+  // Pagination
+  pageNo = 1;
+  size = 5;
+
+  constructor(
+    private userService: UserService,
+    private resourceService: ResourceService,
+    private router: ActivatedRoute
+  ) {}
 
   ngOnInit() {
     this.currentUser = localStorage.getItem('username');
-    this.router.params.subscribe(async (params) => {
+    this.router.params.subscribe(async params => {
       await Promise.all([
         this.getPublicProfile(params.username),
         this.checkIfUserIsFollowed(this.currentUser, params.username)
@@ -53,7 +62,11 @@ export class PublicProfileComponent implements OnInit {
 
   async getPublicProfile(username: string) {
     this.isLoading = true;
-    const result = await this.userService.getPublicProfile({ username, pageNo: 1, size: 5});
+    const result = await this.userService.getPublicProfile({
+      username,
+      pageNo: this.pageNo,
+      size: this.size
+    });
     console.log(result);
     this.isLoading = false;
 
@@ -124,4 +137,23 @@ export class PublicProfileComponent implements OnInit {
     }
   }
 
+  async loadMorePosts() {
+    this.pageNo++;
+    await this.getUserResources();
+  }
+
+  async getUserResources() {
+    try {
+      const response = await this.resourceService.getUserResources({
+        pageNo: this.pageNo,
+        size: this.size,
+        username: this.username
+      });
+      for (const resource of response.resources) {
+        this.resources.push(resource);
+      }
+    } catch (err) {
+      console.error(err);
+    }
+  }
 }

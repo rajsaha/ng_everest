@@ -82,7 +82,10 @@
   <mat-tab label="Resources">
     <div class="section-container">
       <!-- * Resource grid -->
-      <div class="resource-grid" *ngIf="!isLoading" infiniteScroll>
+      <div
+        class="resource-grid"
+        *ngIf="!isLoading"
+      >
         <app-resource
           *ngFor="let resource of resources"
           [data]="resource"
@@ -90,6 +93,10 @@
           self="false"
         >
         </app-resource>
+      </div>
+
+      <div *ngIf="!isLoading" class="see-more" (click)="loadMorePosts()">
+        See More
       </div>
 
       <div class="resource-grid" *ngIf="isLoading">
