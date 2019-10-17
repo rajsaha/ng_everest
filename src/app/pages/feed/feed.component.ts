@@ -41,6 +41,7 @@ export class FeedComponent implements OnInit {
         size: this.size,
         username: this.username
       });
+
       for (const resource of response.resources) {
         this.posts.push(resource);
       }

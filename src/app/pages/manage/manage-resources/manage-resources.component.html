@@ -22,7 +22,7 @@
     </div>
   </div>
 
-  <div class="see-more" (click)="loadMorePosts()">
+  <div class="see-more" *ngIf="!isLoading && resources.length < resourcesCount" (click)="loadMorePosts()">
     See More
   </div>
 

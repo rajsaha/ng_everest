@@ -95,7 +95,7 @@
         </app-resource>
       </div>
 
-      <div *ngIf="!isLoading" class="see-more" (click)="loadMorePosts()">
+      <div *ngIf="!isLoading && resources.length < resourcesCount" class="see-more" (click)="loadMorePosts()">
         See More
       </div>
 

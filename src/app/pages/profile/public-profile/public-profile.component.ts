@@ -29,6 +29,7 @@ export class PublicProfileComponent implements OnInit {
 
   // Resources
   resources = [];
+  resourcesCount = 0;
 
   // Collections
   collections = [];
@@ -55,7 +56,8 @@ export class PublicProfileComponent implements OnInit {
     this.router.params.subscribe(async params => {
       await Promise.all([
         this.getPublicProfile(params.username),
-        this.checkIfUserIsFollowed(this.currentUser, params.username)
+        this.checkIfUserIsFollowed(this.currentUser, params.username),
+        this.getUserResources(params.username)
       ]);
     });
   }
@@ -67,17 +69,14 @@ export class PublicProfileComponent implements OnInit {
       pageNo: this.pageNo,
       size: this.size
     });
-    console.log(result);
     this.isLoading = false;
 
     // * Separating the individual parts
     const profileData = result.profileData.userData;
     const userCollections = result.userCollections.collections;
-    const userResources = result.userResources.resources;
 
     // * Assigning data
     this.setProfileData(profileData);
-    this.setResources(userResources);
     this.setCollections(userCollections);
   }
 
@@ -142,13 +141,16 @@ export class PublicProfileComponent implements OnInit {
     await this.getUserResources();
   }
 
-  async getUserResources() {
+  async getUserResources(username?) {
     try {
       const response = await this.resourceService.getUserResources({
         pageNo: this.pageNo,
         size: this.size,
-        username: this.username
+        username: username ? username : this.username
       });
+
+      this.resourcesCount = response.count;
+      
       for (const resource of response.resources) {
         this.resources.push(resource);
       }

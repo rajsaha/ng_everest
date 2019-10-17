@@ -13,6 +13,7 @@ import { debounceTime } from 'rxjs/internal/operators';
 export class ManageResourcesComponent implements OnInit {
   username: string;
   resources = [];
+  resourcesCount = 0;
   resourceSearchForm: FormGroup;
 
   // Icons
@@ -53,6 +54,8 @@ export class ManageResourcesComponent implements OnInit {
   async getUserResources() {
     try {
       this.isLoading = true;
+
+      // Search
       const query = this.resourceSearchForm.get('query').value;
       if (query) {
         const searchResult = await this.resourceService.searchForUserResources({
@@ -63,12 +66,15 @@ export class ManageResourcesComponent implements OnInit {
         this.resources = searchResult.resources;
         return;
       }
+
+      // Without search
       const response = await this.resourceService.getUserResources({
         pageNo: this.pageNo,
         size: this.size,
         username: this.username
       });
       this.isLoading = false;
+      this.resourcesCount = response.count;
 
       for (const resource of response.resources) {
         this.resources.push(resource);
