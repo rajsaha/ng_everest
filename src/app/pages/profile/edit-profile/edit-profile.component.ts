@@ -80,7 +80,6 @@ export class EditProfileComponent implements OnInit {
   async getUserData() {
     this.isLoading = true;
     const res = await this.userService.getProfileData(this.username);
-    console.log(res);
     this.isLoading = false;
 
     this.isProfileSaveButtonDisabled = true;
