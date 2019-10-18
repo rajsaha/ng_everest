@@ -9,3 +9,34 @@
 mat-form-field {
     width: 100% !important;
 }
+
+.existing-collections {
+    max-height: 500px;
+    overflow-y: auto;
+    .collection {
+        border-radius: 5px;
+        cursor: pointer;
+        display: grid;
+        grid-template-columns: 50px 1fr;
+        grid-column-gap: 15px;
+        margin-bottom: 5px;
+        padding: 5px;
+        transition: background-color 0.2s ease-in-out;
+
+        &:hover {
+            background-color: rgba(0, 0, 0, .1);
+        }
+
+        .image {
+            width: 50px;
+            height: 50px;
+            border-radius: 5px;
+            background-size: cover;
+            background-position: center center;
+        }
+
+        span {
+            align-self: center;
+        }
+    }
+}

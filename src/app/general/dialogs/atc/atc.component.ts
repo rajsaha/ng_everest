@@ -12,7 +12,7 @@ import { SnackbarService } from '@services/general/snackbar.service';
 })
 export class AtcComponent implements OnInit {
   username: string;
-  collectionNames = [];
+  collections = [];
 
   // Form
   addToCollectionForm: FormGroup;
@@ -50,16 +50,20 @@ export class AtcComponent implements OnInit {
 
   async initAddToCollectionForm() {
     this.addToCollectionForm = this.fb.group({
-      collectionName: ['', Validators.required]
+      collectionName: ['', Validators.required],
+      collectionId: ['']
     });
+  }
+
+  get addToCollectionFormControls() {
+    return this.addToCollectionForm.controls;
   }
 
   async getCollectionNames() {
     const response = await this.collectionService.getCollectionNames({ username: this.username });
+    console.log(response);
     if (response.collections) {
-      for (const item of response.collections) {
-        this.collectionNames.push(item.title);
-      }
+      this.collections = response.collections;
     }
   }
 
@@ -75,6 +79,8 @@ export class AtcComponent implements OnInit {
   }
 
   async submitAddToCollectionForm() {
+    console.log(this.addToCollectionForm.value);
+    return;
     if (this.addToCollectionForm.valid) {
       const response: any = await this.resourceService.editResourceCollection({
         collectionTitle: this.addToCollectionForm.controls.collectionName.value,
@@ -101,5 +107,14 @@ export class AtcComponent implements OnInit {
         });
       }
     }
+  }
+
+  setCollectionId(collectionId: string) {
+    if (collectionId) {
+      this.addToCollectionFormControls.collectionId.patchValue(collectionId);
+    } else {
+      this.addToCollectionFormControls.collectionId.reset();
+    }
+    console.log(this.addToCollectionForm.value);
   }
 }
