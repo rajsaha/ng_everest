@@ -94,5 +94,11 @@ mat-form-field {
         width: 100%;
         height: 100px;
     }
+
+    .no-collection {
+      display: grid;
+      font-size: 12px;
+      text-align: center;
+    }
   }
 }

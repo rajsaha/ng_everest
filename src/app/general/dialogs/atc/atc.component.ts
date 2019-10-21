@@ -27,7 +27,7 @@ export class AtcComponent implements OnInit {
 
   constructor(
     public dialogRef: MatDialogRef<AtcComponent>,
-    @Inject(MAT_DIALOG_DATA) public data,
+    @Inject(MAT_DIALOG_DATA) public data: any,
     private resourceService: ResourceService,
     private collectionService: CollectionService,
     private snackbarService: SnackbarService,
@@ -68,7 +68,7 @@ export class AtcComponent implements OnInit {
 
   async initAddToCollectionForm() {
     this.createCollectionForm = this.fb.group({
-      collectionName: ['', Validators.required]
+      collectionTitle: ['', Validators.required]
     });
   }
 
@@ -119,7 +119,7 @@ export class AtcComponent implements OnInit {
     if (response && !response.error) {
       this.snackbarService.openSnackBar({
         message: {
-          message: `Resource added to ${this.createCollectionForm.controls.collectionName.value}`,
+          message: `Resource added to ${this.createCollectionForm.controls.collectionTitle.value}`,
           error: false
         },
         class: 'green-snackbar'
@@ -139,7 +139,7 @@ export class AtcComponent implements OnInit {
   async submitCreateCollectionForm() {
     if (this.createCollectionForm.valid) {
       const response: any = await this.collectionService.createCollectionAndPushResource({
-        collectionTitle: this.createCollectionForm.controls.collectionName.value,
+        collectionTitle: this.createCollectionForm.controls.collectionTitle.value,
         resourceId: this.data.id,
         username: this.username
       });
@@ -147,7 +147,7 @@ export class AtcComponent implements OnInit {
       if (response && !response.error) {
         this.snackbarService.openSnackBar({
           message: {
-            message: `Resource added to ${this.createCollectionForm.controls.collectionName.value}`,
+            message: `Resource added to ${this.createCollectionForm.controls.collectionTitle.value}`,
             error: false
           },
           class: 'green-snackbar'

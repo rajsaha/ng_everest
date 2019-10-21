@@ -46,6 +46,10 @@
           </span>
         </p>
       </div>
+
+      <p *ngIf="!isLoading && collections.length === 0" class="no-collection">
+        You haven't made a collection yet!
+      </p>
     </div>
   </div>
 
@@ -55,7 +59,7 @@
       <input
         matInput
         placeholder="Collection name"
-        formControlName="collectionName"
+        formControlName="collectionTitle"
       />
     </mat-form-field>
   </form>
