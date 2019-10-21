@@ -13,6 +13,7 @@ import { SnackbarService } from '@services/general/snackbar.service';
 export class AtcComponent implements OnInit {
   username: string;
   collections = [];
+  currentCollectionName = '';
 
   // Form
   addToCollectionForm: FormGroup;
@@ -102,10 +103,9 @@ export class AtcComponent implements OnInit {
     const collection = await this.collectionService.getCollectionTitleByResourceId(
       { username: this.username, resourceId }
     );
+
     if (collection.collection) {
-      this.addToCollectionForm.controls.collectionName.patchValue(
-        collection.collection.title
-      );
+      this.currentCollectionName = collection.collection.title;
     }
   }
 

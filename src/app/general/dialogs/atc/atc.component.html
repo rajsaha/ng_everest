@@ -39,7 +39,12 @@
           [ngStyle]="{ 'background-image': 'url(' + collection.image + ')' }"
         ></div>
 
-        <span>{{ collection.title }}</span>
+        <p>
+          {{ collection.title }}
+          <span class="in-this-collection" *ngIf="currentCollectionName && currentCollectionName === collection.title">
+              In this collection
+          </span>
+        </p>
       </div>
     </div>
   </div>
