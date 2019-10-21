@@ -1,41 +1,63 @@
 <p class="dialog-title">
   <strong>{{ data.title }}</strong>
 </p>
-<form [formGroup]="addToCollectionForm">
-  <div mat-dialog-content>
-    <!-- <mat-form-field appearance="outline">
-      <mat-label>Add to Collection</mat-label>
-      <input
-        type="text"
-        placeholder="Select or Create New"
-        matInput
-        [matAutocomplete]="auto"
-        formControlName="collectionName"
-      />
-      <mat-autocomplete #auto="matAutocomplete">
-        <mat-optgroup label="Move to Existing Collections">
-          <mat-option
-            *ngFor="let collection of collections"
-            [value]="collection.title"
-          >
-            {{ collection.title }}
-          </mat-option>
-        </mat-optgroup>
-      </mat-autocomplete>
-    </mat-form-field> -->
-    <div class="existing-collections" *ngIf="collections.length > 0">
+<h6>Add to Collection</h6>
+<div mat-dialog-content>
+  <!-- <mat-form-field appearance="outline">
+    <mat-label>Add to Collection</mat-label>
+    <input
+      type="text"
+      placeholder="Select or Create New"
+      matInput
+      [matAutocomplete]="auto"
+      formControlName="collectionName"
+    />
+    <mat-autocomplete #auto="matAutocomplete">
+      <mat-optgroup label="Move to Existing Collections">
+        <mat-option
+          *ngFor="let collection of collections"
+          [value]="collection.title"
+        >
+          {{ collection.title }}
+        </mat-option>
+      </mat-optgroup>
+    </mat-autocomplete>
+  </mat-form-field> -->
+  <div class="parent">
+    <mat-progress-bar mode="indeterminate" *ngIf="isLoading"> </mat-progress-bar>
+    <div
+      class="existing-collections"
+      infiniteScroll
+      [infiniteScrollDistance]="2"
+      [infiniteScrollThrottle]="50"
+      (scrolled)="onScrollDown()"
+      [scrollWindow]="false"
+    >
       <div class="collection" *ngFor="let collection of collections" matRipple>
-        <div class="image" [ngStyle]="{ 'background-image': 'url(' + collection.image  +')' }">
-        </div>
+        <div
+          class="image"
+          [ngStyle]="{ 'background-image': 'url(' + collection.image + ')' }"
+        ></div>
 
         <span>{{ collection.title }}</span>
       </div>
     </div>
   </div>
-  <div mat-dialog-actions>
-    <button mat-button (click)="onNoClick()">Cancel</button>
-    <button mat-button (click)="submitAddToCollectionForm()" cdkFocusInitial>
-      Ok
-    </button>
-  </div>
-</form>
+
+  <form [formGroup]="addToCollectionForm">
+    <mat-form-field appearance="outline">
+      <mat-label>Create new Collection</mat-label>
+      <input
+        matInput
+        placeholder="Collection name"
+        formControlName="collectionName"
+      />
+    </mat-form-field>
+  </form>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">Cancel</button>
+  <button mat-button (click)="submitAddToCollectionForm()" cdkFocusInitial>
+    Ok
+  </button>
+</div>

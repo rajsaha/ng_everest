@@ -1,5 +1,24 @@
 * {
-	font-family: "Hind", sans-serif;
+    font-family: "Hind", sans-serif;
+    
+    // width
+    &::-webkit-scrollbar {
+        width: 5px;
+  
+        &:hover {
+            width: 10px;
+        }
+      }
+  
+      // Handle
+      &::-webkit-scrollbar-thumb {
+        border-radius: 5px;  
+        background: #FC800C;
+  
+        &:hover {
+          background: rgb(175, 87, 5);
+        }
+      }
 }
 
 a {

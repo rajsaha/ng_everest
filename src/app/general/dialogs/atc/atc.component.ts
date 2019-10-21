@@ -17,13 +17,21 @@ export class AtcComponent implements OnInit {
   // Form
   addToCollectionForm: FormGroup;
 
+  // Pagination
+  pageNo = 1;
+  size = 5;
+
+  // Toggles
+  isLoading = false;
+
   constructor(
     public dialogRef: MatDialogRef<AtcComponent>,
     @Inject(MAT_DIALOG_DATA) public data,
     private resourceService: ResourceService,
     private collectionService: CollectionService,
     private snackbarService: SnackbarService,
-    private fb: FormBuilder) { }
+    private fb: FormBuilder
+  ) {}
 
   async ngOnInit() {
     this.username = localStorage.getItem('username');
@@ -48,10 +56,18 @@ export class AtcComponent implements OnInit {
     this.dialogRef.close();
   }
 
+  async onScrollDown() {
+    await this.loadMorePosts();
+  }
+
+  async loadMorePosts() {
+    this.pageNo++;
+    await this.getCollectionNames();
+  }
+
   async initAddToCollectionForm() {
     this.addToCollectionForm = this.fb.group({
-      collectionName: ['', Validators.required],
-      collectionId: ['']
+      collectionName: ['', Validators.required]
     });
   }
 
@@ -60,21 +76,36 @@ export class AtcComponent implements OnInit {
   }
 
   async getCollectionNames() {
-    const response = await this.collectionService.getCollectionNames({ username: this.username });
-    console.log(response);
+    this.isLoading = true;
+    const response = await this.collectionService.getCollectionNames({
+      pageNo: this.pageNo,
+      size: this.size,
+      username: this.username
+    });
+    this.isLoading = false;
+
     if (response.collections) {
-      this.collections = response.collections;
+      for (const collection of response.collections) {
+        this.collections.push(collection);
+      }
     }
   }
 
   async checkForResourceInCollection() {
-    const response = await this.collectionService.checkForResourceInCollection({ id: this.data.id, username: this.username });
+    const response = await this.collectionService.checkForResourceInCollection({
+      id: this.data.id,
+      username: this.username
+    });
   }
 
   async getCollectionTitle(resourceId: string) {
-    const collection = await this.collectionService.getCollectionTitleByResourceId({ username: this.username, resourceId });
+    const collection = await this.collectionService.getCollectionTitleByResourceId(
+      { username: this.username, resourceId }
+    );
     if (collection.collection) {
-      this.addToCollectionForm.controls.collectionName.patchValue(collection.collection.title);
+      this.addToCollectionForm.controls.collectionName.patchValue(
+        collection.collection.title
+      );
     }
   }
 
@@ -94,16 +125,16 @@ export class AtcComponent implements OnInit {
             message: `Resource added to ${this.addToCollectionForm.controls.collectionName.value}`,
             error: false
           },
-          class: 'green-snackbar',
+          class: 'green-snackbar'
         });
-        this.dialogRef.close({added: true});
+        this.dialogRef.close({ added: true });
       } else {
         this.snackbarService.openSnackBar({
           message: {
             message: `Something went wrong!`,
             error: true
           },
-          class: 'red-snackbar',
+          class: 'red-snackbar'
         });
       }
     }
