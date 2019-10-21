@@ -138,9 +138,9 @@ export class ResourceService {
     });
   }
 
-  editResourceCollection(data: any): Promise<any> {
+  addResourceToCollection(data: any): Promise<any> {
     return new Promise(resolve => {
-      this.http.post(`${ENV.API_URL}/resource/edit-resource-collection`, data)
+      this.http.post(`${ENV.API_URL}/resource/add-resource-to-collection`, data)
       .subscribe((response: any) => {
         resolve(response);
       });

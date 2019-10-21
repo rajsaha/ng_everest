@@ -45,9 +45,9 @@ export class CollectionService {
     });
   }
 
-  createCollection(data: any): Promise<any> {
+  createCollectionAndPushResource(data: any): Promise<any> {
     return new Promise(resolve => {
-      this.http.post(`${ENV.API_URL}/collection/create-collection`, data)
+      this.http.post(`${ENV.API_URL}/collection/create-collection-and-push-resource`, data)
         .subscribe((response: any) => {
           resolve(response);
         });

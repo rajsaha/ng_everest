@@ -16,7 +16,7 @@ export class AtcComponent implements OnInit {
   currentCollectionName = '';
 
   // Form
-  addToCollectionForm: FormGroup;
+  createCollectionForm: FormGroup;
 
   // Pagination
   pageNo = 1;
@@ -67,13 +67,13 @@ export class AtcComponent implements OnInit {
   }
 
   async initAddToCollectionForm() {
-    this.addToCollectionForm = this.fb.group({
+    this.createCollectionForm = this.fb.group({
       collectionName: ['', Validators.required]
     });
   }
 
-  get addToCollectionFormControls() {
-    return this.addToCollectionForm.controls;
+  get createCollectionFormControls() {
+    return this.createCollectionForm.controls;
   }
 
   async getCollectionNames() {
@@ -109,12 +109,37 @@ export class AtcComponent implements OnInit {
     }
   }
 
-  async submitAddToCollectionForm() {
-    console.log(this.addToCollectionForm.value);
-    return;
-    if (this.addToCollectionForm.valid) {
-      const response: any = await this.resourceService.editResourceCollection({
-        collectionTitle: this.addToCollectionForm.controls.collectionName.value,
+  async addResourceToCollection(collectionId: string) {
+    const response: any = await this.resourceService.addResourceToCollection({
+      collectionId,
+      resourceId: this.data.id,
+      username: this.username
+    });
+
+    if (response && !response.error) {
+      this.snackbarService.openSnackBar({
+        message: {
+          message: `Resource added to ${this.createCollectionForm.controls.collectionName.value}`,
+          error: false
+        },
+        class: 'green-snackbar'
+      });
+      this.dialogRef.close({ added: true });
+    } else {
+      this.snackbarService.openSnackBar({
+        message: {
+          message: `Something went wrong!`,
+          error: true
+        },
+        class: 'red-snackbar'
+      });
+    }
+  }
+
+  async submitCreateCollectionForm() {
+    if (this.createCollectionForm.valid) {
+      const response: any = await this.collectionService.createCollectionAndPushResource({
+        collectionTitle: this.createCollectionForm.controls.collectionName.value,
         resourceId: this.data.id,
         username: this.username
       });
@@ -122,7 +147,7 @@ export class AtcComponent implements OnInit {
       if (response && !response.error) {
         this.snackbarService.openSnackBar({
           message: {
-            message: `Resource added to ${this.addToCollectionForm.controls.collectionName.value}`,
+            message: `Resource added to ${this.createCollectionForm.controls.collectionName.value}`,
             error: false
           },
           class: 'green-snackbar'
@@ -142,10 +167,10 @@ export class AtcComponent implements OnInit {
 
   setCollectionId(collectionId: string) {
     if (collectionId) {
-      this.addToCollectionFormControls.collectionId.patchValue(collectionId);
+      this.createCollectionFormControls.collectionId.patchValue(collectionId);
     } else {
-      this.addToCollectionFormControls.collectionId.reset();
+      this.createCollectionFormControls.collectionId.reset();
     }
-    console.log(this.addToCollectionForm.value);
+    console.log(this.createCollectionForm.value);
   }
 }
