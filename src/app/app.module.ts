@@ -30,6 +30,7 @@ import { ShareResourceComponent } from './pages/share-resource/share-resource.co
 import { MainComponent } from './layouts/main/main.component';
 import { NoAuthComponent } from './layouts/no-auth/no-auth.component';
 import { SearchComponent } from './components/search/search.component';
+import { AddToCollectionComponent } from './components/add-to-collection/add-to-collection.component';
 
 @NgModule({
   declarations: [
@@ -43,7 +44,8 @@ import { SearchComponent } from './components/search/search.component';
     ShareResourceComponent,
     MainComponent,
     NoAuthComponent,
-    SearchComponent
+    SearchComponent,
+    AddToCollectionComponent
   ],
   imports: [
     CommonModule,

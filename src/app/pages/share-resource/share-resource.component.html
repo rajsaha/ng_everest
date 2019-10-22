@@ -66,19 +66,6 @@
           </mat-chip-list>
         </mat-form-field>
 
-        <h6>Add to collection</h6>
-        <mat-form-field appearance="outline">
-          <mat-label>Collections</mat-label>
-          <input type="text" placeholder="Select or Create New" matInput [matAutocomplete]="auto" formControlName="collectionTitle">
-          <mat-autocomplete #auto="matAutocomplete">
-            <mat-optgroup label="Existing Collections">
-              <mat-option *ngFor="let collection of collections" [value]="collection.title">
-                {{ collection.title }}
-              </mat-option>
-            </mat-optgroup>
-          </mat-autocomplete>
-        </mat-form-field>
-
         <div class="form-button-container clearfix">
           <app-custom-button [buttonLabel]="submitButtonText" [isDisabled]="isDisabled" [isLoading]="isLoading" size="small"></app-custom-button>
         </div>
