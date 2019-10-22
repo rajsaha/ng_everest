@@ -144,10 +144,10 @@ export class AtcComponent implements OnInit {
         username: this.username
       });
 
-      if (response && !response.error) {
+      if (response && !response.message.error) {
         this.snackbarService.openSnackBar({
           message: {
-            message: `Resource added to ${this.createCollectionForm.controls.collectionTitle.value}`,
+            message: `Saved to collection`,
             error: false
           },
           class: 'green-snackbar'
@@ -156,7 +156,7 @@ export class AtcComponent implements OnInit {
       } else {
         this.snackbarService.openSnackBar({
           message: {
-            message: `Something went wrong!`,
+            message: response.message.message,
             error: true
           },
           class: 'red-snackbar'

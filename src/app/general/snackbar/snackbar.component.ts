@@ -11,7 +11,7 @@ export class SnackbarComponent implements OnInit {
   // Icons
   faCheckCircle = faCheckCircle;
   faTimesCircle = faTimesCircle;
-  
+
   constructor(@Inject(MAT_SNACK_BAR_DATA) public data: any) { }
 
   ngOnInit() {
