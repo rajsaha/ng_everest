@@ -28,6 +28,7 @@ export class ShareResourceComponent implements OnInit {
   username: string;
   collections: Array<object> = [];
   submitButtonText = 'Share';
+  atcData: any;
 
   // Icons
   faUpload = faUpload;
@@ -63,7 +64,6 @@ export class ShareResourceComponent implements OnInit {
     this.username = localStorage.getItem('username');
     this.initShareResourceForm();
     this.onURLOnChanges();
-    this.getCollectionNames();
   }
 
   initShareResourceForm() {
@@ -259,17 +259,7 @@ export class ShareResourceComponent implements OnInit {
     reader.readAsDataURL(file);
   }
 
-  async getCollectionNames() {
-    const response = await this.collectionService.getCollectionNames({
-      username: this.username
-    });
-    if (response.collections) {
-      for (const item of response.collections) {
-        this.collections.push({
-          title: item.title,
-          id: item._id
-        });
-      }
-    }
+  receiveAtcData($event) {
+    this.atcData = $event;
   }
 }

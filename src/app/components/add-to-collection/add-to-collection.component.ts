@@ -1,5 +1,6 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { CollectionService } from '@services/collection/collection.service';
+import { FormGroup, FormBuilder } from '@angular/forms';
 
 @Component({
   selector: 'app-add-to-collection',
@@ -8,6 +9,7 @@ import { CollectionService } from '@services/collection/collection.service';
 })
 export class AddToCollectionComponent implements OnInit {
   @Input() resourceId: string;
+  @Output() message = new EventEmitter<object>();
 
   username: string;
   collections = [];
@@ -17,15 +19,34 @@ export class AddToCollectionComponent implements OnInit {
   pageNo = 1;
   size = 5;
 
-  // Toggles
-  constructor(private collectionService: CollectionService) {}
+  // Form
+  atcForm: FormGroup;
+
+  constructor(
+    private collectionService: CollectionService,
+    private fb: FormBuilder
+  ) {}
 
   async ngOnInit() {
     this.username = localStorage.getItem('username');
+    this.initAtcForm();
+    this.onFormChanges();
     await this.getCollectionNames();
     if (this.resourceId) {
       await this.getCollectionTitle(this.resourceId);
     }
+  }
+
+  initAtcForm() {
+    this.atcForm = this.fb.group({
+      collectionId: [''],
+      newCollection: [false],
+      collectionName: ['']
+    });
+  }
+
+  get atcFormControls() {
+    return this.atcForm.controls;
   }
 
   async getCollectionNames() {
@@ -50,5 +71,11 @@ export class AddToCollectionComponent implements OnInit {
     if (collection.collection) {
       this.currentCollectionName = collection.collection.title;
     }
+  }
+
+  onFormChanges() {
+    this.atcForm.valueChanges.subscribe(() => {
+      this.message.emit(this.atcForm.value);
+    });
   }
 }
