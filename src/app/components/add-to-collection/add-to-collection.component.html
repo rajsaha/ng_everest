@@ -1,1 +1,38 @@
-<p>add-to-collection works!</p>
+<h6>Add to Collection</h6>
+<div *ngIf="collections">
+  <mat-form-field appearance="outline">
+    <mat-label>Existing collections</mat-label>
+    <mat-select>
+      <mat-option
+        *ngFor="let collection of collections"
+        [value]="collection.id"
+      >
+        <div class="collection">
+          <div
+            class="image"
+            [ngStyle]="{ 'background-image': 'url(' + collection.image + ')' }"
+          ></div>
+
+          <p>
+            {{ collection.title }}
+            <span
+              class="in-this-collection"
+              *ngIf="
+                currentCollectionName &&
+                currentCollectionName === collection.title
+              "
+            >
+              In this collection
+            </span>
+          </p>
+        </div>
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+</div>
+
+<mat-checkbox>Create new Collection</mat-checkbox>
+<mat-form-field appearance="outline">
+  <mat-label>Collection Name</mat-label>
+  <input type="text" matInput placeholder="Name" />
+</mat-form-field>
