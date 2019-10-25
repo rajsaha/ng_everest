@@ -1,6 +1,7 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, ViewChild } from '@angular/core';
 import { CollectionService } from '@services/collection/collection.service';
 import { FormGroup, FormBuilder } from '@angular/forms';
+import { MatSelect } from '@angular/material';
 
 @Component({
   selector: 'app-add-to-collection',
@@ -10,6 +11,7 @@ import { FormGroup, FormBuilder } from '@angular/forms';
 export class AddToCollectionComponent implements OnInit {
   @Input() resourceId: string;
   @Output() message = new EventEmitter<object>();
+  @ViewChild('collectionSelect', { static: false }) selectCollection: MatSelect;
 
   username: string;
   collections = [];
@@ -31,6 +33,7 @@ export class AddToCollectionComponent implements OnInit {
     this.username = localStorage.getItem('username');
     this.initAtcForm();
     this.onFormChanges();
+    this.onSelectChanges();
     await this.getCollectionNames();
     if (this.resourceId) {
       await this.getCollectionTitle(this.resourceId);
@@ -76,6 +79,20 @@ export class AddToCollectionComponent implements OnInit {
   onFormChanges() {
     this.atcForm.valueChanges.subscribe(() => {
       this.message.emit(this.atcForm.value);
+    });
+  }
+
+  onSelectChanges() {
+    // this.selectCollection.selectionChange.subscribe(() => this.registerScrollEvent());
+  }
+
+  registerScrollEvent() {
+    console.log('scrolling');
+    return;
+    const selectPanel = this.selectCollection.panel.nativeElement;
+    selectPanel.addEventListener('scroll', async () => {
+      this.pageNo++;
+      await this.getCollectionNames();
     });
   }
 }

@@ -3,7 +3,7 @@
     <div *ngIf="collections">
         <mat-form-field appearance="outline">
           <mat-label>Existing collections</mat-label>
-          <mat-select formControlName="collectionId">
+          <mat-select formControlName="collectionId" #collectionSelect>
             <mat-option
               *ngFor="let collection of collections"
               [value]="collection.id"

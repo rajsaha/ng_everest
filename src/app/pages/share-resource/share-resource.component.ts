@@ -75,9 +75,7 @@ export class ShareResourceComponent implements OnInit {
         description: ['', [Validators.required]],
         image: [''],
         username: [this.username],
-        type: ['ext-content'],
-        collectionId: [''],
-        collectionTitle: ['']
+        type: ['ext-content']
       },
       { validator: [this.validationService.checkValidURL] }
     );
@@ -122,6 +120,7 @@ export class ShareResourceComponent implements OnInit {
       const data = {
         formData: this.shareResourceForm.value,
         tags: this.tags,
+        collectionData: this.atcData,
         customImage: this.image
       };
 
@@ -156,7 +155,8 @@ export class ShareResourceComponent implements OnInit {
 
       const data = {
         formData: this.shareResourceForm.value,
-        tags: this.tags
+        tags: this.tags,
+        collectionData: this.atcData
       };
 
       const response = await this.resourceService.shareResource(data);
@@ -261,5 +261,6 @@ export class ShareResourceComponent implements OnInit {
 
   receiveAtcData($event) {
     this.atcData = $event;
+    console.log(this.atcData);
   }
 }
