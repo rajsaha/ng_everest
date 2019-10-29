@@ -1,6 +1,35 @@
 <mat-tab-group mat-stretch-tabs>
     <mat-tab label="Followers">
-        
+        <div class="followers" *ngIf="followers.length > 0">
+            <div class="user" *ngFor="let user of followers">
+                <div class="image" [ngStyle]="{ 'background-image': 'url(' + (user.image ? user.image.link : '') +')' }"></div>
+                <div class="details">
+                    <span>{{ user.name }}</span>
+                    <span>{{ user.username }}</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="no-data" *ngIf="followers.length === 0">
+            No one's following you
+        </div>
     </mat-tab>
-    <mat-tab label="Following"></mat-tab>
+    <mat-tab label="Following">
+        <div class="following" *ngIf="following.length > 0">
+            <div class="user" *ngFor="let user of following">
+                <div class="image" [ngStyle]="{ 'background-image': 'url(' + (user.image ? user.image.link : '') +')' }"></div>
+                <div class="details">
+                    <span>{{ user.name }}</span>
+                    <span>{{ user.username }}</span>
+                </div>
+                <div>
+                    <button mat-stroked-button>Unfollow</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="no-data" *ngIf="following.length === 0">
+            You're not following anyone
+        </div>
+    </mat-tab>
 </mat-tab-group>

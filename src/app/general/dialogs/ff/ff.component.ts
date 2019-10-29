@@ -8,6 +8,8 @@ import { UserService } from '@services/user/user.service';
 })
 export class FfComponent implements OnInit {
   username: string;
+  followers = [];
+  following = [];
   constructor(private userService: UserService) { }
 
   async ngOnInit() {
@@ -16,7 +18,9 @@ export class FfComponent implements OnInit {
   }
 
   async getUserFollowers() {
-    const response = await this.userService.getFollowersFollowing(this.username);
+    const response: any = await this.userService.getFollowersFollowing(this.username);
+    this.followers = response.followers;
+    this.following = response.following;
     console.log(response);
   }
 
