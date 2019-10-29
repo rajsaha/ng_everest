@@ -57,7 +57,7 @@ export class SearchComponent implements OnInit {
       if (query) {
         this.isSearchActive = false;
         this.isLoading = true;
-        const searchResult = await this.userService.globalSearch(encodeURIComponent(query));
+        const searchResult: any = await this.userService.globalSearch(encodeURIComponent(query));
 
         this.isSearchActive = true;
         this.isLoading = false;
@@ -81,7 +81,7 @@ export class SearchComponent implements OnInit {
     if (this.searchForm.get('query').value) {
       this.isSearchActive = false;
       this.isLoading = true;
-      const searchResult = await this.userService.globalSearch(encodeURIComponent(this.searchForm.get('query').value));
+      const searchResult: any = await this.userService.globalSearch(encodeURIComponent(this.searchForm.get('query').value));
       this.isSearchActive = true;
       this.isLoading = false;
       if (searchResult.users && searchResult.users.users.length > 0) {
@@ -111,8 +111,7 @@ export class SearchComponent implements OnInit {
   }
 
   async getResourceImage(resourceId: string) {
-    const result = await this.resourceService.getResourceImage(resourceId);
-    console.log(result);
+    const result: any = await this.resourceService.getResourceImage(resourceId);
     return result.image.link;
   }
 

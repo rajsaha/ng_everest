@@ -58,7 +58,7 @@ export class ManageResourcesComponent implements OnInit {
       // Search
       const query = this.resourceSearchForm.get('query').value;
       if (query) {
-        const searchResult = await this.resourceService.searchForUserResources({
+        const searchResult: any = await this.resourceService.searchForUserResources({
           username: this.username,
           query
         });
@@ -68,7 +68,7 @@ export class ManageResourcesComponent implements OnInit {
       }
 
       // Without search
-      const response = await this.resourceService.getUserResources({
+      const response: any = await this.resourceService.getUserResources({
         pageNo: this.pageNo,
         size: this.size,
         username: this.username

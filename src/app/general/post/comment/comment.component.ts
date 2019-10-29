@@ -25,7 +25,7 @@ export class CommentComponent implements OnInit {
   }
 
   async getComments() {
-    const response = await this.resourceService.getResourceComments({
+    const response: any = await this.resourceService.getResourceComments({
       pageNo: this.pageNo,
       size: this.size,
       resourceId: this.resourceId

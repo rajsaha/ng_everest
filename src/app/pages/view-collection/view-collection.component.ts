@@ -55,7 +55,7 @@ export class ViewCollectionComponent implements OnInit {
 
   async getCollection(id: string) {
     this.isLoading = true;
-    const result = await this.collectionService.getCollectionById({ id });
+    const result: any = await this.collectionService.getCollectionById({ id });
     this.collection = result.collection;
     this.changeCollectionTitleForm.controls.title.patchValue(result.collection.title);
     if (this.collection.resources.length > 0) {
@@ -65,7 +65,7 @@ export class ViewCollectionComponent implements OnInit {
   }
 
   async getMultipleResources(data) {
-    const result = await this.resourceService.getMultipleResources(data);
+    const result: any = await this.resourceService.getMultipleResources(data);
     this.resources = result.resources;
   }
 
@@ -104,6 +104,7 @@ export class ViewCollectionComponent implements OnInit {
   }
 
   async checkIfMine(username: string, id: string) {
-    this.isMine = await this.collectionService.checkIfMine({ username, id});
+    const response: any = await this.collectionService.checkIfMine({ username, id});
+    this.isMine = response;
   }
 }

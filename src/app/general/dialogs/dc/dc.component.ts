@@ -27,7 +27,7 @@ export class DcComponent implements OnInit {
   }
 
   async onYesClick() {
-    const response = await this.collectionService.deleteCollection(this.data.id);
+    const response: any = await this.collectionService.deleteCollection(this.data.id);
 
     if (!response.error) {
       this.snackbarService.openSnackBar({

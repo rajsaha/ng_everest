@@ -38,7 +38,7 @@ export class SignupComponent implements OnInit {
   onSubmit() {
     this.signingUp = true;
     if (this.signUpForm.valid) {
-      this.signUpService.signUp(this.signUpForm.value).then((res) => {
+      this.signUpService.signUp(this.signUpForm.value).then((res: any) => {
         this.signingUp = false;
         if (!res.error) {
           this.snackbarService.openSnackBar({

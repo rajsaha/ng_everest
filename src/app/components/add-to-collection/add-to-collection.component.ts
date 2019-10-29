@@ -53,11 +53,13 @@ export class AddToCollectionComponent implements OnInit {
   }
 
   async getCollectionNames() {
-    const response = await this.collectionService.getCollectionNames({
+    const response: any = await this.collectionService.getCollectionNames({
       pageNo: this.pageNo,
       size: this.size,
       username: this.username
     });
+
+    console.log(response);
 
     if (response.collections) {
       for (const collection of response.collections) {
@@ -67,7 +69,7 @@ export class AddToCollectionComponent implements OnInit {
   }
 
   async getCollectionTitle(resourceId: string) {
-    const collection = await this.collectionService.getCollectionTitleByResourceId(
+    const collection: any = await this.collectionService.getCollectionTitleByResourceId(
       { username: this.username, resourceId }
     );
 

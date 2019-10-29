@@ -127,7 +127,7 @@ export class EditArticleComponent implements OnInit {
   }
 
   async getCollectionNames() {
-    const response = await this.collectionService.getCollectionNames({
+    const response: any = await this.collectionService.getCollectionNames({
       username: this.username
     });
     if (response.collections) {
@@ -177,7 +177,7 @@ export class EditArticleComponent implements OnInit {
   async getResource(id: string) {
     try {
       this.isLoading = true;
-      const response = await this.resourceService.getResource({ id });
+      const response: any = await this.resourceService.getResource({ id });
       this.isLoading = false;
       this.resource = response.resource;
     } catch (err) {
@@ -186,7 +186,7 @@ export class EditArticleComponent implements OnInit {
   }
 
   async getCollectionTitle(resourceId: string) {
-    const collection = await this.collectionService.getCollectionTitleByResourceId(
+    const collection: any = await this.collectionService.getCollectionTitleByResourceId(
       { username: this.username, resourceId }
     );
 
@@ -226,7 +226,7 @@ export class EditArticleComponent implements OnInit {
       };
     }
 
-    const response = await this.resourceService.editResource(data);
+    const response: any = await this.resourceService.editResource(data);
     this.saveButtonText = 'Done';
     this.isLoading = false;
     this.isDisabled = false;

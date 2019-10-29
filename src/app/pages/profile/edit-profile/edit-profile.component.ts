@@ -80,7 +80,7 @@ export class EditProfileComponent implements OnInit {
 
   async getUserData() {
     this.isLoading = true;
-    const res = await this.userService.getProfileData(this.username);
+    const res: any = await this.userService.getProfileData(this.username);
     this.isLoading = false;
 
     this.isProfileSaveButtonDisabled = true;
@@ -137,7 +137,7 @@ export class EditProfileComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(async result => {
       if (result && result.status) {
-        const imageLink = await this.userService.getProfilePhoto(this.username);
+        const imageLink: any = await this.userService.getProfilePhoto(this.username);
         this.image = imageLink.image.image.link
           ? imageLink.image.image.link
           : this.defaultProfileImage;
@@ -167,7 +167,7 @@ export class EditProfileComponent implements OnInit {
       interest
     };
 
-    const res = await this.userService.removeInterest(data);
+    const res: any = await this.userService.removeInterest(data);
 
     if (res.error) {
       this.snackbarService.openSnackBar({
@@ -227,7 +227,7 @@ export class EditProfileComponent implements OnInit {
     this.isLoading = true;
     this.submitButtonText = 'Saving...';
 
-    const res = await this.userService.updateProfileData(data);
+    const res: any = await this.userService.updateProfileData(data);
 
     this.isLoading = false;
     this.submitButtonText = 'Save';

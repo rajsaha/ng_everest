@@ -36,7 +36,7 @@ export class FeedComponent implements OnInit {
 
   async getAllResources() {
     try {
-      const response = await this.resourceService.getAllResources({
+      const response: any = await this.resourceService.getAllResources({
         pageNo: this.pageNo,
         size: this.size,
         username: this.username

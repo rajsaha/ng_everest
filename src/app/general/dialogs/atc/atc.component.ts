@@ -78,7 +78,7 @@ export class AtcComponent implements OnInit {
 
   async getCollectionNames() {
     this.isLoading = true;
-    const response = await this.collectionService.getCollectionNames({
+    const response: any = await this.collectionService.getCollectionNames({
       pageNo: this.pageNo,
       size: this.size,
       username: this.username
@@ -93,14 +93,14 @@ export class AtcComponent implements OnInit {
   }
 
   async checkForResourceInCollection() {
-    const response = await this.collectionService.checkForResourceInCollection({
+    const response: any = await this.collectionService.checkForResourceInCollection({
       id: this.data.id,
       username: this.username
     });
   }
 
   async getCollectionTitle(resourceId: string) {
-    const collection = await this.collectionService.getCollectionTitleByResourceId(
+    const collection: any = await this.collectionService.getCollectionTitleByResourceId(
       { username: this.username, resourceId }
     );
 

@@ -124,7 +124,7 @@ export class ShareResourceComponent implements OnInit {
         customImage: this.image
       };
 
-      const response = await this.resourceService.shareResource(data);
+      const response: any = await this.resourceService.shareResource(data);
       this.isLoading = false;
       this.isDisabled = false;
       this.submitButtonText = 'Sharing';
@@ -159,7 +159,7 @@ export class ShareResourceComponent implements OnInit {
         collectionData: this.atcData
       };
 
-      const response = await this.resourceService.shareResource(data);
+      const response: any = await this.resourceService.shareResource(data);
       this.isLoading = false;
       this.isDisabled = false;
       this.submitButtonText = 'Sharing';
@@ -195,7 +195,7 @@ export class ShareResourceComponent implements OnInit {
         this.shareResourceForm.get('description').disable;
 
         if (this.shareResourceForm.controls.url.valid) {
-          const response = await this.resourceService.getOpenGraphData({
+          const response: any = await this.resourceService.getOpenGraphData({
             url: val
           });
 

@@ -162,7 +162,7 @@ export class WriteComponent implements OnInit {
         customImage: this.customImage
       };
 
-      const response = await this.resourceService.shareResource(data);
+      const response: any = await this.resourceService.shareResource(data);
       this.isLoading = false;
       this.isDisabled = false;
       this.saveButtonText = 'Save';
@@ -196,7 +196,7 @@ export class WriteComponent implements OnInit {
         tags: this.tags,
       };
 
-      const response = await this.resourceService.shareResource(data);
+      const response: any = await this.resourceService.shareResource(data);
       this.isLoading = false;
       this.isDisabled = false;
       this.saveButtonText = 'Sharing';
@@ -224,7 +224,7 @@ export class WriteComponent implements OnInit {
   }
 
   async getCollectionNames() {
-    const response = await this.collectionService.getCollectionNames({
+    const response: any = await this.collectionService.getCollectionNames({
       username: this.username
     });
     if (response.collections) {

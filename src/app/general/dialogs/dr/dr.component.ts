@@ -23,7 +23,7 @@ export class DrComponent implements OnInit {
   }
 
   async onYesClick() {
-    const response = await this.resourceService.deleteResource({id: this.data.id});
+    const response: any = await this.resourceService.deleteResource({id: this.data.id});
 
     if (!response.error) {
       this.snackbarService.openSnackBar({

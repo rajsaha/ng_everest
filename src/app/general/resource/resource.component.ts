@@ -89,7 +89,7 @@ export class ResourceComponent implements OnInit {
   }
 
   async deleteResourceFromCollection() {
-    const result = await this.collectionService.deleteResourceFromCollection({resourceId: this.id, collectionId: this.collectionId});
+    const result: any = await this.collectionService.deleteResourceFromCollection({resourceId: this.id, collectionId: this.collectionId});
     if (result) {
       this.drResponse.emit(this.id);
     }

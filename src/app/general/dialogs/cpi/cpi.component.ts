@@ -35,7 +35,7 @@ export class CpiComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data,
     private snackbarService: SnackbarService,
     private userService: UserService) {
-    this.userService.getProfilePhoto(data.username).then((res) => {
+    this.userService.getProfilePhoto(data.username).then((res: any) => {
       if (res.image.image) {
         this.userImage = res.image.image.link ? res.image.image.link : this.defaultProfileImage;
         this.deleteHash = res.image.image.deleteHash;
@@ -87,7 +87,7 @@ export class CpiComponent implements OnInit {
     // * Pre api call
     this.isSavingPhoto = true;
     this.dialogRef.disableClose = true;
-    const response = await this.userService.saveProfilePhoto(
+    const response: any = await this.userService.saveProfilePhoto(
       {
         id: this.userId,
         image: this.userImage,
@@ -124,7 +124,7 @@ export class CpiComponent implements OnInit {
     // * Pre api call
     this.isSavingPhoto = true;
     this.dialogRef.disableClose = true;
-    const response = await this.userService.deleteProfilePhoto({ id: this.userId, deleteHash: this.deleteHash });
+    const response: any = await this.userService.deleteProfilePhoto({ id: this.userId, deleteHash: this.deleteHash });
 
     // * Post api call
     this.dialogRef.disableClose = false;

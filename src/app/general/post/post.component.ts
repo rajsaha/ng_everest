@@ -114,19 +114,19 @@ export class PostComponent implements OnInit {
   }
 
   async getCommentsCount() {
-    const result = await this.resourceService.getResourceCommentsCount({
+    const result: any = await this.resourceService.getResourceCommentsCount({
       resourceId: this.id
     });
     this.commentCount = result;
   }
 
   async getUserImage(username) {
-    const result = await this.resourceService.getUserImage(username);
+    const result: any = await this.resourceService.getUserImage(username);
     this.userImage = result.image ? result.image : this.noPhoto;
   }
 
   async checkIfPostInCollection(id: string, username: string) {
-    const result = await this.collectionService.checkForResourceInCollection({
+    const result: any = await this.collectionService.checkForResourceInCollection({
       id,
       username: this.currentUser
     });
@@ -136,7 +136,7 @@ export class PostComponent implements OnInit {
   }
 
   async checkIfPostIsLiked(id: string, username: string) {
-    const result = await this.userService.checkIfPostIsLiked({
+    const result: any = await this.userService.checkIfPostIsLiked({
       resourceId: id,
       username
     });
@@ -159,7 +159,7 @@ export class PostComponent implements OnInit {
 
   async addComment() {
     this.showComments = true;
-    const result = await this.resourceService.addComment(
+    const result: any = await this.resourceService.addComment(
       this.commentForm.value
     );
 

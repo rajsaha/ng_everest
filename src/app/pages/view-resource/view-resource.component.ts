@@ -37,7 +37,7 @@ export class ViewResourceComponent implements OnInit {
   async getResource(id: string) {
     try {
       this.isLoading = true;
-      const response = await this.resourceService.getResource({id});
+      const response: any = await this.resourceService.getResource({id});
       this.isLoading = false;
       this.resource = response.resource;
       this.checkIfEditable(this.resource.username);

@@ -67,7 +67,7 @@ export class PublicProfileComponent implements OnInit {
 
   async getPublicProfile(username: string) {
     this.isLoading = true;
-    const result = await this.userService.getPublicProfile({
+    const result: any = await this.userService.getPublicProfile({
       username,
       pageNo: this.pageNo,
       size: this.size
@@ -107,7 +107,7 @@ export class PublicProfileComponent implements OnInit {
   }
 
   async checkIfUserIsFollowed(currentUser, username) {
-    const result = await this.userService.checkIfUserFollowed({
+    const result: any = await this.userService.checkIfUserFollowed({
       currentUser,
       username
     });
@@ -118,7 +118,7 @@ export class PublicProfileComponent implements OnInit {
   }
 
   async follow() {
-    const result = await this.userService.followUser({
+    const result: any = await this.userService.followUser({
       currentUser: this.currentUser,
       username: this.username
     });
@@ -129,7 +129,7 @@ export class PublicProfileComponent implements OnInit {
   }
 
   async unfollow() {
-    const result = await this.userService.unfollowUser({
+    const result: any = await this.userService.unfollowUser({
       currentUser: this.currentUser,
       username: this.username
     });
@@ -146,7 +146,7 @@ export class PublicProfileComponent implements OnInit {
 
   async getUserResources(username?: any) {
     try {
-      const response = await this.resourceService.getUserResources({
+      const response: any = await this.resourceService.getUserResources({
         pageNo: this.pageNo,
         size: this.size,
         username: username ? username : this.username
