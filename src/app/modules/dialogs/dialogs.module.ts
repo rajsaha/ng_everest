@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { AtcComponent } from 'src/app/general/dialogs/atc/atc.component';
 import { DcComponent } from 'src/app/general/dialogs/dc/dc.component';
 import { DrComponent } from 'src/app/general/dialogs/dr/dr.component';
+import { FfComponent } from 'src/app/general/dialogs/ff/ff.component';
 import {
   MatFormFieldModule,
   MatAutocompleteModule,
@@ -10,13 +11,14 @@ import {
   MatDialogModule,
   MatInputModule,
   MatRippleModule,
-  MatProgressBarModule
+  MatProgressBarModule,
+  MatTabsModule
 } from '@angular/material';
 import { ReactiveFormsModule } from '@angular/forms';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 
 @NgModule({
-  declarations: [AtcComponent, DcComponent, DrComponent],
+  declarations: [AtcComponent, DcComponent, DrComponent, FfComponent],
   imports: [
     CommonModule,
     InfiniteScrollModule,
@@ -27,8 +29,10 @@ import { InfiniteScrollModule } from 'ngx-infinite-scroll';
     MatButtonModule,
     MatDialogModule,
     MatRippleModule,
-    MatProgressBarModule
+    MatProgressBarModule,
+    MatTabsModule
   ],
-  exports: [AtcComponent, DcComponent, DrComponent]
+  exports: [AtcComponent, DcComponent, DrComponent, FfComponent],
+  entryComponents: [FfComponent]
 })
 export class DialogsModule {}

@@ -4,6 +4,8 @@ import { UserService } from '@services/user/user.service';
 import { ActivatedRoute } from '@angular/router';
 import { environment as ENV } from '@environments/environment';
 import { ResourceService } from '@services/resource/resource.service';
+import { MatDialog } from '@angular/material';
+import { FfComponent } from 'src/app/general/dialogs/ff/ff.component';
 
 @Component({
   selector: 'app-public-profile',
@@ -48,7 +50,8 @@ export class PublicProfileComponent implements OnInit {
   constructor(
     private userService: UserService,
     private resourceService: ResourceService,
-    private router: ActivatedRoute
+    private router: ActivatedRoute,
+    private dialog: MatDialog
   ) {}
 
   ngOnInit() {
@@ -141,7 +144,7 @@ export class PublicProfileComponent implements OnInit {
     await this.getUserResources();
   }
 
-  async getUserResources(username?) {
+  async getUserResources(username?: any) {
     try {
       const response = await this.resourceService.getUserResources({
         pageNo: this.pageNo,
@@ -150,12 +153,19 @@ export class PublicProfileComponent implements OnInit {
       });
 
       this.resourcesCount = response.count;
-      
+
       for (const resource of response.resources) {
         this.resources.push(resource);
       }
     } catch (err) {
       console.error(err);
     }
+  }
+
+  openFollowDialog() {
+    const dialogRef = this.dialog.open(FfComponent, {});
+
+    dialogRef.afterClosed().subscribe(async (result: any) => {
+    });
   }
 }

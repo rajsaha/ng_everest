@@ -152,9 +152,10 @@ app-root {
             }
 
             .followers-following {
+                border-radius: 5px;
                 display: inline-block;
                 cursor: pointer;
-                padding: 8px;
+                padding: 10px;
                 font-size: 14px;
                 width: auto;
             }

@@ -7,6 +7,7 @@ import { SnackbarService } from '@services/general/snackbar.service';
 import { MatDialog, MatChipInputEvent } from '@angular/material';
 import { CpiComponent } from 'src/app/general/dialogs/cpi/cpi.component';
 import { environment as ENV } from '@environments/environment';
+import { FfComponent } from 'src/app/general/dialogs/ff/ff.component';
 
 @Component({
   selector: 'app-edit-profile',
@@ -248,5 +249,12 @@ export class EditProfileComponent implements OnInit {
         class: 'red-snackbar'
       });
     }
+  }
+
+  openFollowDialog() {
+    const dialogRef = this.dialog.open(FfComponent, {});
+
+    dialogRef.afterClosed().subscribe(async (result: any) => {
+    });
   }
 }
