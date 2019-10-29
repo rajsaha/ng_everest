@@ -37,6 +37,7 @@ export class PublicProfileComponent implements OnInit {
   collections = [];
 
   currentUser: string;
+  paramUser: string;
   collectionUrl = './collection';
 
   // Toggles
@@ -57,6 +58,7 @@ export class PublicProfileComponent implements OnInit {
   ngOnInit() {
     this.currentUser = localStorage.getItem('username');
     this.router.params.subscribe(async params => {
+      this.paramUser = params.username;
       await Promise.all([
         this.getPublicProfile(params.username),
         this.checkIfUserIsFollowed(this.currentUser, params.username),
@@ -163,7 +165,11 @@ export class PublicProfileComponent implements OnInit {
   }
 
   openFollowDialog() {
-    const dialogRef = this.dialog.open(FfComponent, {});
+    const dialogRef = this.dialog.open(FfComponent, {
+      data: {
+        username: this.paramUser
+      }
+    });
 
     dialogRef.afterClosed().subscribe(async (result: any) => {
     });

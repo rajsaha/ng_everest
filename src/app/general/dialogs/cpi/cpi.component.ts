@@ -32,7 +32,7 @@ export class CpiComponent implements OnInit {
 
   constructor(
     public dialogRef: MatDialogRef<CpiComponent>,
-    @Inject(MAT_DIALOG_DATA) public data,
+    @Inject(MAT_DIALOG_DATA) public data: any,
     private snackbarService: SnackbarService,
     private userService: UserService) {
     this.userService.getProfilePhoto(data.username).then((res: any) => {

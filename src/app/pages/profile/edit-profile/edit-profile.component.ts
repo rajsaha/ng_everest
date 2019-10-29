@@ -252,7 +252,11 @@ export class EditProfileComponent implements OnInit {
   }
 
   openFollowDialog() {
-    const dialogRef = this.dialog.open(FfComponent, {});
+    const dialogRef = this.dialog.open(FfComponent, {
+      data: {
+        username: this.username
+      }
+    });
 
     dialogRef.afterClosed().subscribe(async (result: any) => {
     });
