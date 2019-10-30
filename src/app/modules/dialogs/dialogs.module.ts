@@ -12,7 +12,8 @@ import {
   MatInputModule,
   MatRippleModule,
   MatProgressBarModule,
-  MatTabsModule
+  MatTabsModule,
+  MatProgressSpinnerModule
 } from '@angular/material';
 import { ReactiveFormsModule } from '@angular/forms';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
@@ -30,6 +31,7 @@ import { InfiniteScrollModule } from 'ngx-infinite-scroll';
     MatDialogModule,
     MatRippleModule,
     MatProgressBarModule,
+    MatProgressSpinnerModule,
     MatTabsModule
   ],
   exports: [AtcComponent, DcComponent, DrComponent, FfComponent],

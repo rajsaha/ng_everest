@@ -1,6 +1,5 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { UserService } from '@services/user/user.service';
-import { ActivatedRoute } from '@angular/router';
 import { MAT_DIALOG_DATA } from '@angular/material';
 
 @Component({
@@ -12,19 +11,23 @@ export class FfComponent implements OnInit {
   username: string;
   followers = [];
   following = [];
+
+  // Toggles
+  isLoading = false;
+
   constructor(
     private userService: UserService,
-    private route: ActivatedRoute,
     @Inject(MAT_DIALOG_DATA) public data: any) { }
 
   async ngOnInit() {
-    console.log(this.data);
     this.username = localStorage.getItem('username');
     await this.getUserFollowers();
   }
 
   async getUserFollowers() {
+    this.isLoading = true;
     const response: any = await this.userService.getFollowersFollowing(this.data.username);
+    this.isLoading = false;
     for (const user of response.followers) {
       this.followers.push(user);
     }
@@ -32,6 +35,10 @@ export class FfComponent implements OnInit {
     for (const user of response.following) {
       this.following.push(user);
     }
+  }
+
+  onScrollDown() {
+    console.log('asd');
   }
 
 }
