@@ -17,7 +17,8 @@ export class FfComponent implements OnInit {
 
   constructor(
     private userService: UserService,
-    @Inject(MAT_DIALOG_DATA) public data: any) { }
+    @Inject(MAT_DIALOG_DATA) public data: any
+  ) {}
 
   async ngOnInit() {
     this.username = localStorage.getItem('username');
@@ -26,7 +27,9 @@ export class FfComponent implements OnInit {
 
   async getUserFollowers() {
     this.isLoading = true;
-    const response: any = await this.userService.getFollowersFollowing(this.data.username);
+    const response: any = await this.userService.getFollowersFollowing(
+      this.data.username
+    );
     this.isLoading = false;
     for (const user of response.followers) {
       this.followers.push(user);
@@ -40,5 +43,4 @@ export class FfComponent implements OnInit {
   onScrollDown() {
     console.log('asd');
   }
-
 }

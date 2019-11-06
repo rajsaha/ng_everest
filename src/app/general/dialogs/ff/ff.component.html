@@ -8,8 +8,8 @@
           infiniteScroll
           [infiniteScrollDistance]="2"
           [infiniteScrollThrottle]="50"
+          [fromRoot]="true"
           (scrolled)="onScrollDown()"
-          [scrollWindow]="false"
         >
           <div
             class="image"
@@ -48,7 +48,7 @@
           [infiniteScrollDistance]="2"
           [infiniteScrollThrottle]="50"
           (scrolled)="onScrollDown()"
-          [scrollWindow]="false"
+          [fromRoot]="true"
         >
           <div
             class="image"
