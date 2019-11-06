@@ -18,10 +18,11 @@
       <app-resource *ngFor="let resource of resources" [data]="resource" (drResponse)="drResponseHandler($event)"
         [isInCollectionPage]="isInCollectionPage">
       </app-resource>
+      <app-loading type="resource" *ngIf="isLoading"></app-loading>
     </div>
   </div>
 
-  <div class="see-more" (click)="loadMorePosts()">
+  <div class="see-more" *ngIf="!isLoading && resources.length < resourcesCount" (click)="loadMorePosts()">
     See More
   </div>
 

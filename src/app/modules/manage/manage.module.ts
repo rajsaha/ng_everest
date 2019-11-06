@@ -13,6 +13,9 @@ import { MaterialModule } from 'src/app/modules/material/material.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { GeneralModule } from 'src/app/modules/general/general.module';
 import { DialogsModule } from 'src/app/modules/dialogs/dialogs.module';
+import { EditArticleComponent } from 'src/app/pages/edit-article/edit-article.component';
+import { EditorModule } from '@tinymce/tinymce-angular';
+import { AutosizeModule } from 'ngx-autosize';
 
 const routes: Routes = [
     {
@@ -28,6 +31,10 @@ const routes: Routes = [
         component: EditResourceComponent
     },
     {
+        path: 'article/edit/:resourceId',
+        component: EditArticleComponent
+    },
+    {
         path: 'collection',
         component: ManageCollectionsComponent
     }
@@ -38,14 +45,17 @@ const routes: Routes = [
         ManageComponent,
         ManageResourcesComponent,
         EditResourceComponent,
-        ManageCollectionsComponent
+        ManageCollectionsComponent,
+        EditArticleComponent
     ],
     imports: [
         CommonModule,
+        AutosizeModule,
         MaterialModule,
         ReactiveFormsModule,
         GeneralModule,
         DialogsModule,
+        EditorModule,
         RouterModule.forChild(routes)
     ],
     entryComponents: [AtcComponent, SnackbarComponent, DrComponent, DcComponent],

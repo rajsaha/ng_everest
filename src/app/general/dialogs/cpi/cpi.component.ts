@@ -3,7 +3,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { SnackbarService } from '@services/general/snackbar.service';
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
 import { UserService } from '@services/user/user.service';
-import { environment as ENV } from '@environments/environment.prod';
+import { environment as ENV } from '@environments/environment';
 
 class ImageSnippet {
   constructor(public src: string, public file: File) { }
@@ -32,10 +32,10 @@ export class CpiComponent implements OnInit {
 
   constructor(
     public dialogRef: MatDialogRef<CpiComponent>,
-    @Inject(MAT_DIALOG_DATA) public data,
+    @Inject(MAT_DIALOG_DATA) public data: any,
     private snackbarService: SnackbarService,
     private userService: UserService) {
-    this.userService.getProfilePhoto(data.username).then((res) => {
+    this.userService.getProfilePhoto(data.username).then((res: any) => {
       if (res.image.image) {
         this.userImage = res.image.image.link ? res.image.image.link : this.defaultProfileImage;
         this.deleteHash = res.image.image.deleteHash;
@@ -74,7 +74,9 @@ export class CpiComponent implements OnInit {
   }
 
   onNoClick() {
-    this.dialogRef.close();
+    this.dialogRef.close({
+      status: false
+    });
   }
 
   onYesClick() {
@@ -85,7 +87,7 @@ export class CpiComponent implements OnInit {
     // * Pre api call
     this.isSavingPhoto = true;
     this.dialogRef.disableClose = true;
-    const response = await this.userService.saveProfilePhoto(
+    const response: any = await this.userService.saveProfilePhoto(
       {
         id: this.userId,
         image: this.userImage,
@@ -122,7 +124,7 @@ export class CpiComponent implements OnInit {
     // * Pre api call
     this.isSavingPhoto = true;
     this.dialogRef.disableClose = true;
-    const response = await this.userService.deleteProfilePhoto({ id: this.userId, deleteHash: this.deleteHash });
+    const response: any = await this.userService.deleteProfilePhoto({ id: this.userId, deleteHash: this.deleteHash });
 
     // * Post api call
     this.dialogRef.disableClose = false;

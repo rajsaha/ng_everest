@@ -9,140 +9,85 @@ export class UserService {
 
   constructor(private http: HttpClient) { }
 
-  getProfileData(username: string): Promise<any> {
-    return new Promise(resolve => {
-      this.http.get(`${ENV.API_URL}/user/get-user-data/${username}`)
-        .subscribe((response: any) => {
-          resolve(response);
-        });
-    });
+  getProfileData(username: string) {
+    const response = this.http.get(`${ENV.API_URL}/user/get-user-data/${username}`).toPromise();
+    return response;
   }
 
-  getPublicProfile(username: string): Promise<any> {
-    return new Promise(resolve => {
-      this.http.get(`${ENV.API_URL}/user/get-public-profile/${username}`)
-        .subscribe((response: any) => {
-          resolve(response);
-        });
-    });
+  getPublicProfile(data: any) {
+    const response = this.http.post(`${ENV.API_URL}/user/get-public-profile`, data).toPromise()
+    return response;
   }
 
-  updateProfileData(data: any): Promise<any> {
-    return new Promise(resolve => {
-      this.http.post(`${ENV.API_URL}/user/update-user-data`, data)
-        .subscribe((response: any) => {
-          resolve(response);
-        });
-    });
+  updateProfileData(data: any) {
+    const response = this.http.post(`${ENV.API_URL}/user/update-user-data`, data).toPromise();
+    return response;
   }
 
-  removeInterest(data: any): Promise<any> {
-    return new Promise(resolve => {
-      this.http.post(`${ENV.API_URL}/user/remove-user-interest`, data)
-        .subscribe((response: any) => {
-          resolve(response);
-        });
-    });
+  removeInterest(data: any) {
+    const response = this.http.post(`${ENV.API_URL}/user/remove-user-interest`, data).toPromise();
+    return response;
   }
 
-  saveProfilePhoto(data: any): Promise<any> {
-    return new Promise(resolve => {
-      this.http.post(`${ENV.API_URL}/user/save-profile-photo`, data)
-        .subscribe((response: any) => {
-          resolve(response);
-        });
-    });
+  saveProfilePhoto(data: any) {
+    const response = this.http.post(`${ENV.API_URL}/user/save-profile-photo`, data).toPromise();
+    return response;
   }
 
-  deleteProfilePhoto(data: any): Promise<any> {
-    return new Promise(resolve => {
-      this.http.delete(`${ENV.API_URL}/user/delete-profile-photo/${data.id}/${data.deleteHash}`)
-        .subscribe((response: any) => {
-          resolve(response);
-        });
-    });
+  deleteProfilePhoto(data: any) {
+    const response = this.http.delete(`${ENV.API_URL}/user/delete-profile-photo/${data.id}/${data.deleteHash}`).toPromise();
+    return response;
   }
 
-  getProfilePhoto(data: any): Promise<any> {
-    return new Promise(resolve => {
-      this.http.get(`${ENV.API_URL}/user/get-profile-photo/${data}`)
-        .subscribe((response: any) => {
-          resolve(response);
-        });
-    });
+  getProfilePhoto(data: any) {
+    const response = this.http.get(`${ENV.API_URL}/user/get-profile-photo/${data}`).toPromise();
+    return response;
   }
 
-  updatePassword(data: any): Promise<any> {
-    return new Promise(resolve => {
-      this.http.post(`${ENV.API_URL}/user/update-password`, data)
-        .subscribe((response: any) => {
-          resolve(response);
-        });
-    });
+  updatePassword(data: any) {
+    const response = this.http.post(`${ENV.API_URL}/user/update-password`, data).toPromise();
+    return response;
   }
 
   // * Like and unlike post
-  likePost(data: any): Promise<any> {
-    return new Promise(resolve => {
-      this.http.post(`${ENV.API_URL}/user/like`, data)
-        .subscribe((response: any) => {
-          resolve(response);
-        });
-    });
+  likePost(data: any) {
+    const response = this.http.post(`${ENV.API_URL}/user/like`, data).toPromise();
+    return response;
   }
 
-  unLikePost(data: any): Promise<any> {
-    return new Promise(resolve => {
-      this.http.post(`${ENV.API_URL}/user/unlike`, data)
-        .subscribe((response: any) => {
-          resolve(response);
-        });
-    });
+  unLikePost(data: any) {
+    const response = this.http.post(`${ENV.API_URL}/user/unlike`, data).toPromise();
+    return response;
   }
 
-  checkIfPostIsLiked(data: any): Promise<any> {
-    return new Promise(resolve => {
-      this.http.post(`${ENV.API_URL}/user/check-if-post-liked`, data)
-        .subscribe((response: any) => {
-          resolve(response);
-        });
-    });
+  checkIfPostIsLiked(data: any) {
+    const response = this.http.post(`${ENV.API_URL}/user/check-if-post-liked`, data).toPromise();
+    return response;
   }
 
   // * Follow / unfollow calls
-  followUser(data: any): Promise<any> {
-    return new Promise(resolve => {
-      this.http.post(`${ENV.API_URL}/user/follow`, data)
-        .subscribe((response: any) => {
-          resolve(response);
-        });
-    });
+  followUser(data: any) {
+    const response = this.http.post(`${ENV.API_URL}/user/follow`, data).toPromise();
+    return response;
   }
 
-  unfollowUser(data: any): Promise<any> {
-    return new Promise(resolve => {
-      this.http.post(`${ENV.API_URL}/user/unfollow`, data)
-        .subscribe((response: any) => {
-          resolve(response);
-        });
-    });
+  unfollowUser(data: any) {
+    const response = this.http.post(`${ENV.API_URL}/user/unfollow`, data).toPromise();
+    return response;
   }
 
-  checkIfUserFollowed(data: any): Promise<any> {
-    return new Promise(resolve => {
-      this.http.post(`${ENV.API_URL}/user/check-if-user-followed`, data)
-        .subscribe((response: any) => {
-          resolve(response);
-        });
-    });
+  checkIfUserFollowed(data: any) {
+    const response = this.http.post(`${ENV.API_URL}/user/check-if-user-followed`, data).toPromise();
+    return response;
   }
 
-  globalSearch(query): Promise<any> {
-    return new Promise(resolve => {
-      this.http.get(`${ENV.API_URL}/user/global-search/${query}`)
-        .subscribe((response: any) => {
-          resolve(response);
-        });
-    });
+  globalSearch(query: string) {
+    const response = this.http.get(`${ENV.API_URL}/user/global-search/${query}`).toPromise();
+    return response;
+  }
+
+  getFollowersFollowing(username: string) {
+    const response = this.http.get(`${ENV.API_URL}/user/get-followers-following/${username}`).toPromise();
+    return response;
   }
 }

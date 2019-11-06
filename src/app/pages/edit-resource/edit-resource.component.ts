@@ -110,7 +110,7 @@ export class EditResourceComponent implements OnInit {
       tag
     };
 
-    const res = await this.resourceService.removeTag(data);
+    const res: any = await this.resourceService.removeTag(data);
     if (res.error) {
       this.snackbarService.openSnackBar({
         message: {
@@ -148,7 +148,7 @@ export class EditResourceComponent implements OnInit {
       };
     }
 
-    const response = await this.resourceService.editResource(data);
+    const response: any = await this.resourceService.editResource(data);
     this.submitButtonText = 'Done';
     this.isLoading = false;
     this.isDisabled = false;
@@ -181,7 +181,7 @@ export class EditResourceComponent implements OnInit {
     this.editResourceForm.controls.url.valueChanges.pipe(delay(3000)).subscribe(async (val) => {
       this.isLoading = true;
       if (this.editResourceForm.controls.url.valid) {
-        const response = await this.resourceService.getOpenGraphData({
+        const response: any = await this.resourceService.getOpenGraphData({
           url: val
         });
 
@@ -232,7 +232,7 @@ export class EditResourceComponent implements OnInit {
   }
 
   async getCollectionNames() {
-    const response = await this.collectionService.getCollectionNames({ username: this.username });
+    const response: any = await this.collectionService.getCollectionNames({ username: this.username });
     if (response.collections) {
       for (const item of response.collections) {
         this.collectionNames.push(item.title);
@@ -243,7 +243,7 @@ export class EditResourceComponent implements OnInit {
   async getResource(id: string) {
     try {
       this.isLoading = true;
-      const response = await this.resourceService.getResource({ id });
+      const response: any = await this.resourceService.getResource({ id });
 
       // * Redirect if resource belongs to someone else
       if (this.username !== response.resource.username) {
@@ -259,7 +259,7 @@ export class EditResourceComponent implements OnInit {
   }
 
   async getCollectionTitle(resourceId: string) {
-    const collection = await this.collectionService.getCollectionTitleByResourceId({ username: this.username, resourceId });
+    const collection: any = await this.collectionService.getCollectionTitleByResourceId({ username: this.username, resourceId });
 
     if (collection.collection) {
       this.editResourceForm.controls.collectionName.patchValue(collection.collection.title);

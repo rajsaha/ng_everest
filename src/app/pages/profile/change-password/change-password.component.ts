@@ -39,7 +39,7 @@ export class ChangePasswordComponent implements OnInit {
 
   async changePasswordForm() {
     if (this.passwordForm.valid) {
-      const response = await this.userService.updatePassword(this.passwordForm.value);
+      const response: any = await this.userService.updatePassword(this.passwordForm.value);
 
       if (!response.error) {
         this.snackbarService.openSnackBar({

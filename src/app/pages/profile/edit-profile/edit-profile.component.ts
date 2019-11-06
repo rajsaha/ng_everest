@@ -6,7 +6,8 @@ import { UserService } from '@services/user/user.service';
 import { SnackbarService } from '@services/general/snackbar.service';
 import { MatDialog, MatChipInputEvent } from '@angular/material';
 import { CpiComponent } from 'src/app/general/dialogs/cpi/cpi.component';
-import { environment as ENV } from '@environments/environment.prod';
+import { environment as ENV } from '@environments/environment';
+import { FfComponent } from 'src/app/general/dialogs/ff/ff.component';
 
 @Component({
   selector: 'app-edit-profile',
@@ -21,7 +22,9 @@ export class EditProfileComponent implements OnInit {
   website: string;
   bio: string;
   email: string;
-  image = '../../../assets/portrait.jpg';
+  followers = [];
+  following = [];
+  image = `${ENV.SITE_URL}/assets/images/portrait.jpg`;
   uploadedImage: string;
   imageId: string;
   deleteHash: string;
@@ -52,7 +55,7 @@ export class EditProfileComponent implements OnInit {
     private userService: UserService,
     private snackbarService: SnackbarService,
     public dialog: MatDialog
-  ) { }
+  ) {}
 
   async ngOnInit() {
     this.username = localStorage.getItem('username');
@@ -77,11 +80,13 @@ export class EditProfileComponent implements OnInit {
 
   async getUserData() {
     this.isLoading = true;
-    const res = await this.userService.getProfileData(this.username);
+    const res: any = await this.userService.getProfileData(this.username);
     this.isLoading = false;
 
     this.isProfileSaveButtonDisabled = true;
     this.interests = res.userData.interests;
+    this.followers = res.userData.followers;
+    this.following = res.userData.following;
 
     if (res.userData.image) {
       this.image = res.userData.image.link;
@@ -130,9 +135,13 @@ export class EditProfileComponent implements OnInit {
       }
     });
 
-    dialogRef.afterClosed().subscribe(async (result) => {
-      const imageLink = await this.userService.getProfilePhoto(this.username);
-      this.image = imageLink.image.image.link ? imageLink.image.image.link : this.defaultProfileImage;
+    dialogRef.afterClosed().subscribe(async result => {
+      if (result && result.status) {
+        const imageLink: any = await this.userService.getProfilePhoto(this.username);
+        this.image = imageLink.image.image.link
+          ? imageLink.image.image.link
+          : this.defaultProfileImage;
+      }
     });
   }
 
@@ -158,7 +167,7 @@ export class EditProfileComponent implements OnInit {
       interest
     };
 
-    const res = await this.userService.removeInterest(data);
+    const res: any = await this.userService.removeInterest(data);
 
     if (res.error) {
       this.snackbarService.openSnackBar({
@@ -166,7 +175,7 @@ export class EditProfileComponent implements OnInit {
           message: 'Something went wrong!',
           error: true
         },
-        class: 'red-snackbar',
+        class: 'red-snackbar'
       });
     } else {
       if (index >= 0) {
@@ -218,7 +227,7 @@ export class EditProfileComponent implements OnInit {
     this.isLoading = true;
     this.submitButtonText = 'Saving...';
 
-    const res = await this.userService.updateProfileData(data);
+    const res: any = await this.userService.updateProfileData(data);
 
     this.isLoading = false;
     this.submitButtonText = 'Save';
@@ -229,7 +238,7 @@ export class EditProfileComponent implements OnInit {
           message: 'Profile data saved!',
           error: false
         },
-        class: 'green-snackbar',
+        class: 'green-snackbar'
       });
     } else {
       this.snackbarService.openSnackBar({
@@ -237,9 +246,19 @@ export class EditProfileComponent implements OnInit {
           message: `Error: ${res.error}!`,
           error: true
         },
-        class: 'red-snackbar',
+        class: 'red-snackbar'
       });
     }
   }
 
+  openFollowDialog() {
+    const dialogRef = this.dialog.open(FfComponent, {
+      data: {
+        username: this.username
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(async (result: any) => {
+    });
+  }
 }

@@ -1,80 +1,131 @@
 <div class="public-view" *ngIf="!isLoading">
-    <div class="section-container">
-        <div class="section">
-            <div class="profile-picture">
-                <div class="image-container" [ngStyle]="{ 'background-image': 'url(' + image  +')', 'border': 'none' }">
-                </div>
-                <div class="text">
-                    <p>{{ username }}</p>
-                    <p>{{ email }}</p>
-                </div>
-                <button class="follow-user" mat-stroked-button color="primary" (click)="follow()" *ngIf="!isFollowed">Follow</button>
-                <button class="follow-user" mat-stroked-button color="primary" (click)="unfollow()" *ngIf="isFollowed">Unfollow</button>
-            </div>
-            <button class="follow-user-sm" mat-stroked-button (click)="follow()" *ngIf="!isFollowed" color="primary">Follow</button>
-            <button class="follow-user-sm" mat-stroked-button (click)="unfollow()" *ngIf="isFollowed">Unfollow</button>
-
-            <!--* Public view of profile -->
-            <div class="public-view-content">
-                <h1 *ngIf="name">{{ name }}</h1>
-                <a *ngIf="website" [href]="website" target="_blank">
-                    <fa-icon [icon]="faExternalLinkAlt"></fa-icon>&nbsp; Website
-                </a>
-                <p class="bio" *ngIf="bio">{{ bio }}</p>
-                <mat-chip-list *ngIf="interests">
-                    <mat-chip *ngFor="let interest of interests">{{ interest }}</mat-chip>
-                </mat-chip-list>
-            </div>
+  <div class="section-container">
+    <div class="section">
+      <div class="profile-picture">
+        <div
+          class="image-container"
+          [ngStyle]="{
+            'background-image': 'url(' + image + ')',
+            border: 'none'
+          }"
+        ></div>
+        <div class="text">
+          <p>{{ username }}</p>
+          <p>{{ email }}</p>
         </div>
+        <button
+          class="follow-user"
+          mat-stroked-button
+          color="primary"
+          (click)="follow()"
+          *ngIf="!isFollowed"
+        >
+          Follow
+        </button>
+        <button
+          class="follow-user"
+          mat-stroked-button
+          color="primary"
+          (click)="unfollow()"
+          *ngIf="isFollowed"
+        >
+          Unfollow
+        </button>
+      </div>
+      <button
+        class="follow-user-sm"
+        mat-stroked-button
+        (click)="follow()"
+        *ngIf="!isFollowed"
+        color="primary"
+      >
+        Follow
+      </button>
+      <button
+        class="follow-user-sm"
+        mat-stroked-button
+        (click)="unfollow()"
+        *ngIf="isFollowed"
+      >
+        Unfollow
+      </button>
+
+      <!--* Public view of profile -->
+      <div class="public-view-content">
+        <h1 *ngIf="name">{{ name }}</h1>
+        <a *ngIf="website" [href]="website" target="_blank">
+          <fa-icon [icon]="faExternalLinkAlt"></fa-icon>&nbsp; Website
+        </a>
+        <p class="bio" *ngIf="bio">{{ bio }}</p>
+        <mat-chip-list *ngIf="interests">
+          <mat-chip *ngFor="let interest of interests">{{ interest }}</mat-chip>
+        </mat-chip-list>
+        <div class="followers-following" (click)="openFollowDialog()">
+          <strong>{{ followers.length }}</strong> followers |
+          <strong>{{ following.length }}</strong> following
+        </div>
+      </div>
     </div>
+  </div>
 </div>
 
 <div class="public-view" *ngIf="isLoading">
-    <div class="section-container">
-        <div class="section">
-            <app-loading type="profile"></app-loading>
-        </div>
+  <div class="section-container">
+    <div class="section">
+      <app-loading type="profile"></app-loading>
     </div>
+  </div>
 </div>
 
 <mat-tab-group mat-align-tabs="center">
-    <!-- * Resources -->
-    <mat-tab label="Resources">
-        <div class="section-container">
-            <!-- * Resource grid -->
-            <div class="resource-grid" *ngIf="!isLoading">
-                <app-resource 
-                *ngFor="let resource of resources" 
-                [data]="resource" 
-                isInCollectionPage="false" 
-                self="false">
-                </app-resource>
-            </div>
+  <!-- * Resources -->
+  <mat-tab label="Resources">
+    <div class="section-container">
+      <!-- * Resource grid -->
+      <div
+        class="resource-grid"
+        *ngIf="!isLoading"
+      >
+        <app-resource
+          *ngFor="let resource of resources"
+          [data]="resource"
+          isInCollectionPage="false"
+          self="false"
+        >
+        </app-resource>
+      </div>
 
-            <div class="resource-grid" *ngIf="isLoading">
-                <app-loading type="resource"></app-loading>
-            </div>
+      <div *ngIf="!isLoading && resources.length < resourcesCount" class="see-more" (click)="loadMorePosts()">
+        See More
+      </div>
 
-            <div *ngIf="resources && resources.length === 0">
-                {{ name ? name : username }} hasn't shared any resources yet
-            </div>
-        </div>
-    </mat-tab>
+      <div class="resource-grid" *ngIf="isLoading">
+        <app-loading type="resource"></app-loading>
+      </div>
 
-    <!-- * Collections -->
-    <mat-tab label="Collections">
-        <div class="section-container">
-            <div class="list-of-collections" *ngIf="!isLoading">
-                <app-collection *ngFor="let collection of collections" [data]="collection"></app-collection>
-            </div>
+      <div *ngIf="resources && resources.length === 0">
+        {{ name ? name : username }} hasn't shared any resources yet
+      </div>
+    </div>
+  </mat-tab>
 
-            <div class="list-of-collections" *ngIf="isLoading">
-                <app-loading type="collection"></app-loading>
-            </div>
+  <!-- * Collections -->
+  <mat-tab label="Collections">
+    <div class="section-container">
+      <div class="list-of-collections" *ngIf="!isLoading">
+        <app-collection
+          *ngFor="let collection of collections"
+          [data]="collection"
+        ></app-collection>
+      </div>
 
-            <div *ngIf="collections && collections.length === 0">
-                {{ name ? name : username }} hasn't made a collection yet
-            </div>
-        </div>
-    </mat-tab>
+      <div class="list-of-collections" *ngIf="isLoading">
+        <app-loading type="collection"></app-loading>
+      </div>
+
+      <div *ngIf="collections && collections.length === 0">
+        {{ name ? name : username }} hasn't made a collection yet
+      </div>
+    </div>
+  </mat-tab>
 </mat-tab-group>

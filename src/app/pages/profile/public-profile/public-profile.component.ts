@@ -2,7 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { faExternalLinkAlt } from '@fortawesome/free-solid-svg-icons';
 import { UserService } from '@services/user/user.service';
 import { ActivatedRoute } from '@angular/router';
-import { environment as ENV } from '@environments/environment.prod';
+import { environment as ENV } from '@environments/environment';
+import { ResourceService } from '@services/resource/resource.service';
+import { MatDialog } from '@angular/material';
+import { FfComponent } from 'src/app/general/dialogs/ff/ff.component';
 
 @Component({
   selector: 'app-public-profile',
@@ -20,48 +23,65 @@ export class PublicProfileComponent implements OnInit {
   website: string;
   bio: string;
   email: string;
-  image = '../../../assets/portrait.jpg';
+  following = [];
+  followers = [];
+  image = `${ENV.SITE_URL}/assets/images/portrait.jpg`;
   interests = [];
   defaultProfileImage = `${ENV.SITE_URL}/assets/images/portrait.jpg`;
 
   // Resources
   resources = [];
+  resourcesCount = 0;
 
   // Collections
   collections = [];
 
   currentUser: string;
+  paramUser: string;
   collectionUrl = './collection';
 
   // Toggles
   isLoading = false;
   isFollowed = false;
 
-  constructor(private userService: UserService, private router: ActivatedRoute) { }
+  // Pagination
+  pageNo = 1;
+  size = 5;
+
+  constructor(
+    private userService: UserService,
+    private resourceService: ResourceService,
+    private router: ActivatedRoute,
+    private dialog: MatDialog
+  ) {}
 
   ngOnInit() {
     this.currentUser = localStorage.getItem('username');
-    this.router.params.subscribe(async (params) => {
+    this.router.params.subscribe(async params => {
+      this.paramUser = params.username;
       await Promise.all([
         this.getPublicProfile(params.username),
-        this.checkIfUserIsFollowed(this.currentUser, params.username)
+        this.checkIfUserIsFollowed(this.currentUser, params.username),
+        this.getUserResources(params.username)
       ]);
     });
   }
 
   async getPublicProfile(username: string) {
     this.isLoading = true;
-    const result = await this.userService.getPublicProfile(username);
+    const result: any = await this.userService.getPublicProfile({
+      username,
+      pageNo: this.pageNo,
+      size: this.size
+    });
     this.isLoading = false;
 
     // * Separating the individual parts
     const profileData = result.profileData.userData;
     const userCollections = result.userCollections.collections;
-    const userResources = result.userResources.resources;
 
     // * Assigning data
     this.setProfileData(profileData);
-    this.setResources(userResources);
     this.setCollections(userCollections);
   }
 
@@ -71,6 +91,8 @@ export class PublicProfileComponent implements OnInit {
     this.website = data.website;
     this.bio = data.bio;
     this.email = data.email;
+    this.followers = data.followers;
+    this.following = data.following;
 
     if (data.image) {
       this.image = data.image.link;
@@ -87,7 +109,7 @@ export class PublicProfileComponent implements OnInit {
   }
 
   async checkIfUserIsFollowed(currentUser, username) {
-    const result = await this.userService.checkIfUserFollowed({
+    const result: any = await this.userService.checkIfUserFollowed({
       currentUser,
       username
     });
@@ -98,7 +120,7 @@ export class PublicProfileComponent implements OnInit {
   }
 
   async follow() {
-    const result = await this.userService.followUser({
+    const result: any = await this.userService.followUser({
       currentUser: this.currentUser,
       username: this.username
     });
@@ -109,7 +131,7 @@ export class PublicProfileComponent implements OnInit {
   }
 
   async unfollow() {
-    const result = await this.userService.unfollowUser({
+    const result: any = await this.userService.unfollowUser({
       currentUser: this.currentUser,
       username: this.username
     });
@@ -119,4 +141,37 @@ export class PublicProfileComponent implements OnInit {
     }
   }
 
+  async loadMorePosts() {
+    this.pageNo++;
+    await this.getUserResources();
+  }
+
+  async getUserResources(username?: any) {
+    try {
+      const response: any = await this.resourceService.getUserResources({
+        pageNo: this.pageNo,
+        size: this.size,
+        username: username ? username : this.username
+      });
+
+      this.resourcesCount = response.count;
+
+      for (const resource of response.resources) {
+        this.resources.push(resource);
+      }
+    } catch (err) {
+      console.error(err);
+    }
+  }
+
+  openFollowDialog() {
+    const dialogRef = this.dialog.open(FfComponent, {
+      data: {
+        username: this.paramUser
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(async (result: any) => {
+    });
+  }
 }

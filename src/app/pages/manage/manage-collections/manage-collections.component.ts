@@ -45,12 +45,12 @@ export class ManageCollectionsComponent implements OnInit {
       this.isLoading = true;
       const query = this.collectionSearchForm.get('query').value;
       if (query) {
-        const searchResult = await this.collectionService.searchUserCollections({username: this.username, title: query});
+        const searchResult: any = await this.collectionService.searchUserCollections({username: this.username, title: query});
         this.isLoading = false;
         this.collections = searchResult.collections;
         return;
       }
-      const response = await this.collectionService.getCollections({ username: this.username });
+      const response: any = await this.collectionService.getCollections({ username: this.username });
       this.isLoading = false;
       this.collections = response.collections;
     } catch (err) {
@@ -61,7 +61,7 @@ export class ManageCollectionsComponent implements OnInit {
   onCollectionSearchFormChange() {
     this.collectionSearchForm.get('query').valueChanges.pipe(debounceTime(300)).subscribe(async (query) => {
       this.isLoading = true;
-      const searchResult = await this.collectionService.searchUserCollections({username: this.username, title: query});
+      const searchResult: any = await this.collectionService.searchUserCollections({username: this.username, title: query});
       this.isLoading = false;
       this.collections = searchResult.collections;
     });

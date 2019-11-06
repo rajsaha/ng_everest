@@ -1,3 +1,8 @@
+<mat-progress-bar
+  *ngIf="isLoading"
+  mode="indeterminate"
+>
+</mat-progress-bar>
 <div class="section-container">
   <div class="section">
     <div class="section-header">
@@ -5,73 +10,128 @@
     </div>
 
     <div class="section-content">
-      <div class="custom-image" (click)="imageInput.click()" matRipple
-        *ngIf="editResourceForm.controls.isCustomImage.value" [ngStyle]="{ 'background-image': 'url(' + image + ')' }">
+      <div
+        class="custom-image"
+        (click)="imageInput.click()"
+        matRipple
+        *ngIf="editResourceForm.controls.isCustomImage.value"
+        [ngStyle]="{ 'background-image': 'url(' + image + ')' }"
+      >
         <p *ngIf="!image">
-          <fa-icon [icon]="faUpload"></fa-icon>&nbsp;Click here to upload a custom image
+          <fa-icon [icon]="faUpload"></fa-icon>&nbsp;Click here to upload a
+          custom image
         </p>
-        <input hidden (change)="onFileSelected(imageInput)" #imageInput type="file" accept="image/*">
+        <input
+          hidden
+          (change)="onFileSelected(imageInput)"
+          #imageInput
+          type="file"
+          accept="image/*"
+        />
       </div>
 
-      <div class="resource-image" *ngIf="!editResourceForm.controls.isCustomImage.value"
-        [ngStyle]="{ 'background-image': 'url(' + ogImage + ')' }">
+      <div
+        class="resource-image"
+        *ngIf="!editResourceForm.controls.isCustomImage.value"
+        [ngStyle]="{ 'background-image': 'url(' + ogImage + ')' }"
+      >
         <p *ngIf="!ogImage">
-          If your link has an <a href="http://ogp.me/" target="_blank">Open Graph</a> image, it'll appear here
+          If your link has an
+          <a href="http://ogp.me/" target="_blank">Open Graph</a> image, it'll
+          appear here
         </p>
       </div>
 
-
-      <form [formGroup]="editResourceForm" (ngSubmit)="submitEditResourceForm()">
+      <form
+        [formGroup]="editResourceForm"
+        (ngSubmit)="submitEditResourceForm()"
+      >
         <div class="mat-checkbox-container">
-          <mat-checkbox formControlName="isCustomImage">Use custom image</mat-checkbox>
+          <mat-checkbox formControlName="isCustomImage"
+            >Use custom image</mat-checkbox
+          >
         </div>
         <mat-form-field appearance="outline">
           <mat-label>Link</mat-label>
-          <input matInput placeholder="Paste your link here" formControlName="url" (focus)="onFocus()">
-          <mat-error *ngIf="editResourceForm.controls['url'].hasError('urlInvalid')">
+          <input
+            matInput
+            placeholder="Paste your link here"
+            formControlName="url"
+            (focus)="onFocus()"
+          />
+          <mat-error
+            *ngIf="editResourceForm.controls['url'].hasError('urlInvalid')"
+          >
             Invalid link
           </mat-error>
         </mat-form-field>
 
         <mat-form-field appearance="outline">
           <mat-label>Title</mat-label>
-          <input matInput placeholder="Give it a title" formControlName="title">
+          <input
+            matInput
+            placeholder="Give it a title"
+            formControlName="title"
+          />
         </mat-form-field>
 
         <mat-form-field appearance="outline">
           <mat-label>Description</mat-label>
-          <textarea matInput placeholder="Say something about it" formControlName="description"></textarea>
+          <textarea
+            matInput
+            placeholder="Say something about it"
+            formControlName="description"
+          ></textarea>
         </mat-form-field>
 
         <mat-form-field appearance="outline">
           <mat-label>Tags</mat-label>
           <mat-chip-list #chipList aria-label="Tags">
-            <mat-chip *ngFor="let tag of tags" [selectable]="selectable" [removable]="removable"
-              (removed)="removeTag(tag)">
+            <mat-chip
+              *ngFor="let tag of tags"
+              [selectable]="selectable"
+              [removable]="removable"
+              (removed)="removeTag(tag)"
+            >
               {{ tag }}
               <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
             </mat-chip>
-            <input placeholder="Add tags that best fit" [matChipInputFor]="chipList"
-              [matChipInputSeparatorKeyCodes]="separatorKeysCodes" [matChipInputAddOnBlur]="addOnBlur"
-              (matChipInputTokenEnd)="addTag($event)">
+            <input
+              placeholder="Add tags that best fit"
+              [matChipInputFor]="chipList"
+              [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+              [matChipInputAddOnBlur]="addOnBlur"
+              (matChipInputTokenEnd)="addTag($event)"
+            />
           </mat-chip-list>
         </mat-form-field>
 
         <h6>Add to collection</h6>
         <mat-form-field appearance="outline">
           <mat-label>Collections</mat-label>
-          <input type="text" placeholder="Select or Create New" matInput [matAutocomplete]="auto" formControlName="collectionName">
+          <input
+            type="text"
+            placeholder="Select or Create New"
+            matInput
+            [matAutocomplete]="auto"
+            formControlName="collectionName"
+          />
           <mat-autocomplete #auto="matAutocomplete">
             <mat-optgroup label="Move to Existing Collections">
               <mat-option *ngFor="let name of collectionNames" [value]="name">
-                {{name}}
+                {{ name }}
               </mat-option>
             </mat-optgroup>
           </mat-autocomplete>
         </mat-form-field>
 
         <div class="form-button-container">
-          <app-custom-button [buttonLabel]="submitButtonText" [isDisabled]="isDisabled" [isLoading]="isLoading" size="small"></app-custom-button>
+          <app-custom-button
+            [buttonLabel]="submitButtonText"
+            [isDisabled]="isDisabled"
+            [isLoading]="isLoading"
+            size="small"
+          ></app-custom-button>
         </div>
       </form>
     </div>

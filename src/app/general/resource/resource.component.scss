@@ -10,14 +10,16 @@
 	position: relative;
 	
 	&:hover {
-		box-shadow: 0 22px 32px 0 rgba(197, 197, 197, 0.6);
+		box-shadow: 0 22px 32px 0 rgba(197, 197, 197, 0.9);
 	}
 
 	.image {
 		border-top-left-radius: 5px;
 		border-top-right-radius: 5px;
 		width: 275px;
+		height: 150px;
 		max-width: 300px;
+		max-height: 300px;
 		object-fit: cover;
 
 		&::before {
@@ -29,6 +31,14 @@
 
 	.details {
 		padding: 0 15px 15px 15px;
+
+		h4 {
+			margin-bottom: 10px;
+		}
+
+		.type {
+			margin-left: 0;
+		}
 
 		.actions {
 			a {

@@ -13,6 +13,7 @@ import { debounceTime } from 'rxjs/internal/operators';
 export class ManageResourcesComponent implements OnInit {
   username: string;
   resources = [];
+  resourcesCount = 0;
   resourceSearchForm: FormGroup;
 
   // Icons
@@ -35,7 +36,8 @@ export class ManageResourcesComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private resourceService: ResourceService,
-    private utilityService: UtilityService) { }
+    private utilityService: UtilityService
+  ) {}
 
   async ngOnInit() {
     this.username = localStorage.getItem('username');
@@ -52,9 +54,11 @@ export class ManageResourcesComponent implements OnInit {
   async getUserResources() {
     try {
       this.isLoading = true;
+
+      // Search
       const query = this.resourceSearchForm.get('query').value;
       if (query) {
-        const searchResult = await this.resourceService.searchForUserResources({
+        const searchResult: any = await this.resourceService.searchForUserResources({
           username: this.username,
           query
         });
@@ -62,12 +66,15 @@ export class ManageResourcesComponent implements OnInit {
         this.resources = searchResult.resources;
         return;
       }
-      const response = await this.resourceService.getUserResources({
+
+      // Without search
+      const response: any = await this.resourceService.getUserResources({
         pageNo: this.pageNo,
         size: this.size,
         username: this.username
       });
       this.isLoading = false;
+      this.resourcesCount = response.count;
 
       for (const resource of response.resources) {
         this.resources.push(resource);
@@ -89,7 +96,9 @@ export class ManageResourcesComponent implements OnInit {
 
   drResponseHandler(result: number) {
     if (result) {
-      for (const {item, index} of this.utilityService.toItemIndexes(this.resources)) {
+      for (const { item, index } of this.utilityService.toItemIndexes(
+        this.resources
+      )) {
         if (result === item._id) {
           this.resources.splice(index, 1);
           return;
@@ -99,12 +108,12 @@ export class ManageResourcesComponent implements OnInit {
   }
 
   onResourceSearchFormChange() {
-    this.resourceSearchForm.get('query').valueChanges.pipe(debounceTime(300)).subscribe(async (query) => {
-      this.isLoading = true;
-      const searchResult = await this.resourceService.searchForUserResources({username: this.username, query});
-      this.isLoading = false;
-      this.resources = searchResult.resources;
-    });
+    this.resourceSearchForm
+      .get('query')
+      .valueChanges.pipe(debounceTime(300))
+      .subscribe(async () => {
+        this.resources = [];
+        await this.getUserResources();
+      });
   }
-
 }
