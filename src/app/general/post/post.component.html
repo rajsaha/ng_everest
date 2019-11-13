@@ -43,7 +43,7 @@
   <!-- * Tags -->
   <div class="tags">
     <div class="tag">
-      <a *ngFor="let tag of tags"><strong>#{{ tag }}</strong></a>
+      <a *ngFor="let tag of tags" [routerLink]="['/search']" [queryParams]="{ query: tag }"><strong>#{{ tag }}</strong></a>
     </div>
   </div>
 

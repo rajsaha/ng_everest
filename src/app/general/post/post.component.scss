@@ -26,6 +26,7 @@
 }
 
 .post {
+	height: auto;
 	border: 1px solid #eee;
 	border-radius: 5px;
 	margin-left: auto;
@@ -125,6 +126,7 @@
 
 		.tag {
 			a {
+				text-decoration: none;
 				strong {
 					color: #fe685f;
 					border-radius: 5px;

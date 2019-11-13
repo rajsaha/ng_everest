@@ -6,6 +6,14 @@
   justify-items: center;
 }
 
+.user-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+  grid-auto-flow: dense;
+  grid-column-gap: 5px;
+  justify-items: center;
+}
+
 .see-more {
   cursor: pointer;
   text-align: center;
@@ -19,5 +27,10 @@
   .resource-grid {
     justify-items: start;
     grid-template-columns: repeat(auto-fit, 286px);
+  }
+
+  .user-grid {
+    justify-items: safe;
+    grid-template-columns: repeat(auto-fit, 115px);
   }
 }

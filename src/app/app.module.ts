@@ -31,6 +31,8 @@ import { MainComponent } from './layouts/main/main.component';
 import { NoAuthComponent } from './layouts/no-auth/no-auth.component';
 import { SearchComponent } from './components/search/search.component';
 import { AddToCollectionComponent } from './components/add-to-collection/add-to-collection.component';
+import { SearchPageComponent } from './pages/search-page/search-page.component';
+import { UserComponent } from './general/user/user.component';
 
 @NgModule({
   declarations: [
@@ -45,7 +47,9 @@ import { AddToCollectionComponent } from './components/add-to-collection/add-to-
     MainComponent,
     NoAuthComponent,
     SearchComponent,
-    AddToCollectionComponent
+    AddToCollectionComponent,
+    SearchPageComponent,
+    UserComponent
   ],
   imports: [
     CommonModule,
