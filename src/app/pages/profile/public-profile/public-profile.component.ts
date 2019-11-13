@@ -1,16 +1,16 @@
-import { Component, OnInit } from '@angular/core';
-import { faExternalLinkAlt } from '@fortawesome/free-solid-svg-icons';
-import { UserService } from '@services/user/user.service';
-import { ActivatedRoute } from '@angular/router';
-import { environment as ENV } from '@environments/environment';
-import { ResourceService } from '@services/resource/resource.service';
-import { MatDialog } from '@angular/material';
-import { FfComponent } from 'src/app/general/dialogs/ff/ff.component';
+import { Component, OnInit } from "@angular/core";
+import { faExternalLinkAlt } from "@fortawesome/free-solid-svg-icons";
+import { UserService } from "@services/user/user.service";
+import { ActivatedRoute, Router } from "@angular/router";
+import { environment as ENV } from "@environments/environment";
+import { ResourceService } from "@services/resource/resource.service";
+import { MatDialog } from "@angular/material";
+import { FfComponent } from "src/app/general/dialogs/ff/ff.component";
 
 @Component({
-  selector: 'app-public-profile',
-  templateUrl: './public-profile.component.html',
-  styleUrls: ['./public-profile.component.scss']
+  selector: "app-public-profile",
+  templateUrl: "./public-profile.component.html",
+  styleUrls: ["./public-profile.component.scss"]
 })
 export class PublicProfileComponent implements OnInit {
   // Icons
@@ -38,7 +38,7 @@ export class PublicProfileComponent implements OnInit {
 
   currentUser: string;
   paramUser: string;
-  collectionUrl = './collection';
+  collectionUrl = "./collection";
 
   // Toggles
   isLoading = false;
@@ -51,13 +51,14 @@ export class PublicProfileComponent implements OnInit {
   constructor(
     private userService: UserService,
     private resourceService: ResourceService,
-    private router: ActivatedRoute,
+    private route: ActivatedRoute,
+    private router: Router,
     private dialog: MatDialog
   ) {}
 
   ngOnInit() {
-    this.currentUser = localStorage.getItem('username');
-    this.router.params.subscribe(async params => {
+    this.currentUser = localStorage.getItem("username");
+    this.route.params.subscribe(async params => {
       this.paramUser = params.username;
       await Promise.all([
         this.getPublicProfile(params.username),
@@ -171,7 +172,10 @@ export class PublicProfileComponent implements OnInit {
       }
     });
 
-    dialogRef.afterClosed().subscribe(async (result: any) => {
-    });
+    dialogRef.afterClosed().subscribe(async (result: any) => {});
+  }
+
+  goToSearch(query: string) {
+    this.router.navigate([`/search`], { queryParams: { query }, relativeTo: this.route.parent });
   }
 }

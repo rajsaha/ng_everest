@@ -1,18 +1,19 @@
-import { Component, OnInit } from '@angular/core';
-import { faExternalLinkAlt } from '@fortawesome/free-solid-svg-icons';
-import { COMMA, ENTER } from '@angular/cdk/keycodes';
-import { FormBuilder, FormGroup } from '@angular/forms';
-import { UserService } from '@services/user/user.service';
-import { SnackbarService } from '@services/general/snackbar.service';
-import { MatDialog, MatChipInputEvent } from '@angular/material';
-import { CpiComponent } from 'src/app/general/dialogs/cpi/cpi.component';
-import { environment as ENV } from '@environments/environment';
-import { FfComponent } from 'src/app/general/dialogs/ff/ff.component';
+import { Component, OnInit } from "@angular/core";
+import { faExternalLinkAlt } from "@fortawesome/free-solid-svg-icons";
+import { COMMA, ENTER } from "@angular/cdk/keycodes";
+import { FormBuilder, FormGroup } from "@angular/forms";
+import { UserService } from "@services/user/user.service";
+import { SnackbarService } from "@services/general/snackbar.service";
+import { MatDialog, MatChipInputEvent } from "@angular/material";
+import { CpiComponent } from "src/app/general/dialogs/cpi/cpi.component";
+import { environment as ENV } from "@environments/environment";
+import { FfComponent } from "src/app/general/dialogs/ff/ff.component";
+import { ActivatedRoute, Router } from "@angular/router";
 
 @Component({
-  selector: 'app-edit-profile',
-  templateUrl: './edit-profile.component.html',
-  styleUrls: ['./edit-profile.component.scss']
+  selector: "app-edit-profile",
+  templateUrl: "./edit-profile.component.html",
+  styleUrls: ["./edit-profile.component.scss"]
 })
 export class EditProfileComponent implements OnInit {
   // Profile data
@@ -30,7 +31,7 @@ export class EditProfileComponent implements OnInit {
   deleteHash: string;
   interests = [];
   defaultProfileImage = `${ENV.SITE_URL}/assets/images/portrait.jpg`;
-  submitButtonText = 'Save';
+  submitButtonText = "Save";
 
   // Toggles
   isLoading = false;
@@ -54,12 +55,14 @@ export class EditProfileComponent implements OnInit {
     private fb: FormBuilder,
     private userService: UserService,
     private snackbarService: SnackbarService,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private route: ActivatedRoute,
+    private router: Router
   ) {}
 
   async ngOnInit() {
-    this.username = localStorage.getItem('username');
-    this.userId = localStorage.getItem('userId');
+    this.username = localStorage.getItem("username");
+    this.userId = localStorage.getItem("userId");
 
     // Init Forms
     this.initProfileForm();
@@ -70,11 +73,11 @@ export class EditProfileComponent implements OnInit {
 
   initProfileForm() {
     this.profileForm = this.fb.group({
-      name: [''],
-      username: [{ value: '', disabled: true }],
-      website: [''],
-      bio: [''],
-      email: ['']
+      name: [""],
+      username: [{ value: "", disabled: true }],
+      website: [""],
+      bio: [""],
+      email: [""]
     });
   }
 
@@ -137,7 +140,9 @@ export class EditProfileComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(async result => {
       if (result && result.status) {
-        const imageLink: any = await this.userService.getProfilePhoto(this.username);
+        const imageLink: any = await this.userService.getProfilePhoto(
+          this.username
+        );
         this.image = imageLink.image.image.link
           ? imageLink.image.image.link
           : this.defaultProfileImage;
@@ -150,13 +155,13 @@ export class EditProfileComponent implements OnInit {
     const value = event.value;
 
     // Add our fruit
-    if ((value || '').trim()) {
+    if ((value || "").trim()) {
       this.interests.push(value);
     }
 
     // Reset the input value
     if (input) {
-      input.value = '';
+      input.value = "";
     }
   }
 
@@ -172,10 +177,10 @@ export class EditProfileComponent implements OnInit {
     if (res.error) {
       this.snackbarService.openSnackBar({
         message: {
-          message: 'Something went wrong!',
+          message: "Something went wrong!",
           error: true
         },
-        class: 'red-snackbar'
+        class: "red-snackbar"
       });
     } else {
       if (index >= 0) {
@@ -225,20 +230,20 @@ export class EditProfileComponent implements OnInit {
     };
 
     this.isLoading = true;
-    this.submitButtonText = 'Saving...';
+    this.submitButtonText = "Saving...";
 
     const res: any = await this.userService.updateProfileData(data);
 
     this.isLoading = false;
-    this.submitButtonText = 'Save';
+    this.submitButtonText = "Save";
 
     if (!res.error) {
       this.snackbarService.openSnackBar({
         message: {
-          message: 'Profile data saved!',
+          message: "Profile data saved!",
           error: false
         },
-        class: 'green-snackbar'
+        class: "green-snackbar"
       });
     } else {
       this.snackbarService.openSnackBar({
@@ -246,7 +251,7 @@ export class EditProfileComponent implements OnInit {
           message: `Error: ${res.error}!`,
           error: true
         },
-        class: 'red-snackbar'
+        class: "red-snackbar"
       });
     }
   }
@@ -258,7 +263,13 @@ export class EditProfileComponent implements OnInit {
       }
     });
 
-    dialogRef.afterClosed().subscribe(async (result: any) => {
+    dialogRef.afterClosed().subscribe(async (result: any) => {});
+  }
+
+  goToSearch(query: string) {
+    this.router.navigate([`/search`], {
+      queryParams: { query },
+      relativeTo: this.route.parent
     });
   }
 }
