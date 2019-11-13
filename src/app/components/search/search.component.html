@@ -5,7 +5,8 @@
         placeholder="Search" 
         formControlName="query" 
         (focus)="activateSearch()" 
-        (focusout)="deactivateSearch()">
+        (focusout)="deactivateSearch()"
+        (keyup.enter)="goToSearch()">
     </form>
 
     <div class="search-result" *ngIf="isSearchActive && this.searchForm.get('query').value.length > 0">

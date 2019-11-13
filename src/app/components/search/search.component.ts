@@ -136,4 +136,12 @@ export class SearchComponent implements OnInit {
     this.route.navigate([`/profile/user/${username}/collection/${id}`], { relativeTo: this.router.parent });
   }
 
+  goToSearch() {
+    const query = this.searchForm.get('query').value;
+    if (query) { 
+      this.isSearchActive = false;
+      this.route.navigate([`/search`], { queryParams: { query }, relativeTo: this.router.parent });
+    }
+  }
+
 }
