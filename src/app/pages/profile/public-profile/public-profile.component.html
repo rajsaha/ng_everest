@@ -61,8 +61,8 @@
           <mat-chip *ngFor="let interest of interests" (click)="goToSearch(interest)">{{ interest }}</mat-chip>
         </mat-chip-list>
         <div class="followers-following" (click)="openFollowDialog()">
-          <strong>{{ followers.length }}</strong> followers |
-          <strong>{{ following.length }}</strong> following
+          <strong>{{ followers.length - 1 }}</strong> followers |
+          <strong>{{ following.length - 1 }}</strong> following
         </div>
       </div>
     </div>

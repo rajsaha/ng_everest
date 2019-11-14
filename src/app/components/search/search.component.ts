@@ -140,6 +140,7 @@ export class SearchComponent implements OnInit {
     const query = this.searchForm.get('query').value;
     if (query) { 
       this.isSearchActive = false;
+      this.searchForm.get('query').patchValue('');
       this.route.navigate([`/search`], { queryParams: { query }, relativeTo: this.router.parent });
     }
   }
