@@ -1,26 +1,42 @@
 <div class="section-container">
-  <h1>Search</h1>
-  <div class="search">
-    <form [formGroup]="searchForm">
+  <div class="search-container">
+    <div class="search">
+      <form [formGroup]="searchForm">
+        <mat-form-field appearance="outline">
+          <mat-label>Search</mat-label>
+          <mat-icon matPrefix>
+            <fa-icon [icon]="faSearch"></fa-icon>
+          </mat-icon>
+          <input matInput placeholder="Search" formControlName="query" />
+        </mat-form-field>
+      </form>
+    </div>
+
+    <mat-divider></mat-divider>
+
+    <div class="dropdowns">
       <mat-form-field appearance="outline">
-        <mat-label>Search</mat-label>
-        <mat-icon matPrefix>
-          <fa-icon [icon]="faSearch"></fa-icon>
-        </mat-icon>
-        <input
-          matInput
-          placeholder="Search"
-          formControlName="query"
-        />
+        <mat-label>Order By</mat-label>
+        <mat-select>
+          <mat-option>Recommend Count</mat-option>
+          <mat-option>Recent First</mat-option>
+        </mat-select>
       </mat-form-field>
-    </form>
+
+      <div class="checkboxes">
+        <mat-checkbox>All</mat-checkbox>
+        <mat-checkbox>Articles</mat-checkbox>
+        <mat-checkbox>Resources</mat-checkbox>
+        <mat-checkbox>Collections</mat-checkbox>
+      </div>
+    </div>
   </div>
 
   <div class="search-section" *ngIf="users.length > 0">
-      <h3>Users</h3>
-      <div class="user-grid">
-          <app-user *ngFor="let user of users" [data]="user"></app-user>
-      </div>
+    <h3>Users</h3>
+    <div class="user-grid">
+      <app-user *ngFor="let user of users" [data]="user"></app-user>
+    </div>
   </div>
 
   <div class="search-section" *ngIf="resources.length > 0">
@@ -37,10 +53,13 @@
   </div>
 
   <div class="search-section" *ngIf="collections.length > 0">
-      <h3>Collections</h3>
-      <div class="list-of-collections" *ngIf="!isLoading">
-        <app-collection *ngFor="let collection of collections" [data]="collection"></app-collection>
-        <app-loading type="collection" *ngIf="isLoading"></app-loading>
-      </div>
+    <h3>Collections</h3>
+    <div class="list-of-collections" *ngIf="!isLoading">
+      <app-collection
+        *ngFor="let collection of collections"
+        [data]="collection"
+      ></app-collection>
+      <app-loading type="collection" *ngIf="isLoading"></app-loading>
+    </div>
   </div>
 </div>
