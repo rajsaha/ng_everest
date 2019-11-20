@@ -1,7 +1,7 @@
 <div class="section-container">
   <div class="search-container">
-    <div class="search">
-      <form [formGroup]="searchForm">
+    <form [formGroup]="searchForm">
+      <div class="search">
         <mat-form-field appearance="outline">
           <mat-label>Search</mat-label>
           <mat-icon matPrefix>
@@ -9,27 +9,30 @@
           </mat-icon>
           <input matInput placeholder="Search" formControlName="query" />
         </mat-form-field>
-      </form>
-    </div>
-
-    <mat-divider></mat-divider>
-
-    <div class="dropdowns">
-      <mat-form-field appearance="outline">
-        <mat-label>Order By</mat-label>
-        <mat-select>
-          <mat-option>Recommend Count</mat-option>
-          <mat-option>Recent First</mat-option>
-        </mat-select>
-      </mat-form-field>
-
-      <div class="checkboxes">
-        <mat-checkbox>All</mat-checkbox>
-        <mat-checkbox>Articles</mat-checkbox>
-        <mat-checkbox>Resources</mat-checkbox>
-        <mat-checkbox>Collections</mat-checkbox>
       </div>
-    </div>
+
+      <mat-divider></mat-divider>
+
+      <div class="dropdowns">
+        <mat-form-field appearance="outline">
+          <mat-label>Order By</mat-label>
+          <mat-select formControlName="orderBy">
+            <mat-option value="recommend">Recommend Count</mat-option>
+            <mat-option value="recent">Recent First</mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <div class="checkboxes-container">
+          <p>Include</p>
+          <div class="checkboxes">
+            <mat-checkbox formControlName="all">All</mat-checkbox>
+            <mat-checkbox formControlName="article">Articles</mat-checkbox>
+            <mat-checkbox formControlName="resource">Resources</mat-checkbox>
+            <mat-checkbox formControlName="collection">Collections</mat-checkbox>
+          </div>
+        </div>
+      </div>
+    </form>
   </div>
 
   <div class="search-section" *ngIf="users.length > 0">

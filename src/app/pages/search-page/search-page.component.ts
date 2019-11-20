@@ -1,6 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
-import { FormGroup, FormBuilder } from "@angular/forms";
+import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 import { debounceTime } from "rxjs/internal/operators";
 import { UserService } from "@services/user/user.service";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
@@ -35,12 +35,18 @@ export class SearchPageComponent implements OnInit {
   ngOnInit() {
     this.initSearchForm();
     this.getSearchQuery();
+    this.onQueryChanges();
     this.onSearchFormChanges();
   }
 
   initSearchForm() {
     this.searchForm = this.fb.group({
-      query: [""]
+      query: ["", Validators.required],
+      orderBy: [""],
+      all: [true],
+      article: [false],
+      resource: [false],
+      collection: [false]
     });
   }
 
@@ -53,11 +59,30 @@ export class SearchPageComponent implements OnInit {
     });
   }
 
+  onSearchFormChanges() {
+    this.searchForm.valueChanges.subscribe(val => {
+      console.log(val);
+      if (val.all) {
+        this.searchForm.get("article").patchValue(false);
+        this.searchForm.get("resource").patchValue(false);
+        this.searchForm.get("collection").patchValue(false);
+      }
+
+      if (
+        !val.article ||
+        !val.resource ||
+        !val.collection
+      ) {
+        this.searchForm.get('all').patchValue(false);
+      }
+    });
+  }
+
   get query() {
     return this.searchForm.get("query").value;
   }
 
-  onSearchFormChanges() {
+  onQueryChanges() {
     this.searchForm
       .get("query")
       .valueChanges.pipe(debounceTime(300))

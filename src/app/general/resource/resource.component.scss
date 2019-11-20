@@ -8,6 +8,8 @@
 	margin-bottom: 25px;
 	transition: box-shadow 0.2s ease-in;
 	position: relative;
+	animation: fadeUp 0.2s ease-in-out;
+	animation-fill-mode: forwards;
 	
 	&:hover {
 		box-shadow: 0 22px 32px 0 rgba(197, 197, 197, 0.9);
@@ -45,6 +47,18 @@
 				color: inherit;
 			}
 		}
+	}
+}
+
+@keyframes fadeUp {
+	0% {
+		opacity: 0;
+		transform: translateY(15px);
+	}
+
+	100% {
+		opacity: 1;
+		transform: translateY(0);
 	}
 }
 
