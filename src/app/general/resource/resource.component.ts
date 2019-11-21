@@ -50,7 +50,6 @@ export class ResourceComponent implements OnInit {
     this.loggedInUser = localStorage.getItem('username');
     this.getRouteUserId();
     this.populateResource();
-    console.log(this.data);
   }
 
   getRouteUserId() {

@@ -36,6 +36,7 @@ export class SearchPageComponent implements OnInit {
     this.initSearchForm();
     this.getSearchQuery();
     this.onQueryChanges();
+    this.onSearchFormChange();
   }
 
   initSearchForm() {
@@ -43,7 +44,6 @@ export class SearchPageComponent implements OnInit {
       query: ["", Validators.required],
       orderBy: ["recent"],
       user: [true],
-      article: [true],
       resource: [true],
       collection: [true]
     });
@@ -55,6 +55,13 @@ export class SearchPageComponent implements OnInit {
       if (param.query) {
         await this.globalSearch(param.query);
       }
+    });
+  }
+
+  onSearchFormChange() {
+    this.searchForm.valueChanges.pipe(debounceTime(300)).subscribe(async val => {
+      this.clearArrays();
+      await this.globalSearch(val.query);
     });
   }
 
@@ -90,7 +97,6 @@ export class SearchPageComponent implements OnInit {
         orderBy: this.searchForm.get('orderBy').value,
         resource: this.searchForm.get('resource').value,
         collection: this.searchForm.get('collection').value,
-        article: this.searchForm.get('article').value,
         user: this.searchForm.get('user').value
       }
     });
