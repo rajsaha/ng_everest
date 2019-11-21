@@ -62,7 +62,12 @@ export class SearchComponent implements OnInit {
           this.isLoading = true;
           const searchResult: any = await this.userService.globalSearch({
             query: encodeURIComponent(query),
-            options: {}
+            options: {
+              orderBy: 'recent',
+              resource: true,
+              collection: true,
+              user: true
+            }
           });
           this.isSearchActive = true;
           this.isLoading = false;
@@ -105,7 +110,12 @@ export class SearchComponent implements OnInit {
       this.isLoading = true;
       const searchResult: any = await this.userService.globalSearch({
         query,
-        options: {}
+        options: {
+          orderBy: 'recent',
+          resource: true,
+          collection: true,
+          user: true
+        }
       });
       this.isSearchActive = true;
       this.isLoading = false;

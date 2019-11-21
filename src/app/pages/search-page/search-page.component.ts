@@ -100,7 +100,6 @@ export class SearchPageComponent implements OnInit {
         user: this.searchForm.get('user').value
       }
     });
-    console.log(searchResult);
     this.isLoading = false;
 
     if (searchResult.resourceOnly) {
