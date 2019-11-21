@@ -25,10 +25,10 @@
         <div class="checkboxes-container">
           <p>Include</p>
           <div class="checkboxes">
-            <mat-checkbox formControlName="all">All</mat-checkbox>
             <mat-checkbox formControlName="article">Articles</mat-checkbox>
             <mat-checkbox formControlName="resource">Resources</mat-checkbox>
             <mat-checkbox formControlName="collection">Collections</mat-checkbox>
+            <mat-checkbox formControlName="user">Users</mat-checkbox>
           </div>
         </div>
       </div>
@@ -48,7 +48,6 @@
       <app-resource
         *ngFor="let resource of resources"
         [data]="resource"
-        [isInCollectionPage]="isInCollectionPage"
       >
       </app-resource>
       <app-loading type="resource" *ngIf="isLoading"></app-loading>

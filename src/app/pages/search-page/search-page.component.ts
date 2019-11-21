@@ -36,17 +36,16 @@ export class SearchPageComponent implements OnInit {
     this.initSearchForm();
     this.getSearchQuery();
     this.onQueryChanges();
-    this.onSearchFormChanges();
   }
 
   initSearchForm() {
     this.searchForm = this.fb.group({
       query: ["", Validators.required],
-      orderBy: [""],
-      all: [true],
-      article: [false],
-      resource: [false],
-      collection: [false]
+      orderBy: ["recent"],
+      user: [true],
+      article: [true],
+      resource: [true],
+      collection: [true]
     });
   }
 
@@ -55,25 +54,6 @@ export class SearchPageComponent implements OnInit {
       this.searchForm.get("query").patchValue(param.query);
       if (param.query) {
         await this.globalSearch(param.query);
-      }
-    });
-  }
-
-  onSearchFormChanges() {
-    this.searchForm.valueChanges.subscribe(val => {
-      console.log(val);
-      if (val.all) {
-        this.searchForm.get("article").patchValue(false);
-        this.searchForm.get("resource").patchValue(false);
-        this.searchForm.get("collection").patchValue(false);
-      }
-
-      if (
-        !val.article ||
-        !val.resource ||
-        !val.collection
-      ) {
-        this.searchForm.get('all').patchValue(false);
       }
     });
   }
@@ -104,10 +84,25 @@ export class SearchPageComponent implements OnInit {
 
   async globalSearch(query: string) {
     this.isLoading = true;
-    const searchResult: any = await this.userService.globalSearch(
-      encodeURIComponent(query)
-    );
+    const searchResult: any = await this.userService.globalSearch({
+      query: encodeURIComponent(query),
+      options: {
+        orderBy: this.searchForm.get('orderBy').value,
+        resource: this.searchForm.get('resource').value,
+        collection: this.searchForm.get('collection').value,
+        article: this.searchForm.get('article').value,
+        user: this.searchForm.get('user').value
+      }
+    });
+    console.log(searchResult);
     this.isLoading = false;
+
+    if (searchResult.resourceOnly) {
+      if (searchResult.resources && searchResult.resources.length > 0) {
+        this.resources = searchResult.resources;
+        return;
+      }
+    }
 
     // * Users
     if (searchResult.users && searchResult.users.users.length > 0) {

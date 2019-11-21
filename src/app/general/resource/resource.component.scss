@@ -41,11 +41,12 @@
 		.type {
 			margin-left: 0;
 		}
+	}
 
-		.actions {
-			a {
-				color: inherit;
-			}
+	.stats {
+		padding: 0 15px 15px 15px;
+		.likes {
+			font-size: 12px;
 		}
 	}
 }

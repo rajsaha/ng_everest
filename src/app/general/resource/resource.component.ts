@@ -1,9 +1,7 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { faEye, faEdit, faTrashAlt, faExternalLinkAlt, faTimes, faFolderMinus } from '@fortawesome/free-solid-svg-icons';
 import { MatDialog } from '@angular/material';
 import * as moment from 'moment';
-import { DrComponent } from '../dialogs/dr/dr.component';
-import { CollectionService } from '@services/collection/collection.service';
 import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
@@ -14,8 +12,6 @@ import { Router, ActivatedRoute } from '@angular/router';
 export class ResourceComponent implements OnInit {
   @Input() data: any;
   @Input() collectionId: string;
-  @Input() isInCollectionPage: boolean;
-  @Output() drResponse: EventEmitter<any> = new EventEmitter();
 
   // Data
   id: string;
@@ -28,6 +24,7 @@ export class ResourceComponent implements OnInit {
   timestamp: any;
   allComments = [];
   resourceUser: string;
+  recommended_by_count: number;
 
   // For permissions
   loggedInUser: string;
@@ -46,7 +43,6 @@ export class ResourceComponent implements OnInit {
 
   constructor(
     public dialog: MatDialog,
-    private collectionService: CollectionService,
     private route: Router,
     private router: ActivatedRoute) { }
 
@@ -54,6 +50,7 @@ export class ResourceComponent implements OnInit {
     this.loggedInUser = localStorage.getItem('username');
     this.getRouteUserId();
     this.populateResource();
+    console.log(this.data);
   }
 
   getRouteUserId() {
@@ -72,27 +69,8 @@ export class ResourceComponent implements OnInit {
     this.description = this.data.description;
     this.image = this.data.image;
     this.timestamp = moment(this.data.timestamp.$date).fromNow();
+    this.recommended_by_count = this.data.recommended_by_count;
     this.isLoading = false;
-  }
-
-  openDrDialog() {
-    const dialogRef = this.dialog.open(DrComponent, {
-      data: {
-        id: this.id,
-        title: this.title
-      }
-    });
-
-    dialogRef.afterClosed().subscribe(async () => {
-      this.drResponse.emit();
-    });
-  }
-
-  async deleteResourceFromCollection() {
-    const result: any = await this.collectionService.deleteResourceFromCollection({resourceId: this.id, collectionId: this.collectionId});
-    if (result) {
-      this.drResponse.emit(this.id);
-    }
   }
 
   goToView() {
