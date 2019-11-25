@@ -2,7 +2,36 @@
   .collection-data {
     margin-bottom: 25px;
     .collection-header {
+      display: grid;
+      grid-template-areas: "left right"
+                           "center center";
+      grid-template-columns: 1fr 100px;
+      column-gap: 15px;
+      row-gap: 15px;                     
       margin-bottom: 15px;
+
+      .left {
+        grid-area: "left";
+      }
+
+      .right {
+        grid-area: "right";
+        align-self: center;
+        border-left: 2px solid rgba(0, 0, 0, .1);
+        padding: 15px;
+
+        span {
+          font-size: 25px;
+          margin-right: 5px;
+        }
+      }
+
+      .bottom {
+        grid-area: "bottom";
+        grid-column: span 2;
+
+        font-size: 12px;
+      }
 
       .username {
         color: rgba(0, 0, 0, .5);

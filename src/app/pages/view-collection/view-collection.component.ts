@@ -7,7 +7,7 @@ import { UtilityService } from '@services/general/utility.service';
 import { MatDialog } from '@angular/material';
 import { DcComponent } from 'src/app/general/dialogs/dc/dc.component';
 import { FormGroup, FormBuilder } from '@angular/forms';
-import { delay } from 'rxjs/internal/operators';
+import { delay, last } from 'rxjs/internal/operators';
 
 @Component({
   selector: 'app-view-collection',
@@ -21,6 +21,9 @@ export class ViewCollectionComponent implements OnInit {
   currentUser: string;
   @Output() dcResponse: EventEmitter<any> = new EventEmitter();
   changeCollectionTitleForm: FormGroup;
+  numOfResources: number;
+  size = 5;
+  pointer = 0;
 
   // Icons
   faPen = faPen;
@@ -30,6 +33,7 @@ export class ViewCollectionComponent implements OnInit {
   isLoading = false;
   isMine = false;
   isInCollectionPage = true;
+  seeMore = false;
 
   constructor(
     private route: ActivatedRoute,
@@ -47,26 +51,45 @@ export class ViewCollectionComponent implements OnInit {
       this.collection = null;
       this.id = params.collectionId;
       await Promise.all([
-        this.getCollection(this.id),
+        this.getCollection(),
         this.checkIfMine(this.currentUser, this.id)
       ]);
     });
   }
 
-  async getCollection(id: string) {
+  async getCollection() {
     this.isLoading = true;
-    const result: any = await this.collectionService.getCollectionById({ id });
+    const result: any = await this.collectionService.getCollectionById({ id: this.id });
     this.collection = result.collection;
+    this.numOfResources = this.collection.resources.length;
     this.changeCollectionTitleForm.controls.title.patchValue(result.collection.title);
-    if (this.collection.resources.length > 0) {
+    if (this.numOfResources > 0) {
       await this.getMultipleResources(this.collection.resources);
     }
     this.isLoading = false;
   }
 
   async getMultipleResources(data) {
-    const result: any = await this.resourceService.getMultipleResources(data);
-    this.resources = result.resources;
+    const lastIndex = this.numOfResources - 1;
+    if (lastIndex > this.size) {
+      this.seeMore = true;
+      const page = data.slice(this.pointer, (this.pointer + this.size));
+      this.pointer += 5;
+      if (this.pointer > lastIndex) {
+        this.seeMore = false;
+      }
+      const result: any = await this.resourceService.getMultipleResources(page);
+      for (let resource of result.resources) {
+        this.resources.push(resource);
+      }
+      console.log(page);
+    } else {
+      this.seeMore = false;
+      const result: any = await this.resourceService.getMultipleResources(data);
+      for (let resource of result.resources) {
+        this.resources.push(resource);
+      }
+    }
   }
 
   drResponseHandler(result: string) {
