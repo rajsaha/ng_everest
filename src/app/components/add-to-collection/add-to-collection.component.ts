@@ -69,6 +69,7 @@ export class AddToCollectionComponent implements OnInit {
   }
 
   async getCollectionTitle(resourceId: string) {
+
     const collection: any = await this.collectionService.getCollectionTitleByResourceId(
       { username: this.username, resourceId }
     );

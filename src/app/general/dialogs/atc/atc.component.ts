@@ -105,7 +105,7 @@ export class AtcComponent implements OnInit {
     );
 
     if (collection.collection) {
-      this.currentCollectionName = collection.collection.title;
+      this.currentCollectionName = collection.collection[0].title;
     }
   }
 

@@ -82,7 +82,6 @@ export class ViewCollectionComponent implements OnInit {
       for (let resource of result.resources) {
         this.resources.push(resource);
       }
-      console.log(page);
     } else {
       this.seeMore = false;
       const result: any = await this.resourceService.getMultipleResources(data);

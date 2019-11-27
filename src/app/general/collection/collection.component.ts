@@ -30,7 +30,11 @@ export class CollectionComponent implements OnInit {
   }
 
   async getFourImages() {
-    const result: any = await this.resourceService.getFourImages([...this.data.resources]);
+    let resourceIds = [];
+    for (let resource of this.data.resources) {
+      resourceIds.push(resource.resourceId);
+    }
+    const result: any = await this.resourceService.getFourImages(resourceIds);
     if (result.images[0]) {
       this.image1 = result.images[0].image;
     }

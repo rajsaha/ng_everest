@@ -84,7 +84,8 @@ export class EditResourceComponent implements OnInit {
       image: [''],
       username: [this.username],
       type: ['ext-content'],
-      collectionName: ['']
+      collectionName: [''],
+      timestamp: ['']
     }, { validator: [this.validationService.checkValidURL] });
   }
 
@@ -260,9 +261,8 @@ export class EditResourceComponent implements OnInit {
 
   async getCollectionTitle(resourceId: string) {
     const collection: any = await this.collectionService.getCollectionTitleByResourceId({ username: this.username, resourceId });
-
     if (collection.collection) {
-      this.editResourceForm.controls.collectionName.patchValue(collection.collection.title);
+      this.editResourceForm.controls.collectionName.patchValue(collection.collection[0].title);
     }
   }
 
@@ -272,6 +272,7 @@ export class EditResourceComponent implements OnInit {
     this.editResourceForm.controls.title.patchValue(data.title);
     this.editResourceForm.controls.description.patchValue(data.description);
     this.editResourceForm.controls.image.patchValue(data.image);
+    this.editResourceForm.controls.timestamp.patchValue(data.timestamp);
     this.tags = data.tags;
     this.ogImage = data.image;
   }
