@@ -1,34 +1,41 @@
 <div class="section-container">
   <div class="collection-data" *ngIf="collection">
-    <div class="collection-header">
-      <div class="left">
-        <small class="username" [routerLink]="['/profile', collection.username]"
-          >{{ collection.username }}'s collection</small
-        >
-        <form [formGroup]="changeCollectionTitleForm" *ngIf="isMine">
+    <form [formGroup]="changeCollectionTitleForm" *ngIf="isMine">
+      <div class="collection-header">
+        <div class="left">
+          <small
+            class="username"
+            [routerLink]="['/profile', collection.username]"
+            >{{ collection.username }}'s collection</small
+          >
           <mat-form-field>
             <input type="text" matInput formControlName="title" />
             <mat-icon matSuffix>
               <fa-icon [icon]="faEdit"></fa-icon>
             </mat-icon>
-            <mat-hint>Change your collection title</mat-hint>
+            <mat-hint>Collection title</mat-hint>
           </mat-form-field>
-        </form>
-        <h2 *ngIf="!isMine">
-          {{ changeCollectionTitleForm.get("title").value }}
-        </h2>
-      </div>
+          <h2 *ngIf="!isMine">
+            {{ changeCollectionTitleForm.get("title").value }}
+          </h2>
+        </div>
 
-      <div class="right">
-        <span>{{ numOfResources }}</span
-        ><small>resources</small>
-      </div>
+        <div class="right">
+          <span>{{ numOfResources }}</span
+          ><small>resources</small>
+        </div>
 
-      <div class="bottom">
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Soluta totam
-        iusto aut. Inventore amet saepe atque deserunt sint.
+        <div class="bottom">
+          <mat-form-field>
+            <textarea type="text" matInput formControlName="description"></textarea>
+            <mat-icon matSuffix>
+              <fa-icon [icon]="faEdit"></fa-icon>
+            </mat-icon>
+            <mat-hint>Collection description</mat-hint>
+          </mat-form-field>
+        </div>
       </div>
-    </div>
+    </form>
 
     <div class="resource-grid">
       <app-resource
@@ -38,7 +45,11 @@
       ></app-resource>
     </div>
 
-    <div class="see-more" *ngIf="!isLoading && seeMore" (click)="getCollection()">
+    <div
+      class="see-more"
+      *ngIf="!isLoading && seeMore"
+      (click)="getCollection()"
+    >
       See More
     </div>
 

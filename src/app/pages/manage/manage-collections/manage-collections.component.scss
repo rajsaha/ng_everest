@@ -1,3 +1,14 @@
+$block-width: 6.2rem;
+$block-height: 6.2rem;
+
+.create-new-collection {
+  background-color: transparent;
+  border: 3px solid rbga(0, 0, 0, .2);
+  border-radius: 10px;
+  width: $block-width;
+  height: $block-height;
+}
+
 .search {
   mat-form-field {
     margin-top: 15px;

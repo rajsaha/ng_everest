@@ -115,7 +115,8 @@ export class ViewCollectionComponent implements OnInit {
 
   initCollectionTitleForm() {
     this.changeCollectionTitleForm = this.fb.group({
-      title: ['']
+      title: [''],
+      description: ['Describe the collection here']
     });
   }
 
