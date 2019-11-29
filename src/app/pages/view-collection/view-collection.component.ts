@@ -71,7 +71,7 @@ export class ViewCollectionComponent implements OnInit {
 
   async getMultipleResources(data) {
     const lastIndex = this.numOfResources - 1;
-    if (lastIndex > this.size) {
+    if (lastIndex >= this.size) {
       this.seeMore = true;
       const page = data.slice(this.pointer, (this.pointer + this.size));
       this.pointer += 5;
