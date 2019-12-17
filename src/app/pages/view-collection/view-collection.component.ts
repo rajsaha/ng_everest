@@ -7,7 +7,7 @@ import { UtilityService } from '@services/general/utility.service';
 import { MatDialog } from '@angular/material';
 import { DcComponent } from 'src/app/general/dialogs/dc/dc.component';
 import { FormGroup, FormBuilder } from '@angular/forms';
-import { delay, last } from 'rxjs/internal/operators';
+import { delay } from 'rxjs/internal/operators';
 
 @Component({
   selector: 'app-view-collection',
@@ -20,7 +20,7 @@ export class ViewCollectionComponent implements OnInit {
   resources = [];
   currentUser: string;
   @Output() dcResponse: EventEmitter<any> = new EventEmitter();
-  changeCollectionTitleForm: FormGroup;
+  changeCollectionForm: FormGroup;
   numOfResources: number;
   size = 5;
   pointer = 0;
@@ -45,8 +45,9 @@ export class ViewCollectionComponent implements OnInit {
 
   ngOnInit() {
     this.currentUser = localStorage.getItem('username');
-    this.initCollectionTitleForm();
+    this.initCollectionForm();
     this.onCollectionTitleFormChange();
+    this.onCollectionDescriptionFormChange();
     this.route.params.subscribe(async (params) => {
       this.collection = null;
       this.id = params.collectionId;
@@ -62,7 +63,8 @@ export class ViewCollectionComponent implements OnInit {
     const result: any = await this.collectionService.getCollectionById({ id: this.id });
     this.collection = result.collection;
     this.numOfResources = this.collection.resources.length;
-    this.changeCollectionTitleForm.controls.title.patchValue(result.collection.title);
+    this.changeCollectionForm.controls.title.patchValue(result.collection.title);
+    this.changeCollectionForm.controls.description.patchValue(result.collection.description);
     if (this.numOfResources > 0) {
       await this.getMultipleResources(this.collection.resources);
     }
@@ -113,16 +115,22 @@ export class ViewCollectionComponent implements OnInit {
     });
   }
 
-  initCollectionTitleForm() {
-    this.changeCollectionTitleForm = this.fb.group({
+  initCollectionForm() {
+    this.changeCollectionForm = this.fb.group({
       title: [''],
-      description: ['Describe the collection here']
+      description: ['']
     });
   }
 
   onCollectionTitleFormChange() {
-    this.changeCollectionTitleForm.get('title').valueChanges.pipe(delay(1500)).subscribe(async (title) => {
+    this.changeCollectionForm.get('title').valueChanges.pipe(delay(1500)).subscribe(async (title) => {
       const result = await this.collectionService.changeCollectionTitle({id: this.collection._id, title});
+    });
+  }
+
+  onCollectionDescriptionFormChange() {
+    this.changeCollectionForm.get('description').valueChanges.pipe(delay(1500)).subscribe(async (description) => {
+      const result = await this.collectionService.changeCollectionDescription({id: this.collection._id, description});
     });
   }
 

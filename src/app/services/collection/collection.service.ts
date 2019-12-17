@@ -77,6 +77,13 @@ export class CollectionService {
     return response;
   }
 
+  changeCollectionDescription(data: any) {
+    const response = this.http
+      .post(`${ENV.API_URL}/collection/change-collection-description`, data)
+      .toPromise();
+    return response;
+  }
+
   searchUserCollections(data: any) {
     const response = this.http
       .post(`${ENV.API_URL}/collection/search-user-collections`, data)
