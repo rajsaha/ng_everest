@@ -4,17 +4,15 @@ import { AtcComponent } from 'src/app/general/dialogs/atc/atc.component';
 import { DcComponent } from 'src/app/general/dialogs/dc/dc.component';
 import { DrComponent } from 'src/app/general/dialogs/dr/dr.component';
 import { FfComponent } from 'src/app/general/dialogs/ff/ff.component';
-import {
-  MatFormFieldModule,
-  MatAutocompleteModule,
-  MatButtonModule,
-  MatDialogModule,
-  MatInputModule,
-  MatRippleModule,
-  MatProgressBarModule,
-  MatTabsModule,
-  MatProgressSpinnerModule
-} from '@angular/material';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { MatButtonModule } from '@angular/material/button';
+import { MatRippleModule } from '@angular/material/core';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatTabsModule } from '@angular/material/tabs';
 import { ReactiveFormsModule } from '@angular/forms';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 

@@ -146,5 +146,8 @@
       }
     }
   },
-  "defaultProject": "everest"
+  "defaultProject": "everest",
+  "cli": {
+    "analytics": "ad7bfafd-7517-4f88-9e52-1de67326f749"
+  }
 }

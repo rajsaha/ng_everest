@@ -11,7 +11,6 @@ import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 
-import { MatPasswordStrengthModule } from '@angular-material-extensions/password-strength';
 import { ManageModule } from './modules/manage/manage.module';
 import { CommonModule } from '@angular/common';
 import { MaterialModule } from './modules/material/material.module';
@@ -58,8 +57,6 @@ import { UserComponent } from './general/user/user.component';
     AppRoutingModule,
     ReactiveFormsModule,
     HttpClientModule,
-    MatPasswordStrengthModule.forRoot(),
-    // * Custom Modules
     MaterialModule,
     ManageModule,
     DialogsModule,

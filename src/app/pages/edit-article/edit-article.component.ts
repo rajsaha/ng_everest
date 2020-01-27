@@ -5,7 +5,7 @@ import { environment as ENV } from '@environments/environment';
 import { CollectionService } from '@services/collection/collection.service';
 import { faUpload, faTrashAlt } from '@fortawesome/free-solid-svg-icons';
 import { ENTER, COMMA } from '@angular/cdk/keycodes';
-import { MatChipInputEvent } from '@angular/material';
+import { MatChipInputEvent } from '@angular/material/chips';
 import { ResourceService } from '@services/resource/resource.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { SnackbarService } from '@services/general/snackbar.service';

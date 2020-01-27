@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter, ViewChild } from '@angular/core';
 import { CollectionService } from '@services/collection/collection.service';
 import { FormGroup, FormBuilder } from '@angular/forms';
-import { MatSelect } from '@angular/material';
+import { MatSelect } from '@angular/material/select';
 
 @Component({
   selector: 'app-add-to-collection',

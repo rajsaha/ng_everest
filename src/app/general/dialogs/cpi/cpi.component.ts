@@ -1,5 +1,5 @@
 import { Component, Inject, OnInit, ViewChild, ElementRef } from '@angular/core';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { SnackbarService } from '@services/general/snackbar.service';
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
 import { UserService } from '@services/user/user.service';

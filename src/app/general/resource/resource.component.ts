@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { faEye, faEdit, faTrashAlt, faExternalLinkAlt, faTimes, faFolderMinus } from '@fortawesome/free-solid-svg-icons';
-import { MatDialog } from '@angular/material';
+import { MatDialog } from '@angular/material/dialog';
 import * as moment from 'moment';
 import { Router, ActivatedRoute } from '@angular/router';
 

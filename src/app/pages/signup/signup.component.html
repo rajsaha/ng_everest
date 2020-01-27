@@ -31,7 +31,6 @@
       <mat-error *ngIf="signUpForm.controls['password'].hasError('minlength')">
         Password must be at least 4 characters
       </mat-error>
-      <mat-password-strength [password]="signUpForm.get('password').value"></mat-password-strength>
     </mat-form-field>
 
     <mat-form-field appearance="outline">

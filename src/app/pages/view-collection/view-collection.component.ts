@@ -4,7 +4,7 @@ import { CollectionService } from '@services/collection/collection.service';
 import { ResourceService } from '@services/resource/resource.service';
 import { faPen, faEdit } from '@fortawesome/free-solid-svg-icons';
 import { UtilityService } from '@services/general/utility.service';
-import { MatDialog } from '@angular/material';
+import { MatDialog } from '@angular/material/dialog';
 import { DcComponent } from 'src/app/general/dialogs/dc/dc.component';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { delay } from 'rxjs/internal/operators';
