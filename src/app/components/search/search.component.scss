@@ -1,5 +1,5 @@
-$image-width: 50px;
-$image-height: 50px;
+$image-width: 35px;
+$image-height: 35px;
 %fixed-abs {
     position: absolute;
     left: 50%;
@@ -79,7 +79,6 @@ $image-height: 50px;
                 "image username";
                 cursor: pointer;
                 margin-bottom: 5px;
-                padding: 5px 0;
         
                 p {
                     margin: 0;
@@ -118,14 +117,15 @@ $image-height: 50px;
         
                 .item-b {
                     grid-area: name;
-                    font-size: 14px;
+                    font-size: 12px;
+                    margin-bottom: -10px;
                 }
         
                 .item-c {
                     margin-top: -5px;
                     grid-area: username;
                     font-size: 12px;
-                    color: rgba(0, 0, 0, .7);
+                    color: #A2A2A2;
                 }
             }
         }

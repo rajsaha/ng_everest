@@ -30,7 +30,7 @@
             <h3>Resources</h3>
             <div class="item" *ngFor="let resource of resources" (mousedown)="goToResource(resource.username, resource._id)">
                 <div class="item-a" [ngStyle]="{'background-image': 'url(' + resource.image  +')'}"></div>
-                <p class="item-b">{{ resource.title | truncate:[25] }}</p>
+                <p class="item-b">{{ resource.title | truncate:[30] }}</p>
                 <small class="item-c">@{{ resource.username }}</small>
             </div>
         </div>
