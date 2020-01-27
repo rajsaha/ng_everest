@@ -23,7 +23,7 @@ export class EditArticleComponent implements OnInit {
   apiKey = `${ENV.TINYMCE_API_KEY}`;
   tinyMceInit: any;
   editArticleForm: FormGroup;
-  @ViewChild('imageInput', { static: false }) imageInput: ElementRef;
+  @ViewChild('imageInput') imageInput: ElementRef;
   selectedFile: any;
   isLoading = false;
   isDisabled = false;

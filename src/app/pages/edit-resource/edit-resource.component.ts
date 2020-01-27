@@ -25,7 +25,7 @@ export class EditResourceComponent implements OnInit {
   resource: any;
   editResourceForm: FormGroup;
   selectedFile: any;
-  @ViewChild('imageInput', { static: false }) imageInput: ElementRef;
+  @ViewChild('imageInput') imageInput: ElementRef;
   image: any;
   username: string;
   collectionNames = [];

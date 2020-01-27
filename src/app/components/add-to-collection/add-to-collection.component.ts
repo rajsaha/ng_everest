@@ -11,7 +11,7 @@ import { MatSelect } from '@angular/material';
 export class AddToCollectionComponent implements OnInit {
   @Input() resourceId: string;
   @Output() message = new EventEmitter<object>();
-  @ViewChild('collectionSelect', { static: false }) selectCollection: MatSelect;
+  @ViewChild('collectionSelect') selectCollection: MatSelect;
 
   username: string;
   collections = [];

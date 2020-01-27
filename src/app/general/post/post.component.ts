@@ -27,7 +27,7 @@ export class PostComponent implements OnInit {
   @Input() data: any;
   @Input() noTruncation = false;
 
-  @ViewChild(CommentComponent, { static: false })
+  @ViewChild(CommentComponent)
   commentComponent: CommentComponent;
 
   currentUser: string;

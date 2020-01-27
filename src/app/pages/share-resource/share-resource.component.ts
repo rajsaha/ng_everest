@@ -23,7 +23,7 @@ class ImageSnippet {
 export class ShareResourceComponent implements OnInit {
   shareResourceForm: FormGroup;
   selectedFile: any;
-  @ViewChild('imageInput', { static: false }) imageInput: ElementRef;
+  @ViewChild('imageInput') imageInput: ElementRef;
   image: any;
   username: string;
   collections: Array<object> = [];

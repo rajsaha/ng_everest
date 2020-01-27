@@ -24,7 +24,7 @@ export class WriteComponent implements OnInit {
   tinyMceInit: any;
   saveButtonText = 'Save';
   selectedFile: any;
-  @ViewChild('imageInput', { static: false }) imageInput: ElementRef;
+  @ViewChild('imageInput') imageInput: ElementRef;
   isLoading = false;
   isDisabled = false;
   collections = [];

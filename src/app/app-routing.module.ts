@@ -30,15 +30,15 @@ const routes: Routes = [
       },
       {
         path: 'manage',
-        loadChildren: 'src/app/modules/manage/manage.module#ManageModule'
+        loadChildren: () => import('src/app/modules/manage/manage.module').then(m => m.ManageModule)
       },
       {
         path: 'profile',
-        loadChildren: 'src/app/modules/profile/profile.module#ProfileModule'
+        loadChildren: () => import('src/app/modules/profile/profile.module').then(m => m.ProfileModule)
       },
       {
         path: 'write',
-        loadChildren: 'src/app/modules/write/write.module#WriteModule'
+        loadChildren: () => import('src/app/modules/write/write.module').then(m => m.WriteModule)
       }
     ]
   },
