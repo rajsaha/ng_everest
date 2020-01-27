@@ -1,13 +1,18 @@
 <div class="search">
-    <form [formGroup]="searchForm">
-        <input 
-        type="text" 
-        placeholder="Search" 
-        formControlName="query" 
-        (focus)="activateSearch()" 
-        (focusout)="deactivateSearch()"
-        (keyup.enter)="goToSearch()">
-    </form>
+    <div class="form" [ngClass]="{ 'search-activated': isSearchActive }">
+        <div class="search-icon">
+            <fa-icon [icon]="faSearch"></fa-icon>
+        </div>
+        <form [formGroup]="searchForm">
+            <input 
+            type="text" 
+            placeholder="Search" 
+            formControlName="query" 
+            (focus)="activateSearch()" 
+            (focusout)="deactivateSearch()"
+            (keyup.enter)="goToSearch()">
+        </form>
+    </div>
 
     <div class="search-result" *ngIf="isSearchActive && this.searchForm.get('query').value.length > 0">
         <!-- Users result -->
