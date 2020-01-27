@@ -13,10 +13,10 @@
       // Handle
       &::-webkit-scrollbar-thumb {
         border-radius: 5px;  
-        background: #FC800C;
+        background: rgb(119, 119, 119);
   
         &:hover {
-          background: rgb(175, 87, 5);
+          background: rgb(77, 77, 77);
         }
       }
 }
