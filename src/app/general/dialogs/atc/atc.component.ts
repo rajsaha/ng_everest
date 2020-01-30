@@ -104,7 +104,7 @@ export class AtcComponent implements OnInit {
       { username: this.username, resourceId }
     );
 
-    if (collection.collection) {
+    if (collection.collection.length > 0) {
       this.currentCollectionName = collection.collection[0].title;
     }
   }

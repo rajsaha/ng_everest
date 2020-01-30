@@ -35,7 +35,7 @@ export class UserService {
   }
 
   deleteProfilePhoto(data: any) {
-    const response = this.http.delete(`${ENV.API_URL}/user/delete-profile-photo/${data.id}/${data.deleteHash}`).toPromise();
+    const response = this.http.delete(`${ENV.API_URL}/user/delete-profile-photo/${data.id}`).toPromise();
     return response;
   }
 

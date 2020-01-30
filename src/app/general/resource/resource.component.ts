@@ -66,7 +66,7 @@ export class ResourceComponent implements OnInit {
     this.title = this.data.title;
     this.type = this.data.type;
     this.description = this.data.description;
-    this.image = this.data.image;
+    this.image = this.data.mdImage.link;
     this.timestamp = moment(this.data.timestamp.$date).fromNow();
     this.recommended_by_count = this.data.recommended_by_count;
     this.isLoading = false;

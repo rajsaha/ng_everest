@@ -75,6 +75,7 @@ export class PublicProfileComponent implements OnInit {
       pageNo: this.pageNo,
       size: this.size
     });
+    console.log(result);
     this.isLoading = false;
 
     // * Separating the individual parts
@@ -95,8 +96,8 @@ export class PublicProfileComponent implements OnInit {
     this.followers = data.followers;
     this.following = data.following;
 
-    if (data.image) {
-      this.image = data.image.link;
+    if (data.mdImage) {
+      this.image = data.mdImage.link;
     }
     this.interests = data.interests;
   }

@@ -92,11 +92,11 @@ export class EditProfileComponent implements OnInit {
     this.followers = res.userData.followers;
     this.following = res.userData.following;
 
-    if (res.userData.image) {
-      this.image = res.userData.image.link;
-      this.uploadedImage = res.userData.image.link;
-      this.imageId = res.userData.image.id;
-      this.deleteHash = res.userData.image.deleteHash;
+    if (res.userData.mdImage.link) {
+      this.image = res.userData.mdImage.link;
+      this.uploadedImage = res.userData.mdImage.link;
+      this.imageId = res.userData.mdImage.id;
+      this.deleteHash = res.userData.mdImage.deleteHash;
     } else {
       this.image = this.defaultProfileImage;
     }
@@ -140,12 +140,9 @@ export class EditProfileComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(async result => {
-      if (result && result.status) {
-        const imageLink: any = await this.userService.getProfilePhoto(
-          this.username
-        );
-        this.image = imageLink.image.image.link
-          ? imageLink.image.image.link
+      if (result.newImage) {
+        this.image = result.image
+          ? result.image
           : this.defaultProfileImage;
       }
     });

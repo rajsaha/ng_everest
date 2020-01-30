@@ -59,8 +59,6 @@ export class AddToCollectionComponent implements OnInit {
       username: this.username
     });
 
-    console.log(response);
-
     if (response.collections) {
       for (const collection of response.collections) {
         this.collections.push(collection);

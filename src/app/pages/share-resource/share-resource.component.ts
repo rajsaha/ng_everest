@@ -261,6 +261,5 @@ export class ShareResourceComponent implements OnInit {
 
   receiveAtcData($event) {
     this.atcData = $event;
-    console.log(this.atcData);
   }
 }
