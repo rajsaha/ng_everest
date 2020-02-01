@@ -10,13 +10,14 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import * as moment from 'moment';
 import { AtcComponent } from '../dialogs/atc/atc.component';
-import { PoComponent } from '../dialogs/po/po.component';
+import { PoComponent } from './po/po.component';
 import { ResourceService } from '@services/resource/resource.service';
 import { CollectionService } from '@services/collection/collection.service';
 import { UserService } from '@services/user/user.service';
 import { CommentComponent } from './comment/comment.component';
 import { environment as ENV } from '@environments/environment';
 import { Router, ActivatedRoute } from '@angular/router';
+import { PopoverService } from '@services/popover/popover.service';
 
 @Component({
   selector: 'app-post',
@@ -74,7 +75,8 @@ export class PostComponent implements OnInit {
     private userService: UserService,
     private collectionService: CollectionService,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private popper: PopoverService
   ) {}
 
   async ngOnInit() {
@@ -195,19 +197,6 @@ export class PostComponent implements OnInit {
     }
   }
 
-  openPostDialog() {
-    const dialogRef = this.dialog.open(PoComponent, {
-      data: {
-        id: this.id,
-        username: this.username
-      }
-    });
-
-    dialogRef.afterClosed().subscribe(() => {
-      console.log('The dialog was closed');
-    });
-  }
-
   async like() {
     try {
       const result = await this.userService.likePost({
@@ -284,5 +273,20 @@ export class PostComponent implements OnInit {
     } else {
       this.router.navigate([`/profile/user/${this.username}/resource/${this.id}`], { relativeTo: this.route.parent });
     }
+  }
+
+  show(origin: HTMLElement) {
+    const ref = this.popper.open<{}>({
+      content: PoComponent,
+      origin,
+      data: {
+        resourceId: this.id,
+        username: this.username
+      }
+    });
+
+    ref.afterClosed$.subscribe(res => {
+        //
+    })
   }
 }

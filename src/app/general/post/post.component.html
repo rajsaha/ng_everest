@@ -1,4 +1,4 @@
-<div class="post" *ngIf="!isLoading">
+<div class="post" *ngIf="!isLoading" #origin>
   <!-- * Header -->
   <div class="header">
     <div class="user-image" 
@@ -9,7 +9,7 @@
       <span>{{ username }}</span>
       <small>{{ timestamp }}</small>
     </div>
-    <div class="post-menu" (click)="openPostDialog()">
+    <div class="post-menu" (click)="show(origin)">
       <fa-icon [icon]="faEllipsisV"></fa-icon>
     </div>
   </div>

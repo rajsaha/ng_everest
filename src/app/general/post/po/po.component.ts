@@ -1,9 +1,9 @@
-import { Component, OnInit, Inject } from '@angular/core';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router, ActivatedRoute } from '@angular/router';
-import { faShare, faArrowRight } from '@fortawesome/free-solid-svg-icons';
+import { faShare, faShareAlt, faFlag } from '@fortawesome/free-solid-svg-icons';
 import { faCopy } from '@fortawesome/free-regular-svg-icons';
+import { PopoverRef } from 'src/app/components/popover/popover-ref';
 
 @Component({
   selector: 'app-po',
@@ -12,29 +12,23 @@ import { faCopy } from '@fortawesome/free-regular-svg-icons';
 })
 export class PoComponent implements OnInit {
   id: string;
+  username: string;
 
   // Icons
   faShare = faShare;
+  faShareAlt = faShareAlt;
   faCopy = faCopy;
-  faArrowRight = faArrowRight;
+  faFlag = faFlag;
 
   constructor(
-    public dialogRef: MatDialogRef<PoComponent>,
-    @Inject(MAT_DIALOG_DATA) public data,
     private snackBar: MatSnackBar,
     private router: Router,
-    private route: ActivatedRoute) { }
+    private route: ActivatedRoute,
+    private popoverRef: PopoverRef) { }
 
   ngOnInit() {
-    this.id = this.data.id;
-  }
-
-  onNoClick() {
-    this.dialogRef.close();
-  }
-
-  onYesClick() {
-    this.dialogRef.close();
+    this.id = this.popoverRef.data.resourceId;
+    this.username = this.popoverRef.data.username;
   }
 
   openSnackBar(message: string, action: string) {
@@ -44,8 +38,12 @@ export class PoComponent implements OnInit {
   }
 
   goToView() {
-    this.router.navigate([`/profile/user/${this.data.username}/resource/${this.data.id}`], { relativeTo: this.route.parent });
-    this.dialogRef.close();
+    this.router.navigate([`/profile/user/${this.username}/resource/${this.id}`], { relativeTo: this.route.parent });
+    this.close();
+  }
+
+  close() {
+    this.popoverRef.close();
   }
 
 }
