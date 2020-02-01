@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router, ActivatedRoute } from '@angular/router';
-import { faShare, faShareAlt, faLink } from '@fortawesome/free-solid-svg-icons';
-import { faFlag } from '@fortawesome/free-regular-svg-icons';
+import { faShare, faShareAlt, faLink, faBackspace } from '@fortawesome/free-solid-svg-icons';
 import { PopoverRef } from 'src/app/components/popover/popover-ref';
 
 @Component({
@@ -18,7 +17,7 @@ export class PoComponent implements OnInit {
   faShare = faShare;
   faShareAlt = faShareAlt;
   faLink = faLink;
-  faFlag = faFlag;
+  faBackspace = faBackspace;
 
   constructor(
     private snackBar: MatSnackBar,

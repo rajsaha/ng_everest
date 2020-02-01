@@ -271,10 +271,10 @@ export class EditResourceComponent implements OnInit {
     this.editResourceForm.controls.url.patchValue(data.url);
     this.editResourceForm.controls.title.patchValue(data.title);
     this.editResourceForm.controls.description.patchValue(data.description);
-    this.editResourceForm.controls.image.patchValue(data.image);
+    this.editResourceForm.controls.image.patchValue(data.lgImage.link);
     this.editResourceForm.controls.timestamp.patchValue(data.timestamp);
     this.tags = data.tags;
-    this.ogImage = data.image;
+    this.ogImage = data.lgImage.link;
   }
 
 }
