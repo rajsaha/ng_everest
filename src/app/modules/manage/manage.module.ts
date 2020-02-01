@@ -16,6 +16,7 @@ import { DialogsModule } from "src/app/modules/dialogs/dialogs.module";
 import { EditArticleComponent } from "src/app/pages/edit-article/edit-article.component";
 import { EditorModule } from "@tinymce/tinymce-angular";
 import { AutosizeModule } from "ngx-autosize";
+import { ResourceOptionsComponent } from 'src/app/general/resource/resource-options/resource-options.component';
 
 const routes: Routes = [
   {
@@ -46,7 +47,8 @@ const routes: Routes = [
     ManageResourcesComponent,
     EditResourceComponent,
     ManageCollectionsComponent,
-    EditArticleComponent
+    EditArticleComponent,
+    ResourceOptionsComponent
   ],
   imports: [
     CommonModule,

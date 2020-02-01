@@ -96,12 +96,12 @@ export class ManageResourcesComponent implements OnInit {
     await this.getUserResources();
   }
 
-  drResponseHandler(result: number) {
-    if (result) {
+  drResponseHandler(result: any) {
+    if (result.resourceId) {
       for (const { item, index } of this.utilityService.toItemIndexes(
         this.resources
       )) {
-        if (result === item._id) {
+        if (result.resourceId === item._id) {
           this.resources.splice(index, 1);
           return;
         }

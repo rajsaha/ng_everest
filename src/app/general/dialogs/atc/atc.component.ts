@@ -171,6 +171,5 @@ export class AtcComponent implements OnInit {
     } else {
       this.createCollectionFormControls.collectionId.reset();
     }
-    console.log(this.createCollectionForm.value);
   }
 }

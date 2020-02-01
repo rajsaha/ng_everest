@@ -29,7 +29,7 @@
     [scrollWindow]="false"
   >
     <div class="resource-grid">
-      <app-resource *ngFor="let resource of resources" [data]="resource">
+      <app-resource *ngFor="let resource of resources" [data]="resource" (deleteEvent)="drResponseHandler($event)">
       </app-resource>
       <app-loading type="resource" *ngIf="isLoading"></app-loading>
     </div>

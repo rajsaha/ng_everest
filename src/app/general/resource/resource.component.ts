@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from "@angular/core";
+import { Component, OnInit, Input, Output, EventEmitter } from "@angular/core";
 import {
   faEye,
   faEdit,
@@ -9,9 +9,10 @@ import {
   faEllipsisV,
   faThumbsUp
 } from "@fortawesome/free-solid-svg-icons";
-import { MatDialog } from "@angular/material/dialog";
 import * as moment from "moment";
 import { Router, ActivatedRoute } from "@angular/router";
+import { PopoverService } from '@services/popover/popover.service';
+import { ResourceOptionsComponent } from './resource-options/resource-options.component';
 
 @Component({
   selector: "app-resource",
@@ -21,6 +22,7 @@ import { Router, ActivatedRoute } from "@angular/router";
 export class ResourceComponent implements OnInit {
   @Input() data: any;
   @Input() collectionId: string;
+  @Output() deleteEvent = new EventEmitter();
 
   // Data
   id: string;
@@ -54,9 +56,9 @@ export class ResourceComponent implements OnInit {
   isOptionsActive = false;
 
   constructor(
-    public dialog: MatDialog,
-    private route: Router,
-    private router: ActivatedRoute
+    private router: Router,
+    private route: ActivatedRoute,
+    private popper: PopoverService
   ) {}
 
   ngOnInit() {
@@ -66,7 +68,7 @@ export class ResourceComponent implements OnInit {
   }
 
   getRouteUserId() {
-    this.router.parent.params.subscribe(param => {
+    this.route.parent.params.subscribe(param => {
       this.routeUser = param.username;
     });
   }
@@ -86,25 +88,31 @@ export class ResourceComponent implements OnInit {
   }
 
   goToView() {
-    this.route.navigate(
+    this.router.navigate(
       [`/profile/user/${this.resourceUser}/resource/${this.id}`],
-      { relativeTo: this.router.parent }
+      { relativeTo: this.route.parent }
     );
   }
 
-  goToEdit() {
-    if (this.type === "ext-content") {
-      this.route.navigate([`/manage/resource/edit/${this.id}`], {
-        relativeTo: this.router.parent
-      });
-    } else {
-      this.route.navigate([`/manage/article/edit/${this.id}`], {
-        relativeTo: this.router.parent
-      });
-    }
-  }
+  show(origin: HTMLElement) {
+    const ref = this.popper.open<{}>({
+      content: ResourceOptionsComponent,
+      origin,
+      data: {
+        resourceId: this.id,
+        resourceUser: this.resourceUser,
+        type: this.type,
+        title: this.title
+      }
+    });
 
-  toggleDropdown() {
-    this.isOptionsActive = !this.isOptionsActive;
+    ref.afterClosed$.subscribe(res => {
+        if (res.data && res.data['isDeleted']) {
+          this.deleteEvent.emit({
+            resourceId: this.id
+          });
+        }
+    })
+
   }
 }

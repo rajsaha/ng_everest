@@ -24,7 +24,6 @@ export class DrComponent implements OnInit {
 
   async onYesClick() {
     const response: any = await this.resourceService.deleteResource({id: this.data.id});
-
     if (!response.error) {
       this.snackbarService.openSnackBar({
         message: {
@@ -33,7 +32,7 @@ export class DrComponent implements OnInit {
         },
         class: 'green-snackbar',
       });
-      this.dialogRef.close(this.data.id);
+      this.dialogRef.close(true);
     } else {
       this.snackbarService.openSnackBar({
         message: {
@@ -43,7 +42,7 @@ export class DrComponent implements OnInit {
         class: 'red-snackbar',
       });
 
-      this.dialogRef.close();
+      this.dialogRef.close(false);
     }
   }
 

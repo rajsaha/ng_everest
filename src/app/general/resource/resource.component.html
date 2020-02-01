@@ -1,7 +1,7 @@
-<div class="resource" *ngIf="!isLoading">
+<div class="resource" *ngIf="!isLoading" #origin>
   <div class="header">
     <span>{{ title | truncate: [30] }}</span>
-    <button mat-icon-button (click)="toggleDropdown()">
+    <button mat-icon-button (click)="show(origin)">
       <fa-icon [icon]="faEllipsesV"></fa-icon>
     </button>
   </div>

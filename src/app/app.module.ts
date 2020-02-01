@@ -32,6 +32,7 @@ import { SearchComponent } from './components/search/search.component';
 import { AddToCollectionComponent } from './components/add-to-collection/add-to-collection.component';
 import { SearchPageComponent } from './pages/search-page/search-page.component';
 import { UserComponent } from './general/user/user.component';
+import { PopoverComponent } from './components/popover/popover.component';
 
 @NgModule({
   declarations: [
@@ -48,7 +49,8 @@ import { UserComponent } from './general/user/user.component';
     SearchComponent,
     AddToCollectionComponent,
     SearchPageComponent,
-    UserComponent
+    UserComponent,
+    PopoverComponent
   ],
   imports: [
     CommonModule,
@@ -70,7 +72,7 @@ import { UserComponent } from './general/user/user.component';
     }
   ],
   bootstrap: [AppComponent],
-  entryComponents: [AtcComponent, PoComponent, SnackbarComponent]
+  entryComponents: [AtcComponent, PoComponent, SnackbarComponent, PopoverComponent]
 })
 export class AppModule { }
 

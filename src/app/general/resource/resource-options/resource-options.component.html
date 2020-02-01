@@ -1,0 +1,36 @@
+<div class="popover-header">
+  <span>Resource Options</span>
+</div>
+
+<div class="popover-item" (click)="goToView()" matRipple>
+  <div class="top">
+    <fa-icon [icon]="faShare"></fa-icon>
+    <span>Go to Post</span>
+  </div>
+
+  <div class="bottom">
+    <small>View details of post</small>
+  </div>
+</div>
+
+<div class="popover-item" (click)="goToEdit()" matRipple>
+  <div class="top">
+    <fa-icon [icon]="faPen"></fa-icon>
+    <span>Edit</span>
+  </div>
+
+  <div class="bottom">
+    <small>Edit details of post</small>
+  </div>
+</div>
+
+<div class="popover-item" (click)="openDeleteResourceDialog()" matRipple>
+  <div class="top">
+    <fa-icon [icon]="faTrashAlt"></fa-icon>
+    <span>Delete</span>
+  </div>
+
+  <div class="bottom">
+    <small>Permanently delete resource</small>
+  </div>
+</div>

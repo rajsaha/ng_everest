@@ -75,7 +75,6 @@ export class PublicProfileComponent implements OnInit {
       pageNo: this.pageNo,
       size: this.size
     });
-    console.log(result);
     this.isLoading = false;
 
     // * Separating the individual parts
