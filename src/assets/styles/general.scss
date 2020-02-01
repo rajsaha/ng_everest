@@ -197,11 +197,16 @@ app-root {
     border-bottom-right-radius: 5px;
   }
 
+  &:not(:last-of-type) {
+    border-bottom: 1px solid #DEE8FF;
+  }
+
   &:hover {
     background-color: rgba(0, 0, 0, 0.1);
   }
   .top {
     font-size: 14px;
+    margin-bottom: 5px;
     fa-icon {
       color: #481a89;
       margin-right: 10px;
