@@ -1,8 +1,8 @@
-import { Component, OnInit, HostListener } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { ResourceService } from '@services/resource/resource.service';
 import { UtilityService } from '@services/general/utility.service';
-import { faSearch } from '@fortawesome/free-solid-svg-icons';
+import { faSearch, faFilter } from '@fortawesome/free-solid-svg-icons';
 import { debounceTime } from 'rxjs/internal/operators';
 
 @Component({
@@ -18,6 +18,7 @@ export class ManageResourcesComponent implements OnInit {
 
   // Icons
   faSearch = faSearch;
+  faFilter = faFilter;
 
   // Toggles
   isLoading = false;
@@ -47,7 +48,8 @@ export class ManageResourcesComponent implements OnInit {
 
   async initResourceSearchForm() {
     this.resourceSearchForm = this.fb.group({
-      query: ['']
+      query: [''],
+      filter: ['']
     });
   }
 

@@ -1,13 +1,22 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { faEye, faEdit, faTrashAlt, faExternalLinkAlt, faTimes, faFolderMinus } from '@fortawesome/free-solid-svg-icons';
-import { MatDialog } from '@angular/material/dialog';
-import * as moment from 'moment';
-import { Router, ActivatedRoute } from '@angular/router';
+import { Component, OnInit, Input } from "@angular/core";
+import {
+  faEye,
+  faEdit,
+  faTrashAlt,
+  faExternalLinkAlt,
+  faTimes,
+  faFolderMinus,
+  faEllipsisV,
+  faThumbsUp
+} from "@fortawesome/free-solid-svg-icons";
+import { MatDialog } from "@angular/material/dialog";
+import * as moment from "moment";
+import { Router, ActivatedRoute } from "@angular/router";
 
 @Component({
-  selector: 'app-resource',
-  templateUrl: './resource.component.html',
-  styleUrls: ['./resource.component.scss']
+  selector: "app-resource",
+  templateUrl: "./resource.component.html",
+  styleUrls: ["./resource.component.scss"]
 })
 export class ResourceComponent implements OnInit {
   @Input() data: any;
@@ -20,7 +29,7 @@ export class ResourceComponent implements OnInit {
   tags = [];
   type: string;
   description: string;
-  image = '';
+  image = "";
   timestamp: any;
   allComments = [];
   resourceUser: string;
@@ -37,23 +46,27 @@ export class ResourceComponent implements OnInit {
   faExternalLinkAlt = faExternalLinkAlt;
   faTimes = faTimes;
   faFolderMinus = faFolderMinus;
+  faEllipsesV = faEllipsisV;
+  faThumbsUp = faThumbsUp;
 
   // Toggles
   isLoading = false;
+  isOptionsActive = false;
 
   constructor(
     public dialog: MatDialog,
     private route: Router,
-    private router: ActivatedRoute) { }
+    private router: ActivatedRoute
+  ) {}
 
   ngOnInit() {
-    this.loggedInUser = localStorage.getItem('username');
+    this.loggedInUser = localStorage.getItem("username");
     this.getRouteUserId();
     this.populateResource();
   }
 
   getRouteUserId() {
-    this.router.parent.params.subscribe((param) => {
+    this.router.parent.params.subscribe(param => {
       this.routeUser = param.username;
     });
   }
@@ -73,15 +86,25 @@ export class ResourceComponent implements OnInit {
   }
 
   goToView() {
-    this.route.navigate([`/profile/user/${this.resourceUser}/resource/${this.id}`], { relativeTo: this.router.parent });
+    this.route.navigate(
+      [`/profile/user/${this.resourceUser}/resource/${this.id}`],
+      { relativeTo: this.router.parent }
+    );
   }
 
   goToEdit() {
-    if (this.type === 'ext-content') {
-      this.route.navigate([`/manage/resource/edit/${this.id}`], { relativeTo: this.router.parent });
+    if (this.type === "ext-content") {
+      this.route.navigate([`/manage/resource/edit/${this.id}`], {
+        relativeTo: this.router.parent
+      });
     } else {
-      this.route.navigate([`/manage/article/edit/${this.id}`], { relativeTo: this.router.parent });
+      this.route.navigate([`/manage/article/edit/${this.id}`], {
+        relativeTo: this.router.parent
+      });
     }
   }
 
+  toggleDropdown() {
+    this.isOptionsActive = !this.isOptionsActive;
+  }
 }

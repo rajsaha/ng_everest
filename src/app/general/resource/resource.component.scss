@@ -1,72 +1,112 @@
+%count {
+  padding: 0 8px;
+  background-color: #dee8ff;
+  border-radius: 20px;
+  color: #481a89;
+  font-size: 10px;
+  font-weight: bold;
+  margin-left: 5px;
+}
+
 .resource {
-	cursor: pointer;
-	width: 275px;
-	max-width: 300px;
-	box-shadow: 0 8px 20px 0 rgba(197, 197, 197, 0.6);
-	background-color: white;
-	border-radius: 5px;
-	margin-bottom: 25px;
-	transition: box-shadow 0.2s ease-in;
-	position: relative;
-	animation: fadeUp 0.2s ease-in-out;
-	animation-fill-mode: forwards;
-	
-	&:hover {
-		box-shadow: 0 22px 32px 0 rgba(197, 197, 197, 0.9);
-	}
+  cursor: pointer;
+  width: 275px;
+  max-width: 300px;
+  box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+  background-color: white;
+  border-radius: 5px;
+  margin-bottom: 25px;
+  transition: box-shadow 0.2s ease-in;
+  position: relative;
+  animation: fadeUp 0.2s ease-in-out;
+  animation-fill-mode: forwards;
+  margin-bottom: 40px;
 
-	.image {
-		border-top-left-radius: 5px;
-		border-top-right-radius: 5px;
-		width: 275px;
-		height: 150px;
-		max-width: 300px;
-		max-height: 300px;
-		object-fit: cover;
+  &:hover {
+    box-shadow: 0 2px 40px rgba(0, 0, 0, 0.2);
+  }
 
-		&::before {
-			display: block;
-			content: '';
-			padding-top: calc(100% * 2 / 3);
-		}
-	}
+  .header {
+    display: grid;
+    grid-template-columns: auto 30px;
+    padding: 5px 10px 3px 20px;
 
-	.details {
-		padding: 0 15px 15px 15px;
+    span {
+      align-self: center;
+      font-size: 14px;
+      font-weight: 500;
+      color: #3c3c3c;
+    }
 
-		h4 {
-			margin-bottom: 10px;
-		}
+    fa-icon {
+      color: #6d6b71;
+      align-self: center;
+    }
+  }
 
-		.type {
-			margin-left: 0;
-		}
-	}
+  .image {
+    width: 275px;
+    height: 150px;
+    max-width: 300px;
+    max-height: 300px;
+    object-fit: cover;
 
-	.stats {
-		padding: 0 15px 15px 15px;
-		.likes {
-			font-size: 12px;
-		}
-	}
+    &::before {
+      display: block;
+      content: "";
+      padding-top: calc(100% * 2 / 3);
+    }
+  }
+
+  .details {
+    padding: 0 20px 20px 20px;
+    color: #3c3c3c;
+    font-size: 12px;
+    line-height: 20px;
+
+    .type {
+      margin-left: 0;
+    }
+  }
+
+  .stats {
+    padding: 0 15px 15px 15px;
+
+    .like {
+      fa-icon {
+        color: rgba(0, 0, 0, 0.2);
+        vertical-align: top;
+      }
+
+      .count {
+        @extend %count;
+      }
+    }
+  }
+}
+
+.is-liked {
+  fa-icon {
+    color: #ffa25a !important;
+  }
 }
 
 @keyframes fadeUp {
-	0% {
-		opacity: 0;
-		transform: translateY(15px);
-	}
+  0% {
+    opacity: 0;
+    transform: translateY(15px);
+  }
 
-	100% {
-		opacity: 1;
-		transform: translateY(0);
-	}
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 @media (min-width: 602px) {
-	.resource {
-		.image {
-			display: inherit;
-		}
-	}
+  .resource {
+    .image {
+      display: inherit;
+    }
+  }
 }

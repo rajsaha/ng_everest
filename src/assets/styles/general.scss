@@ -42,12 +42,11 @@ app-root {
 	color: white;
 	font-size: 12px;
 	padding: 5px 5px 4px 5px;
-	background: rgb(244,67,54);
-	background: linear-gradient(to right,#ff8a00,#e52e71);
-	border-radius: 5px;
-	-webkit-box-shadow: 0px 0px 8px -1px rgba(0,0,0,0.26);
-	-moz-box-shadow: 0px 0px 8px -1px rgba(0,0,0,0.26);
-	box-shadow: 0px 0px 8px -1px rgba(0,0,0,0.26);
+	background-color: #481A89;
+	border-radius: 25px;
+	-webkit-box-shadow: 0px 0px 8px -1px #481A89;
+	-moz-box-shadow: 0px 0px 8px -1px #481A89;
+	box-shadow: 0px 0px 8px -1px #481A89;
 	text-align: center;
 	width: 50px;
 	margin-left: 15px;

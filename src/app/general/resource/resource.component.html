@@ -1,22 +1,26 @@
 <div class="resource" *ngIf="!isLoading">
+  <div class="header">
+    <span>{{ title | truncate: [30] }}</span>
+    <button mat-icon-button (click)="toggleDropdown()">
+      <fa-icon [icon]="faEllipsesV"></fa-icon>
+    </button>
+  </div>
   <img *ngIf="image" class="image" [src]="image" (click)="goToView()" />
   <div class="details">
-    <h4 [ngStyle]="{ 'padding-top': image ? '' : '15px' }" (click)="goToView()">
-      {{ title }}
-    </h4>
     <!-- * Type -->
     <div class="type" *ngIf="type === 'article'">
       {{ type }}
     </div>
-    <p *ngIf="type === 'ext-content'">{{ description | truncate: [40] }}</p>
+    <p  *ngIf="type === 'ext-content'">{{ description | truncate: [150] }}</p>
     <div
       *ngIf="type === 'article'"
       [innerHtml]="description | truncate: [40]"
     ></div>
   </div>
   <div class="stats">
-    <div class="likes" *ngIf="recommended_by_count > 0">
-      {{ recommended_by_count }} {{ (recommended_by_count === 1) ? 'like' : 'likes' }}
+    <div class="like" [ngClass]="recommended_by_count > 0 ? 'is-liked' : ''">
+      <fa-icon [icon]="faThumbsUp"></fa-icon>
+      <span class="count">{{ recommended_by_count }}</span>
     </div>
   </div>
 </div>
