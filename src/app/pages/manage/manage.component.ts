@@ -1,32 +1,31 @@
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, OnInit } from "@angular/core";
+import {
+  faSearch,
+  faFilter,
+  faLayerGroup,
+  faPager,
+  faThList,
+  faThLarge
+} from "@fortawesome/free-solid-svg-icons";
 
 @Component({
-  selector: 'app-manage',
-  templateUrl: './manage.component.html',
-  styleUrls: ['./manage.component.scss']
+  selector: "app-manage",
+  templateUrl: "./manage.component.html",
+  styleUrls: ["./manage.component.scss"]
 })
 export class ManageComponent implements OnInit {
   navLinks: any[];
   activeLinkIndex = -1;
 
-  constructor(private router: Router) {
-    this.navLinks = [
-      {
-        label: 'Resources',
-        link: 'resource',
-        index: 0
-      }, {
-        label: 'Collections',
-        link: 'collection',
-        index: 1
-      }
-    ];
-  }
+  // Icons
+  faSearch = faSearch;
+  faFilter = faFilter;
+  faLayerGroup = faLayerGroup;
+  faPager = faPager;
+  faThList = faThList;
+  faThLarge = faThLarge;
 
-  ngOnInit() {
-    this.router.events.subscribe((res) => {
-      this.activeLinkIndex = this.navLinks.indexOf(this.navLinks.find(tab => tab.link === '.' + this.router.url));
-    });
-  }
+  constructor() {}
+
+  ngOnInit() {}
 }
