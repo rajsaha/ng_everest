@@ -1,16 +1,4 @@
 <div class="section-container">
-  <div class="search">
-    <form [formGroup]="collectionSearchForm">
-      <mat-form-field appearance="outline">
-        <mat-label>Search</mat-label>
-        <mat-icon matPrefix>
-          <fa-icon [icon]="faSearch"></fa-icon>
-        </mat-icon>
-        <input matInput placeholder="Search for your resources" formControlName="query">
-      </mat-form-field>
-    </form>
-  </div>
-
   <div class="list-of-collections" *ngIf="!isLoading">
     <app-collection *ngFor="let collection of collections" [data]="collection"></app-collection>
   </div>

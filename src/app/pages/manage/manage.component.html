@@ -1,12 +1,12 @@
 <div class="header">
   <h3>Resources</h3>
-  <div class="controls">
+  <div class="controls" [formGroup]="form">
     <!-- Search -->
     <div class="control">
       <div class="control-icon">
         <fa-icon [icon]="faSearch"></fa-icon>
       </div>
-      <input type="text" placeholder="Search" />
+      <input type="text" placeholder="Search" formControlName="searchQuery" />
     </div>
 
     <!-- Filter -->
@@ -14,23 +14,51 @@
       <div class="control-icon">
         <fa-icon [icon]="faFilter"></fa-icon>
       </div>
-      <input type="text" placeholder="Filter" />
+      <input type="text" placeholder="Filter" formControlName="filter" />
     </div>
 
     <!-- Toggle Content Type -->
     <div class="control-group">
-      <fa-icon [icon]="faLayerGroup"></fa-icon>
-      <span>Collections</span>
+      <div
+        class="group"
+        [ngClass]="{ selected: form.get('collections').value }"
+        (click)="viewCollections()"
+      >
+        <fa-icon [icon]="faLayerGroup"></fa-icon>
+        <span>Collections</span>
+      </div>
 
-      <fa-icon [icon]="faPager" style="margin-right: 10px;"></fa-icon>
-      <span>Posts</span>
+      <div
+        class="group"
+        [ngClass]="{ selected: form.get('posts').value }"
+        (click)="viewPosts()"
+      >
+        <fa-icon [icon]="faPager"></fa-icon>
+        <span>Posts</span>
+      </div>
     </div>
 
     <!-- Toggle View -->
     <div class="control-group">
-      <fa-icon [icon]="faThLarge"></fa-icon>
-      <fa-icon [icon]="faThList"></fa-icon>
+      <div class="group">
+        <fa-icon
+          [icon]="faThLarge"
+          [ngClass]="{ selected: form.get('view').value }"
+        ></fa-icon>
+      </div>
+      <div class="group">
+        <fa-icon
+          [icon]="faThList"
+          [ngClass]="{ selected: !form.get('view').value }"
+        ></fa-icon>
+      </div>
     </div>
   </div>
 </div>
-<app-manage-resources></app-manage-resources>
+<app-manage-resources
+  *ngIf="form.get('posts').value"
+></app-manage-resources>
+
+<app-manage-collections
+  *ngIf="form.get('collections').value"
+></app-manage-collections>

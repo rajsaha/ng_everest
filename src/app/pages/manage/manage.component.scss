@@ -57,36 +57,45 @@
       transition: border 0.2s ease-in-out;
       justify-self: center;
 
-      &:focus-within {
-        border: 2px solid rgba(72, 26, 137, 0.5);
-      }
-
-      fa-icon {
-        color: #481a89;
-        font-size: 16px;
-      }
-
-      fa-icon:not(:last-of-type) {
+      div:first-child {
         margin-right: 10px;
       }
 
-      span {
-        font-size: 14px;
-      }
+      .group {
+        display: inline-block;
+        cursor: pointer;
+        
+        fa-icon {
+          color: #C8C4D1;
+          font-size: 16px;
+        }
 
-      span:not(:last-of-type) {
-        margin-right: 10px;
+        span {
+          color: #6D6B71;
+          font-size: 14px;
+          margin-left: 8px;
+        }
       }
     }
   }
 }
 
+.selected {
+  fa-icon {
+    color: #481a89 !important;
+  }
+
+  span {
+    color: #481a89 !important;
+  }
+}
+
 @media (min-width: 376px) {
-    .header {
-        .controls {
-            grid-template-columns: repeat(2, 1fr);
-        }
+  .header {
+    .controls {
+      grid-template-columns: repeat(2, 1fr);
     }
+  }
 }
 
 @media (min-width: 768px) {
@@ -98,7 +107,7 @@
       justify-self: end;
 
       .control {
-          width: 100px;
+        width: 100px;
       }
     }
   }

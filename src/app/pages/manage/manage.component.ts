@@ -7,6 +7,7 @@ import {
   faThList,
   faThLarge
 } from "@fortawesome/free-solid-svg-icons";
+import { FormGroup, FormBuilder } from "@angular/forms";
 
 @Component({
   selector: "app-manage",
@@ -16,6 +17,7 @@ import {
 export class ManageComponent implements OnInit {
   navLinks: any[];
   activeLinkIndex = -1;
+  form: FormGroup;
 
   // Icons
   faSearch = faSearch;
@@ -25,7 +27,29 @@ export class ManageComponent implements OnInit {
   faThList = faThList;
   faThLarge = faThLarge;
 
-  constructor() {}
+  constructor(private fb: FormBuilder) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.initForm();
+  }
+
+  initForm() {
+    this.form = this.fb.group({
+      searchQuery: [""],
+      filter: [""],
+      collections: [true],
+      posts: [false],
+      view: [true]
+    });
+  }
+
+  viewCollections() {
+    this.form.get("collections").patchValue(true);
+    this.form.get("posts").patchValue(false);
+  }
+
+  viewPosts() {
+    this.form.get("collections").patchValue(false);
+    this.form.get("posts").patchValue(true);
+  }
 }
