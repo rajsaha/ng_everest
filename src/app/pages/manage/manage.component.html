@@ -1,5 +1,5 @@
 <div class="header">
-  <h3>Resources</h3>
+  <h3>{{ form.get('collections').value ? 'Collections' : 'Resources' }}</h3>
   <div class="controls" [formGroup]="form">
     <!-- Search -->
     <div class="control">
@@ -40,24 +40,16 @@
 
     <!-- Toggle View -->
     <div class="control-group">
-      <div class="group">
-        <fa-icon
-          [icon]="faThLarge"
-          [ngClass]="{ selected: form.get('view').value }"
-        ></fa-icon>
+      <div class="group" [ngClass]="{ selected: form.get('view').value }">
+        <fa-icon [icon]="faThLarge"></fa-icon>
       </div>
-      <div class="group">
-        <fa-icon
-          [icon]="faThList"
-          [ngClass]="{ selected: !form.get('view').value }"
-        ></fa-icon>
+      <div class="group" [ngClass]="{ selected: !form.get('view').value }">
+        <fa-icon [icon]="faThList"></fa-icon>
       </div>
     </div>
   </div>
 </div>
-<app-manage-resources
-  *ngIf="form.get('posts').value"
-></app-manage-resources>
+<app-manage-resources *ngIf="form.get('posts').value"></app-manage-resources>
 
 <app-manage-collections
   *ngIf="form.get('collections').value"
