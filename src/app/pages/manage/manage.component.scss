@@ -20,8 +20,8 @@
       grid-template-columns: 15px auto;
       grid-gap: 15px;
       padding: 5px 20px;
-      transition: border 0.2s ease-in-out;
       justify-self: center;
+      transition: border 0.2s ease-in-out, width 150ms cubic-bezier(0.25, 0.8, 0.25, 1);
 
       &:focus-within {
         border: 2px solid rgba(72, 26, 137, 0.5);
@@ -90,6 +90,10 @@
   }
 }
 
+.search-in-focus {
+  width: inherit;
+}
+
 @media (min-width: 376px) {
   .header {
     .controls {
@@ -110,5 +114,11 @@
         width: 100px;
       }
     }
+  }
+}
+
+@media (min-width: 860px) {
+  .search-in-focus {
+    width: 200px !important;
   }
 }

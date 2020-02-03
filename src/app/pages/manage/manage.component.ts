@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, ViewChild } from "@angular/core";
 import {
   faSearch,
   faFilter,
@@ -18,6 +18,7 @@ export class ManageComponent implements OnInit {
   navLinks: any[];
   activeLinkIndex = -1;
   form: FormGroup;
+  isSearchFocused = false;
 
   // Icons
   faSearch = faSearch;
@@ -51,5 +52,13 @@ export class ManageComponent implements OnInit {
   viewPosts() {
     this.form.get("collections").patchValue(false);
     this.form.get("posts").patchValue(true);
+  }
+
+  searchFocusIn() {
+    this.isSearchFocused = true;
+  }
+
+  searchFocusOut() {
+    this.isSearchFocused = false;
   }
 }

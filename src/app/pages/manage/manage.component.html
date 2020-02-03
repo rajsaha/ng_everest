@@ -1,12 +1,18 @@
 <div class="header">
-  <h3>{{ form.get('collections').value ? 'Collections' : 'Resources' }}</h3>
+  <h3>{{ form.get("collections").value ? "Collections" : "Resources" }}</h3>
   <div class="controls" [formGroup]="form">
     <!-- Search -->
-    <div class="control">
+    <div class="control" [ngClass]="{ 'search-in-focus': isSearchFocused }">
       <div class="control-icon">
         <fa-icon [icon]="faSearch"></fa-icon>
       </div>
-      <input type="text" placeholder="Search" formControlName="searchQuery" />
+      <input
+        type="text"
+        placeholder="Search"
+        formControlName="searchQuery"
+        (focus)="searchFocusIn()"
+        (focusout)="searchFocusOut()"
+      />
     </div>
 
     <!-- Filter -->
