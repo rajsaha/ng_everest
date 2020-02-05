@@ -232,7 +232,9 @@ export class PostComponent implements OnInit {
       data: {
         id: this.id,
         url: this.url,
-        title: this.title
+        title: this.title,
+        image: this.image,
+        description: this.description
       }
     });
 

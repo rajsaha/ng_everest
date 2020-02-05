@@ -68,12 +68,14 @@
         fa-icon {
           color: #C8C4D1;
           font-size: 16px;
+          transition: color 0.2s ease-in-out;
         }
 
         span {
           color: #6D6B71;
           font-size: 14px;
           margin-left: 8px;
+          transition: color 0.2s ease-in-out;
         }
       }
     }
