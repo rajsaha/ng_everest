@@ -56,7 +56,7 @@
         <div class="item" *ngIf="i < 3">
           <div
             class="item-a"
-            [ngStyle]="{ 'background-image': 'url(' + resource.image + ')' }"
+            [ngStyle]="{ 'background-image': 'url(' + resource.smImage.link + ')' }"
           ></div>
           <p class="item-b">{{ resource.title | truncate: [30] }}</p>
           <small class="item-c">@{{ resource.username }}</small>

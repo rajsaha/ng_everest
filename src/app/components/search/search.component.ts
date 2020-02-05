@@ -118,6 +118,7 @@ export class SearchComponent implements OnInit {
           user: true
         }
       });
+      
       this.isSearchActive = true;
       this.isLoading = false;
 
@@ -168,8 +169,8 @@ export class SearchComponent implements OnInit {
   }
 
   getImageLink(user: any) {
-    if (user && user.image) {
-      return user.image.link;
+    if (user && user.smImage) {
+      return user.smImage.link;
     }
   }
 
