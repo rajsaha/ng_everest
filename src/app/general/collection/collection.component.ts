@@ -43,7 +43,7 @@ export class CollectionComponent implements OnInit {
     }
     const result: any = await this.resourceService.getFourImages(resourceIds);
     if (result.images[0]) {
-      this.image1 = result.images[0].mdImage.link;
+      this.image1 = result.images[0].lgImage.link;
     }
 
     if (result.images[1]) {

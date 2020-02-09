@@ -1,13 +1,15 @@
-$block-width: 6.2rem;
+$main-block-width: 12.12rem;
+$main-block-height: 12.12rem;
+$block-width: 7.2rem;
 $block-height: 6.2rem;
-$block-radius: 5px;
-$block-border: 1px solid white;
+$block-radius: 10px;
+$block-border: 5px solid white;
 
 .collection-container {
   border: 1px solid rgb(235, 235, 235);
   border-radius: 10px;
   background-color: white;
-  box-shadow: 0 8px 20px 0 rgba(197, 197, 197, 0.6);
+  box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
   cursor: pointer;
   display: inline-block;
   transition: all 0.2s ease-in-out;
@@ -46,38 +48,41 @@ $block-border: 1px solid white;
   }
 
   .collection {
-    display: inline-grid;
-    grid-template-columns: $block-width $block-width;
-    place-self: center stretch;
-
-    .block {
+    .main {
+      display: block;
       background-color: rgba(231, 231, 231, 1);
       background-size: cover;
       background-repeat: no-repeat;
       background-position: center center;
-      width: $block-width;
-      height: $block-height;
+      border-bottom: 5px solid white;
+      width: auto;
+      height: $main-block-height;
+    }
 
-      &:nth-child(1) {
-        border-right: $block-border;
-        border-bottom: $block-border;
-        border-top-left-radius: $block-radius;
-        border-bottom-left-radius: 0;
-        border-top-right-radius: 0;
-        border-bottom-right-radius: 0;
-      }
-
-      &:nth-child(2) {
-        border-left: $block-border;
-        border-bottom: $block-border;
-        border-top-left-radius: 0;
-        border-bottom-left-radius: 0;
-        border-top-right-radius: $block-radius;
-        border-bottom-right-radius: 0;
-      }
-
-      &:nth-child(4) {
-        border-left: $block-border;
+    .subs {
+      display: inline-flex;
+      .block {
+        background-color: rgba(231, 231, 231, 1);
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center center;
+        width: $block-width;
+        height: $block-height;
+  
+        &:nth-child(1) {
+          border-left: $block-border;
+          border-right: $block-border;
+          border-bottom-left-radius: $block-radius;
+        }
+  
+        &:nth-child(2) {
+          border-right: $block-border;
+        }
+  
+        &:nth-child(3) {
+          border-right: $block-border;
+          border-bottom-right-radius: $block-radius;
+        }
       }
     }
   }
