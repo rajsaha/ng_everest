@@ -40,6 +40,8 @@ mat-form-field {
         margin-bottom: 15px;
         overflow: hidden;
         transition: max-height 0.15s ease-in-out;
+        animation: fadeIn 0.2s ease-in-out;
+        animation-fill-mode: forwards;
 
         &:hover {
           overflow-y: scroll;
@@ -181,5 +183,15 @@ mat-form-field {
     grid-template-columns: 1fr 2px 1fr;
     grid-template-areas: "left divider right";
     grid-gap: 15px;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
   }
 }

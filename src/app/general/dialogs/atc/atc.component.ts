@@ -87,7 +87,7 @@ export class AtcComponent implements OnInit {
   async initAddToCollectionForm() {
     this.createCollectionForm = this.fb.group({
       collectionTitle: ["", Validators.required],
-      collectionNote: [""]
+      description: [""]
     });
   }
 
@@ -163,6 +163,7 @@ export class AtcComponent implements OnInit {
         {
           collectionTitle: this.createCollectionForm.controls.collectionTitle
             .value,
+          description: this.createCollectionForm.controls.description.value,
           resourceId: this.data.id,
           username: this.username
         }
