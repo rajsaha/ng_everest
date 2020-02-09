@@ -5,7 +5,8 @@ $block-border: 1px solid white;
 
 .collection-container {
   border: 1px solid rgb(235, 235, 235);
-  border-radius: 5px;
+  border-radius: 10px;
+  background-color: white;
   box-shadow: 0 8px 20px 0 rgba(197, 197, 197, 0.6);
   cursor: pointer;
   display: inline-block;
@@ -15,7 +16,34 @@ $block-border: 1px solid white;
 
   &:hover {
 		box-shadow: 0 22px 32px 0 rgba(197, 197, 197, 0.6);
-	}
+  }
+  
+  .header {
+    display: grid;
+    grid-template-columns: auto 30px;
+    padding: 0 5px;
+
+    .title-and-count {
+      .collection-name {
+        padding: 10px 0 0 10px;
+        margin-top: 0;
+        margin-bottom: 2px;
+      }
+
+      .no-of-resources {
+        font-size: 12px;
+        padding: 0px 0 10px 10px;
+      }
+    }
+
+    button {
+      align-self: center;
+      fa-icon {
+        color: #6d6b71;
+        align-self: center;
+      }
+    }
+  }
 
   .collection {
     display: inline-grid;
@@ -50,25 +78,6 @@ $block-border: 1px solid white;
 
       &:nth-child(4) {
         border-left: $block-border;
-      }
-    }
-  }
-
-  .bottom-section {
-    background-color: white;
-    border-bottom-right-radius: 5px;
-    border-bottom-left-radius: 5px;
-    p {
-      padding: 10px 0 0 10px;
-      margin-top: 0;
-      margin-bottom: 0;
-
-      &.collection-name {
-        font-weight: bold;
-      }
-
-      &.no-of-resources {
-        padding-bottom: 15px;
       }
     }
   }

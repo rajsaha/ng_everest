@@ -103,7 +103,6 @@ export class AtcComponent implements OnInit {
       username: this.username
     });
     this.isLoading = false;
-
     if (response.collections) {
       for (const collection of response.collections) {
         this.collections.push(collection);
