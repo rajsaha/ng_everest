@@ -1,19 +1,23 @@
-import { Component, Inject, OnInit } from '@angular/core';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { CollectionService } from '@services/collection/collection.service';
-import { ResourceService } from '@services/resource/resource.service';
-import { SnackbarService } from '@services/general/snackbar.service';
+import { Component, Inject, OnInit, NgZone, ViewChild } from "@angular/core";
+import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
+import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { CollectionService } from "@services/collection/collection.service";
+import { ResourceService } from "@services/resource/resource.service";
+import { SnackbarService } from "@services/general/snackbar.service";
+import { CdkTextareaAutosize } from "@angular/cdk/text-field";
+import { take } from "rxjs/operators";
+import { BreakpointObserver, Breakpoints } from "@angular/cdk/layout";
 
 @Component({
-  selector: 'app-atc',
-  templateUrl: './atc.component.html',
-  styleUrls: ['./atc.component.scss']
+  selector: "app-atc",
+  templateUrl: "./atc.component.html",
+  styleUrls: ["./atc.component.scss"]
 })
 export class AtcComponent implements OnInit {
   username: string;
   collections = [];
-  currentCollectionName = '';
+  currentCollectionName = "";
+  isMobileViewport = false;
 
   // Form
   createCollectionForm: FormGroup;
@@ -25,17 +29,31 @@ export class AtcComponent implements OnInit {
   // Toggles
   isLoading = false;
 
+  @ViewChild("autosize") autosize: CdkTextareaAutosize;
+
   constructor(
     public dialogRef: MatDialogRef<AtcComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
     private resourceService: ResourceService,
     private collectionService: CollectionService,
     private snackbarService: SnackbarService,
-    private fb: FormBuilder
-  ) {}
+    private fb: FormBuilder,
+    private _ngZone: NgZone,
+    private breakpointObserver: BreakpointObserver
+  ) {
+    breakpointObserver
+      .observe([Breakpoints.HandsetLandscape, Breakpoints.HandsetPortrait])
+      .subscribe(result => {
+        if (result.matches) {
+          this.isMobileViewport = true;
+        } else {
+          this.isMobileViewport = false;
+        }
+      });
+  }
 
   async ngOnInit() {
-    this.username = localStorage.getItem('username');
+    this.username = localStorage.getItem("username");
 
     try {
       await Promise.all([
@@ -68,7 +86,8 @@ export class AtcComponent implements OnInit {
 
   async initAddToCollectionForm() {
     this.createCollectionForm = this.fb.group({
-      collectionTitle: ['', Validators.required]
+      collectionTitle: ["", Validators.required],
+      collectionNote: [""]
     });
   }
 
@@ -93,10 +112,12 @@ export class AtcComponent implements OnInit {
   }
 
   async checkForResourceInCollection() {
-    const response: any = await this.collectionService.checkForResourceInCollection({
-      id: this.data.id,
-      username: this.username
-    });
+    const response: any = await this.collectionService.checkForResourceInCollection(
+      {
+        id: this.data.id,
+        username: this.username
+      }
+    );
   }
 
   async getCollectionTitle(resourceId: string) {
@@ -122,7 +143,7 @@ export class AtcComponent implements OnInit {
           message: `Resource added to ${this.createCollectionForm.controls.collectionTitle.value}`,
           error: false
         },
-        class: 'green-snackbar'
+        class: "green-snackbar"
       });
       this.dialogRef.close({ added: true });
     } else {
@@ -131,18 +152,21 @@ export class AtcComponent implements OnInit {
           message: `Something went wrong!`,
           error: true
         },
-        class: 'red-snackbar'
+        class: "red-snackbar"
       });
     }
   }
 
   async submitCreateCollectionForm() {
     if (this.createCollectionForm.valid) {
-      const response: any = await this.collectionService.createCollectionAndPushResource({
-        collectionTitle: this.createCollectionForm.controls.collectionTitle.value,
-        resourceId: this.data.id,
-        username: this.username
-      });
+      const response: any = await this.collectionService.createCollectionAndPushResource(
+        {
+          collectionTitle: this.createCollectionForm.controls.collectionTitle
+            .value,
+          resourceId: this.data.id,
+          username: this.username
+        }
+      );
 
       if (response && !response.message.error) {
         this.snackbarService.openSnackBar({
@@ -150,7 +174,7 @@ export class AtcComponent implements OnInit {
             message: `Saved to collection`,
             error: false
           },
-          class: 'green-snackbar'
+          class: "green-snackbar"
         });
         this.dialogRef.close({ added: true });
       } else {
@@ -159,7 +183,7 @@ export class AtcComponent implements OnInit {
             message: response.message.message,
             error: true
           },
-          class: 'red-snackbar'
+          class: "red-snackbar"
         });
       }
     }
@@ -171,5 +195,11 @@ export class AtcComponent implements OnInit {
     } else {
       this.createCollectionFormControls.collectionId.reset();
     }
+  }
+
+  triggerResize() {
+    this._ngZone.onStable
+      .pipe(take(1))
+      .subscribe(() => this.autosize.resizeToFitContent(true));
   }
 }

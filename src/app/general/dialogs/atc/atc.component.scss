@@ -18,9 +18,11 @@ mat-form-field {
 
 .columns {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-gap: 15px;
+  grid-template-columns: 1fr;
+  grid-template-areas: "left";
+
   .left {
+    grid-area: left;
     .parent {
       height: 100%;
       overflow: hidden;
@@ -138,15 +140,28 @@ mat-form-field {
     }
   }
 
+  .divider {
+    grid-area: divider;
+    width: 2px;
+    background-color: #DEE8FF;
+  }
+
   .right {
+    grid-gap: right;
+    max-width: 400px;
     img {
       display: block;
       width: 100%;
     }
 
+    h4 {
+      font-family: "Montserrat", sans-serif;
+    }
+
     p {
       color: #3c3c3c;
       line-height: 25px;
+      max-height: 200px;
     }
   }
 }
@@ -154,5 +169,17 @@ mat-form-field {
 .mat-form-field-appearance-outline {
   .mat-form-field-outline {
     box-shadow: none !important;
+  }
+}
+
+.mat-dialog-actions {
+  float: right;
+}
+
+@media (min-width: 601px) {
+  .columns {
+    grid-template-columns: 1fr 2px 1fr;
+    grid-template-areas: "left divider right";
+    grid-gap: 15px;
   }
 }

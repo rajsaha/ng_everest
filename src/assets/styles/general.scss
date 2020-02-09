@@ -225,6 +225,42 @@ app-root {
   }
 }
 
+.custom-input {
+  width: 100%;
+  margin-bottom: 15px;
+  .label-container {
+    margin-bottom: 5px;
+    label {
+      color: rgb(184, 184, 184);
+      font-size: 12px;
+      font-weight: 300;
+    }
+  }
+
+  .input-container {
+    background-color: #f6f8fa;
+    border: 2px solid transparent;
+    border-radius: 10px;
+    padding: 15px 20px;
+    transition: border 0.2s ease-in-out;
+    input, textarea {
+      align-self: center;
+      background-color: transparent;
+      border: none;
+      font-size: 15px;
+      width: 100%;
+      &:focus {
+        outline: 0;
+        border: 0;
+      }
+    }
+
+    textarea {
+      overflow-y: hidden;
+    }
+  }
+}
+
 @media (min-width: 768px) {
   .section-container {
     .section {
