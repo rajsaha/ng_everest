@@ -1,18 +1,31 @@
 <!-- * All Comments -->
 <div class="all-comments" *ngIf="allComments.length > 0">
   <div class="comment" *ngFor="let comment of allComments">
-    <span class="username"
-      ><strong>{{ comment.username }}</strong></span
-    >
-    <span class="text">{{ comment.content }}</span>
-    <small class="comment-timestamp">{{ formatTime(comment.timestamp) }}</small>
+    <div class="image" [ngStyle]="{ 'background-image': 'url(' + image + ')' }"></div>
+    <div class="text">
+      <span class="username"
+        ><strong>{{ comment.username }}</strong></span
+      >
+      <span class="text">{{ comment.content }}</span>
+      <small class="comment-timestamp">{{
+        formatTime(comment.timestamp)
+      }}</small>
+    </div>
   </div>
 </div>
 
-<div class="see-more" *ngIf="allComments.length < count && !isLoading" (click)="getMoreComments()" matRipple>
+<div
+  class="see-more"
+  *ngIf="allComments.length < count && !isLoading"
+  (click)="getMoreComments()"
+  matRipple
+>
   View {{ count - allComments.length }} more comments
 </div>
 
 <div class="spinner" *ngIf="isLoading">
-  <mat-progress-spinner mode="indeterminate" diameter="25"></mat-progress-spinner>
+  <mat-progress-spinner
+    mode="indeterminate"
+    diameter="25"
+  ></mat-progress-spinner>
 </div>

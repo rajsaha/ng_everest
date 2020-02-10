@@ -42,6 +42,7 @@ export class PostComponent implements OnInit {
   tags = [];
   description: string;
   image = '';
+  smImage = '';
   userImage = '';
   timestamp: any;
   commentCount = 0;
@@ -107,6 +108,7 @@ export class PostComponent implements OnInit {
     this.tags = this.data.tags;
     this.description = this.data.description;
     this.image = this.data.lgImage.link;
+    this.smImage = this.data.smImage.link;
     this.timestamp = moment(this.data.timestamp).fromNow();
     this.recommendedByCount = this.data.recommended_by_count;
 
@@ -162,7 +164,8 @@ export class PostComponent implements OnInit {
   async addComment() {
     this.showComments = true;
     const result: any = await this.resourceService.addComment(
-      this.commentForm.value
+      this.commentForm.value,
+      this.smImage
     );
 
     if (result && result.status) {
