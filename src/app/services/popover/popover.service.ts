@@ -28,10 +28,10 @@ export class PopoverService {
     content,
     data,
     width,
-    height
-  }: PopoverParams<T>): PopoverRef<T> {
+    height,
+  }: PopoverParams<T>, position?: string): PopoverRef<T> {
     const overlayRef = this.overlay.create(
-      this.getOverlayConfig({ origin, width, height })
+      this.getOverlayConfig({ origin, width, height }, position)
     );
     const popoverRef = new PopoverRef<T>(overlayRef, content, data);
 
@@ -41,22 +41,22 @@ export class PopoverService {
     return popoverRef;
   }
 
-  private getOverlayConfig({ origin, width, height }): OverlayConfig {
+  private getOverlayConfig({ origin, width, height }, position): OverlayConfig {
     return new OverlayConfig({
       hasBackdrop: true,
       width,
       height,
       backdropClass: "popover-backdrop",
-      positionStrategy: this.getOverlayPosition(origin),
+      positionStrategy: this.getOverlayPosition(origin, position),
       scrollStrategy: this.overlay.scrollStrategies.reposition()
     });
   }
 
-  private getOverlayPosition(origin: HTMLElement): PositionStrategy {
+  private getOverlayPosition(origin: HTMLElement, position): PositionStrategy {
     const positionStrategy = this.overlay
       .position()
       .flexibleConnectedTo(origin)
-      .withPositions(this.getPositions())
+      .withPositions(this.getPositions(position))
       .withFlexibleDimensions(false)
       .withPush(false);
 
@@ -68,7 +68,23 @@ export class PopoverService {
     return new PortalInjector(injector, tokens);
   }
 
-  private getPositions(): ConnectionPositionPair[] {
+  private getPositions(position?: string): ConnectionPositionPair[] {
+    if (position === "vertical") {
+      return [
+        {
+          originX: "start",
+          originY: "bottom",
+          overlayX: "start",
+          overlayY: "top"
+        },
+        {
+          originX: "end",
+          originY: "bottom",
+          overlayX: "end",
+          overlayY: "top"
+        }
+      ];
+    }
     return [
       {
         originX: "end",

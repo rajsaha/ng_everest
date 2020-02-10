@@ -18,6 +18,7 @@ import { EditorModule } from "@tinymce/tinymce-angular";
 import { AutosizeModule } from "ngx-autosize";
 import { ResourceOptionsComponent } from 'src/app/general/resource/resource-options/resource-options.component';
 import { CollectionOptionsComponent } from 'src/app/general/collection/collection-options/collection-options.component';
+import { FilterOptionsComponent } from 'src/app/pages/manage/filter-options/filter-options.component';
 
 const routes: Routes = [
   {
@@ -50,7 +51,8 @@ const routes: Routes = [
     ManageCollectionsComponent,
     EditArticleComponent,
     ResourceOptionsComponent,
-    CollectionOptionsComponent
+    CollectionOptionsComponent,
+    FilterOptionsComponent
   ],
   imports: [
     CommonModule,

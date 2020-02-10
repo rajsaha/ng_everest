@@ -1,4 +1,4 @@
-<div class="popover" [@EnterLeave]="'flyIn'">
+<div class="popover" [ngClass]="positionClass" [@EnterLeave]="'flyIn'">
   <ng-container [ngSwitch]="renderMethod">
     <div *ngSwitchCase="'text'" [innerHTML]="content"></div>
     <ng-container *ngSwitchCase="'template'">

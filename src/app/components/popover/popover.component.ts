@@ -24,11 +24,28 @@ export class PopoverComponent implements OnInit {
   renderMethod: "template" | "component" | "text" = "component";
   content: PopoverContent;
   context;
+  position = "horizontal";
+  positionClass = "position-horizontal";
 
   constructor(private popoverRef: PopoverRef) {}
 
   ngOnInit() {
     this.content = this.popoverRef.content;
+    if (this.popoverRef.data.position) {
+      this.position = this.popoverRef.data.position;
+    }
+    
+    switch (this.position) {
+      case "horizontal":
+        this.positionClass = "position-horizontal";
+        break;
+      case "vertical":
+        this.positionClass = "position-vertical";
+        break;
+      default:
+        this.positionClass = "position-horizontal";
+        break;    
+    }
 
     if (typeof this.content === "string") {
       this.renderMethod = "text";

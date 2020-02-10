@@ -16,11 +16,16 @@
     </div>
 
     <!-- Filter -->
-    <div class="control">
+    <div class="control" #origin>
       <div class="control-icon">
         <fa-icon [icon]="faFilter"></fa-icon>
       </div>
-      <input type="text" placeholder="Filter" formControlName="filter" />
+      <input
+        type="text"
+        placeholder="Filter"
+        formControlName="filter"
+        (focus)="showFilterOptions(origin)"
+      />
     </div>
 
     <!-- Toggle Content Type -->

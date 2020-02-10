@@ -8,6 +8,8 @@ import {
   faThLarge
 } from "@fortawesome/free-solid-svg-icons";
 import { FormGroup, FormBuilder } from "@angular/forms";
+import { FilterOptionsComponent } from "./filter-options/filter-options.component";
+import { PopoverService } from "@services/popover/popover.service";
 
 @Component({
   selector: "app-manage",
@@ -19,6 +21,7 @@ export class ManageComponent implements OnInit {
   activeLinkIndex = -1;
   form: FormGroup;
   isSearchFocused = false;
+  isFilterFocused = false;
 
   // Icons
   faSearch = faSearch;
@@ -28,7 +31,7 @@ export class ManageComponent implements OnInit {
   faThList = faThList;
   faThLarge = faThLarge;
 
-  constructor(private fb: FormBuilder) {}
+  constructor(private fb: FormBuilder, private popper: PopoverService) {}
 
   ngOnInit() {
     this.initForm();
@@ -60,5 +63,23 @@ export class ManageComponent implements OnInit {
 
   searchFocusOut() {
     this.isSearchFocused = false;
+  }
+
+  showFilterOptions(origin: HTMLElement) {
+    const ref = this.popper.open<{}>(
+      {
+        content: FilterOptionsComponent,
+        origin,
+        data: {
+          position: "vertical"
+        }
+      },
+      "vertical"
+    );
+
+    ref.afterClosed$.subscribe(res => {
+      if (res.data && res.data["isDeleted"]) {
+      }
+    });
   }
 }
