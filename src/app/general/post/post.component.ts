@@ -108,7 +108,7 @@ export class PostComponent implements OnInit {
     this.tags = this.data.tags;
     this.description = this.data.description;
     this.image = this.data.lgImage.link;
-    this.smImage = this.data.smImage.link;
+    this.userImage = localStorage.getItem("profileImage");
     this.timestamp = moment(this.data.timestamp).fromNow();
     this.recommendedByCount = this.data.recommended_by_count;
 
@@ -165,7 +165,7 @@ export class PostComponent implements OnInit {
     this.showComments = true;
     const result: any = await this.resourceService.addComment(
       this.commentForm.value,
-      this.smImage
+      localStorage.getItem("profileImage")
     );
 
     if (result && result.status) {
