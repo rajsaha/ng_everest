@@ -39,6 +39,7 @@ export class EditResourceComponent implements OnInit {
   isLoading = false;
   isDisabled = false;
   isUrlDisabled = true;
+  isUrlChanged = false;
 
   // Tags
   tags = [];
@@ -140,12 +141,14 @@ export class EditResourceComponent implements OnInit {
       data = {
         formData: this.editResourceForm.value,
         tags: this.tags,
-        customImage: this.image
+        customImage: this.image,
+        isUrlChanged: this.isUrlChanged
       };
     } else {
       data = {
         formData: this.editResourceForm.value,
-        tags: this.tags
+        tags: this.tags,
+        isUrlChanged: this.isUrlChanged
       };
     }
 
@@ -187,6 +190,7 @@ export class EditResourceComponent implements OnInit {
         });
 
         this.isLoading = false;
+        this.isUrlChanged = true;
 
         if (!response) {
           this.snackbarService.openSnackBar({
