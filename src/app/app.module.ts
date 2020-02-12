@@ -33,6 +33,7 @@ import { AddToCollectionComponent } from './components/add-to-collection/add-to-
 import { SearchPageComponent } from './pages/search-page/search-page.component';
 import { UserComponent } from './general/user/user.component';
 import { PopoverComponent } from './components/popover/popover.component';
+import { ProfileSummaryComponent } from './components/profile-summary/profile-summary.component';
 
 @NgModule({
   declarations: [
@@ -50,7 +51,8 @@ import { PopoverComponent } from './components/popover/popover.component';
     AddToCollectionComponent,
     SearchPageComponent,
     UserComponent,
-    PopoverComponent
+    PopoverComponent,
+    ProfileSummaryComponent
   ],
   imports: [
     CommonModule,
