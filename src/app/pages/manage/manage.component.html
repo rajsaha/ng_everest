@@ -60,8 +60,14 @@
     </div>
   </div>
 </div>
-<app-manage-resources *ngIf="form.get('posts').value"></app-manage-resources>
 
-<app-manage-collections
-  *ngIf="form.get('collections').value"
-></app-manage-collections>
+<div class="columns">
+  <app-profile-summary></app-profile-summary>
+  <div>
+    <app-manage-resources *ngIf="form.get('posts').value"></app-manage-resources>
+
+    <app-manage-collections
+      *ngIf="form.get('collections').value"
+    ></app-manage-collections>
+  </div>
+</div>

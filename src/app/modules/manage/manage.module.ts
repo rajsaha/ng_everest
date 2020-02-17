@@ -19,6 +19,7 @@ import { AutosizeModule } from "ngx-autosize";
 import { ResourceOptionsComponent } from 'src/app/general/resource/resource-options/resource-options.component';
 import { CollectionOptionsComponent } from 'src/app/general/collection/collection-options/collection-options.component';
 import { FilterOptionsComponent } from 'src/app/pages/manage/filter-options/filter-options.component';
+import { ProfileSummaryComponent } from 'src/app/components/profile-summary/profile-summary.component';
 
 const routes: Routes = [
   {
@@ -49,10 +50,11 @@ const routes: Routes = [
     ManageResourcesComponent,
     EditResourceComponent,
     ManageCollectionsComponent,
+    ProfileSummaryComponent,
     EditArticleComponent,
     ResourceOptionsComponent,
     CollectionOptionsComponent,
-    FilterOptionsComponent
+    FilterOptionsComponent,
   ],
   imports: [
     CommonModule,

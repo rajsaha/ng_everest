@@ -96,6 +96,11 @@
   width: inherit;
 }
 
+.columns {
+  display: grid;
+  grid-template-columns: auto;
+}
+
 @media (min-width: 376px) {
   .header {
     .controls {
@@ -116,6 +121,11 @@
         width: 100px;
       }
     }
+  }
+
+  .columns {
+    grid-template-columns: 1fr 2fr;
+    grid-gap: 25px;
   }
 }
 
