@@ -1,0 +1,79 @@
+.summary-parent {
+    background-color: white;
+    box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+    .columns {
+        display: grid;
+        grid-template-columns: 75px 2fr;
+        grid-gap: 15px;
+        padding: 15px;
+
+        .image {
+            background-size: cover;
+            background-repeat: no-repeat;
+            width: 75px;
+            height: 75px;
+            border-radius: 50%;
+            align-self: center;
+            justify-self: center;
+        }
+
+        .name-bio {
+            align-self: center;
+            h4 {
+                margin-top: 0;
+                margin-bottom: 0;
+            }
+
+            p {
+                margin-bottom: 0;
+            }
+        }
+    }
+
+    .boxes {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        grid-gap: 15px;
+        text-align: center;
+        align-content: center;
+        padding: 15px 15px 15px 15px;
+        border-bottom: 1px solid rgba(0, 0, 0, .1);
+        .box {
+            border-radius: 5px;
+            background-color: rgb(216, 216, 216);
+            color: white;
+            padding: 25px;
+            height: 35px;
+            position: relative;
+
+            div {
+                position: absolute;
+                left: 50%;
+                top: 50%;
+                transform: translate(-50%, -50%);
+                h3 {
+                    margin-top: 0;
+                    margin-bottom: 0;
+                }
+                
+                span {
+                    font-size: 14px;
+                }
+            }
+        }
+    }
+
+    .followers {
+        padding: 15px;   
+    }
+
+    .interests {
+        padding: 15px;
+    }
+}
+
+h4 {
+    margin-top: 0;
+    margin-bottom: 0;
+}

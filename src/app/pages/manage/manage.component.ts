@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from "@angular/core";
+import { Component, OnInit } from "@angular/core";
 import {
   faSearch,
   faFilter,
@@ -22,6 +22,7 @@ export class ManageComponent implements OnInit {
   form: FormGroup;
   isSearchFocused = false;
   isFilterFocused = false;
+  profileImage = "";
 
   // Icons
   faSearch = faSearch;
@@ -35,6 +36,7 @@ export class ManageComponent implements OnInit {
 
   ngOnInit() {
     this.initForm();
+    this.profileImage = localStorage.getItem("profileImage");
   }
 
   initForm() {

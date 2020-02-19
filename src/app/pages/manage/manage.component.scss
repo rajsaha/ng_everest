@@ -112,6 +112,7 @@
 @media (min-width: 768px) {
   .header {
     grid-template-columns: 85px 1fr;
+    padding: 50px 30px 0 30px;
 
     .controls {
       grid-template-columns: repeat(4, auto);
@@ -124,8 +125,9 @@
   }
 
   .columns {
-    grid-template-columns: 1fr 2fr;
-    grid-gap: 25px;
+    grid-template-columns: 350px 2fr;
+    grid-gap: 15px;
+    padding: 0 30px;
   }
 }
 
