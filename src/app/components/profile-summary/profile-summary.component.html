@@ -40,7 +40,7 @@
       <div
         *ngFor="let follower of followers"
         class="follower-image"
-        [ngStyle]="{ 'background-image': 'url(' + followers.smImage.link + ')' }"
+        [ngStyle]="{ 'background-image': 'url(' + follower.smImage.link + ')' }"
       ></div>
       <div *ngIf="followersCount > 4" class="remaining-followers">
           +{{ followersCount - 4 }}

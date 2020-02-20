@@ -33,7 +33,7 @@ export class ProfileSummaryComponent implements OnInit {
     this.bio = result.userData.bio;
     this.interests = result.userData.interests;
     this.followers = result.followers;
-    this.followersCount = result.followersCount - 1;
+    this.followersCount = result.followersCount;
     this.articleCount = result.articleCount;
     this.extContentCount = result.extContentCount;
   }
