@@ -65,7 +65,19 @@
     }
 
     .followers {
-        padding: 15px;   
+        padding: 15px;
+        .followers-images-array {
+            display: grid;
+            grid-template-columns: 25px 25px 25px 25px 25px;
+            grid-gap: -15px;
+
+            .follower-image {
+                width: 23px;
+                height: 23px;
+                border-radius: 50%;
+                border: 2px solid white;
+            }
+        }   
     }
 
     .interests {

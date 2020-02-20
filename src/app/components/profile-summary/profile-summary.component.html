@@ -1,42 +1,55 @@
 <div class="summary-parent">
-    <div class="columns">
-        <div class="image" [ngStyle]="{ 'background-image': 'url(' + profileImage + ')' }"></div>
-        <div class="name-bio">
-            <h4>Name</h4>
-            <p>This is a description</p>
-        </div>
+  <div class="columns">
+    <div
+      class="image"
+      [ngStyle]="{ 'background-image': 'url(' + profileImage + ')' }"
+    ></div>
+    <div class="name-bio">
+      <h4>{{ name }}</h4>
+      <p>{{ bio }}</p>
+    </div>
+  </div>
+
+  <div class="boxes">
+    <div class="box articles">
+      <div>
+        <h3>{{ articleCount }}</h3>
+        <span>Articles</span>
+      </div>
     </div>
 
-    <div class="boxes">
-        <div class="box articles">
-            <div>
-                <h3>1</h3>
-                <span>Articles</span>
-            </div>
-        </div>
-
-        <div class="box posts">
-            <div>
-                <h3>2</h3>
-                <span>Posts</span>
-            </div>
-        </div>
-
-        <div class="box following">
-            <div>
-                <h3>3</h3>
-                <span>Following</span>
-            </div>
-        </div>
+    <div class="box posts">
+      <div>
+        <h3>{{ extContentCount }}</h3>
+        <span>Posts</span>
+      </div>
     </div>
 
-    <div class="followers">
-        <h4>Followers</h4>
-        <p>No one's following you.</p>
+    <div class="box following">
+      <div>
+        <h3>{{ followersCount }}</h3>
+        <span>Following</span>
+      </div>
     </div>
+  </div>
 
-    <div class="interests">
-        <h4>Interests</h4>
-        <p>You haven't set any interests.</p>
+  <div class="followers">
+    <h4>Followers</h4>
+    <p *ngIf="followersCount === 0">Add posts and articles to get followers</p>
+    <div *ngIf="followersCount > 0" class="follower-images-array">
+      <div
+        *ngFor="let follower of followers"
+        class="follower-image"
+        [ngStyle]="{ 'background-image': 'url(' + followers.smImage.link + ')' }"
+      ></div>
+      <div *ngIf="followersCount > 4" class="remaining-followers">
+          +{{ followersCount - 4 }}
+      </div>
     </div>
+  </div>
+
+  <div class="interests">
+    <h4>Interests</h4>
+    <p>You haven't set any interests.</p>
+  </div>
 </div>

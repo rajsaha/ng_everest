@@ -22,7 +22,7 @@ export class ManageComponent implements OnInit {
   form: FormGroup;
   isSearchFocused = false;
   isFilterFocused = false;
-  profileImage = "";
+  username: string;
 
   // Icons
   faSearch = faSearch;
@@ -36,7 +36,7 @@ export class ManageComponent implements OnInit {
 
   ngOnInit() {
     this.initForm();
-    this.profileImage = localStorage.getItem("profileImage");
+    this.username = localStorage.getItem("username");
   }
 
   initForm() {
