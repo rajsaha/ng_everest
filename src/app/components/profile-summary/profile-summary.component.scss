@@ -66,17 +66,20 @@
 
     .followers {
         padding: 15px;
-        .followers-images-array {
+        .follower-images-array {
             display: grid;
             grid-template-columns: 25px 25px 25px 25px 25px;
             grid-gap: -15px;
 
             .follower-image {
                 background-color: lightgrey;
-                width: 23px;
-                height: 23px;
+                width: 35px;
+                height: 35px;
                 border-radius: 50%;
                 border: 2px solid white;
+                background-size: cover;
+                background-position: center;
+                background-repeat: no-repeat;
             }
         }   
     }

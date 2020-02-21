@@ -91,8 +91,8 @@ export class EditProfileComponent implements OnInit {
     this.interests = res.userData.interests;
     this.followers = res.userData.followers;
     this.following = res.userData.following;
-
-    if (res.userData.mdImage.link) {
+    
+    if (res.userData.mdImage) {
       this.image = res.userData.mdImage.link;
       this.uploadedImage = res.userData.mdImage.link;
       this.imageId = res.userData.mdImage.id;
