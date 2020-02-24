@@ -26,6 +26,7 @@ export class ShareResourceComponent implements OnInit {
   @ViewChild('imageInput') imageInput: ElementRef;
   image: any;
   username: string;
+  userId: string;
   collections: Array<object> = [];
   submitButtonText = 'Share';
   atcData: any;
@@ -62,6 +63,7 @@ export class ShareResourceComponent implements OnInit {
 
   ngOnInit() {
     this.username = localStorage.getItem('username');
+    this.userId = localStorage.getItem("userId");
     this.initShareResourceForm();
     this.onURLOnChanges();
   }
@@ -74,7 +76,7 @@ export class ShareResourceComponent implements OnInit {
         title: ['', [Validators.required]],
         description: ['', [Validators.required]],
         image: [''],
-        username: [this.username],
+        userId: [this.userId],
         type: ['ext-content']
       },
       { validator: [this.validationService.checkValidURL] }

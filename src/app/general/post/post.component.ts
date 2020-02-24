@@ -35,6 +35,8 @@ export class PostComponent implements OnInit {
 
   // Data
   id: string;
+  firstName: string;
+  lastName: string;
   username: string;
   url: string;
   title: string;
@@ -102,6 +104,8 @@ export class PostComponent implements OnInit {
   async populatePost() {
     this.id = this.data._id;
     this.username = this.data.username;
+    this.firstName = this.data.firstName;
+    this.lastName = this.data.lastName;
     this.url = this.data.url;
     this.title = this.data.title;
     this.type = this.data.type;

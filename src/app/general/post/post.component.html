@@ -6,7 +6,7 @@
     [ngStyle]="{ 'background-image': 'url(' + userImage  +')' }">
     </div>
     <div class="uploader-info">
-      <span>{{ username }}</span>
+      <span>{{ firstName }} {{ lastName }}</span>
       <small>{{ timestamp }}</small>
     </div>
     <div class="post-menu" (click)="show(origin)">
