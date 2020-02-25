@@ -18,8 +18,10 @@ export class PublicProfileComponent implements OnInit {
 
   // Profile data
   username: string;
+  anchorUserId: string;
   userId: string;
-  name: string;
+  firstName: string;
+  lastName: string;
   website: string;
   bio: string;
   email: string;
@@ -58,13 +60,10 @@ export class PublicProfileComponent implements OnInit {
 
   ngOnInit() {
     this.currentUser = localStorage.getItem("username");
+    this.anchorUserId = localStorage.getItem("userId");
     this.route.params.subscribe(async params => {
       this.paramUser = params.username;
-      await Promise.all([
-        this.getPublicProfile(params.username),
-        this.checkIfUserIsFollowed(this.currentUser, params.username),
-        this.getUserResources(params.username)
-      ]);
+      await this.getPublicProfile(params.username);
     });
   }
 
@@ -86,9 +85,11 @@ export class PublicProfileComponent implements OnInit {
     this.setCollections(userCollections);
   }
 
-  setProfileData(data: any) {
+  async setProfileData(data: any) {
+    this.userId = data._id;
     this.username = data.username;
-    this.name = data.name;
+    this.firstName = data.firstName;
+    this.lastName = data.lastName;
     this.website = data.website;
     this.bio = data.bio;
     this.email = data.email;
@@ -99,6 +100,8 @@ export class PublicProfileComponent implements OnInit {
       this.image = data.mdImage.link;
     }
     this.interests = data.interests;
+
+    await this.checkIfUserIsFollowed(this.anchorUserId, this.userId);
   }
 
   setResources(data: any) {
@@ -109,10 +112,10 @@ export class PublicProfileComponent implements OnInit {
     this.collections = data;
   }
 
-  async checkIfUserIsFollowed(currentUser, username) {
+  async checkIfUserIsFollowed(anchorUserId, userId) {
     const result: any = await this.userService.checkIfUserFollowed({
-      currentUser,
-      username
+      anchorUserId,
+      userId
     });
 
     if (result) {
@@ -122,8 +125,8 @@ export class PublicProfileComponent implements OnInit {
 
   async follow() {
     const result: any = await this.userService.followUser({
-      currentUser: this.currentUser,
-      username: this.username
+      anchorUserId: this.anchorUserId,
+      userId: this.userId
     });
 
     if (result) {
@@ -133,8 +136,8 @@ export class PublicProfileComponent implements OnInit {
 
   async unfollow() {
     const result: any = await this.userService.unfollowUser({
-      currentUser: this.currentUser,
-      username: this.username
+      anchorUserId: this.anchorUserId,
+      userId: this.userId
     });
 
     if (result) {

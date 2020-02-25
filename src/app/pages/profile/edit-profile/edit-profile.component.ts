@@ -20,7 +20,8 @@ export class EditProfileComponent implements OnInit {
   // Profile data
   username: string;
   userId: string;
-  name: string;
+  firstName: string;
+  lastName: string;
   website: string;
   bio: string;
   email: string;
@@ -74,7 +75,8 @@ export class EditProfileComponent implements OnInit {
 
   initProfileForm() {
     this.profileForm = this.fb.group({
-      name: [""],
+      firstName: [""],
+      lastName: [""],
       username: [{ value: "", disabled: true }],
       website: [""],
       bio: [""],
@@ -85,12 +87,11 @@ export class EditProfileComponent implements OnInit {
   async getUserData() {
     this.isLoading = true;
     const res: any = await this.userService.getProfileData(this.username);
-    this.isLoading = false;
 
     this.isProfileSaveButtonDisabled = true;
-    this.interests = res.userData.interests;
-    this.followers = res.userData.followers;
-    this.following = res.userData.following;
+    this.interests = res.userData.interests ? res.userData.interests : [];
+    this.followers = res.userData.followers ? res.userData.followers : [];
+    this.following = res.userData.following ? res.userData.following : [];
     
     if (res.userData.mdImage) {
       this.image = res.userData.mdImage.link;
@@ -103,7 +104,8 @@ export class EditProfileComponent implements OnInit {
 
     this.initFormData({
       username: res.userData.username,
-      name: res.userData.name,
+      firstName: res.userData.firstName,
+      lastName: res.userData.lastName,
       website: res.userData.website,
       bio: res.userData.bio,
       email: res.userData.email
@@ -112,6 +114,7 @@ export class EditProfileComponent implements OnInit {
     // Calculate profile progress
     this.profileProgress = 0;
     this.calculateProgress();
+    this.isLoading = false;
   }
 
   initFormData(data: any) {
@@ -119,14 +122,16 @@ export class EditProfileComponent implements OnInit {
     this.isProfileSaveButtonDisabled = false;
 
     this.username = data.username;
-    this.name = data.name;
+    this.firstName = data.firstName;
+    this.lastName = data.lastName;
     this.website = data.website;
     this.bio = data.bio;
     this.email = data.email;
 
     // Form Control Values
     this.profileForm.controls.username.patchValue(data.username);
-    this.profileForm.controls.name.patchValue(data.name);
+    this.profileForm.controls.firstName.patchValue(data.firstName);
+    this.profileForm.controls.lastName.patchValue(data.lastName);
     this.profileForm.controls.website.patchValue(data.website);
     this.profileForm.controls.bio.patchValue(data.bio);
     this.profileForm.controls.email.patchValue(data.email);
@@ -188,7 +193,11 @@ export class EditProfileComponent implements OnInit {
   }
 
   calculateProgress() {
-    if (this.name) {
+    if (this.firstName) {
+      this.alterProgress(true);
+    }
+
+    if (this.lastName) {
       this.alterProgress(true);
     }
 
@@ -208,11 +217,11 @@ export class EditProfileComponent implements OnInit {
   alterProgress(bool: boolean) {
     if (bool) {
       if (this.profileProgress < 100) {
-        this.profileProgress += 25;
+        this.profileProgress += 20;
       }
     } else {
       if (this.profileProgress > 0) {
-        this.profileProgress -= 25;
+        this.profileProgress -= 20;
       }
     }
   }
@@ -220,7 +229,8 @@ export class EditProfileComponent implements OnInit {
   async saveProfileForm() {
     const data = {
       id: this.userId,
-      name: this.profileForm.controls.name.value,
+      firstName: this.profileForm.controls.firstName.value,
+      lastName: this.profileForm.controls.lastName.value,
       website: this.profileForm.controls.website.value,
       bio: this.profileForm.controls.bio.value,
       interests: this.interests,

@@ -5,8 +5,7 @@
         <div
           class="image-container"
           [ngStyle]="{
-            'background-image': 'url(' + image + ')',
-            border: '2px solid transparent'
+            'background-image': 'url(' + image + ')'
           }"
         ></div>
         <div class="text">
@@ -52,7 +51,7 @@
 
       <!--* Public view of profile -->
       <div class="public-view-content">
-        <h1 *ngIf="name">{{ name }}</h1>
+        <h1 *ngIf="name">{{ firstName }} {{ lastName }}</h1>
         <a *ngIf="website" [href]="website" target="_blank">
           <fa-icon [icon]="faExternalLinkAlt"></fa-icon>&nbsp; Website
         </a>
@@ -61,8 +60,8 @@
           <mat-chip *ngFor="let interest of interests" (click)="goToSearch(interest)">{{ interest }}</mat-chip>
         </mat-chip-list>
         <div class="followers-following" (click)="openFollowDialog()">
-          <strong>{{ followers.length - 1 }}</strong> followers |
-          <strong>{{ following.length - 1 }}</strong> following
+          <strong>{{ followers.length }}</strong> followers |
+          <strong>{{ following.length }}</strong> following
         </div>
       </div>
     </div>

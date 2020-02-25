@@ -11,6 +11,7 @@ import { debounceTime } from 'rxjs/internal/operators';
   styleUrls: ['./manage-resources.component.scss']
 })
 export class ManageResourcesComponent implements OnInit {
+  userId: string;
   username: string;
   resources = [];
   resourcesCount = 0;
@@ -42,6 +43,7 @@ export class ManageResourcesComponent implements OnInit {
 
   async ngOnInit() {
     this.username = localStorage.getItem('username');
+    this.userId = localStorage.getItem("userId");
     await Promise.all([this.initResourceSearchForm(), this.getUserResources()]);
     this.onResourceSearchFormChange();
   }
@@ -56,7 +58,6 @@ export class ManageResourcesComponent implements OnInit {
   async getUserResources() {
     try {
       this.isLoading = true;
-
       // Search
       const query = this.resourceSearchForm.get('query').value;
       if (query) {
@@ -73,7 +74,8 @@ export class ManageResourcesComponent implements OnInit {
       const response: any = await this.resourceService.getUserResources({
         pageNo: this.pageNo,
         size: this.size,
-        username: this.username
+        username: this.username,
+        userId: this.userId
       });
       this.isLoading = false;
       this.resourcesCount = response.count;

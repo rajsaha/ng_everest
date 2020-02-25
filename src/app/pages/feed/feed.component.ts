@@ -44,8 +44,6 @@ export class FeedComponent implements OnInit {
         userId: this.userId
       });
 
-      console.log(response);
-
       for (const resource of response.resources) {
         this.posts.push(resource);
       }

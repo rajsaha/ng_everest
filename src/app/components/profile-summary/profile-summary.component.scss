@@ -9,6 +9,7 @@
         padding: 15px;
 
         .image {
+            background-color: lightgrey;
             background-size: cover;
             background-repeat: no-repeat;
             width: 75px;
@@ -41,7 +42,6 @@
         border-bottom: 1px solid rgba(0, 0, 0, .1);
         .box {
             border-radius: 5px;
-            background-color: rgb(216, 216, 216);
             color: white;
             padding: 25px;
             height: 35px;
@@ -72,7 +72,6 @@
             grid-gap: -15px;
 
             .follower-image {
-                background-color: lightgrey;
                 width: 35px;
                 height: 35px;
                 border-radius: 50%;
@@ -92,4 +91,23 @@
 h4 {
     margin-top: 0;
     margin-bottom: 0;
+}
+
+.greyed-out {
+    color: rgb(172, 172, 172);
+}
+
+.articles {
+    background-color: #FE5045;
+    color: white;
+}
+
+.posts {
+    background-color: #FFA25A;
+    color: white;
+}
+
+.following {
+    background-color: #481A89;
+    color: white;
 }
