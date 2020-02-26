@@ -8,7 +8,7 @@ import { environment as ENV } from "@environments/environment";
   styleUrls: ['./profile-summary.component.scss']
 })
 export class ProfileSummaryComponent implements OnInit {
-  @Input() username: string;
+  @Input() userId: string;
   
   // Profile Data
   profileImage: string;
@@ -30,7 +30,7 @@ export class ProfileSummaryComponent implements OnInit {
   }
 
   async getProfileData() {
-    const result: any = await this.userService.getProfileData(this.username);
+    const result: any = await this.userService.getProfileData(this.userId);
     console.log(result);
     if (result.userData.mdImage) {
       this.profileImage = result.userData.mdImage.link;
