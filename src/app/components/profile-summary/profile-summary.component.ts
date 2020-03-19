@@ -17,7 +17,7 @@ export class ProfileSummaryComponent implements OnInit {
   bio = "No bio provided";
   interests = [];
   followers = [];
-  followersCount = 0;
+  followerCount = 0;
   followingCount = 0;
   articleCount = 0;
   extContentCount = 0;
@@ -42,8 +42,8 @@ export class ProfileSummaryComponent implements OnInit {
     this.lastName = result.userData.lastName;
     this.bio = result.userData.bio;
     this.interests = result.userData.interests;
-    this.followers = result.followers;
-    this.followersCount = result.userData.followersCount;
+    this.followers = result.followerObjects;
+    this.followerCount = result.userData.followerCount;
     this.followingCount = result.userData.followingCount;
     this.articleCount = result.articleCount;
     this.extContentCount = result.extContentCount;

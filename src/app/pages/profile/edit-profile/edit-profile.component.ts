@@ -86,7 +86,8 @@ export class EditProfileComponent implements OnInit {
 
   async getUserData() {
     this.isLoading = true;
-    const res: any = await this.userService.getProfileData(this.username);
+    const res: any = await this.userService.getProfileData(this.userId);
+    console.log(res);
 
     this.isProfileSaveButtonDisabled = true;
     this.interests = res.userData.interests ? res.userData.interests : [];

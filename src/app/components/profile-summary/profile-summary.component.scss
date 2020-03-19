@@ -85,6 +85,19 @@
 
     .interests {
         padding: 15px;
+
+        .list-of-interests {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            grid-gap: 5px;
+            p {
+                background-color: #DCE6FD;
+                color: #481A89;
+                padding: 5px 15px;
+                border-radius: 15px;
+                text-align: center;
+            }
+        }
     }
 }
 
