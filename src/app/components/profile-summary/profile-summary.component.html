@@ -1,9 +1,12 @@
-<div class="summary-parent">
+<div class="summary-parent" *ngIf="!loading">
   <div class="columns">
-    <div
-      class="image"
-      [ngStyle]="{ 'background-image': 'url(' + profileImage + ')' }"
-    ></div>
+    <app-user-image
+      [image]="profileImage"
+      size="md"
+      [firstName]="firstName"
+      [lastName]="lastName"
+      [username]="username"
+    ></app-user-image>
     <div class="name-bio">
       <h4>{{ firstName }} {{ lastName }}</h4>
       <p [ngClass]="{ 'greyed-out': !bio }">{{ bio ? bio : "No bio added" }}</p>
@@ -39,8 +42,11 @@
     <div *ngIf="followerCount > 0" class="follower-images-array">
       <app-user-image
         *ngFor="let follower of followers"
-        [data]="follower"
-        size="sm"
+        [image]="follower.smImage.link"
+        [firstName]="firstName"
+        [lastName]="lastName"
+        [username]="follower.username"
+        size="xs"
       ></app-user-image>
       <div *ngIf="followerCount > 4" class="remaining-followers">
         +{{ followerCount - 4 }}

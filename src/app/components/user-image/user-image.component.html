@@ -1,4 +1,10 @@
 <div
+  (click)="goToUser(username)"
   class="image"
-  [ngStyle]="{ 'background-image': 'url(' + data[imageSize]['link'] + ')' }"
-></div>
+  [ngClass]="[imageSizeClass, clickableClass]"
+  [ngStyle]="url"
+>
+  <span *ngIf="!image">
+    {{ placeholder }}
+  </span>
+</div>

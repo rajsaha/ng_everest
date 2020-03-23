@@ -1,10 +1,19 @@
 <div class="post" *ngIf="!isLoading" #origin>
   <!-- * Header -->
   <div class="header">
-    <div class="user-image" 
-    [routerLink]="['/profile/user', username]"
-    [ngStyle]="{ 'background-image': 'url(' + userImage  +')' }">
-    </div>
+    <!-- <div
+      class="user-image"
+      [routerLink]="['/profile/user', username]"
+      [ngStyle]="{ 'background-image': 'url(' + userImage + ')' }"
+    ></div> -->
+    <app-user-image
+      [image]="userImage"
+      [firstName]="firstName[0]"
+      [lastName]="lastName[0]"
+      [username]="username"
+      size="sm"
+    >
+    </app-user-image>
     <div class="uploader-info">
       <span>{{ firstName }} {{ lastName }}</span>
       <small>{{ timestamp }}</small>
@@ -17,19 +26,34 @@
   <!-- * Image -->
   <a (click)="openResource()" target="_blank" *ngIf="image">
     <div class="image">
-      <img [src]="image" [alt]="title">
+      <img [src]="image" [alt]="title" />
     </div>
   </a>
 
   <!-- * Title -->
-  <div class="title" [ngStyle]="{'grid-template-columns': isInCollection ? '1fr 45px' : '1fr 106px'}">
+  <div
+    class="title"
+    [ngStyle]="{
+      'grid-template-columns': isInCollection ? '1fr 45px' : '1fr 106px'
+    }"
+  >
     <strong>{{ title }}</strong>
-    <div class="collection-badge-false" *ngIf="!isInCollection" matRipple (click)="openCollectionsDialog()">
+    <div
+      class="collection-badge-false"
+      *ngIf="!isInCollection"
+      matRipple
+      (click)="openCollectionsDialog()"
+    >
       <fa-icon [icon]="faPlus"></fa-icon> Add to Collection
     </div>
 
     <div class="collection-badge-true-parent">
-      <div class="collection-badge-true" *ngIf="isInCollection" matRipple (click)="openCollectionsDialog()">
+      <div
+        class="collection-badge-true"
+        *ngIf="isInCollection"
+        matRipple
+        (click)="openCollectionsDialog()"
+      >
         &nbsp;&nbsp;&nbsp;&nbsp;Added
       </div>
     </div>
@@ -38,26 +62,31 @@
   <!-- * Type -->
   <div class="type" *ngIf="type === 'article'">
     {{ type }}
-  </div> 
+  </div>
 
   <!-- * Tags -->
   <div class="tags">
     <div class="tag">
-      <a *ngFor="let tag of tags" [routerLink]="['/search']" [queryParams]="{ query: tag }"><strong>#{{ tag }}</strong></a>
+      <a
+        *ngFor="let tag of tags"
+        [routerLink]="['/search']"
+        [queryParams]="{ query: tag }"
+        ><strong>#{{ tag }}</strong></a
+      >
     </div>
   </div>
 
   <!-- * Description (Post) -->
   <div class="description" *ngIf="type === 'ext-content'">
     <p>
-      {{ description | truncate:[truncateValue] }}
+      {{ description | truncate: [truncateValue] }}
     </p>
     <span *ngIf="isSeeMore" (click)="seeMore()" class="see-more">See More</span>
   </div>
 
   <!-- * Description (Post) -->
   <div class="description" *ngIf="type === 'article'">
-    <div [innerHTML]="description | truncate:[truncateValue]"></div>
+    <div [innerHTML]="description | truncate: [truncateValue]"></div>
     <!-- <p>
       {{ description | truncate:[truncateValue] }}
     </p> -->
@@ -66,28 +95,53 @@
 
   <!-- * Controls -->
   <div class="controls">
-    <button *ngIf="isLiked" mat-button class="btn btn-like is-liked" (click)="unlike()">
-      <fa-icon [icon]="faThumbsUp"></fa-icon><span *ngIf="recommendedByCount > 0" class="count">{{ recommendedByCount }}</span>
+    <button
+      *ngIf="isLiked"
+      mat-button
+      class="btn btn-like is-liked"
+      (click)="unlike()"
+    >
+      <fa-icon [icon]="faThumbsUp"></fa-icon
+      ><span *ngIf="recommendedByCount > 0" class="count">{{
+        recommendedByCount
+      }}</span>
     </button>
 
     <button *ngIf="!isLiked" mat-button class="btn btn-like" (click)="like()">
-      <fa-icon [icon]="faThumbsUp"></fa-icon><span *ngIf="recommendedByCount > 0" class="count">{{ recommendedByCount }}</span>
+      <fa-icon [icon]="faThumbsUp"></fa-icon
+      ><span *ngIf="recommendedByCount > 0" class="count">{{
+        recommendedByCount
+      }}</span>
     </button>
 
-    <button mat-button class="btn btn-comment"
-      (click)="showComments = !showComments" [disabled]="!commentCount > 0">
-      <fa-icon [icon]="faComment"></fa-icon><span *ngIf="commentCount > 0" class="count">{{ commentCount }}</span>
+    <button
+      mat-button
+      class="btn btn-comment"
+      (click)="showComments = !showComments"
+      [disabled]="!commentCount > 0"
+    >
+      <fa-icon [icon]="faComment"></fa-icon
+      ><span *ngIf="commentCount > 0" class="count">{{ commentCount }}</span>
     </button>
   </div>
 
-  <app-comment *ngIf="showComments" [resourceId]="id" [image]="userImage"></app-comment>
+  <app-comment
+    *ngIf="showComments"
+    [resourceId]="id"
+    [image]="userImage"
+  ></app-comment>
 
   <!-- * Add Comment -->
   <div class="add-comment">
     <form [formGroup]="commentForm" (ngSubmit)="addComment()">
       <div>
-        <textarea matInput placeholder="Leave a comment" autosize formControlName="comment"
-          (keydown.enter)="textareaEnterPressed($event)"></textarea>
+        <textarea
+          matInput
+          placeholder="Leave a comment"
+          autosize
+          formControlName="comment"
+          (keydown.enter)="textareaEnterPressed($event)"
+        ></textarea>
         <button *ngIf="!commentForm.controls['comment'].value">
           <fa-icon [icon]="faReply"></fa-icon>
         </button>

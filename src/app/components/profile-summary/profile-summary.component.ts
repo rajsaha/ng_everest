@@ -10,7 +10,10 @@ import { environment as ENV } from "@environments/environment";
 export class ProfileSummaryComponent implements OnInit {
   @Input() userId: string;
   
+  loading = false;
+
   // Profile Data
+  username: string;
   profileImage: string;
   firstName: string;
   lastName: string;
@@ -30,14 +33,15 @@ export class ProfileSummaryComponent implements OnInit {
   }
 
   async getProfileData() {
+    this.loading = true;
     const result: any = await this.userService.getProfileData(this.userId);
-    console.log(result);
     if (result.userData.mdImage) {
       this.profileImage = result.userData.mdImage.link;
     } else {
       this.profileImage = this.defaultProfileImage;
     }
     
+    this.username= result.userData.username;
     this.firstName = result.userData.firstName;
     this.lastName = result.userData.lastName;
     this.bio = result.userData.bio;
@@ -47,6 +51,7 @@ export class ProfileSummaryComponent implements OnInit {
     this.followingCount = result.userData.followingCount;
     this.articleCount = result.articleCount;
     this.extContentCount = result.extContentCount;
+    this.loading = false;
   }
 
 }

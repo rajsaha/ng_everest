@@ -84,15 +84,14 @@ export class PostComponent implements OnInit {
 
   async ngOnInit() {
     this.init_comment_form();
+    this.populatePost();
+    this.checkIfDescriptionTooLong(this.description)
     try {
       this.isLoading = true;
       await Promise.all([
-        this.populatePost(),
         this.getCommentsCount(),
-        this.getUserImage(this.data.username),
         this.checkIfPostInCollection(this.data._id, this.data.username),
         this.checkIfPostIsLiked(this.data._id, this.currentUser),
-        this.checkIfDescriptionTooLong(this.description)
       ]);
       this.isLoading = false;
     } catch (err) {
@@ -100,7 +99,7 @@ export class PostComponent implements OnInit {
     }
   }
 
-  async populatePost() {
+  populatePost() {
     this.id = this.data._id;
     this.username = this.data.username;
     this.firstName = this.data.firstName;
@@ -111,7 +110,7 @@ export class PostComponent implements OnInit {
     this.tags = this.data.tags;
     this.description = this.data.description;
     this.image = this.data.lgImage.link;
-    this.userImage = localStorage.getItem("profileImage");
+    this.userImage = this.data.userImage ? this.data.userImage : this.noPhoto;
     this.timestamp = moment(this.data.timestamp).fromNow();
     this.recommendedByCount = this.data.recommended_by_count;
 
@@ -125,11 +124,6 @@ export class PostComponent implements OnInit {
       resourceId: this.id
     });
     this.commentCount = result;
-  }
-
-  async getUserImage(username) {
-    const result: any = await this.resourceService.getUserImage(username);
-    this.userImage = result.image ? result.image : this.noPhoto;
   }
 
   async checkIfPostInCollection(id: string, username: string) {
@@ -256,7 +250,7 @@ export class PostComponent implements OnInit {
     });
   }
 
-  async checkIfDescriptionTooLong(text: string) {
+  checkIfDescriptionTooLong(text: string) {
     if (!this.noTruncation) {
       if (text.length > this.truncateValue) {
         this.isSeeMore = true;
