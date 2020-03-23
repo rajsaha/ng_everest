@@ -26,12 +26,12 @@ import { PopoverService } from '@services/popover/popover.service';
 })
 export class PostComponent implements OnInit {
   @Input() data: any;
+  @Input() currentUser: string;
+  @Input() currentUserId: string;
   @Input() noTruncation = false;
 
   @ViewChild(CommentComponent)
   commentComponent: CommentComponent;
-
-  currentUser: string;
 
   // Data
   id: string;
@@ -83,7 +83,7 @@ export class PostComponent implements OnInit {
   ) {}
 
   async ngOnInit() {
-    this.currentUser = localStorage.getItem('username');
+    this.init_comment_form();
     try {
       this.isLoading = true;
       await Promise.all([
@@ -92,7 +92,6 @@ export class PostComponent implements OnInit {
         this.getUserImage(this.data.username),
         this.checkIfPostInCollection(this.data._id, this.data.username),
         this.checkIfPostIsLiked(this.data._id, this.currentUser),
-        this.init_comment_form(),
         this.checkIfDescriptionTooLong(this.description)
       ]);
       this.isLoading = false;
@@ -146,7 +145,7 @@ export class PostComponent implements OnInit {
   async checkIfPostIsLiked(id: string, username: string) {
     const result: any = await this.userService.checkIfPostIsLiked({
       resourceId: id,
-      username
+      userId: this.currentUserId
     });
     if (result) {
       this.isLiked = true;
@@ -156,7 +155,7 @@ export class PostComponent implements OnInit {
     this.isLiked = false;
   }
 
-  async init_comment_form() {
+  init_comment_form() {
     this.commentForm = this.fb.group({
       resourceId: [this.id],
       username: [this.currentUser],
@@ -207,7 +206,7 @@ export class PostComponent implements OnInit {
   async like() {
     try {
       const result = await this.userService.likePost({
-        username: this.currentUser,
+        userId: this.currentUserId,
         resourceId: this.id
       });
       if (result) {
@@ -222,7 +221,7 @@ export class PostComponent implements OnInit {
   async unlike() {
     try {
       const result = await this.userService.unLikePost({
-        username: this.currentUser,
+        userId: this.currentUserId,
         resourceId: this.id
       });
       if (result) {

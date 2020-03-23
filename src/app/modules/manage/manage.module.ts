@@ -20,6 +20,7 @@ import { ResourceOptionsComponent } from 'src/app/general/resource/resource-opti
 import { CollectionOptionsComponent } from 'src/app/general/collection/collection-options/collection-options.component';
 import { FilterOptionsComponent } from 'src/app/pages/manage/filter-options/filter-options.component';
 import { ProfileSummaryComponent } from 'src/app/components/profile-summary/profile-summary.component';
+import { UserImageComponent } from 'src/app/components/user-image/user-image.component';
 
 const routes: Routes = [
   {
@@ -55,6 +56,7 @@ const routes: Routes = [
     ResourceOptionsComponent,
     CollectionOptionsComponent,
     FilterOptionsComponent,
+    UserImageComponent
   ],
   imports: [
     CommonModule,

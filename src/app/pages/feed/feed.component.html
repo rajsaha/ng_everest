@@ -7,7 +7,7 @@
     (scrolled)="onScrollDown()"
     [scrollWindow]="false"
   >
-    <app-post *ngFor="let post of posts" [data]="post"></app-post>
+    <app-post *ngFor="let post of posts" [data]="post" [currentUser]="username" [currentUserId]="userId"></app-post>
 
     <div class="section-container" *ngIf="posts.length === 0">
       <p>Nothing here</p>
