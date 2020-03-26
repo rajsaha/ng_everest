@@ -8,7 +8,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 })
 export class UserImageComponent implements OnInit {
   @Input() size: string;
-  @Input() image: any;
+  @Input() image = null;
   @Input() firstName: string;
   @Input() lastName: string;
   @Input() username: string;
