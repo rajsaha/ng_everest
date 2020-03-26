@@ -83,8 +83,8 @@ export class PostComponent implements OnInit {
   ) {}
 
   async ngOnInit() {
-    this.init_comment_form();
     this.populatePost();
+    this.init_comment_form();
     this.checkIfDescriptionTooLong(this.description)
     try {
       this.isLoading = true;
@@ -152,6 +152,8 @@ export class PostComponent implements OnInit {
   init_comment_form() {
     this.commentForm = this.fb.group({
       resourceId: [this.id],
+      firstName: [this.firstName[0]],
+      lastName: [this.lastName[0]],
       username: [this.currentUser],
       comment: ['', Validators.required],
       timestamp: [Date.now()]
