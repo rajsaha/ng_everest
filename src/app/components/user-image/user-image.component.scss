@@ -11,18 +11,26 @@
     color: #4a4a4a;
     align-self: center;
     justify-self: center;
-    font-size: 150%;
+    font-size: 2rem;
   }
 }
 
 .xs {
   width: 35px;
   height: 35px;
+
+  span {
+    font-size: 1rem;
+  }
 }
 
 .sm {
   width: 40px;
   height: 40px;
+
+  span {
+    font-size: 1.4rem;
+  }
 }
 
 .md {

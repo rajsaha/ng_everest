@@ -42,9 +42,9 @@
     <div *ngIf="followerCount > 0" class="follower-images-array">
       <app-user-image
         *ngFor="let follower of followers"
-        [image]="follower.smImage.link"
-        [firstName]="firstName"
-        [lastName]="lastName"
+        [image]="follower.smImage ? follower.smImage : ''"
+        [firstName]="follower.firstName"
+        [lastName]="follower.lastName"
         [username]="follower.username"
         size="xs"
       ></app-user-image>
