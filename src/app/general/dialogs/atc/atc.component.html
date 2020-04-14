@@ -6,7 +6,7 @@
     <div class="left">
       <div class="parent">
         <div
-          *ngIf="collections.length > 0"
+          *ngIf="!isLoading"
           class="existing-collections"
           infiniteScroll
           [infiniteScrollDistance]="2"
@@ -26,7 +26,8 @@
             <div
               class="image"
               [ngStyle]="{
-                'background-image': 'url(' + collection.image.link + ')'
+                'background-image':
+                  'url(' + collection.resource1.smImage.link + ')'
               }"
             ></div>
 
@@ -34,10 +35,7 @@
               {{ collection.title }}
               <span
                 class="in-this-collection"
-                *ngIf="
-                  currentCollectionName &&
-                  currentCollectionName === collection.title
-                "
+                *ngIf="isResourceInThisCollection(collection)"
               >
                 In this collection
               </span>
@@ -99,7 +97,12 @@
 
 <div mat-dialog-actions>
   <button mat-stroked-button (click)="onNoClick()">Cancel</button>
-  <button mat-flat-button color="primary" (click)="submitCreateCollectionForm()" cdkFocusInitial>
+  <button
+    mat-flat-button
+    color="primary"
+    (click)="submitCreateCollectionForm()"
+    cdkFocusInitial
+  >
     Save
   </button>
 </div>

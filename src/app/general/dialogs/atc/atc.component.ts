@@ -16,6 +16,7 @@ import { BreakpointObserver, Breakpoints } from "@angular/cdk/layout";
 export class AtcComponent implements OnInit {
   username: string;
   collections = [];
+  currentCollectionId: string;
   currentCollectionName = "";
   isMobileViewport = false;
 
@@ -57,7 +58,7 @@ export class AtcComponent implements OnInit {
 
     try {
       await Promise.all([
-        this.getCollectionNames(),
+        this.getCollections(),
         this.checkForResourceInCollection(),
         this.initAddToCollectionForm(),
         this.getCollectionTitle(this.data.id)
@@ -81,7 +82,7 @@ export class AtcComponent implements OnInit {
 
   async loadMorePosts() {
     this.pageNo++;
-    await this.getCollectionNames();
+    await this.getCollections();
   }
 
   async initAddToCollectionForm() {
@@ -95,19 +96,20 @@ export class AtcComponent implements OnInit {
     return this.createCollectionForm.controls;
   }
 
-  async getCollectionNames() {
+  async getCollections() {
     this.isLoading = true;
-    const response: any = await this.collectionService.getCollectionNames({
+    const response: any = await this.collectionService.getCollections({
       pageNo: this.pageNo,
       size: this.size,
       username: this.username
     });
-    this.isLoading = false;
-    if (response.collections) {
-      for (const collection of response.collections) {
+
+    if (!response.error) {
+      for (const collection of response.collections[0].collections) {
         this.collections.push(collection);
       }
     }
+    this.isLoading = false;
   }
 
   async checkForResourceInCollection() {
@@ -117,6 +119,38 @@ export class AtcComponent implements OnInit {
         username: this.username
       }
     );
+  }
+
+  isResourceInThisCollection(collection: any) {
+    if (collection.resource1) {
+      if (collection.resource1._id === this.data.id) {
+        this.currentCollectionId = collection._id;
+        return true;
+      }
+    }
+
+    if (collection.resource2) {
+      if (collection.resource2._id === this.data.id) {
+        this.currentCollectionId = collection._id;
+        return true;
+      }
+    }
+
+    if (collection.resource3) {
+      if (collection.resource3._id === this.data.id) {
+        this.currentCollectionId = collection._id;
+        return true;
+      }
+    }
+
+    if (collection.resource4) {
+      if (collection.resource4._id === this.data.id) {
+        this.currentCollectionId = collection._id;
+        return true;
+      }
+    }
+
+    return false;
   }
 
   async getCollectionTitle(resourceId: string) {
@@ -129,11 +163,17 @@ export class AtcComponent implements OnInit {
     }
   }
 
-  async addResourceToCollection(collectionId: string) {
+  async addResourceToCollection(collection: any) {
+    if (collection._id === this.currentCollectionId) {
+      return;
+    }
+
+    let collectionId = collection._id;
     const response: any = await this.resourceService.addResourceToCollection({
       collectionId,
       resourceId: this.data.id,
-      username: this.username
+      username: this.username,
+      currentCollectionId: this.currentCollectionId ? this.currentCollectionId : null
     });
 
     if (response && !response.error) {
