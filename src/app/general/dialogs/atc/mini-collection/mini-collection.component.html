@@ -1,0 +1,19 @@
+<div class="collection" matRipple>
+  <div
+    class="image"
+    [ngStyle]="{
+      'background-image': 'url(' + image + ')'
+    }"
+  >
+    <div class="placeholder" *ngIf="showPlaceholder">
+      <span>{{ placeholderText }}</span>
+    </div>
+  </div>
+
+  <p>
+    {{ data.title }}
+    <span class="in-this-collection" *ngIf="isInThisCollection">
+      In this collection
+    </span>
+  </p>
+</div>

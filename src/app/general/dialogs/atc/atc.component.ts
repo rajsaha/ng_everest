@@ -109,6 +109,7 @@ export class AtcComponent implements OnInit {
         this.collections.push(collection);
       }
     }
+    this.getCurrentCollectionId();
     this.isLoading = false;
   }
 
@@ -121,36 +122,32 @@ export class AtcComponent implements OnInit {
     );
   }
 
-  isResourceInThisCollection(collection: any) {
-    if (collection.resource1) {
-      if (collection.resource1._id === this.data.id) {
-        this.currentCollectionId = collection._id;
-        return true;
+  getCurrentCollectionId() {
+    for (let collection of this.collections) {
+      if (collection.resource1) {
+        if (collection.resource1._id === this.data.id) {
+          this.currentCollectionId = collection._id;
+        }
+      }
+  
+      if (collection.resource2) {
+        if (collection.resource2._id === this.data.id) {
+          this.currentCollectionId = collection._id;
+        }
+      }
+  
+      if (collection.resource3) {
+        if (collection.resource3._id === this.data.id) {
+          this.currentCollectionId = collection._id;
+        }
+      }
+  
+      if (collection.resource4) {
+        if (collection.resource4._id === this.data.id) {
+          this.currentCollectionId = collection._id;
+        }
       }
     }
-
-    if (collection.resource2) {
-      if (collection.resource2._id === this.data.id) {
-        this.currentCollectionId = collection._id;
-        return true;
-      }
-    }
-
-    if (collection.resource3) {
-      if (collection.resource3._id === this.data.id) {
-        this.currentCollectionId = collection._id;
-        return true;
-      }
-    }
-
-    if (collection.resource4) {
-      if (collection.resource4._id === this.data.id) {
-        this.currentCollectionId = collection._id;
-        return true;
-      }
-    }
-
-    return false;
   }
 
   async getCollectionTitle(resourceId: string) {
@@ -179,7 +176,7 @@ export class AtcComponent implements OnInit {
     if (response && !response.error) {
       this.snackbarService.openSnackBar({
         message: {
-          message: `Resource added to ${this.createCollectionForm.controls.collectionTitle.value}`,
+          message: `Resource added to ${collection.title}`,
           error: false
         },
         class: "green-snackbar"
@@ -200,6 +197,7 @@ export class AtcComponent implements OnInit {
     if (this.createCollectionForm.valid) {
       const response: any = await this.collectionService.createCollectionAndPushResource(
         {
+          currentCollectionId: this.currentCollectionId ? this.currentCollectionId : null,
           collectionTitle: this.createCollectionForm.controls.collectionTitle
             .value,
           description: this.createCollectionForm.controls.description.value,
