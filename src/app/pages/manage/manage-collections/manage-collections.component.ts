@@ -50,9 +50,9 @@ export class ManageCollectionsComponent implements OnInit {
         this.collections = searchResult.collections;
         return;
       }
-      const response: any = await this.collectionService.getCollections({ username: this.username });
+      const response: any = await this.collectionService.getCollections({ username: this.username, pageNo: 1, size: 100 });
       this.isLoading = false;
-      this.collections = response.collections;
+      this.collections = response.collections[0].collections;
     } catch (err) {
       console.error(err);
     }

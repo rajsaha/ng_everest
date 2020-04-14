@@ -17,9 +17,6 @@ export class CollectionComponent implements OnInit {
   image3 = "";
   image4 = "";
 
-  // Toggles
-  isLoading = false;
-
   // Icons
   faEllipsesV = faEllipsisV;
 
@@ -31,31 +28,24 @@ export class CollectionComponent implements OnInit {
   ) {}
 
   async ngOnInit() {
-    this.isLoading = true;
-    await this.getFourImages();
-    this.isLoading = false;
+    this.setImages();
   }
 
-  async getFourImages() {
-    let resourceIds = [];
-    for (let resource of this.data.resources) {
-      resourceIds.push(resource.resourceId);
-    }
-    const result: any = await this.resourceService.getFourImages(resourceIds);
-    if (result.images[0]) {
-      this.image1 = result.images[0].lgImage.link;
+  setImages() {
+    if (this.data.resource1) {
+      this.image1 = this.data.resource1.lgImage.link;
     }
 
-    if (result.images[1]) {
-      this.image2 = result.images[1].mdImage.link;
+    if (this.data.resource2) {
+      this.image2 = this.data.resource2.mdImage.link;
     }
 
-    if (result.images[2]) {
-      this.image3 = result.images[2].mdImage.link;
+    if (this.data.resource3) {
+      this.image3 = this.data.resource3.mdImage.link;
     }
 
-    if (result.images[3]) {
-      this.image4 = result.images[3].mdImage.link;
+    if (this.data.resource4) {
+      this.image4 = this.data.resource4.mdImage.link;
     }
   }
 

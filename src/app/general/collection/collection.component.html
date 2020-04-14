@@ -3,7 +3,7 @@
     <div class="title-and-count">
       <p class="collection-name">{{ data.title | truncate:[17] }}</p>
       <div class="no-of-resources">
-        <small>{{ data.resources.length }} {{ data.resources.length >= 0 ? 'resource' : 'resources'}}</small>
+        <small>{{ data.count }} {{ data.count >= 0 ? 'resource' : 'resources'}}</small>
       </div>
     </div>
     <button mat-icon-button (click)="show(origin)">
