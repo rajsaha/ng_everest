@@ -7,16 +7,18 @@ $image-height: 35px;
 }
 
 .search {
+  width: 100%;
   position: relative;
 
   .form {
+    width: 100%;
     background-color: #f6f8fa;
     border: 2px solid transparent;
     border-radius: 25px;
     display: grid;
     grid-template-columns: 15px auto;
     grid-gap: 15px;
-    padding: 2px 30px;
+    padding: 2px 0 2px 15px;
     transition: border 0.2s ease-in-out;
 
     &:focus-within {

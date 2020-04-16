@@ -12,6 +12,7 @@ import { CollectionOptionsComponent } from "./collection-options/collection-opti
 })
 export class CollectionComponent implements OnInit {
   @Input() data: any;
+  isLoading = false;
   image1 = "";
   image2 = "";
   image3 = "";
@@ -32,6 +33,7 @@ export class CollectionComponent implements OnInit {
   }
 
   setImages() {
+    this.isLoading = true;
     if (this.data.resource1) {
       this.image1 = this.data.resource1.lgImage.link;
     }
@@ -47,6 +49,7 @@ export class CollectionComponent implements OnInit {
     if (this.data.resource4) {
       this.image4 = this.data.resource4.mdImage.link;
     }
+    this.isLoading = false;
   }
 
   goToCollection() {
