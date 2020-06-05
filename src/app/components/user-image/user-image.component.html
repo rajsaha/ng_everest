@@ -4,7 +4,7 @@
   [ngClass]="[imageSizeClass, clickableClass]"
   [ngStyle]="url"
 >
-  <span *ngIf="image === '' || image === null">
+  <span *ngIf="(image === '' || image === null) && placeholder">
     {{ placeholder }}
   </span>
 </div>
