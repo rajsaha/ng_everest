@@ -10,7 +10,6 @@ export class MiniCollectionComponent implements OnInit {
   currentCollectionId: string;
   @Input() resourceId: string;
 
-  isInThisCollection = false;
   showPlaceholder = false;
   placeholderText = "";
   image: string;
@@ -19,7 +18,6 @@ export class MiniCollectionComponent implements OnInit {
 
   ngOnInit() {
     this.setImage();
-    this.isInThisCollection = this.isResourceInThisCollection(this.data);
   }
 
   setImage() {
@@ -42,17 +40,4 @@ export class MiniCollectionComponent implements OnInit {
 
     return output;
   }
-
-  isResourceInThisCollection(collection: any) {
-    if (collection.resource1) {
-      if (collection.resource1._id === this.resourceId) {
-        this.currentCollectionId = collection._id;
-
-        return true;
-      }
-    }
-    
-    return false;
-  }
-
 }

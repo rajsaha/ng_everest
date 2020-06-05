@@ -57,12 +57,8 @@ export class AtcComponent implements OnInit {
     this.username = localStorage.getItem("username");
 
     try {
-      await Promise.all([
-        this.getCollections(),
-        this.checkForResourceInCollection(),
-        this.initAddToCollectionForm(),
-        this.getCollectionTitle(this.data.id)
-      ]);
+      this.initAddToCollectionForm();
+      await this.getCollections();
     } catch (err) {
       throw new Error(err);
     }
@@ -85,7 +81,7 @@ export class AtcComponent implements OnInit {
     await this.getCollections();
   }
 
-  async initAddToCollectionForm() {
+  initAddToCollectionForm() {
     this.createCollectionForm = this.fb.group({
       collectionTitle: ["", Validators.required],
       description: [""]
@@ -101,7 +97,8 @@ export class AtcComponent implements OnInit {
     const response: any = await this.collectionService.getCollections({
       pageNo: this.pageNo,
       size: this.size,
-      username: this.username
+      username: this.username,
+      resourceId: this.data.id
     });
 
     if (!response.error) {
@@ -111,15 +108,6 @@ export class AtcComponent implements OnInit {
     }
     this.getCurrentCollectionId();
     this.isLoading = false;
-  }
-
-  async checkForResourceInCollection() {
-    const response: any = await this.collectionService.checkForResourceInCollection(
-      {
-        id: this.data.id,
-        username: this.username
-      }
-    );
   }
 
   getCurrentCollectionId() {
@@ -147,16 +135,6 @@ export class AtcComponent implements OnInit {
           this.currentCollectionId = collection._id;
         }
       }
-    }
-  }
-
-  async getCollectionTitle(resourceId: string) {
-    const collection: any = await this.collectionService.getCollectionTitleByResourceId(
-      { username: this.username, resourceId }
-    );
-
-    if (collection.collection.length > 0) {
-      this.currentCollectionName = collection.collection[0].title;
     }
   }
 
