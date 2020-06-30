@@ -3,7 +3,7 @@ import { ValidationService } from "@services/forms/validation.service";
 import { FormGroup, Validators, FormBuilder } from "@angular/forms";
 import { UserService } from "@services/user/user.service";
 import { SnackbarService } from "@services/general/snackbar.service";
-import { faKey } from "@fortawesome/free-solid-svg-icons";
+import { faKey, faChevronDown, faChevronUp } from "@fortawesome/free-solid-svg-icons";
 
 @Component({
   selector: "app-change-password",
@@ -19,6 +19,8 @@ export class ChangePasswordComponent implements OnInit {
 
   // Icons
   faKey = faKey;
+  faChevronDown = faChevronDown;
+  faChevronUp = faChevronUp;
 
   constructor(
     private fb: FormBuilder,

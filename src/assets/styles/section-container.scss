@@ -1,19 +1,3 @@
-%section-header-icon-base {
-  transition: all 0.2s ease-in-out;
-  align-self: center;
-  justify-self: end;
-  border-radius: 50%;
-  width: 25px;
-  height: 25px;
-  display: grid;
-
-  fa-icon {
-    align-self: center;
-    justify-self: center;
-    font-size: 12px;
-  }
-}
-
 .section-container {
   padding: 0 15px;
   .section {
@@ -126,26 +110,25 @@
     .section-header-with-icon {
       cursor: pointer;
       display: grid;
-      grid-template-columns: 2fr 1fr;
+      grid-template-columns: 2fr 15px;
 
-      p {
-        font-weight: bold;
-      }
-
-      .icon-container-closed {
-        @extend %section-header-icon-base;
-        border: 1px solid #cccccc;
+      .left {
         fa-icon {
-          color: #797979;
+          color: dimgrey;
+          margin-right: 10px;
+        }
+
+        span {
+          font-weight: bold;
         }
       }
 
-      .icon-container-open {
-        @extend %section-header-icon-base;
-        border: transparent;
-        background-color: #481a89;
+      .right {
+        align-self: center;
+        justify-self: center;
+
         fa-icon {
-          color: white;
+          color: dimgrey;
         }
       }
     }

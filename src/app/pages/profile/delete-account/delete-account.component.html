@@ -5,14 +5,12 @@
       class="section-header-with-icon"
       (click)="showAccountForm = !showAccountForm"
     >
-      <p>Privacy Settings</p>
-      <div
-        [ngClass]="{
-          'icon-container-closed': !showAccountForm,
-          'icon-container-open': showAccountForm
-        }"
-      >
+      <p class="left">
         <fa-icon [icon]="faFingerprint"></fa-icon>
+        <span>Privacy Settings</span>
+      </p>
+      <div class="right">
+        <fa-icon [icon]="showAccountForm ? faChevronUp : faChevronDown"></fa-icon>
       </div>
     </div>
 
