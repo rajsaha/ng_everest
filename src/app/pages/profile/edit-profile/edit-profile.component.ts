@@ -87,14 +87,13 @@ export class EditProfileComponent implements OnInit {
   async getUserData() {
     this.isLoading = true;
     const res: any = await this.userService.getProfileData(this.userId);
-    console.log(res);
 
     this.isProfileSaveButtonDisabled = true;
     this.interests = res.userData.interests ? res.userData.interests : [];
     this.followers = res.userData.followers ? res.userData.followers : [];
     this.following = res.userData.following ? res.userData.following : [];
     
-    if (res.userData.mdImage) {
+    if (res.userData.mdImage.link) {
       this.image = res.userData.mdImage.link;
       this.uploadedImage = res.userData.mdImage.link;
       this.imageId = res.userData.mdImage.id;

@@ -96,7 +96,7 @@ export class PublicProfileComponent implements OnInit {
     this.followers = data.followers;
     this.following = data.following;
 
-    if (data.mdImage) {
+    if (data.mdImage.link) {
       this.image = data.mdImage.link;
     }
     this.interests = data.interests;
