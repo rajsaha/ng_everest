@@ -17,18 +17,18 @@ export class CollectionComponent implements OnInit {
   image2 = "";
   image3 = "";
   image4 = "";
+  truncateAmount = "17";
 
   // Icons
   faEllipsesV = faEllipsisV;
 
   constructor(
-    private resourceService: ResourceService,
     private route: Router,
     private router: ActivatedRoute,
     private popper: PopoverService
   ) {}
 
-  async ngOnInit() {
+  ngOnInit() {
     this.setImages();
   }
 

@@ -1,6 +1,6 @@
 <div class="section-container">
   <div class="collection-data" *ngIf="collection">
-    <form [formGroup]="changeCollectionForm" *ngIf="isMine">
+    <!-- <form [formGroup]="changeCollectionForm" *ngIf="isMine">
       <div class="collection-header">
         <div class="left">
           <small
@@ -35,7 +35,7 @@
           </mat-form-field>
         </div>
       </div>
-    </form>
+    </form> -->
     
     <div class="resource-grid">
       <app-resource
@@ -47,8 +47,8 @@
 
     <div
       class="see-more"
-      *ngIf="!isLoading && seeMore"
-      (click)="getCollection()"
+      *ngIf="!isLoading"
+      (click)="seeMore()"
     >
       See More
     </div>
@@ -57,13 +57,13 @@
       <p>This collection is empty</p>
     </div>
 
-    <div class="delete" (click)="openDcDialog()" *ngIf="isMine">
+    <!-- <div class="delete" (click)="openDcDialog()" *ngIf="isMine">
       <app-custom-button
         buttonLabel="Delete Collection"
         size="small"
         backgroundColor="delete"
       >
       </app-custom-button>
-    </div>
+    </div> -->
   </div>
 </div>

@@ -1,7 +1,7 @@
 <div class="collection-container" *ngIf="!isLoading" #origin>
   <div class="header">
     <div class="title-and-count">
-      <p class="collection-name">{{ data.title | truncate:[17] }}</p>
+      <p class="collection-name">{{ data.title | truncate:[truncateAmount] }}</p>
       <div class="no-of-resources">
         <small>{{ data.count }} {{ data.count >= 0 ? 'resource' : 'resources'}}</small>
       </div>

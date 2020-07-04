@@ -1,7 +1,6 @@
-import { Component, OnInit, Output, EventEmitter, OnDestroy } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { CollectionService } from '@services/collection/collection.service';
-import { ResourceService } from '@services/resource/resource.service';
 import { faPen, faEdit } from '@fortawesome/free-solid-svg-icons';
 import { UtilityService } from '@services/general/utility.service';
 import { MatDialog } from '@angular/material/dialog';
@@ -22,8 +21,9 @@ export class ViewCollectionComponent implements OnInit {
   @Output() dcResponse: EventEmitter<any> = new EventEmitter();
   changeCollectionForm: FormGroup;
   numOfResources: number;
-  size = 5;
-  pointer = 0;
+  // Pagination
+  pageNo = 1;
+  size = 8;
 
   // Icons
   faPen = faPen;
@@ -33,12 +33,10 @@ export class ViewCollectionComponent implements OnInit {
   isLoading = false;
   isMine = false;
   isInCollectionPage = true;
-  seeMore = false;
 
   constructor(
     private route: ActivatedRoute,
     private collectionService: CollectionService,
-    private resourceService: ResourceService,
     private utilityService: UtilityService,
     public dialog: MatDialog,
     private fb: FormBuilder) { }
@@ -60,37 +58,24 @@ export class ViewCollectionComponent implements OnInit {
 
   async getCollection() {
     this.isLoading = true;
-    const result: any = await this.collectionService.getCollectionById({ id: this.id });
-    this.collection = result.collection;
-    this.numOfResources = this.collection.resources.length;
+    const result: any = await this.collectionService.getCollectionById({
+      pageNo: this.pageNo,
+      size: this.size,
+      id: this.id 
+    });
+    this.collection = result.collection.collection[0];
+    this.numOfResources = result.collection.count;
+    for (let item of result.collection.collection[0].resources) {
+      this.resources.push(item);
+    }
     this.changeCollectionForm.controls.title.patchValue(result.collection.title);
     this.changeCollectionForm.controls.description.patchValue(result.collection.description);
-    if (this.numOfResources > 0) {
-      await this.getMultipleResources(this.collection.resources);
-    }
     this.isLoading = false;
   }
 
-  async getMultipleResources(data) {
-    const lastIndex = this.numOfResources - 1;
-    if (lastIndex >= this.size) {
-      this.seeMore = true;
-      const page = data.slice(this.pointer, (this.pointer + this.size));
-      this.pointer += 5;
-      if (this.pointer > lastIndex) {
-        this.seeMore = false;
-      }
-      const result: any = await this.resourceService.getMultipleResources(page);
-      for (let resource of result.resources) {
-        this.resources.push(resource);
-      }
-    } else {
-      this.seeMore = false;
-      const result: any = await this.resourceService.getMultipleResources(data);
-      for (let resource of result.resources) {
-        this.resources.push(resource);
-      }
-    }
+  async seeMore() {
+    this.pageNo++;
+    await this.getCollection();
   }
 
   drResponseHandler(result: string) {
