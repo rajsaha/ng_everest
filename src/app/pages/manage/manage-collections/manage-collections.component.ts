@@ -3,7 +3,7 @@ import { CollectionService } from '@services/collection/collection.service';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
 import { Router } from '@angular/router';
-import { debounceTime } from 'rxjs/internal/operators';
+import { debounceTime } from 'rxjs/operators';
 
 @Component({
   selector: 'app-manage-collections',

@@ -5,7 +5,7 @@ import { faUpload, faPlusCircle } from '@fortawesome/free-solid-svg-icons';
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { MatChipInputEvent } from '@angular/material/chips';
 import { ValidationService } from '@services/forms/validation.service';
-import { delay } from 'rxjs/internal/operators';
+import { delay } from 'rxjs/operators';
 import { ResourceService } from '@services/resource/resource.service';
 import { SnackbarService } from '@services/general/snackbar.service';
 import { CollectionService } from '@services/collection/collection.service';

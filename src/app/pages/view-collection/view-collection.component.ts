@@ -6,7 +6,7 @@ import { UtilityService } from '@services/general/utility.service';
 import { MatDialog } from '@angular/material/dialog';
 import { DcComponent } from 'src/app/general/dialogs/dc/dc.component';
 import { FormGroup, FormBuilder } from '@angular/forms';
-import { delay } from 'rxjs/internal/operators';
+import { delay } from 'rxjs/operators';
 
 @Component({
   selector: 'app-view-collection',

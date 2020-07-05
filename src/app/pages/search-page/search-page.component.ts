@@ -1,7 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
 import { FormGroup, FormBuilder, Validators } from "@angular/forms";
-import { debounceTime } from "rxjs/internal/operators";
+import { debounceTime } from "rxjs/operators";
 import { UserService } from "@services/user/user.service";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
 

@@ -1,6 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { FormGroup, FormBuilder } from "@angular/forms";
-import { debounceTime } from "rxjs/internal/operators";
+import { debounceTime } from "rxjs/operators";
 import { UserService } from "@services/user/user.service";
 import { faBorderAll, faTimesCircle, faSearch } from "@fortawesome/free-solid-svg-icons";
 import { Router, ActivatedRoute } from "@angular/router";

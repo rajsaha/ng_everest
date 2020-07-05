@@ -3,7 +3,7 @@ import { FormGroup, FormBuilder } from '@angular/forms';
 import { ResourceService } from '@services/resource/resource.service';
 import { UtilityService } from '@services/general/utility.service';
 import { faSearch, faFilter } from '@fortawesome/free-solid-svg-icons';
-import { debounceTime } from 'rxjs/internal/operators';
+import { debounceTime } from 'rxjs/operators';
 
 @Component({
   selector: 'app-manage-resources',
