@@ -5,11 +5,10 @@ import { faUpload, faPlusCircle } from '@fortawesome/free-solid-svg-icons';
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { MatChipInputEvent } from '@angular/material/chips';
 import { ValidationService } from '@services/forms/validation.service';
-import { debounceTime } from 'rxjs/internal/operators';
 import { ResourceService } from '@services/resource/resource.service';
 import { SnackbarService } from '@services/general/snackbar.service';
 import { CollectionService } from '@services/collection/collection.service';
-import { isArray } from 'util';
+import { debounceTime } from 'rxjs/operators';
 
 class ImageSnippet {
   constructor(public src: string, public file: File) {}
@@ -23,9 +22,10 @@ class ImageSnippet {
 export class ShareResourceComponent implements OnInit {
   shareResourceForm: FormGroup;
   selectedFile: any;
-  @ViewChild('imageInput', { static: false }) imageInput: ElementRef;
+  @ViewChild('imageInput') imageInput: ElementRef;
   image: any;
   username: string;
+  userId: string;
   collections: Array<object> = [];
   submitButtonText = 'Share';
   atcData: any;
@@ -62,6 +62,7 @@ export class ShareResourceComponent implements OnInit {
 
   ngOnInit() {
     this.username = localStorage.getItem('username');
+    this.userId = localStorage.getItem("userId");
     this.initShareResourceForm();
     this.onURLOnChanges();
   }
@@ -74,7 +75,7 @@ export class ShareResourceComponent implements OnInit {
         title: ['', [Validators.required]],
         description: ['', [Validators.required]],
         image: [''],
-        username: [this.username],
+        userId: [this.userId],
         type: ['ext-content']
       },
       { validator: [this.validationService.checkValidURL] }
@@ -215,7 +216,7 @@ export class ShareResourceComponent implements OnInit {
             this.ogTitle = response.message.data.data.ogTitle;
             this.ogDescription = response.message.data.data.ogDescription;
             if (
-              isArray(response.message.data.data.ogImage) &&
+              Array.isArray(response.message.data.data.ogImage) &&
               response.message.data.data.ogImage.length > 0
             ) {
               this.ogImage = response.message.data.data.ogImage[0].url;
@@ -261,6 +262,5 @@ export class ShareResourceComponent implements OnInit {
 
   receiveAtcData($event) {
     this.atcData = $event;
-    console.log(this.atcData);
   }
 }

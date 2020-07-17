@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter, ViewChild } from '@angular/core';
 import { CollectionService } from '@services/collection/collection.service';
 import { FormGroup, FormBuilder } from '@angular/forms';
-import { MatSelect } from '@angular/material';
+import { MatSelect } from '@angular/material/select';
 
 @Component({
   selector: 'app-add-to-collection',
@@ -11,7 +11,7 @@ import { MatSelect } from '@angular/material';
 export class AddToCollectionComponent implements OnInit {
   @Input() resourceId: string;
   @Output() message = new EventEmitter<object>();
-  @ViewChild('collectionSelect', { static: false }) selectCollection: MatSelect;
+  @ViewChild('collectionSelect') selectCollection: MatSelect;
 
   username: string;
   collections = [];
@@ -59,8 +59,6 @@ export class AddToCollectionComponent implements OnInit {
       username: this.username
     });
 
-    console.log(response);
-
     if (response.collections) {
       for (const collection of response.collections) {
         this.collections.push(collection);
@@ -69,6 +67,7 @@ export class AddToCollectionComponent implements OnInit {
   }
 
   async getCollectionTitle(resourceId: string) {
+
     const collection: any = await this.collectionService.getCollectionTitleByResourceId(
       { username: this.username, resourceId }
     );

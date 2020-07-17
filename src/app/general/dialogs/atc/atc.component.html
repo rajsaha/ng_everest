@@ -1,52 +1,91 @@
 <p class="dialog-title">
-  <strong>{{ data.title }}</strong>
+  <strong>Add to Collection</strong>
 </p>
-<h6>Add to Collection</h6>
 <div mat-dialog-content>
-  <div class="parent">
-    <mat-progress-bar mode="indeterminate" *ngIf="isLoading"> </mat-progress-bar>
-    <div
-      class="existing-collections"
-      infiniteScroll
-      [infiniteScrollDistance]="2"
-      [infiniteScrollThrottle]="50"
-      (scrolled)="onScrollDown()"
-      [scrollWindow]="false"
-    >
-      <div class="collection" *ngFor="let collection of collections" (click)="addResourceToCollection(collection.id)" matRipple>
+  <div class="columns">
+    <div class="left">
+      <div class="parent">
         <div
-          class="image"
-          [ngStyle]="{ 'background-image': 'url(' + collection.image + ')' }"
-        ></div>
+          *ngIf="!isLoading"
+          class="existing-collections"
+          infiniteScroll
+          [infiniteScrollDistance]="2"
+          [infiniteScrollThrottle]="50"
+          (scrolled)="onScrollDown()"
+          [scrollWindow]="false"
+        >
+          <h6>Add to existing collections</h6>
+          <mat-progress-bar mode="indeterminate" *ngIf="isLoading">
+          </mat-progress-bar>
+          
+          <app-mini-collection
+            *ngFor="let collection of collections"
+            (click)="addResourceToCollection(collection)"
+            [data]="collection"
+            [resourceId]="data.id"
+          ></app-mini-collection>
 
-        <p>
-          {{ collection.title }}
-          <span class="in-this-collection" *ngIf="currentCollectionName && currentCollectionName === collection.title">
-              In this collection
-          </span>
-        </p>
+          <p
+            *ngIf="!isLoading && collections.length === 0"
+            class="no-collection"
+          >
+            You haven't made a collection yet!
+          </p>
+        </div>
+
+        <form [formGroup]="createCollectionForm">
+          <h6>Add to new collection</h6>
+          <div class="custom-input">
+            <div class="label-container">
+              <label>Collection Name</label>
+            </div>
+            <div class="input-container">
+              <input
+                type="text"
+                formControlName="collectionTitle"
+                placeholder="Name your collection"
+              />
+            </div>
+          </div>
+
+          <div class="custom-input">
+            <div class="label-container">
+              <label>Collection Note</label>
+            </div>
+            <div class="input-container">
+              <textarea
+                cdkTextareaAutosize
+                #autosize="cdkTextareaAutosize"
+                cdkAutosizeMinRows="3"
+                cdkAutosizeMaxRows="5"
+                type="text"
+                formControlName="description"
+                placeholder="Add note for this post..."
+              ></textarea>
+            </div>
+          </div>
+        </form>
       </div>
+    </div>
 
-      <p *ngIf="!isLoading && collections.length === 0" class="no-collection">
-        You haven't made a collection yet!
-      </p>
+    <div class="divider" *ngIf="!isMobileViewport"></div>
+
+    <div class="right" *ngIf="!isMobileViewport">
+      <img [src]="data.image" />
+      <h4>{{ data.title }}</h4>
+      <p>{{ data.description }}</p>
     </div>
   </div>
-
-  <form [formGroup]="createCollectionForm">
-    <mat-form-field appearance="outline">
-      <mat-label>Create new Collection</mat-label>
-      <input
-        matInput
-        placeholder="Collection name"
-        formControlName="collectionTitle"
-      />
-    </mat-form-field>
-  </form>
 </div>
+
 <div mat-dialog-actions>
-  <button mat-button (click)="onNoClick()">Cancel</button>
-  <button mat-button (click)="submitCreateCollectionForm()" cdkFocusInitial>
-    Ok
+  <button mat-stroked-button (click)="onNoClick()">Cancel</button>
+  <button
+    mat-flat-button
+    color="primary"
+    (click)="submitCreateCollectionForm()"
+    cdkFocusInitial
+  >
+    Save
   </button>
 </div>

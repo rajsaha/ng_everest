@@ -26,6 +26,7 @@
 }
 
 .post {
+	height: auto;
 	border: 1px solid #eee;
 	border-radius: 5px;
 	margin-left: auto;
@@ -34,6 +35,8 @@
 	max-width: 600px;
 	background-color: white;
 	box-shadow: 0 8px 20px 0 rgba(218, 224, 235, 0.6);
+	animation: fadeUp 0.2s ease-in-out;
+	animation-fill-mode: forwards;
 
 	.header {
 		display: grid;
@@ -125,6 +128,7 @@
 
 		.tag {
 			a {
+				text-decoration: none;
 				strong {
 					color: #fe685f;
 					border-radius: 5px;
@@ -296,6 +300,18 @@ textarea {
 	100% {
 		opacity: 1;
 		transform: scale(1);
+	}
+}
+
+@keyframes fadeUp {
+	0% {
+		opacity: 0;
+		transform: translateY(15px);
+	}
+
+	100% {
+		opacity: 1;
+		transform: translateY(0);
 	}
 }
 

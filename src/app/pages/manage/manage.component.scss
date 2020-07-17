@@ -1,0 +1,138 @@
+.header {
+  display: grid;
+  grid-template-columns: auto;
+  grid-gap: 15px;
+  align-items: center;
+  margin-bottom: 30px;
+  padding: 15px 15px 0 15px;
+  overflow-x: hidden;
+
+  .controls {
+    display: grid;
+    grid-template-columns: auto;
+    grid-gap: 15px;
+
+    .control {
+      background-color: #f6f8fa;
+      border: 2px solid transparent;
+      border-radius: 25px;
+      display: grid;
+      grid-template-columns: 15px auto;
+      grid-gap: 15px;
+      padding: 5px 20px;
+      justify-self: center;
+      transition: border 0.2s ease-in-out, width 150ms cubic-bezier(0.25, 0.8, 0.25, 1);
+
+      &:focus-within {
+        border: 2px solid rgba(72, 26, 137, 0.5);
+      }
+
+      .control-icon {
+        align-self: center;
+        fa-icon {
+          color: #481a89;
+          font-size: 16px;
+        }
+      }
+
+      input {
+        width: 100%;
+        align-self: center;
+        background-color: transparent;
+        border: none;
+        font-size: 14px;
+        &:focus {
+          outline: 0;
+          border: 0;
+        }
+      }
+    }
+
+    .control-group {
+      text-align: center;
+      background-color: #f6f8fa;
+      border: 2px solid transparent;
+      border-radius: 25px;
+      padding: 5px 20px;
+      transition: border 0.2s ease-in-out;
+      justify-self: center;
+
+      div:first-child {
+        margin-right: 10px;
+      }
+
+      .group {
+        display: inline-block;
+        cursor: pointer;
+        
+        fa-icon {
+          color: #C8C4D1;
+          font-size: 16px;
+          transition: color 0.2s ease-in-out;
+        }
+
+        span {
+          color: #6D6B71;
+          font-size: 14px;
+          margin-left: 8px;
+          transition: color 0.2s ease-in-out;
+        }
+      }
+    }
+  }
+}
+
+.selected {
+  fa-icon {
+    color: #481a89 !important;
+  }
+
+  span {
+    color: #481a89 !important;
+  }
+}
+
+.search-in-focus {
+  width: inherit;
+}
+
+.columns {
+  display: grid;
+  grid-template-columns: auto;
+}
+
+@media (min-width: 376px) {
+  .header {
+    .controls {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+}
+
+@media (min-width: 768px) {
+  .header {
+    grid-template-columns: 85px 1fr;
+    padding: 50px 30px 0 30px;
+
+    .controls {
+      grid-template-columns: repeat(4, auto);
+      justify-self: end;
+
+      .control {
+        width: 100px;
+      }
+    }
+  }
+
+  .columns {
+    grid-template-columns: 350px 2fr;
+    grid-gap: 15px;
+    padding: 0 30px;
+  }
+}
+
+@media (min-width: 860px) {
+  .search-in-focus {
+    width: 200px !important;
+  }
+}

@@ -18,8 +18,8 @@
 	}
 
 	.toolbar {
-		display: grid;
-		grid-template-columns: 50px 1fr 70px;
+		display: inline-grid;
+		grid-template-columns: 50px auto 20px;
 		background-color: white;
 		box-shadow: 0 2px 16px rgba(0, 0, 0, .1);
 		z-index: 100;
@@ -28,15 +28,21 @@
 		.app-name {
 			display: none;
 			a {
+				color: #3C3C3C;
 				font-family: "Raleway", sans-serif;
 				font-weight: 200;
 				text-transform: uppercase;
-				letter-spacing: 10px;
+				letter-spacing: 8px;
 				text-decoration: none;
+
+				&:visited {
+					color: inherit;
+				}
 			}
 		}
 
-		.search {
+		.app-search {
+			width: 100%;
 			justify-self: center;
 			align-self: center;
 		}
@@ -96,6 +102,16 @@
 	border: 1px solid rgba(0, 0, 0, 1) !important;
 }
 
+@media (min-width: 320px) and (max-width: 420px) {
+	.app-container {
+		.toolbar {
+			.app-search {
+				width: 10rem;
+			}
+		}
+	}
+}
+
 @media (min-width: 768px) {
 	.app-container {
 		.sidenav-container {	
@@ -109,7 +125,8 @@
 				display: inherit;
 			}
 
-			.search {
+			.app-search {
+				width: 15rem;
 				grid-column-start: auto;
 			}
 		}

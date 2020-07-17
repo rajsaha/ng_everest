@@ -5,8 +5,7 @@
         <div
           class="image-container"
           [ngStyle]="{
-            'background-image': 'url(' + image + ')',
-            border: 'none'
+            'background-image': 'url(' + image + ')'
           }"
         ></div>
         <div class="text">
@@ -52,13 +51,13 @@
 
       <!--* Public view of profile -->
       <div class="public-view-content">
-        <h1 *ngIf="name">{{ name }}</h1>
+        <h1 *ngIf="name">{{ firstName }} {{ lastName }}</h1>
         <a *ngIf="website" [href]="website" target="_blank">
           <fa-icon [icon]="faExternalLinkAlt"></fa-icon>&nbsp; Website
         </a>
         <p class="bio" *ngIf="bio">{{ bio }}</p>
         <mat-chip-list *ngIf="interests">
-          <mat-chip *ngFor="let interest of interests">{{ interest }}</mat-chip>
+          <mat-chip *ngFor="let interest of interests" (click)="goToSearch(interest)">{{ interest }}</mat-chip>
         </mat-chip-list>
         <div class="followers-following" (click)="openFollowDialog()">
           <strong>{{ followers.length }}</strong> followers |

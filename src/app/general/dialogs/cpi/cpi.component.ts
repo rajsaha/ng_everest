@@ -1,5 +1,5 @@
 import { Component, Inject, OnInit, ViewChild, ElementRef } from '@angular/core';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { SnackbarService } from '@services/general/snackbar.service';
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
 import { UserService } from '@services/user/user.service';
@@ -34,19 +34,20 @@ export class CpiComponent implements OnInit {
     public dialogRef: MatDialogRef<CpiComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
     private snackbarService: SnackbarService,
-    private userService: UserService) {
-    this.userService.getProfilePhoto(data.username).then((res: any) => {
-      if (res.image.image) {
-        this.userImage = res.image.image.link ? res.image.image.link : this.defaultProfileImage;
-        this.deleteHash = res.image.image.deleteHash;
-        this.imageId = res.image.image.id;
-        this.imageFromDB = res.image.image.link ? true : false;
-      }
-    });
-  }
+    private userService: UserService) {}
 
   ngOnInit() {
     this.userId = localStorage.getItem('userId');
+    this.getProfilePhoto();
+  }
+
+  getProfilePhoto() {
+    this.userService.getProfilePhoto(this.data.username).then((res: any) => {
+      if (res.mdImage) {
+        this.userImage = res.mdImage.link ? res.mdImage.link : this.defaultProfileImage;
+        this.imageFromDB = res.mdImage.link ? true : false;
+      }
+    });
   }
 
   onFileSelected(imageInput: any) {
@@ -75,12 +76,8 @@ export class CpiComponent implements OnInit {
 
   onNoClick() {
     this.dialogRef.close({
-      status: false
+      newImage: false
     });
-  }
-
-  onYesClick() {
-    this.dialogRef.close();
   }
 
   async saveProfilePhoto() {
@@ -107,8 +104,11 @@ export class CpiComponent implements OnInit {
         },
         class: 'green-snackbar',
       });
-      localStorage.setItem('profileImage', this.userImage);
-      this.dialogRef.close();
+      localStorage.setItem('profileImage', response.smImage.link);
+      this.dialogRef.close({
+        newImage: true,
+        image: response.mdImage.link
+      });
     } else {
       this.snackbarService.openSnackBar({
         message: {
@@ -124,7 +124,7 @@ export class CpiComponent implements OnInit {
     // * Pre api call
     this.isSavingPhoto = true;
     this.dialogRef.disableClose = true;
-    const response: any = await this.userService.deleteProfilePhoto({ id: this.userId, deleteHash: this.deleteHash });
+    const response: any = await this.userService.deleteProfilePhoto({ id: this.userId });
 
     // * Post api call
     this.dialogRef.disableClose = false;

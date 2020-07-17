@@ -118,7 +118,8 @@ export class ResourceService {
     return response;
   }
 
-  addComment(data: any) {
+  addComment(data: any, smImage: string) {
+    data.smImage = smImage;
     const response = this.http
       .post(`${ENV.API_URL}/resource/add-comment`, data)
       .toPromise();

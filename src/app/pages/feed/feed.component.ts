@@ -11,6 +11,7 @@ export class FeedComponent implements OnInit {
   posts = [];
   isFabActive = false;
   username: string;
+  userId: string;
 
   // Icons
   faPlus = faPlus;
@@ -31,6 +32,7 @@ export class FeedComponent implements OnInit {
 
   async ngOnInit() {
     this.username = localStorage.getItem('username');
+    this.userId = localStorage.getItem("userId");
     await this.getAllResources();
   }
 
@@ -39,7 +41,7 @@ export class FeedComponent implements OnInit {
       const response: any = await this.resourceService.getAllResources({
         pageNo: this.pageNo,
         size: this.size,
-        username: this.username
+        userId: this.userId
       });
 
       for (const resource of response.resources) {

@@ -1,28 +1,45 @@
 <div class="section-container">
-  <!-- * Search resources -->
-  <div class="search">
+  <!-- <div class="header">
+    <h3>Manage Resources</h3>
     <form [formGroup]="resourceSearchForm">
-      <mat-form-field appearance="outline">
-        <mat-label>Search</mat-label>
-        <mat-icon matPrefix>
-          <fa-icon [icon]="faSearch"></fa-icon>
-        </mat-icon>
-        <input matInput placeholder="Search for your resources" formControlName="query">
-      </mat-form-field>
-    </form>
-  </div>
+      <div class="controls">
+        <div class="control">
+          <div class="control-icon">
+            <fa-icon [icon]="faSearch"></fa-icon>
+          </div>
+          <input type="text" placeholder="Search" formControlName="query" />
+        </div>
 
-  <div class="parent" infiniteScroll [infiniteScrollDistance]="2" [infiniteScrollThrottle]="50"
-    (scrolled)="onScrollDown()" [scrollWindow]="false">
+        <div class="control">
+          <div class="control-icon">
+            <fa-icon [icon]="faFilter"></fa-icon>
+          </div>
+          <input type="text" placeholder="Search" formControlName="filter" />
+        </div>
+      </div>
+    </form>
+  </div> -->
+
+  <div
+    class="parent"
+    infiniteScroll
+    [infiniteScrollDistance]="2"
+    [infiniteScrollThrottle]="50"
+    (scrolled)="onScrollDown()"
+    [scrollWindow]="false"
+  >
     <div class="resource-grid">
-      <app-resource *ngFor="let resource of resources" [data]="resource" (drResponse)="drResponseHandler($event)"
-        [isInCollectionPage]="isInCollectionPage">
+      <app-resource *ngFor="let resource of resources" [data]="resource" (deleteEvent)="drResponseHandler($event)">
       </app-resource>
       <app-loading type="resource" *ngIf="isLoading"></app-loading>
     </div>
   </div>
 
-  <div class="see-more" *ngIf="!isLoading && resources.length < resourcesCount" (click)="loadMorePosts()">
+  <div
+    class="see-more"
+    *ngIf="!isLoading && resources.length < resourcesCount"
+    (click)="loadMorePosts()"
+  >
     See More
   </div>
 

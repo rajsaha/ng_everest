@@ -5,11 +5,10 @@ import { faUpload, faPlusCircle } from '@fortawesome/free-solid-svg-icons';
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { MatChipInputEvent } from '@angular/material/chips';
 import { ValidationService } from '@services/forms/validation.service';
-import { delay } from 'rxjs/internal/operators';
+import { delay } from 'rxjs/operators';
 import { ResourceService } from '@services/resource/resource.service';
 import { SnackbarService } from '@services/general/snackbar.service';
 import { CollectionService } from '@services/collection/collection.service';
-import { isArray } from 'util';
 
 class ImageSnippet {
   constructor(public src: string, public file: File) { }
@@ -25,7 +24,7 @@ export class EditResourceComponent implements OnInit {
   resource: any;
   editResourceForm: FormGroup;
   selectedFile: any;
-  @ViewChild('imageInput', { static: false }) imageInput: ElementRef;
+  @ViewChild('imageInput') imageInput: ElementRef;
   image: any;
   username: string;
   collectionNames = [];
@@ -39,6 +38,7 @@ export class EditResourceComponent implements OnInit {
   isLoading = false;
   isDisabled = false;
   isUrlDisabled = true;
+  isUrlChanged = false;
 
   // Tags
   tags = [];
@@ -84,7 +84,8 @@ export class EditResourceComponent implements OnInit {
       image: [''],
       username: [this.username],
       type: ['ext-content'],
-      collectionName: ['']
+      collectionName: [''],
+      timestamp: ['']
     }, { validator: [this.validationService.checkValidURL] });
   }
 
@@ -139,12 +140,14 @@ export class EditResourceComponent implements OnInit {
       data = {
         formData: this.editResourceForm.value,
         tags: this.tags,
-        customImage: this.image
+        customImage: this.image,
+        isUrlChanged: this.isUrlChanged
       };
     } else {
       data = {
         formData: this.editResourceForm.value,
-        tags: this.tags
+        tags: this.tags,
+        isUrlChanged: this.isUrlChanged
       };
     }
 
@@ -186,6 +189,7 @@ export class EditResourceComponent implements OnInit {
         });
 
         this.isLoading = false;
+        this.isUrlChanged = true;
 
         if (!response) {
           this.snackbarService.openSnackBar({
@@ -198,7 +202,7 @@ export class EditResourceComponent implements OnInit {
         } else {
           this.ogTitle = response.message.data.data.ogTitle;
           this.ogDescription = response.message.data.data.ogDescription;
-          if (isArray(response.message.data.data.ogImage)) {
+          if (Array.isArray(response.message.data.data.ogImage)) {
             this.ogImage = response.message.data.data.ogImage[0].url;
           } else {
             this.ogImage = response.message.data.data.ogImage.url;
@@ -260,9 +264,8 @@ export class EditResourceComponent implements OnInit {
 
   async getCollectionTitle(resourceId: string) {
     const collection: any = await this.collectionService.getCollectionTitleByResourceId({ username: this.username, resourceId });
-
     if (collection.collection) {
-      this.editResourceForm.controls.collectionName.patchValue(collection.collection.title);
+      this.editResourceForm.controls.collectionName.patchValue(collection.collection[0].title);
     }
   }
 
@@ -271,9 +274,10 @@ export class EditResourceComponent implements OnInit {
     this.editResourceForm.controls.url.patchValue(data.url);
     this.editResourceForm.controls.title.patchValue(data.title);
     this.editResourceForm.controls.description.patchValue(data.description);
-    this.editResourceForm.controls.image.patchValue(data.image);
+    this.editResourceForm.controls.image.patchValue(data.lgImage.link);
+    this.editResourceForm.controls.timestamp.patchValue(data.timestamp);
     this.tags = data.tags;
-    this.ogImage = data.image;
+    this.ogImage = data.lgImage.link;
   }
 
 }

@@ -1,61 +1,112 @@
 <div class="search">
+  <div class="form">
+    <div class="search-icon">
+      <fa-icon [icon]="faSearch"></fa-icon>
+    </div>
     <form [formGroup]="searchForm">
-        <input 
-        type="text" 
-        placeholder="Search" 
-        formControlName="query" 
-        (focus)="activateSearch()" 
-        (focusout)="deactivateSearch()">
+      <input
+        type="text"
+        placeholder="Search"
+        formControlName="query"
+        (focus)="activateSearch()"
+        (focusout)="deactivateSearch()"
+        (keyup.enter)="goToSearch()"
+      />
     </form>
+  </div>
 
-    <div class="search-result" *ngIf="isSearchActive && this.searchForm.get('query').value.length > 0">
-        <!-- Users result -->
-        <div class="section" *ngIf="users.length > 0">
-            <h3>Users</h3>
-            <div class="item" *ngFor="let user of users" (mousedown)="goToUser(user.username)">
-                <div class="item-a" [ngStyle]="{'background-image': 'url(' + getImageLink(user)  + ')'}"></div>
-                <p class="item-b">{{ user.name ? user.name : 'No Name' }}</p>
-                <small class="item-c">@{{ user.username ? user.username : '...' }}</small>
-            </div>
+  <div
+    class="search-result"
+    *ngIf="isSearchActive && this.searchForm.get('query').value.length > 0"
+  >
+    <!-- Users result -->
+    <div class="section" *ngIf="users.length > 0">
+      <h3>Users</h3>
+      <div
+        *ngFor="let user of users; let i = index"
+        (mousedown)="goToUser(user.username)"
+      >
+        <div class="item" *ngIf="i < 3">
+          <div
+            class="item-a"
+            [ngStyle]="{
+              'background-image': 'url(' + getImageLink(user) + ')'
+            }"
+          ></div>
+          <p class="item-b">{{ user.name ? user.name : "No Name" }}</p>
+          <small class="item-c"
+            >@{{ user.username ? user.username : "..." }}</small
+          >
         </div>
-        
-        <!-- Resources result -->
-        <div class="section" *ngIf="resources.length > 0">
-            <h3>Resources</h3>
-            <div class="item" *ngFor="let resource of resources" (mousedown)="goToResource(resource.username, resource._id)">
-                <div class="item-a" [ngStyle]="{'background-image': 'url(' + resource.image  +')'}"></div>
-                <p class="item-b">{{ resource.title | truncate:[25] }}</p>
-                <small class="item-c">@{{ resource.username }}</small>
-            </div>
-        </div>
+      </div>
 
-        <!-- Collections result -->
-        <div class="section" *ngIf="collections.length > 0">
-            <h3>Collections</h3>
-            <div class="item" *ngFor="let collection of collections" (mousedown)="goToCollection(collection.username, collection._id)">
-                <div class="item-a collection-icon-container">
-                    <div class="icon">
-                        <fa-icon [icon]="faBorderAll"></fa-icon>
-                    </div>
-                </div>
-                <p class="item-b">{{ collection.title }}</p>
-                <small class="item-c">@{{ collection.username }}</small>
-            </div>
-        </div>
-
-        <div class="loading" 
-        *ngIf="
-        users.length === 0 && 
-        resources.length === 0 && 
-        collections.length === 0">
-            <fa-icon [icon]="faTimesCircle"></fa-icon>
-            <p>Nothing here! Try a different query?</p>
-        </div>
+      <div class="see-more" *ngIf="users.length > 3" (mousedown)="goToSearch()">
+        <span>See More</span>
+        <span>{{ users.length }}</span>
+      </div>
     </div>
 
-    <div class="search-result" *ngIf="isLoading">
-        <div class="loading">
-            <mat-spinner diameter="25"></mat-spinner>
+    <!-- Resources result -->
+    <div class="section" *ngIf="resources.length > 0">
+      <h3>Resources</h3>
+      <div
+        *ngFor="let resource of resources; let i = index"
+        (mousedown)="goToResource(resource.username, resource._id)"
+      >
+        <div class="item" *ngIf="i < 3">
+          <div
+            class="item-a"
+            [ngStyle]="{ 'background-image': 'url(' + resource.smImage.link + ')' }"
+          ></div>
+          <p class="item-b">{{ resource.title | truncate: [30] }}</p>
+          <small class="item-c">@{{ resource.username }}</small>
         </div>
+      </div>
+
+      <div class="see-more" *ngIf="resources.length > 3" (mousedown)="goToSearch()">
+        <span>See More</span>
+        <span>{{ resources.length }}</span>
+      </div>
     </div>
+
+    <!-- Collections result -->
+    <div class="section" *ngIf="collections.length > 0">
+      <h3>Collections</h3>
+      <div
+        *ngFor="let collection of collections; let i = index"
+        (mousedown)="goToCollection(collection.username, collection._id)"
+      >
+        <div class="item" *ngIf="i < 3">
+          <div class="item-a collection-icon-container">
+            <div class="icon">
+              <fa-icon [icon]="faBorderAll"></fa-icon>
+            </div>
+          </div>
+          <p class="item-b">{{ collection.title }}</p>
+          <small class="item-c">@{{ collection.username }}</small>
+        </div>
+      </div>
+
+      <div class="see-more" *ngIf="collections.length > 3" (mousedown)="goToSearch()">
+        <span>See More</span>
+        <span>{{ collections.length }}</span>
+      </div>
+    </div>
+
+    <div
+      class="loading"
+      *ngIf="
+        users.length === 0 && resources.length === 0 && collections.length === 0
+      "
+    >
+      <fa-icon [icon]="faTimesCircle"></fa-icon>
+      <p>Nothing here! Try a different query?</p>
+    </div>
+  </div>
+
+  <div class="search-result" *ngIf="isLoading">
+    <div class="loading">
+      <mat-spinner diameter="25"></mat-spinner>
+    </div>
+  </div>
 </div>

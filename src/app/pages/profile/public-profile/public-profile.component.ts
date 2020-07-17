@@ -1,16 +1,16 @@
-import { Component, OnInit } from '@angular/core';
-import { faExternalLinkAlt } from '@fortawesome/free-solid-svg-icons';
-import { UserService } from '@services/user/user.service';
-import { ActivatedRoute } from '@angular/router';
-import { environment as ENV } from '@environments/environment';
-import { ResourceService } from '@services/resource/resource.service';
-import { MatDialog } from '@angular/material';
-import { FfComponent } from 'src/app/general/dialogs/ff/ff.component';
+import { Component, OnInit } from "@angular/core";
+import { faExternalLinkAlt } from "@fortawesome/free-solid-svg-icons";
+import { UserService } from "@services/user/user.service";
+import { ActivatedRoute, Router } from "@angular/router";
+import { environment as ENV } from "@environments/environment";
+import { ResourceService } from "@services/resource/resource.service";
+import { MatDialog } from "@angular/material/dialog";
+import { FfComponent } from "src/app/general/dialogs/ff/ff.component";
 
 @Component({
-  selector: 'app-public-profile',
-  templateUrl: './public-profile.component.html',
-  styleUrls: ['./public-profile.component.scss']
+  selector: "app-public-profile",
+  templateUrl: "./public-profile.component.html",
+  styleUrls: ["./public-profile.component.scss"]
 })
 export class PublicProfileComponent implements OnInit {
   // Icons
@@ -18,8 +18,10 @@ export class PublicProfileComponent implements OnInit {
 
   // Profile data
   username: string;
+  anchorUserId: string;
   userId: string;
-  name: string;
+  firstName: string;
+  lastName: string;
   website: string;
   bio: string;
   email: string;
@@ -38,7 +40,7 @@ export class PublicProfileComponent implements OnInit {
 
   currentUser: string;
   paramUser: string;
-  collectionUrl = './collection';
+  collectionUrl = "./collection";
 
   // Toggles
   isLoading = false;
@@ -51,19 +53,17 @@ export class PublicProfileComponent implements OnInit {
   constructor(
     private userService: UserService,
     private resourceService: ResourceService,
-    private router: ActivatedRoute,
+    private route: ActivatedRoute,
+    private router: Router,
     private dialog: MatDialog
   ) {}
 
   ngOnInit() {
-    this.currentUser = localStorage.getItem('username');
-    this.router.params.subscribe(async params => {
+    this.currentUser = localStorage.getItem("username");
+    this.anchorUserId = localStorage.getItem("userId");
+    this.route.params.subscribe(async params => {
       this.paramUser = params.username;
-      await Promise.all([
-        this.getPublicProfile(params.username),
-        this.checkIfUserIsFollowed(this.currentUser, params.username),
-        this.getUserResources(params.username)
-      ]);
+      await this.getPublicProfile(params.username);
     });
   }
 
@@ -85,19 +85,23 @@ export class PublicProfileComponent implements OnInit {
     this.setCollections(userCollections);
   }
 
-  setProfileData(data: any) {
+  async setProfileData(data: any) {
+    this.userId = data._id;
     this.username = data.username;
-    this.name = data.name;
+    this.firstName = data.firstName;
+    this.lastName = data.lastName;
     this.website = data.website;
     this.bio = data.bio;
     this.email = data.email;
     this.followers = data.followers;
     this.following = data.following;
 
-    if (data.image) {
-      this.image = data.image.link;
+    if (data.mdImage.link) {
+      this.image = data.mdImage.link;
     }
     this.interests = data.interests;
+
+    await this.checkIfUserIsFollowed(this.anchorUserId, this.userId);
   }
 
   setResources(data: any) {
@@ -108,10 +112,10 @@ export class PublicProfileComponent implements OnInit {
     this.collections = data;
   }
 
-  async checkIfUserIsFollowed(currentUser, username) {
+  async checkIfUserIsFollowed(anchorUserId, userId) {
     const result: any = await this.userService.checkIfUserFollowed({
-      currentUser,
-      username
+      anchorUserId,
+      userId
     });
 
     if (result) {
@@ -121,8 +125,8 @@ export class PublicProfileComponent implements OnInit {
 
   async follow() {
     const result: any = await this.userService.followUser({
-      currentUser: this.currentUser,
-      username: this.username
+      anchorUserId: this.anchorUserId,
+      userId: this.userId
     });
 
     if (result) {
@@ -132,8 +136,8 @@ export class PublicProfileComponent implements OnInit {
 
   async unfollow() {
     const result: any = await this.userService.unfollowUser({
-      currentUser: this.currentUser,
-      username: this.username
+      anchorUserId: this.anchorUserId,
+      userId: this.userId
     });
 
     if (result) {
@@ -171,7 +175,10 @@ export class PublicProfileComponent implements OnInit {
       }
     });
 
-    dialogRef.afterClosed().subscribe(async (result: any) => {
-    });
+    dialogRef.afterClosed().subscribe(async (result: any) => {});
+  }
+
+  goToSearch(query: string) {
+    this.router.navigate([`/search`], { queryParams: { query }, relativeTo: this.route.parent });
   }
 }

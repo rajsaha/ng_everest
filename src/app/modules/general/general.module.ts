@@ -11,11 +11,16 @@ import { ResourceComponent } from 'src/app/general/resource/resource.component';
 import { CollectionComponent } from 'src/app/general/collection/collection.component';
 import { ViewCollectionComponent } from 'src/app/pages/view-collection/view-collection.component';
 import { RouterModule } from '@angular/router';
-import { MatButtonModule, MatIconModule, MatFormFieldModule, MatInputModule, MatProgressSpinnerModule } from '@angular/material';
+import { MatButtonModule } from '@angular/material/button';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatIconModule } from '@angular/material/icon';
+import { MatInputModule } from '@angular/material/input';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ViewResourceComponent } from 'src/app/pages/view-resource/view-resource.component';
 import { PostComponent } from 'src/app/general/post/post.component';
 import { CommentComponent } from 'src/app/general/post/comment/comment.component';
+import { UserImageComponent } from 'src/app/components/user-image/user-image.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +33,8 @@ import { CommentComponent } from 'src/app/general/post/comment/comment.component
     ResourceComponent,
     CollectionComponent,
     ViewCollectionComponent,
-    ViewResourceComponent
+    ViewResourceComponent,
+    UserImageComponent
   ],
   imports: [
     CommonModule,
@@ -55,7 +61,8 @@ import { CommentComponent } from 'src/app/general/post/comment/comment.component
     ResourceComponent,
     CollectionComponent,
     ViewCollectionComponent,
-    ViewResourceComponent
+    ViewResourceComponent,
+    UserImageComponent
   ]
 })
 export class GeneralModule { }

@@ -7,16 +7,17 @@ import {
   faEllipsisV
 } from '@fortawesome/free-solid-svg-icons';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { MatDialog } from '@angular/material';
+import { MatDialog } from '@angular/material/dialog';
 import * as moment from 'moment';
 import { AtcComponent } from '../dialogs/atc/atc.component';
-import { PoComponent } from '../dialogs/po/po.component';
+import { PoComponent } from './po/po.component';
 import { ResourceService } from '@services/resource/resource.service';
 import { CollectionService } from '@services/collection/collection.service';
 import { UserService } from '@services/user/user.service';
 import { CommentComponent } from './comment/comment.component';
 import { environment as ENV } from '@environments/environment';
 import { Router, ActivatedRoute } from '@angular/router';
+import { PopoverService } from '@services/popover/popover.service';
 
 @Component({
   selector: 'app-post',
@@ -25,15 +26,17 @@ import { Router, ActivatedRoute } from '@angular/router';
 })
 export class PostComponent implements OnInit {
   @Input() data: any;
+  @Input() currentUser: string;
+  @Input() currentUserId: string;
   @Input() noTruncation = false;
 
-  @ViewChild(CommentComponent, { static: false })
+  @ViewChild(CommentComponent)
   commentComponent: CommentComponent;
-
-  currentUser: string;
 
   // Data
   id: string;
+  firstName: string;
+  lastName: string;
   username: string;
   url: string;
   title: string;
@@ -41,6 +44,7 @@ export class PostComponent implements OnInit {
   tags = [];
   description: string;
   image = '';
+  smImage = '';
   userImage = '';
   timestamp: any;
   commentCount = 0;
@@ -74,21 +78,20 @@ export class PostComponent implements OnInit {
     private userService: UserService,
     private collectionService: CollectionService,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private popper: PopoverService
   ) {}
 
   async ngOnInit() {
-    this.currentUser = localStorage.getItem('username');
+    this.populatePost();
+    this.init_comment_form();
+    this.checkIfDescriptionTooLong(this.description)
     try {
       this.isLoading = true;
       await Promise.all([
-        this.populatePost(),
         this.getCommentsCount(),
-        this.getUserImage(this.data.username),
         this.checkIfPostInCollection(this.data._id, this.data.username),
         this.checkIfPostIsLiked(this.data._id, this.currentUser),
-        this.init_comment_form(),
-        this.checkIfDescriptionTooLong(this.description)
       ]);
       this.isLoading = false;
     } catch (err) {
@@ -96,15 +99,18 @@ export class PostComponent implements OnInit {
     }
   }
 
-  async populatePost() {
+  populatePost() {
     this.id = this.data._id;
     this.username = this.data.username;
+    this.firstName = this.data.firstName;
+    this.lastName = this.data.lastName;
     this.url = this.data.url;
     this.title = this.data.title;
     this.type = this.data.type;
     this.tags = this.data.tags;
     this.description = this.data.description;
-    this.image = this.data.image;
+    this.image = this.data.lgImage.link;
+    this.userImage = this.data.userImage ? this.data.userImage : this.noPhoto;
     this.timestamp = moment(this.data.timestamp).fromNow();
     this.recommendedByCount = this.data.recommended_by_count;
 
@@ -120,11 +126,6 @@ export class PostComponent implements OnInit {
     this.commentCount = result;
   }
 
-  async getUserImage(username) {
-    const result: any = await this.resourceService.getUserImage(username);
-    this.userImage = result.image ? result.image : this.noPhoto;
-  }
-
   async checkIfPostInCollection(id: string, username: string) {
     const result: any = await this.collectionService.checkForResourceInCollection({
       id,
@@ -138,7 +139,7 @@ export class PostComponent implements OnInit {
   async checkIfPostIsLiked(id: string, username: string) {
     const result: any = await this.userService.checkIfPostIsLiked({
       resourceId: id,
-      username
+      userId: this.currentUserId
     });
     if (result) {
       this.isLiked = true;
@@ -148,9 +149,11 @@ export class PostComponent implements OnInit {
     this.isLiked = false;
   }
 
-  async init_comment_form() {
+  init_comment_form() {
     this.commentForm = this.fb.group({
       resourceId: [this.id],
+      firstName: [this.firstName[0]],
+      lastName: [this.lastName[0]],
       username: [this.currentUser],
       comment: ['', Validators.required],
       timestamp: [Date.now()]
@@ -160,7 +163,8 @@ export class PostComponent implements OnInit {
   async addComment() {
     this.showComments = true;
     const result: any = await this.resourceService.addComment(
-      this.commentForm.value
+      this.commentForm.value,
+      localStorage.getItem("profileImage")
     );
 
     if (result && result.status) {
@@ -195,23 +199,10 @@ export class PostComponent implements OnInit {
     }
   }
 
-  openPostDialog() {
-    const dialogRef = this.dialog.open(PoComponent, {
-      data: {
-        id: this.id,
-        username: this.username
-      }
-    });
-
-    dialogRef.afterClosed().subscribe(() => {
-      console.log('The dialog was closed');
-    });
-  }
-
   async like() {
     try {
       const result = await this.userService.likePost({
-        username: this.currentUser,
+        userId: this.currentUserId,
         resourceId: this.id
       });
       if (result) {
@@ -226,7 +217,7 @@ export class PostComponent implements OnInit {
   async unlike() {
     try {
       const result = await this.userService.unLikePost({
-        username: this.currentUser,
+        userId: this.currentUserId,
         resourceId: this.id
       });
       if (result) {
@@ -243,7 +234,9 @@ export class PostComponent implements OnInit {
       data: {
         id: this.id,
         url: this.url,
-        title: this.title
+        title: this.title,
+        image: this.image,
+        description: this.description
       }
     });
 
@@ -259,7 +252,7 @@ export class PostComponent implements OnInit {
     });
   }
 
-  async checkIfDescriptionTooLong(text: string) {
+  checkIfDescriptionTooLong(text: string) {
     if (!this.noTruncation) {
       if (text.length > this.truncateValue) {
         this.isSeeMore = true;
@@ -284,5 +277,20 @@ export class PostComponent implements OnInit {
     } else {
       this.router.navigate([`/profile/user/${this.username}/resource/${this.id}`], { relativeTo: this.route.parent });
     }
+  }
+
+  show(origin: HTMLElement) {
+    const ref = this.popper.open<{}>({
+      content: PoComponent,
+      origin,
+      data: {
+        resourceId: this.id,
+        username: this.username
+      }
+    });
+
+    ref.afterClosed$.subscribe(res => {
+        //
+    })
   }
 }
