@@ -1,9 +1,9 @@
-import { Component, OnInit, HostListener } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { ResourceService } from '@services/resource/resource.service';
 import { UtilityService } from '@services/general/utility.service';
-import { faSearch } from '@fortawesome/free-solid-svg-icons';
-import { debounceTime } from 'rxjs/internal/operators';
+import { faSearch, faFilter } from '@fortawesome/free-solid-svg-icons';
+import { debounceTime } from 'rxjs/operators';
 
 @Component({
   selector: 'app-manage-resources',
@@ -11,12 +11,15 @@ import { debounceTime } from 'rxjs/internal/operators';
   styleUrls: ['./manage-resources.component.scss']
 })
 export class ManageResourcesComponent implements OnInit {
+  userId: string;
   username: string;
   resources = [];
+  resourcesCount = 0;
   resourceSearchForm: FormGroup;
 
   // Icons
   faSearch = faSearch;
+  faFilter = faFilter;
 
   // Toggles
   isLoading = false;
@@ -35,26 +38,30 @@ export class ManageResourcesComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private resourceService: ResourceService,
-    private utilityService: UtilityService) { }
+    private utilityService: UtilityService
+  ) {}
 
   async ngOnInit() {
     this.username = localStorage.getItem('username');
+    this.userId = localStorage.getItem("userId");
     await Promise.all([this.initResourceSearchForm(), this.getUserResources()]);
     this.onResourceSearchFormChange();
   }
 
   async initResourceSearchForm() {
     this.resourceSearchForm = this.fb.group({
-      query: ['']
+      query: [''],
+      filter: ['']
     });
   }
 
   async getUserResources() {
     try {
       this.isLoading = true;
+      // Search
       const query = this.resourceSearchForm.get('query').value;
       if (query) {
-        const searchResult = await this.resourceService.searchForUserResources({
+        const searchResult: any = await this.resourceService.searchForUserResources({
           username: this.username,
           query
         });
@@ -62,12 +69,16 @@ export class ManageResourcesComponent implements OnInit {
         this.resources = searchResult.resources;
         return;
       }
-      const response = await this.resourceService.getUserResources({
+
+      // Without search
+      const response: any = await this.resourceService.getUserResources({
         pageNo: this.pageNo,
         size: this.size,
-        username: this.username
+        username: this.username,
+        userId: this.userId
       });
       this.isLoading = false;
+      this.resourcesCount = response.count;
 
       for (const resource of response.resources) {
         this.resources.push(resource);
@@ -87,10 +98,12 @@ export class ManageResourcesComponent implements OnInit {
     await this.getUserResources();
   }
 
-  drResponseHandler(result: number) {
-    if (result) {
-      for (const {item, index} of this.utilityService.toItemIndexes(this.resources)) {
-        if (result === item._id) {
+  drResponseHandler(result: any) {
+    if (result.resourceId) {
+      for (const { item, index } of this.utilityService.toItemIndexes(
+        this.resources
+      )) {
+        if (result.resourceId === item._id) {
           this.resources.splice(index, 1);
           return;
         }
@@ -99,12 +112,12 @@ export class ManageResourcesComponent implements OnInit {
   }
 
   onResourceSearchFormChange() {
-    this.resourceSearchForm.get('query').valueChanges.pipe(debounceTime(300)).subscribe(async (query) => {
-      this.isLoading = true;
-      const searchResult = await this.resourceService.searchForUserResources({username: this.username, query});
-      this.isLoading = false;
-      this.resources = searchResult.resources;
-    });
+    this.resourceSearchForm
+      .get('query')
+      .valueChanges.pipe(debounceTime(300))
+      .subscribe(async () => {
+        this.resources = [];
+        await this.getUserResources();
+      });
   }
-
 }

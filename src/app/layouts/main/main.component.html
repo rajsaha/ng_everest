@@ -3,9 +3,9 @@
         <button mat-icon-button (click)="snav.toggle(); isMenuActive = !isMenuActive">
             <mat-icon>{{ isMenuActive ? 'clear' : 'menu' }}</mat-icon>
         </button>
-        <h1 class="app-name"><a routerLink="/">Everest</a></h1>
+        <h1 class="app-name" *ngIf="!mobileQuery.matches"><a routerLink="/">Everest</a></h1>
         
-        <app-search class="search"></app-search>
+        <app-search class="app-search"></app-search>
 
         <div class="profile-container">
             <div class="profile-image" [matMenuTriggerFor]="menu"
@@ -35,6 +35,9 @@
                 </a>
                 <a routerLink="/share-resource" routerLinkActive="active-sidenav">
                     <fa-icon [icon]="faShareAlt"></fa-icon>&nbsp;&nbsp;Share Resource
+                </a>
+                <a routerLink="/write" routerLinkActive="active-sidenav">
+                    <fa-icon [icon]="faPenAlt"></fa-icon>&nbsp;&nbsp;Write
                 </a>
                 <mat-divider></mat-divider>
                 <a routerLink="/manage/resource" routerLinkActive="active-sidenav">

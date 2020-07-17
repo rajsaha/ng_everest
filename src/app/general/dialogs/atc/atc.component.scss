@@ -1,11 +1,138 @@
 .dialog-title {
-    font-size: 16px;
-    max-width: 400px;
-    strong {
-        font-family: 'Montserrat', sans-serif;
-    }
+  font-size: 16px;
+  max-width: 400px;
+  margin-bottom: 35px;
+  strong {
+    font-family: "Montserrat", sans-serif;
+  }
+}
+
+h6 {
+  margin-top: 0;
+  margin-bottom: 10px;
 }
 
 mat-form-field {
-    width: 100% !important;
+  width: 100% !important;
+}
+
+.columns {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-areas: "left";
+
+  .left {
+    grid-area: left;
+    .parent {
+      height: 100%;
+      overflow: hidden;
+
+      h6 {
+        color: #7e7e7e;
+        font-size: 14px;
+        font-weight: 400;
+      }
+
+      .existing-collections {
+        border-radius: 5px;
+        height: 225px;
+        max-height: 500px;
+        margin-bottom: 15px;
+        overflow: hidden;
+        transition: max-height 0.15s ease-in-out;
+        animation: fadeIn 0.2s ease-in-out;
+        animation-fill-mode: forwards;
+
+        &:hover {
+          overflow-y: scroll;
+        }
+
+        // width
+        &::-webkit-scrollbar {
+          width: 5px;
+
+          &:hover {
+            width: 10px;
+          }
+        }
+
+        // Handle
+        &::-webkit-scrollbar-thumb {
+          border-radius: 5px;
+          background: #fc800c;
+
+          &:hover {
+            background: rgb(175, 87, 5);
+          }
+        }
+
+        .loading {
+          display: grid;
+          justify-content: center;
+          align-content: center;
+          width: 100%;
+          height: 100px;
+        }
+
+        .no-collection {
+          display: grid;
+          font-size: 12px;
+          text-align: center;
+        }
+      }
+    }
+  }
+
+  .divider {
+    grid-area: divider;
+    width: 2px;
+    background-color: #DEE8FF;
+  }
+
+  .right {
+    grid-gap: right;
+    max-width: 400px;
+    img {
+      display: block;
+      width: 100%;
+    }
+
+    h4 {
+      font-family: "Montserrat", sans-serif;
+    }
+
+    p {
+      color: #3c3c3c;
+      line-height: 25px;
+      max-height: 200px;
+    }
+  }
+}
+
+.mat-form-field-appearance-outline {
+  .mat-form-field-outline {
+    box-shadow: none !important;
+  }
+}
+
+.mat-dialog-actions {
+  float: right;
+}
+
+@media (min-width: 601px) {
+  .columns {
+    grid-template-columns: 1fr 2px 1fr;
+    grid-template-areas: "left divider right";
+    grid-gap: 15px;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
 }

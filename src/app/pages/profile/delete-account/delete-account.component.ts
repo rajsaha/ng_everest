@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
+import { faFingerprint, faChevronDown, faChevronUp } from "@fortawesome/free-solid-svg-icons";
 
 @Component({
   selector: 'app-delete-account',
@@ -9,9 +10,15 @@ import { FormBuilder } from '@angular/forms';
 export class DeleteAccountComponent implements OnInit {
   username: string;
   userId: string;
+  showAccountForm = false;
 
   // Toggable
   isDeleteable = false;
+
+  // Icon
+  faFingerprint = faFingerprint;
+  faChevronDown = faChevronDown;
+  faChevronUp = faChevronUp;
 
   deleteAccountForm = this.fb.group({
     username: ['']

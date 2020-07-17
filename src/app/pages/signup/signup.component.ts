@@ -38,7 +38,7 @@ export class SignupComponent implements OnInit {
   onSubmit() {
     this.signingUp = true;
     if (this.signUpForm.valid) {
-      this.signUpService.signUp(this.signUpForm.value).then((res) => {
+      this.signUpService.signUp(this.signUpForm.value).then((res: any) => {
         this.signingUp = false;
         if (!res.error) {
           this.snackbarService.openSnackBar({
@@ -66,6 +66,8 @@ export class SignupComponent implements OnInit {
     this.signUpForm = this.fb.group({
       email: ['', [Validators.email, Validators.required]],
       username: ['', [Validators.required, Validators.minLength(4)]],
+      firstName: ['', [Validators.required, Validators.minLength(2)]],
+      lastName: ['', [Validators.required, Validators.minLength(2)]],
       password: ['', [Validators.required, Validators.minLength(4)]],
       confirm_password: ['']
     }, { validator: [this.validationService.matchingConfirmPasswords] });

@@ -1,8 +1,12 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { Routes, RouterModule } from '@angular/router';
 import { WriteComponent } from 'src/app/pages/write/write.component';
-import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
+import { EditorModule } from '@tinymce/tinymce-angular';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { GeneralModule } from '../general/general.module';
+import { CommonModule } from '@angular/common';
+import { MaterialModule } from '../material/material.module';
+import { AutosizeModule } from 'ngx-autosize';
 
 const routes: Routes = [
   {
@@ -17,7 +21,12 @@ const routes: Routes = [
   ],
   imports: [
     CommonModule,
-    CKEditorModule,
+    AutosizeModule,
+    MaterialModule,
+    GeneralModule,
+    EditorModule,
+    FormsModule,
+    ReactiveFormsModule,
     RouterModule.forChild(routes)
   ],
   exports: [RouterModule]

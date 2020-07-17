@@ -3,7 +3,7 @@ import { CollectionService } from '@services/collection/collection.service';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
 import { Router } from '@angular/router';
-import { debounceTime } from 'rxjs/internal/operators';
+import { debounceTime } from 'rxjs/operators';
 
 @Component({
   selector: 'app-manage-collections',
@@ -45,14 +45,14 @@ export class ManageCollectionsComponent implements OnInit {
       this.isLoading = true;
       const query = this.collectionSearchForm.get('query').value;
       if (query) {
-        const searchResult = await this.collectionService.searchUserCollections({username: this.username, title: query});
+        const searchResult: any = await this.collectionService.searchUserCollections({username: this.username, title: query});
         this.isLoading = false;
         this.collections = searchResult.collections;
         return;
       }
-      const response = await this.collectionService.getCollections({ username: this.username });
+      const response: any = await this.collectionService.getCollections({ username: this.username, pageNo: 1, size: 100 });
       this.isLoading = false;
-      this.collections = response.collections;
+      this.collections = response.collections[0].collections;
     } catch (err) {
       console.error(err);
     }
@@ -61,7 +61,7 @@ export class ManageCollectionsComponent implements OnInit {
   onCollectionSearchFormChange() {
     this.collectionSearchForm.get('query').valueChanges.pipe(debounceTime(300)).subscribe(async (query) => {
       this.isLoading = true;
-      const searchResult = await this.collectionService.searchUserCollections({username: this.username, title: query});
+      const searchResult: any = await this.collectionService.searchUserCollections({username: this.username, title: query});
       this.isLoading = false;
       this.collections = searchResult.collections;
     });

@@ -1,23 +1,43 @@
 <!-- Privacy -->
 <div class="section-container">
-    <div class="section">
-        <div class="section-header">
-            <h4>Privacy</h4>
-        </div>
-
-        <div class="section-content">
-            <h6>Delete Account</h6>
-            <form [formGroup]="deleteAccountForm" (ngSubmit)="openConfirmAccountDeletionDialog()">
-                <mat-form-field appearance="outline">
-                    <mat-label>Username</mat-label>
-                    <input matInput placeholder="Write your username" formControlName="username">
-                    <mat-hint>Write your username to confirm account deletion</mat-hint>
-                </mat-form-field>
-                <div class="form-button-container clearfix">
-                    <app-custom-button buttonLabel="Delete" *ngIf="isDeleteable" size="small"
-                        [backgroundColor]="delete"></app-custom-button>
-                </div>
-            </form>
-        </div>
+  <div class="section" [ngClass]="{ 'padding-bottom': !showAccountForm }">
+    <div
+      class="section-header-with-icon"
+      (click)="showAccountForm = !showAccountForm"
+    >
+      <p class="left">
+        <fa-icon [icon]="faFingerprint"></fa-icon>
+        <span>Privacy Settings</span>
+      </p>
+      <div class="right">
+        <fa-icon [icon]="showAccountForm ? faChevronUp : faChevronDown"></fa-icon>
+      </div>
     </div>
+
+    <div class="section-content" *ngIf="showAccountForm">
+      <h6>Delete Account</h6>
+      <form
+        [formGroup]="deleteAccountForm"
+        (ngSubmit)="openConfirmAccountDeletionDialog()"
+      >
+        <mat-form-field appearance="outline">
+          <mat-label>Username</mat-label>
+          <input
+            matInput
+            placeholder="Write your username"
+            formControlName="username"
+          />
+          <mat-hint>Write your username to confirm account deletion</mat-hint>
+        </mat-form-field>
+        <div class="form-button-container clearfix">
+          <app-custom-button
+            buttonLabel="Delete"
+            *ngIf="isDeleteable"
+            size="small"
+            [backgroundColor]="delete"
+          ></app-custom-button>
+        </div>
+      </form>
+    </div>
+  </div>
 </div>

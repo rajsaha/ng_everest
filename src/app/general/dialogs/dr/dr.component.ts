@@ -1,5 +1,5 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ResourceService } from '@services/resource/resource.service';
 import { SnackbarService } from '@services/general/snackbar.service';
 
@@ -23,8 +23,7 @@ export class DrComponent implements OnInit {
   }
 
   async onYesClick() {
-    const response = await this.resourceService.deleteResource({id: this.data.id});
-
+    const response: any = await this.resourceService.deleteResource({id: this.data.id});
     if (!response.error) {
       this.snackbarService.openSnackBar({
         message: {
@@ -33,7 +32,7 @@ export class DrComponent implements OnInit {
         },
         class: 'green-snackbar',
       });
-      this.dialogRef.close(this.data.id);
+      this.dialogRef.close(true);
     } else {
       this.snackbarService.openSnackBar({
         message: {
@@ -43,7 +42,7 @@ export class DrComponent implements OnInit {
         class: 'red-snackbar',
       });
 
-      this.dialogRef.close();
+      this.dialogRef.close(false);
     }
   }
 

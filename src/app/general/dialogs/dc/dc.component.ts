@@ -1,5 +1,5 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { CollectionService } from '@services/collection/collection.service';
 import { SnackbarService } from '@services/general/snackbar.service';
 import { Router } from '@angular/router';
@@ -27,7 +27,7 @@ export class DcComponent implements OnInit {
   }
 
   async onYesClick() {
-    const response = await this.collectionService.deleteCollection(this.data.id);
+    const response: any = await this.collectionService.deleteCollection(this.data.id);
 
     if (!response.error) {
       this.snackbarService.openSnackBar({

@@ -26,12 +26,35 @@
     </mat-form-field>
 
     <mat-form-field appearance="outline">
+      <mat-label>First Name</mat-label>
+      <input matInput formControlName="firstName" />
+      <mat-error
+        *ngIf="signUpForm.controls['firstName'].hasError('minlength') && !signUpForm.controls['firstName'].hasError('required')">
+        First name must be <strong>2</strong> letters or more
+      </mat-error>
+      <mat-error *ngIf="signUpForm.controls['firstName'].hasError('required')">
+        First name is <strong>required</strong>
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Last Name</mat-label>
+      <input matInput formControlName="lastName" />
+      <mat-error
+        *ngIf="signUpForm.controls['lastName'].hasError('minlength') && !signUpForm.controls['lastName'].hasError('required')">
+        Last name must be <strong>2</strong> letters or more
+      </mat-error>
+      <mat-error *ngIf="signUpForm.controls['lastName'].hasError('required')">
+        Last name is <strong>required</strong>
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
       <mat-label>Password</mat-label>
       <input matInput type="password" formControlName="password" />
       <mat-error *ngIf="signUpForm.controls['password'].hasError('minlength')">
         Password must be at least 4 characters
       </mat-error>
-      <mat-password-strength [password]="signUpForm.get('password').value"></mat-password-strength>
     </mat-form-field>
 
     <mat-form-field appearance="outline">

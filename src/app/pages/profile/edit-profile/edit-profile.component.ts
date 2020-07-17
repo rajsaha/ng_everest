@@ -1,33 +1,39 @@
-import { Component, OnInit } from '@angular/core';
-import { faExternalLinkAlt } from '@fortawesome/free-solid-svg-icons';
-import { COMMA, ENTER } from '@angular/cdk/keycodes';
-import { FormBuilder, FormGroup } from '@angular/forms';
-import { UserService } from '@services/user/user.service';
-import { SnackbarService } from '@services/general/snackbar.service';
-import { MatDialog, MatChipInputEvent } from '@angular/material';
-import { CpiComponent } from 'src/app/general/dialogs/cpi/cpi.component';
-import { environment as ENV } from '@environments/environment.prod';
+import { Component, OnInit } from "@angular/core";
+import { faExternalLinkAlt } from "@fortawesome/free-solid-svg-icons";
+import { COMMA, ENTER } from "@angular/cdk/keycodes";
+import { FormBuilder, FormGroup } from "@angular/forms";
+import { UserService } from "@services/user/user.service";
+import { SnackbarService } from "@services/general/snackbar.service";
+import { MatChipInputEvent } from "@angular/material/chips";
+import { MatDialog } from "@angular/material/dialog";
+import { CpiComponent } from "src/app/general/dialogs/cpi/cpi.component";
+import { environment as ENV } from "@environments/environment";
+import { FfComponent } from "src/app/general/dialogs/ff/ff.component";
+import { ActivatedRoute, Router } from "@angular/router";
 
 @Component({
-  selector: 'app-edit-profile',
-  templateUrl: './edit-profile.component.html',
-  styleUrls: ['./edit-profile.component.scss']
+  selector: "app-edit-profile",
+  templateUrl: "./edit-profile.component.html",
+  styleUrls: ["./edit-profile.component.scss"]
 })
 export class EditProfileComponent implements OnInit {
   // Profile data
   username: string;
   userId: string;
-  name: string;
+  firstName: string;
+  lastName: string;
   website: string;
   bio: string;
   email: string;
-  image = '../../../assets/portrait.jpg';
+  followers = [];
+  following = [];
+  image = `${ENV.SITE_URL}/assets/images/portrait.jpg`;
   uploadedImage: string;
   imageId: string;
   deleteHash: string;
   interests = [];
   defaultProfileImage = `${ENV.SITE_URL}/assets/images/portrait.jpg`;
-  submitButtonText = 'Save';
+  submitButtonText = "Save";
 
   // Toggles
   isLoading = false;
@@ -51,12 +57,14 @@ export class EditProfileComponent implements OnInit {
     private fb: FormBuilder,
     private userService: UserService,
     private snackbarService: SnackbarService,
-    public dialog: MatDialog
-  ) { }
+    public dialog: MatDialog,
+    private route: ActivatedRoute,
+    private router: Router
+  ) {}
 
   async ngOnInit() {
-    this.username = localStorage.getItem('username');
-    this.userId = localStorage.getItem('userId');
+    this.username = localStorage.getItem("username");
+    this.userId = localStorage.getItem("userId");
 
     // Init Forms
     this.initProfileForm();
@@ -67,34 +75,37 @@ export class EditProfileComponent implements OnInit {
 
   initProfileForm() {
     this.profileForm = this.fb.group({
-      name: [''],
-      username: [{ value: '', disabled: true }],
-      website: [''],
-      bio: [''],
-      email: ['']
+      firstName: [""],
+      lastName: [""],
+      username: [{ value: "", disabled: true }],
+      website: [""],
+      bio: [""],
+      email: [""]
     });
   }
 
   async getUserData() {
     this.isLoading = true;
-    const res = await this.userService.getProfileData(this.username);
-    this.isLoading = false;
+    const res: any = await this.userService.getProfileData(this.userId);
 
     this.isProfileSaveButtonDisabled = true;
-    this.interests = res.userData.interests;
-
-    if (res.userData.image) {
-      this.image = res.userData.image.link;
-      this.uploadedImage = res.userData.image.link;
-      this.imageId = res.userData.image.id;
-      this.deleteHash = res.userData.image.deleteHash;
+    this.interests = res.userData.interests ? res.userData.interests : [];
+    this.followers = res.userData.followers ? res.userData.followers : [];
+    this.following = res.userData.following ? res.userData.following : [];
+    
+    if (res.userData.mdImage.link) {
+      this.image = res.userData.mdImage.link;
+      this.uploadedImage = res.userData.mdImage.link;
+      this.imageId = res.userData.mdImage.id;
+      this.deleteHash = res.userData.mdImage.deleteHash;
     } else {
       this.image = this.defaultProfileImage;
     }
 
     this.initFormData({
       username: res.userData.username,
-      name: res.userData.name,
+      firstName: res.userData.firstName,
+      lastName: res.userData.lastName,
       website: res.userData.website,
       bio: res.userData.bio,
       email: res.userData.email
@@ -103,6 +114,7 @@ export class EditProfileComponent implements OnInit {
     // Calculate profile progress
     this.profileProgress = 0;
     this.calculateProgress();
+    this.isLoading = false;
   }
 
   initFormData(data: any) {
@@ -110,14 +122,16 @@ export class EditProfileComponent implements OnInit {
     this.isProfileSaveButtonDisabled = false;
 
     this.username = data.username;
-    this.name = data.name;
+    this.firstName = data.firstName;
+    this.lastName = data.lastName;
     this.website = data.website;
     this.bio = data.bio;
     this.email = data.email;
 
     // Form Control Values
     this.profileForm.controls.username.patchValue(data.username);
-    this.profileForm.controls.name.patchValue(data.name);
+    this.profileForm.controls.firstName.patchValue(data.firstName);
+    this.profileForm.controls.lastName.patchValue(data.lastName);
     this.profileForm.controls.website.patchValue(data.website);
     this.profileForm.controls.bio.patchValue(data.bio);
     this.profileForm.controls.email.patchValue(data.email);
@@ -130,9 +144,12 @@ export class EditProfileComponent implements OnInit {
       }
     });
 
-    dialogRef.afterClosed().subscribe(async (result) => {
-      const imageLink = await this.userService.getProfilePhoto(this.username);
-      this.image = imageLink.image.image.link ? imageLink.image.image.link : this.defaultProfileImage;
+    dialogRef.afterClosed().subscribe(async result => {
+      if (result.newImage) {
+        this.image = result.image
+          ? result.image
+          : this.defaultProfileImage;
+      }
     });
   }
 
@@ -141,13 +158,13 @@ export class EditProfileComponent implements OnInit {
     const value = event.value;
 
     // Add our fruit
-    if ((value || '').trim()) {
+    if ((value || "").trim()) {
       this.interests.push(value);
     }
 
     // Reset the input value
     if (input) {
-      input.value = '';
+      input.value = "";
     }
   }
 
@@ -158,15 +175,15 @@ export class EditProfileComponent implements OnInit {
       interest
     };
 
-    const res = await this.userService.removeInterest(data);
+    const res: any = await this.userService.removeInterest(data);
 
     if (res.error) {
       this.snackbarService.openSnackBar({
         message: {
-          message: 'Something went wrong!',
+          message: "Something went wrong!",
           error: true
         },
-        class: 'red-snackbar',
+        class: "red-snackbar"
       });
     } else {
       if (index >= 0) {
@@ -176,7 +193,11 @@ export class EditProfileComponent implements OnInit {
   }
 
   calculateProgress() {
-    if (this.name) {
+    if (this.firstName) {
+      this.alterProgress(true);
+    }
+
+    if (this.lastName) {
       this.alterProgress(true);
     }
 
@@ -196,11 +217,11 @@ export class EditProfileComponent implements OnInit {
   alterProgress(bool: boolean) {
     if (bool) {
       if (this.profileProgress < 100) {
-        this.profileProgress += 25;
+        this.profileProgress += 20;
       }
     } else {
       if (this.profileProgress > 0) {
-        this.profileProgress -= 25;
+        this.profileProgress -= 20;
       }
     }
   }
@@ -208,7 +229,8 @@ export class EditProfileComponent implements OnInit {
   async saveProfileForm() {
     const data = {
       id: this.userId,
-      name: this.profileForm.controls.name.value,
+      firstName: this.profileForm.controls.firstName.value,
+      lastName: this.profileForm.controls.lastName.value,
       website: this.profileForm.controls.website.value,
       bio: this.profileForm.controls.bio.value,
       interests: this.interests,
@@ -216,20 +238,20 @@ export class EditProfileComponent implements OnInit {
     };
 
     this.isLoading = true;
-    this.submitButtonText = 'Saving...';
+    this.submitButtonText = "Saving...";
 
-    const res = await this.userService.updateProfileData(data);
+    const res: any = await this.userService.updateProfileData(data);
 
     this.isLoading = false;
-    this.submitButtonText = 'Save';
+    this.submitButtonText = "Save";
 
     if (!res.error) {
       this.snackbarService.openSnackBar({
         message: {
-          message: 'Profile data saved!',
+          message: "Profile data saved!",
           error: false
         },
-        class: 'green-snackbar',
+        class: "green-snackbar"
       });
     } else {
       this.snackbarService.openSnackBar({
@@ -237,9 +259,25 @@ export class EditProfileComponent implements OnInit {
           message: `Error: ${res.error}!`,
           error: true
         },
-        class: 'red-snackbar',
+        class: "red-snackbar"
       });
     }
   }
 
+  openFollowDialog() {
+    const dialogRef = this.dialog.open(FfComponent, {
+      data: {
+        username: this.username
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(async (result: any) => {});
+  }
+
+  goToSearch(query: string) {
+    this.router.navigate([`/search`], {
+      queryParams: { query },
+      relativeTo: this.route.parent
+    });
+  }
 }

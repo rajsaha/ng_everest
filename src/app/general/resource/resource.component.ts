@@ -1,32 +1,41 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { faEye, faEdit, faTrashAlt, faExternalLinkAlt, faTimes, faFolderMinus } from '@fortawesome/free-solid-svg-icons';
-import { MatDialog } from '@angular/material';
-import * as moment from 'moment';
-import { DrComponent } from '../dialogs/dr/dr.component';
-import { CollectionService } from '@services/collection/collection.service';
-import { Router, ActivatedRoute } from '@angular/router';
+import { Component, OnInit, Input, Output, EventEmitter } from "@angular/core";
+import {
+  faEye,
+  faEdit,
+  faTrashAlt,
+  faExternalLinkAlt,
+  faTimes,
+  faFolderMinus,
+  faEllipsisV,
+  faThumbsUp
+} from "@fortawesome/free-solid-svg-icons";
+import * as moment from "moment";
+import { Router, ActivatedRoute } from "@angular/router";
+import { PopoverService } from '@services/popover/popover.service';
+import { ResourceOptionsComponent } from './resource-options/resource-options.component';
 
 @Component({
-  selector: 'app-resource',
-  templateUrl: './resource.component.html',
-  styleUrls: ['./resource.component.scss']
+  selector: "app-resource",
+  templateUrl: "./resource.component.html",
+  styleUrls: ["./resource.component.scss"]
 })
 export class ResourceComponent implements OnInit {
   @Input() data: any;
   @Input() collectionId: string;
-  @Input() isInCollectionPage: boolean;
-  @Output() drResponse: EventEmitter<any> = new EventEmitter();
+  @Output() deleteEvent = new EventEmitter();
 
   // Data
   id: string;
   url: string;
   title: string;
   tags = [];
+  type: string;
   description: string;
-  image = '';
+  image = "";
   timestamp: any;
   allComments = [];
   resourceUser: string;
+  recommended_by_count: number;
 
   // For permissions
   loggedInUser: string;
@@ -39,24 +48,27 @@ export class ResourceComponent implements OnInit {
   faExternalLinkAlt = faExternalLinkAlt;
   faTimes = faTimes;
   faFolderMinus = faFolderMinus;
+  faEllipsesV = faEllipsisV;
+  faThumbsUp = faThumbsUp;
 
   // Toggles
   isLoading = false;
+  isOptionsActive = false;
 
   constructor(
-    public dialog: MatDialog,
-    private collectionService: CollectionService,
-    private route: Router,
-    private router: ActivatedRoute) { }
+    private router: Router,
+    private route: ActivatedRoute,
+    private popper: PopoverService
+  ) {}
 
   ngOnInit() {
-    this.loggedInUser = localStorage.getItem('username');
+    this.loggedInUser = localStorage.getItem("username");
     this.getRouteUserId();
     this.populateResource();
   }
 
   getRouteUserId() {
-    this.router.parent.params.subscribe((param) => {
+    this.route.parent.params.subscribe(param => {
       this.routeUser = param.username;
     });
   }
@@ -67,38 +79,39 @@ export class ResourceComponent implements OnInit {
     this.resourceUser = this.data.username;
     this.url = this.data.url;
     this.title = this.data.title;
+    this.type = this.data.type;
     this.description = this.data.description;
-    this.image = this.data.image;
+    this.image = this.data.mdImage.link;
     this.timestamp = moment(this.data.timestamp.$date).fromNow();
+    this.recommended_by_count = this.data.recommended_by_count;
     this.isLoading = false;
   }
 
-  openDrDialog() {
-    const dialogRef = this.dialog.open(DrComponent, {
+  goToView() {
+    this.router.navigate(
+      [`/profile/user/${this.resourceUser}/resource/${this.id}`],
+      { relativeTo: this.route.parent }
+    );
+  }
+
+  show(origin: HTMLElement) {
+    const ref = this.popper.open<{}>({
+      content: ResourceOptionsComponent,
+      origin,
       data: {
-        id: this.id,
+        resourceId: this.id,
+        resourceUser: this.resourceUser,
+        type: this.type,
         title: this.title
       }
     });
 
-    dialogRef.afterClosed().subscribe(async () => {
-      this.drResponse.emit();
-    });
+    ref.afterClosed$.subscribe(res => {
+        if (res.data && res.data['isDeleted']) {
+          this.deleteEvent.emit({
+            resourceId: this.id
+          });
+        }
+    })
   }
-
-  async deleteResourceFromCollection() {
-    const result = await this.collectionService.deleteResourceFromCollection({resourceId: this.id, collectionId: this.collectionId});
-    if (result) {
-      this.drResponse.emit(this.id);
-    }
-  }
-
-  goToView() {
-    this.route.navigate([`/profile/user/${this.resourceUser}/resource/${this.id}`], { relativeTo: this.router.parent });
-  }
-
-  goToEdit() {
-    this.route.navigate([`/manage/resource/edit/${this.id}`], { relativeTo: this.router.parent });
-  }
-
 }

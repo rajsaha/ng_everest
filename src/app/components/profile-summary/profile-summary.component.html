@@ -1,0 +1,66 @@
+<div class="summary-parent" *ngIf="!loading">
+  <div class="columns">
+    <app-user-image
+      [image]="profileImage"
+      size="md"
+      [firstName]="firstName"
+      [lastName]="lastName"
+      [username]="username"
+    ></app-user-image>
+    <div class="name-bio">
+      <h4>{{ firstName }} {{ lastName }}</h4>
+      <p [ngClass]="{ 'greyed-out': !bio }">{{ bio ? bio : "No bio added" }}</p>
+    </div>
+  </div>
+
+  <div class="boxes">
+    <div class="box articles">
+      <div>
+        <h3>{{ articleCount }}</h3>
+        <span>Articles</span>
+      </div>
+    </div>
+
+    <div class="box posts">
+      <div>
+        <h3>{{ extContentCount }}</h3>
+        <span>Posts</span>
+      </div>
+    </div>
+
+    <div class="box following">
+      <div>
+        <h3>{{ followingCount - 1 }}</h3>
+        <span>Following</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="followers">
+    <h4>Followers</h4>
+    <p *ngIf="followerCount === 0">Add posts and articles to get followers</p>
+    <div *ngIf="followerCount > 0" class="follower-images-array">
+      <app-user-image
+        *ngFor="let follower of followers"
+        [image]="follower.smImage ? follower.smImage : ''"
+        [firstName]="follower.firstName"
+        [lastName]="follower.lastName"
+        [username]="follower.username"
+        size="xs"
+      ></app-user-image>
+      <div *ngIf="followerCount > 4" class="remaining-followers">
+        +{{ followerCount - 4 }}
+      </div>
+    </div>
+  </div>
+
+  <div class="interests">
+    <h4>Interests</h4>
+    <p *ngIf="interests.length === 0">You haven't set any interests.</p>
+    <div class="list-of-interests" *ngIf="interests">
+      <p *ngFor="let interest of interests">
+        {{ interest }}
+      </p>
+    </div>
+  </div>
+</div>

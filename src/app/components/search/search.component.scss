@@ -1,141 +1,195 @@
-$image-width: 50px;
-$image-height: 50px;
+$image-width: 35px;
+$image-height: 35px;
 %fixed-abs {
-    position: absolute;
-    left: -3.4rem;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
 }
 
 .search {
-    position: relative;
+  width: 100%;
+  position: relative;
+
+  .form {
+    width: 100%;
+    background-color: #f6f8fa;
+    border: 2px solid transparent;
+    border-radius: 25px;
+    display: grid;
+    grid-template-columns: 15px auto;
+    grid-gap: 15px;
+    padding: 2px 0 2px 15px;
+    transition: border 0.2s ease-in-out;
+
+    &:focus-within {
+      border: 2px solid rgba(72, 26, 137, 0.5);
+    }
+
+    .search-icon {
+      align-self: center;
+      fa-icon {
+        color: #481a89;
+        font-size: 16px;
+      }
+    }
+
     form {
+      margin: 0;
+      input {
+        align-self: center;
+        background-color: transparent;
+        border: none;
+        font-size: 15px;
+        &:focus {
+          outline: 0;
+          border: 0;
+        }
+      }
+    }
+  }
+
+  .search-result {
+    @extend %fixed-abs;
+    background-color: white;
+    box-shadow: 0 8px 20px 0 rgba(218, 224, 235, 0.6);
+    border-radius: 5px;
+    animation: appear 0.2s ease-in;
+    animation-fill-mode: forwards;
+    max-height: 800px;
+    max-width: 300px;
+    height: auto;
+    width: 300px;
+    overflow-y: hidden;
+
+    &:hover {
+      overflow-y: auto;
+    }
+
+    .section {
+      h3 {
+        padding: 10px 15px;
+        font-size: 14px;
+        border-bottom: 1px solid #dee8ff;
+        margin-bottom: 5px;
+      }
+
+      .item {
+        display: grid;
+        grid-template-columns: 75px 1fr;
+        grid-template-rows: auto;
+        grid-template-areas:
+          "image name"
+          "image username";
+        cursor: pointer;
+        margin-bottom: 5px;
+
+        p {
+          margin: 0;
+        }
+
+        &:hover {
+          background-color: rgba(0, 0, 0, 0.1);
+        }
+
+        .item-a {
+          grid-area: image;
+          background-color: grey;
+          border-radius: 50%;
+          min-width: $image-width;
+          min-height: $image-height;
+          width: $image-width;
+          height: $image-height;
+          background-size: cover;
+          background-repeat: no-repeat;
+          background-position: center center;
+          align-self: center;
+          justify-self: center;
+        }
+
+        .item-a.collection-icon-container {
+          position: relative;
+
+          .icon {
+            color: white;
+            position: absolute;
+            top: 55%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+          }
+        }
+
+        .item-b {
+          grid-area: name;
+          font-size: 12px;
+          margin-bottom: -10px;
+        }
+
+        .item-c {
+          margin-top: -5px;
+          grid-area: username;
+          font-size: 12px;
+          color: #a2a2a2;
+        }
+      }
+
+      .see-more {
+        font-family: 'Montserrat', sans-serif;
+        color: #481A89;
+
+        span:nth-of-type(1) {
+          margin-right: 10px;
+        }
+
+        span:nth-of-type(2) {
+          background-color: #DEE8FF;
+          border-radius: 25px;
+          font-size: 10px;
+          font-weight: bold;
+          padding: 2px 12px;
+        }
+      }
+    }
+
+    .loading {
+      display: grid;
+      padding: 15px;
+
+      mat-spinner {
+        justify-self: center;
+        align-self: center;
+      }
+
+      fa-icon {
+        color: #ff1744;
+        justify-self: center;
+        align-self: center;
+      }
+
+      p {
         margin: 0;
-        
-        input {
-            padding: 8px 5px 5px 5px;
-            font-size: 14px;
-            border: 1px solid rgba(0, 0, 0, .1);
-            border-radius: 5px;
-            width: 100%;
-    
-            &::placeholder {
-                color: rgba(0, 0, 0, .7);
-            }
-        }
+        text-align: center;
+        font-size: 12px;
+      }
     }
+  }
+}
 
-    .search-result {
-        @extend %fixed-abs;
-        background-color: white;
-        box-shadow: 0 8px 20px 0 rgba(218, 224, 235, 0.6);
-        border-radius: 5px;
-        animation: appear 0.2s ease-in;
-        animation-fill-mode: forwards;
-        max-height: 500px;
-        max-width: 300px;
-        height: auto;
-        width: 300px;
-        overflow-y: auto;
-        padding: 15px 0;
-    
-        h3 {
-            padding: 0 15px;
-        }
-
-        .loading {
-            display: grid;
-            padding: 15px;
-            
-            mat-spinner {
-                justify-self: center;
-                align-self: center;
-            }
-
-            fa-icon {
-                color: #ff1744;
-                justify-self: center;
-                align-self: center;
-            }
-
-            p {
-                margin: 0;
-                text-align: center;
-                font-size: 12px;
-            }
-        }
-    
-        .item {
-            display: grid;
-            grid-template-columns: 75px 1fr;
-            grid-template-rows: auto;
-            grid-template-areas: 
-            "image name"
-            "image username";
-            cursor: pointer;
-            margin-bottom: 5px;
-            padding: 5px 0;
-    
-            p {
-                margin: 0;
-            }
-    
-            &:hover {
-                background-color: rgba(0, 0, 0, 0.1);
-            }
-    
-            .item-a {
-                grid-area: image;
-                background-color: grey;
-                border-radius: 50%;
-                min-width: $image-width;
-                min-height: $image-height;
-                width: $image-width;
-                height: $image-height;
-                background-size: cover;
-                background-repeat: no-repeat;
-                background-position: center center;
-                align-self: center;
-                justify-self: center;
-            }
-
-            .item-a.collection-icon-container {
-                position: relative;
-
-                .icon {
-                    color: white;
-                    position: absolute;
-                    top: 55%;
-                    left: 50%;
-                    transform: translate(-50%, -50%);
-                }
-            }
-    
-            .item-b {
-                grid-area: name;
-                font-size: 14px;
-            }
-    
-            .item-c {
-                margin-top: -5px;
-                grid-area: username;
-                font-size: 12px;
-                color: rgba(0, 0, 0, .7);
-            }
-        }
-    }
+.search-activated {
+  border: 2px solid #481a89 !important;
 }
 
 @keyframes appear {
-    0% {
-        opacity: 0;
-        transform: translateY(-8px);
-    }
+  0% {
+    opacity: 0;
+    top: -8px;
+  }
 
-    50% {
-        transform: translateY(8px);
-    }
+  50% {
+    top: 60px;
+  }
 
-    100% {
-        opacity: 1;
-        transform: translateY(0);
-    }
+  100% {
+    opacity: 1;
+    top: 50px;
+  }
 }

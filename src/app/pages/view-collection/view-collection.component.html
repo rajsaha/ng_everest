@@ -1,35 +1,69 @@
 <div class="section-container">
-    <div class="collection-data" *ngIf="collection">
-        <div class="collection-header">
-            <small class="username" [routerLink]="['/profile', collection.username]">{{ collection.username }}'s collection</small>
-            <form [formGroup]="changeCollectionTitleForm" *ngIf="isMine">
-                <mat-form-field>
-                    <input type="text" matInput formControlName="title">
-                    <mat-icon matSuffix>
-                        <fa-icon [icon]="faEdit"></fa-icon>
-                    </mat-icon>
-                    <mat-hint>Change your collection title</mat-hint>
-                </mat-form-field>
-            </form>
-            <h2 *ngIf="!isMine">{{ changeCollectionTitleForm.get('title').value }}</h2>
+  <div class="collection-data" *ngIf="collection">
+    <!-- <form [formGroup]="changeCollectionForm" *ngIf="isMine">
+      <div class="collection-header">
+        <div class="left">
+          <small
+            class="username"
+            [routerLink]="['/profile', collection.username]"
+            >{{ collection.username }}'s collection</small
+          >
+          <mat-form-field>
+            <input type="text" matInput formControlName="title" />
+            <mat-icon matSuffix>
+              <fa-icon [icon]="faEdit"></fa-icon>
+            </mat-icon>
+            <mat-hint>Collection title</mat-hint>
+          </mat-form-field>
+          <h2 *ngIf="!isMine">
+            {{ changeCollectionTitleForm.get("title").value }}
+          </h2>
         </div>
 
-        <div class="resource-grid" *ngIf="!isLoading">
-            <app-resource 
-            *ngFor="let resource of resources" 
-            [data]="resource"
-            [isInCollectionPage]="isInCollectionPage" 
-            (drResponse)="drResponseHandler($event)" 
-            [collectionId]="id"></app-resource>
+        <div class="right">
+          <span>{{ numOfResources }}</span
+          ><small>resources</small>
         </div>
 
-        <div *ngIf="resources.length === 0">
-            <p>This collection is empty</p>
+        <div class="bottom">
+          <mat-form-field>
+            <textarea type="text" matInput formControlName="description"></textarea>
+            <mat-icon matSuffix>
+              <fa-icon [icon]="faEdit"></fa-icon>
+            </mat-icon>
+            <mat-hint>Collection description</mat-hint>
+          </mat-form-field>
         </div>
-
-        <div class="delete" (click)="openDcDialog()" *ngIf="isMine">
-            <app-custom-button buttonLabel="Delete Collection" size="small" backgroundColor="delete">
-            </app-custom-button>
-        </div>
+      </div>
+    </form> -->
+    
+    <div class="resource-grid">
+      <app-resource
+        *ngFor="let resource of resources"
+        [data]="resource"
+        [collectionId]="id"
+      ></app-resource>
     </div>
+
+    <div
+      class="see-more"
+      *ngIf="!isLoading"
+      (click)="seeMore()"
+    >
+      See More
+    </div>
+
+    <div *ngIf="resources.length === 0">
+      <p>This collection is empty</p>
+    </div>
+
+    <!-- <div class="delete" (click)="openDcDialog()" *ngIf="isMine">
+      <app-custom-button
+        buttonLabel="Delete Collection"
+        size="small"
+        backgroundColor="delete"
+      >
+      </app-custom-button>
+    </div> -->
+  </div>
 </div>

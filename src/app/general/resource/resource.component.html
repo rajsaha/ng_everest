@@ -1,29 +1,28 @@
-<div class="resource" *ngIf="!isLoading">
-  <img class="image" [src]="image" (click)="goToView()">
+<div class="resource" *ngIf="!isLoading" #origin>
+  <div class="header">
+    <span>{{ title | truncate: [30] }}</span>
+    <button mat-icon-button (click)="show(origin)">
+      <fa-icon [icon]="faEllipsesV"></fa-icon>
+    </button>
+  </div>
+  <img *ngIf="image" class="image" [src]="image" (click)="goToView()" />
   <div class="details">
-    <h4>{{ data.title }}</h4>
-    <p>{{ data.description | truncate:[40] }}</p>
-    <div class="actions">
-      <button (click)="goToEdit()" mat-button *ngIf="loggedInUser === resourceUser">
-        <fa-icon [icon]="faEdit"></fa-icon>
-      </button>
-
-      <a [href]="data.url" target="_blank">
-        <button mat-button>
-          <fa-icon [icon]="faExternalLinkAlt"></fa-icon>
-        </button>
-      </a>
-
-      <button *ngIf="!isInCollectionPage && resourceUser === loggedInUser" mat-button color="warn" (click)="openDrDialog()">
-        <fa-icon [icon]="faTrashAlt"></fa-icon>
-      </button>
-
-      <button *ngIf="isInCollectionPage && routeUser === loggedInUser" mat-button color="warn" (click)="deleteResourceFromCollection()">
-        <fa-icon [icon]="faFolderMinus"></fa-icon>
-      </button>
+    <!-- * Type -->
+    <div class="type" *ngIf="type === 'article'">
+      {{ type }}
+    </div>
+    <p  *ngIf="type === 'ext-content'">{{ description | truncate: [150] }}</p>
+    <div
+      *ngIf="type === 'article'"
+      [innerHtml]="description | truncate: [40]"
+    ></div>
+  </div>
+  <div class="stats">
+    <div class="like" [ngClass]="recommended_by_count > 0 ? 'is-liked' : ''">
+      <fa-icon [icon]="faThumbsUp"></fa-icon>
+      <span class="count">{{ recommended_by_count }}</span>
     </div>
   </div>
-  <div class="stats"></div>
 </div>
 
 <app-loading type="resource" *ngIf="isLoading"></app-loading>

@@ -1,32 +1,89 @@
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, OnInit } from "@angular/core";
+import {
+  faSearch,
+  faFilter,
+  faLayerGroup,
+  faPager,
+  faThList,
+  faThLarge
+} from "@fortawesome/free-solid-svg-icons";
+import { FormGroup, FormBuilder } from "@angular/forms";
+import { FilterOptionsComponent } from "./filter-options/filter-options.component";
+import { PopoverService } from "@services/popover/popover.service";
 
 @Component({
-  selector: 'app-manage',
-  templateUrl: './manage.component.html',
-  styleUrls: ['./manage.component.scss']
+  selector: "app-manage",
+  templateUrl: "./manage.component.html",
+  styleUrls: ["./manage.component.scss"]
 })
 export class ManageComponent implements OnInit {
   navLinks: any[];
   activeLinkIndex = -1;
+  form: FormGroup;
+  isSearchFocused = false;
+  isFilterFocused = false;
+  username: string;
+  userId: string;
 
-  constructor(private router: Router) {
-    this.navLinks = [
-      {
-        label: 'Resources',
-        link: 'resource',
-        index: 0
-      }, {
-        label: 'Collections',
-        link: 'collection',
-        index: 1
-      }
-    ];
-  }
+  // Icons
+  faSearch = faSearch;
+  faFilter = faFilter;
+  faLayerGroup = faLayerGroup;
+  faPager = faPager;
+  faThList = faThList;
+  faThLarge = faThLarge;
+
+  constructor(private fb: FormBuilder, private popper: PopoverService) {}
 
   ngOnInit() {
-    this.router.events.subscribe((res) => {
-      this.activeLinkIndex = this.navLinks.indexOf(this.navLinks.find(tab => tab.link === '.' + this.router.url));
+    this.initForm();
+    this.username = localStorage.getItem("username");
+    this.userId = localStorage.getItem("userId");
+  }
+
+  initForm() {
+    this.form = this.fb.group({
+      searchQuery: [""],
+      filter: [""],
+      collections: [true],
+      posts: [false],
+      view: [true]
+    });
+  }
+
+  viewCollections() {
+    this.form.get("collections").patchValue(true);
+    this.form.get("posts").patchValue(false);
+  }
+
+  viewPosts() {
+    this.form.get("collections").patchValue(false);
+    this.form.get("posts").patchValue(true);
+  }
+
+  searchFocusIn() {
+    this.isSearchFocused = true;
+  }
+
+  searchFocusOut() {
+    this.isSearchFocused = false;
+  }
+
+  showFilterOptions(origin: HTMLElement) {
+    const ref = this.popper.open<{}>(
+      {
+        content: FilterOptionsComponent,
+        origin,
+        data: {
+          position: "vertical"
+        }
+      },
+      "vertical"
+    );
+
+    ref.afterClosed$.subscribe(res => {
+      if (res.data && res.data["isDeleted"]) {
+      }
     });
   }
 }

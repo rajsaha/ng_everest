@@ -1,0 +1,66 @@
+<div class="section-container">
+  <div class="search-container">
+    <form [formGroup]="searchForm">
+      <div class="search">
+        <mat-form-field appearance="outline">
+          <mat-label>Search</mat-label>
+          <mat-icon matPrefix>
+            <fa-icon [icon]="faSearch"></fa-icon>
+          </mat-icon>
+          <input matInput placeholder="Search" formControlName="query" />
+        </mat-form-field>
+      </div>
+
+      <mat-divider></mat-divider>
+
+      <div class="dropdowns">
+        <mat-form-field appearance="outline">
+          <mat-label>Order By</mat-label>
+          <mat-select formControlName="orderBy">
+            <mat-option value="recommend">Recommend Count</mat-option>
+            <mat-option value="recent">Recent First</mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <div class="checkboxes-container">
+          <p>Include</p>
+          <div class="checkboxes">
+            <mat-checkbox formControlName="resource">Resources</mat-checkbox>
+            <mat-checkbox formControlName="collection">Collections</mat-checkbox>
+            <mat-checkbox formControlName="user">Users</mat-checkbox>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+
+  <div class="search-section" *ngIf="users.length > 0">
+    <h3>Users</h3>
+    <div class="user-grid">
+      <app-user *ngFor="let user of users" [data]="user"></app-user>
+    </div>
+  </div>
+
+  <div class="search-section" *ngIf="resources.length > 0">
+    <h3>Resources</h3>
+    <div class="resource-grid">
+      <app-resource
+        *ngFor="let resource of resources"
+        [data]="resource"
+      >
+      </app-resource>
+      <app-loading type="resource" *ngIf="isLoading"></app-loading>
+    </div>
+  </div>
+
+  <div class="search-section" *ngIf="collections.length > 0">
+    <h3>Collections</h3>
+    <div class="list-of-collections" *ngIf="!isLoading">
+      <app-collection
+        *ngFor="let collection of collections"
+        [data]="collection"
+      ></app-collection>
+      <app-loading type="collection" *ngIf="isLoading"></app-loading>
+    </div>
+  </div>
+</div>

@@ -37,7 +37,7 @@ export class ViewResourceComponent implements OnInit {
   async getResource(id: string) {
     try {
       this.isLoading = true;
-      const response = await this.resourceService.getResource({id});
+      const response: any = await this.resourceService.getResource({id});
       this.isLoading = false;
       this.resource = response.resource;
       this.checkIfEditable(this.resource.username);
@@ -47,7 +47,11 @@ export class ViewResourceComponent implements OnInit {
   }
 
   goToEdit() {
-    this.router.navigate(['/manage/resource/edit', this.id]);
+    if (this.resource.type === 'ext-content') {
+      this.router.navigate(['/manage/resource/edit', this.id]);
+    } else {
+      this.router.navigate(['/manage/article/edit', this.id]);
+    }
   }
 
   checkIfEditable(username: string) {

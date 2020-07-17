@@ -11,8 +11,6 @@ import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 
-import { AutosizeModule } from 'ngx-autosize';
-import { MatPasswordStrengthModule } from '@angular-material-extensions/password-strength';
 import { ManageModule } from './modules/manage/manage.module';
 import { CommonModule } from '@angular/common';
 import { MaterialModule } from './modules/material/material.module';
@@ -24,13 +22,18 @@ import { WelcomeComponent } from './pages/welcome/welcome.component';
 import { SignupComponent } from './pages/signup/signup.component';
 import { FeedComponent } from './pages/feed/feed.component';
 import { AtcComponent } from './general/dialogs/atc/atc.component';
-import { PoComponent } from './general/dialogs/po/po.component';
+import { PoComponent } from './general/post/po/po.component';
 import { PageNotFoundComponent } from './pages/page-not-found/page-not-found.component';
 import { SnackbarComponent } from './general/snackbar/snackbar.component';
 import { ShareResourceComponent } from './pages/share-resource/share-resource.component';
 import { MainComponent } from './layouts/main/main.component';
 import { NoAuthComponent } from './layouts/no-auth/no-auth.component';
 import { SearchComponent } from './components/search/search.component';
+import { AddToCollectionComponent } from './components/add-to-collection/add-to-collection.component';
+import { SearchPageComponent } from './pages/search-page/search-page.component';
+import { UserComponent } from './general/user/user.component';
+import { PopoverComponent } from './components/popover/popover.component';
+import { EditCollectionComponent } from './general/collection/edit-collection/edit-collection.component';
 
 @NgModule({
   declarations: [
@@ -44,7 +47,12 @@ import { SearchComponent } from './components/search/search.component';
     ShareResourceComponent,
     MainComponent,
     NoAuthComponent,
-    SearchComponent
+    SearchComponent,
+    AddToCollectionComponent,
+    SearchPageComponent,
+    UserComponent,
+    PopoverComponent,
+    EditCollectionComponent
   ],
   imports: [
     CommonModule,
@@ -53,9 +61,6 @@ import { SearchComponent } from './components/search/search.component';
     AppRoutingModule,
     ReactiveFormsModule,
     HttpClientModule,
-    AutosizeModule,
-    MatPasswordStrengthModule.forRoot(),
-    // * Custom Modules
     MaterialModule,
     ManageModule,
     DialogsModule,
@@ -69,7 +74,7 @@ import { SearchComponent } from './components/search/search.component';
     }
   ],
   bootstrap: [AppComponent],
-  entryComponents: [AtcComponent, PoComponent, SnackbarComponent]
+  entryComponents: [AtcComponent, PoComponent, SnackbarComponent, PopoverComponent]
 })
 export class AppModule { }
 
