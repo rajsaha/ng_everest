@@ -26,6 +26,7 @@ export class AtcComponent implements OnInit {
   // Pagination
   pageNo = 1;
   size = 5;
+  count = 0;
 
   // Toggles
   isLoading = false;
@@ -73,7 +74,9 @@ export class AtcComponent implements OnInit {
   }
 
   async onScrollDown() {
-    await this.loadMorePosts();
+    if (this.collections.length < this.count) {
+      await this.loadMorePosts();
+    }
   }
 
   async loadMorePosts() {
@@ -100,6 +103,8 @@ export class AtcComponent implements OnInit {
       username: this.username,
       resourceId: this.data.id
     });
+
+    this.count = response.collections[0].count[0].count;
 
     if (!response.error) {
       for (const collection of response.collections[0].collections) {

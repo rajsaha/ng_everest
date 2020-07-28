@@ -7,9 +7,8 @@
       [lastName]="lastName"
       [username]="username"
     ></app-user-image>
-    <div class="name-bio">
+    <div class="name">
       <h4>{{ firstName }} {{ lastName }}</h4>
-      <p [ngClass]="{ 'greyed-out': !bio }">{{ bio ? bio : "No bio added" }}</p>
     </div>
   </div>
 
@@ -62,5 +61,10 @@
         {{ interest }}
       </p>
     </div>
+  </div>
+
+  <div class="bio">
+    <h4>Bio</h4>
+    <p [ngClass]="{ 'greyed-out': !bio }">{{ bio ? bio : "No bio added" }}</p>
   </div>
 </div>
