@@ -16,6 +16,7 @@ import { MatTabsModule } from "@angular/material/tabs";
 import { ReactiveFormsModule } from "@angular/forms";
 import { InfiniteScrollModule } from "ngx-infinite-scroll";
 import { MiniCollectionComponent } from 'src/app/general/dialogs/atc/mini-collection/mini-collection.component';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import { MiniCollectionComponent } from 'src/app/general/dialogs/atc/mini-collec
   ],
   imports: [
     CommonModule,
+    FontAwesomeModule,
     InfiniteScrollModule,
     MatInputModule,
     MatFormFieldModule,

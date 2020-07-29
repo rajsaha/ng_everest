@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { faCheckCircle } from "@fortawesome/free-solid-svg-icons";
 
 @Component({
   selector: 'app-mini-collection',
@@ -13,6 +14,9 @@ export class MiniCollectionComponent implements OnInit {
   showPlaceholder = false;
   placeholderText = "";
   image: string;
+
+  // Icons
+  faCheckCircle = faCheckCircle;
 
   constructor() { }
 

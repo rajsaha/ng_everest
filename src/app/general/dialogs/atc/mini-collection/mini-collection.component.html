@@ -1,4 +1,11 @@
-<div class="collection" matRipple>
+<div
+  class="collection"
+  matRipple
+  [ngClass]="{
+    'two-columns': !data.inThisCollection,
+    'three-columns': data.inThisCollection
+  }"
+>
   <div
     class="image"
     [ngStyle]="{
@@ -11,9 +18,13 @@
   </div>
 
   <p>
-    {{ data.title }}
-    <span class="in-this-collection" *ngIf="data.inThisCollection.length > 0">
+    {{ data.title ? data.title : "Unset" }}
+    <!-- <span class="in-this-collection" *ngIf="data.inThisCollection.length > 0">
       In this collection
-    </span>
+    </span> -->
   </p>
+
+  <div class="in-this-collection" *ngIf="data.inThisCollection.length > 0">
+    <fa-icon [icon]="faCheckCircle"></fa-icon>
+  </div>
 </div>
