@@ -8,6 +8,13 @@ import { environment as ENV } from "@environments/environment";
 export class UserService {
   constructor(private http: HttpClient) {}
 
+  getUserId(username: string) {
+    const response = this.http
+      .post(`${ENV.API_URL}/user/get-user-id`, { username })
+      .toPromise();
+    return response;
+  }
+
   getProfileData(userId: string) {
     const response = this.http
       .post(`${ENV.API_URL}/user/get-user-data`, { userId })

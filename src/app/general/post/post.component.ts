@@ -109,7 +109,7 @@ export class PostComponent implements OnInit {
     this.type = this.data.type;
     this.tags = this.data.tags;
     this.description = this.data.description;
-    this.image = this.data.lgImage.link;
+    this.image = this.data.lgImage.link ? this.data.lgImage.link : "";
     this.userImage = this.data.userImage ? this.data.userImage : this.noPhoto;
     this.timestamp = moment(this.data.timestamp).fromNow();
     this.recommendedByCount = this.data.recommended_by_count;

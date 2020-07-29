@@ -12,6 +12,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { PublicProfileComponent } from 'src/app/pages/profile/public-profile/public-profile.component';
 import { ViewCollectionComponent } from 'src/app/pages/view-collection/view-collection.component';
 import { ViewResourceComponent } from 'src/app/pages/view-resource/view-resource.component';
+import { ManageComponent } from 'src/app/pages/manage/manage.component';
 
 const routes: Routes = [
   {
@@ -19,7 +20,7 @@ const routes: Routes = [
       children: [
         {
           path: '',
-          component: ProfileComponent,
+          component: ManageComponent,
           pathMatch: 'full'
         },
         {

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { ResourceService } from '@services/resource/resource.service';
 import { UtilityService } from '@services/general/utility.service';
@@ -11,8 +11,7 @@ import { debounceTime } from 'rxjs/operators';
   styleUrls: ['./manage-resources.component.scss']
 })
 export class ManageResourcesComponent implements OnInit {
-  userId: string;
-  username: string;
+  @Input() userData: any;
   resources = [];
   resourcesCount = 0;
   resourceSearchForm: FormGroup;
@@ -42,9 +41,8 @@ export class ManageResourcesComponent implements OnInit {
   ) {}
 
   async ngOnInit() {
-    this.username = localStorage.getItem('username');
-    this.userId = localStorage.getItem("userId");
-    await Promise.all([this.initResourceSearchForm(), this.getUserResources()]);
+    this.initResourceSearchForm();
+    await this.getUserResources();
     this.onResourceSearchFormChange();
   }
 
@@ -57,12 +55,13 @@ export class ManageResourcesComponent implements OnInit {
 
   async getUserResources() {
     try {
+      console.log(this.userData)
       this.isLoading = true;
       // Search
       const query = this.resourceSearchForm.get('query').value;
       if (query) {
         const searchResult: any = await this.resourceService.searchForUserResources({
-          username: this.username,
+          username: this.userData.username,
           query
         });
         this.isLoading = false;
@@ -74,8 +73,8 @@ export class ManageResourcesComponent implements OnInit {
       const response: any = await this.resourceService.getUserResources({
         pageNo: this.pageNo,
         size: this.size,
-        username: this.username,
-        userId: this.userId
+        username: this.userData.username,
+        userId: this.userData.userId
       });
       this.isLoading = false;
       this.resourcesCount = response.count;

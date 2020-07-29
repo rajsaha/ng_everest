@@ -61,12 +61,16 @@
   </div>
 </div>
 
-<div class="columns">
-  <app-profile-summary [userId]="userId"></app-profile-summary>
+<div class="columns" *ngIf="!isLoading && userData">
+  <app-profile-summary [userData]="userData"></app-profile-summary>
   <div>
-    <app-manage-resources *ngIf="form.get('posts').value"></app-manage-resources>
+    <app-manage-resources
+      [userData]="userData"
+      *ngIf="form.get('posts').value"
+    ></app-manage-resources>
 
     <app-manage-collections
+      [userData]="userData"
       *ngIf="form.get('collections').value"
     ></app-manage-collections>
   </div>

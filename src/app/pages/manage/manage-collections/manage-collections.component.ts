@@ -1,20 +1,20 @@
-import { Component, OnInit } from '@angular/core';
-import { CollectionService } from '@services/collection/collection.service';
-import { FormBuilder, FormGroup } from '@angular/forms';
-import { faSearch } from '@fortawesome/free-solid-svg-icons';
-import { Router } from '@angular/router';
-import { debounceTime } from 'rxjs/operators';
+import { Component, OnInit, Input } from "@angular/core";
+import { CollectionService } from "@services/collection/collection.service";
+import { FormBuilder, FormGroup } from "@angular/forms";
+import { faSearch } from "@fortawesome/free-solid-svg-icons";
+import { Router } from "@angular/router";
+import { debounceTime } from "rxjs/operators";
 
 @Component({
-  selector: 'app-manage-collections',
-  templateUrl: './manage-collections.component.html',
-  styleUrls: ['./manage-collections.component.scss']
+  selector: "app-manage-collections",
+  templateUrl: "./manage-collections.component.html",
+  styleUrls: ["./manage-collections.component.scss"],
 })
 export class ManageCollectionsComponent implements OnInit {
-  username: string;
+  @Input() userData: any;
   collections: any;
   collectionSearchForm: FormGroup;
-  collectionUrl = 'collection/';
+  collectionUrl = "collection/";
 
   // Toggles
   isLoading = false;
@@ -25,32 +25,39 @@ export class ManageCollectionsComponent implements OnInit {
   constructor(
     private router: Router,
     private fb: FormBuilder,
-    private collectionService: CollectionService) { }
+    private collectionService: CollectionService
+  ) {}
 
   async ngOnInit() {
     this.setCollectionUrl();
-    this.username = localStorage.getItem('username');
-    await Promise.all([this.initCollectionSearchForm(), this.getAllCollections()]);
+    this.initCollectionSearchForm();
+    await this.getAllCollections();
     this.onCollectionSearchFormChange();
   }
 
   async initCollectionSearchForm() {
     this.collectionSearchForm = this.fb.group({
-      query: ['']
+      query: [""],
     });
   }
 
   async getAllCollections() {
     try {
       this.isLoading = true;
-      const query = this.collectionSearchForm.get('query').value;
+      const query = this.collectionSearchForm.get("query").value;
       if (query) {
-        const searchResult: any = await this.collectionService.searchUserCollections({username: this.username, title: query});
+        const searchResult: any = await this.collectionService.searchUserCollections(
+          { username: this.userData.username, title: query }
+        );
         this.isLoading = false;
         this.collections = searchResult.collections;
         return;
       }
-      const response: any = await this.collectionService.getCollections({ username: this.username, pageNo: 1, size: 100 });
+      const response: any = await this.collectionService.getCollections({
+        username: this.userData.username,
+        pageNo: 1,
+        size: 100,
+      });
       this.isLoading = false;
       this.collections = response.collections[0].collections;
     } catch (err) {
@@ -59,19 +66,23 @@ export class ManageCollectionsComponent implements OnInit {
   }
 
   onCollectionSearchFormChange() {
-    this.collectionSearchForm.get('query').valueChanges.pipe(debounceTime(300)).subscribe(async (query) => {
-      this.isLoading = true;
-      const searchResult: any = await this.collectionService.searchUserCollections({username: this.username, title: query});
-      this.isLoading = false;
-      this.collections = searchResult.collections;
-    });
+    this.collectionSearchForm
+      .get("query")
+      .valueChanges.pipe(debounceTime(300))
+      .subscribe(async (query) => {
+        this.isLoading = true;
+        const searchResult: any = await this.collectionService.searchUserCollections(
+          { username: this.userData.username, title: query }
+        );
+        this.isLoading = false;
+        this.collections = searchResult.collections;
+      });
   }
 
   setCollectionUrl() {
     const url = this.router.url;
-    if (url === '/manage/collection') {
-      this.collectionUrl = '../collection';
+    if (url === "/manage/collection") {
+      this.collectionUrl = "../collection";
     }
   }
-
 }

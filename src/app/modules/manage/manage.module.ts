@@ -20,11 +20,12 @@ import { ResourceOptionsComponent } from 'src/app/general/resource/resource-opti
 import { CollectionOptionsComponent } from 'src/app/general/collection/collection-options/collection-options.component';
 import { FilterOptionsComponent } from 'src/app/pages/manage/filter-options/filter-options.component';
 import { ProfileSummaryComponent } from 'src/app/components/profile-summary/profile-summary.component';
+import { ProfileComponent } from 'src/app/pages/profile/profile.component';
 
 const routes: Routes = [
   {
     path: "",
-    component: ManageComponent
+    component: ProfileComponent
   },
   {
     path: "resource",

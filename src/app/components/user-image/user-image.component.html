@@ -1,10 +1,10 @@
 <div
-  (click)="goToUser(username)"
+  (click)="goToUser(userData.username)"
   class="image"
   [ngClass]="[imageSizeClass, clickableClass]"
   [ngStyle]="url"
 >
-  <span *ngIf="(image === '' || image === null) && placeholder">
+  <span *ngIf="(userData.image === '' || userData.image === null) && placeholder">
     {{ placeholder }}
   </span>
 </div>

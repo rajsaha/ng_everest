@@ -1,17 +1,14 @@
 import { Component, OnInit, Input } from "@angular/core";
-import { Router, ActivatedRoute } from '@angular/router';
+import { Router, ActivatedRoute } from "@angular/router";
 
 @Component({
   selector: "app-user-image",
   templateUrl: "./user-image.component.html",
-  styleUrls: ["./user-image.component.scss"]
+  styleUrls: ["./user-image.component.scss"],
 })
 export class UserImageComponent implements OnInit {
   @Input() size: string;
-  @Input() image = null;
-  @Input() firstName: string;
-  @Input() lastName: string;
-  @Input() username: string;
+  @Input() userData: any;
   @Input() clickable = true;
   imageSizeClass: string;
   url = {};
@@ -22,12 +19,12 @@ export class UserImageComponent implements OnInit {
   constructor(private router: Router, private route: ActivatedRoute) {}
 
   ngOnInit() {
-    if (!this.image) {
-      this.url = { 'background-image': 'none'};
+    if (!this.userData.image) {
+      this.url = { "background-image": "none" };
     } else {
-      this.url = { 'background-image': `url(${this.image})` };
+      this.url = { "background-image": `url(${this.userData.image})` };
     }
-    
+
     // * Set image container size
     switch (this.size) {
       case "xs":
@@ -49,12 +46,12 @@ export class UserImageComponent implements OnInit {
 
     // * Set clickable
     if (this.clickable) {
-      this.clickableClass = 'clickable';
+      this.clickableClass = "clickable";
     }
 
     // * Set placeholder
-    let firstLetter = this.firstName.charAt(0);
-    let secondLetter = this.lastName.charAt(0);
+    let firstLetter = this.userData.firstName.charAt(0);
+    let secondLetter = this.userData.lastName.charAt(0);
     this.placeholder = firstLetter.concat(secondLetter).toUpperCase();
     this.ready = true;
   }
@@ -64,7 +61,7 @@ export class UserImageComponent implements OnInit {
       return;
     }
     this.router.navigate([`/profile/user/${username}`], {
-      relativeTo: this.route.parent
+      relativeTo: this.route.parent,
     });
   }
 }
