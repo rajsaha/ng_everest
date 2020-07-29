@@ -1,49 +1,30 @@
-<div class="section-container">
-  <!-- <div class="header">
-    <h3>Manage Resources</h3>
-    <form [formGroup]="resourceSearchForm">
-      <div class="controls">
-        <div class="control">
-          <div class="control-icon">
-            <fa-icon [icon]="faSearch"></fa-icon>
-          </div>
-          <input type="text" placeholder="Search" formControlName="query" />
-        </div>
-
-        <div class="control">
-          <div class="control-icon">
-            <fa-icon [icon]="faFilter"></fa-icon>
-          </div>
-          <input type="text" placeholder="Search" formControlName="filter" />
-        </div>
-      </div>
-    </form>
-  </div> -->
-
-  <div
-    class="parent"
-    infiniteScroll
-    [infiniteScrollDistance]="2"
-    [infiniteScrollThrottle]="50"
-    (scrolled)="onScrollDown()"
-    [scrollWindow]="false"
-  >
-    <div class="resource-grid">
-      <app-resource *ngFor="let resource of resources" [data]="resource" (deleteEvent)="drResponseHandler($event)">
-      </app-resource>
-      <app-loading type="resource" *ngIf="isLoading"></app-loading>
-    </div>
+<div
+  class="parent"
+  infiniteScroll
+  [infiniteScrollDistance]="2"
+  [infiniteScrollThrottle]="50"
+  (scrolled)="onScrollDown()"
+  [scrollWindow]="false"
+>
+  <div class="resource-grid">
+    <app-resource
+      *ngFor="let resource of resources"
+      [data]="resource"
+      (deleteEvent)="drResponseHandler($event)"
+    >
+    </app-resource>
+    <app-loading type="resource" *ngIf="isLoading"></app-loading>
   </div>
+</div>
 
-  <div
-    class="see-more"
-    *ngIf="!isLoading && resources.length < resourcesCount"
-    (click)="loadMorePosts()"
-  >
-    See More
-  </div>
+<div
+  class="see-more"
+  *ngIf="!isLoading && resources.length < resourcesCount"
+  (click)="loadMorePosts()"
+>
+  See More
+</div>
 
-  <div *ngIf="resources && resources.length === 0">
-    You haven't shared any resources yet
-  </div>
+<div *ngIf="resources && resources.length === 0">
+  You haven't shared any resources yet
 </div>
