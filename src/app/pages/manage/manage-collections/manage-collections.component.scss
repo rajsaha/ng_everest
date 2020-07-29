@@ -31,12 +31,12 @@ $block-height: 6.2rem;
   grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
   grid-auto-flow: dense;
   grid-column-gap: 5px;
-  justify-items: center;
+  // justify-items: center;
 }
 
 @media (min-width: 768px) {
   .list-of-collections {
     justify-items: start;
-    grid-template-columns: repeat(auto-fit, 390px);
+    grid-template-columns: repeat(auto-fit, 275px);
   }
 }

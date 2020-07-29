@@ -1,77 +1,79 @@
-<div class="header">
-  <h3>{{ form.get("collections").value ? "Collections" : "Resources" }}</h3>
-  <div class="controls" [formGroup]="form">
-    <!-- Search -->
-    <div class="control" [ngClass]="{ 'search-in-focus': isSearchFocused }">
-      <div class="control-icon">
-        <fa-icon [icon]="faSearch"></fa-icon>
-      </div>
-      <input
-        type="text"
-        placeholder="Search"
-        formControlName="searchQuery"
-        (focus)="searchFocusIn()"
-        (focusout)="searchFocusOut()"
-      />
-    </div>
-
-    <!-- Filter -->
-    <div class="control" #origin>
-      <div class="control-icon">
-        <fa-icon [icon]="faFilter"></fa-icon>
-      </div>
-      <input
-        type="text"
-        placeholder="Filter"
-        formControlName="filter"
-        (focus)="showFilterOptions(origin)"
-      />
-    </div>
-
-    <!-- Toggle Content Type -->
-    <div class="control-group">
-      <div
-        class="group"
-        [ngClass]="{ selected: form.get('collections').value }"
-        (click)="viewCollections()"
-      >
-        <fa-icon [icon]="faLayerGroup"></fa-icon>
-        <span>Collections</span>
+<div class="container">
+  <div class="header">
+    <h3>{{ form.get("collections").value ? "Collections" : "Resources" }}</h3>
+    <div class="controls" [formGroup]="form">
+      <!-- Search -->
+      <div class="control" [ngClass]="{ 'search-in-focus': isSearchFocused }">
+        <div class="control-icon">
+          <fa-icon [icon]="faSearch"></fa-icon>
+        </div>
+        <input
+          type="text"
+          placeholder="Search"
+          formControlName="searchQuery"
+          (focus)="searchFocusIn()"
+          (focusout)="searchFocusOut()"
+        />
       </div>
 
-      <div
-        class="group"
-        [ngClass]="{ selected: form.get('posts').value }"
-        (click)="viewPosts()"
-      >
-        <fa-icon [icon]="faPager"></fa-icon>
-        <span>Posts</span>
+      <!-- Filter -->
+      <div class="control" #origin>
+        <div class="control-icon">
+          <fa-icon [icon]="faFilter"></fa-icon>
+        </div>
+        <input
+          type="text"
+          placeholder="Filter"
+          formControlName="filter"
+          (focus)="showFilterOptions(origin)"
+        />
       </div>
-    </div>
 
-    <!-- Toggle View -->
-    <div class="control-group">
-      <div class="group" [ngClass]="{ selected: form.get('view').value }">
-        <fa-icon [icon]="faThLarge"></fa-icon>
+      <!-- Toggle Content Type -->
+      <div class="control-group">
+        <div
+          class="group"
+          [ngClass]="{ selected: form.get('collections').value }"
+          (click)="viewCollections()"
+        >
+          <fa-icon [icon]="faLayerGroup"></fa-icon>
+          <span>Collections</span>
+        </div>
+
+        <div
+          class="group"
+          [ngClass]="{ selected: form.get('posts').value }"
+          (click)="viewPosts()"
+        >
+          <fa-icon [icon]="faPager"></fa-icon>
+          <span>Posts</span>
+        </div>
       </div>
-      <div class="group" [ngClass]="{ selected: !form.get('view').value }">
-        <fa-icon [icon]="faThList"></fa-icon>
+
+      <!-- Toggle View -->
+      <div class="control-group">
+        <div class="group" [ngClass]="{ selected: form.get('view').value }">
+          <fa-icon [icon]="faThLarge"></fa-icon>
+        </div>
+        <div class="group" [ngClass]="{ selected: !form.get('view').value }">
+          <fa-icon [icon]="faThList"></fa-icon>
+        </div>
       </div>
     </div>
   </div>
-</div>
 
-<div class="columns" *ngIf="!isLoading && userData">
-  <app-profile-summary [userData]="userData"></app-profile-summary>
-  <div>
-    <app-manage-resources
-      [userData]="userData"
-      *ngIf="form.get('posts').value"
-    ></app-manage-resources>
+  <div class="columns" *ngIf="!isLoading && userData">
+    <app-profile-summary [userData]="userData"></app-profile-summary>
+    <div>
+      <app-manage-resources
+        [userData]="userData"
+        *ngIf="form.get('posts').value"
+      ></app-manage-resources>
 
-    <app-manage-collections
-      [userData]="userData"
-      *ngIf="form.get('collections').value"
-    ></app-manage-collections>
+      <app-manage-collections
+        [userData]="userData"
+        *ngIf="form.get('collections').value"
+      ></app-manage-collections>
+    </div>
   </div>
 </div>
