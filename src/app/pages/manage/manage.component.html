@@ -3,7 +3,7 @@
     <h3>{{ form.get("collections").value ? "Collections" : "Resources" }}</h3>
     <div class="controls" [formGroup]="form">
       <!-- Search -->
-      <div class="control" [ngClass]="{ 'search-in-focus': isSearchFocused }">
+      <div class="control search" [ngClass]="{ 'search-in-focus': isSearchFocused }">
         <div class="control-icon">
           <fa-icon [icon]="faSearch"></fa-icon>
         </div>
@@ -17,7 +17,7 @@
       </div>
 
       <!-- Filter -->
-      <div class="control" #origin>
+      <div class="control filter" #origin>
         <div class="control-icon">
           <fa-icon [icon]="faFilter"></fa-icon>
         </div>
@@ -30,7 +30,7 @@
       </div>
 
       <!-- Toggle Content Type -->
-      <div class="control-group">
+      <div class="control-group content">
         <div
           class="group"
           [ngClass]="{ selected: form.get('collections').value }"
@@ -51,14 +51,14 @@
       </div>
 
       <!-- Toggle View -->
-      <div class="control-group">
+      <!-- <div class="control-group">
         <div class="group" [ngClass]="{ selected: form.get('view').value }">
           <fa-icon [icon]="faThLarge"></fa-icon>
         </div>
         <div class="group" [ngClass]="{ selected: !form.get('view').value }">
           <fa-icon [icon]="faThList"></fa-icon>
         </div>
-      </div>
+      </div> -->
     </div>
   </div>
 
