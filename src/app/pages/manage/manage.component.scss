@@ -12,7 +12,6 @@
 
     .controls {
       display: grid;
-      grid-template-columns: repeat(2, 1fr);
       grid-gap: 15px;
       padding-left: 15px;
       padding-right: 15px;
@@ -92,10 +91,6 @@
           }
         }
       }
-
-      .control-group.content {
-        justify-self: end;
-      }
     }
   }
 
@@ -119,15 +114,13 @@
   width: inherit;
 }
 
-// @media (min-width: 376px) {
-//   .container {
-//     .header {
-//       .controls {
-//         grid-template-columns: repeat(2, 1fr);
-//       }
-//     }
-//   }
-// }
+.two-columns {
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.one-column {
+  grid-template-columns: repeat(1, 1fr);
+}
 
 @media (min-width: 768px) {
   .container {
@@ -141,6 +134,14 @@
 
         .control {
           width: 100px;
+        }
+
+        .control-group {
+          .group {
+            span {
+              display: inherit;
+            }
+          }
         }
       }
     }

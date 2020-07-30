@@ -1,9 +1,21 @@
 <div class="container">
   <div class="header">
     <h3>{{ form.get("collections").value ? "Collections" : "Resources" }}</h3>
-    <div class="controls" [formGroup]="form">
+    <div
+      class="controls"
+      [formGroup]="form"
+      [ngClass]="{
+        'one-column': !form.get('posts').value,
+        'two-columns': form.get('posts').value
+      }"
+    >
       <!-- Search -->
-      <div class="control search" [ngClass]="{ 'search-in-focus': isSearchFocused }">
+      <div
+        class="control search"
+        [ngClass]="{
+          'search-in-focus': isSearchFocused
+        }"
+      >
         <div class="control-icon">
           <fa-icon [icon]="faSearch"></fa-icon>
         </div>
@@ -17,7 +29,7 @@
       </div>
 
       <!-- Filter -->
-      <div class="control filter" #origin>
+      <div class="control filter" #origin *ngIf="form.get('posts').value">
         <div class="control-icon">
           <fa-icon [icon]="faFilter"></fa-icon>
         </div>
