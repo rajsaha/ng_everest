@@ -67,7 +67,7 @@ export class MainComponent implements OnInit, OnDestroy {
     this.localStorageImage = localStorage.getItem("profileImage");
     this.image = this.localStorageImage
       ? this.localStorageImage
-      : this.defaultProfileImage;
+      : "";
     this.firstName = localStorage.getItem("firstName");
     this.lastName = localStorage.getItem("lastName");
   }

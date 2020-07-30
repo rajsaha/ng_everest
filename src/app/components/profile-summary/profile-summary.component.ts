@@ -44,7 +44,7 @@ export class ProfileSummaryComponent implements OnInit {
     if (result.userData.mdImage) {
       this.profileImage = result.userData.mdImage.link;
     } else {
-      this.profileImage = this.defaultProfileImage;
+      this.profileImage = "";
     }
     
     this.username= result.userData.username;
