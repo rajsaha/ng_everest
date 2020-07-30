@@ -23,6 +23,7 @@ export class ProfileSummaryComponent implements OnInit {
   followerCount = 0;
   followingCount = 0;
   articleCount = 0;
+  collectionCount = 0;
   extContentCount = 0;
   defaultProfileImage = `${ENV.SITE_URL}/assets/images/portrait.jpg`;
 
@@ -49,6 +50,7 @@ export class ProfileSummaryComponent implements OnInit {
     this.followers = result.followerObjects;
     this.followerCount = result.userData.followerCount;
     this.followingCount = result.userData.followingCount;
+    this.collectionCount = result.userData.collectionCount;
     this.articleCount = result.articleCount;
     this.extContentCount = result.extContentCount;
     this.loading = false;
