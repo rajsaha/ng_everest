@@ -14,6 +14,7 @@ import { BreakpointObserver, Breakpoints } from "@angular/cdk/layout";
   styleUrls: ["./atc.component.scss"]
 })
 export class AtcComponent implements OnInit {
+  userId: string;
   username: string;
   collections = [];
   currentCollectionId: string;
@@ -55,6 +56,7 @@ export class AtcComponent implements OnInit {
   }
 
   async ngOnInit() {
+    this.userId = localStorage.getItem("userId");
     this.username = localStorage.getItem("username");
 
     try {
@@ -185,7 +187,8 @@ export class AtcComponent implements OnInit {
             .value,
           description: this.createCollectionForm.controls.description.value,
           resourceId: this.data.id,
-          username: this.username
+          username: this.username,
+          userId: this.userId
         }
       );
 
