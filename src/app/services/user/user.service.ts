@@ -15,9 +15,9 @@ export class UserService {
     return response;
   }
 
-  getProfileData(userId: string) {
+  getProfileData(data: any) {
     const response = this.http
-      .post(`${ENV.API_URL}/user/get-user-data`, { userId })
+      .post(`${ENV.API_URL}/user/get-user-data`, data)
       .toPromise();
     return response;
   }

@@ -26,6 +26,7 @@ export class ManageComponent implements OnInit {
   isFilterFocused = false;
   username: string;
   userId: string;
+  loggedInUserId: string;
   paramUsername: string;
   isSelf = false;
   userData: any;
@@ -49,6 +50,7 @@ export class ManageComponent implements OnInit {
   ngOnInit() {
     this.initForm();
     this.username = localStorage.getItem("username");
+    this.loggedInUserId = localStorage.getItem("userId");
     this.checkIfSelf();
   }
 
@@ -76,7 +78,8 @@ export class ManageComponent implements OnInit {
       this.userData = {
         username: this.paramUsername,
         userId: this.userId,
-        isSelf: this.isSelf
+        isSelf: this.isSelf,
+        loggedInUserId: this.loggedInUserId
       }
       this.isLoading = false;
     });
