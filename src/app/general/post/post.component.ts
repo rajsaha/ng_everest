@@ -170,6 +170,8 @@ export class PostComponent implements OnInit {
     if (result && result.status) {
       // * Add comment to array
       this.commentComponent.addCommentToArray({
+        firstName: this.commentFormControls.firstName.value,
+        lastName: this.commentFormControls.lastName.value,
         username: this.commentFormControls.username.value,
         content: this.commentFormControls.comment.value,
         timestamp: this.commentFormControls.timestamp.value

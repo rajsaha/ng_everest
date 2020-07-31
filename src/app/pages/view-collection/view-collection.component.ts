@@ -44,8 +44,8 @@ export class ViewCollectionComponent implements OnInit {
   ngOnInit() {
     this.currentUser = localStorage.getItem('username');
     this.initCollectionForm();
-    this.onCollectionTitleFormChange();
-    this.onCollectionDescriptionFormChange();
+    // this.onCollectionTitleFormChange();
+    // this.onCollectionDescriptionFormChange();
     this.route.params.subscribe(async (params) => {
       this.collection = null;
       this.id = params.collectionId;

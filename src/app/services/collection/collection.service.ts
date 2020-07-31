@@ -29,6 +29,16 @@ export class CollectionService {
     return response;
   }
 
+  getCollectionByTitle(data: any) {
+    const response = this.http
+      .post(
+        `${ENV.API_URL}/collection/get-collection-by-title`,
+        data
+      )
+      .toPromise();
+    return response;
+  }
+
   getCollectionTitleByResourceId(data: any) {
     const response = this.http
       .post(

@@ -5,13 +5,13 @@ import { CollectionService } from "@services/collection/collection.service";
 import { ResourceService } from "@services/resource/resource.service";
 import { SnackbarService } from "@services/general/snackbar.service";
 import { CdkTextareaAutosize } from "@angular/cdk/text-field";
-import { take } from "rxjs/operators";
+import { take, debounceTime } from "rxjs/operators";
 import { BreakpointObserver, Breakpoints } from "@angular/cdk/layout";
 
 @Component({
   selector: "app-atc",
   templateUrl: "./atc.component.html",
-  styleUrls: ["./atc.component.scss"]
+  styleUrls: ["./atc.component.scss"],
 })
 export class AtcComponent implements OnInit {
   userId: string;
@@ -46,7 +46,7 @@ export class AtcComponent implements OnInit {
   ) {
     breakpointObserver
       .observe([Breakpoints.HandsetLandscape, Breakpoints.HandsetPortrait])
-      .subscribe(result => {
+      .subscribe((result) => {
         if (result.matches) {
           this.isMobileViewport = true;
         } else {
@@ -58,13 +58,9 @@ export class AtcComponent implements OnInit {
   async ngOnInit() {
     this.userId = localStorage.getItem("userId");
     this.username = localStorage.getItem("username");
-
-    try {
-      this.initAddToCollectionForm();
-      await this.getCollections();
-    } catch (err) {
-      throw new Error(err);
-    }
+    this.initAddToCollectionForm();
+    this.onFormChange();
+    await this.getCollections();
   }
 
   onNoClick() {
@@ -89,8 +85,23 @@ export class AtcComponent implements OnInit {
   initAddToCollectionForm() {
     this.createCollectionForm = this.fb.group({
       collectionTitle: ["", Validators.required],
-      description: [""]
+      description: [""],
     });
+  }
+
+  onFormChange() {
+    this.createCollectionForm.valueChanges
+      .pipe(debounceTime(500))
+      .subscribe(async (val) => {
+        if (val.collectionTitle.length > 0) {
+          const result = await this.collectionService.getCollectionByTitle({
+            title: val.collectionTitle,
+            username: this.username,
+          });
+
+          console.log(result);
+        }
+      });
   }
 
   get createCollectionFormControls() {
@@ -103,7 +114,7 @@ export class AtcComponent implements OnInit {
       pageNo: this.pageNo,
       size: this.size,
       username: this.username,
-      resourceId: this.data.id
+      resourceId: this.data.id,
     });
 
     this.count = response.collections[0].count[0].count;
@@ -124,19 +135,19 @@ export class AtcComponent implements OnInit {
           this.currentCollectionId = collection._id;
         }
       }
-  
+
       if (collection.resource2) {
         if (collection.resource2._id === this.data.id) {
           this.currentCollectionId = collection._id;
         }
       }
-  
+
       if (collection.resource3) {
         if (collection.resource3._id === this.data.id) {
           this.currentCollectionId = collection._id;
         }
       }
-  
+
       if (collection.resource4) {
         if (collection.resource4._id === this.data.id) {
           this.currentCollectionId = collection._id;
@@ -155,25 +166,27 @@ export class AtcComponent implements OnInit {
       collectionId,
       resourceId: this.data.id,
       username: this.username,
-      currentCollectionId: this.currentCollectionId ? this.currentCollectionId : null
+      currentCollectionId: this.currentCollectionId
+        ? this.currentCollectionId
+        : null,
     });
 
     if (response && !response.error) {
       this.snackbarService.openSnackBar({
         message: {
           message: `Resource added to ${collection.title}`,
-          error: false
+          error: false,
         },
-        class: "green-snackbar"
+        class: "green-snackbar",
       });
       this.dialogRef.close({ added: true });
     } else {
       this.snackbarService.openSnackBar({
         message: {
           message: `Something went wrong!`,
-          error: true
+          error: true,
         },
-        class: "red-snackbar"
+        class: "red-snackbar",
       });
     }
   }
@@ -182,13 +195,15 @@ export class AtcComponent implements OnInit {
     if (this.createCollectionForm.valid) {
       const response: any = await this.collectionService.createCollectionAndPushResource(
         {
-          currentCollectionId: this.currentCollectionId ? this.currentCollectionId : null,
+          currentCollectionId: this.currentCollectionId
+            ? this.currentCollectionId
+            : null,
           collectionTitle: this.createCollectionForm.controls.collectionTitle
             .value,
           description: this.createCollectionForm.controls.description.value,
           resourceId: this.data.id,
           username: this.username,
-          userId: this.userId
+          userId: this.userId,
         }
       );
 
@@ -196,18 +211,18 @@ export class AtcComponent implements OnInit {
         this.snackbarService.openSnackBar({
           message: {
             message: `Saved to collection`,
-            error: false
+            error: false,
           },
-          class: "green-snackbar"
+          class: "green-snackbar",
         });
         this.dialogRef.close({ added: true });
       } else {
         this.snackbarService.openSnackBar({
           message: {
             message: response.message.message,
-            error: true
+            error: true,
           },
-          class: "red-snackbar"
+          class: "red-snackbar",
         });
       }
     }

@@ -92,10 +92,11 @@
         h3 {
           margin-top: 0;
           margin-bottom: 0;
+          font-size: 1rem;
         }
 
         span {
-          font-size: 14px;
+          font-size: 12px;
         }
       }
     }
@@ -169,3 +170,21 @@ h4 {
   background-color: #481a89;
   color: white;
 }
+
+@media (min-width: 768px) {
+  .summary-parent {
+    .boxes {
+      .box {
+        div {
+          h3 {
+            font-size: 1.17rem;
+          }
+          span {
+            font-size: 14px;
+          }
+        }
+      }
+    }
+  }
+}
+
