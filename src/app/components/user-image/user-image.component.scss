@@ -9,10 +9,9 @@
   transition: border 0.2s ease-in-out;
 
   span {
+    font-family: "Montserrat", sans-serif;
     color: #4a4a4a;
-    align-self: center;
-    justify-self: center;
-    font-size: 2rem;
+    place-self: center;
   }
 }
 
@@ -21,7 +20,7 @@
   height: 35px;
 
   span {
-    font-size: 1rem;
+    font-size: 0.8rem;
   }
 }
 
@@ -30,13 +29,17 @@
   height: 40px;
 
   span {
-    font-size: 1.4rem;
+    font-size: 0.9rem;
   }
 }
 
 .md {
   width: 75px;
   height: 75px;
+
+  span {
+    font-size: 1.4rem;
+  }
 }
 
 .clickable {
