@@ -1,0 +1,15 @@
+<div
+  class="resource"
+  [ngClass]="{ 'hover-in': isActive, 'hover-out': !isActive }"
+  (mouseover)="toggleActive(true)"
+  (mouseout)="toggleActive(false)"
+>
+  <div
+    class="resource-image"
+    [ngStyle]="{ 'background-image': 'url(' + data.mdImage.link + ')' }"
+  >
+    <div class="delete-button">
+      <fa-icon [icon]="faTimesCircle"></fa-icon>
+    </div>
+  </div>
+</div>

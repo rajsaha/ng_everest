@@ -43,16 +43,10 @@
 
     <div class="bottom" *ngIf="!isLoading">
       <div class="delete-resource-array">
-        <div *ngFor="let resource of resources" class="resource">
-          <div
-            class="resource-image"
-            [ngStyle]="{ 'background-image': 'url(' + resource.mdImage.link + ')' }"
-          >
-            <div class="delete-button">
-              <fa-icon [icon]="faTimesCircle"></fa-icon>
-            </div>
-          </div>
-        </div>
+        <app-delete-resource-from-collection
+          *ngFor="let resource of resources"
+          [data]="resource"
+        ></app-delete-resource-from-collection>
       </div>
     </div>
   </div>

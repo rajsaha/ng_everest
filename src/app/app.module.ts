@@ -34,6 +34,7 @@ import { SearchPageComponent } from './pages/search-page/search-page.component';
 import { UserComponent } from './general/user/user.component';
 import { PopoverComponent } from './components/popover/popover.component';
 import { EditCollectionComponent } from './general/collection/edit-collection/edit-collection.component';
+import { DeleteResourceFromCollectionComponent } from './general/collection/delete-resource-from-collection/delete-resource-from-collection.component';
 
 @NgModule({
   declarations: [
@@ -52,7 +53,8 @@ import { EditCollectionComponent } from './general/collection/edit-collection/ed
     SearchPageComponent,
     UserComponent,
     PopoverComponent,
-    EditCollectionComponent
+    EditCollectionComponent,
+    DeleteResourceFromCollectionComponent
   ],
   imports: [
     CommonModule,

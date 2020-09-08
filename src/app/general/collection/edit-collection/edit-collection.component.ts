@@ -2,7 +2,6 @@ import { Component, OnInit, Inject } from "@angular/core";
 import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
 import { FormBuilder, FormGroup } from "@angular/forms";
 import { CollectionService } from "@services/collection/collection.service";
-import { faTimesCircle } from "@fortawesome/free-solid-svg-icons";
 
 @Component({
   selector: "app-edit-collection",
@@ -20,9 +19,6 @@ export class EditCollectionComponent implements OnInit {
 
   // Toggles
   isLoading = false;
-
-  // Icons
-  faTimesCircle = faTimesCircle;
 
   constructor(
     public dialogRef: MatDialogRef<EditCollectionComponent>,
