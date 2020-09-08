@@ -46,6 +46,7 @@
         <app-delete-resource-from-collection
           *ngFor="let resource of resources"
           [data]="resource"
+          [collectionId]="this.data.collectionData._id"
         ></app-delete-resource-from-collection>
       </div>
     </div>

@@ -8,7 +8,7 @@
     class="resource-image"
     [ngStyle]="{ 'background-image': 'url(' + data.mdImage.link + ')' }"
   >
-    <div class="delete-button">
+    <div class="delete-button" (click)="deleteResourceFromCollection()">
       <fa-icon [icon]="faTimesCircle"></fa-icon>
     </div>
   </div>
