@@ -1,17 +1,15 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { CollectionService } from '@services/collection/collection.service';
-import { faPen, faEdit } from '@fortawesome/free-solid-svg-icons';
-import { UtilityService } from '@services/general/utility.service';
-import { MatDialog } from '@angular/material/dialog';
-import { DcComponent } from 'src/app/general/dialogs/dc/dc.component';
-import { FormGroup, FormBuilder } from '@angular/forms';
-import { delay } from 'rxjs/operators';
+import { Component, OnInit, Output, EventEmitter } from "@angular/core";
+import { ActivatedRoute } from "@angular/router";
+import { CollectionService } from "@services/collection/collection.service";
+import { faPen, faEdit } from "@fortawesome/free-solid-svg-icons";
+import { UtilityService } from "@services/general/utility.service";
+import { MatDialog } from "@angular/material/dialog";
+import { DcComponent } from "src/app/general/dialogs/dc/dc.component";
 
 @Component({
-  selector: 'app-view-collection',
-  templateUrl: './view-collection.component.html',
-  styleUrls: ['./view-collection.component.scss']
+  selector: "app-view-collection",
+  templateUrl: "./view-collection.component.html",
+  styleUrls: ["./view-collection.component.scss"],
 })
 export class ViewCollectionComponent implements OnInit {
   id: string;
@@ -19,7 +17,6 @@ export class ViewCollectionComponent implements OnInit {
   resources = [];
   currentUser: string;
   @Output() dcResponse: EventEmitter<any> = new EventEmitter();
-  changeCollectionForm: FormGroup;
   numOfResources: number;
   // Pagination
   pageNo = 1;
@@ -38,20 +35,17 @@ export class ViewCollectionComponent implements OnInit {
     private route: ActivatedRoute,
     private collectionService: CollectionService,
     private utilityService: UtilityService,
-    public dialog: MatDialog,
-    private fb: FormBuilder) { }
+    public dialog: MatDialog
+  ) {}
 
   ngOnInit() {
-    this.currentUser = localStorage.getItem('username');
-    this.initCollectionForm();
-    // this.onCollectionTitleFormChange();
-    // this.onCollectionDescriptionFormChange();
+    this.currentUser = localStorage.getItem("username");
     this.route.params.subscribe(async (params) => {
       this.collection = null;
       this.id = params.collectionId;
       await Promise.all([
         this.getCollection(),
-        this.checkIfMine(this.currentUser, this.id)
+        this.checkIfMine(this.currentUser, this.id),
       ]);
     });
   }
@@ -61,15 +55,13 @@ export class ViewCollectionComponent implements OnInit {
     const result: any = await this.collectionService.getCollectionById({
       pageNo: this.pageNo,
       size: this.size,
-      id: this.id 
+      id: this.id,
     });
     this.collection = result.collection.collection[0];
     this.numOfResources = result.collection.count;
     for (let item of result.collection.collection[0].resources) {
       this.resources.push(item);
     }
-    this.changeCollectionForm.controls.title.patchValue(result.collection.title);
-    this.changeCollectionForm.controls.description.patchValue(result.collection.description);
     this.isLoading = false;
   }
 
@@ -79,7 +71,9 @@ export class ViewCollectionComponent implements OnInit {
   }
 
   drResponseHandler(result: string) {
-    for (const { item, index } of this.utilityService.toItemIndexes(this.resources)) {
+    for (const { item, index } of this.utilityService.toItemIndexes(
+      this.resources
+    )) {
       if (result === item._id) {
         this.resources.splice(index, 1);
         return;
@@ -91,8 +85,8 @@ export class ViewCollectionComponent implements OnInit {
     const dialogRef = this.dialog.open(DcComponent, {
       data: {
         id: this.id,
-        title: this.collection.title
-      }
+        title: this.collection.title,
+      },
     });
 
     dialogRef.afterClosed().subscribe(async () => {
@@ -100,27 +94,11 @@ export class ViewCollectionComponent implements OnInit {
     });
   }
 
-  initCollectionForm() {
-    this.changeCollectionForm = this.fb.group({
-      title: [''],
-      description: ['']
-    });
-  }
-
-  onCollectionTitleFormChange() {
-    this.changeCollectionForm.get('title').valueChanges.pipe(delay(1500)).subscribe(async (title) => {
-      const result = await this.collectionService.changeCollectionTitle({id: this.collection._id, title});
-    });
-  }
-
-  onCollectionDescriptionFormChange() {
-    this.changeCollectionForm.get('description').valueChanges.pipe(delay(1500)).subscribe(async (description) => {
-      const result = await this.collectionService.changeCollectionDescription({id: this.collection._id, description});
-    });
-  }
-
   async checkIfMine(username: string, id: string) {
-    const response: any = await this.collectionService.checkIfMine({ username, id});
+    const response: any = await this.collectionService.checkIfMine({
+      username,
+      id,
+    });
     this.isMine = response;
   }
 }

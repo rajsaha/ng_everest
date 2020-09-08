@@ -63,7 +63,9 @@ export class CollectionComponent implements OnInit {
     const ref = this.popper.open<{}>({
       content: CollectionOptionsComponent,
       origin,
-      data: {}
+      data: {
+        collectionData: this.data
+      }
     });
 
     ref.afterClosed$.subscribe(res => {

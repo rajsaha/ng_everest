@@ -1,0 +1,116 @@
+.dialog-title {
+  font-size: 16px;
+  max-width: 400px;
+  margin-bottom: 35px;
+  strong {
+    font-family: "Montserrat", sans-serif;
+  }
+}
+
+h6 {
+  margin-top: 0;
+  margin-bottom: 10px;
+}
+
+mat-form-field {
+  width: 100% !important;
+}
+
+.columns {
+  .left {
+    .parent {
+      height: 100%;
+      overflow: hidden;
+
+      h6 {
+        color: #7e7e7e;
+        font-size: 14px;
+        font-weight: 400;
+      }
+    }
+  }
+
+  .divider {
+    grid-area: divider;
+    width: 2px;
+    background-color: #dee8ff;
+  }
+
+  .bottom {
+    overflow-y: hidden;
+    .delete-resource-array {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, 100px);
+      grid-gap: 15px;
+      max-height: 300px;
+      padding: 15px;
+      -webkit-box-shadow: inset 0px 0px 24px 2px rgba(0,0,0,0.12);
+      -moz-box-shadow: inset 0px 0px 24px 2px rgba(0,0,0,0.12);
+      box-shadow: inset 0px 0px 24px 2px rgba(0,0,0,0.12);
+      border-radius: 10px;
+      .resource {
+        width: 100px;
+        height: 100px;
+        -webkit-box-shadow: 0px 0px 24px 2px rgba(0,0,0,0.12);
+        -moz-box-shadow: 0px 0px 24px 2px rgba(0,0,0,0.12);
+        box-shadow: 0px 0px 24px 2px rgba(0,0,0,0.12);
+        .resource-image {
+          width: 100%;
+          height: 100%;
+          border-radius: 5px;
+          position: relative;
+          background-repeat: no-repeat;
+          background-size: cover;
+          background-position: center center;
+        }
+
+        .delete-button {
+          position: absolute;
+          top: 5px;
+          right: 5px;
+          width: 24px;
+          height: 24px;
+          border-radius: 50%;
+
+          fa-icon {
+            color: #fe5045;
+            cursor: pointer;
+            font-size: 25px;
+            transition: color 0.2s ease-in-out;
+          }
+
+          &:hover {
+            fa-icon {
+              color: red;
+            }
+          }
+        }
+
+        &:hover {
+          animation: hoverResource 0.2s ease-in-out;
+          animation-fill-mode: forwards;
+        }
+      }
+    }
+  }
+}
+
+@keyframes hoverResource {
+  0% {
+    transform: scale(1.0);
+  }
+
+  100% {
+    transform: scale(1.05);
+  }
+}
+
+.mat-form-field-appearance-outline {
+  .mat-form-field-outline {
+    box-shadow: none !important;
+  }
+}
+
+.mat-dialog-actions {
+  float: right;
+}
