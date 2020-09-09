@@ -10,6 +10,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { MatDialog } from "@angular/material/dialog";
 import { EditCollectionComponent } from "../edit-collection/edit-collection.component";
+import { DcComponent } from '../../dialogs/dc/dc.component';
 
 @Component({
   selector: "app-collection-options",
@@ -40,6 +41,18 @@ export class CollectionOptionsComponent implements OnInit {
       },
       width: "600px",
       maxWidth: 600,
+    });
+
+    this.close();
+
+    dialogRef.afterClosed().subscribe(async (result: any) => {});
+  }
+
+  openDeleteCollectionDialog() {
+    const dialogRef = this.dialog.open(DcComponent, {
+      data: {
+        collectionData: this.popoverRef.data.collectionData,
+      },
     });
 
     this.close();

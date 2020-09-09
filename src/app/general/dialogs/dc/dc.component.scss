@@ -1,0 +1,26 @@
+.columns {
+    display: grid;
+    grid-template-columns: 100px 1fr;
+    grid-gap: 15px;
+    .left {
+        align-self: center;
+        justify-self: center;
+        .icon-container {
+            position: relative;
+            border-radius: 50%;
+            background-color: rgba(255, 0, 0, 0.1);
+            width: 75px;
+            height: 75px;
+            fa-icon {
+                position: absolute;
+                left: 50%;
+                top: 50%;
+                transform: translate(-50%, -50%);
+                color: rgba(255, 0, 0, 0.4);
+            }
+        }
+    }
+    .right {
+
+    }
+}

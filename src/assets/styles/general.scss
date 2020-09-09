@@ -225,6 +225,14 @@ app-root {
   }
 }
 
+.dialog-title {
+  font-size: 16px;
+  max-width: 400px;
+  strong {
+    font-family: "Montserrat", sans-serif;
+  }
+}
+
 .custom-input {
   width: 100%;
   margin-bottom: 15px;

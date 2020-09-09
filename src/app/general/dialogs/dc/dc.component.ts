@@ -3,6 +3,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { CollectionService } from '@services/collection/collection.service';
 import { SnackbarService } from '@services/general/snackbar.service';
 import { Router } from '@angular/router';
+import { faTrash } from "@fortawesome/free-solid-svg-icons";
 
 @Component({
   selector: 'app-dc',
@@ -10,7 +11,9 @@ import { Router } from '@angular/router';
   styleUrls: ['./dc.component.scss']
 })
 export class DcComponent implements OnInit {
-
+  // Icon
+  faTrash = faTrash;
+  
   constructor(
     public dialogRef: MatDialogRef<DcComponent>,
     @Inject(MAT_DIALOG_DATA) public data,
