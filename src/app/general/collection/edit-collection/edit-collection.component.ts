@@ -1,7 +1,10 @@
 import { Component, OnInit, Inject } from "@angular/core";
 import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
-import { FormBuilder, FormGroup } from "@angular/forms";
+import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { CollectionService } from "@services/collection/collection.service";
+import { Store, select } from '@ngrx/store';
+import { Observable } from 'rxjs';
+import { setRefreshCollectionsToTrue } from "@services/ngrx/refreshCollections.actions";
 
 @Component({
   selector: "app-edit-collection",
@@ -19,16 +22,17 @@ export class EditCollectionComponent implements OnInit {
 
   // Toggles
   isLoading = false;
+  isChanged = false;
 
   constructor(
     public dialogRef: MatDialogRef<EditCollectionComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
     private fb: FormBuilder,
-    private collectionService: CollectionService
+    private collectionService: CollectionService,
+    private store: Store<{ refreshCollectionsState: boolean }>
   ) {}
 
   async ngOnInit() {
-    console.log(this.data.collectionData);
     this.initForm();
     this.setData();
     await this.getCollection();
@@ -36,9 +40,13 @@ export class EditCollectionComponent implements OnInit {
 
   initForm() {
     this.form = this.fb.group({
-      title: [""],
+      title: ["", Validators.required],
       description: [""],
     });
+  }
+
+  getFormControlValidity(control: string) {
+    return this.form.controls[control].invalid;
   }
 
   setData() {
@@ -65,6 +73,35 @@ export class EditCollectionComponent implements OnInit {
   }
 
   cancel() {
+    this.setRefreshCollectionsToTrue();
     this.dialogRef.close();
+  }
+
+  async save() {
+    const result: any = await this.collectionService.editCollectionDetails({
+      id: this.data.collectionData._id,
+      title: this.form.value.title,
+      description: this.form.value.description
+    });
+
+    if (!result.error) {
+      this.isChanged = true;
+      this.setRefreshCollectionsToTrue();
+      this.dialogRef.close();
+    }
+  }
+
+  handleDeleteResourceEvent(eventData: any) {
+    if (eventData.isDeleted) {
+      this.isChanged = true;
+      let index = this.resources.indexOf(eventData.resource);
+      this.resources.splice(index);
+    }
+  }
+
+  setRefreshCollectionsToTrue() {
+    if (this.isChanged) {
+      this.store.dispatch(setRefreshCollectionsToTrue());
+    }
   }
 }

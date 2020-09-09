@@ -10,6 +10,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { StoreModule } from "@ngrx/store";
+import { collectionsRefreshStateReducer } from "@services/ngrx/refreshCollections.reducer";
 
 import { ManageModule } from './modules/manage/manage.module';
 import { CommonModule } from '@angular/common';
@@ -59,6 +61,7 @@ import { DeleteResourceFromCollectionComponent } from './general/collection/dele
   imports: [
     CommonModule,
     BrowserModule,
+    StoreModule.forRoot({ collectionsRefreshState: collectionsRefreshStateReducer }),
     BrowserAnimationsModule,
     AppRoutingModule,
     ReactiveFormsModule,

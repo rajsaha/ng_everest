@@ -17,6 +17,9 @@
                 placeholder="Name your collection"
               />
             </div>
+            <p class="error-message" *ngIf="getFormControlValidity('title')">
+              Title is required
+            </p>
           </div>
 
           <div class="custom-input">
@@ -47,6 +50,7 @@
           *ngFor="let resource of resources"
           [data]="resource"
           [collectionId]="this.data.collectionData._id"
+          (deleteEvent)="handleDeleteResourceEvent($event)"
         ></app-delete-resource-from-collection>
       </div>
     </div>
@@ -54,7 +58,14 @@
 </div>
 
 <div mat-dialog-actions>
-  <button mat-stroked-button>Delete</button>
   <button mat-stroked-button (click)="cancel()">Cancel</button>
-  <button mat-flat-button color="primary" cdkFocusInitial>Save</button>
+  <button
+    mat-flat-button
+    color="primary"
+    cdkFocusInitial
+    (click)="save()"
+    [disabled]="form.invalid"
+  >
+    Save
+  </button>
 </div>

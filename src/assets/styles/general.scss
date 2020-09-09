@@ -255,9 +255,18 @@ app-root {
       }
     }
 
+    &:focus-within {
+      border-color: #481a89;
+    }
+
     textarea {
       overflow-y: hidden;
     }
+  }
+
+  .error-message {
+    font-size: 12px;
+    color: red;
   }
 }
 

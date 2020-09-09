@@ -80,16 +80,9 @@ export class CollectionService {
     return response;
   }
 
-  changeCollectionTitle(data: any) {
+  editCollectionDetails(data: any) {
     const response = this.http
-      .post(`${ENV.API_URL}/collection/change-collection-title`, data)
-      .toPromise();
-    return response;
-  }
-
-  changeCollectionDescription(data: any) {
-    const response = this.http
-      .post(`${ENV.API_URL}/collection/change-collection-description`, data)
+      .post(`${ENV.API_URL}/collection/edit-collection-details`, data)
       .toPromise();
     return response;
   }

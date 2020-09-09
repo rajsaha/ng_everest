@@ -4,6 +4,9 @@ import { FormBuilder, FormGroup } from "@angular/forms";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import { Router } from "@angular/router";
 import { debounceTime } from "rxjs/operators";
+import { Store, select } from '@ngrx/store';
+import { Observable } from 'rxjs';
+import { setRefreshCollectionsToFalse } from '@services/ngrx/refreshCollections.actions';  
 
 @Component({
   selector: "app-manage-collections",
@@ -22,17 +25,24 @@ export class ManageCollectionsComponent implements OnInit {
   // Icons
   faSearch = faSearch;
 
+  // Store
+  refreshCollectionsState$: Observable<boolean>;
+
   constructor(
     private router: Router,
     private fb: FormBuilder,
-    private collectionService: CollectionService
-  ) {}
+    private collectionService: CollectionService,
+    private store: Store<{ refreshCollectionsState: boolean }>
+  ) {
+    this.refreshCollectionsState$ = store.pipe(select('refreshCollectionsState'));
+  }
 
   async ngOnInit() {
     this.setCollectionUrl();
     this.initCollectionSearchForm();
     await this.getAllCollections();
     this.onCollectionSearchFormChange();
+    this.monitorRefreshCollectionsState();
   }
 
   async initCollectionSearchForm() {
@@ -84,5 +94,14 @@ export class ManageCollectionsComponent implements OnInit {
     if (url === "/manage/collection") {
       this.collectionUrl = "../collection";
     }
+  }
+
+  monitorRefreshCollectionsState() {
+    this.store.select(state => state).subscribe(async (data: any) => {
+      if (data.collectionsRefreshState) {
+        await this.getAllCollections();
+        this.store.dispatch(setRefreshCollectionsToFalse());
+      }
+    });
   }
 }

@@ -1,3 +1,5 @@
+@import "./variables.scss";
+
 .no-auth-layout {
 	display: grid;
 	grid-template-columns: 1fr;
@@ -69,7 +71,7 @@
 
 	.right {
 		display: none;
-		background-image: url(assets/mountains.webp);
+		background-image: $no-auth-bg;
 		background-position: center center;
 		background-size: cover;
 		background-repeat: no-repeat;

@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { faTimesCircle } from "@fortawesome/free-solid-svg-icons";
 import { CollectionService } from '@services/collection/collection.service';
 
@@ -11,24 +11,28 @@ export class DeleteResourceFromCollectionComponent implements OnInit {
   @Input() data: any;
   @Input() collectionId: any;
   isActive = false;
+  @Output() deleteEvent = new EventEmitter();
   // Icons
   faTimesCircle = faTimesCircle;
   constructor(private collectionService: CollectionService) { }
 
-  ngOnInit() {
-    console.log(this.data)
-  }
+  ngOnInit() {}
 
   toggleActive(status: boolean) {
     this.isActive = status;
   }
 
   async deleteResourceFromCollection() {
-    const result = await this.collectionService.deleteResourceFromCollection({
-      anchorCollectionId: this.collectionId,
+    const result: any = await this.collectionService.deleteResourceFromCollection({
+      collectionId: this.collectionId,
       resourceId: this.data._id,
     });
 
-    console.log(result);
+    if (!result.error) {
+      this.deleteEvent.emit({
+        isDeleted: true,
+        resource: this.data
+      });
+    }
   }
 }
