@@ -1,8 +1,7 @@
 import { createReducer, on } from "@ngrx/store";
 import {
   setRefreshCollectionsToTrue,
-  setRefreshCollectionsToFalse,
-  getRefreshCollectionsState
+  setRefreshCollectionsToFalse
 } from "./refreshCollections.actions";
 
 export const initialState = false;
