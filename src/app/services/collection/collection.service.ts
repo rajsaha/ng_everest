@@ -22,9 +22,9 @@ export class CollectionService {
     return response;
   }
 
-  getCollectionNames(data: any) {
+  getCollectionTitles(data: any) {
     const response = this.http
-      .post(`${ENV.API_URL}/collection/get-collection-names`, data)
+      .post(`${ENV.API_URL}/collection/get-collection-titles`, data)
       .toPromise();
     return response;
   }

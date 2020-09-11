@@ -236,9 +236,9 @@ export class EditResourceComponent implements OnInit {
   }
 
   async getCollectionNames() {
-    const response: any = await this.collectionService.getCollectionNames({ username: this.username });
-    if (response.collections) {
-      for (const item of response.collections) {
+    const response: any = await this.collectionService.getCollectionTitles({ username: this.username });
+    if (!response.error) {
+      for (const item of response.data) {
         this.collectionNames.push(item.title);
       }
     }
