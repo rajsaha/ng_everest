@@ -1,3 +1,7 @@
+.dialog-title {
+    margin-bottom: 0;
+}
+
 .columns {
     display: grid;
     grid-template-columns: 100px 1fr;
@@ -9,9 +13,10 @@
             position: relative;
             border-radius: 50%;
             background-color: rgba(255, 0, 0, 0.1);
-            width: 75px;
-            height: 75px;
+            width: 100px;
+            height: 100px;
             fa-icon {
+                font-size: 25px;
                 position: absolute;
                 left: 50%;
                 top: 50%;

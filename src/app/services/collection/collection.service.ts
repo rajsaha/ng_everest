@@ -73,9 +73,9 @@ export class CollectionService {
     return response;
   }
 
-  deleteCollection(id: string) {
+  deleteCollection(data: any) {
     const response = this.http
-      .get(`${ENV.API_URL}/collection/delete-collection/${id}`)
+      .post(`${ENV.API_URL}/collection/delete-collection`, data)
       .toPromise();
     return response;
   }
