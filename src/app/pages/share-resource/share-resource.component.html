@@ -28,15 +28,17 @@
           (click)="imageInput.click()"
           matRipple
           *ngIf="shareResourceForm.controls.isCustomImage.value"
-          [ngStyle]="{ 'background-image': 'url(' + image ? image : '' + ')' }"
+          [style.background-image]="
+            'url(' + shareResourceForm.controls.customImage.value + ')'
+          "
         >
-          <p *ngIf="!image">
+          <p *ngIf="!shareResourceForm.controls.customImage.value">
             <fa-icon [icon]="faUpload"></fa-icon>&nbsp;Click here to upload a
             custom image
           </p>
           <input
             hidden
-            (change)="onFileSelected(imageInput)"
+            (change)="onFileSelected(imageInput.files[0])"
             #imageInput
             type="file"
             accept="image/*"
