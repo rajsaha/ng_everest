@@ -46,7 +46,7 @@
           <fa-icon [icon]="faShareAlt"></fa-icon>&nbsp;&nbsp;Share Resource
         </a>
         <mat-divider></mat-divider>
-        <a routerLink="/manage" routerLinkActive="active-sidenav">
+        <a [routerLink]="'/profile/user/' + username + '/settings'" routerLinkActive="active-sidenav">
           <fa-icon [icon]="faSquare"></fa-icon>&nbsp;&nbsp;Settings
         </a>
         <a (click)="logout()">

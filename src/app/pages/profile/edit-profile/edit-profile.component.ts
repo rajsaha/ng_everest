@@ -86,7 +86,7 @@ export class EditProfileComponent implements OnInit {
 
   async getUserData() {
     this.isLoading = true;
-    const res: any = await this.userService.getProfileData(this.userId);
+    const res: any = await this.userService.getProfileData({ userId: this.userId });
 
     this.isProfileSaveButtonDisabled = true;
     this.interests = res.userData.interests ? res.userData.interests : [];
@@ -267,7 +267,7 @@ export class EditProfileComponent implements OnInit {
   openFollowDialog() {
     const dialogRef = this.dialog.open(FfComponent, {
       data: {
-        username: this.username
+        userId: this.userId
       }
     });
 

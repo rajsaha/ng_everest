@@ -122,9 +122,9 @@ export class UserService {
     return response;
   }
 
-  getFollowersFollowing(username: string) {
+  getFollowersFollowing(data: any) {
     const response = this.http
-      .get(`${ENV.API_URL}/user/get-followers-following/${username}`)
+      .post(`${ENV.API_URL}/user/get-followers-following`, data)
       .toPromise();
     return response;
   }

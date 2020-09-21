@@ -1,11 +1,11 @@
-import { Component, OnInit, Inject } from '@angular/core';
-import { UserService } from '@services/user/user.service';
-import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { Component, OnInit, Inject } from "@angular/core";
+import { UserService } from "@services/user/user.service";
+import { MAT_DIALOG_DATA } from "@angular/material/dialog";
 
 @Component({
-  selector: 'app-ff',
-  templateUrl: './ff.component.html',
-  styleUrls: ['./ff.component.scss']
+  selector: "app-ff",
+  templateUrl: "./ff.component.html",
+  styleUrls: ["./ff.component.scss"],
 })
 export class FfComponent implements OnInit {
   username: string;
@@ -21,15 +21,15 @@ export class FfComponent implements OnInit {
   ) {}
 
   async ngOnInit() {
-    this.username = localStorage.getItem('username');
+    this.username = localStorage.getItem("username");
     await this.getUserFollowers();
   }
 
   async getUserFollowers() {
     this.isLoading = true;
-    const response: any = await this.userService.getFollowersFollowing(
-      this.data.username
-    );
+    const response: any = await this.userService.getFollowersFollowing({
+      userId: this.data.userId,
+    });
     this.isLoading = false;
     for (const user of response.followers) {
       this.followers.push(user);
@@ -41,6 +41,6 @@ export class FfComponent implements OnInit {
   }
 
   onScrollDown() {
-    console.log('asd');
+    console.log("asd");
   }
 }
