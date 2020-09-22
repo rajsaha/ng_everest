@@ -45,7 +45,7 @@ export class AtcComponent implements OnInit {
     private breakpointObserver: BreakpointObserver
   ) {
     breakpointObserver
-      .observe([Breakpoints.HandsetLandscape, Breakpoints.HandsetPortrait])
+      .observe([Breakpoints.XSmall, Breakpoints.Small])
       .subscribe((result) => {
         if (result.matches) {
           this.isMobileViewport = true;
