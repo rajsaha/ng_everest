@@ -109,14 +109,24 @@
       grid-template-columns: 25px 25px 25px 25px 25px;
       grid-gap: -15px;
 
-      .follower-image {
+      .remaining-followers {
         width: 35px;
         height: 35px;
+        display: grid;
         border-radius: 50%;
         border: 2px solid white;
-        background-size: cover;
-        background-position: center;
-        background-repeat: no-repeat;
+        background-color: aliceblue;
+        transition: border 0.2s ease-in-out;
+
+        &:hover {
+          border-color: #481a89;
+        }
+
+        span {
+          place-self: center;
+          font-family: "Montserrat", sans-serif;
+          font-size: 0.6rem;
+        }
       }
     }
   }

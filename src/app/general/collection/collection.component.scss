@@ -52,6 +52,7 @@ $block-border: 5px solid white;
   .collection {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 198px 80px;
     padding: 0 5px 5px 5px;
     .main {
       grid-column-start: 1;
@@ -62,7 +63,6 @@ $block-border: 5px solid white;
       background-position: center center;
       border-bottom: 5px solid white;
       width: auto;
-      height: $main-block-height;
     }
 
     .block {

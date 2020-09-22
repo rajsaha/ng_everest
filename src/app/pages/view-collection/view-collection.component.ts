@@ -57,9 +57,9 @@ export class ViewCollectionComponent implements OnInit {
       size: this.size,
       id: this.id,
     });
-    this.collection = result.collection.collection[0];
+    this.collection = result.collection;
     this.numOfResources = result.collection.count;
-    for (let item of result.collection.collection[0].resources) {
+    for (let item of this.collection.resources) {
       this.resources.push(item);
     }
     this.isLoading = false;

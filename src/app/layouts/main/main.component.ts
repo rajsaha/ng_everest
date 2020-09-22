@@ -9,6 +9,7 @@ import {
   faBorderAll,
   faSearch,
   faPenAlt,
+  faCog
 } from "@fortawesome/free-solid-svg-icons";
 import { faSquare } from "@fortawesome/free-regular-svg-icons";
 import { LoginService } from "@services/auth/login.service";
@@ -39,10 +40,10 @@ export class MainComponent implements OnInit, OnDestroy {
   faSignOutAlt = faSignOutAlt;
   faStream = faStream;
   faShareAlt = faShareAlt;
-  faSquare = faSquare;
   faBorderAll = faBorderAll;
   faSearch = faSearch;
   faPenAlt = faPenAlt;
+  faCog = faCog;
 
   private mobileQueryListener: () => void;
 

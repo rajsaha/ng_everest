@@ -68,7 +68,9 @@
         size="xs"
       ></app-user-image>
       <div *ngIf="followerCount > 4" class="remaining-followers">
-        +{{ followerCount - 4 }}
+        <span>
+          +{{ followerCount - 4 }}
+        </span>
       </div>
     </div>
   </div>
