@@ -19,10 +19,9 @@ mat-form-field {
 .columns {
   display: grid;
   grid-template-columns: 1fr;
-  grid-template-areas: "left";
+  grid-gap: 15px;
 
   .left {
-    grid-area: left;
     .parent {
       height: 100%;
       overflow: hidden;
@@ -84,13 +83,11 @@ mat-form-field {
   }
 
   .divider {
-    grid-area: divider;
     width: 2px;
     background-color: #DEE8FF;
   }
 
   .right {
-    grid-gap: right;
     max-width: 400px;
     img {
       display: block;
@@ -126,5 +123,11 @@ mat-form-field {
 
   to {
     opacity: 1;
+  }
+}
+
+@media(min-width: 768px) {
+  .columns {
+    grid-template-columns: 1fr 2px 1fr;
   }
 }

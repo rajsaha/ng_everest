@@ -44,8 +44,8 @@ export class AtcComponent implements OnInit {
     private _ngZone: NgZone,
     private breakpointObserver: BreakpointObserver
   ) {
-    breakpointObserver
-      .observe([Breakpoints.XSmall, Breakpoints.Small])
+    this.breakpointObserver
+      .observe('(max-width: 768px)')
       .subscribe((result) => {
         if (result.matches) {
           this.isMobileViewport = true;
