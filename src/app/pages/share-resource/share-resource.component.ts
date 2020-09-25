@@ -9,7 +9,7 @@ import { ResourceService } from "@services/resource/resource.service";
 import { SnackbarService } from "@services/general/snackbar.service";
 import { CollectionService } from "@services/collection/collection.service";
 import { debounceTime } from "rxjs/operators";
-import { DomSanitizer } from '@angular/platform-browser';
+import { DomSanitizer } from "@angular/platform-browser";
 
 class ImageSnippet {
   constructor(public src: string, public file: File) {}
@@ -65,12 +65,15 @@ export class ShareResourceComponent implements OnInit {
     this.userId = localStorage.getItem("userId");
     this.initShareResourceForm();
     this.onURLOnChanges();
+    this.onNoImageChange();
+    this.onIsCustomImageChange();
   }
 
   initShareResourceForm() {
     this.shareResourceForm = this.fb.group(
       {
         isCustomImage: [false],
+        noImage: [false],
         url: ["", Validators.required],
         title: ["", [Validators.required]],
         description: ["", [Validators.required]],
@@ -78,7 +81,7 @@ export class ShareResourceComponent implements OnInit {
         customImage: [""],
         userId: [this.userId],
         type: ["ext-content"],
-        username: [this.username]
+        username: [this.username],
       },
       { validator: [this.validationService.checkValidURL] }
     );
@@ -188,6 +191,22 @@ export class ShareResourceComponent implements OnInit {
     }
   }
 
+  onNoImageChange() {
+    this.shareResourceForm.controls.noImage.valueChanges.subscribe((val) => {
+      if (val) {
+        this.shareResourceForm.controls.isCustomImage.patchValue(false);
+      }
+    });
+  }
+
+  onIsCustomImageChange() {
+    this.shareResourceForm.controls.isCustomImage.valueChanges.subscribe((val) => {
+      if (val) {
+        this.shareResourceForm.controls.noImage.patchValue(false);
+      }
+    });
+  }
+
   async onURLOnChanges() {
     this.shareResourceForm.controls.url.valueChanges
       .pipe(debounceTime(1500))
@@ -254,7 +273,7 @@ export class ShareResourceComponent implements OnInit {
       const reader: FileReader = new FileReader();
       reader.readAsDataURL(file);
 
-      reader.onload = event => {
+      reader.onload = (event) => {
         this.shareResourceForm.controls.customImage.patchValue(reader.result);
       };
     }

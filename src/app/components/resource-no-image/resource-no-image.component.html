@@ -1,0 +1,47 @@
+<form [formGroup]="form" *ngIf="form">
+  <div class="no-image-text">
+    <div class="text-container">
+      <p>{{ form.controls.topText.value }}</p>
+      <p>{{ form.controls.bottomText.value }}</p>
+    </div>
+  </div>
+
+  <div class="controls">
+    <div class="control">
+      <mat-form-field appearance="outline">
+        <mat-label>Presets</mat-label>
+        <mat-select formControlName="preset">
+          <mat-option value="option1">Option 1</mat-option>
+          <mat-option value="option2">Option 2</mat-option>
+          <mat-option value="option3">Option 3</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <div class="control">
+      <!-- <mat-form-field appearance="outline">
+        <mat-label>Background Color</mat-label>
+        <mat-select formControlName="backgroundColor">
+          <mat-option value="option1">Option 1</mat-option>
+          <mat-option value="option2">Option 2</mat-option>
+          <mat-option value="option3">Option 3</mat-option>
+        </mat-select>
+      </mat-form-field> -->
+      <color-sketch
+        color="#fff"
+        (onChangeComplete)="handleBgColorChange($event)"
+      ></color-sketch>
+    </div>
+
+    <div class="control">
+      <mat-form-field appearance="outline">
+        <mat-label>Text Color</mat-label>
+        <mat-select formControlName="textColor">
+          <mat-option value="option1">Option 1</mat-option>
+          <mat-option value="option2">Option 2</mat-option>
+          <mat-option value="option3">Option 3</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+  </div>
+</form>

@@ -47,7 +47,10 @@
 
         <div
           class="resource-image"
-          *ngIf="!shareResourceForm.controls.isCustomImage.value"
+          *ngIf="
+            !shareResourceForm.controls.isCustomImage.value &&
+            !shareResourceForm.controls.noImage.value
+          "
           [ngStyle]="{ 'background-image': 'url(' + ogImage + ')' }"
         >
           <p *ngIf="!ogImage">
@@ -57,10 +60,20 @@
           </p>
         </div>
 
+        <app-resource-no-image
+          *ngIf="
+            !shareResourceForm.controls.isCustomImage.value &&
+            shareResourceForm.controls.noImage.value &&
+            shareResourceForm.controls.title.value
+          "
+          [data]="{ title: shareResourceForm.controls.title.value }"
+        ></app-resource-no-image>
+
         <div class="mat-checkbox-container">
           <mat-checkbox formControlName="isCustomImage"
-            >Use custom image</mat-checkbox
+            >Custom Image</mat-checkbox
           >
+          <mat-checkbox formControlName="noImage">No Image</mat-checkbox>
         </div>
 
         <mat-form-field appearance="fill">
