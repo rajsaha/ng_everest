@@ -24,7 +24,7 @@
   </div>
 </div>
 
-<div class="popover-item" matRipple (click)="goToView()">
+<div class="popover-item" matRipple (click)="view()">
   <div class="top">
     <fa-icon [icon]="faShare"></fa-icon>
     <span>Go to Post</span>
@@ -32,6 +32,22 @@
 
   <div class="bottom">
     <small>View entire post</small>
+  </div>
+</div>
+
+<div
+  *ngIf="loggedInUser == username"
+  (click)="edit()"
+  class="popover-item"
+  matRipple
+>
+  <div class="top">
+    <fa-icon [icon]="faEdit"></fa-icon>
+    <span>Edit Post</span>
+  </div>
+
+  <div class="bottom">
+    <small>Edit title, description and image</small>
   </div>
 </div>
 

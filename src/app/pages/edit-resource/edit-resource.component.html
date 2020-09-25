@@ -1,8 +1,4 @@
-<mat-progress-bar
-  *ngIf="isLoading"
-  mode="indeterminate"
->
-</mat-progress-bar>
+<mat-progress-bar *ngIf="isLoading" mode="indeterminate"> </mat-progress-bar>
 <div class="section-container">
   <div class="section">
     <div class="section-header">
@@ -15,15 +11,17 @@
         (click)="imageInput.click()"
         matRipple
         *ngIf="editResourceForm.controls.isCustomImage.value"
-        [ngStyle]="{ 'background-image': 'url(' + image + ')' }"
+        [style.background-image]="
+          'url(' + editResourceForm.controls.customImage.value + ')'
+        "
       >
-        <p *ngIf="!image">
+        <p *ngIf="!editResourceForm.controls.customImage.value">
           <fa-icon [icon]="faUpload"></fa-icon>&nbsp;Click here to upload a
           custom image
         </p>
         <input
           hidden
-          (change)="onFileSelected(imageInput)"
+          (change)="onFileSelected(imageInput.files[0])"
           #imageInput
           type="file"
           accept="image/*"
@@ -104,25 +102,6 @@
               (matChipInputTokenEnd)="addTag($event)"
             />
           </mat-chip-list>
-        </mat-form-field>
-
-        <h6>Add to collection</h6>
-        <mat-form-field appearance="outline">
-          <mat-label>Collections</mat-label>
-          <input
-            type="text"
-            placeholder="Select or Create New"
-            matInput
-            [matAutocomplete]="auto"
-            formControlName="collectionName"
-          />
-          <mat-autocomplete #auto="matAutocomplete">
-            <mat-optgroup label="Move to Existing Collections">
-              <mat-option *ngFor="let name of collectionNames" [value]="name">
-                {{ name }}
-              </mat-option>
-            </mat-optgroup>
-          </mat-autocomplete>
         </mat-form-field>
 
         <div class="form-button-container">
