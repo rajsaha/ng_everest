@@ -1,44 +1,45 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule, enableProdMode } from '@angular/core';
-import { HTTP_INTERCEPTORS } from '@angular/common/http';
-import { AuthInterceptorService } from '@services/auth/auth-interceptor.service';
+import { BrowserModule } from "@angular/platform-browser";
+import { NgModule, enableProdMode } from "@angular/core";
+import { HTTP_INTERCEPTORS } from "@angular/common/http";
+import { AuthInterceptorService } from "@services/auth/auth-interceptor.service";
 
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
+import { AppRoutingModule } from "./app-routing.module";
+import { AppComponent } from "./app.component";
 
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
-import { ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
+import { platformBrowserDynamic } from "@angular/platform-browser-dynamic";
+import { ReactiveFormsModule } from "@angular/forms";
+import { HttpClientModule } from "@angular/common/http";
 import { StoreModule } from "@ngrx/store";
 import { collectionsRefreshStateReducer } from "@services/ngrx/refreshCollections.reducer";
+import { noImageComponentStateReducer } from "@services/ngrx/noImageComponent.reducer";
 
-import { ManageModule } from './modules/manage/manage.module';
-import { CommonModule } from '@angular/common';
-import { MaterialModule } from './modules/material/material.module';
-import { GeneralModule } from './modules/general/general.module';
-import { DialogsModule } from './modules/dialogs/dialogs.module';
-import { ColorSketchModule } from 'ngx-color/sketch';
+import { ManageModule } from "./modules/manage/manage.module";
+import { CommonModule } from "@angular/common";
+import { MaterialModule } from "./modules/material/material.module";
+import { GeneralModule } from "./modules/general/general.module";
+import { DialogsModule } from "./modules/dialogs/dialogs.module";
+import { ColorPickerModule } from "ngx-color-picker";
 
-import { LoginComponent } from './pages/login/login.component';
-import { WelcomeComponent } from './pages/welcome/welcome.component';
-import { SignupComponent } from './pages/signup/signup.component';
-import { FeedComponent } from './pages/feed/feed.component';
-import { AtcComponent } from './general/dialogs/atc/atc.component';
-import { PoComponent } from './general/post/po/po.component';
-import { PageNotFoundComponent } from './pages/page-not-found/page-not-found.component';
-import { SnackbarComponent } from './general/snackbar/snackbar.component';
-import { ShareResourceComponent } from './pages/share-resource/share-resource.component';
-import { MainComponent } from './layouts/main/main.component';
-import { NoAuthComponent } from './layouts/no-auth/no-auth.component';
-import { SearchComponent } from './components/search/search.component';
-import { AddToCollectionComponent } from './components/add-to-collection/add-to-collection.component';
-import { SearchPageComponent } from './pages/search-page/search-page.component';
-import { UserComponent } from './general/user/user.component';
-import { PopoverComponent } from './components/popover/popover.component';
-import { EditCollectionComponent } from './general/collection/edit-collection/edit-collection.component';
-import { DeleteResourceFromCollectionComponent } from './general/collection/delete-resource-from-collection/delete-resource-from-collection.component';
-import { ResourceNoImageComponent } from './components/resource-no-image/resource-no-image.component';
+import { LoginComponent } from "./pages/login/login.component";
+import { WelcomeComponent } from "./pages/welcome/welcome.component";
+import { SignupComponent } from "./pages/signup/signup.component";
+import { FeedComponent } from "./pages/feed/feed.component";
+import { AtcComponent } from "./general/dialogs/atc/atc.component";
+import { PoComponent } from "./general/post/po/po.component";
+import { PageNotFoundComponent } from "./pages/page-not-found/page-not-found.component";
+import { SnackbarComponent } from "./general/snackbar/snackbar.component";
+import { ShareResourceComponent } from "./pages/share-resource/share-resource.component";
+import { MainComponent } from "./layouts/main/main.component";
+import { NoAuthComponent } from "./layouts/no-auth/no-auth.component";
+import { SearchComponent } from "./components/search/search.component";
+import { AddToCollectionComponent } from "./components/add-to-collection/add-to-collection.component";
+import { SearchPageComponent } from "./pages/search-page/search-page.component";
+import { UserComponent } from "./general/user/user.component";
+import { PopoverComponent } from "./components/popover/popover.component";
+import { EditCollectionComponent } from "./general/collection/edit-collection/edit-collection.component";
+import { DeleteResourceFromCollectionComponent } from "./general/collection/delete-resource-from-collection/delete-resource-from-collection.component";
+import { ResourceNoImageComponent } from "./components/resource-no-image/resource-no-image.component";
 
 @NgModule({
   declarations: [
@@ -59,12 +60,15 @@ import { ResourceNoImageComponent } from './components/resource-no-image/resourc
     PopoverComponent,
     EditCollectionComponent,
     DeleteResourceFromCollectionComponent,
-    ResourceNoImageComponent
+    ResourceNoImageComponent,
   ],
   imports: [
     CommonModule,
     BrowserModule,
-    StoreModule.forRoot({ collectionsRefreshState: collectionsRefreshStateReducer }),
+    StoreModule.forRoot({
+      collectionsRefreshState: collectionsRefreshStateReducer,
+      noImageComponentState: noImageComponentStateReducer,
+    }),
     BrowserAnimationsModule,
     AppRoutingModule,
     ReactiveFormsModule,
@@ -73,19 +77,24 @@ import { ResourceNoImageComponent } from './components/resource-no-image/resourc
     ManageModule,
     DialogsModule,
     GeneralModule,
-    ColorSketchModule
+    ColorPickerModule,
   ],
   providers: [
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptorService,
-      multi: true
-    }
+      multi: true,
+    },
   ],
   bootstrap: [AppComponent],
-  entryComponents: [AtcComponent, PoComponent, SnackbarComponent, PopoverComponent]
+  entryComponents: [
+    AtcComponent,
+    PoComponent,
+    SnackbarComponent,
+    PopoverComponent,
+  ],
 })
-export class AppModule { }
+export class AppModule {}
 
 enableProdMode();
 platformBrowserDynamic().bootstrapModule(AppModule);

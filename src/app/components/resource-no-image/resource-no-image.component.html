@@ -1,47 +1,58 @@
 <form [formGroup]="form" *ngIf="form">
-  <div class="no-image-text">
-    <div class="text-container">
+  <div
+    class="no-image-text"
+    [style.background]="form.get('backgroundColor').value"
+  >
+    <div class="text-container" [style.color]="form.get('textColor').value">
       <p>{{ form.controls.topText.value }}</p>
-      <p>{{ form.controls.bottomText.value }}</p>
+      <p>{{ form.controls.bottomText.value | truncate: [20] }}</p>
     </div>
   </div>
 
-  <div class="controls">
+  <div class="controls" *ngIf="mode === 'edit'">
     <div class="control">
       <mat-form-field appearance="outline">
         <mat-label>Presets</mat-label>
-        <mat-select formControlName="preset">
-          <mat-option value="option1">Option 1</mat-option>
-          <mat-option value="option2">Option 2</mat-option>
-          <mat-option value="option3">Option 3</mat-option>
+        <mat-select (selectionChange)="setPreset($event)">
+          <mat-option [value]="item" *ngFor="let item of presets">
+            <div class="preset">
+              <div
+                class="preview"
+                [style.background-color]="item.backgroundColor"
+                [style.color]="item.textColor"
+              >
+              </div>
+              <div class="text">{{ item.text }}</div>
+            </div>
+          </mat-option>
         </mat-select>
       </mat-form-field>
     </div>
 
-    <div class="control">
-      <!-- <mat-form-field appearance="outline">
-        <mat-label>Background Color</mat-label>
-        <mat-select formControlName="backgroundColor">
-          <mat-option value="option1">Option 1</mat-option>
-          <mat-option value="option2">Option 2</mat-option>
-          <mat-option value="option3">Option 3</mat-option>
-        </mat-select>
-      </mat-form-field> -->
-      <color-sketch
-        color="#fff"
-        (onChangeComplete)="handleBgColorChange($event)"
-      ></color-sketch>
+    <div class="control p-top-5">
+      <mat-label>Background Color</mat-label>
+      <div class="input-container">
+        <input
+          formControlName="backgroundColor"
+          [colorPicker]="form.get('backgroundColor').value"
+          [value]="form.get('backgroundColor').value"
+          (colorPickerChange)="form.get('backgroundColor').setValue($event)"
+          [style.background]="form.get('backgroundColor').value"
+        />
+      </div>
     </div>
 
-    <div class="control">
-      <mat-form-field appearance="outline">
-        <mat-label>Text Color</mat-label>
-        <mat-select formControlName="textColor">
-          <mat-option value="option1">Option 1</mat-option>
-          <mat-option value="option2">Option 2</mat-option>
-          <mat-option value="option3">Option 3</mat-option>
-        </mat-select>
-      </mat-form-field>
+    <div class="control p-top-5">
+      <mat-label>Text Color</mat-label>
+      <div class="input-container">
+        <input
+          formControlName="textColor"
+          [colorPicker]="form.get('textColor').value"
+          [value]="form.get('textColor').value"
+          (colorPickerChange)="form.get('textColor').setValue($event)"
+          [style.background]="form.get('textColor').value"
+        />
+      </div>
     </div>
   </div>
 </form>

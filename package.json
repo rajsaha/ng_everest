@@ -34,6 +34,7 @@
     "moment": "^2.27.0",
     "ngx-autosize": "^1.8.0",
     "ngx-color": "^6.0.2",
+    "ngx-color-picker": "^10.0.1",
     "ngx-infinite-scroll": "^8.0.2",
     "normalize.css": "^8.0.1",
     "path": "^0.12.7",
