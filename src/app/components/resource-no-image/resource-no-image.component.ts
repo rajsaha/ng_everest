@@ -55,8 +55,8 @@ export class ResourceNoImageComponent implements OnInit, OnChanges {
       topText: [""],
       bottomText: [""],
       preset: [""],
-      backgroundColor: ["#ffbc63"],
-      textColor: ["#c25151"],
+      backgroundColor: ["#000"],
+      textColor: ["#fff"],
       presetSelect: [""]
     });
   }
@@ -82,11 +82,10 @@ export class ResourceNoImageComponent implements OnInit, OnChanges {
     let bottomText = stringArray;
     this.form.controls.topText.patchValue(topText.join(" "));
     this.form.controls.bottomText.patchValue(bottomText.join(" "));
+    this.form.controls.backgroundColor.patchValue(data.backgroundColor ? data.backgroundColor : "#000");
+    this.form.controls.textColor.patchValue(data.textColor ? data.textColor : "#fff");
     if (this.mode === 'edit') {
       this.store.dispatch(setFormValue({ formVal: this.form.value }));
-    } else {
-      this.form.controls.backgroundColor.patchValue(data.backgroundColor);
-      this.form.controls.textColor.patchValue(data.textColor);
     }
   }
 

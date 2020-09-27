@@ -38,3 +38,9 @@
         text-align: center;
     }
 }
+
+.mat-checkbox-container {
+    display: inline-grid;
+    grid-gap: 15px;
+    grid-template-columns: auto auto;
+}

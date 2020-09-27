@@ -9,6 +9,7 @@ import { delay } from "rxjs/operators";
 import { ResourceService } from "@services/resource/resource.service";
 import { SnackbarService } from "@services/general/snackbar.service";
 import { CollectionService } from "@services/collection/collection.service";
+import { Store } from '@ngrx/store';
 
 class ImageSnippet {
   constructor(public src: string, public file: File) {}
@@ -38,6 +39,7 @@ export class EditResourceComponent implements OnInit {
   isDisabled = false;
   isUrlDisabled = true;
   isUrlChanged = false;
+  isReady = false;
 
   // Tags
   tags = [];
@@ -52,6 +54,10 @@ export class EditResourceComponent implements OnInit {
   ogDescription: string;
   ogImage: string;
 
+  // Store
+  noImageComponentFormState$: Observable<boolean>;
+  noImageData: any;
+
   constructor(
     private fb: FormBuilder,
     private validationService: ValidationService,
@@ -59,12 +65,15 @@ export class EditResourceComponent implements OnInit {
     private collectionService: CollectionService,
     private snackbarService: SnackbarService,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private store: Store<{ noImageComponentFormState: any }>
   ) {}
 
   ngOnInit() {
     this.initEditResourceForm();
     this.onURLOnChanges();
+    this.onNoImageChange();
+    this.onIsCustomImageChange();
     this.username = localStorage.getItem("username");
     this.route.params.subscribe(async (params) => {
       await Promise.all([
@@ -78,7 +87,7 @@ export class EditResourceComponent implements OnInit {
     this.editResourceForm = this.fb.group(
       {
         id: [""],
-        isCustomImage: [""],
+        isCustomImage: [false],
         url: [{ disabled: this.isUrlDisabled }, Validators.required],
         title: ["", [Validators.required]],
         description: ["", [Validators.required]],
@@ -88,9 +97,32 @@ export class EditResourceComponent implements OnInit {
         type: ["ext-content"],
         collectionName: [""],
         timestamp: [""],
+        noImage: [false]
       },
       { validator: [this.validationService.checkValidURL] }
     );
+  }
+
+  onNoImageChange() {
+    this.editResourceForm.controls.noImage.valueChanges.subscribe((val) => {
+      if (val) {
+        this.editResourceForm.controls.isCustomImage.patchValue(false);
+      }
+    });
+  }
+
+  onIsCustomImageChange() {
+    this.editResourceForm.controls.isCustomImage.valueChanges.subscribe(
+      (val) => {
+        if (val) {
+          this.editResourceForm.controls.noImage.patchValue(false);
+        }
+      }
+    );
+  }
+
+  get editResourceFormControls() {
+    return this.editResourceForm.controls;
   }
 
   addTag(event: MatChipInputEvent): void {
@@ -139,21 +171,16 @@ export class EditResourceComponent implements OnInit {
     this.submitButtonText = "Saving...";
     this.isLoading = true;
     this.isDisabled = true;
+    this.monitorNoImageState();
+    
     let data = {};
-    if (this.editResourceForm.controls.isCustomImage) {
-      data = {
-        formData: this.editResourceForm.value,
-        tags: this.tags,
-        customImage: this.image,
-        isUrlChanged: this.isUrlChanged,
-      };
-    } else {
-      data = {
-        formData: this.editResourceForm.value,
-        tags: this.tags,
-        isUrlChanged: this.isUrlChanged,
-      };
-    }
+    data = {
+      formData: this.editResourceForm.value,
+      tags: this.tags,
+      customImage: this.image,
+      isUrlChanged: this.isUrlChanged,
+      noImageData: this.noImageData,
+    };
 
     const response: any = await this.resourceService.editResource(data);
     this.submitButtonText = "Done";
@@ -284,5 +311,19 @@ export class EditResourceComponent implements OnInit {
     this.editResourceForm.controls.timestamp.patchValue(data.timestamp);
     this.tags = data.tags;
     this.ogImage = data.lgImage.link;
+
+    if (data.noImage) {
+      this.editResourceForm.controls.noImage.patchValue(true);
+    }
+
+    this.isReady = true;
+  }
+
+  monitorNoImageState() {
+    this.store
+      .select((state) => state)
+      .subscribe((data: any) => {
+        this.noImageData = data.noImageComponentState;
+      });
   }
 }

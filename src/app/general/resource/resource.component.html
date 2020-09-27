@@ -6,6 +6,16 @@
     </button>
   </div>
   <img *ngIf="image" class="image" [src]="image" (click)="goToView()" />
+  <div
+    *ngIf="noImage"
+    class="no-image-text"
+    [style.background]="backgroundColor"
+  >
+    <div class="text-container" [style.color]="textColor">
+      <p>{{ topText }}</p>
+      <p>{{ bottomText }}</p>
+    </div>
+  </div>
   <div class="details">
     <!-- * Type -->
     <div class="type" *ngIf="type === 'article'">
