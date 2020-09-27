@@ -10,6 +10,8 @@ import { SnackbarService } from "@services/general/snackbar.service";
 import { CollectionService } from "@services/collection/collection.service";
 import { debounceTime } from "rxjs/operators";
 import { DomSanitizer } from "@angular/platform-browser";
+import { Observable } from 'rxjs';
+import { select, Store } from "@ngrx/store";
 
 class ImageSnippet {
   constructor(public src: string, public file: File) {}
@@ -51,14 +53,23 @@ export class ShareResourceComponent implements OnInit {
   ogDescription: string;
   ogImage: string;
 
+  // Store
+  noImageComponentFormState$: Observable<boolean>;
+  noImageData: any;
+
   constructor(
     private fb: FormBuilder,
     private validationService: ValidationService,
     private resourceService: ResourceService,
     private collectionService: CollectionService,
     private snackbarService: SnackbarService,
-    private router: Router
-  ) {}
+    private router: Router,
+    private store: Store<{ noImageComponentFormState: any }>
+  ) {
+    this.noImageComponentFormState$ = store.pipe(
+      select("noImageComponentFormState")
+    );
+  }
 
   ngOnInit() {
     this.username = localStorage.getItem("username");
@@ -122,11 +133,13 @@ export class ShareResourceComponent implements OnInit {
       this.isLoading = true;
       this.isDisabled = true;
       this.submitButtonText = "Sharing...";
+      this.monitorNoImageState();
 
       const data = {
         formData: this.shareResourceForm.value,
         tags: this.tags,
         collectionData: this.atcData,
+        noImageData: this.noImageData
       };
 
       const response: any = await this.resourceService.shareResource(data);
@@ -281,5 +294,13 @@ export class ShareResourceComponent implements OnInit {
 
   receiveAtcData($event) {
     this.atcData = $event;
+  }
+
+  monitorNoImageState() {
+    this.store
+      .select((state) => state)
+      .subscribe((data: any) => {
+        this.noImageData = data.noImageComponentState;
+      });
   }
 }

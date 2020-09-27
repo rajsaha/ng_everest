@@ -49,6 +49,9 @@ export class PostComponent implements OnInit {
   timestamp: any;
   commentCount = 0;
   recommendedByCount: number;
+  noImage: boolean;
+  backgroundColor: string;
+  textColor: string;
 
   // Icons
   faThumbsUp = faThumbsUp;
@@ -83,10 +86,10 @@ export class PostComponent implements OnInit {
   ) {}
 
   async ngOnInit() {
-    this.populatePost();
-    this.init_comment_form();
-    this.checkIfDescriptionTooLong(this.description)
     try {
+      this.populatePost();
+      this.init_comment_form();
+      this.checkIfDescriptionTooLong(this.description)
       this.isLoading = true;
       await Promise.all([
         this.getCommentsCount(),
@@ -113,6 +116,9 @@ export class PostComponent implements OnInit {
     this.userImage = this.data.userImage ? this.data.userImage : this.noPhoto;
     this.timestamp = moment(this.data.timestamp).fromNow();
     this.recommendedByCount = this.data.recommended_by_count;
+    this.noImage = this.data.noImage;
+    this.backgroundColor = this.data.backgroundColor;
+    this.textColor = this.data.textColor;
 
     if (this.type === 'article') {
       this.truncateValue = 500;

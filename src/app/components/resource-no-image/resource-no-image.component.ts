@@ -16,7 +16,7 @@ import { select, Store } from "@ngrx/store";
   styleUrls: ["./resource-no-image.component.scss"],
 })
 export class ResourceNoImageComponent implements OnInit, OnChanges {
-  @Input() data: any;
+  @Input() data: { title: string, backgroundColor?: string, textColor?: string };
   @Input() mode = "edit";
   form: FormGroup;
 

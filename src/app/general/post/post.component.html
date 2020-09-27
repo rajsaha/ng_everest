@@ -32,6 +32,17 @@
     </div>
   </a>
 
+  <a (click)="openResource()" target="_blank" *ngIf="noImage">
+    <app-resource-no-image
+      [data]="{
+        title: title,
+        backgroundColor: backgroundColor,
+        textColor: textColor
+      }"
+      [mode]="'view'"
+    ></app-resource-no-image>
+  </a>
+
   <!-- * Title -->
   <div
     class="title"

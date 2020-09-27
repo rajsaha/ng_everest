@@ -63,8 +63,7 @@
         <app-resource-no-image
           *ngIf="
             !shareResourceForm.controls.isCustomImage.value &&
-            shareResourceForm.controls.noImage.value &&
-            shareResourceForm.controls.title.value
+            shareResourceForm.controls.noImage.value
           "
           [data]="{ title: shareResourceForm.controls.title.value }"
         ></app-resource-no-image>
