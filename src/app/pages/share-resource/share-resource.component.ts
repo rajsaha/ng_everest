@@ -10,7 +10,7 @@ import { SnackbarService } from "@services/general/snackbar.service";
 import { CollectionService } from "@services/collection/collection.service";
 import { debounceTime } from "rxjs/operators";
 import { DomSanitizer } from "@angular/platform-browser";
-import { Observable } from 'rxjs';
+import { Observable } from "rxjs";
 import { select, Store } from "@ngrx/store";
 
 class ImageSnippet {
@@ -129,78 +129,41 @@ export class ShareResourceComponent implements OnInit {
       return;
     }
 
-    if (this.shareResourceForm.controls.isCustomImage) {
-      this.isLoading = true;
-      this.isDisabled = true;
-      this.submitButtonText = "Sharing...";
-      this.monitorNoImageState();
+    this.isLoading = true;
+    this.isDisabled = true;
+    this.submitButtonText = "Sharing...";
+    this.monitorNoImageState();
 
-      const data = {
-        formData: this.shareResourceForm.value,
-        tags: this.tags,
-        collectionData: this.atcData,
-        noImageData: this.noImageData
-      };
+    const data = {
+      formData: this.shareResourceForm.value,
+      tags: this.tags,
+      collectionData: this.atcData,
+      noImageData: this.noImageData,
+    };
 
-      const response: any = await this.resourceService.shareResource(data);
-      this.isLoading = false;
-      this.isDisabled = false;
-      this.submitButtonText = "Sharing";
+    const response: any = await this.resourceService.shareResource(data);
+    this.isLoading = false;
+    this.isDisabled = false;
+    this.submitButtonText = "Sharing";
 
-      if (!response.error) {
-        this.snackbarService.openSnackBar({
-          message: {
-            message: "Resource saved!",
-            error: false,
-          },
-          class: "green-snackbar",
-        });
-        this.router.navigate(["/"]);
-      } else {
-        this.snackbarService.openSnackBar({
-          message: {
-            message: `Error: ${response.error}!`,
-            error: true,
-          },
-          class: "red-snackbar",
-        });
-        this.isDisabled = false;
-      }
+    if (!response.error) {
+      this.snackbarService.openSnackBar({
+        message: {
+          message: "Resource saved!",
+          error: false,
+        },
+        class: "green-snackbar",
+      });
+      this.router.navigate(["/"]);
     } else {
-      this.isLoading = true;
-      this.isDisabled = true;
-      this.submitButtonText = "Sharing...";
-
-      const data = {
-        formData: this.shareResourceForm.value,
-        tags: this.tags,
-        collectionData: this.atcData,
-      };
-
-      const response: any = await this.resourceService.shareResource(data);
-      this.isLoading = false;
+      this.snackbarService.openSnackBar({
+        message: {
+          message: `Error: ${response.error}!`,
+          error: true,
+        },
+        class: "red-snackbar",
+      });
       this.isDisabled = false;
-      this.submitButtonText = "Sharing";
-
-      if (!response.error) {
-        this.snackbarService.openSnackBar({
-          message: {
-            message: "Resource saved!",
-            error: false,
-          },
-          class: "green-snackbar",
-        });
-        this.router.navigate(["/"]);
-      } else {
-        this.snackbarService.openSnackBar({
-          message: {
-            message: `Error: ${response.error}!`,
-            error: true,
-          },
-          class: "red-snackbar",
-        });
-        this.isDisabled = false;
-      }
     }
   }
 
@@ -213,11 +176,13 @@ export class ShareResourceComponent implements OnInit {
   }
 
   onIsCustomImageChange() {
-    this.shareResourceForm.controls.isCustomImage.valueChanges.subscribe((val) => {
-      if (val) {
-        this.shareResourceForm.controls.noImage.patchValue(false);
+    this.shareResourceForm.controls.isCustomImage.valueChanges.subscribe(
+      (val) => {
+        if (val) {
+          this.shareResourceForm.controls.noImage.patchValue(false);
+        }
       }
-    });
+    );
   }
 
   async onURLOnChanges() {

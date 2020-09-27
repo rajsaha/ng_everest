@@ -19,7 +19,6 @@ import { CommonModule } from "@angular/common";
 import { MaterialModule } from "./modules/material/material.module";
 import { GeneralModule } from "./modules/general/general.module";
 import { DialogsModule } from "./modules/dialogs/dialogs.module";
-import { ColorPickerModule } from "ngx-color-picker";
 
 import { LoginComponent } from "./pages/login/login.component";
 import { WelcomeComponent } from "./pages/welcome/welcome.component";
@@ -39,7 +38,6 @@ import { UserComponent } from "./general/user/user.component";
 import { PopoverComponent } from "./components/popover/popover.component";
 import { EditCollectionComponent } from "./general/collection/edit-collection/edit-collection.component";
 import { DeleteResourceFromCollectionComponent } from "./general/collection/delete-resource-from-collection/delete-resource-from-collection.component";
-import { ResourceNoImageComponent } from "./components/resource-no-image/resource-no-image.component";
 
 @NgModule({
   declarations: [
@@ -60,7 +58,6 @@ import { ResourceNoImageComponent } from "./components/resource-no-image/resourc
     PopoverComponent,
     EditCollectionComponent,
     DeleteResourceFromCollectionComponent,
-    ResourceNoImageComponent,
   ],
   imports: [
     CommonModule,
@@ -77,7 +74,6 @@ import { ResourceNoImageComponent } from "./components/resource-no-image/resourc
     ManageModule,
     DialogsModule,
     GeneralModule,
-    ColorPickerModule,
   ],
   providers: [
     {

@@ -57,6 +57,7 @@ export class ResourceNoImageComponent implements OnInit, OnChanges {
       preset: [""],
       backgroundColor: ["#ffbc63"],
       textColor: ["#c25151"],
+      presetSelect: [""]
     });
   }
 

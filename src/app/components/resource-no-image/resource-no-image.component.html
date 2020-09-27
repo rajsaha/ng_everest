@@ -10,10 +10,10 @@
   </div>
 
   <div class="controls" *ngIf="mode === 'edit'">
-    <div class="control">
+    <!-- <div class="control">
       <mat-form-field appearance="outline">
         <mat-label>Presets</mat-label>
-        <mat-select (selectionChange)="setPreset($event)">
+        <mat-select (selectionChange)="setPreset($event)" formControlName="presetSelect">
           <mat-option [value]="item" *ngFor="let item of presets">
             <div class="preset">
               <div
@@ -27,7 +27,7 @@
           </mat-option>
         </mat-select>
       </mat-form-field>
-    </div>
+    </div> -->
 
     <div class="control p-top-5">
       <mat-label>Background Color</mat-label>

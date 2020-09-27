@@ -21,6 +21,8 @@ import { ViewResourceComponent } from 'src/app/pages/view-resource/view-resource
 import { PostComponent } from 'src/app/general/post/post.component';
 import { CommentComponent } from 'src/app/general/post/comment/comment.component';
 import { UserImageComponent } from 'src/app/components/user-image/user-image.component';
+import { ResourceNoImageComponent } from 'src/app/components/resource-no-image/resource-no-image.component';
+import { ColorPickerModule } from 'ngx-color-picker';
 
 @NgModule({
   declarations: [
@@ -34,7 +36,8 @@ import { UserImageComponent } from 'src/app/components/user-image/user-image.com
     CollectionComponent,
     ViewCollectionComponent,
     ViewResourceComponent,
-    UserImageComponent
+    UserImageComponent,
+    ResourceNoImageComponent
   ],
   imports: [
     CommonModule,
@@ -47,7 +50,8 @@ import { UserImageComponent } from 'src/app/components/user-image/user-image.com
     MatFormFieldModule,
     MatInputModule,
     MatProgressSpinnerModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    ColorPickerModule
   ],
   exports: [
     PostComponent,
@@ -62,7 +66,9 @@ import { UserImageComponent } from 'src/app/components/user-image/user-image.com
     CollectionComponent,
     ViewCollectionComponent,
     ViewResourceComponent,
-    UserImageComponent
+    UserImageComponent,
+    ResourceNoImageComponent,
+    ColorPickerModule
   ]
 })
 export class GeneralModule { }

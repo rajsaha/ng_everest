@@ -22,7 +22,6 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatTooltipModule } from '@angular/material/tooltip';
-import { MatRadioModule } from "@angular/material/radio";
 
 
 @NgModule({
@@ -51,7 +50,6 @@ import { MatRadioModule } from "@angular/material/radio";
     MatChipsModule,
     MatProgressSpinnerModule,
     MatAutocompleteModule,
-    MatRadioModule
     // ! End of Material Angular Modules
   ],
   exports: [
@@ -76,7 +74,6 @@ import { MatRadioModule } from "@angular/material/radio";
     MatChipsModule,
     MatProgressSpinnerModule,
     MatAutocompleteModule,
-    MatRadioModule
   ]
 })
 export class MaterialModule { }
