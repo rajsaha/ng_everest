@@ -10,6 +10,7 @@ import { ResourceService } from "@services/resource/resource.service";
 import { SnackbarService } from "@services/general/snackbar.service";
 import { CollectionService } from "@services/collection/collection.service";
 import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
 
 class ImageSnippet {
   constructor(public src: string, public file: File) {}

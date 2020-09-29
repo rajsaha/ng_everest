@@ -16,22 +16,75 @@
     </button>
   </div>
   <div class="collection" (click)="goToCollection()">
-    <div
-      class="main"
-      [ngStyle]="{ 'background-image': 'url(' + image1 + ')' }"
-    ></div>
+    <div class="main" [ngStyle]="{ 'background-image': 'url(' + image1 + ')' }">
+      <div
+        class="no-image-text"
+        *ngIf="resource1NoImageData.noImage"
+        [style.background]="resource1NoImageData.backgroundColor"
+      >
+        <div
+          class="text-container-main"
+          [style.color]="resource1NoImageData.textColor"
+        >
+          <p>{{ resource1NoImageData.topText }}</p>
+          <p>{{ resource1NoImageData.bottomText | truncate: [20] }}</p>
+        </div>
+      </div>
+    </div>
     <div
       class="block"
       [ngStyle]="{ 'background-image': 'url(' + image2 + ')' }"
-    ></div>
+    >
+      <div
+        class="no-image-text"
+        *ngIf="resource2NoImageData.noImage"
+        [style.background]="resource2NoImageData.backgroundColor"
+      >
+        <div
+          class="text-container-block"
+          [style.color]="resource2NoImageData.textColor"
+        >
+          <p>{{ resource2NoImageData.topText }}</p>
+          <p>{{ resource2NoImageData.bottomText | truncate: [20] }}</p>
+        </div>
+      </div>
+    </div>
     <div
       class="block"
       [ngStyle]="{ 'background-image': 'url(' + image3 + ')' }"
-    ></div>
+    >
+      <div
+        class="no-image-text"
+        *ngIf="resource3NoImageData.noImage"
+        [style.background]="resource3NoImageData.backgroundColor"
+      >
+        <div
+          class="text-container-block"
+          [style.color]="resource3NoImageData.textColor"
+        >
+          <p>{{ resource3NoImageData.topText }}</p>
+          <p>{{ resource3NoImageData.bottomText | truncate: [20] }}</p>
+        </div>
+      </div>
+    </div>
     <div
       class="block"
       [ngStyle]="{ 'background-image': 'url(' + image4 + ')' }"
-    ></div>
+    >
+      <div
+        class="no-image-text"
+        *ngIf="resource4NoImageData.noImage"
+        [style.background]="resource4NoImageData.backgroundColor"
+      >
+        <div
+          class="text-container-block"
+          [style.color]="resource4NoImageData.textColor"
+        >
+          <p>{{ resource4NoImageData.topText }}</p>
+          <p>{{ resource4NoImageData.bottomText | truncate: [20] }}</p>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
 

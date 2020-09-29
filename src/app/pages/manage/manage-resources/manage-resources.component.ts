@@ -55,7 +55,6 @@ export class ManageResourcesComponent implements OnInit {
 
   async getUserResources() {
     try {
-      console.log(this.userData)
       this.isLoading = true;
       // Search
       const query = this.resourceSearchForm.get('query').value;

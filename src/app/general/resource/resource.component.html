@@ -11,7 +11,7 @@
     class="no-image-text"
     [style.background]="backgroundColor"
   >
-    <div class="text-container" [style.color]="textColor">
+    <div class="text-container" [style.color]="textColor" (click)="goToView()">
       <p>{{ topText }}</p>
       <p>{{ bottomText }}</p>
     </div>

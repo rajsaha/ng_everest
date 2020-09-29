@@ -6,6 +6,22 @@ $min-block-width: 5rem;
 $min-block-height: 5rem;
 $block-radius: 10px;
 $block-border: 5px solid white;
+%noImageTextBase {
+  border-radius: 5px;
+  display: grid;
+  place-items: center;
+  margin-bottom: 15px;
+  height: 100%;
+  max-width: 600px;
+}
+
+%pBase {
+  p {
+    font-family: "Bree Serif", serif;
+    margin: 0;
+    text-align: center;
+  }
+}
 
 .collection-container {
   border: 1px solid rgb(235, 235, 235);
@@ -63,6 +79,22 @@ $block-border: 5px solid white;
       background-position: center center;
       border-bottom: 5px solid white;
       width: auto;
+
+      .no-image-text {
+        @extend %noImageTextBase;
+
+        .text-container-main {
+          @extend %pBase;
+
+          p:nth-of-type(1) {
+            font-size: 2rem;
+          }
+
+          p:nth-of-type(2) {
+            font-size: 1rem;
+          }
+        }
+      }
     }
 
     .block {
@@ -74,6 +106,22 @@ $block-border: 5px solid white;
       max-height: $max-block-height;
       min-width: $min-block-width;
       min-height: $min-block-height;
+
+      .no-image-text {
+        @extend %noImageTextBase;
+
+        .text-container-block {
+          @extend %pBase;
+
+          p:nth-of-type(1) {
+            font-size: 0.8rem;
+          }
+
+          p:nth-of-type(2) {
+            font-size: 0.5rem;
+          }
+        }
+      }
 
       &:nth-child(1) {
         border-left: $block-border;
