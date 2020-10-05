@@ -81,7 +81,11 @@ export class ResourceComponent implements OnInit {
   populateResource() {
     this.isLoading = true;
     this.id = this.data._id;
-    this.resourceUser = this.data.username[0];
+    if (this.data.username[0].username) {
+      this.resourceUser = this.data.username[0].username;
+    } else {
+      this.resourceUser = this.data.username;
+    }
     this.url = this.data.url;
     this.title = this.data.title;
     this.type = this.data.type;
