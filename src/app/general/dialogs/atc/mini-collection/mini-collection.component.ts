@@ -34,7 +34,7 @@ export class MiniCollectionComponent implements OnInit {
       // * Handle no image situation
       if (this.data.resource1.noImage) {
         this.showPlaceholder = true;
-        this.placeholderText = this.generatePlaceholderText(this.data.title);
+        this.placeholderText = this.generatePlaceholderText(this.data.resource1.title);
       }
     }
   }
