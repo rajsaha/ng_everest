@@ -1,4 +1,5 @@
 <div
+  *ngIf="ready"
   (click)="goToUser(userData.username)"
   class="image"
   [ngClass]="[imageSizeClass, clickableClass]"

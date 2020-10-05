@@ -30,7 +30,6 @@ export class FfComponent implements OnInit {
     const response: any = await this.userService.getFollowersFollowing({
       userId: this.data.userId,
     });
-    this.isLoading = false;
     for (const user of response.data.followers) {
       this.followers.push(user.followers[0]);
     }
@@ -38,6 +37,7 @@ export class FfComponent implements OnInit {
     for (const user of response.data.followings) {
       this.following.push(user.followings[0]);
     }
+    this.isLoading = false;
   }
 
   onScrollDown() {

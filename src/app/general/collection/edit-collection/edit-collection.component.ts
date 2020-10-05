@@ -66,7 +66,7 @@ export class EditCollectionComponent implements OnInit {
       id: this.data.collectionData._id,
     });
     this.numOfResources = result.collection.count;
-    for (let item of result.collection.collection[0].resources) {
+    for (let item of result.collection.resources) {
       this.resources.push(item);
     }
     this.isLoading = false;

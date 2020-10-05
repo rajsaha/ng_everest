@@ -5,9 +5,24 @@
   (mouseout)="toggleActive(false)"
 >
   <div
+    *ngIf="!data.noImage"
     class="resource-image"
     [ngStyle]="{ 'background-image': 'url(' + data.mdImage.link + ')' }"
   >
+    <div class="delete-button" (click)="deleteResourceFromCollection()">
+      <fa-icon [icon]="faTimesCircle"></fa-icon>
+    </div>
+  </div>
+
+  <div
+    *ngIf="data.noImage"
+    class="resource-image"
+    [ngStyle]="{
+      'background-color': data.backgroundColor,
+      color: data.textColor
+    }"
+  >
+    <p>{{ generatePlaceholderText(data.title) }}</p>
     <div class="delete-button" (click)="deleteResourceFromCollection()">
       <fa-icon [icon]="faTimesCircle"></fa-icon>
     </div>

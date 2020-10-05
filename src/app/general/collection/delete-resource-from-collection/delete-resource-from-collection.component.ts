@@ -35,4 +35,16 @@ export class DeleteResourceFromCollectionComponent implements OnInit {
       });
     }
   }
+
+  generatePlaceholderText(title: string) {
+    let stringArray = title.split(" ");
+    let output = "";
+    if (stringArray.length > 1) {
+      output = stringArray[0].charAt(0) + stringArray[1].charAt(0);
+    } else {
+      output = stringArray[0].charAt(0) + stringArray[0].charAt(1);
+    }
+
+    return output;
+  }
 }
