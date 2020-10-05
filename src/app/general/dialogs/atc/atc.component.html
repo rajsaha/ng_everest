@@ -17,7 +17,7 @@
           <h6>Add to existing collections</h6>
           <mat-progress-bar mode="indeterminate" *ngIf="isLoading">
           </mat-progress-bar>
-          
+
           <app-mini-collection
             *ngFor="let collection of collections"
             (click)="addResourceToCollection(collection)"
@@ -71,7 +71,20 @@
     <div class="divider" *ngIf="!isMobileViewport"></div>
 
     <div class="right" *ngIf="!isMobileViewport">
-      <img [src]="data.image" />
+      <img *ngIf="!data.noImage" [src]="data.image" />
+      <div
+        *ngIf="data.noImage"
+        class="no-image-text"
+        [ngStyle]="{
+          'background-color': data.backgroundColor,
+          color: data.textColor
+        }"
+      >
+        <div class="text-container">
+          <p>{{ topText }}</p>
+          <p>{{ bottomText }}</p>
+        </div>
+      </div>
       <h4>{{ data.title }}</h4>
       <p>{{ data.description }}</p>
     </div>

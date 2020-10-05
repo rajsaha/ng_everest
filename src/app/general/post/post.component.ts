@@ -244,7 +244,10 @@ export class PostComponent implements OnInit {
         url: this.url,
         title: this.title,
         image: this.image,
-        description: this.description
+        description: this.description,
+        backgroundColor: this.backgroundColor,
+        textColor: this.textColor,
+        noImage: this.noImage
       }
     });
 

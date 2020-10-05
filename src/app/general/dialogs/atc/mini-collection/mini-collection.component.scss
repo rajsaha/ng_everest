@@ -17,6 +17,12 @@
   background-position: center center;
 }
 
+%noImageBox {
+  width: 50px;
+  height: 50px;
+  border-radius: 5px;
+}
+
 .collection {
   border-radius: 5px;
   cursor: pointer;
@@ -37,6 +43,23 @@
     .placeholder {
       position: absolute;
       @extend %imageBox;
+      display: grid;
+
+      span {
+        align-self: center;
+        justify-self: center;
+        text-transform: uppercase;
+      }
+    }
+  }
+
+  .no-image {
+    position: relative;
+    @extend %noImageBox;
+
+    .placeholder {
+      position: absolute;
+      @extend %noImageBox;
       display: grid;
 
       span {

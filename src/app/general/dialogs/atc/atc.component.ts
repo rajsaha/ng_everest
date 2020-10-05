@@ -20,6 +20,8 @@ export class AtcComponent implements OnInit {
   currentCollectionId: string;
   currentCollectionName = "";
   isMobileViewport = false;
+  topText: string;
+  bottomText: string;
 
   // Form
   createCollectionForm: FormGroup;
@@ -56,6 +58,7 @@ export class AtcComponent implements OnInit {
   }
 
   async ngOnInit() {
+    this.prepareText(this.data.title);
     this.userId = localStorage.getItem("userId");
     this.username = localStorage.getItem("username");
     this.initAddToCollectionForm();
@@ -240,5 +243,12 @@ export class AtcComponent implements OnInit {
     this._ngZone.onStable
       .pipe(take(1))
       .subscribe(() => this.autosize.resizeToFitContent(true));
+  }
+
+  prepareText(title: string) {
+    let stringArray = title.split(" ");
+    let halfLength = Math.ceil(stringArray.length / 2);
+    this.topText = stringArray.splice(0, halfLength).join(" ");
+    this.bottomText = stringArray.join(" ");
   }
 }

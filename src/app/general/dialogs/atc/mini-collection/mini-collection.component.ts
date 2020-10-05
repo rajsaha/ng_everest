@@ -30,6 +30,12 @@ export class MiniCollectionComponent implements OnInit {
       this.placeholderText = this.generatePlaceholderText(this.data.title);
     } else {
       this.image = this.data.resource1.smImage.link;
+
+      // * Handle no image situation
+      if (this.data.resource1.noImage) {
+        this.showPlaceholder = true;
+        this.placeholderText = this.generatePlaceholderText(this.data.title);
+      }
     }
   }
 
