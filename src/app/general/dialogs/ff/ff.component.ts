@@ -31,12 +31,12 @@ export class FfComponent implements OnInit {
       userId: this.data.userId,
     });
     this.isLoading = false;
-    for (const user of response.followers) {
-      this.followers.push(user);
+    for (const user of response.data.followers) {
+      this.followers.push(user.followers[0]);
     }
 
-    for (const user of response.following) {
-      this.following.push(user);
+    for (const user of response.data.followings) {
+      this.following.push(user.followings[0]);
     }
   }
 

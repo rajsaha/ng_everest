@@ -11,15 +11,9 @@
           [fromRoot]="true"
           (scrolled)="onScrollDown()"
         >
-          <div
-            class="image"
-            [ngStyle]="{
-              'background-image':
-                'url(' + (user.image ? user.image.link : '') + ')'
-            }"
-          ></div>
+          <app-user-image [userData]="user"></app-user-image>
           <div class="details">
-            <span>{{ user.name }}</span>
+            <span>{{ user.firstName }} {{ user.lastName }}</span>
             <span>{{ user.username }}</span>
           </div>
         </div>
@@ -31,12 +25,11 @@
           diameter="25"
         ></mat-progress-spinner>
       </div>
-  
+
       <div class="no-data" *ngIf="!isLoading && followers.length === 0">
         No one's following you
       </div>
     </div>
-
   </mat-tab>
   <mat-tab label="Following">
     <div class="parent">
@@ -50,13 +43,7 @@
           (scrolled)="onScrollDown()"
           [fromRoot]="true"
         >
-          <div
-            class="image"
-            [ngStyle]="{
-              'background-image':
-                'url(' + (user.image ? user.image.link : '') + ')'
-            }"
-          ></div>
+          <app-user-image [userData]="user"></app-user-image>
           <div class="details">
             <span class="name">{{ user.name }}</span>
             <span class="username">{{ user.username }}</span>
@@ -73,7 +60,7 @@
           diameter="25"
         ></mat-progress-spinner>
       </div>
-  
+
       <div class="no-data" *ngIf="isLoading && following.length > 0">
         You're not following anyone
       </div>
