@@ -11,7 +11,7 @@
           [fromRoot]="true"
           (scrolled)="onScrollDown()"
         >
-          <app-user-image [userData]="user"></app-user-image>
+          <app-user-image [userData]="user" [clickable]="false"></app-user-image>
           <div class="details">
             <span>{{ user.firstName }} {{ user.lastName }}</span>
             <span>{{ user.username }}</span>
@@ -43,7 +43,7 @@
           (scrolled)="onScrollDown()"
           [fromRoot]="true"
         >
-          <app-user-image [userData]="user"></app-user-image>
+          <app-user-image [userData]="user" [clickable]="false"></app-user-image>
           <div class="details">
             <span class="name">{{ user.name }}</span>
             <span class="username">{{ user.username }}</span>

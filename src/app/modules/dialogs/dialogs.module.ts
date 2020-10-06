@@ -17,6 +17,7 @@ import { ReactiveFormsModule } from "@angular/forms";
 import { InfiniteScrollModule } from "ngx-infinite-scroll";
 import { MiniCollectionComponent } from 'src/app/general/dialogs/atc/mini-collection/mini-collection.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { GeneralModule } from '../general/general.module';
 
 @NgModule({
   declarations: [
@@ -29,6 +30,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
   imports: [
     CommonModule,
     FontAwesomeModule,
+    GeneralModule,
     InfiniteScrollModule,
     MatInputModule,
     MatFormFieldModule,
