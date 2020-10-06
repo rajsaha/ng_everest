@@ -49,7 +49,7 @@
             <span class="username">{{ user.username }}</span>
           </div>
           <div>
-            <button mat-stroked-button>Unfollow</button>
+            <button mat-stroked-button (click)="unfollow(user.id)">Unfollow</button>
           </div>
         </div>
       </div>

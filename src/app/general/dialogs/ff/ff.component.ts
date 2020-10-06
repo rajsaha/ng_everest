@@ -9,6 +9,7 @@ import { MAT_DIALOG_DATA } from "@angular/material/dialog";
 })
 export class FfComponent implements OnInit {
   username: string;
+  anchorUserId: string;
   followers = [];
   following = [];
 
@@ -22,6 +23,7 @@ export class FfComponent implements OnInit {
 
   async ngOnInit() {
     this.username = localStorage.getItem("username");
+    this.anchorUserId = localStorage.getItem("userId");
     await this.getUserFollowers();
   }
 
@@ -42,5 +44,18 @@ export class FfComponent implements OnInit {
 
   onScrollDown() {
     console.log("asd");
+  }
+
+  async unfollow(userId: string) {
+    const result: any = await this.userService.unfollowUser({
+      anchorUserId: this.anchorUserId,
+      userId
+    });
+
+    if (!result.error) {
+      this.followers = [];
+      this.following = [];
+      await this.getUserFollowers();
+    }
   }
 }
