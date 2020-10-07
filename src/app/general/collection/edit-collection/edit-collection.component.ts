@@ -4,7 +4,7 @@ import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { CollectionService } from "@services/collection/collection.service";
 import { Store, select } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { setRefreshCollectionsToTrue } from "@services/ngrx/refreshCollections.actions";
+import { setRefreshCollectionsToTrue } from "@services/ngrx/refreshCollections/refreshCollections.actions";
 
 @Component({
   selector: "app-edit-collection",

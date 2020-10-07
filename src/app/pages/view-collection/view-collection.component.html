@@ -1,6 +1,8 @@
 <div class="section-container">
   <div class="collection-data" *ngIf="collection">
     <h2>{{ collection.title }}</h2>
+    <p>{{ collection.description }}</p>
+    <div class="general-divider"></div>
     <div class="resource-grid">
       <app-resource
         *ngFor="let resource of resources"
@@ -11,7 +13,7 @@
 
     <div
       class="see-more"
-      *ngIf="!isLoading"
+      *ngIf="!isLoading && (resources.length < numOfResources)"
       (click)="seeMore()"
     >
       See More

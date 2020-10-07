@@ -6,7 +6,7 @@ import { Router } from "@angular/router";
 import { debounceTime } from "rxjs/operators";
 import { Store, select } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { setRefreshCollectionsToFalse } from '@services/ngrx/refreshCollections.actions';  
+import { setRefreshCollectionsToFalse } from '@services/ngrx/refreshCollections/refreshCollections.actions';  
 
 @Component({
   selector: "app-manage-collections",

@@ -6,7 +6,7 @@ import {
   SimpleChanges,
 } from "@angular/core";
 import { FormBuilder, FormGroup } from "@angular/forms";
-import { setFormValue } from "@services/ngrx/noImageComponent.actions";
+import { setFormValue } from "@services/ngrx/noImageComponent/noImageComponent.actions";
 import { Observable } from "rxjs";
 import { select, Store } from "@ngrx/store";
 

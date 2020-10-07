@@ -4,7 +4,7 @@ import { CollectionService } from "@services/collection/collection.service";
 import { SnackbarService } from "@services/general/snackbar.service";
 import { Router } from "@angular/router";
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
-import { setRefreshCollectionsToTrue } from "@services/ngrx/refreshCollections.actions";
+import { setRefreshCollectionsToTrue } from "@services/ngrx/refreshCollections/refreshCollections.actions";
 import { Store } from '@ngrx/store';
 
 @Component({
