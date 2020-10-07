@@ -11,7 +11,14 @@ import { FormGroup, FormBuilder } from "@angular/forms";
 import { FilterOptionsComponent } from "./filter-options/filter-options.component";
 import { PopoverService } from "@services/popover/popover.service";
 import { ActivatedRoute } from "@angular/router";
-import { UserService } from '@services/user/user.service';
+import { UserService } from "@services/user/user.service";
+import { Observable } from "rxjs";
+import { select, Store } from "@ngrx/store";
+import { delay } from "rxjs/operators";
+import {
+  setResourceQuery,
+  setCollectionQuery,
+} from "@services/ngrx/searchQueries/searchQueries.actions";
 
 @Component({
   selector: "app-manage",
@@ -40,15 +47,22 @@ export class ManageComponent implements OnInit {
   faThList = faThList;
   faThLarge = faThLarge;
 
+  // Store
+  searchQueriesState$: Observable<any>;
+
   constructor(
     private fb: FormBuilder,
     private popper: PopoverService,
     private route: ActivatedRoute,
-    private userService: UserService
-  ) {}
+    private userService: UserService,
+    private store: Store<{ searchQueriesState: any }>
+  ) {
+    this.searchQueriesState$ = store.pipe(select("searchQueriesState"));
+  }
 
   ngOnInit() {
     this.initForm();
+    this.onFormChange();
     this.username = localStorage.getItem("username");
     this.loggedInUserId = localStorage.getItem("userId");
     this.checkIfSelf();
@@ -61,6 +75,28 @@ export class ManageComponent implements OnInit {
       collections: [true],
       posts: [false],
       view: [true],
+    });
+  }
+
+  onFormChange() {
+    this.form.valueChanges.subscribe((val) => {
+      if (val.searchQuery) {
+        if (val.collections) {
+          this.store.dispatch(
+            setCollectionQuery({
+              query: { collectionQuery: val.searchQuery, resourceQuery: "" },
+            })
+          );
+        }
+
+        if (val.posts) {
+          this.store.dispatch(
+            setCollectionQuery({
+              query: { collectionQuery: "", resourceQuery: val.searchQuery },
+            })
+          );
+        }
+      }
     });
   }
 
@@ -79,8 +115,8 @@ export class ManageComponent implements OnInit {
         username: this.paramUsername,
         userId: this.userId,
         isSelf: this.isSelf,
-        loggedInUserId: this.loggedInUserId
-      }
+        loggedInUserId: this.loggedInUserId,
+      };
       this.isLoading = false;
     });
   }

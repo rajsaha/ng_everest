@@ -19,7 +19,7 @@
 
 <div
   class="see-more"
-  *ngIf="!isLoading && resources.length < resourcesCount"
+  *ngIf="!isLoading && resources.length < resourcesCount && !resourceSearchQuery"
   (click)="loadMorePosts()"
 >
   See More

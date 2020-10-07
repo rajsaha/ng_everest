@@ -13,6 +13,7 @@ import { HttpClientModule } from "@angular/common/http";
 import { StoreModule } from "@ngrx/store";
 import { collectionsRefreshStateReducer } from "@services/ngrx/refreshCollections/refreshCollections.reducer";
 import { noImageComponentStateReducer } from "@services/ngrx/noImageComponent/noImageComponent.reducer";
+import { searchQueriesStateReducer } from "@services/ngrx/searchQueries/searchQueries.reducer";
 
 import { ManageModule } from "./modules/manage/manage.module";
 import { CommonModule } from "@angular/common";
@@ -65,6 +66,7 @@ import { DeleteResourceFromCollectionComponent } from "./general/collection/dele
     StoreModule.forRoot({
       collectionsRefreshState: collectionsRefreshStateReducer,
       noImageComponentState: noImageComponentStateReducer,
+      searchQueriesState: searchQueriesStateReducer
     }),
     BrowserAnimationsModule,
     AppRoutingModule,
