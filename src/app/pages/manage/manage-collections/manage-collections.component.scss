@@ -30,13 +30,13 @@ $block-height: 6.2rem;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   grid-auto-flow: dense;
-  grid-column-gap: 5px;
+  grid-column-gap: 15px;
   // justify-items: center;
 }
 
 @media (min-width: 768px) {
   .list-of-collections {
-    justify-items: start;
+    justify-items: inherit;
     grid-template-columns: repeat(auto-fit, 278px);
   }
 }

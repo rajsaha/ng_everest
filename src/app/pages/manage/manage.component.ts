@@ -80,22 +80,20 @@ export class ManageComponent implements OnInit {
 
   onFormChange() {
     this.form.valueChanges.subscribe((val) => {
-      if (val.searchQuery) {
-        if (val.collections) {
-          this.store.dispatch(
-            setCollectionQuery({
-              query: { collectionQuery: val.searchQuery, resourceQuery: "" },
-            })
-          );
-        }
+      if (val.collections) {
+        this.store.dispatch(
+          setCollectionQuery({
+            query: { collectionQuery: val.searchQuery, resourceQuery: "" },
+          })
+        );
+      }
 
-        if (val.posts) {
-          this.store.dispatch(
-            setCollectionQuery({
-              query: { collectionQuery: "", resourceQuery: val.searchQuery },
-            })
-          );
-        }
+      if (val.posts) {
+        this.store.dispatch(
+          setCollectionQuery({
+            query: { collectionQuery: "", resourceQuery: val.searchQuery },
+          })
+        );
       }
     });
   }
