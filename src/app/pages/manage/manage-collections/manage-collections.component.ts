@@ -97,7 +97,6 @@ export class ManageCollectionsComponent implements OnInit {
           await this.onCollectionSearch(
             data.searchQueriesState.collectionQuery
           );
-          this.store.dispatch(unsetCollectionQuery());
         } else {
           this.collections = [];
           await this.getAllCollections();

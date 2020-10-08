@@ -122,7 +122,6 @@ export class ManageResourcesComponent implements OnInit {
         if (data.searchQueriesState.resourceQuery) {
           await this.onResourceSearch(data.searchQueriesState.resourceQuery);
           this.resourceSearchQuery = data.searchQueriesState.resourceQuery;
-          this.store.dispatch(unsetResourceQuery());
         } else {
           this.resources = [];
           await this.getUserResources();

@@ -93,8 +93,8 @@ $image-height: 35px;
 
         .item-a {
           grid-area: image;
-          background-color: grey;
           border-radius: 50%;
+          background-color: rgba(0, 0, 0, .1);
           min-width: $image-width;
           min-height: $image-height;
           width: $image-width;
@@ -104,6 +104,11 @@ $image-height: 35px;
           background-position: center center;
           align-self: center;
           justify-self: center;
+
+          p {
+            margin: 0;
+            text-align: center;
+          }
         }
 
         .item-a.collection-icon-container {

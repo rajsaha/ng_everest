@@ -122,9 +122,9 @@ export class SearchPageComponent implements OnInit {
     // * Collections
     if (
       searchResult.collections &&
-      searchResult.collections.collections.length > 0
+      searchResult.collections.data[0].collections.length > 0
     ) {
-      this.collections = searchResult.collections.collections;
+      this.collections = searchResult.collections.data[0].collections;
     }
   }
 }
