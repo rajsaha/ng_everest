@@ -1,6 +1,5 @@
 import { Component, OnInit, Input } from "@angular/core";
 import { CollectionService } from "@services/collection/collection.service";
-import { FormBuilder } from "@angular/forms";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import { Router } from "@angular/router";
 import { debounceTime } from "rxjs/operators";
@@ -31,7 +30,6 @@ export class ManageCollectionsComponent implements OnInit {
 
   constructor(
     private router: Router,
-    private fb: FormBuilder,
     private collectionService: CollectionService,
     private store: Store<{ refreshCollectionsState: boolean }>
   ) {
@@ -42,7 +40,6 @@ export class ManageCollectionsComponent implements OnInit {
 
   async ngOnInit() {
     this.setCollectionUrl();
-    await this.getAllCollections();
     this.monitorNgrxState();
   }
 
@@ -54,7 +51,9 @@ export class ManageCollectionsComponent implements OnInit {
         pageNo: 1,
         size: 100,
       });
-      this.collections = response.collections[0].collections;
+      for (let item of response.collections[0].collections) {
+        this.collections.push(item);
+      }
       this.isLoading = false;
     } catch (err) {
       console.error(err);
@@ -99,6 +98,9 @@ export class ManageCollectionsComponent implements OnInit {
             data.searchQueriesState.collectionQuery
           );
           this.store.dispatch(unsetCollectionQuery());
+        } else {
+          this.collections = [];
+          await this.getAllCollections();
         }
       });
   }

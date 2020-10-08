@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from "@angular/core";
-import { FormGroup, FormBuilder } from "@angular/forms";
+import { FormGroup } from "@angular/forms";
 import { ResourceService } from "@services/resource/resource.service";
 import { UtilityService } from "@services/general/utility.service";
 import { faSearch, faFilter } from "@fortawesome/free-solid-svg-icons";
@@ -52,7 +52,6 @@ export class ManageResourcesComponent implements OnInit {
   }
 
   async ngOnInit() {
-    await this.getUserResources();
     this.monitorNgrxState();
   }
 
@@ -124,6 +123,9 @@ export class ManageResourcesComponent implements OnInit {
           await this.onResourceSearch(data.searchQueriesState.resourceQuery);
           this.resourceSearchQuery = data.searchQueriesState.resourceQuery;
           this.store.dispatch(unsetResourceQuery());
+        } else {
+          this.resources = [];
+          await this.getUserResources();
         }
       });
   }
