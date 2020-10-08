@@ -5,7 +5,7 @@ import { ActivatedRoute, Router } from "@angular/router";
 import { environment as ENV } from "@environments/environment";
 import { ResourceService } from "@services/resource/resource.service";
 import { MatDialog } from "@angular/material/dialog";
-import { FfComponent } from "src/app/general/dialogs/ff/ff.component";
+import { FfComponent } from "src/app/components/dialogs/ff/ff.component";
 
 @Component({
   selector: "app-public-profile",

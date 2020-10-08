@@ -2,7 +2,7 @@ import { NgModule } from "@angular/core";
 import { CommonModule } from "@angular/common";
 import { MaterialModule } from "../material/material.module";
 import { GeneralModule } from "../general/general.module";
-import { CpiComponent } from "src/app/general/dialogs/cpi/cpi.component";
+import { CpiComponent } from "src/app/components/dialogs/cpi/cpi.component";
 import { EditProfileComponent } from "src/app/pages/profile/edit-profile/edit-profile.component";
 import { ChangePasswordComponent } from "src/app/pages/profile/change-password/change-password.component";
 import { DeleteAccountComponent } from "src/app/pages/profile/delete-account/delete-account.component";

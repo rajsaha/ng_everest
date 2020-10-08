@@ -4,7 +4,7 @@ import { CollectionService } from "@services/collection/collection.service";
 import { faPen, faEdit } from "@fortawesome/free-solid-svg-icons";
 import { UtilityService } from "@services/general/utility.service";
 import { MatDialog } from "@angular/material/dialog";
-import { DcComponent } from "src/app/general/dialogs/dc/dc.component";
+import { DcComponent } from "src/app/components/dialogs/dc/dc.component";
 
 @Component({
   selector: "app-view-collection",

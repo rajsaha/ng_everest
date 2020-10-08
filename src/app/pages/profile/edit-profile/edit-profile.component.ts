@@ -6,9 +6,9 @@ import { UserService } from "@services/user/user.service";
 import { SnackbarService } from "@services/general/snackbar.service";
 import { MatChipInputEvent } from "@angular/material/chips";
 import { MatDialog } from "@angular/material/dialog";
-import { CpiComponent } from "src/app/general/dialogs/cpi/cpi.component";
+import { CpiComponent } from "src/app/components/dialogs/cpi/cpi.component";
 import { environment as ENV } from "@environments/environment";
-import { FfComponent } from "src/app/general/dialogs/ff/ff.component";
+import { FfComponent } from "src/app/components/dialogs/ff/ff.component";
 import { ActivatedRoute, Router } from "@angular/router";
 
 @Component({
