@@ -13,8 +13,8 @@ export class UserComponent implements OnInit {
   ngOnInit() {}
 
   parseImageLink(data: any) {
-    if (data.image) {
-      return data.image.link;
+    if (data.smImage) {
+      return data.smImage.link;
     } else {
       return '';
     }
