@@ -27,12 +27,15 @@
         (mousedown)="goToUser(user.username)"
       >
         <div class="item" *ngIf="i < 3">
-          <div
+          <div class="item-a">
+            <app-user-image class="item-a" [userData]="user" [clickable]="false" size="xs"></app-user-image>
+          </div>
+          <!-- <div
             class="item-a"
             [ngStyle]="{
               'background-image': 'url(' + user.image + ')'
             }"
-          ></div>
+          ></div> -->
           <p class="item-b">{{ user.firstName }} {{ user.lastName }}</p>
           <small class="item-c"
             >@{{ user.username ? user.username : "..." }}</small
