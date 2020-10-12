@@ -22,9 +22,19 @@ export class CollectionService {
     return response;
   }
 
-  getCollectionNames(data: any) {
+  getCollectionTitles(data: any) {
     const response = this.http
-      .post(`${ENV.API_URL}/collection/get-collection-names`, data)
+      .post(`${ENV.API_URL}/collection/get-collection-titles`, data)
+      .toPromise();
+    return response;
+  }
+
+  getCollectionByTitle(data: any) {
+    const response = this.http
+      .post(
+        `${ENV.API_URL}/collection/get-collection-by-title`,
+        data
+      )
       .toPromise();
     return response;
   }
@@ -63,23 +73,16 @@ export class CollectionService {
     return response;
   }
 
-  deleteCollection(id: string) {
+  deleteCollection(data: any) {
     const response = this.http
-      .get(`${ENV.API_URL}/collection/delete-collection/${id}`)
+      .post(`${ENV.API_URL}/collection/delete-collection`, data)
       .toPromise();
     return response;
   }
 
-  changeCollectionTitle(data: any) {
+  editCollectionDetails(data: any) {
     const response = this.http
-      .post(`${ENV.API_URL}/collection/change-collection-title`, data)
-      .toPromise();
-    return response;
-  }
-
-  changeCollectionDescription(data: any) {
-    const response = this.http
-      .post(`${ENV.API_URL}/collection/change-collection-description`, data)
+      .post(`${ENV.API_URL}/collection/edit-collection-details`, data)
       .toPromise();
     return response;
   }

@@ -1,0 +1,78 @@
+.resource {
+  width: 100px;
+  height: 100px;
+  -webkit-box-shadow: 0px 0px 24px 2px rgba(0, 0, 0, 0.12);
+  -moz-box-shadow: 0px 0px 24px 2px rgba(0, 0, 0, 0.12);
+  box-shadow: 0px 0px 24px 2px rgba(0, 0, 0, 0.12);
+  .resource-image {
+    width: 100%;
+    height: 100%;
+    border-radius: 5px;
+    position: relative;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+    display: grid;
+    place-items: center;
+
+    p {
+      font-family: 'Bree Serif', serif;
+      margin: 0;
+      font-size: 2rem;
+    }
+  }
+
+  .delete-button {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    background-color: white;
+    border: 2px solid white;
+
+    fa-icon {
+      color: #fe5045;
+      cursor: pointer;
+      font-size: 25px;
+      transition: color 0.2s ease-in-out;
+    }
+
+    &:hover {
+      fa-icon {
+        color: red;
+      }
+    }
+  }
+}
+
+.hover-in {
+  animation: hoverIn 0.2s ease-in-out;
+  animation-fill-mode: forwards;
+}
+
+.hover-out {
+  animation: hoverOut 0.2s ease-in-out;
+  animation-fill-mode: forwards;
+}
+
+@keyframes hoverIn {
+  0% {
+    transform: scale(1);
+  }
+
+  100% {
+    transform: scale(1.05);
+  }
+}
+
+@keyframes hoverOut {
+  0% {
+    transform: scale(1.05);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}

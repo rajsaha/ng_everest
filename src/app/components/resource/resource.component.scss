@@ -1,0 +1,139 @@
+%count {
+  padding: 0 8px;
+  background-color: #dee8ff;
+  border-radius: 20px;
+  color: #481a89;
+  font-size: 10px;
+  font-weight: bold;
+  margin-left: 5px;
+}
+
+.resource {
+  cursor: pointer;
+  width: 275px;
+  max-width: 300px;
+  box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+  background-color: white;
+  border-radius: 5px;
+  margin-bottom: 25px;
+  transition: box-shadow 0.2s ease-in;
+  position: relative;
+  animation: fadeUp 0.2s ease-in-out;
+  animation-fill-mode: forwards;
+  margin-bottom: 40px;
+
+  &:hover {
+    box-shadow: 0 2px 40px rgba(0, 0, 0, 0.2);
+  }
+
+  .header {
+    display: grid;
+    grid-template-columns: auto 30px;
+    padding: 5px 10px 3px 20px;
+
+    span {
+      align-self: center;
+      font-size: 14px;
+      font-weight: 500;
+      color: #3c3c3c;
+    }
+
+    fa-icon {
+      color: #6d6b71;
+      align-self: center;
+    }
+  }
+
+  .image {
+    width: 275px;
+    height: 150px;
+    max-width: 300px;
+    max-height: 300px;
+    object-fit: cover;
+
+    &::before {
+      display: block;
+      content: "";
+      padding-top: calc(100% * 2 / 3);
+    }
+  }
+
+  .details {
+    padding: 0 20px 20px 20px;
+    color: #3c3c3c;
+    font-size: 12px;
+    line-height: 20px;
+
+    .type {
+      margin-left: 0;
+    }
+  }
+
+  .stats {
+    padding: 0 15px 15px 15px;
+
+    .like {
+      fa-icon {
+        color: rgba(0, 0, 0, 0.2);
+        vertical-align: top;
+      }
+
+      .count {
+        @extend %count;
+      }
+    }
+  }
+}
+
+.is-liked {
+  fa-icon {
+    color: #ffa25a !important;
+  }
+}
+
+.no-image-text {    
+  padding: 15px;
+  border-radius: 5px;
+  display: grid;
+  place-items: center;
+  margin-bottom: 15px;
+  min-height: 150px;
+  max-width: 600px;
+  max-height: 400px;
+
+  .text-container {
+      p {
+          font-family: 'Bree Serif', serif;
+          margin: 0;
+          text-align: center;
+      }
+  
+      p:nth-of-type(1) {
+          font-size: 2rem;
+      }
+  
+      p:nth-of-type(2) {
+          font-size: 1rem;
+      }
+  }
+}
+
+@keyframes fadeUp {
+  0% {
+    opacity: 0;
+    transform: translateY(15px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (min-width: 602px) {
+  .resource {
+    .image {
+      display: inherit;
+    }
+  }
+}

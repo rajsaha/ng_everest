@@ -5,16 +5,25 @@ import {
   faLayerGroup,
   faPager,
   faThList,
-  faThLarge
+  faThLarge,
 } from "@fortawesome/free-solid-svg-icons";
 import { FormGroup, FormBuilder } from "@angular/forms";
 import { FilterOptionsComponent } from "./filter-options/filter-options.component";
 import { PopoverService } from "@services/popover/popover.service";
+import { ActivatedRoute } from "@angular/router";
+import { UserService } from "@services/user/user.service";
+import { Observable } from "rxjs";
+import { select, Store } from "@ngrx/store";
+import { delay } from "rxjs/operators";
+import {
+  setResourceQuery,
+  setCollectionQuery,
+} from "@services/ngrx/searchQueries/searchQueries.actions";
 
 @Component({
   selector: "app-manage",
   templateUrl: "./manage.component.html",
-  styleUrls: ["./manage.component.scss"]
+  styleUrls: ["./manage.component.scss"],
 })
 export class ManageComponent implements OnInit {
   navLinks: any[];
@@ -24,6 +33,11 @@ export class ManageComponent implements OnInit {
   isFilterFocused = false;
   username: string;
   userId: string;
+  loggedInUserId: string;
+  paramUsername: string;
+  isSelf = false;
+  userData: any;
+  isLoading = false;
 
   // Icons
   faSearch = faSearch;
@@ -33,12 +47,25 @@ export class ManageComponent implements OnInit {
   faThList = faThList;
   faThLarge = faThLarge;
 
-  constructor(private fb: FormBuilder, private popper: PopoverService) {}
+  // Store
+  searchQueriesState$: Observable<any>;
+
+  constructor(
+    private fb: FormBuilder,
+    private popper: PopoverService,
+    private route: ActivatedRoute,
+    private userService: UserService,
+    private store: Store<{ searchQueriesState: any }>
+  ) {
+    this.searchQueriesState$ = store.pipe(select("searchQueriesState"));
+  }
 
   ngOnInit() {
     this.initForm();
+    this.onFormChange();
     this.username = localStorage.getItem("username");
-    this.userId = localStorage.getItem("userId");
+    this.loggedInUserId = localStorage.getItem("userId");
+    this.checkIfSelf();
   }
 
   initForm() {
@@ -47,8 +74,54 @@ export class ManageComponent implements OnInit {
       filter: [""],
       collections: [true],
       posts: [false],
-      view: [true]
+      view: [true],
     });
+  }
+
+  onFormChange() {
+    this.form.valueChanges.subscribe((val) => {
+      if (val.collections) {
+        this.store.dispatch(
+          setCollectionQuery({
+            query: { collectionQuery: val.searchQuery, resourceQuery: "" },
+          })
+        );
+      }
+
+      if (val.posts) {
+        this.store.dispatch(
+          setCollectionQuery({
+            query: { collectionQuery: "", resourceQuery: val.searchQuery },
+          })
+        );
+      }
+    });
+  }
+
+  checkIfSelf() {
+    this.route.params.subscribe(async (param) => {
+      this.isLoading = true;
+      this.paramUsername = param.username;
+      await this.getUserId(this.paramUsername);
+      if (this.paramUsername === this.username) {
+        this.isSelf = true;
+      } else {
+        this.isSelf = false;
+      }
+
+      this.userData = {
+        username: this.paramUsername,
+        userId: this.userId,
+        isSelf: this.isSelf,
+        loggedInUserId: this.loggedInUserId,
+      };
+      this.isLoading = false;
+    });
+  }
+
+  async getUserId(paramUsername: string) {
+    const result: any = await this.userService.getUserId(paramUsername);
+    this.userId = result;
   }
 
   viewCollections() {
@@ -75,13 +148,13 @@ export class ManageComponent implements OnInit {
         content: FilterOptionsComponent,
         origin,
         data: {
-          position: "vertical"
-        }
+          position: "vertical",
+        },
       },
       "vertical"
     );
 
-    ref.afterClosed$.subscribe(res => {
+    ref.afterClosed$.subscribe((res) => {
       if (res.data && res.data["isDeleted"]) {
       }
     });

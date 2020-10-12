@@ -1,77 +1,152 @@
 <mat-progress-bar mode="query" *ngIf="isLoading"></mat-progress-bar>
-<div class="section-container">
-  <div class="section">
-    <div class="section-header">
-      <h4>Share a Resource</h4>
-    </div>
-
-    <div class="section-content">
-      <div class="custom-image" (click)="imageInput.click()" matRipple
-        *ngIf="shareResourceForm.controls.isCustomImage.value" [ngStyle]="{ 'background-image': 'url(' + image ? image : '' + ')' }">
-        <p *ngIf="!image">
-          <fa-icon [icon]="faUpload"></fa-icon>&nbsp;Click here to upload a custom image
-        </p>
-        <input hidden (change)="onFileSelected(imageInput)" #imageInput type="file" accept="image/*">
+<form [formGroup]="shareResourceForm">
+  <div class="section-container">
+    <div class="section">
+      <div class="section-header">
+        <h4>What do you want to share?</h4>
       </div>
 
-      <div class="resource-image" *ngIf="!shareResourceForm.controls.isCustomImage.value"
-        [ngStyle]="{ 'background-image': 'url(' + ogImage + ')' }">
-        <p *ngIf="!ogImage">
-          If your link has an <a href="http://ogp.me/" target="_blank">Open Graph</a> image, it'll appear here
-        </p>
-      </div>
-
-
-      <form [formGroup]="shareResourceForm" (ngSubmit)="submitShareResourceForm()">
-        <div class="mat-checkbox-container">
-          <mat-checkbox formControlName="isCustomImage">Use custom image</mat-checkbox>
-        </div>
-        <mat-form-field appearance="outline">
+      <div class="section-content">
+        <mat-form-field appearance="fill">
           <mat-label>Link</mat-label>
-          <input matInput placeholder="Paste your link here" formControlName="url">
-          <mat-error *ngIf="shareResourceFormControls.url.hasError('urlInvalid') && shareResourceFormControls.url.dirty">
+          <input
+            matInput
+            placeholder="Paste your link here"
+            formControlName="url"
+          />
+          <mat-error
+            *ngIf="
+              shareResourceFormControls.url.hasError('urlInvalid') &&
+              shareResourceFormControls.url.dirty
+            "
+          >
             Invalid link
           </mat-error>
         </mat-form-field>
+        <div
+          class="custom-image"
+          (click)="imageInput.click()"
+          matRipple
+          *ngIf="shareResourceForm.controls.isCustomImage.value"
+          [style.background-image]="
+            'url(' + shareResourceForm.controls.customImage.value + ')'
+          "
+        >
+          <p *ngIf="!shareResourceForm.controls.customImage.value">
+            <fa-icon [icon]="faUpload"></fa-icon>&nbsp;Click here to upload a
+            custom image
+          </p>
+          <input
+            hidden
+            (change)="onFileSelected(imageInput.files[0])"
+            #imageInput
+            type="file"
+            accept="image/*"
+          />
+        </div>
 
-        <mat-form-field appearance="outline">
+        <div
+          class="resource-image"
+          *ngIf="
+            !shareResourceForm.controls.isCustomImage.value &&
+            !shareResourceForm.controls.noImage.value
+          "
+          [ngStyle]="{ 'background-image': 'url(' + ogImage + ')' }"
+        >
+          <p *ngIf="!ogImage">
+            If your link has an
+            <a href="http://ogp.me/" target="_blank">Open Graph</a> image, it'll
+            appear here
+          </p>
+        </div>
+
+        <app-resource-no-image
+          *ngIf="
+            !shareResourceForm.controls.isCustomImage.value &&
+            shareResourceForm.controls.noImage.value
+          "
+          [data]="{ title: shareResourceForm.controls.title.value }"
+        ></app-resource-no-image>
+
+        <div class="mat-checkbox-container">
+          <mat-checkbox formControlName="isCustomImage"
+            >Custom Image</mat-checkbox
+          >
+          <mat-checkbox formControlName="noImage">No Image</mat-checkbox>
+        </div>
+
+        <mat-form-field appearance="fill">
           <mat-label>Title</mat-label>
-          <input matInput placeholder="Give it a title" formControlName="title">
+          <input
+            matInput
+            placeholder="Give it a title"
+            formControlName="title"
+          />
 
-          <mat-error *ngIf="shareResourceFormControls.title.hasError('required') && shareResourceFormControls.title.dirty">
+          <mat-error
+            *ngIf="
+              shareResourceFormControls.title.hasError('required') &&
+              shareResourceFormControls.title.dirty
+            "
+          >
             Title required
           </mat-error>
         </mat-form-field>
 
-        <mat-form-field appearance="outline">
+        <mat-form-field appearance="fill">
           <mat-label>Description</mat-label>
-          <textarea matInput placeholder="Say something about it" formControlName="description"></textarea>
+          <textarea
+            matInput
+            placeholder="Say something about it"
+            formControlName="description"
+          ></textarea>
 
-          <mat-error *ngIf="shareResourceFormControls.description.hasError('required') && shareResourceFormControls.description.dirty">
+          <mat-error
+            *ngIf="
+              shareResourceFormControls.description.hasError('required') &&
+              shareResourceFormControls.description.dirty
+            "
+          >
             Description required
           </mat-error>
         </mat-form-field>
 
-        <mat-form-field appearance="outline">
+        <mat-form-field appearance="fill">
           <mat-label>Tags</mat-label>
           <mat-chip-list #chipList aria-label="Tags">
-            <mat-chip *ngFor="let tag of tags" [selectable]="selectable" [removable]="removable"
-              (removed)="removeTag(tag)">
+            <mat-chip
+              *ngFor="let tag of tags"
+              [selectable]="selectable"
+              [removable]="removable"
+              (removed)="removeTag(tag)"
+            >
               {{ tag }}
               <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
             </mat-chip>
-            <input placeholder="Add tags that best fit" [matChipInputFor]="chipList"
-              [matChipInputSeparatorKeyCodes]="separatorKeysCodes" [matChipInputAddOnBlur]="addOnBlur"
-              (matChipInputTokenEnd)="addTag($event)">
+            <input
+              placeholder="Add tags that best fit"
+              [matChipInputFor]="chipList"
+              [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+              [matChipInputAddOnBlur]="addOnBlur"
+              (matChipInputTokenEnd)="addTag($event)"
+            />
           </mat-chip-list>
         </mat-form-field>
 
-        <app-add-to-collection (message)="receiveAtcData($event)"></app-add-to-collection>
+        <app-add-to-collection
+          (message)="receiveAtcData($event)"
+        ></app-add-to-collection>
 
         <div class="form-button-container clearfix">
-          <app-custom-button [buttonLabel]="submitButtonText" [isDisabled]="isDisabled" [isLoading]="isLoading" size="small"></app-custom-button>
+          <app-custom-button
+            (click)="submitShareResourceForm()"
+            [buttonLabel]="submitButtonText"
+            [isDisabled]="isDisabled"
+            [isLoading]="isLoading"
+            size="small"
+          ></app-custom-button>
         </div>
-      </form>
+      </div>
     </div>
   </div>
-</div>
+</form>

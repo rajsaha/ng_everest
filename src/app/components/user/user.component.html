@@ -1,0 +1,9 @@
+<div class="user-box" (click)="goToUser(data.username)">
+  <div class="image-container">
+    <app-user-image [userData]="data" [clickable]="false" size="md"></app-user-image>
+  </div>
+  <div class="details">
+    <h4 *ngIf="data.name">{{ data.name }}</h4>
+    <p>{{ data.username }}</p>
+  </div>
+</div>

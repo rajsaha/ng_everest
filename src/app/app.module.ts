@@ -1,39 +1,44 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule, enableProdMode } from '@angular/core';
-import { HTTP_INTERCEPTORS } from '@angular/common/http';
-import { AuthInterceptorService } from '@services/auth/auth-interceptor.service';
+import { BrowserModule } from "@angular/platform-browser";
+import { NgModule, enableProdMode } from "@angular/core";
+import { HTTP_INTERCEPTORS } from "@angular/common/http";
+import { AuthInterceptorService } from "@services/auth/auth-interceptor.service";
 
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
+import { AppRoutingModule } from "./app-routing.module";
+import { AppComponent } from "./app.component";
 
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
-import { ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
+import { platformBrowserDynamic } from "@angular/platform-browser-dynamic";
+import { ReactiveFormsModule } from "@angular/forms";
+import { HttpClientModule } from "@angular/common/http";
+import { StoreModule } from "@ngrx/store";
+import { collectionsRefreshStateReducer } from "@services/ngrx/refreshCollections/refreshCollections.reducer";
+import { noImageComponentStateReducer } from "@services/ngrx/noImageComponent/noImageComponent.reducer";
+import { searchQueriesStateReducer } from "@services/ngrx/searchQueries/searchQueries.reducer";
 
-import { ManageModule } from './modules/manage/manage.module';
-import { CommonModule } from '@angular/common';
-import { MaterialModule } from './modules/material/material.module';
-import { GeneralModule } from './modules/general/general.module';
-import { DialogsModule } from './modules/dialogs/dialogs.module';
+import { ManageModule } from "./modules/manage/manage.module";
+import { CommonModule } from "@angular/common";
+import { MaterialModule } from "./modules/material/material.module";
+import { GeneralModule } from "./modules/general/general.module";
+import { DialogsModule } from "./modules/dialogs/dialogs.module";
 
-import { LoginComponent } from './pages/login/login.component';
-import { WelcomeComponent } from './pages/welcome/welcome.component';
-import { SignupComponent } from './pages/signup/signup.component';
-import { FeedComponent } from './pages/feed/feed.component';
-import { AtcComponent } from './general/dialogs/atc/atc.component';
-import { PoComponent } from './general/post/po/po.component';
-import { PageNotFoundComponent } from './pages/page-not-found/page-not-found.component';
-import { SnackbarComponent } from './general/snackbar/snackbar.component';
-import { ShareResourceComponent } from './pages/share-resource/share-resource.component';
-import { MainComponent } from './layouts/main/main.component';
-import { NoAuthComponent } from './layouts/no-auth/no-auth.component';
-import { SearchComponent } from './components/search/search.component';
-import { AddToCollectionComponent } from './components/add-to-collection/add-to-collection.component';
-import { SearchPageComponent } from './pages/search-page/search-page.component';
-import { UserComponent } from './general/user/user.component';
-import { PopoverComponent } from './components/popover/popover.component';
-import { EditCollectionComponent } from './general/collection/edit-collection/edit-collection.component';
+import { LoginComponent } from "./pages/login/login.component";
+import { WelcomeComponent } from "./pages/welcome/welcome.component";
+import { SignupComponent } from "./pages/signup/signup.component";
+import { FeedComponent } from "./pages/feed/feed.component";
+import { AtcComponent } from "./components/dialogs/atc/atc.component";
+import { PoComponent } from "./components/post/po/po.component";
+import { PageNotFoundComponent } from "./pages/page-not-found/page-not-found.component";
+import { SnackbarComponent } from "./components/snackbar/snackbar.component";
+import { ShareResourceComponent } from "./pages/share-resource/share-resource.component";
+import { MainComponent } from "./layouts/main/main.component";
+import { NoAuthComponent } from "./layouts/no-auth/no-auth.component";
+import { SearchComponent } from "./components/search/search.component";
+import { AddToCollectionComponent } from "./components/add-to-collection/add-to-collection.component";
+import { SearchPageComponent } from "./pages/search-page/search-page.component";
+import { UserComponent } from "./components/user/user.component";
+import { PopoverComponent } from "./components/popover/popover.component";
+import { EditCollectionComponent } from "./components/collection/edit-collection/edit-collection.component";
+import { DeleteResourceFromCollectionComponent } from "./components/collection/delete-resource-from-collection/delete-resource-from-collection.component";
 
 @NgModule({
   declarations: [
@@ -52,11 +57,17 @@ import { EditCollectionComponent } from './general/collection/edit-collection/ed
     SearchPageComponent,
     UserComponent,
     PopoverComponent,
-    EditCollectionComponent
+    EditCollectionComponent,
+    DeleteResourceFromCollectionComponent,
   ],
   imports: [
     CommonModule,
     BrowserModule,
+    StoreModule.forRoot({
+      collectionsRefreshState: collectionsRefreshStateReducer,
+      noImageComponentState: noImageComponentStateReducer,
+      searchQueriesState: searchQueriesStateReducer
+    }),
     BrowserAnimationsModule,
     AppRoutingModule,
     ReactiveFormsModule,
@@ -64,19 +75,24 @@ import { EditCollectionComponent } from './general/collection/edit-collection/ed
     MaterialModule,
     ManageModule,
     DialogsModule,
-    GeneralModule
+    GeneralModule,
   ],
   providers: [
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptorService,
-      multi: true
-    }
+      multi: true,
+    },
   ],
   bootstrap: [AppComponent],
-  entryComponents: [AtcComponent, PoComponent, SnackbarComponent, PopoverComponent]
+  entryComponents: [
+    AtcComponent,
+    PoComponent,
+    SnackbarComponent,
+    PopoverComponent,
+  ],
 })
-export class AppModule { }
+export class AppModule {}
 
 enableProdMode();
 platformBrowserDynamic().bootstrapModule(AppModule);

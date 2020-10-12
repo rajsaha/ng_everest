@@ -18,22 +18,32 @@ export class LoginService {
         .post(`${ENV.API_URL}/login`, loginCred)
         .subscribe((response: any) => {
           if (!response.error) {
-            this.setSession(response.token, response.expiresIn, response.username, response.userId, response.image);
+            this.setSession({
+              token: response.token, 
+              expiresIn: response.expiresIn, 
+              username: response.username, 
+              userId: response.userId, 
+              image: response.image,
+              firstName: response.firstName,
+              lastName: response.lastName
+            });
           }
           resolve(response);
         });
     });
   }
 
-  private setSession(token, expiresIn, username, userId, image) {
-    const expiresAt = moment().add(expiresIn, 'milliseconds');
+  private setSession(data: any) {
+    const expiresAt = moment().add(data.expiresIn, 'milliseconds');
 
-    localStorage.setItem('token', token);
+    localStorage.setItem('token', data.token);
     localStorage.setItem('expires_at', JSON.stringify(expiresAt.valueOf()));
-    localStorage.setItem('username', username);
-    localStorage.setItem('userId', userId);
-    if (image) {
-      localStorage.setItem('profileImage', image);
+    localStorage.setItem('username', data.username);
+    localStorage.setItem('userId', data.userId);
+    localStorage.setItem('firstName', data.firstName);
+    localStorage.setItem('lastName', data.lastName);
+    if (data.image) {
+      localStorage.setItem('profileImage', data.image);
     }
   }
 

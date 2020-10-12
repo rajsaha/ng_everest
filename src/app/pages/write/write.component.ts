@@ -224,11 +224,11 @@ export class WriteComponent implements OnInit {
   }
 
   async getCollectionNames() {
-    const response: any = await this.collectionService.getCollectionNames({
+    const response: any = await this.collectionService.getCollectionTitles({
       username: this.username
     });
-    if (response.collections) {
-      for (const item of response.collections) {
+    if (!response.error) {
+      for (const item of response.data) {
         this.collections.push({
           title: item.title,
           id: item._id

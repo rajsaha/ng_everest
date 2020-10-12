@@ -34,7 +34,7 @@ export class AddToCollectionComponent implements OnInit {
     this.initAtcForm();
     this.onFormChanges();
     this.onSelectChanges();
-    await this.getCollectionNames();
+    await this.getCollectionTitles();
     if (this.resourceId) {
       await this.getCollectionTitle(this.resourceId);
     }
@@ -52,15 +52,15 @@ export class AddToCollectionComponent implements OnInit {
     return this.atcForm.controls;
   }
 
-  async getCollectionNames() {
-    const response: any = await this.collectionService.getCollectionNames({
+  async getCollectionTitles() {
+    const response: any = await this.collectionService.getCollectionTitles({
       pageNo: this.pageNo,
       size: this.size,
       username: this.username
     });
 
-    if (response.collections) {
-      for (const collection of response.collections) {
+    if (!response.error) {
+      for (const collection of response.data) {
         this.collections.push(collection);
       }
     }
@@ -93,7 +93,7 @@ export class AddToCollectionComponent implements OnInit {
     const selectPanel = this.selectCollection.panel.nativeElement;
     selectPanel.addEventListener('scroll', async () => {
       this.pageNo++;
-      await this.getCollectionNames();
+      await this.getCollectionTitles();
     });
   }
 }

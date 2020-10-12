@@ -1,0 +1,54 @@
+h6 {
+  margin-top: 0;
+  margin-bottom: 10px;
+}
+
+mat-form-field {
+  width: 100% !important;
+}
+
+.columns {
+  .left {
+    .parent {
+      height: 100%;
+      overflow: hidden;
+
+      h6 {
+        color: #7e7e7e;
+        font-size: 14px;
+        font-weight: 400;
+      }
+    }
+  }
+
+  .divider {
+    grid-area: divider;
+    width: 2px;
+    background-color: #dee8ff;
+  }
+
+  .bottom {
+    overflow-y: hidden;
+    .delete-resource-array {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, 100px);
+      grid-gap: 15px;
+      max-height: 300px;
+      padding: 15px;
+      -webkit-box-shadow: inset 0px 0px 24px 2px rgba(0,0,0,0.12);
+      -moz-box-shadow: inset 0px 0px 24px 2px rgba(0,0,0,0.12);
+      box-shadow: inset 0px 0px 24px 2px rgba(0,0,0,0.12);
+      border-radius: 10px;
+    }
+  }
+}
+
+.mat-form-field-appearance-outline {
+  .mat-form-field-outline {
+    box-shadow: none !important;
+  }
+}
+
+.mat-dialog-actions {
+  float: right;
+}

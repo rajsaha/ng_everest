@@ -1,56 +1,62 @@
 <div class="app-container" [class.is-mobile]="mobileQuery.matches">
-    <mat-toolbar class="toolbar">
-        <button mat-icon-button (click)="snav.toggle(); isMenuActive = !isMenuActive">
-            <mat-icon>{{ isMenuActive ? 'clear' : 'menu' }}</mat-icon>
-        </button>
-        <h1 class="app-name" *ngIf="!mobileQuery.matches"><a routerLink="/">Everest</a></h1>
-        
-        <app-search class="app-search"></app-search>
+  <mat-toolbar class="toolbar">
+    <button
+      mat-icon-button
+      (click)="snav.toggle(); isMenuActive = !isMenuActive"
+    >
+      <mat-icon>{{ isMenuActive ? "clear" : "menu" }}</mat-icon>
+    </button>
+    <h1 class="app-name" *ngIf="!mobileQuery.matches">
+      <a routerLink="/">Everest</a>
+    </h1>
 
-        <div class="profile-container">
-            <div class="profile-image" [matMenuTriggerFor]="menu"
-                [ngStyle]="{ 'background-image': 'url(' + image  +')' }">
-            </div>
-            <mat-menu #menu="matMenu">
-                <button mat-menu-item [routerLink]="['/profile/user', username]" routerLinkActive="active">
-                    <fa-icon [icon]="faUser"></fa-icon>&nbsp;&nbsp;View Profile
-                </button>
-                <button mat-menu-item routerLink="/manage" routerLinkActive="active">
-                    <fa-icon [icon]="faStream"></fa-icon>&nbsp;&nbsp;Manage
-                </button>
-                <button mat-menu-item (click)="logout()">
-                    <fa-icon [icon]="faSignOutAlt"></fa-icon>&nbsp;&nbsp;Logout
-                </button>
-            </mat-menu>
-        </div>
-    </mat-toolbar>
+    <app-search class="app-search"></app-search>
 
-    <mat-sidenav-container class="sidenav-container" [style.marginTop.px]="mobileQuery.matches ? 56 : 0">
-        <mat-sidenav #snav [mode]="mobileQuery.matches ? 'over' : 'side'" [fixedInViewport]="mobileQuery.matches"
-            fixedTopGap="56">
-            <mat-nav-list>
-                <h1 class="app-name"><a routerLink="/">Everest</a></h1>
-                <a routerLink="/" routerLinkActive="active-sidenav">
-                    <fa-icon [icon]="faStream"></fa-icon>&nbsp;&nbsp;Feed
-                </a>
-                <a routerLink="/share-resource" routerLinkActive="active-sidenav">
-                    <fa-icon [icon]="faShareAlt"></fa-icon>&nbsp;&nbsp;Share Resource
-                </a>
-                <a routerLink="/write" routerLinkActive="active-sidenav">
-                    <fa-icon [icon]="faPenAlt"></fa-icon>&nbsp;&nbsp;Write
-                </a>
-                <mat-divider></mat-divider>
-                <a routerLink="/manage/resource" routerLinkActive="active-sidenav">
-                    <fa-icon [icon]="faSquare"></fa-icon>&nbsp;&nbsp;Manage Resources
-                </a>
-                <a routerLink="/manage/collection" routerLinkActive="active-sidenav">
-                    <fa-icon [icon]="faBorderAll"></fa-icon>&nbsp;&nbsp;Manage Collections
-                </a>
-            </mat-nav-list>
-        </mat-sidenav>
+    <div class="profile-container">
+      <app-user-image
+        class="profile-image"
+        [userData]="{
+          image: image,
+          firstName: firstName,
+          lastName: lastName,
+          username: username
+        }"
+        clickable="true"
+      >
+      </app-user-image>
+    </div>
+  </mat-toolbar>
 
-        <mat-sidenav-content>
-            <router-outlet></router-outlet>
-        </mat-sidenav-content>
-    </mat-sidenav-container>
+  <mat-sidenav-container
+    class="sidenav-container"
+    [style.marginTop.px]="mobileQuery.matches ? 56 : 0"
+  >
+    <mat-sidenav
+      #snav
+      [mode]="mobileQuery.matches ? 'over' : 'side'"
+      [fixedInViewport]="mobileQuery.matches"
+      fixedTopGap="56"
+    >
+      <mat-nav-list>
+        <h1 class="app-name"><a routerLink="/">Everest</a></h1>
+        <a routerLink="/" routerLinkActive="active-sidenav">
+          <fa-icon [icon]="faStream"></fa-icon>&nbsp;&nbsp;Feed
+        </a>
+        <a routerLink="/share-resource" routerLinkActive="active-sidenav">
+          <fa-icon [icon]="faShareAlt"></fa-icon>&nbsp;&nbsp;Share Resource
+        </a>
+        <mat-divider></mat-divider>
+        <a routerLink="/profile/settings" routerLinkActive="active-sidenav">
+          <fa-icon [icon]="faCog"></fa-icon>&nbsp;&nbsp;Settings
+        </a>
+        <a (click)="logout()">
+          <fa-icon [icon]="faSignOutAlt"></fa-icon>&nbsp;&nbsp;Logout
+        </a>
+      </mat-nav-list>
+    </mat-sidenav>
+
+    <mat-sidenav-content>
+      <router-outlet></router-outlet>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
 </div>

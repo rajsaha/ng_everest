@@ -1,23 +1,40 @@
 <div class="summary-parent" *ngIf="!loading">
   <div class="columns">
     <app-user-image
-      [image]="profileImage"
+      [userData]="{
+        image: profileImage,
+        firstName: firstName,
+        lastName: lastName,
+        username: username
+      }"
       size="md"
-      [firstName]="firstName"
-      [lastName]="lastName"
-      [username]="username"
     ></app-user-image>
-    <div class="name-bio">
+    <div class="name">
       <h4>{{ firstName }} {{ lastName }}</h4>
-      <p [ngClass]="{ 'greyed-out': !bio }">{{ bio ? bio : "No bio added" }}</p>
+      <div class="follow-unfollow-container" *ngIf="!userData.isSelf">
+        <button
+          class="follow"
+          *ngIf="!isLoggedInUserFollowingParamUser"
+          (click)="followUser()"
+        >
+          Follow
+        </button>
+        <button
+          class="unfollow"
+          *ngIf="isLoggedInUserFollowingParamUser"
+          (click)="unfollowUser()"
+        >
+          Unfollow
+        </button>
+      </div>
     </div>
   </div>
 
   <div class="boxes">
     <div class="box articles">
       <div>
-        <h3>{{ articleCount }}</h3>
-        <span>Articles</span>
+        <h3>{{ collectionCount }}</h3>
+        <span>Collections</span>
       </div>
     </div>
 
@@ -42,14 +59,18 @@
     <div *ngIf="followerCount > 0" class="follower-images-array">
       <app-user-image
         *ngFor="let follower of followers"
-        [image]="follower.smImage ? follower.smImage : ''"
-        [firstName]="follower.firstName"
-        [lastName]="follower.lastName"
-        [username]="follower.username"
+        [userData]="{
+          image: follower.smImage ? follower.smImage : '',
+          firstName: follower.firstName,
+          lastName: follower.lastName,
+          username: follower.username
+        }"
         size="xs"
       ></app-user-image>
       <div *ngIf="followerCount > 4" class="remaining-followers">
-        +{{ followerCount - 4 }}
+        <span>
+          +{{ followerCount - 4 }}
+        </span>
       </div>
     </div>
   </div>
@@ -62,5 +83,10 @@
         {{ interest }}
       </p>
     </div>
+  </div>
+
+  <div class="bio">
+    <h4>Bio</h4>
+    <p [ngClass]="{ 'greyed-out': !bio }">{{ bio ? bio : "No bio added" }}</p>
   </div>
 </div>

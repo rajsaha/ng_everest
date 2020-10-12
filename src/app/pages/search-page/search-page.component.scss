@@ -1,4 +1,5 @@
 .section-container {
+  margin-top: 25px;
   h1 {
     font-weight: 400;
     margin-bottom: 0;
@@ -64,16 +65,15 @@
 
 .list-of-collections {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   grid-auto-flow: dense;
-  grid-column-gap: 5px;
-  justify-items: center;
+  grid-column-gap: 15px;
 }
 
 @media (min-width: 768px) {
   .list-of-collections {
-    justify-items: start;
-    grid-template-columns: repeat(auto-fit, 210px);
+    justify-items: inherit;
+    grid-template-columns: repeat(auto-fit, 278px);
   }
 
   .section-container {

@@ -55,16 +55,7 @@
 		grid-column-end: end;
 
 		.profile-image {
-			background-size: cover;
-			background-position: center center;
-			background-repeat: no-repeat;
-			box-shadow: 0 8px 20px 0 rgba(145, 145, 145, 0.6);
-			width: 40px;
-			height: 40px;
-			border: 2px solid white;
-			border-radius: 50%;
 			float: right;
-			cursor: pointer;
 		}
 	}
 
@@ -88,6 +79,7 @@
 			text-transform: uppercase;
 			letter-spacing: 10px;
 			text-decoration: none;
+			display: none;
 		}
 	}
 
