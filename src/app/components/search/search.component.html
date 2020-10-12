@@ -27,13 +27,16 @@
         (mousedown)="goToUser(user.username)"
       >
         <div class="item" *ngIf="i < 3">
-          <div
+          <div class="item-a">
+            <app-user-image class="item-a" [userData]="user" [clickable]="false" size="xs"></app-user-image>
+          </div>
+          <!-- <div
             class="item-a"
             [ngStyle]="{
-              'background-image': 'url(' + getImageLink(user) + ')'
+              'background-image': 'url(' + user.image + ')'
             }"
-          ></div>
-          <p class="item-b">{{ user.name ? user.name : "No Name" }}</p>
+          ></div> -->
+          <p class="item-b">{{ user.firstName }} {{ user.lastName }}</p>
           <small class="item-c"
             >@{{ user.username ? user.username : "..." }}</small
           >
@@ -47,7 +50,7 @@
     </div>
 
     <!-- Resources result -->
-    <div class="section" *ngIf="resources.length > 0">
+    <div class="section" *ngIf="resources">
       <h3>Resources</h3>
       <div
         *ngFor="let resource of resources; let i = index"
@@ -55,15 +58,32 @@
       >
         <div class="item" *ngIf="i < 3">
           <div
+            *ngIf="!resource.noImage"
             class="item-a"
-            [ngStyle]="{ 'background-image': 'url(' + resource.smImage.link + ')' }"
+            [ngStyle]="{
+              'background-image': 'url(' + resource.smImage.link + ')'
+            }"
           ></div>
+          <div
+            *ngIf="resource.noImage"
+            class="item-a"
+            [ngStyle]="{
+              'background-color': resource.backgroundColor,
+              color: resource.textColor
+            }"
+          >
+            <p>{{ resource.title[0] }} </p>
+          </div>
           <p class="item-b">{{ resource.title | truncate: [30] }}</p>
           <small class="item-c">@{{ resource.username }}</small>
         </div>
       </div>
 
-      <div class="see-more" *ngIf="resources.length > 3" (mousedown)="goToSearch()">
+      <div
+        class="see-more"
+        *ngIf="resources.length > 3"
+        (mousedown)="goToSearch()"
+      >
         <span>See More</span>
         <span>{{ resources.length }}</span>
       </div>
@@ -87,7 +107,11 @@
         </div>
       </div>
 
-      <div class="see-more" *ngIf="collections.length > 3" (mousedown)="goToSearch()">
+      <div
+        class="see-more"
+        *ngIf="collections.length > 3"
+        (mousedown)="goToSearch()"
+      >
         <span>See More</span>
         <span>{{ collections.length }}</span>
       </div>

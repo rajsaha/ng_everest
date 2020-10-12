@@ -1,42 +1,8 @@
 <div class="section-container">
   <div class="collection-data" *ngIf="collection">
-    <!-- <form [formGroup]="changeCollectionForm" *ngIf="isMine">
-      <div class="collection-header">
-        <div class="left">
-          <small
-            class="username"
-            [routerLink]="['/profile', collection.username]"
-            >{{ collection.username }}'s collection</small
-          >
-          <mat-form-field>
-            <input type="text" matInput formControlName="title" />
-            <mat-icon matSuffix>
-              <fa-icon [icon]="faEdit"></fa-icon>
-            </mat-icon>
-            <mat-hint>Collection title</mat-hint>
-          </mat-form-field>
-          <h2 *ngIf="!isMine">
-            {{ changeCollectionTitleForm.get("title").value }}
-          </h2>
-        </div>
-
-        <div class="right">
-          <span>{{ numOfResources }}</span
-          ><small>resources</small>
-        </div>
-
-        <div class="bottom">
-          <mat-form-field>
-            <textarea type="text" matInput formControlName="description"></textarea>
-            <mat-icon matSuffix>
-              <fa-icon [icon]="faEdit"></fa-icon>
-            </mat-icon>
-            <mat-hint>Collection description</mat-hint>
-          </mat-form-field>
-        </div>
-      </div>
-    </form> -->
-    
+    <h2>{{ collection.title }}</h2>
+    <p>{{ collection.description }}</p>
+    <div class="general-divider"></div>
     <div class="resource-grid">
       <app-resource
         *ngFor="let resource of resources"
@@ -47,7 +13,7 @@
 
     <div
       class="see-more"
-      *ngIf="!isLoading"
+      *ngIf="!isLoading && (resources.length < numOfResources)"
       (click)="seeMore()"
     >
       See More

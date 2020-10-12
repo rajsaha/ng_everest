@@ -1,90 +1,121 @@
-<mat-progress-bar
-  *ngIf="isLoading"
-  mode="indeterminate"
->
-</mat-progress-bar>
-<div class="section-container">
-  <div class="section">
-    <div class="section-header">
-      <h4>Edit Resource</h4>
-    </div>
-
-    <div class="section-content">
-      <div
-        class="custom-image"
-        (click)="imageInput.click()"
-        matRipple
-        *ngIf="editResourceForm.controls.isCustomImage.value"
-        [ngStyle]="{ 'background-image': 'url(' + image + ')' }"
-      >
-        <p *ngIf="!image">
-          <fa-icon [icon]="faUpload"></fa-icon>&nbsp;Click here to upload a
-          custom image
-        </p>
-        <input
-          hidden
-          (change)="onFileSelected(imageInput)"
-          #imageInput
-          type="file"
-          accept="image/*"
-        />
+<mat-progress-bar mode="query" *ngIf="isLoading"></mat-progress-bar>
+<form [formGroup]="editResourceForm">
+  <div class="section-container">
+    <div class="section">
+      <div class="section-header">
+        <h4>What do you want to share?</h4>
       </div>
 
-      <div
-        class="resource-image"
-        *ngIf="!editResourceForm.controls.isCustomImage.value"
-        [ngStyle]="{ 'background-image': 'url(' + ogImage + ')' }"
-      >
-        <p *ngIf="!ogImage">
-          If your link has an
-          <a href="http://ogp.me/" target="_blank">Open Graph</a> image, it'll
-          appear here
-        </p>
-      </div>
-
-      <form
-        [formGroup]="editResourceForm"
-        (ngSubmit)="submitEditResourceForm()"
-      >
-        <div class="mat-checkbox-container">
-          <mat-checkbox formControlName="isCustomImage"
-            >Use custom image</mat-checkbox
-          >
-        </div>
-        <mat-form-field appearance="outline">
+      <div class="section-content">
+        <mat-form-field appearance="fill">
           <mat-label>Link</mat-label>
           <input
             matInput
             placeholder="Paste your link here"
             formControlName="url"
-            (focus)="onFocus()"
           />
           <mat-error
-            *ngIf="editResourceForm.controls['url'].hasError('urlInvalid')"
+            *ngIf="
+              editResourceFormControls.url.hasError('urlInvalid') &&
+              editResourceFormControls.url.dirty
+            "
           >
             Invalid link
           </mat-error>
         </mat-form-field>
+        <div
+          class="custom-image"
+          (click)="imageInput.click()"
+          matRipple
+          *ngIf="editResourceForm.controls.isCustomImage.value"
+          [style.background-image]="
+            'url(' + editResourceForm.controls.customImage.value + ')'
+          "
+        >
+          <p *ngIf="!editResourceForm.controls.customImage.value">
+            <fa-icon [icon]="faUpload"></fa-icon>&nbsp;Click here to upload a
+            custom image
+          </p>
+          <input
+            hidden
+            (change)="onFileSelected(imageInput.files[0])"
+            #imageInput
+            type="file"
+            accept="image/*"
+          />
+        </div>
 
-        <mat-form-field appearance="outline">
+        <div
+          class="resource-image"
+          *ngIf="
+            !editResourceForm.controls.isCustomImage.value &&
+            !editResourceForm.controls.noImage.value
+          "
+          [ngStyle]="{ 'background-image': 'url(' + ogImage + ')' }"
+        >
+          <p *ngIf="!ogImage">
+            If your link has an
+            <a href="http://ogp.me/" target="_blank">Open Graph</a> image, it'll
+            appear here
+          </p>
+        </div>
+
+        <app-resource-no-image
+          *ngIf="
+            !editResourceForm.controls.isCustomImage.value &&
+            editResourceForm.controls.noImage.value
+          "
+          [data]="{
+            title: editResourceForm.controls.title.value,
+            backgroundColor: resource.backgroundColor,
+            textColor: resource.textColor
+          }"
+        ></app-resource-no-image>
+
+        <div class="mat-checkbox-container">
+          <mat-checkbox formControlName="isCustomImage"
+            >Custom Image</mat-checkbox
+          >
+          <mat-checkbox formControlName="noImage">No Image</mat-checkbox>
+        </div>
+
+        <mat-form-field appearance="fill">
           <mat-label>Title</mat-label>
           <input
             matInput
             placeholder="Give it a title"
             formControlName="title"
           />
+
+          <mat-error
+            *ngIf="
+              editResourceFormControls.title.hasError('required') &&
+              editResourceFormControls.title.dirty
+            "
+          >
+            Title required
+          </mat-error>
         </mat-form-field>
 
-        <mat-form-field appearance="outline">
+        <mat-form-field appearance="fill">
           <mat-label>Description</mat-label>
           <textarea
             matInput
             placeholder="Say something about it"
             formControlName="description"
           ></textarea>
+
+          <mat-error
+            *ngIf="
+              editResourceFormControls.description.hasError('required') &&
+              editResourceFormControls.description.dirty
+            "
+          >
+            Description required
+          </mat-error>
         </mat-form-field>
 
-        <mat-form-field appearance="outline">
+        <mat-form-field appearance="fill">
           <mat-label>Tags</mat-label>
           <mat-chip-list #chipList aria-label="Tags">
             <mat-chip
@@ -106,34 +137,16 @@
           </mat-chip-list>
         </mat-form-field>
 
-        <h6>Add to collection</h6>
-        <mat-form-field appearance="outline">
-          <mat-label>Collections</mat-label>
-          <input
-            type="text"
-            placeholder="Select or Create New"
-            matInput
-            [matAutocomplete]="auto"
-            formControlName="collectionName"
-          />
-          <mat-autocomplete #auto="matAutocomplete">
-            <mat-optgroup label="Move to Existing Collections">
-              <mat-option *ngFor="let name of collectionNames" [value]="name">
-                {{ name }}
-              </mat-option>
-            </mat-optgroup>
-          </mat-autocomplete>
-        </mat-form-field>
-
-        <div class="form-button-container">
+        <div class="form-button-container clearfix">
           <app-custom-button
+            (click)="submitEditResourceForm()"
             [buttonLabel]="submitButtonText"
             [isDisabled]="isDisabled"
             [isLoading]="isLoading"
             size="small"
           ></app-custom-button>
         </div>
-      </form>
+      </div>
     </div>
   </div>
-</div>
+</form>

@@ -1,18 +1,22 @@
-import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder } from '@angular/forms';
-import { ResourceService } from '@services/resource/resource.service';
-import { UtilityService } from '@services/general/utility.service';
-import { faSearch, faFilter } from '@fortawesome/free-solid-svg-icons';
-import { debounceTime } from 'rxjs/operators';
+import { Component, OnInit, Input } from "@angular/core";
+import { FormGroup } from "@angular/forms";
+import { ResourceService } from "@services/resource/resource.service";
+import { UtilityService } from "@services/general/utility.service";
+import { faSearch, faFilter } from "@fortawesome/free-solid-svg-icons";
+import { debounceTime } from "rxjs/operators";
+import { Store, select } from "@ngrx/store";
+import { Observable } from "rxjs";
+import {
+  unsetResourceQuery,
+} from "@services/ngrx/searchQueries/searchQueries.actions";
 
 @Component({
-  selector: 'app-manage-resources',
-  templateUrl: './manage-resources.component.html',
-  styleUrls: ['./manage-resources.component.scss']
+  selector: "app-manage-resources",
+  templateUrl: "./manage-resources.component.html",
+  styleUrls: ["./manage-resources.component.scss"],
 })
 export class ManageResourcesComponent implements OnInit {
-  userId: string;
-  username: string;
+  @Input() userData: any;
   resources = [];
   resourcesCount = 0;
   resourceSearchForm: FormGroup;
@@ -35,47 +39,31 @@ export class ManageResourcesComponent implements OnInit {
   pageNo = 1;
   size = 8;
 
-  constructor(
-    private fb: FormBuilder,
-    private resourceService: ResourceService,
-    private utilityService: UtilityService
-  ) {}
+  // Store
+  searchQueriesState$: Observable<any>;
+  resourceSearchQuery: string;
 
-  async ngOnInit() {
-    this.username = localStorage.getItem('username');
-    this.userId = localStorage.getItem("userId");
-    await Promise.all([this.initResourceSearchForm(), this.getUserResources()]);
-    this.onResourceSearchFormChange();
+  constructor(
+    private resourceService: ResourceService,
+    private utilityService: UtilityService,
+    private store: Store<{ searchQueriesState: any }>
+  ) {
+    this.searchQueriesState$ = store.pipe(select("searchQueriesState"));
   }
 
-  async initResourceSearchForm() {
-    this.resourceSearchForm = this.fb.group({
-      query: [''],
-      filter: ['']
-    });
+  async ngOnInit() {
+    this.monitorNgrxState();
   }
 
   async getUserResources() {
     try {
       this.isLoading = true;
-      // Search
-      const query = this.resourceSearchForm.get('query').value;
-      if (query) {
-        const searchResult: any = await this.resourceService.searchForUserResources({
-          username: this.username,
-          query
-        });
-        this.isLoading = false;
-        this.resources = searchResult.resources;
-        return;
-      }
-
       // Without search
       const response: any = await this.resourceService.getUserResources({
         pageNo: this.pageNo,
         size: this.size,
-        username: this.username,
-        userId: this.userId
+        username: this.userData.username,
+        userId: this.userData.userId,
       });
       this.isLoading = false;
       this.resourcesCount = response.count;
@@ -89,7 +77,7 @@ export class ManageResourcesComponent implements OnInit {
   }
 
   onScrollDown() {
-    console.log('end');
+    console.log("end");
     // await this.loadMorePosts();
   }
 
@@ -111,13 +99,33 @@ export class ManageResourcesComponent implements OnInit {
     }
   }
 
-  onResourceSearchFormChange() {
-    this.resourceSearchForm
-      .get('query')
-      .valueChanges.pipe(debounceTime(300))
-      .subscribe(async () => {
-        this.resources = [];
-        await this.getUserResources();
+  async onResourceSearch(query: string) {
+    this.isLoading = true;
+    const result: any = await this.resourceService.searchForUserResources({
+      userId: this.userData.userId,
+      query,
+    });
+    if (!result.error) {
+      this.resources = [];
+      for (let item of result.resources) {
+        this.resources.push(item);
+      }
+    }
+    this.isLoading = false;
+  }
+
+  monitorNgrxState() {
+    this.store
+      .select((state) => state)
+      .pipe(debounceTime(1000))
+      .subscribe(async (data: any) => {
+        if (data.searchQueriesState.resourceQuery) {
+          await this.onResourceSearch(data.searchQueriesState.resourceQuery);
+          this.resourceSearchQuery = data.searchQueriesState.resourceQuery;
+        } else {
+          this.resources = [];
+          await this.getUserResources();
+        }
       });
   }
 }

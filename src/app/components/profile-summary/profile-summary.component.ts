@@ -8,7 +8,7 @@ import { environment as ENV } from "@environments/environment";
   styleUrls: ['./profile-summary.component.scss']
 })
 export class ProfileSummaryComponent implements OnInit {
-  @Input() userId: string;
+  @Input() userData: any;
   
   loading = false;
 
@@ -23,8 +23,10 @@ export class ProfileSummaryComponent implements OnInit {
   followerCount = 0;
   followingCount = 0;
   articleCount = 0;
+  collectionCount = 0;
   extContentCount = 0;
   defaultProfileImage = `${ENV.SITE_URL}/assets/images/portrait.jpg`;
+  isLoggedInUserFollowingParamUser: number;
 
   constructor(private userService: UserService) { }
 
@@ -34,11 +36,15 @@ export class ProfileSummaryComponent implements OnInit {
 
   async getProfileData() {
     this.loading = true;
-    const result: any = await this.userService.getProfileData(this.userId);
+    const result: any = await this.userService.getProfileData(
+      { 
+        userId: this.userData.userId,
+        loggedInUserId: this.userData.loggedInUserId 
+      });
     if (result.userData.mdImage) {
       this.profileImage = result.userData.mdImage.link;
     } else {
-      this.profileImage = this.defaultProfileImage;
+      this.profileImage = "";
     }
     
     this.username= result.userData.username;
@@ -49,9 +55,33 @@ export class ProfileSummaryComponent implements OnInit {
     this.followers = result.followerObjects;
     this.followerCount = result.userData.followerCount;
     this.followingCount = result.userData.followingCount;
+    this.collectionCount = result.userData.collectionCount;
     this.articleCount = result.articleCount;
     this.extContentCount = result.extContentCount;
+    this.isLoggedInUserFollowingParamUser = result.isLoggedInUserFollowingParamUser;
     this.loading = false;
+  }
+
+  followUser() {
+    const result = this.userService.followUser({ 
+      anchorUserId: this.userData.loggedInUserId,
+      userId: this.userData.userId 
+    });
+
+    if (result) {
+      this.isLoggedInUserFollowingParamUser = 1;
+    }
+  }
+
+  unfollowUser() {
+    const result = this.userService.unfollowUser({ 
+      anchorUserId: this.userData.loggedInUserId,
+      userId: this.userData.userId 
+    });
+
+    if (result) {
+      this.isLoggedInUserFollowingParamUser = 0;
+    }
   }
 
 }

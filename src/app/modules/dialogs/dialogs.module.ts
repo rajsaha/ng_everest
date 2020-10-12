@@ -1,9 +1,9 @@
 import { NgModule } from "@angular/core";
 import { CommonModule } from "@angular/common";
-import { AtcComponent } from "src/app/general/dialogs/atc/atc.component";
-import { DcComponent } from "src/app/general/dialogs/dc/dc.component";
-import { DrComponent } from "src/app/general/dialogs/dr/dr.component";
-import { FfComponent } from "src/app/general/dialogs/ff/ff.component";
+import { AtcComponent } from "src/app/components/dialogs/atc/atc.component";
+import { DcComponent } from "src/app/components/dialogs/dc/dc.component";
+import { DrComponent } from "src/app/components/dialogs/dr/dr.component";
+import { FfComponent } from "src/app/components/dialogs/ff/ff.component";
 import { MatAutocompleteModule } from "@angular/material/autocomplete";
 import { MatButtonModule } from "@angular/material/button";
 import { MatRippleModule } from "@angular/material/core";
@@ -15,7 +15,9 @@ import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
 import { MatTabsModule } from "@angular/material/tabs";
 import { ReactiveFormsModule } from "@angular/forms";
 import { InfiniteScrollModule } from "ngx-infinite-scroll";
-import { MiniCollectionComponent } from 'src/app/general/dialogs/atc/mini-collection/mini-collection.component';
+import { MiniCollectionComponent } from 'src/app/components/dialogs/atc/mini-collection/mini-collection.component';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { GeneralModule } from '../general/general.module';
 
 @NgModule({
   declarations: [
@@ -27,6 +29,8 @@ import { MiniCollectionComponent } from 'src/app/general/dialogs/atc/mini-collec
   ],
   imports: [
     CommonModule,
+    FontAwesomeModule,
+    GeneralModule,
     InfiniteScrollModule,
     MatInputModule,
     MatFormFieldModule,

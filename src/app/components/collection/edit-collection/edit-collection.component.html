@@ -1,0 +1,71 @@
+<p class="dialog-title">
+  <strong>Edit Collection</strong>
+</p>
+<div mat-dialog-content>
+  <div class="columns">
+    <div class="left">
+      <div class="parent">
+        <form [formGroup]="form">
+          <div class="custom-input">
+            <div class="label-container">
+              <label>Collection Title</label>
+            </div>
+            <div class="input-container">
+              <input
+                type="text"
+                formControlName="title"
+                placeholder="Name your collection"
+              />
+            </div>
+            <p class="error-message" *ngIf="getFormControlValidity('title')">
+              Title is required
+            </p>
+          </div>
+
+          <div class="custom-input">
+            <div class="label-container">
+              <label>Collection Description</label>
+            </div>
+            <div class="input-container">
+              <textarea
+                cdkTextareaAutosize
+                #autosize="cdkTextareaAutosize"
+                cdkAutosizeMinRows="3"
+                cdkAutosizeMaxRows="5"
+                type="text"
+                formControlName="description"
+                placeholder="Describe your collection..."
+              ></textarea>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="bottom" *ngIf="!isLoading">
+      <div class="delete-resource-array">
+        <app-delete-resource-from-collection
+          *ngFor="let resource of resources"
+          [data]="resource"
+          [collectionId]="this.data.collectionData._id"
+          (deleteEvent)="handleDeleteResourceEvent($event)"
+        ></app-delete-resource-from-collection>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div mat-dialog-actions>
+  <button mat-stroked-button (click)="cancel()">Cancel</button>
+  <button
+    mat-flat-button
+    color="primary"
+    cdkFocusInitial
+    (click)="save()"
+    [disabled]="form.invalid"
+  >
+    Save
+  </button>
+</div>

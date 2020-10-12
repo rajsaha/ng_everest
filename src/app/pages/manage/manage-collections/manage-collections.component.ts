@@ -1,20 +1,23 @@
-import { Component, OnInit } from '@angular/core';
-import { CollectionService } from '@services/collection/collection.service';
-import { FormBuilder, FormGroup } from '@angular/forms';
-import { faSearch } from '@fortawesome/free-solid-svg-icons';
-import { Router } from '@angular/router';
-import { debounceTime } from 'rxjs/operators';
+import { Component, OnInit, Input } from "@angular/core";
+import { CollectionService } from "@services/collection/collection.service";
+import { faSearch } from "@fortawesome/free-solid-svg-icons";
+import { Router } from "@angular/router";
+import { debounceTime } from "rxjs/operators";
+import { Store, select } from "@ngrx/store";
+import { Observable } from "rxjs";
+import { setRefreshCollectionsToFalse } from "@services/ngrx/refreshCollections/refreshCollections.actions";
+import { unsetCollectionQuery } from "@services/ngrx/searchQueries/searchQueries.actions";
 
 @Component({
-  selector: 'app-manage-collections',
-  templateUrl: './manage-collections.component.html',
-  styleUrls: ['./manage-collections.component.scss']
+  selector: "app-manage-collections",
+  templateUrl: "./manage-collections.component.html",
+  styleUrls: ["./manage-collections.component.scss"],
 })
 export class ManageCollectionsComponent implements OnInit {
-  username: string;
+  @Input() userData: any;
   collections: any;
-  collectionSearchForm: FormGroup;
-  collectionUrl = 'collection/';
+  collectionUrl = "collection/";
+  collectionQuery: string;
 
   // Toggles
   isLoading = false;
@@ -22,56 +25,81 @@ export class ManageCollectionsComponent implements OnInit {
   // Icons
   faSearch = faSearch;
 
+  // Store
+  refreshCollectionsState$: Observable<boolean>;
+
   constructor(
     private router: Router,
-    private fb: FormBuilder,
-    private collectionService: CollectionService) { }
+    private collectionService: CollectionService,
+    private store: Store<{ refreshCollectionsState: boolean }>
+  ) {
+    this.refreshCollectionsState$ = store.pipe(
+      select("refreshCollectionsState")
+    );
+  }
 
   async ngOnInit() {
     this.setCollectionUrl();
-    this.username = localStorage.getItem('username');
-    await Promise.all([this.initCollectionSearchForm(), this.getAllCollections()]);
-    this.onCollectionSearchFormChange();
-  }
-
-  async initCollectionSearchForm() {
-    this.collectionSearchForm = this.fb.group({
-      query: ['']
-    });
+    this.monitorNgrxState();
   }
 
   async getAllCollections() {
     try {
       this.isLoading = true;
-      const query = this.collectionSearchForm.get('query').value;
-      if (query) {
-        const searchResult: any = await this.collectionService.searchUserCollections({username: this.username, title: query});
-        this.isLoading = false;
-        this.collections = searchResult.collections;
-        return;
+      const response: any = await this.collectionService.getCollections({
+        username: this.userData.username,
+        pageNo: 1,
+        size: 100,
+      });
+      for (let item of response.collections[0].collections) {
+        this.collections.push(item);
       }
-      const response: any = await this.collectionService.getCollections({ username: this.username, pageNo: 1, size: 100 });
       this.isLoading = false;
-      this.collections = response.collections[0].collections;
     } catch (err) {
       console.error(err);
     }
   }
 
-  onCollectionSearchFormChange() {
-    this.collectionSearchForm.get('query').valueChanges.pipe(debounceTime(300)).subscribe(async (query) => {
-      this.isLoading = true;
-      const searchResult: any = await this.collectionService.searchUserCollections({username: this.username, title: query});
-      this.isLoading = false;
-      this.collections = searchResult.collections;
+  async onCollectionSearch(query: string) {
+    this.isLoading = true;
+    const result: any = await this.collectionService.searchUserCollections({
+      username: this.userData.username,
+      query,
     });
+    if (!result.error) {
+      this.collections = [];
+      for (let item of result.collections[0].collections) {
+        this.collections.push(item);
+      }
+    }
+    this.isLoading = false;
   }
 
   setCollectionUrl() {
     const url = this.router.url;
-    if (url === '/manage/collection') {
-      this.collectionUrl = '../collection';
+    if (url === "/manage/collection") {
+      this.collectionUrl = "../collection";
     }
   }
 
+  monitorNgrxState() {
+    this.store
+      .select((state) => state)
+      .pipe(debounceTime(1000))
+      .subscribe(async (data: any) => {
+        if (data.collectionsRefreshState) {
+          await this.getAllCollections();
+          this.store.dispatch(setRefreshCollectionsToFalse());
+        }
+
+        if (data.searchQueriesState.collectionQuery) {
+          await this.onCollectionSearch(
+            data.searchQueriesState.collectionQuery
+          );
+        } else {
+          this.collections = [];
+          await this.getAllCollections();
+        }
+      });
+  }
 }

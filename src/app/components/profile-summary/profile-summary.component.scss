@@ -1,126 +1,200 @@
+%follow-button-base {
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  font-size: 12px;
+  padding: 5px 10px;
+  border-radius: 3px;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+
 .summary-parent {
-    background-color: white;
-    box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
-    border-radius: 5px;
-    .columns {
-        display: grid;
-        grid-template-columns: 75px 2fr;
-        grid-gap: 15px;
-        padding: 15px;
+  background-color: white;
+  box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
+  margin-bottom: 15px;
+  .columns {
+    display: grid;
+    grid-template-columns: 75px 2fr;
+    grid-gap: 15px;
+    padding: 15px;
 
-        .image {
-            background-color: lightgrey;
-            background-size: cover;
-            background-repeat: no-repeat;
-            width: 75px;
-            height: 75px;
-            border-radius: 50%;
-            align-self: center;
-            justify-self: center;
-        }
-
-        .name-bio {
-            align-self: center;
-            h4 {
-                margin-top: 0;
-                margin-bottom: 0;
-            }
-
-            p {
-                margin-bottom: 0;
-            }
-        }
+    .image {
+      background-color: lightgrey;
+      background-size: cover;
+      background-repeat: no-repeat;
+      width: 75px;
+      height: 75px;
+      border-radius: 50%;
+      align-self: center;
+      justify-self: center;
     }
 
-    .boxes {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        grid-gap: 15px;
-        text-align: center;
-        align-content: center;
-        padding: 15px 15px 15px 15px;
-        border-bottom: 1px solid rgba(0, 0, 0, .1);
-        .box {
-            border-radius: 5px;
+    .name {
+      align-self: center;
+      h4 {
+        margin-top: 0;
+        margin-bottom: 5px;
+      }
+
+      .follow-unfollow-container {
+        .follow {
+          @extend %follow-button-base;
+          background-color: #481a89;
+          color: white;
+
+          &:hover {
+            background-color: #5d25ac;
+          }
+
+          &:active {
+            background-color: #2e1157;
+          }
+        }
+
+        .unfollow {
+          @extend %follow-button-base;
+          background-color: transparent;
+          color: #2d2d2d;
+
+          &:hover {
+            border-color: #481a89;
+          }
+
+          &:active {
+            background-color: #703eb6;
             color: white;
-            padding: 25px;
-            height: 35px;
-            position: relative;
-
-            div {
-                position: absolute;
-                left: 50%;
-                top: 50%;
-                transform: translate(-50%, -50%);
-                h3 {
-                    margin-top: 0;
-                    margin-bottom: 0;
-                }
-                
-                span {
-                    font-size: 14px;
-                }
-            }
+          }
         }
+      }
     }
+  }
 
-    .followers {
-        padding: 15px;
-        .follower-images-array {
-            display: grid;
-            grid-template-columns: 25px 25px 25px 25px 25px;
-            grid-gap: -15px;
+  .boxes {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 15px;
+    text-align: center;
+    align-content: center;
+    padding: 15px 15px 15px 15px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    .box {
+      border-radius: 5px;
+      color: white;
+      padding: 25px;
+      height: 35px;
+      position: relative;
 
-            .follower-image {
-                width: 35px;
-                height: 35px;
-                border-radius: 50%;
-                border: 2px solid white;
-                background-size: cover;
-                background-position: center;
-                background-repeat: no-repeat;
-            }
-        }   
-    }
-
-    .interests {
-        padding: 15px;
-
-        .list-of-interests {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            grid-gap: 5px;
-            p {
-                background-color: #DCE6FD;
-                color: #481A89;
-                padding: 5px 15px;
-                border-radius: 15px;
-                text-align: center;
-            }
+      div {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        h3 {
+          margin-top: 0;
+          margin-bottom: 0;
+          font-size: 1rem;
         }
+
+        span {
+          font-size: 12px;
+        }
+      }
     }
+  }
+
+  .followers {
+    padding: 15px;
+    .follower-images-array {
+      display: grid;
+      grid-template-columns: 25px 25px 25px 25px 25px;
+      grid-gap: -15px;
+
+      .remaining-followers {
+        width: 35px;
+        height: 35px;
+        display: grid;
+        border-radius: 50%;
+        border: 2px solid white;
+        background-color: aliceblue;
+        transition: border 0.2s ease-in-out;
+
+        &:hover {
+          border-color: #481a89;
+        }
+
+        span {
+          place-self: center;
+          font-family: "Montserrat", sans-serif;
+          font-size: 0.6rem;
+        }
+      }
+    }
+  }
+
+  .interests {
+    padding: 15px;
+
+    .list-of-interests {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      grid-gap: 5px;
+      p {
+        background-color: #dce6fd;
+        color: #481a89;
+        padding: 5px 15px;
+        border-radius: 15px;
+        text-align: center;
+      }
+    }
+  }
+
+  .bio {
+    padding: 15px;
+    p {
+      margin-bottom: 0;
+      line-height: 25px;
+    }
+  }
 }
 
 h4 {
-    margin-top: 0;
-    margin-bottom: 0;
+  margin-top: 0;
+  margin-bottom: 0;
 }
 
 .greyed-out {
-    color: rgb(172, 172, 172);
+  color: rgb(172, 172, 172);
 }
 
 .articles {
-    background-color: #FE5045;
-    color: white;
+  background-color: #fe5045;
+  color: white;
 }
 
 .posts {
-    background-color: #FFA25A;
-    color: white;
+  background-color: #ffa25a;
+  color: white;
 }
 
 .following {
-    background-color: #481A89;
-    color: white;
+  background-color: #481a89;
+  color: white;
 }
+
+@media (min-width: 768px) {
+  .summary-parent {
+    .boxes {
+      .box {
+        div {
+          h3 {
+            font-size: 1.17rem;
+          }
+          span {
+            font-size: 14px;
+          }
+        }
+      }
+    }
+  }
+}
+

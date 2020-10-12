@@ -104,7 +104,7 @@ export class SearchPageComponent implements OnInit {
 
     if (searchResult.resourceOnly) {
       if (searchResult.resources && searchResult.resources.length > 0) {
-        this.resources = searchResult.resources;
+        this.resources = searchResult.resources.data[0].resources;
         return;
       }
     }
@@ -115,16 +115,16 @@ export class SearchPageComponent implements OnInit {
     }
 
     // * Resources
-    if (searchResult.resources && searchResult.resources.resources.length > 0) {
-      this.resources = searchResult.resources.resources;
+    if (searchResult.resources && searchResult.resources.data[0].resources.length > 0) {
+      this.resources = searchResult.resources.data[0].resources;
     }
 
     // * Collections
     if (
       searchResult.collections &&
-      searchResult.collections.collections.length > 0
+      searchResult.collections.data[0].collections.length > 0
     ) {
-      this.collections = searchResult.collections.collections;
+      this.collections = searchResult.collections.data[0].collections;
     }
   }
 }

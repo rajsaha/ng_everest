@@ -1,0 +1,23 @@
+<p class="dialog-title">
+  <strong>Delete Collection</strong>
+</p>
+
+<mat-dialog-content>
+  <p>
+    Are you sure you want to delete
+    <strong>{{ data.collectionData.title }}</strong
+    >?
+  </p>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button
+    mat-flat-button
+    color="warn"
+    (click)="onYesClick()"
+    cdkFocusInitial
+  >
+    Ok
+  </button>
+  <button mat-stroked-button (click)="onNoClick()">Cancel</button>
+</mat-dialog-actions>

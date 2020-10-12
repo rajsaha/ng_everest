@@ -8,9 +8,16 @@ import { environment as ENV } from "@environments/environment";
 export class UserService {
   constructor(private http: HttpClient) {}
 
-  getProfileData(userId: string) {
+  getUserId(username: string) {
     const response = this.http
-      .post(`${ENV.API_URL}/user/get-user-data`, { userId })
+      .post(`${ENV.API_URL}/user/get-user-id`, { username })
+      .toPromise();
+    return response;
+  }
+
+  getProfileData(data: any) {
+    const response = this.http
+      .post(`${ENV.API_URL}/user/get-user-data`, data)
       .toPromise();
     return response;
   }
@@ -115,9 +122,9 @@ export class UserService {
     return response;
   }
 
-  getFollowersFollowing(username: string) {
+  getFollowersFollowing(data: any) {
     const response = this.http
-      .get(`${ENV.API_URL}/user/get-followers-following/${username}`)
+      .post(`${ENV.API_URL}/user/get-followers-following`, data)
       .toPromise();
     return response;
   }

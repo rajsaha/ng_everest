@@ -76,9 +76,9 @@ export class SearchComponent implements OnInit {
           if (
             searchResult.resourceOnly &&
             searchResult.resources &&
-            searchResult.resources.length > 0
+            searchResult.resources.data[0].resources.length > 0
           ) {
-            this.resources = searchResult.resources;
+            this.resources = searchResult.resources.data[0].resources;
             return;
           }          
 
@@ -88,16 +88,16 @@ export class SearchComponent implements OnInit {
 
           if (
             searchResult.resources &&
-            searchResult.resources.resources.length > 0
+            searchResult.resources.data[0].resources.length > 0
           ) {
-            this.resources = searchResult.resources.resources;
+            this.resources = searchResult.resources.data[0].resources;
           }
 
           if (
             searchResult.collections &&
-            searchResult.collections.collections.length > 0
+            searchResult.collections.data[0].collections.length > 0
           ) {
-            this.collections = searchResult.collections.collections;
+            this.collections = searchResult.collections.data[0].collections;
           }
         }
       });
@@ -125,11 +125,11 @@ export class SearchComponent implements OnInit {
       if (
         searchResult.resourceOnly &&
         searchResult.resources &&
-        searchResult.resources.length > 0
+        searchResult.resources.data[0].resources.length > 0
       ) {
-        this.resources = searchResult.resources;
+        this.resources = searchResult.resources.data[0].resources;
         return;
-      }
+      }          
 
       if (searchResult.users && searchResult.users.users.length > 0) {
         this.users = searchResult.users.users;
@@ -137,16 +137,16 @@ export class SearchComponent implements OnInit {
 
       if (
         searchResult.resources &&
-        searchResult.resources.resources.length > 0
+        searchResult.resources.data[0].resources.length > 0
       ) {
-        this.resources = searchResult.resources.resources;
+        this.resources = searchResult.resources.data[0].resources;
       }
 
       if (
         searchResult.collections &&
-        searchResult.collections.collections.length > 0
+        searchResult.collections.data[0].collections.length > 0
       ) {
-        this.collections = searchResult.collections.collections;
+        this.collections = searchResult.collections.data[0].collections;
       }
     }
   }
