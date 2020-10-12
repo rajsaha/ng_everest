@@ -87,7 +87,6 @@ export class ManageCollectionsComponent implements OnInit {
       .select((state) => state)
       .pipe(debounceTime(1000))
       .subscribe(async (data: any) => {
-        console.log(data);
         if (data.collectionsRefreshState) {
           await this.getAllCollections();
           this.store.dispatch(setRefreshCollectionsToFalse());

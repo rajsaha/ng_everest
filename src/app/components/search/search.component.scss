@@ -104,6 +104,8 @@ $image-height: 38px;
           background-position: center center;
           align-self: center;
           justify-self: center;
+          display: grid;
+          place-items: center;
 
           p {
             margin: 0;
