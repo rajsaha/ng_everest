@@ -172,6 +172,7 @@ export class AtcComponent implements OnInit {
       currentCollectionId: this.currentCollectionId
         ? this.currentCollectionId
         : null,
+      userId: this.userId  
     });
 
     if (response && !response.error) {

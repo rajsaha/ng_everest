@@ -94,7 +94,6 @@ export class PostComponent implements OnInit {
       await Promise.all([
         this.getCommentsCount(),
         this.checkIfPostInCollection(this.data._id, this.data.username),
-        this.checkIfPostIsLiked(this.data._id, this.currentUser),
       ]);
       this.isLoading = false;
     } catch (err) {
@@ -119,6 +118,7 @@ export class PostComponent implements OnInit {
     this.noImage = this.data.noImage;
     this.backgroundColor = this.data.backgroundColor;
     this.textColor = this.data.textColor;
+    this.isLiked = this.data.isLikedByUser.length > 0 ? true : false;
 
     if (this.type === 'article') {
       this.truncateValue = 500;
@@ -140,19 +140,6 @@ export class PostComponent implements OnInit {
     if (result.isInCollection) {
       this.isInCollection = true;
     }
-  }
-
-  async checkIfPostIsLiked(id: string, username: string) {
-    const result: any = await this.userService.checkIfPostIsLiked({
-      resourceId: id,
-      userId: this.currentUserId
-    });
-    if (result) {
-      this.isLiked = true;
-      return;
-    }
-
-    this.isLiked = false;
   }
 
   init_comment_form() {
