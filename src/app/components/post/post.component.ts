@@ -48,6 +48,7 @@ export class PostComponent implements OnInit {
   userImage = '';
   timestamp: any;
   commentCount = 0;
+  comments: any;
   recommendedByCount: number;
   noImage: boolean;
   backgroundColor: string;
@@ -91,10 +92,6 @@ export class PostComponent implements OnInit {
       this.init_comment_form();
       this.checkIfDescriptionTooLong(this.description)
       this.isLoading = true;
-      await Promise.all([
-        this.getCommentsCount(),
-        this.checkIfPostInCollection(this.data._id, this.data.username),
-      ]);
       this.isLoading = false;
     } catch (err) {
       throw new Error(err);
@@ -119,6 +116,9 @@ export class PostComponent implements OnInit {
     this.backgroundColor = this.data.backgroundColor;
     this.textColor = this.data.textColor;
     this.isLiked = this.data.isLikedByUser.length > 0 ? true : false;
+    this.isInCollection = this.data.isInCollection.length > 0 ? true : false;
+    this.commentCount = this.data.commentsCount;
+    this.comments = this.data.comments;
 
     if (this.type === 'article') {
       this.truncateValue = 500;
@@ -130,16 +130,6 @@ export class PostComponent implements OnInit {
       resourceId: this.id
     });
     this.commentCount = result;
-  }
-
-  async checkIfPostInCollection(id: string, username: string) {
-    const result: any = await this.collectionService.checkForResourceInCollection({
-      id,
-      username: this.currentUser
-    });
-    if (result.isInCollection) {
-      this.isInCollection = true;
-    }
   }
 
   init_comment_form() {
