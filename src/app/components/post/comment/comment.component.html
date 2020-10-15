@@ -4,16 +4,16 @@
     <!-- <div class="image-container" [ngStyle]="{ 'background-image': 'url(' + image + ')' }"></div> -->
     <app-user-image
       [userData]="{
-        image: comment.image,
-        firstName: comment.firstName,
-        lastName: comment.lastName,
-        username: comment.username
+        image: comment.image[0],
+        firstName: comment.firstName[0],
+        lastName: comment.lastName[0],
+        username: comment.username[0]
       }"
       size="xs"
     ></app-user-image>
     <div class="text-container">
       <p class="username">
-        <strong>{{ comment.username }}</strong>
+        <strong>{{ comment.username[0] }}</strong>
       </p>
       <small class="comment-timestamp">{{
         formatTime(comment.timestamp)

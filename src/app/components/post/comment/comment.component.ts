@@ -8,7 +8,7 @@ import * as moment from 'moment';
   styleUrls: ['./comment.component.scss']
 })
 export class CommentComponent implements OnInit {
-  @Input() data: { resourceId: string, comments: any, count: number };
+  @Input() data: { resourceId: string, count: number };
   allComments = [];
 
   // Pagination
@@ -21,8 +21,8 @@ export class CommentComponent implements OnInit {
 
   async ngOnInit() {
     this.count = this.data.count;
-    for (const comment of this.data.comments) {
-      this.allComments.push(comment);
+    if (this.data.count > 0) {
+      await this.getComments();
     }
   }
 

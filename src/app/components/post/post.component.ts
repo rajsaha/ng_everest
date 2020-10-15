@@ -37,6 +37,7 @@ export class PostComponent implements OnInit {
   id: string;
   firstName: string;
   lastName: string;
+  userId: string;
   username: string;
   url: string;
   title: string;
@@ -100,6 +101,7 @@ export class PostComponent implements OnInit {
 
   populatePost() {
     this.id = this.data._id;
+    this.userId = this.data.userId;
     this.username = this.data.username;
     this.firstName = this.data.firstName;
     this.lastName = this.data.lastName;
@@ -135,9 +137,7 @@ export class PostComponent implements OnInit {
   init_comment_form() {
     this.commentForm = this.fb.group({
       resourceId: [this.id],
-      firstName: [this.firstName[0]],
-      lastName: [this.lastName[0]],
-      username: [this.currentUser],
+      userId: [this.currentUserId],
       comment: ['', Validators.required],
       timestamp: [Date.now()]
     });
@@ -146,18 +146,18 @@ export class PostComponent implements OnInit {
   async addComment() {
     this.showComments = true;
     const result: any = await this.resourceService.addComment(
-      this.commentForm.value,
-      localStorage.getItem("profileImage")
+      this.commentForm.value
     );
 
-    if (result && result.status) {
+    if (!result.error) {
       // * Add comment to array
       this.commentComponent.addCommentToArray({
-        firstName: this.commentFormControls.firstName.value,
-        lastName: this.commentFormControls.lastName.value,
-        username: this.commentFormControls.username.value,
-        content: this.commentFormControls.comment.value,
-        timestamp: this.commentFormControls.timestamp.value
+        firstName: result.data[0].firstName,
+        lastName: result.data[0].lastName,
+        username: result.data[0].username,
+        content: result.data[0].content,
+        image: result.data[0].image,
+        timestamp: result.data[0].timestamp
       });
       // * Clear textarea
       this.commentForm.controls.comment.patchValue('');
