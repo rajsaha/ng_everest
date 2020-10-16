@@ -172,9 +172,10 @@ export class AtcComponent implements OnInit {
       currentCollectionId: this.currentCollectionId
         ? this.currentCollectionId
         : null,
+      userId: this.userId  
     });
 
-    if (response && !response.error) {
+    if (!response.error) {
       this.snackbarService.openSnackBar({
         message: {
           message: `Resource added to ${collection.title}`,
