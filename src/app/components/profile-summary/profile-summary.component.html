@@ -75,9 +75,9 @@
     </div>
   </div>
 
-  <div class="interests">
+  <div class="interests" *ngIf="interests.length > 0">
     <h4>Interests</h4>
-    <p *ngIf="interests.length === 0">You haven't set any interests.</p>
+    <!-- <p *ngIf="interests.length === 0">You haven't set any interests.</p> -->
     <div class="list-of-interests" *ngIf="interests">
       <p *ngFor="let interest of interests">
         {{ interest }}
@@ -85,7 +85,7 @@
     </div>
   </div>
 
-  <div class="bio">
+  <div class="bio" *ngIf="bio">
     <h4>Bio</h4>
     <p [ngClass]="{ 'greyed-out': !bio }">{{ bio ? bio : "No bio added" }}</p>
   </div>
