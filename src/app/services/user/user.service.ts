@@ -117,7 +117,7 @@ export class UserService {
 
   globalSearch(data: any) {
     const response = this.http
-      .post(`${ENV.API_URL}/user/global-search/${data.query}`, data)
+      .post(`${ENV.API_URL}/user/global-search`, data)
       .toPromise();
     return response;
   }
