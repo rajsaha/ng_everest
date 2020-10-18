@@ -62,7 +62,7 @@ export class SearchComponent implements OnInit {
           this.isSearchActive = false;
           this.isLoading = true;
           const searchResult: any = await this.userService.globalSearch({
-            query: encodeURI(query),
+            query: encodeURIComponent(query),
             options: {
               orderBy: 'recent',
               resource: true,
