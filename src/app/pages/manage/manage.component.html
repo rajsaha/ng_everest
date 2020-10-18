@@ -2,12 +2,8 @@
   <div class="header">
     <h3>{{ form.get("collections").value ? "Collections" : "Resources" }}</h3>
     <div
-      class="controls"
+      class="controls one-column"
       [formGroup]="form"
-      [ngClass]="{
-        'one-column': !form.get('posts').value,
-        'two-columns': form.get('posts').value
-      }"
     >
       <!-- Search -->
       <div
