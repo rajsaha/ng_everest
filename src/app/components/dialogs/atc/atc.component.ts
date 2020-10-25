@@ -120,7 +120,7 @@ export class AtcComponent implements OnInit {
       resourceId: this.data.id,
     });
 
-    this.count = response.collections[0].count[0].count;
+    this.count = response.numOfUserCollections;
 
     if (!response.error) {
       for (const collection of response.collections[0].collections) {
