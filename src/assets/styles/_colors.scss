@@ -1,7 +1,7 @@
 $navigation-background-color: white;
 $navigation-background-color-dark: #212121;
 
-$mat-drawer-content-color: #DEE8FF;
+$mat-drawer-content-color: #dee8ff;
 $mat-drawer-content-color-dark: #303030;
 
 $section-color: white;
@@ -9,14 +9,58 @@ $section-color-dark: #212121;
 $section-box-shadow: 0 8px 20px 0 rgba(218, 224, 235, 0.6);
 $section-box-shadow-dark: none;
 
+// * Post component
 $post-background-color: white;
-$post-background-color-dark: #3e3e3e;
+$post-background-color-dark: #212121;
 $post-box-shadow: 0 8px 20px 0 rgba(218, 224, 235, 0.6);
 $post-box-shadow-dark: 0 8px 20px 0 rgb(35 35 35 / 60%);
+$post-border: 1px solid #eee;
+$post-border-dark: none;
+$post-upload-time-color: rgba(0, 0, 0, 0.3);
+$post-upload-time-color-dark: inherit;
+$post-header-border-bottom: 1px solid #eee;
+$post-header-border-bottom-dark: transparent;
+$post-menu-color: rgba(0, 0, 0, 0.5);
+$post-menu-color-dark: white;
+$post-textarea-background-color: white;
+$post-textarea-background-color-dark:  #212121;
+$post-textarea-color: inherit;
+$post-textarea-color-dark: white;
+$post-btn-like-color: rgba(0, 0, 0, 0.2);
+$post-btn-like-color-dark: white;
+$post-btn-comment-color: #c8c4d1;
+$post-btn-comment-color-dark: white;  
+$post-btn-count-bubble-color: #dee8ff;
+$post-btn-count-bubble-color-dark: #303030;
+$post-btn-count-bubble-text-color: #481a89;
+$post-btn-count-bubble-text-color-dark: white;
 
-$colors: (--navigation-background-color: ($navigation-background-color, $navigation-background-color-dark),
-    --mat-drawer-content-color: ($mat-drawer-content-color, $mat-drawer-content-color-dark),
-    --section-color: ($section-color, $section-color-dark),
-    --section-box-shadow: ($section-box-shadow, $section-box-shadow-dark),
-    --post-background-color: ($post-background-color, $post-background-color-dark),
-    --post-box-shadow: ($post-box-shadow, $post-box-shadow-dark))
+$colors: (--navigation-background-color: ($navigation-background-color,
+    $navigation-background-color-dark,
+  ),
+  --mat-drawer-content-color: ($mat-drawer-content-color,
+    $mat-drawer-content-color-dark,
+  ),
+  --section-color: ($section-color,
+    $section-color-dark,
+  ),
+  --section-box-shadow: ($section-box-shadow,
+    $section-box-shadow-dark,
+  ),
+  --post-background-color: ($post-background-color,
+    $post-background-color-dark,
+  ),
+  --post-box-shadow: ($post-box-shadow,
+    $post-box-shadow-dark,
+  ),
+  --post-border: ($post-border,
+    $post-border-dark),
+  --post-upload-time-color: ($post-upload-time-color, $post-upload-time-color-dark),
+  --post-header-border-bottom: ($post-header-border-bottom, $post-header-border-bottom-dark),
+  --post-menu-color: ($post-menu-color, $post-menu-color-dark),
+  --post-textarea-background-color: ($post-textarea-background-color, $post-textarea-background-color-dark),
+  --post-textarea-color: ($post-textarea-color, $post-textarea-color-dark),
+  --post-btn-like-color: ($post-btn-like-color, $post-btn-like-color-dark),
+  --post-btn-comment-color: ($post-btn-comment-color, $post-btn-comment-color-dark),
+  --post-btn-count-bubble-color: ($post-btn-count-bubble-color, $post-btn-count-bubble-color-dark),
+  --post-btn-count-bubble-text-color: ($post-btn-count-bubble-text-color, $post-btn-count-bubble-text-color-dark));
