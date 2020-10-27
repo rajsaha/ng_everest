@@ -1,9 +1,12 @@
+// * Navigation
 $navigation-background-color: white;
 $navigation-background-color-dark: #212121;
 
+// * Mat drawer
 $mat-drawer-content-color: #dee8ff;
 $mat-drawer-content-color-dark: #303030;
 
+// * Section class (used throughout app)
 $section-color: white;
 $section-color-dark: #212121;
 $section-box-shadow: 0 8px 20px 0 rgba(218, 224, 235, 0.6);
@@ -35,6 +38,30 @@ $post-btn-count-bubble-color-dark: #303030;
 $post-btn-count-bubble-text-color: #481a89;
 $post-btn-count-bubble-text-color-dark: white;
 
+// * Search component
+$search-background-color: #f6f8fa;
+$search-background-color-dark: rgba(255, 255, 255, 0.1);
+$search-search-icon-color: #481a89;
+$search-search-icon-color-dark: #7a47ba;
+$search-form-input-color: inherit;
+$search-form-input-color-dark: white;
+$search-form-focus-within: 2px solid rgba(72, 26, 137, 0.5);
+$search-form-focus-within-dark: 2px solid #7a47ba;
+$search-result-background-color: white;
+$search-result-background-color-dark: #484848;
+$search-result-box-shadow: 0 8px 20px 0 rgba(218, 224, 235, 0.6);
+$search-result-box-shadow-dark: 0 8px 20px 0 rgb(35 35 35 / 60%);
+$search-result-box-section-border: 1px solid #dee8ff;
+$search-result-box-section-border-dark: 1px solid #212121;
+$search-result-see-more: #481A89;
+$search-result-see-more-dark: white;
+$search-result-see-more-bubble: #DEE8FF;
+$search-result-see-more-bubble-dark: #303030;
+$search-result-see-more-bubble-text-color: inherit;
+$search-result-see-more-bubble-text-color-dark: white;
+$search-result-item-hover:rgba(0, 0, 0, 0.1);
+$search-result-item-hover-dark: rgba(0, 0, 0, 0.3);
+
 $colors: (--navigation-background-color: ($navigation-background-color,
     $navigation-background-color-dark,
   ),
@@ -63,4 +90,15 @@ $colors: (--navigation-background-color: ($navigation-background-color,
   --post-btn-like-color: ($post-btn-like-color, $post-btn-like-color-dark),
   --post-btn-comment-color: ($post-btn-comment-color, $post-btn-comment-color-dark),
   --post-btn-count-bubble-color: ($post-btn-count-bubble-color, $post-btn-count-bubble-color-dark),
-  --post-btn-count-bubble-text-color: ($post-btn-count-bubble-text-color, $post-btn-count-bubble-text-color-dark));
+  --post-btn-count-bubble-text-color: ($post-btn-count-bubble-text-color, $post-btn-count-bubble-text-color-dark),
+  --search-background-color: ($search-background-color, $search-background-color-dark),
+  --search-search-icon-color: ($search-search-icon-color, $search-search-icon-color-dark),
+  --search-form-input-color: ($search-form-input-color, $search-form-input-color-dark),
+  --search-form-focus-within: ($search-form-focus-within, $search-form-focus-within-dark),
+  --search-result-background-color: ($search-result-background-color, $search-result-background-color-dark),
+  --search-result-box-shadow: ($search-result-box-shadow, $search-result-box-shadow-dark),
+  --search-result-box-section-border: ($search-result-box-section-border, $search-result-box-section-border-dark),
+  --search-result-see-more: ($search-result-see-more, $search-result-see-more-dark),
+  --search-result-see-more-bubble: ($search-result-see-more-bubble, $search-result-see-more-bubble-dark),
+  --search-result-see-more-text-color: ($search-result-see-more-bubble-text-color, $search-result-see-more-bubble-text-color-dark),
+  --search-result-item-hover: ($search-result-item-hover, $search-result-item-hover-dark));
