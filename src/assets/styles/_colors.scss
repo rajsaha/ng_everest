@@ -48,11 +48,11 @@ $search-form-input-color-dark: white;
 $search-form-focus-within: 2px solid rgba(72, 26, 137, 0.5);
 $search-form-focus-within-dark: 2px solid #7a47ba;
 $search-result-background-color: white;
-$search-result-background-color-dark: #484848;
+$search-result-background-color-dark:#212121;
 $search-result-box-shadow: 0 8px 20px 0 rgba(218, 224, 235, 0.6);
-$search-result-box-shadow-dark: 0 8px 20px 0 rgb(35 35 35 / 60%);
+$search-result-box-shadow-dark: 0 8px 20px 0 rgba(0, 0, 0, 0.4);
 $search-result-box-section-border: 1px solid #dee8ff;
-$search-result-box-section-border-dark: 1px solid #212121;
+$search-result-box-section-border-dark: 1px solid #000000;
 $search-result-see-more: #481A89;
 $search-result-see-more-dark: white;
 $search-result-see-more-bubble: #DEE8FF;
@@ -61,6 +61,12 @@ $search-result-see-more-bubble-text-color: inherit;
 $search-result-see-more-bubble-text-color-dark: white;
 $search-result-item-hover:rgba(0, 0, 0, 0.1);
 $search-result-item-hover-dark: rgba(0, 0, 0, 0.3);
+
+// * User Image Component
+$user-image-border: 2px solid white;
+$user-image-border-dark: 2px solid #212121;
+$user-image-clickable-hover: #481a89;
+$user-image-clickable-hover-dark: #7a47ba;
 
 $colors: (--navigation-background-color: ($navigation-background-color,
     $navigation-background-color-dark,
@@ -101,4 +107,6 @@ $colors: (--navigation-background-color: ($navigation-background-color,
   --search-result-see-more: ($search-result-see-more, $search-result-see-more-dark),
   --search-result-see-more-bubble: ($search-result-see-more-bubble, $search-result-see-more-bubble-dark),
   --search-result-see-more-text-color: ($search-result-see-more-bubble-text-color, $search-result-see-more-bubble-text-color-dark),
-  --search-result-item-hover: ($search-result-item-hover, $search-result-item-hover-dark));
+  --search-result-item-hover: ($search-result-item-hover, $search-result-item-hover-dark),
+  --user-image-border: ($user-image-border, $user-image-border-dark),
+  --user-image-clickable-hover: ($user-image-clickable-hover, $user-image-clickable-hover-dark));
