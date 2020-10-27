@@ -1,0 +1,22 @@
+$navigation-background-color: white;
+$navigation-background-color-dark: #212121;
+
+$mat-drawer-content-color: #DEE8FF;
+$mat-drawer-content-color-dark: #303030;
+
+$section-color: white;
+$section-color-dark: #212121;
+$section-box-shadow: 0 8px 20px 0 rgba(218, 224, 235, 0.6);
+$section-box-shadow-dark: none;
+
+$post-background-color: white;
+$post-background-color-dark: #3e3e3e;
+$post-box-shadow: 0 8px 20px 0 rgba(218, 224, 235, 0.6);
+$post-box-shadow-dark: 0 8px 20px 0 rgb(35 35 35 / 60%);
+
+$colors: (--navigation-background-color: ($navigation-background-color, $navigation-background-color-dark),
+    --mat-drawer-content-color: ($mat-drawer-content-color, $mat-drawer-content-color-dark),
+    --section-color: ($section-color, $section-color-dark),
+    --section-box-shadow: ($section-box-shadow, $section-box-shadow-dark),
+    --post-background-color: ($post-background-color, $post-background-color-dark),
+    --post-box-shadow: ($post-box-shadow, $post-box-shadow-dark))

@@ -39,6 +39,7 @@ import { UserComponent } from "./components/user/user.component";
 import { PopoverComponent } from "./components/popover/popover.component";
 import { EditCollectionComponent } from "./components/collection/edit-collection/edit-collection.component";
 import { DeleteResourceFromCollectionComponent } from "./components/collection/delete-resource-from-collection/delete-resource-from-collection.component";
+import { UiModule } from './modules/ui/ui.module';
 
 @NgModule({
   declarations: [
@@ -76,6 +77,7 @@ import { DeleteResourceFromCollectionComponent } from "./components/collection/d
     ManageModule,
     DialogsModule,
     GeneralModule,
+    UiModule
   ],
   providers: [
     {

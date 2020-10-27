@@ -6,6 +6,7 @@ import {
   faChevronUp,
 } from "@fortawesome/free-solid-svg-icons";
 import { ColorSchemeService } from "@services/color-scheme/color-scheme.service";
+import { CustomColorSchemeService } from '@services/custom-color-scheme/custom-color-scheme.service';
 
 @Component({
   selector: "app-change-theme",
@@ -24,11 +25,12 @@ export class ChangeThemeComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private colorSchemeService: ColorSchemeService
+    private customColorSchemeService: CustomColorSchemeService
   ) {}
 
   ngOnInit(): void {
     this.initForm();
+    this.getCurrentTheme();
     this.onFormChange();
   }
 
@@ -38,9 +40,22 @@ export class ChangeThemeComponent implements OnInit {
     });
   }
 
+  getCurrentTheme() {
+    this.form.controls.theme.patchValue(this.customColorSchemeService.getCurrentTheme());
+  }
+
   onFormChange() {
     this.form.controls.theme.valueChanges.subscribe((val) => {
-      this.colorSchemeService.update(val);
+      switch (val) {
+        case "light":
+          this.customColorSchemeService.setLightTheme();
+          break;
+        case "dark":
+          this.customColorSchemeService.setDarkTheme();
+          break;
+        default:
+          break;  
+      }
     });
   }
 }
