@@ -106,7 +106,7 @@ app-root {
         display: none;
         align-self: center;
         justify-self: center;
-        color: rgba(0, 0, 0, 0.8);
+        color: var(--profile-toggle-profile-view);
         width: 100px;
         font-size: 12px;
       }
@@ -178,7 +178,7 @@ app-root {
 }
 
 .popover-header {
-  border-bottom: 1px solid #dee8ff;
+  border-bottom: var(--popover-header-border-bottom);
   padding: 15px;
   font-size: 14px;
   span {
@@ -198,7 +198,7 @@ app-root {
   }
 
   &:not(:last-of-type) {
-    border-bottom: 1px solid #DEE8FF;
+    border-bottom: var(--popover-item-border-bottom);
   }
 
   &:hover {
@@ -208,12 +208,12 @@ app-root {
     font-size: 14px;
     margin-bottom: 5px;
     fa-icon {
-      color: #481a89;
+      color: var(--popover-item-top-icon-color);
       margin-right: 10px;
     }
 
     span {
-      color: #481a89;
+      color: var(--popover-item-top-text-color);
     }
   }
 
@@ -239,14 +239,14 @@ app-root {
   .label-container {
     margin-bottom: 5px;
     label {
-      color: rgb(184, 184, 184);
+      color: var(--custom-input-label-container);
       font-size: 12px;
       font-weight: 300;
     }
   }
 
   .input-container {
-    background-color: #f6f8fa;
+    background-color: var(--custom-input-input-container);
     border: 2px solid transparent;
     border-radius: 10px;
     padding: 15px 20px;
@@ -257,9 +257,14 @@ app-root {
       border: none;
       font-size: 15px;
       width: 100%;
+      color: var(--custom-input-color);
       &:focus {
         outline: 0;
         border: 0;
+      }
+
+      &::placeholder {
+        color: var(--custom-input-placeholder);
       }
     }
 

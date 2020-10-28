@@ -22,13 +22,14 @@
 	.toolbar {
 		display: inline-grid;
 		grid-template-columns: 50px auto 20px;
-		background-color: white;
-		box-shadow: 0 2px 16px rgba(0, 0, 0, .1);
+		background-color: var(--navigation-background-color);
+		box-shadow: 0 2px 16px rgba(167, 104, 104, 0.1);
 		z-index: 100;
 		position: relative;
 
 		.app-name {
 			display: none;
+
 			a {
 				color: #3C3C3C;
 				font-family: "Raleway", sans-serif;
@@ -108,13 +109,15 @@
 
 @media (min-width: 768px) {
 	.app-container {
-		.sidenav-container {	
+		.sidenav-container {
 			.app-name {
 				display: none;
 			}
 		}
+
 		.toolbar {
 			grid-template-columns: 50px 1fr 180px 70px;
+
 			.app-name {
 				display: inherit;
 			}

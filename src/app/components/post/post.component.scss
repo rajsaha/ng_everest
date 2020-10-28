@@ -17,9 +17,9 @@
 
 %count {
 	padding: 0 8px;
-	background-color: #dee8ff;
+	background-color: var(--post-btn-count-bubble-color);
 	border-radius: 20px;
-	color: #481a89;
+	color: var(--post-btn-count-bubble-text-color);
 	font-size: 10px;
 	font-weight: bold;
 	margin-left: 5px;
@@ -27,14 +27,14 @@
 
 .post {
 	height: auto;
-	border: 1px solid #eee;
+	border: var(--post-border-color);
 	border-radius: 5px;
 	margin-left: auto;
 	margin-right: auto;
 	margin-bottom: 25px;
 	max-width: 600px;
-	background-color: white;
-	box-shadow: 0 8px 20px 0 rgba(218, 224, 235, 0.6);
+	background-color: var(--post-background-color);
+	box-shadow: var(--post-box-shadow);
 	animation: fadeUp 0.2s ease-in-out;
 	animation-fill-mode: forwards;
 
@@ -43,7 +43,7 @@
 		grid-template-columns: 50px 1fr 1fr;
 		padding: 10px 15px;
 		font-size: 14px;
-		border-bottom: 1px solid #eee;
+		border-bottom: var(--post-header-border-bottom);
 
 		.user-image {
 			background-size: cover;
@@ -61,7 +61,7 @@
 			small {
 				display: block;
 				margin-top: 5px;
-				color: rgba(0, 0, 0, 0.3);
+				color: var(--post-upload-time-color);
 				font-size: 12px;
 				text-transform: lowercase;
 			}
@@ -73,7 +73,7 @@
 
 			fa-icon {
 				float: right;
-				color: rgba(0, 0, 0, 0.5);
+				color: var(--post-menu-color);
 			}
 		}
 	}
@@ -112,6 +112,7 @@
 
 		.collection-badge-true-parent {
 			filter: drop-shadow(0 5px 10px rgba(255, 162, 90, 1));
+
 			.collection-badge-true {
 				@extend %badge;
 				@extend %triangle;
@@ -129,6 +130,7 @@
 		.tag {
 			a {
 				text-decoration: none;
+
 				strong {
 					color: #fe685f;
 					border-radius: 5px;
@@ -181,7 +183,7 @@
 
 		.btn-like {
 			fa-icon {
-				color: rgba(0, 0, 0, 0.2);
+				color: var(--post-btn-like-color);
 				vertical-align: top;
 			}
 
@@ -192,7 +194,7 @@
 
 		.btn-comment {
 			fa-icon {
-				color: #c8c4d1;
+				color: var(--post-btn-comment-color);
 				vertical-align: top;
 			}
 
@@ -289,6 +291,9 @@
 
 textarea {
 	border: none !important;
+	background-color: var(--post-textarea-background-color);
+	color: var(--post-textarea-color);
+	cursor: text;
 }
 
 @keyframes buttonAppear {

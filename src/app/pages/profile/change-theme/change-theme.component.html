@@ -1,0 +1,29 @@
+<!-- Change Password -->
+<div class="section-container">
+  <div class="section" [ngClass]="{ 'padding-bottom': !showChangeThemeForm }">
+    <div
+      class="section-header-with-icon"
+      (click)="showChangeThemeForm = !showChangeThemeForm"
+    >
+      <p class="left">
+        <fa-icon [icon]="faEye"></fa-icon>
+        <span>Change Theme</span>
+      </p>
+      <div class="right">
+        <fa-icon
+          [icon]="showChangeThemeForm ? faChevronUp : faChevronDown"
+        ></fa-icon>
+      </div>
+    </div>
+    <div class="section-content" *ngIf="showChangeThemeForm && form">
+      <form [formGroup]="form">
+        <mat-radio-group formControlName="theme">
+          <mat-radio-button checked="true" value="light"
+            >Light</mat-radio-button
+          >
+          <mat-radio-button value="dark">Dark</mat-radio-button>
+        </mat-radio-group>
+      </form>
+    </div>
+  </div>
+</div>

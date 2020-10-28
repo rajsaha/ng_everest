@@ -19,7 +19,14 @@ $my-app-primary: mat-palette($primary-color, 50);
 $my-app-accent:  mat-palette($accent-color, 50);
 $my-app-warn:    mat-palette($mat-deep-orange);
 
-$my-app-theme: mat-light-theme($my-app-primary, $my-app-accent, $my-app-warn);
+$theme-light: mat-light-theme($my-app-primary, $my-app-accent, $my-app-warn);
+$theme-dark: mat-dark-theme($my-app-primary, $my-app-accent, $my-app-warn);
 
-@include angular-material-theme($my-app-theme);
+.color-scheme-light {
+    @include angular-material-theme($theme-light);
+}
+
+.color-scheme-dark {
+    @include angular-material-theme($theme-dark);
+}
 

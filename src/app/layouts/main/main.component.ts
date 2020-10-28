@@ -22,6 +22,7 @@ import { CommunicationService } from "@services/general/communication.service";
 import { environment as ENV } from "@environments/environment";
 import { MatSidenav } from "@angular/material/sidenav";
 import { filter } from "rxjs/operators";
+import { ColorSchemeService } from '@services/color-scheme/color-scheme.service';
 
 @Component({
   selector: "app-main",
@@ -60,8 +61,11 @@ export class MainComponent implements OnInit, OnDestroy {
     media: MediaMatcher,
     private router: Router,
     private loginService: LoginService,
-    private communicationService: CommunicationService
+    private communicationService: CommunicationService,
+    private colorSchemeService: ColorSchemeService
   ) {
+    // Load Color Scheme
+    this.colorSchemeService.load();
     this.mobileQuery = media.matchMedia("(max-width: 600px)");
     this.mobileQueryListener = () => changeDetectorRef.detectChanges();
     this.mobileQuery.addEventListener("change", this.mobileQueryListener);
