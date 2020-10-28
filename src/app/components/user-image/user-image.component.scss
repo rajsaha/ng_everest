@@ -1,7 +1,7 @@
 .image {
   display: grid;
   border-radius: 50%;
-  border: 2px solid white;
+  border: var(--user-image-border);
   background-color: aliceblue;
   background-size: cover;
   background-position: center;
@@ -45,6 +45,6 @@
 .clickable {
   cursor: pointer;
   &:hover {
-    border-color: #481a89;
+    border-color: var(--user-image-clickable-hover);
   }
 }

@@ -8,7 +8,7 @@
 }
 
 .summary-parent {
-  background-color: white;
+  background-color: var(--profile-summary-background-color);
   box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
   border-radius: 5px;
   margin-bottom: 15px;
@@ -114,9 +114,10 @@
         height: 35px;
         display: grid;
         border-radius: 50%;
-        border: 2px solid white;
+        border: var(--profile-summary-remaining-followers-border);
         background-color: aliceblue;
         transition: border 0.2s ease-in-out;
+        color: var(--profile-summary-remaining-followers-color);
 
         &:hover {
           border-color: #481a89;
@@ -135,15 +136,21 @@
     padding: 15px;
 
     .list-of-interests {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      grid-gap: 5px;
+      // display: grid;
+      // grid-template-columns: repeat(4, 1fr);
+      // grid-gap: 5px;
       p {
-        background-color: #dce6fd;
-        color: #481a89;
+        display: inline-block;
+        background-color: var(--profile-summary-list-of-interests-background-color);
+        color: var(--profile-summary-list-of-interests-p);
         padding: 5px 15px;
         border-radius: 15px;
         text-align: center;
+        margin-bottom: 0;
+
+        &:not(:last-of-type) {
+          margin-right: 5px;
+        }
       }
     }
   }

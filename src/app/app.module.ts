@@ -14,6 +14,7 @@ import { StoreModule } from "@ngrx/store";
 import { collectionsRefreshStateReducer } from "@services/ngrx/refreshCollections/refreshCollections.reducer";
 import { noImageComponentStateReducer } from "@services/ngrx/noImageComponent/noImageComponent.reducer";
 import { searchQueriesStateReducer } from "@services/ngrx/searchQueries/searchQueries.reducer";
+import { appThemeStateReducer } from "@services/ngrx/appTheme/appTheme.reducer";
 
 import { ManageModule } from "./modules/manage/manage.module";
 import { CommonModule } from "@angular/common";
@@ -39,6 +40,7 @@ import { UserComponent } from "./components/user/user.component";
 import { PopoverComponent } from "./components/popover/popover.component";
 import { EditCollectionComponent } from "./components/collection/edit-collection/edit-collection.component";
 import { DeleteResourceFromCollectionComponent } from "./components/collection/delete-resource-from-collection/delete-resource-from-collection.component";
+import { UiModule } from './modules/ui/ui.module';
 
 @NgModule({
   declarations: [
@@ -66,7 +68,8 @@ import { DeleteResourceFromCollectionComponent } from "./components/collection/d
     StoreModule.forRoot({
       collectionsRefreshState: collectionsRefreshStateReducer,
       noImageComponentState: noImageComponentStateReducer,
-      searchQueriesState: searchQueriesStateReducer
+      searchQueriesState: searchQueriesStateReducer,
+      appThemeState: appThemeStateReducer
     }),
     BrowserAnimationsModule,
     AppRoutingModule,
@@ -76,6 +79,7 @@ import { DeleteResourceFromCollectionComponent } from "./components/collection/d
     ManageModule,
     DialogsModule,
     GeneralModule,
+    UiModule
   ],
   providers: [
     {

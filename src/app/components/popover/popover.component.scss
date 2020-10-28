@@ -1,8 +1,16 @@
 .popover {
-    background-color: white;
-    box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
     border-radius: 5px;
     width: 250px;
+}
+
+.popover-light-theme {
+    background-color: white;
+    box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+}
+
+.popover-dark-theme {
+    background-color: #212121;
+    box-shadow: 0 2px 20px rgba(0, 0, 0, 0.5);
 }
 
 .position-horizontal {

@@ -13,6 +13,7 @@ import { PublicProfileComponent } from "src/app/pages/profile/public-profile/pub
 import { ViewCollectionComponent } from "src/app/pages/view-collection/view-collection.component";
 import { ViewResourceComponent } from "src/app/pages/view-resource/view-resource.component";
 import { ManageComponent } from "src/app/pages/manage/manage.component";
+import { ChangeThemeComponent } from 'src/app/pages/profile/change-theme/change-theme.component';
 
 const routes: Routes = [
   {
@@ -47,6 +48,7 @@ const routes: Routes = [
     ChangePasswordComponent,
     DeleteAccountComponent,
     CpiComponent,
+    ChangeThemeComponent
   ],
   imports: [
     CommonModule,

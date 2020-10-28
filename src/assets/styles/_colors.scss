@@ -1,0 +1,277 @@
+// * Navigation
+$navigation-background-color: white;
+$navigation-background-color-dark: #212121;
+
+// * Mat drawer
+$mat-drawer-content-color: #dee8ff;
+$mat-drawer-content-color-dark: #303030;
+
+// * Section class (used throughout app)
+$section-color: white;
+$section-color-dark: #212121;
+$section-box-shadow: 0 8px 20px 0 rgba(218, 224, 235, 0.6);
+$section-box-shadow-dark: none;
+
+// * Post component
+$post-background-color: white;
+$post-background-color-dark: #212121;
+$post-box-shadow: 0 8px 20px 0 rgba(218, 224, 235, 0.6);
+$post-box-shadow-dark: 0 8px 20px 0 rgb(35 35 35 / 60%);
+$post-border: 1px solid #eee;
+$post-border-dark: none;
+$post-upload-time-color: rgba(0, 0, 0, 0.3);
+$post-upload-time-color-dark: inherit;
+$post-header-border-bottom: 1px solid #eee;
+$post-header-border-bottom-dark: transparent;
+$post-menu-color: rgba(0, 0, 0, 0.5);
+$post-menu-color-dark: white;
+$post-textarea-background-color: white;
+$post-textarea-background-color-dark: #212121;
+$post-textarea-color: inherit;
+$post-textarea-color-dark: white;
+$post-btn-like-color: rgba(0, 0, 0, 0.2);
+$post-btn-like-color-dark: white;
+$post-btn-comment-color: #c8c4d1;
+$post-btn-comment-color-dark: white;
+$post-btn-count-bubble-color: #dee8ff;
+$post-btn-count-bubble-color-dark: #303030;
+$post-btn-count-bubble-text-color: #481a89;
+$post-btn-count-bubble-text-color-dark: white;
+
+// * Search component
+$search-background-color: #f6f8fa;
+$search-background-color-dark: rgba(255, 255, 255, 0.1);
+$search-search-icon-color: #481a89;
+$search-search-icon-color-dark: #7a47ba;
+$search-form-input-color: inherit;
+$search-form-input-color-dark: white;
+$search-form-focus-within: 2px solid rgba(72, 26, 137, 0.5);
+$search-form-focus-within-dark: 2px solid #7a47ba;
+$search-result-background-color: white;
+$search-result-background-color-dark:#212121;
+$search-result-box-shadow: 0 8px 20px 0 rgba(218, 224, 235, 0.6);
+$search-result-box-shadow-dark: 0 8px 20px 0 rgba(0, 0, 0, 0.4);
+$search-result-box-section-border: 1px solid #dee8ff;
+$search-result-box-section-border-dark: 1px solid #000000;
+$search-result-see-more: #481A89;
+$search-result-see-more-dark: white;
+$search-result-see-more-bubble: #DEE8FF;
+$search-result-see-more-bubble-dark: #303030;
+$search-result-see-more-bubble-text-color: inherit;
+$search-result-see-more-bubble-text-color-dark: white;
+$search-result-item-hover:rgba(0, 0, 0, 0.1);
+$search-result-item-hover-dark: rgba(0, 0, 0, 0.3);
+
+// * User Image Component
+$user-image-border: 2px solid white;
+$user-image-border-dark: 2px solid #212121;
+$user-image-clickable-hover: #481a89;
+$user-image-clickable-hover-dark: #7a47ba;
+
+// * Popover
+$popover-background: white;
+$popover-background-dark: #212121;
+$popover-box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+$popover-box-shadow-dark: 0 2px 20px rgba(0, 0, 0, 0.5);
+$popover-header-border-bottom: 1px solid #dee8ff;
+$popover-header-border-bottom-dark: 1px solid black;
+$popover-item-top-icon-color: #481a89;
+$popover-item-top-icon-color-dark: white;
+$popover-item-top-text-color: #481a89;
+$popover-item-top-text-color-dark: white;
+$popover-item-border-bottom: 1px solid #DEE8FF;
+$popover-item-border-bottom-dark: 1px solid black;
+
+// * Custom input
+$custom-input-input-container: #f6f8fa;
+$custom-input-input-container-dark: rgba(255, 255, 255, 0.1);
+$custom-input-label-container: rgb(184, 184, 184);
+$custom-input-label-container-dark: white;
+$custom-input-placeholder: inherit;
+$custom-input-placeholder-dark: white;
+$custom-input-color: inherit;
+$custom-input-color-dark: white;
+
+// * Divider
+$atc-divider: #dee8ff;
+$atc-divider-dark: #212121;
+
+// * Collection component
+$collection-container-background-color: white;
+$collection-container-background-color-dark: #212121;
+$collection-container-border: 1px solid rgb(235, 235, 235);
+$collection-container-border-dark: 1px solid #212121;
+$collection-container-box-shadow-hover: 0 22px 32px 0 rgba(197, 197, 197, 0.6);
+$collection-container-box-shadow-hover-dark: 0 22px 32px 0 rgba(0, 0, 0, 0.6);
+$collection-main-border-bottom: 5px solid white;
+$collection-main-border-bottom-dark: 5px solid #212121;
+$collection-block-border-right: 5px solid white;
+$collection-block-border-right-dark: 5px solid #212121;
+$collection-block-background-color: #e7e7e7;
+$collection-block-background-color-dark: #484848;
+$collection-main-background-color: rgba(231, 231, 231, 1);
+$collection-main-background-color-dark: #484848;
+$collection-header-button-color: #6d6b71;
+$collection-header-button-color-dark: white;
+
+// * Profile Summary
+$profile-summary-background-color: white;
+$profile-summary-background-color-dark: #212121;
+$profile-summary-remaining-followers-border: 2px solid white;
+$profile-summary-remaining-followers-border-dark: 2px solid #212121;
+$profile-summary-remaining-followers-color: inherit;
+$profile-summary-remaining-followers-color-dark: #212121;
+$profile-summary-list-of-interests-background-color: #dce6fd;
+$profile-summary-list-of-interests-background-color-dark: #616161;
+$profile-summary-list-of-interests-p: #481a89;
+$profile-summary-list-of-interests-p-dark: white;
+
+// * Manage page
+$manage-header-control-background-color: #f6f8fa;
+$manage-header-control-background-color-dark: rgba(255, 255, 255, 0.1);
+$manage-header-control-input-placeholder-color: inherit;
+$manage-header-control-input-placeholder-color-dark: white;
+$manage-header-control-input-color: inherit;
+$manage-header-control-input-color-dark: white;
+$manage-header-control-selected: #481a89;
+$manage-header-control-selected-dark:white;
+$manage-header-control-icon-color: #481a89;
+$manage-header-control-icon-color-dark: #7a47ba;
+
+// * Resource component
+$resource-background-color: white;
+$resource-background-color-dark: #212121;
+$resource-header-text-color: #3c3c3c;
+$resource-header-text-color-dark: white;
+$resource-header-icon-color: #6d6b71;
+$resource-header-icon-color-dark: white;
+$resource-details-text-color: #3c3c3c;
+$resource-details-text-color-dark: white;
+$resource-details-count-background-color: #dee8ff;
+$resource-details-count-background-color-dark: #303030;
+$resource-details-count-text-color: #481a89;
+$resource-details-count-text-color-dark: white;
+$resource-stats-like: rgba(0, 0, 0, 0.2);
+$resource-stats-like-dark: white;
+
+// * Share resource
+$custom-image-background-color: rgb(233, 231, 231);
+$custom-image-background-color-dark: black;
+$custom-image-p: inherit;
+$custom-image-p-dark: white;
+$custom-image-p-a: inherit;
+$custom-image-p-a-dark: white;
+
+// * Profile - toggle profile view
+$profile-toggle-profile-view: rgba(0, 0, 0, 0.8);
+$profile-toggle-profile-view-dark: white;
+
+// * Search container
+$search-page-tool-background-color:  rgba(255, 255, 255, 0.7);
+$search-page-tool-background-color-dark:#212121;
+
+// * User box
+$user-box-background-color: white;
+$user-box-background-color-dark: #212121;
+$user-box-box-shadow: 0 8px 20px 0 rgba(197, 197, 197, 0.6);
+$user-box-box-shadow-dark: 0 8px 20px 0 rgba(0, 0, 0, 0.3);
+$user-box-box-shadow-hover: 0 22px 32px 0 rgba(197, 197, 197, 0.9);
+$user-box-box-shadow-hover-dark: 0 22px 32px 0 rgba(0, 0, 0, 0.5);
+
+$colors: (--navigation-background-color: ($navigation-background-color,
+    $navigation-background-color-dark,
+  ),
+  --mat-drawer-content-color: ($mat-drawer-content-color,
+    $mat-drawer-content-color-dark,
+  ),
+  --section-color: ($section-color,
+    $section-color-dark,
+  ),
+  --section-box-shadow: ($section-box-shadow,
+    $section-box-shadow-dark,
+  ),
+  --post-background-color: ($post-background-color,
+    $post-background-color-dark,
+  ),
+  --post-box-shadow: ($post-box-shadow,
+    $post-box-shadow-dark,
+  ),
+  --post-border: ($post-border,
+    $post-border-dark),
+  --post-upload-time-color: ($post-upload-time-color, $post-upload-time-color-dark),
+  --post-header-border-bottom: ($post-header-border-bottom, $post-header-border-bottom-dark),
+  --post-menu-color: ($post-menu-color, $post-menu-color-dark),
+  --post-textarea-background-color: ($post-textarea-background-color, $post-textarea-background-color-dark),
+  --post-textarea-color: ($post-textarea-color, $post-textarea-color-dark),
+  --post-btn-like-color: ($post-btn-like-color, $post-btn-like-color-dark),
+  --post-btn-comment-color: ($post-btn-comment-color, $post-btn-comment-color-dark),
+  --post-btn-count-bubble-color: ($post-btn-count-bubble-color, $post-btn-count-bubble-color-dark),
+  --post-btn-count-bubble-text-color: ($post-btn-count-bubble-text-color, $post-btn-count-bubble-text-color-dark),
+
+  --search-background-color: ($search-background-color, $search-background-color-dark),
+  --search-search-icon-color: ($search-search-icon-color, $search-search-icon-color-dark),
+  --search-form-input-color: ($search-form-input-color, $search-form-input-color-dark),
+  --search-form-focus-within: ($search-form-focus-within, $search-form-focus-within-dark),
+  --search-result-background-color: ($search-result-background-color, $search-result-background-color-dark),
+  --search-result-box-shadow: ($search-result-box-shadow, $search-result-box-shadow-dark),
+  --search-result-box-section-border: ($search-result-box-section-border, $search-result-box-section-border-dark),
+  --search-result-see-more: ($search-result-see-more, $search-result-see-more-dark),
+  --search-result-see-more-bubble: ($search-result-see-more-bubble, $search-result-see-more-bubble-dark),
+  --search-result-see-more-text-color: ($search-result-see-more-bubble-text-color, $search-result-see-more-bubble-text-color-dark),
+  --search-result-item-hover: ($search-result-item-hover, $search-result-item-hover-dark),
+
+  --user-image-border: ($user-image-border, $user-image-border-dark),
+  --user-image-clickable-hover: ($user-image-clickable-hover, $user-image-clickable-hover-dark),
+
+  --popover-background: ($popover-background, $popover-background-dark),
+  --popover-box-shadow: ($popover-box-shadow, $popover-box-shadow-dark),
+  --popover-header-border-bottom: ($popover-header-border-bottom, $popover-header-border-bottom-dark),
+  --popover-item-top-icon-color: ($popover-item-top-icon-color, $popover-item-top-icon-color-dark),
+  --popover-item-top-text-color: ($popover-item-top-text-color, $popover-item-top-text-color-dark),
+  --popover-item-border-bottom: ($popover-item-border-bottom, $popover-item-border-bottom-dark),
+
+  --custom-input-input-container: ($custom-input-input-container, $custom-input-input-container-dark),
+  --custom-input-label-container: ($custom-input-label-container, $custom-input-label-container-dark),
+  --custom-input-placeholder: ($custom-input-placeholder, $custom-input-placeholder-dark),
+  --custom-input-color: ($custom-input-color, $custom-input-color-dark),
+
+  --atc-divider: ($atc-divider, $atc-divider-dark), 
+
+  --collection-container-background-color: ($collection-container-background-color, $collection-container-background-color-dark),
+  --collection-container-border: ($collection-container-border, $collection-container-border-dark),
+  --collection-container-box-shadow-hover: ($collection-container-box-shadow-hover, $collection-container-box-shadow-hover-dark),
+  --collection-main-border-bottom: ($collection-main-border-bottom, $collection-main-border-bottom-dark),
+  --collection-block-border-right: ($collection-block-border-right, $collection-block-border-right-dark),
+  --collection-block-background-color: ($collection-block-background-color, $collection-block-background-color-dark),
+  --collection-main-backround-color: ($collection-main-background-color, $collection-main-background-color-dark),
+  --collection-header-button-color: ($collection-header-button-color, $collection-header-button-color-dark),
+  
+  --profile-summary-background-color: ($profile-summary-background-color, $profile-summary-background-color-dark),
+  --profile-summary-remaining-followers-border: ($profile-summary-remaining-followers-border, $profile-summary-remaining-followers-border-dark),
+  --profile-summary-remaining-followers-color: ($profile-summary-remaining-followers-color, $profile-summary-remaining-followers-color-dark),
+  --profile-summary-list-of-interests-background-color: ($profile-summary-list-of-interests-background-color, $profile-summary-list-of-interests-background-color-dark),
+  --profile-summary-list-of-interests-p: ($profile-summary-list-of-interests-p, $profile-summary-list-of-interests-p-dark),
+  --manage-header-control-background-color: ($manage-header-control-background-color, $manage-header-control-background-color-dark),
+  --manage-header-control-input-placeholder-color: ($manage-header-control-input-placeholder-color, $manage-header-control-input-placeholder-color-dark),
+  --manage-header-control-input-color: ($manage-header-control-input-color, $manage-header-control-input-color-dark),
+  --manage-header-control-selected: ($manage-header-control-selected, $manage-header-control-selected-dark),
+  --manage-header-control-icon-color: ($manage-header-control-icon-color, $manage-header-control-icon-color-dark),
+
+  --resource-background-color: ($resource-background-color, $resource-background-color-dark),
+  --resource-header-text-color: ($resource-header-text-color, $resource-header-text-color-dark),
+  --resource-header-icon-color: ($resource-header-icon-color, $resource-header-icon-color-dark),
+  --resource-details-text-color: ($resource-details-text-color, $resource-details-text-color-dark),
+  --resource-details-count-background-color: ($resource-details-count-background-color, $resource-details-count-background-color-dark),
+  --resource-details-count-text-color: ($resource-details-count-text-color, $resource-details-count-text-color-dark),
+  --resource-stats-like: ($resource-stats-like, $resource-stats-like-dark),
+  
+  --custom-image-background-color: ($custom-image-background-color, $custom-image-background-color-dark),
+  --custom-image-p: ($custom-image-p, $custom-image-p-dark),
+  --custom-image-p-a: ($custom-image-p-a, $custom-image-p-a-dark),
+  --profile-toggle-profile-view: ($profile-toggle-profile-view, $profile-toggle-profile-view-dark),
+  
+  --search-page-tool-background-color: ($search-page-tool-background-color, $search-page-tool-background-color-dark),
+  
+  --user-box-background-color: ($user-box-background-color, $user-box-background-color-dark),
+  --user-box-box-shadow: ($user-box-box-shadow, $user-box-box-shadow-dark),
+  --user-box-box-shadow-hover: ($user-box-box-shadow-hover, $user-box-box-shadow-hover-dark));

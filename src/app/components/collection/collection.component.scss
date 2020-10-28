@@ -5,7 +5,7 @@ $max-block-height: 6.2rem;
 $min-block-width: 5rem;
 $min-block-height: 5rem;
 $block-radius: 10px;
-$block-border: 5px solid white;
+$block-border: var(--collection-block-border-right);
 %noImageTextBase {
   border-radius: 5px;
   display: grid;
@@ -20,13 +20,14 @@ $block-border: 5px solid white;
     font-family: "Bree Serif", serif;
     margin: 0;
     text-align: center;
+    text-overflow: ellipsis;
   }
 }
 
 .collection-container {
-  border: 1px solid rgb(235, 235, 235);
+  border: var(--collection-container-border);
   border-radius: 10px;
-  background-color: white;
+  background-color: var(--collection-container-background-color);
   box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
   cursor: pointer;
   display: inline-block;
@@ -35,7 +36,7 @@ $block-border: 5px solid white;
   width: 100%;
 
   &:hover {
-    box-shadow: 0 22px 32px 0 rgba(197, 197, 197, 0.6);
+    box-shadow: var(--collection-container-box-shadow-hover);
   }
 
   .header {
@@ -59,7 +60,7 @@ $block-border: 5px solid white;
     button {
       align-self: center;
       fa-icon {
-        color: #6d6b71;
+        color: var(--collection-header-button-color);
         align-self: center;
       }
     }
@@ -73,11 +74,11 @@ $block-border: 5px solid white;
     .main {
       grid-column-start: 1;
       grid-column-end: 4;
-      background-color: rgba(231, 231, 231, 1);
+      background-color: var(--collection-main-background-color);
       background-size: cover;
       background-repeat: no-repeat;
       background-position: center center;
-      border-bottom: 5px solid white;
+      border-bottom: var(--collection-main-border-bottom);
       width: auto;
 
       .no-image-text {
@@ -98,7 +99,7 @@ $block-border: 5px solid white;
     }
 
     .block {
-      background-color: rgba(231, 231, 231, 1);
+      background-color: var(--collection-block-background-color);
       background-size: cover;
       background-repeat: no-repeat;
       background-position: center center;
@@ -114,7 +115,7 @@ $block-border: 5px solid white;
           @extend %pBase;
 
           p:nth-of-type(1) {
-            font-size: 0.8rem;
+            font-size: 0.7rem;
           }
 
           p:nth-of-type(2) {

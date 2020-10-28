@@ -138,7 +138,10 @@
     </button>
   </div>
 
-  <app-comment *ngIf="showComments" [resourceId]="id"></app-comment>
+  <app-comment
+    *ngIf="showComments"
+    [data]="{ resourceId: id, count: commentCount }"
+  ></app-comment>
 
   <!-- * Add Comment -->
   <div class="add-comment">

@@ -8,8 +8,7 @@ import * as moment from 'moment';
   styleUrls: ['./comment.component.scss']
 })
 export class CommentComponent implements OnInit {
-  @Input() resourceId = '';
-
+  @Input() data: { resourceId: string, count: number };
   allComments = [];
 
   // Pagination
@@ -21,14 +20,17 @@ export class CommentComponent implements OnInit {
   constructor(private resourceService: ResourceService) {}
 
   async ngOnInit() {
-    await this.getComments();
+    this.count = this.data.count;
+    if (this.data.count > 0) {
+      await this.getComments();
+    }
   }
 
   async getComments() {
     const response: any = await this.resourceService.getResourceComments({
       pageNo: this.pageNo,
       size: this.size,
-      resourceId: this.resourceId
+      resourceId: this.data.resourceId
     });
 
     if (response.error) {

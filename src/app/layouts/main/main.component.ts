@@ -1,6 +1,12 @@
-import { ChangeDetectorRef, Component, OnInit, OnDestroy } from "@angular/core";
+import {
+  ChangeDetectorRef,
+  Component,
+  OnInit,
+  OnDestroy,
+  ViewChild,
+} from "@angular/core";
 import { MediaMatcher } from "@angular/cdk/layout";
-import { Router } from "@angular/router";
+import { NavigationStart, Router } from "@angular/router";
 import {
   faUser,
   faSignOutAlt,
@@ -9,12 +15,14 @@ import {
   faBorderAll,
   faSearch,
   faPenAlt,
-  faCog
+  faCog,
 } from "@fortawesome/free-solid-svg-icons";
-import { faSquare } from "@fortawesome/free-regular-svg-icons";
 import { LoginService } from "@services/auth/login.service";
 import { CommunicationService } from "@services/general/communication.service";
 import { environment as ENV } from "@environments/environment";
+import { MatSidenav } from "@angular/material/sidenav";
+import { filter } from "rxjs/operators";
+import { ColorSchemeService } from '@services/color-scheme/color-scheme.service';
 
 @Component({
   selector: "app-main",
@@ -34,6 +42,7 @@ export class MainComponent implements OnInit, OnDestroy {
   // Toggles
   isLoggedIn = false;
   isMenuActive = false;
+  @ViewChild("snav") snav: MatSidenav;
 
   // Icons
   faUser = faUser;
@@ -52,23 +61,31 @@ export class MainComponent implements OnInit, OnDestroy {
     media: MediaMatcher,
     private router: Router,
     private loginService: LoginService,
-    private communicationService: CommunicationService
+    private communicationService: CommunicationService,
+    private colorSchemeService: ColorSchemeService
   ) {
+    // Load Color Scheme
+    this.colorSchemeService.load();
     this.mobileQuery = media.matchMedia("(max-width: 600px)");
     this.mobileQueryListener = () => changeDetectorRef.detectChanges();
-    this.mobileQuery.addListener(this.mobileQueryListener);
+    this.mobileQuery.addEventListener("change", this.mobileQueryListener);
     this.communicationService.authState.subscribe((res) => {
       this.isLoggedIn = res;
     });
+
+    router.events
+      .pipe(filter((event) => event instanceof NavigationStart))
+      .subscribe((event: NavigationStart) => {
+        this.snav.toggle(false);
+        this.isMenuActive = false;
+      });
   }
 
   ngOnInit() {
     this.username = localStorage.getItem("username");
     this.isLoggedIn = this.loginService.isLoggedIn();
     this.localStorageImage = localStorage.getItem("profileImage");
-    this.image = this.localStorageImage
-      ? this.localStorageImage
-      : "";
+    this.image = this.localStorageImage ? this.localStorageImage : "";
     this.firstName = localStorage.getItem("firstName");
     this.lastName = localStorage.getItem("lastName");
   }
@@ -80,6 +97,6 @@ export class MainComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.mobileQuery.removeListener(this.mobileQueryListener);
+    this.mobileQuery.removeEventListener("change", this.mobileQueryListener);
   }
 }

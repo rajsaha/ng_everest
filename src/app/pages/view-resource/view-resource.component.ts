@@ -12,6 +12,7 @@ export class ViewResourceComponent implements OnInit {
   id: string;
   resource: any;
   currentUser: string;
+  currentUserId: string;
   isEditable = false;
 
   // Icons
@@ -27,6 +28,7 @@ export class ViewResourceComponent implements OnInit {
 
   ngOnInit() {
     this.currentUser = localStorage.getItem('username');
+    this.currentUserId = localStorage.getItem("userId");
     this.route.params.subscribe(async (params) => {
       this.resource = null;
       this.id = params.resourceId;
