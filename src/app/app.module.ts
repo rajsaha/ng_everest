@@ -14,6 +14,7 @@ import { StoreModule } from "@ngrx/store";
 import { collectionsRefreshStateReducer } from "@services/ngrx/refreshCollections/refreshCollections.reducer";
 import { noImageComponentStateReducer } from "@services/ngrx/noImageComponent/noImageComponent.reducer";
 import { searchQueriesStateReducer } from "@services/ngrx/searchQueries/searchQueries.reducer";
+import { appThemeStateReducer } from "@services/ngrx/appTheme/appTheme.reducer";
 
 import { ManageModule } from "./modules/manage/manage.module";
 import { CommonModule } from "@angular/common";
@@ -67,7 +68,8 @@ import { UiModule } from './modules/ui/ui.module';
     StoreModule.forRoot({
       collectionsRefreshState: collectionsRefreshStateReducer,
       noImageComponentState: noImageComponentStateReducer,
-      searchQueriesState: searchQueriesStateReducer
+      searchQueriesState: searchQueriesStateReducer,
+      appThemeState: appThemeStateReducer
     }),
     BrowserAnimationsModule,
     AppRoutingModule,

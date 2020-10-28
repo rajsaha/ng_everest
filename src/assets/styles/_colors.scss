@@ -68,6 +68,20 @@ $user-image-border-dark: 2px solid #212121;
 $user-image-clickable-hover: #481a89;
 $user-image-clickable-hover-dark: #7a47ba;
 
+// * Popover
+$popover-background: white;
+$popover-background-dark: #212121;
+$popover-box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+$popover-box-shadow-dark: 0 2px 20px rgba(0, 0, 0, 0.5);
+$popover-header-border-bottom: 1px solid #dee8ff;
+$popover-header-border-bottom-dark: 1px solid black;
+$popover-item-top-icon-color: #481a89;
+$popover-item-top-icon-color-dark: white;
+$popover-item-top-text-color: #481a89;
+$popover-item-top-text-color-dark: white;
+$popover-item-border-bottom: 1px solid #DEE8FF;
+$popover-item-border-bottom-dark: 1px solid black;
+
 $colors: (--navigation-background-color: ($navigation-background-color,
     $navigation-background-color-dark,
   ),
@@ -109,4 +123,10 @@ $colors: (--navigation-background-color: ($navigation-background-color,
   --search-result-see-more-text-color: ($search-result-see-more-bubble-text-color, $search-result-see-more-bubble-text-color-dark),
   --search-result-item-hover: ($search-result-item-hover, $search-result-item-hover-dark),
   --user-image-border: ($user-image-border, $user-image-border-dark),
-  --user-image-clickable-hover: ($user-image-clickable-hover, $user-image-clickable-hover-dark));
+  --user-image-clickable-hover: ($user-image-clickable-hover, $user-image-clickable-hover-dark),
+  --popover-background: ($popover-background, $popover-background-dark),
+  --popover-box-shadow: ($popover-box-shadow, $popover-box-shadow-dark),
+  --popover-header-border-bottom: ($popover-header-border-bottom, $popover-header-border-bottom-dark),
+  --popover-item-top-icon-color: ($popover-item-top-icon-color, $popover-item-top-icon-color-dark),
+  --popover-item-top-text-color: ($popover-item-top-text-color, $popover-item-top-text-color-dark),
+  --popover-item-border-bottom: ($popover-item-border-bottom, $popover-item-border-bottom-dark));

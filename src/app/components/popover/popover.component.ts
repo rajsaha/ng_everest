@@ -1,6 +1,7 @@
 import { Component, OnInit, TemplateRef } from "@angular/core";
 import { PopoverRef, PopoverContent } from "./popover-ref";
 import { trigger, transition, state, style, animate } from '@angular/animations';
+import { Store } from '@ngrx/store';
 const ANIMATION_TIMINGS_ENTER = '150ms cubic-bezier(0.25, 0.8, 0.25, 1)';
 const ANIMATION_TIMINGS_LEAVE = '75ms cubic-bezier(0.25, 0.8, 0.25, 1)';
 
@@ -26,15 +27,16 @@ export class PopoverComponent implements OnInit {
   context;
   position = "horizontal";
   positionClass = "position-horizontal";
+  themeClass = "popover-light-theme";
 
-  constructor(private popoverRef: PopoverRef) {}
+  constructor(private popoverRef: PopoverRef, private store: Store) { }
 
   ngOnInit() {
     this.content = this.popoverRef.content;
     if (this.popoverRef.data.position) {
       this.position = this.popoverRef.data.position;
     }
-    
+
     switch (this.position) {
       case "horizontal":
         this.positionClass = "position-horizontal";
@@ -44,7 +46,7 @@ export class PopoverComponent implements OnInit {
         break;
       default:
         this.positionClass = "position-horizontal";
-        break;    
+        break;
     }
 
     if (typeof this.content === "string") {
@@ -57,5 +59,25 @@ export class PopoverComponent implements OnInit {
         close: this.popoverRef.close.bind(this.popoverRef)
       };
     }
+
+    this.monitorStoreState();
+  }
+
+  monitorStoreState() {
+    this.store
+      .select((state) => state)
+      .subscribe((data: any) => {
+        switch (data.appThemeState) {
+          case "light":
+            this.themeClass = "popover-light-theme";
+            break;
+          case "dark":
+            this.themeClass = "popover-dark-theme";
+            break;
+          default:
+            this.themeClass = "popover-light-theme";
+            break;  
+        }
+      });
   }
 }

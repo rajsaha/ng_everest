@@ -178,7 +178,7 @@ app-root {
 }
 
 .popover-header {
-  border-bottom: 1px solid #dee8ff;
+  border-bottom: var(--popover-header-border-bottom);
   padding: 15px;
   font-size: 14px;
   span {
@@ -198,7 +198,7 @@ app-root {
   }
 
   &:not(:last-of-type) {
-    border-bottom: 1px solid #DEE8FF;
+    border-bottom: var(--popover-item-border-bottom);
   }
 
   &:hover {
@@ -208,12 +208,12 @@ app-root {
     font-size: 14px;
     margin-bottom: 5px;
     fa-icon {
-      color: #481a89;
+      color: var(--popover-item-top-icon-color);
       margin-right: 10px;
     }
 
     span {
-      color: #481a89;
+      color: var(--popover-item-top-text-color);
     }
   }
 

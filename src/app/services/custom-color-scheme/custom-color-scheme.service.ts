@@ -1,7 +1,9 @@
 import { Injectable } from '@angular/core';
+import { Store } from '@ngrx/store';
 import { ColorSchemeService } from '@services/color-scheme/color-scheme.service';
 import { StorageService } from '@services/local-storage/local-storage.service';
 import { BehaviorSubject } from 'rxjs';
+import { setTheme } from "@services/ngrx/appTheme/appTheme.actions";
 
 export enum ThemeMode {
   DARK, LIGHT
@@ -19,7 +21,7 @@ export class CustomColorSchemeService {
   private darkThemeSelected = false;
   public theme$ = new BehaviorSubject<ThemeMode>(ThemeMode.LIGHT);
 
-  constructor(private storage: StorageService, private colorSchemeService: ColorSchemeService) { }
+  constructor(private storage: StorageService, private colorSchemeService: ColorSchemeService, private store: Store) { }
 
   public setThemeOnStart() {
     if (this.isDarkThemeSelected()) {
@@ -40,6 +42,7 @@ export class CustomColorSchemeService {
   }
 
   public setLightTheme() {
+    this.store.dispatch(setTheme({ theme: "light" }))
     this.colorSchemeService.update("light");
     this.storage.set(this.THEME_KEY, this.LIGHT_THEME_VALUE);
     document.body.classList.remove(this.DARK_THEME_CLASS_NAME);
@@ -48,6 +51,7 @@ export class CustomColorSchemeService {
   }
 
   public setDarkTheme() {
+    this.store.dispatch(setTheme({ theme: "dark" }))
     this.colorSchemeService.update("dark");
     this.storage.set(this.THEME_KEY, this.DARK_THEME_VALUE);
     document.body.classList.add(this.DARK_THEME_CLASS_NAME);
