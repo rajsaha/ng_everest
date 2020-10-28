@@ -87,6 +87,10 @@ $custom-input-input-container: #f6f8fa;
 $custom-input-input-container-dark: rgba(255, 255, 255, 0.1);
 $custom-input-label-container: rgb(184, 184, 184);
 $custom-input-label-container-dark: white;
+$custom-input-placeholder: inherit;
+$custom-input-placeholder-dark: white;
+$custom-input-color: inherit;
+$custom-input-color-dark: white;
 
 // * Divider
 $atc-divider: #dee8ff;
@@ -147,6 +151,20 @@ $resource-details-count-background-color: #dee8ff;
 $resource-details-count-background-color-dark: #303030;
 $resource-details-count-text-color: #481a89;
 $resource-details-count-text-color-dark: white;
+$resource-stats-like: rgba(0, 0, 0, 0.2);
+$resource-stats-like-dark: white;
+
+// * Share resource
+$custom-image-background-color: rgb(233, 231, 231);
+$custom-image-background-color-dark: black;
+$custom-image-p: inherit;
+$custom-image-p-dark: white;
+$custom-image-p-a: inherit;
+$custom-image-p-a-dark: white;
+
+// * Profile - toggle profile view
+$profile-toggle-profile-view: rgba(0, 0, 0, 0.8);
+$profile-toggle-profile-view-dark: white;
 
 $colors: (--navigation-background-color: ($navigation-background-color,
     $navigation-background-color-dark,
@@ -202,6 +220,8 @@ $colors: (--navigation-background-color: ($navigation-background-color,
 
   --custom-input-input-container: ($custom-input-input-container, $custom-input-input-container-dark),
   --custom-input-label-container: ($custom-input-label-container, $custom-input-label-container-dark),
+  --custom-input-placeholder: ($custom-input-placeholder, $custom-input-placeholder-dark),
+  --custom-input-color: ($custom-input-color, $custom-input-color-dark),
 
   --atc-divider: ($atc-divider, $atc-divider-dark), 
 
@@ -224,10 +244,16 @@ $colors: (--navigation-background-color: ($navigation-background-color,
   --manage-header-control-input-color: ($manage-header-control-input-color, $manage-header-control-input-color-dark),
   --manage-header-control-selected: ($manage-header-control-selected, $manage-header-control-selected-dark),
   --manage-header-control-icon-color: ($manage-header-control-icon-color, $manage-header-control-icon-color-dark),
-  
+
   --resource-background-color: ($resource-background-color, $resource-background-color-dark),
   --resource-header-text-color: ($resource-header-text-color, $resource-header-text-color-dark),
   --resource-header-icon-color: ($resource-header-icon-color, $resource-header-icon-color-dark),
   --resource-details-text-color: ($resource-details-text-color, $resource-details-text-color-dark),
   --resource-details-count-background-color: ($resource-details-count-background-color, $resource-details-count-background-color-dark),
-  --resource-details-count-text-color: ($resource-details-count-text-color, $resource-details-count-text-color-dark));
+  --resource-details-count-text-color: ($resource-details-count-text-color, $resource-details-count-text-color-dark),
+  --resource-stats-like: ($resource-stats-like, $resource-stats-like-dark),
+  
+  --custom-image-background-color: ($custom-image-background-color, $custom-image-background-color-dark),
+  --custom-image-p: ($custom-image-p, $custom-image-p-dark),
+  --custom-image-p-a: ($custom-image-p-a, $custom-image-p-a-dark),
+  --profile-toggle-profile-view: ($profile-toggle-profile-view, $profile-toggle-profile-view-dark));
