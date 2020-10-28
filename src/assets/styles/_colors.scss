@@ -26,13 +26,13 @@ $post-header-border-bottom-dark: transparent;
 $post-menu-color: rgba(0, 0, 0, 0.5);
 $post-menu-color-dark: white;
 $post-textarea-background-color: white;
-$post-textarea-background-color-dark:  #212121;
+$post-textarea-background-color-dark: #212121;
 $post-textarea-color: inherit;
 $post-textarea-color-dark: white;
 $post-btn-like-color: rgba(0, 0, 0, 0.2);
 $post-btn-like-color-dark: white;
 $post-btn-comment-color: #c8c4d1;
-$post-btn-comment-color-dark: white;  
+$post-btn-comment-color-dark: white;
 $post-btn-count-bubble-color: #dee8ff;
 $post-btn-count-bubble-color-dark: #303030;
 $post-btn-count-bubble-text-color: #481a89;
@@ -82,6 +82,46 @@ $popover-item-top-text-color-dark: white;
 $popover-item-border-bottom: 1px solid #DEE8FF;
 $popover-item-border-bottom-dark: 1px solid black;
 
+// * Custom input
+$custom-input-input-container: #f6f8fa;
+$custom-input-input-container-dark: rgba(255, 255, 255, 0.1);
+$custom-input-label-container: rgb(184, 184, 184);
+$custom-input-label-container-dark: white;
+
+// * Divider
+$atc-divider: #dee8ff;
+$atc-divider-dark: #212121;
+
+// * Collection component
+$collection-container-background-color: white;
+$collection-container-background-color-dark: #212121;
+$collection-container-border: 1px solid rgb(235, 235, 235);
+$collection-container-border-dark: 1px solid #212121;
+$collection-container-box-shadow-hover: 0 22px 32px 0 rgba(197, 197, 197, 0.6);
+$collection-container-box-shadow-hover-dark: 0 22px 32px 0 rgba(0, 0, 0, 0.6);
+$collection-main-border-bottom: 5px solid white;
+$collection-main-border-bottom-dark: 5px solid #212121;
+$collection-block-border-right: 5px solid white;
+$collection-block-border-right-dark: 5px solid #212121;
+$collection-block-background-color: #e7e7e7;
+$collection-block-background-color-dark: #484848;
+$collection-main-background-color: rgba(231, 231, 231, 1);
+$collection-main-background-color-dark: #484848;
+$collection-header-button-color: #6d6b71;
+$collection-header-button-color-dark: white;
+
+// * Profile Summary
+$profile-summary-background-color: white;
+$profile-summary-background-color-dark: #212121;
+$profile-summary-remaining-followers-border: 2px solid white;
+$profile-summary-remaining-followers-border-dark: 2px solid #212121;
+$profile-summary-remaining-followers-color: inherit;
+$profile-summary-remaining-followers-color-dark: #212121;
+$profile-summary-list-of-interests-background-color: #dce6fd;
+$profile-summary-list-of-interests-background-color-dark: #616161;
+$profile-summary-list-of-interests-p: #481a89;
+$profile-summary-list-of-interests-p-dark: white; 
+
 $colors: (--navigation-background-color: ($navigation-background-color,
     $navigation-background-color-dark,
   ),
@@ -111,6 +151,7 @@ $colors: (--navigation-background-color: ($navigation-background-color,
   --post-btn-comment-color: ($post-btn-comment-color, $post-btn-comment-color-dark),
   --post-btn-count-bubble-color: ($post-btn-count-bubble-color, $post-btn-count-bubble-color-dark),
   --post-btn-count-bubble-text-color: ($post-btn-count-bubble-text-color, $post-btn-count-bubble-text-color-dark),
+
   --search-background-color: ($search-background-color, $search-background-color-dark),
   --search-search-icon-color: ($search-search-icon-color, $search-search-icon-color-dark),
   --search-form-input-color: ($search-form-input-color, $search-form-input-color-dark),
@@ -122,11 +163,33 @@ $colors: (--navigation-background-color: ($navigation-background-color,
   --search-result-see-more-bubble: ($search-result-see-more-bubble, $search-result-see-more-bubble-dark),
   --search-result-see-more-text-color: ($search-result-see-more-bubble-text-color, $search-result-see-more-bubble-text-color-dark),
   --search-result-item-hover: ($search-result-item-hover, $search-result-item-hover-dark),
+
   --user-image-border: ($user-image-border, $user-image-border-dark),
   --user-image-clickable-hover: ($user-image-clickable-hover, $user-image-clickable-hover-dark),
+
   --popover-background: ($popover-background, $popover-background-dark),
   --popover-box-shadow: ($popover-box-shadow, $popover-box-shadow-dark),
   --popover-header-border-bottom: ($popover-header-border-bottom, $popover-header-border-bottom-dark),
   --popover-item-top-icon-color: ($popover-item-top-icon-color, $popover-item-top-icon-color-dark),
   --popover-item-top-text-color: ($popover-item-top-text-color, $popover-item-top-text-color-dark),
-  --popover-item-border-bottom: ($popover-item-border-bottom, $popover-item-border-bottom-dark));
+  --popover-item-border-bottom: ($popover-item-border-bottom, $popover-item-border-bottom-dark),
+
+  --custom-input-input-container: ($custom-input-input-container, $custom-input-input-container-dark),
+  --custom-input-label-container: ($custom-input-label-container, $custom-input-label-container-dark),
+
+  --atc-divider: ($atc-divider, $atc-divider-dark), 
+
+  --collection-container-background-color: ($collection-container-background-color, $collection-container-background-color-dark),
+  --collection-container-border: ($collection-container-border, $collection-container-border-dark),
+  --collection-container-box-shadow-hover: ($collection-container-box-shadow-hover, $collection-container-box-shadow-hover-dark),
+  --collection-main-border-bottom: ($collection-main-border-bottom, $collection-main-border-bottom-dark),
+  --collection-block-border-right: ($collection-block-border-right, $collection-block-border-right-dark),
+  --collection-block-background-color: ($collection-block-background-color, $collection-block-background-color-dark),
+  --collection-main-backround-color: ($collection-main-background-color, $collection-main-background-color-dark),
+  --collection-header-button-color: ($collection-header-button-color, $collection-header-button-color-dark),
+  
+  --profile-summary-background-color: ($profile-summary-background-color, $profile-summary-background-color-dark),
+  --profile-summary-remaining-followers-border: ($profile-summary-remaining-followers-border, $profile-summary-remaining-followers-border-dark),
+  --profile-summary-remaining-followers-color: ($profile-summary-remaining-followers-color, $profile-summary-remaining-followers-color-dark),
+  --profile-summary-list-of-interests-background-color: ($profile-summary-list-of-interests-background-color, $profile-summary-list-of-interests-background-color-dark),
+  --profile-summary-list-of-interests-p: ($profile-summary-list-of-interests-p, $profile-summary-list-of-interests-p-dark));
