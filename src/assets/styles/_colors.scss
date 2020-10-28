@@ -120,7 +120,19 @@ $profile-summary-remaining-followers-color-dark: #212121;
 $profile-summary-list-of-interests-background-color: #dce6fd;
 $profile-summary-list-of-interests-background-color-dark: #616161;
 $profile-summary-list-of-interests-p: #481a89;
-$profile-summary-list-of-interests-p-dark: white; 
+$profile-summary-list-of-interests-p-dark: white;
+
+// * Manage page
+$manage-header-control-background-color: #f6f8fa;
+$manage-header-control-background-color-dark: rgba(255, 255, 255, 0.1);
+$manage-header-control-input-placeholder-color: inherit;
+$manage-header-control-input-placeholder-color-dark: white;
+$manage-header-control-input-color: inherit;
+$manage-header-control-input-color-dark: white;
+$manage-header-control-selected: #481a89;
+$manage-header-control-selected-dark:white;
+$manage-header-control-icon-color: #481a89;
+$manage-header-control-icon-color-dark: #7a47ba;
 
 $colors: (--navigation-background-color: ($navigation-background-color,
     $navigation-background-color-dark,
@@ -192,4 +204,9 @@ $colors: (--navigation-background-color: ($navigation-background-color,
   --profile-summary-remaining-followers-border: ($profile-summary-remaining-followers-border, $profile-summary-remaining-followers-border-dark),
   --profile-summary-remaining-followers-color: ($profile-summary-remaining-followers-color, $profile-summary-remaining-followers-color-dark),
   --profile-summary-list-of-interests-background-color: ($profile-summary-list-of-interests-background-color, $profile-summary-list-of-interests-background-color-dark),
-  --profile-summary-list-of-interests-p: ($profile-summary-list-of-interests-p, $profile-summary-list-of-interests-p-dark));
+  --profile-summary-list-of-interests-p: ($profile-summary-list-of-interests-p, $profile-summary-list-of-interests-p-dark),
+  --manage-header-control-background-color: ($manage-header-control-background-color, $manage-header-control-background-color-dark),
+  --manage-header-control-input-placeholder-color: ($manage-header-control-input-placeholder-color, $manage-header-control-input-placeholder-color-dark),
+  --manage-header-control-input-color: ($manage-header-control-input-color, $manage-header-control-input-color-dark),
+  --manage-header-control-selected: ($manage-header-control-selected, $manage-header-control-selected-dark),
+  --manage-header-control-icon-color: ($manage-header-control-icon-color, $manage-header-control-icon-color-dark));
