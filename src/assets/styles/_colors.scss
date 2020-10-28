@@ -166,6 +166,18 @@ $custom-image-p-a-dark: white;
 $profile-toggle-profile-view: rgba(0, 0, 0, 0.8);
 $profile-toggle-profile-view-dark: white;
 
+// * Search container
+$search-page-tool-background-color:  rgba(255, 255, 255, 0.7);
+$search-page-tool-background-color-dark:#212121;
+
+// * User box
+$user-box-background-color: white;
+$user-box-background-color-dark: #212121;
+$user-box-box-shadow: 0 8px 20px 0 rgba(197, 197, 197, 0.6);
+$user-box-box-shadow-dark: 0 8px 20px 0 rgba(0, 0, 0, 0.3);
+$user-box-box-shadow-hover: 0 22px 32px 0 rgba(197, 197, 197, 0.9);
+$user-box-box-shadow-hover-dark: 0 22px 32px 0 rgba(0, 0, 0, 0.5);
+
 $colors: (--navigation-background-color: ($navigation-background-color,
     $navigation-background-color-dark,
   ),
@@ -256,4 +268,10 @@ $colors: (--navigation-background-color: ($navigation-background-color,
   --custom-image-background-color: ($custom-image-background-color, $custom-image-background-color-dark),
   --custom-image-p: ($custom-image-p, $custom-image-p-dark),
   --custom-image-p-a: ($custom-image-p-a, $custom-image-p-a-dark),
-  --profile-toggle-profile-view: ($profile-toggle-profile-view, $profile-toggle-profile-view-dark));
+  --profile-toggle-profile-view: ($profile-toggle-profile-view, $profile-toggle-profile-view-dark),
+  
+  --search-page-tool-background-color: ($search-page-tool-background-color, $search-page-tool-background-color-dark),
+  
+  --user-box-background-color: ($user-box-background-color, $user-box-background-color-dark),
+  --user-box-box-shadow: ($user-box-box-shadow, $user-box-box-shadow-dark),
+  --user-box-box-shadow-hover: ($user-box-box-shadow-hover, $user-box-box-shadow-hover-dark));

@@ -2,15 +2,15 @@
 	cursor: pointer;
 	width: auto;
 	min-width: 100px;
-	box-shadow: 0 8px 20px 0 rgba(197, 197, 197, 0.6);
-	background-color: white;
+	box-shadow: var(--user-box-box-shadow);
+	background-color: var(--user-box-background-color);
 	border-radius: 5px;
 	margin-bottom: 25px;
 	transition: box-shadow 0.2s ease-in;
 	position: relative;
 	
 	&:hover {
-		box-shadow: 0 22px 32px 0 rgba(197, 197, 197, 0.9);
+		box-shadow: var(--user-box-box-shadow-hover);
 	}
 
 	.image-container {
