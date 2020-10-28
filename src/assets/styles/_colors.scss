@@ -134,6 +134,20 @@ $manage-header-control-selected-dark:white;
 $manage-header-control-icon-color: #481a89;
 $manage-header-control-icon-color-dark: #7a47ba;
 
+// * Resource component
+$resource-background-color: white;
+$resource-background-color-dark: #212121;
+$resource-header-text-color: #3c3c3c;
+$resource-header-text-color-dark: white;
+$resource-header-icon-color: #6d6b71;
+$resource-header-icon-color-dark: white;
+$resource-details-text-color: #3c3c3c;
+$resource-details-text-color-dark: white;
+$resource-details-count-background-color: #dee8ff;
+$resource-details-count-background-color-dark: #303030;
+$resource-details-count-text-color: #481a89;
+$resource-details-count-text-color-dark: white;
+
 $colors: (--navigation-background-color: ($navigation-background-color,
     $navigation-background-color-dark,
   ),
@@ -209,4 +223,11 @@ $colors: (--navigation-background-color: ($navigation-background-color,
   --manage-header-control-input-placeholder-color: ($manage-header-control-input-placeholder-color, $manage-header-control-input-placeholder-color-dark),
   --manage-header-control-input-color: ($manage-header-control-input-color, $manage-header-control-input-color-dark),
   --manage-header-control-selected: ($manage-header-control-selected, $manage-header-control-selected-dark),
-  --manage-header-control-icon-color: ($manage-header-control-icon-color, $manage-header-control-icon-color-dark));
+  --manage-header-control-icon-color: ($manage-header-control-icon-color, $manage-header-control-icon-color-dark),
+  
+  --resource-background-color: ($resource-background-color, $resource-background-color-dark),
+  --resource-header-text-color: ($resource-header-text-color, $resource-header-text-color-dark),
+  --resource-header-icon-color: ($resource-header-icon-color, $resource-header-icon-color-dark),
+  --resource-details-text-color: ($resource-details-text-color, $resource-details-text-color-dark),
+  --resource-details-count-background-color: ($resource-details-count-background-color, $resource-details-count-background-color-dark),
+  --resource-details-count-text-color: ($resource-details-count-text-color, $resource-details-count-text-color-dark));
