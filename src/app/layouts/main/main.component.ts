@@ -16,6 +16,9 @@ import {
   faSearch,
   faPenAlt,
   faCog,
+  faPowerOff,
+  faPlus,
+  faUserAlt
 } from "@fortawesome/free-solid-svg-icons";
 import { LoginService } from "@services/auth/login.service";
 import { CommunicationService } from "@services/general/communication.service";
@@ -53,6 +56,12 @@ export class MainComponent implements OnInit, OnDestroy {
   faSearch = faSearch;
   faPenAlt = faPenAlt;
   faCog = faCog;
+  faPowerOff = faPowerOff;
+  faPlus = faPlus;
+  faUserAlt = faUserAlt;
+
+  // Links
+  links = [];
 
   private mobileQueryListener: () => void;
 
@@ -88,6 +97,27 @@ export class MainComponent implements OnInit, OnDestroy {
     this.image = this.localStorageImage ? this.localStorageImage : "";
     this.firstName = localStorage.getItem("firstName");
     this.lastName = localStorage.getItem("lastName");
+    this.setLinks();
+  }
+
+  setLinks() {
+    this.links = [{
+      routerLink: "/",
+      icon: this.faStream,
+      text: "Feed"
+    }, {
+      routerLink: "/share-resource",
+      icon: this.faPlus,
+      text: "Share Resource"
+    }, {
+      routerLink: `/profile/user/${this.username}`,
+      icon: this.faUserAlt,
+      text: "Profile"
+    }, {
+      routerLink: "/profile/settings",
+      icon: this.faCog,
+      text: "Settings"
+    }]; 
   }
 
   logout() {
