@@ -1,30 +1,17 @@
-<div
-  class="parent"
-  infiniteScroll
-  [infiniteScrollDistance]="2"
-  [infiniteScrollThrottle]="50"
-  (scrolled)="onScrollDown()"
-  [scrollWindow]="false"
->
+<div class="parent" infiniteScroll [infiniteScrollDistance]="2" [infiniteScrollThrottle]="50"
+  (scrolled)="onScrollDown()" [scrollWindow]="false">
   <div class="resource-grid">
-    <app-resource
-      *ngFor="let resource of resources"
-      [data]="resource"
-      (deleteEvent)="drResponseHandler($event)"
-    >
+
+    <div *ngIf="resources && resources.length === 0">
+      <app-empty-state [data]="{ type: 'resource', isSelf: userData.isSelf }"></app-empty-state>
+    </div>
+    <app-resource *ngFor="let resource of resources" [data]="resource" (deleteEvent)="drResponseHandler($event)">
     </app-resource>
     <app-loading type="resource" *ngIf="isLoading"></app-loading>
   </div>
 </div>
 
-<div
-  class="see-more"
-  *ngIf="!isLoading && resources.length < resourcesCount && !resourceSearchQuery"
-  (click)="loadMorePosts()"
->
+<div class="see-more" *ngIf="!isLoading && resources.length < resourcesCount && !resourceSearchQuery"
+  (click)="loadMorePosts()">
   See More
-</div>
-
-<div *ngIf="resources && resources.length === 0">
-  You haven't shared any resources yet
 </div>

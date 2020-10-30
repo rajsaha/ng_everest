@@ -23,6 +23,7 @@ import { CommentComponent } from 'src/app/components/post/comment/comment.compon
 import { UserImageComponent } from 'src/app/components/user-image/user-image.component';
 import { ResourceNoImageComponent } from 'src/app/components/resource-no-image/resource-no-image.component';
 import { ColorPickerModule } from 'ngx-color-picker';
+import { EmptyStateComponent } from 'src/app/components/empty-state/empty-state.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import { ColorPickerModule } from 'ngx-color-picker';
     ViewCollectionComponent,
     ViewResourceComponent,
     UserImageComponent,
-    ResourceNoImageComponent
+    ResourceNoImageComponent,
+    EmptyStateComponent
   ],
   imports: [
     CommonModule,
@@ -68,7 +70,8 @@ import { ColorPickerModule } from 'ngx-color-picker';
     ViewResourceComponent,
     UserImageComponent,
     ResourceNoImageComponent,
-    ColorPickerModule
+    ColorPickerModule,
+    EmptyStateComponent
   ]
 })
 export class GeneralModule { }

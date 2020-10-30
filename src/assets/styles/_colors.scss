@@ -178,6 +178,10 @@ $user-box-box-shadow-dark: 0 8px 20px 0 rgba(0, 0, 0, 0.3);
 $user-box-box-shadow-hover: 0 22px 32px 0 rgba(197, 197, 197, 0.9);
 $user-box-box-shadow-hover-dark: 0 22px 32px 0 rgba(0, 0, 0, 0.5);
 
+// * Empty state component
+$empty-state-container-background: white;
+$empty-state-container-background-dark: #212121;
+
 $colors: (--navigation-background-color: ($navigation-background-color,
     $navigation-background-color-dark,
   ),
@@ -274,4 +278,5 @@ $colors: (--navigation-background-color: ($navigation-background-color,
   
   --user-box-background-color: ($user-box-background-color, $user-box-background-color-dark),
   --user-box-box-shadow: ($user-box-box-shadow, $user-box-box-shadow-dark),
-  --user-box-box-shadow-hover: ($user-box-box-shadow-hover, $user-box-box-shadow-hover-dark));
+  --user-box-box-shadow-hover: ($user-box-box-shadow-hover, $user-box-box-shadow-hover-dark),
+  --empty-state-container-background: ($empty-state-container-background, $empty-state-container-background-dark));

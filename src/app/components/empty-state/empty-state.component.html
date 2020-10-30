@@ -1,0 +1,35 @@
+<div class="empty-state-container">
+    <div class="empty-type" [ngSwitch]="data.type">
+        <div class="content" *ngSwitchCase="'collection'">
+            <div class="text">
+                {{ text }}
+            </div>
+        </div>
+
+        <div class="content" *ngSwitchCase="'resource'">
+            <div [ngSwitch]="data.isSelf" (click)="goToShareResource()">
+                <div class="content" *ngSwitchCase="true">
+                    <div class="action">
+                        <fa-icon [icon]="faPlus"></fa-icon>
+                    </div>
+        
+                    <div class="text">
+                        {{ text }}
+                    </div>
+                </div>
+
+                <div class="content" *ngSwitchCase="false">
+                    <div class="text">
+                        {{ text }}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="content" *ngSwitchCase="'feed'">
+            <div class="text">
+                {{ text }}
+            </div>
+        </div>
+    </div>
+</div>

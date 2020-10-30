@@ -71,7 +71,7 @@ export class MainComponent implements OnInit, OnDestroy {
     private router: Router,
     private loginService: LoginService,
     private communicationService: CommunicationService,
-    private colorSchemeService: ColorSchemeService
+    private colorSchemeService: ColorSchemeService,
   ) {
     // Load Color Scheme
     this.colorSchemeService.load();
@@ -122,6 +122,7 @@ export class MainComponent implements OnInit, OnDestroy {
 
   logout() {
     this.loginService.logout();
+    this.colorSchemeService.update("light");
     this.router.navigate(["login"]);
     this.isLoggedIn = false;
   }

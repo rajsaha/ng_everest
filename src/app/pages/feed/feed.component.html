@@ -10,7 +10,7 @@
     <app-post *ngFor="let post of posts" [data]="post" [currentUser]="username" [currentUserId]="userId"></app-post>
 
     <div class="section-container" *ngIf="posts.length === 0">
-      <p>Nothing here</p>
+      <app-empty-state [data]="{ type: 'feed', isSelf: true }"></app-empty-state>
     </div>
   </div>
 </div>
