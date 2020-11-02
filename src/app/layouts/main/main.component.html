@@ -1,13 +1,16 @@
 <div class="app-container" [class.is-mobile]="mobileQuery.matches">
-  <mat-toolbar>
+  <mat-toolbar class="mat-toolbar-box-shadow">
     <div class="toolbar">
       <div class="left">
         <button mat-icon-button (click)="snav.toggle(); isMenuActive = !isMenuActive">
           <mat-icon>{{ isMenuActive ? "clear" : "menu" }}</mat-icon>
         </button>
-        <h1 class="app-name">
-          <a routerLink="/">Everest</a>
-        </h1>
+        <a routerLink="/">
+          <div class="app-name">
+            <img class="logo-container" src="../../../assets/images/logo-light.png" alt="Logo">
+            <p>Everest</p>
+          </div>
+        </a>
       </div>
 
       <div class="right">

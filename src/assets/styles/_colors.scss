@@ -1,6 +1,8 @@
 // * Navigation
 $navigation-background-color: white;
 $navigation-background-color-dark: #212121;
+$navigation-logo: url(../../../src/assets/images/logo-light.png);
+$navigation-logo-dark: url(../../../src/assets/images/logo-dark.svg); 
 
 // * Mat drawer
 $mat-drawer-content-color: #dee8ff;
@@ -185,6 +187,7 @@ $empty-state-container-background-dark: #212121;
 $colors: (--navigation-background-color: ($navigation-background-color,
     $navigation-background-color-dark,
   ),
+  --navigation-logo: ($navigation-logo, $navigation-logo-dark),
   --mat-drawer-content-color: ($mat-drawer-content-color,
     $mat-drawer-content-color-dark,
   ),
