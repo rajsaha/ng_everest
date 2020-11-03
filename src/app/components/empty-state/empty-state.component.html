@@ -1,6 +1,9 @@
 <div class="empty-state-container">
     <div class="empty-type" [ngSwitch]="data.type">
         <div class="content" *ngSwitchCase="'collection'">
+            <div class="image">
+                <img src="../../../assets/images/empty-state.svg" alt="empty">
+            </div>
             <div class="text">
                 {{ text }}
             </div>
@@ -9,6 +12,9 @@
         <div class="content" *ngSwitchCase="'resource'">
             <div [ngSwitch]="data.isSelf" (click)="goToShareResource()">
                 <div class="content" *ngSwitchCase="true">
+                    <div class="image">
+                        <img src="../../../assets/images/empty-state.svg" alt="empty">
+                    </div>
                     <div class="action">
                         <fa-icon [icon]="faPlus"></fa-icon>
                     </div>
@@ -19,6 +25,9 @@
                 </div>
 
                 <div class="content" *ngSwitchCase="false">
+                    <div class="image">
+                        <img src="../../../assets/images/empty-state.svg" alt="empty">
+                    </div>
                     <div class="text">
                         {{ text }}
                     </div>

@@ -83,8 +83,10 @@ export class MainComponent implements OnInit, OnDestroy {
     this.localStorageTheme = this.customColorSchemeService.getCurrentTheme();
     if (this.localStorageTheme == 'dark') {
       this.checked = true;
+      this.customColorSchemeService.setDarkTheme();
     } else {
       this.checked = false;
+      this.customColorSchemeService.setLightTheme();
     }
     this.mobileQuery = media.matchMedia("(max-width: 600px)");
     this.mobileQueryListener = () => changeDetectorRef.detectChanges();
@@ -134,6 +136,7 @@ export class MainComponent implements OnInit, OnDestroy {
   logout() {
     this.loginService.logout();
     this.colorSchemeService.update("light");
+    this.customColorSchemeService.setLightTheme();
     this.router.navigate(["login"]);
     this.isLoggedIn = false;
   }
