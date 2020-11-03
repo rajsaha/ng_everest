@@ -54,10 +54,11 @@
         .unfollow {
           @extend %follow-button-base;
           background-color: transparent;
-          color: #2d2d2d;
+          border: var(--profile-summary-unfollow-button-border);
+          color: var(--profile-summary-unfollow-button-color);
 
           &:hover {
-            border-color: #481a89;
+            border-color: var(--profile-summary-unfollow-button-border-color-hover);
           }
 
           &:active {

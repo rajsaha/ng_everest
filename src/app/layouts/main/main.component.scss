@@ -1,3 +1,7 @@
+.mat-toolbar-box-shadow {
+	box-shadow: 0 2px 16px rgba(167, 104, 104, 0.1);
+}
+
 .app-container {
 	width: 100%;
 	height: 100%;
@@ -20,34 +24,76 @@
 	}
 
 	.toolbar {
+		width: 100%;
 		display: inline-grid;
-		grid-template-columns: 50px auto 20px;
-		background-color: var(--navigation-background-color);
-		box-shadow: 0 2px 16px rgba(167, 104, 104, 0.1);
+		grid-template-columns: 1fr 1fr;
+		// background-color: var(--navigation-background-color);
 		z-index: 100;
 		position: relative;
+		align-content: center;
 
-		.app-name {
-			display: none;
+		.left {
+			display: grid;
+			grid-template-columns: 40px 1fr;
+			grid-template-rows: 42px;
+			grid-gap: 5px;
 
-			a {
-				color: #3C3C3C;
-				font-family: "Raleway", sans-serif;
-				font-weight: 200;
-				text-transform: uppercase;
-				letter-spacing: 8px;
+			.branding-container {
 				text-decoration: none;
+				display: grid;
+				grid-template-columns: 40px 1fr;
+				align-items: center;
 
 				&:visited {
 					color: inherit;
 				}
+
+				.logo-container {
+					border-radius: 5px;
+
+					img {
+						width: 25px;
+						height: 25px;
+						margin-top: 10px;
+					}
+				}
+
+				.app-name {
+					align-self: center;
+					// color: #3C3C3C;
+
+					p {
+						display: none;
+						margin: 0;
+						// color: white;
+						font-family: "Raleway", sans-serif;
+						font-weight: 200;
+						text-transform: uppercase;
+						letter-spacing: 8px;
+					}
+				}
 			}
 		}
 
-		.app-search {
-			width: 100%;
-			justify-self: center;
+		.right {
+			display: inline-grid;
 			align-self: center;
+			align-content: center;
+			align-items: center;
+			grid-template-columns: 50px 50px;
+			justify-content: center;
+			justify-self: end;
+			justify-items: center;
+			grid-gap: 5px;
+
+			.app-search {
+				cursor: pointer;
+				text-align: center;
+			}
+
+			.share-resource {
+				cursor: pointer;
+			}
 		}
 	}
 
@@ -97,34 +143,29 @@
 	border: 1px solid rgba(0, 0, 0, 1) !important;
 }
 
-@media (min-width: 320px) and (max-width: 420px) {
-	.app-container {
-		.toolbar {
-			.app-search {
-				width: 10rem;
-			}
-		}
-	}
-}
+@media (min-width: 320px) and (max-width: 420px) {}
 
 @media (min-width: 768px) {
 	.app-container {
-		.sidenav-container {
-			.app-name {
-				display: none;
-			}
-		}
-
 		.toolbar {
-			grid-template-columns: 50px 1fr 180px 70px;
+			grid-template-columns: 1fr 1fr;
 
-			.app-name {
-				display: inherit;
+			.left {
+				.branding-container {
+					.app-name {
+						p {
+							display: inherit;
+						}
+					}
+				}
 			}
 
-			.app-search {
-				width: 15rem;
-				grid-column-start: auto;
+			.right {
+				grid-template-columns: 1fr 50px;
+				
+				.app-search {
+					margin-right: 15px;
+				}
 			}
 		}
 	}

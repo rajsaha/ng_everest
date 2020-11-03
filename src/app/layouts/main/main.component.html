@@ -1,57 +1,57 @@
 <div class="app-container" [class.is-mobile]="mobileQuery.matches">
-  <mat-toolbar class="toolbar">
-    <button
-      mat-icon-button
-      (click)="snav.toggle(); isMenuActive = !isMenuActive"
-    >
-      <mat-icon>{{ isMenuActive ? "clear" : "menu" }}</mat-icon>
-    </button>
-    <h1 class="app-name" *ngIf="!mobileQuery.matches">
-      <a routerLink="/">Everest</a>
-    </h1>
+  <mat-toolbar class="mat-toolbar-box-shadow" color="white">
+    <div class="toolbar">
+      <div class="left">
+        <button mat-icon-button (click)="snav.toggle(); isMenuActive = !isMenuActive">
+          <mat-icon>{{ isMenuActive ? "clear" : "menu" }}</mat-icon>
+        </button>
+        <a class="branding-container" routerLink="/">
+          <div class="logo-container">
+            <img class="logo-container" src="../../../assets/images/logo-light.png" alt="Logo">
+          </div>
+          <div class="app-name">
+            <p>Everest</p>
+          </div>
+        </a>
+      </div>
 
-    <app-search class="app-search"></app-search>
+      <div class="right">
+        <div class="app-search">
+          <app-search></app-search>
+        </div>
 
-    <div class="profile-container">
-      <app-user-image
-        class="profile-image"
-        [userData]="{
-          image: image,
-          firstName: firstName,
-          lastName: lastName,
-          username: username
-        }"
-        clickable="true"
-      >
-      </app-user-image>
+        <div class="share-resource" (click)="goToShareResource()">
+          <fa-icon [icon]="faPlus"></fa-icon>
+        </div>
+
+        <div class="profile-container">
+          <app-user-image class="profile-image" [userData]="{
+              image: image,
+              firstName: firstName,
+              lastName: lastName,
+              username: username
+            }" clickable="true">
+          </app-user-image>
+        </div>
+      </div>
     </div>
   </mat-toolbar>
 
-  <mat-sidenav-container
-    class="sidenav-container"
-    [style.marginTop.px]="mobileQuery.matches ? 56 : 0"
-  >
-    <mat-sidenav
-      #snav
-      [mode]="mobileQuery.matches ? 'over' : 'side'"
-      [fixedInViewport]="mobileQuery.matches"
-      fixedTopGap="56"
-    >
+  <mat-sidenav-container class="sidenav-container" [style.marginTop.px]="mobileQuery.matches ? 56 : 0">
+    <mat-sidenav #snav [mode]="mobileQuery.matches ? 'over' : 'side'" [fixedInViewport]="mobileQuery.matches"
+      fixedTopGap="56">
       <mat-nav-list>
         <h1 class="app-name"><a routerLink="/">Everest</a></h1>
-        <a routerLink="/" routerLinkActive="active-sidenav">
-          <fa-icon [icon]="faStream"></fa-icon>&nbsp;&nbsp;Feed
+        <h4>Pages</h4>
+        <a *ngFor="let item of links" [routerLink]="item.routerLink" routerLinkActive="active-sidenav">
+          <fa-icon [icon]="item.icon"></fa-icon>&nbsp;&nbsp;{{ item.text }}
         </a>
-        <a routerLink="/share-resource" routerLinkActive="active-sidenav">
-          <fa-icon [icon]="faShareAlt"></fa-icon>&nbsp;&nbsp;Share Resource
-        </a>
-        <mat-divider></mat-divider>
-        <a routerLink="/profile/settings" routerLinkActive="active-sidenav">
-          <fa-icon [icon]="faCog"></fa-icon>&nbsp;&nbsp;Settings
-        </a>
-        <a (click)="logout()">
+        <a (click)="logout()" style="cursor: pointer;">
           <fa-icon [icon]="faSignOutAlt"></fa-icon>&nbsp;&nbsp;Logout
         </a>
+        <div class="general-divider"></div>
+        <mat-slide-toggle (change)="onToggleChange($event)" labelPosition="before" [checked]="checked">Dark Mode
+        </mat-slide-toggle>
       </mat-nav-list>
     </mat-sidenav>
 

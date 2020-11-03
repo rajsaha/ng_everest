@@ -47,7 +47,7 @@
   <div
     class="title"
     [ngStyle]="{
-      'grid-template-columns': isInCollection ? '1fr 45px' : '1fr 106px'
+      'grid-template-columns': isInCollection ? '1fr 45px' : '1fr 60px'
     }"
   >
     <strong>{{ title }}</strong>
@@ -57,7 +57,7 @@
       matRipple
       (click)="openCollectionsDialog()"
     >
-      <fa-icon [icon]="faPlus"></fa-icon> Add to Collection
+      <fa-icon [icon]="faPlus"></fa-icon> Collect
     </div>
 
     <div class="collection-badge-true-parent">

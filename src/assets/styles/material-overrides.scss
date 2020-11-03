@@ -10,3 +10,7 @@ mat-nav-list {
     padding: 15px 0;
   }
 }
+
+.mat-toolbar {
+  background: var(--navigation-background-color) !important;
+}

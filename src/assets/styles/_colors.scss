@@ -1,6 +1,8 @@
 // * Navigation
 $navigation-background-color: white;
 $navigation-background-color-dark: #212121;
+$navigation-logo: url(../../../src/assets/images/logo-light.png);
+$navigation-logo-dark: url(../../../src/assets/images/logo-dark.svg); 
 
 // * Mat drawer
 $mat-drawer-content-color: #dee8ff;
@@ -125,6 +127,12 @@ $profile-summary-list-of-interests-background-color: #dce6fd;
 $profile-summary-list-of-interests-background-color-dark: #616161;
 $profile-summary-list-of-interests-p: #481a89;
 $profile-summary-list-of-interests-p-dark: white;
+$profile-summary-unfollow-button-border: 1px solid rgba(0, 0, 0,.1);
+$profile-summary-unfollow-button-border-dark: 1px solid rgba(255, 255, 255, .5);
+$profile-summary-unfollow-button-color: #2d2d2d;
+$profile-summary-unfollow-button-color-dark: white;
+$profile-summary-unfollow-button-border-color-hover: #481a89;
+$profile-summary-unfollow-button-border-color-hover-dark: rgba(255, 255, 255, 1);
 
 // * Manage page
 $manage-header-control-background-color: #f6f8fa;
@@ -156,7 +164,7 @@ $resource-stats-like-dark: white;
 
 // * Share resource
 $custom-image-background-color: rgb(233, 231, 231);
-$custom-image-background-color-dark: black;
+$custom-image-background-color-dark: #2d2d2d;
 $custom-image-p: inherit;
 $custom-image-p-dark: white;
 $custom-image-p-a: inherit;
@@ -167,7 +175,7 @@ $profile-toggle-profile-view: rgba(0, 0, 0, 0.8);
 $profile-toggle-profile-view-dark: white;
 
 // * Search container
-$search-page-tool-background-color:  rgba(255, 255, 255, 0.7);
+$search-page-tool-background-color:  rgba(255, 255, 255, 1);
 $search-page-tool-background-color-dark:#212121;
 
 // * User box
@@ -178,9 +186,16 @@ $user-box-box-shadow-dark: 0 8px 20px 0 rgba(0, 0, 0, 0.3);
 $user-box-box-shadow-hover: 0 22px 32px 0 rgba(197, 197, 197, 0.9);
 $user-box-box-shadow-hover-dark: 0 22px 32px 0 rgba(0, 0, 0, 0.5);
 
+// * Empty state component
+$empty-state-container-background: white;
+$empty-state-container-background-dark: #212121;
+$empty-state-container-action-icon: white;
+$empty-state-container-action-icon-dark: white;
+
 $colors: (--navigation-background-color: ($navigation-background-color,
     $navigation-background-color-dark,
   ),
+  --navigation-logo: ($navigation-logo, $navigation-logo-dark),
   --mat-drawer-content-color: ($mat-drawer-content-color,
     $mat-drawer-content-color-dark,
   ),
@@ -251,6 +266,10 @@ $colors: (--navigation-background-color: ($navigation-background-color,
   --profile-summary-remaining-followers-color: ($profile-summary-remaining-followers-color, $profile-summary-remaining-followers-color-dark),
   --profile-summary-list-of-interests-background-color: ($profile-summary-list-of-interests-background-color, $profile-summary-list-of-interests-background-color-dark),
   --profile-summary-list-of-interests-p: ($profile-summary-list-of-interests-p, $profile-summary-list-of-interests-p-dark),
+  --profile-summary-unfollow-button-border: ($profile-summary-unfollow-button-border, $profile-summary-unfollow-button-border-dark),
+  --profile-summary-unfollow-button-color: ($profile-summary-unfollow-button-color, $profile-summary-unfollow-button-color-dark),
+  --profile-summary-unfollow-button-border-color-hover: ($profile-summary-unfollow-button-border-color-hover, $profile-summary-unfollow-button-border-color-hover-dark),
+
   --manage-header-control-background-color: ($manage-header-control-background-color, $manage-header-control-background-color-dark),
   --manage-header-control-input-placeholder-color: ($manage-header-control-input-placeholder-color, $manage-header-control-input-placeholder-color-dark),
   --manage-header-control-input-color: ($manage-header-control-input-color, $manage-header-control-input-color-dark),
@@ -274,4 +293,6 @@ $colors: (--navigation-background-color: ($navigation-background-color,
   
   --user-box-background-color: ($user-box-background-color, $user-box-background-color-dark),
   --user-box-box-shadow: ($user-box-box-shadow, $user-box-box-shadow-dark),
-  --user-box-box-shadow-hover: ($user-box-box-shadow-hover, $user-box-box-shadow-hover-dark));
+  --user-box-box-shadow-hover: ($user-box-box-shadow-hover, $user-box-box-shadow-hover-dark),
+  --empty-state-container-background: ($empty-state-container-background, $empty-state-container-background-dark),
+  --empty-state-container-action-icon: ($empty-state-container-action-icon, $empty-state-container-action-icon-dark));
