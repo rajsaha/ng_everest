@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild, ElementRef } from "@angular/core";
 import { Router } from "@angular/router";
 import { FormBuilder, Validators, FormGroup } from "@angular/forms";
-import { faUpload, faPlusCircle } from "@fortawesome/free-solid-svg-icons";
+import { faUpload, faPlusCircle, faGlobe } from "@fortawesome/free-solid-svg-icons";
 import { COMMA, ENTER } from "@angular/cdk/keycodes";
 import { MatChipInputEvent } from "@angular/material/chips";
 import { ValidationService } from "@services/forms/validation.service";
@@ -35,6 +35,7 @@ export class ShareResourceComponent implements OnInit {
   // Icons
   faUpload = faUpload;
   faPlusCircle = faPlusCircle;
+  faGlobe = faGlobe;
 
   // Toggles
   isLoading = false;
