@@ -35,7 +35,7 @@ export class SearchComponent implements OnInit {
     private userService: UserService,
     private route: Router,
     private router: ActivatedRoute
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.initSearchForm();
@@ -80,7 +80,7 @@ export class SearchComponent implements OnInit {
           ) {
             this.resources = searchResult.resources.data[0].resources;
             return;
-          }          
+          }
 
           if (searchResult.users && searchResult.users.users.length > 0) {
             this.users = searchResult.users.users;
@@ -118,7 +118,7 @@ export class SearchComponent implements OnInit {
           user: true
         }
       });
-      
+
       this.isSearchActive = true;
       this.isLoading = false;
 
@@ -129,7 +129,7 @@ export class SearchComponent implements OnInit {
       ) {
         this.resources = searchResult.resources.data[0].resources;
         return;
-      }          
+      }
 
       if (searchResult.users && searchResult.users.users.length > 0) {
         this.users = searchResult.users.users;
@@ -195,13 +195,19 @@ export class SearchComponent implements OnInit {
     });
   }
 
-  goToSearch() {
+  goToSearch(noQuery?) {
     const query = this.searchForm.get("query").value;
     if (query) {
       this.isSearchActive = false;
       this.searchForm.get("query").patchValue("");
       this.route.navigate([`/search`], {
         queryParams: { query },
+        relativeTo: this.router.parent
+      });
+    }
+
+    if (noQuery) {
+      this.route.navigate([`/search`], {
         relativeTo: this.router.parent
       });
     }

@@ -1,13 +1,15 @@
 <div class="app-container" [class.is-mobile]="mobileQuery.matches">
-  <mat-toolbar class="mat-toolbar-box-shadow">
+  <mat-toolbar class="mat-toolbar-box-shadow" color="white">
     <div class="toolbar">
       <div class="left">
         <button mat-icon-button (click)="snav.toggle(); isMenuActive = !isMenuActive">
           <mat-icon>{{ isMenuActive ? "clear" : "menu" }}</mat-icon>
         </button>
-        <a routerLink="/">
-          <div class="app-name">
+        <a class="branding-container" routerLink="/">
+          <div class="logo-container">
             <img class="logo-container" src="../../../assets/images/logo-light.png" alt="Logo">
+          </div>
+          <div class="app-name">
             <p>Everest</p>
           </div>
         </a>
@@ -18,7 +20,7 @@
           <app-search></app-search>
         </div>
 
-        <div class="share-resource">
+        <div class="share-resource" (click)="goToShareResource()">
           <fa-icon [icon]="faPlus"></fa-icon>
         </div>
 
@@ -47,6 +49,9 @@
         <a (click)="logout()" style="cursor: pointer;">
           <fa-icon [icon]="faSignOutAlt"></fa-icon>&nbsp;&nbsp;Logout
         </a>
+        <div class="general-divider"></div>
+        <mat-slide-toggle (change)="onToggleChange($event)" labelPosition="before" [checked]="checked">Dark Mode
+        </mat-slide-toggle>
       </mat-nav-list>
     </mat-sidenav>
 
