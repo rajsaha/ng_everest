@@ -1,3 +1,7 @@
+.mat-drawer-inner-container {
+  overflow: hidden !important;
+}
+
 .mat-drawer-content {
   background-color: var(--mat-drawer-content-color);
 }

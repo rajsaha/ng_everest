@@ -36,6 +36,10 @@
 			grid-template-rows: 42px;
 			grid-gap: 5px;
 
+			.burger-menu {
+				font-size: 20px;
+			}
+
 			.branding-container {
 				text-decoration: none;
 				display: grid;
@@ -47,6 +51,7 @@
 				}
 
 				.logo-container {
+					display: none;
 					border-radius: 5px;
 
 					img {
@@ -61,13 +66,13 @@
 					// color: #3C3C3C;
 
 					p {
-						display: none;
 						margin: 0;
 						// color: white;
 						font-family: "Raleway", sans-serif;
 						font-weight: 200;
 						text-transform: uppercase;
 						letter-spacing: 8px;
+						font-size: 14px;
 					}
 				}
 			}
@@ -78,7 +83,7 @@
 			align-self: center;
 			align-content: center;
 			align-items: center;
-			grid-template-columns: 50px 50px;
+			grid-template-columns: 35px 35px;
 			justify-content: center;
 			justify-self: end;
 			justify-items: center;
@@ -91,6 +96,9 @@
 
 			.share-resource {
 				cursor: pointer;
+				fa-icon {
+					font-size: 14px;
+				}
 			}
 		}
 	}
@@ -126,6 +134,36 @@
 			text-decoration: none;
 			display: none;
 		}
+
+		h4 {
+			font-size: 14px;
+		}
+
+		a {
+			font-size: 14px;
+			transition: all 0.3s ease-in-out;
+			margin-bottom: 15px;
+
+			&:hover {
+				background-color: rgba(0,0,0,.1);
+				border-radius: 5px;
+				padding-left: 10px;
+			}
+		}
+
+		.dark-theme-toggle {
+			display: grid;
+			grid-template-columns: 1fr 1fr;
+			p {
+				margin: 0;
+				font-size: 14px;
+				align-self: center;
+			}
+
+			mat-slide-toggle {
+				justify-self: end;
+			}
+		}
 	}
 
 	mat-sidenav {
@@ -149,10 +187,15 @@
 			grid-template-columns: 1fr 1fr;
 
 			.left {
+				.burger-menu {
+					font-size: 24px;
+				}
+
 				.branding-container {
 					.app-name {
 						p {
 							display: inherit;
+							font-size: inherit;
 						}
 					}
 				}
@@ -163,6 +206,12 @@
 				
 				.app-search {
 					margin-right: 15px;
+				}
+
+				.share-resource {
+					fa-icon {
+						font-size: inherit;
+					}
 				}
 			}
 		}

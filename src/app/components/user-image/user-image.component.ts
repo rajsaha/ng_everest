@@ -27,6 +27,9 @@ export class UserImageComponent implements OnInit {
 
     // * Set image container size
     switch (this.size) {
+      case "xxs":
+        this.imageSizeClass = "xxs";
+        break;
       case "xs":
         this.imageSizeClass = "xs";
         break;

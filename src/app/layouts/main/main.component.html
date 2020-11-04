@@ -3,7 +3,7 @@
     <div class="toolbar">
       <div class="left">
         <button mat-icon-button (click)="snav.toggle(); isMenuActive = !isMenuActive">
-          <mat-icon>{{ isMenuActive ? "clear" : "menu" }}</mat-icon>
+          <mat-icon class="burger-menu">{{ isMenuActive ? "clear" : "menu" }}</mat-icon>
         </button>
         <a class="branding-container" routerLink="/">
           <div class="logo-container">
@@ -30,7 +30,7 @@
               firstName: firstName,
               lastName: lastName,
               username: username
-            }" clickable="true">
+            }" clickable="true" [size]="mobileQuery.matches ? 'xxs' : 'xs'">
           </app-user-image>
         </div>
       </div>
@@ -43,15 +43,19 @@
       <mat-nav-list>
         <h1 class="app-name"><a routerLink="/">Everest</a></h1>
         <h4>Pages</h4>
-        <a *ngFor="let item of links" [routerLink]="item.routerLink" routerLinkActive="active-sidenav">
+        <a *ngFor="let item of links" [routerLink]="item.routerLink" routerLinkActive="active-sidenav"
+          [routerLinkActiveOptions]="{exact: true}">
           <fa-icon [icon]="item.icon"></fa-icon>&nbsp;&nbsp;{{ item.text }}
         </a>
         <a (click)="logout()" style="cursor: pointer;">
           <fa-icon [icon]="faSignOutAlt"></fa-icon>&nbsp;&nbsp;Logout
         </a>
         <div class="general-divider"></div>
-        <mat-slide-toggle (change)="onToggleChange($event)" labelPosition="before" [checked]="checked">Dark Mode
-        </mat-slide-toggle>
+        <div class="dark-theme-toggle">
+          <p>Dark Mode</p>
+          <mat-slide-toggle (change)="onToggleChange($event)" labelPosition="before" [checked]="checked">
+          </mat-slide-toggle>
+        </div>
       </mat-nav-list>
     </mat-sidenav>
 
