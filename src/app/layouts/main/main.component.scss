@@ -3,7 +3,7 @@
 }
 
 .app-container {
-	background-color: #dee8ff;
+	background-color: var(--mat-drawer-content-color);
 	display: flex;
 	flex-direction: column;
 	position: absolute;
