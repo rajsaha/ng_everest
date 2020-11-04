@@ -82,8 +82,8 @@ export class ResourceNoImageComponent implements OnInit, OnChanges {
     let bottomText = stringArray;
     this.form.controls.topText.patchValue(topText.join(" "));
     this.form.controls.bottomText.patchValue(bottomText.join(" "));
-    this.form.controls.backgroundColor.patchValue(data.backgroundColor ? data.backgroundColor : "#000");
-    this.form.controls.textColor.patchValue(data.textColor ? data.textColor : "#fff");
+    this.form.controls.backgroundColor.patchValue(data.backgroundColor ? data.backgroundColor : "#dee8ff");
+    this.form.controls.textColor.patchValue(data.textColor ? data.textColor : "#ff3066");
     if (this.mode === 'edit') {
       this.store.dispatch(setFormValue({ formVal: this.form.value }));
     }

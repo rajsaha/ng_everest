@@ -54,6 +54,9 @@ $image-height: 38px;
 
   .search-compact {
     display: inherit;
+    fa-icon {
+      font-size: 14px;
+    }
   }
 
   .search-result {

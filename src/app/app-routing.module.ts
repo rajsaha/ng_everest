@@ -19,6 +19,7 @@ const routes: Routes = [
       {
         path: '',
         component: FeedComponent,
+        pathMatch: "full"
       },
       {
         path: 'search',
