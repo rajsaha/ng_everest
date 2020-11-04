@@ -1,21 +1,34 @@
 <div class="form">
   <p class="form-title">Sign In</p>
   <form [formGroup]="loginForm" (ngSubmit)="login()">
-    <mat-form-field appearance="outline">
-      <mat-label>Username</mat-label>
-      <input matInput formControlName="username" />
-      <mat-error *ngIf="loginFormControls.username.hasError('required') && loginFormControls.username.dirty">
+    <div class="custom-input">
+      <div class="label-container">
+        <label>Username</label>
+      </div>
+      <div class="input-container">
+        <input type="text" formControlName="username" />
+      </div>
+      <p class="error-message"
+        *ngIf="loginFormControls.username.hasError('required') && loginFormControls.username.dirty">
         Please enter username
-      </mat-error>
-    </mat-form-field>
-    <mat-form-field appearance="outline">
-      <mat-label>Password</mat-label>
-      <input matInput type="password" formControlName="password" />
-      <mat-error *ngIf="loginFormControls.password.hasError('required') && loginFormControls.password.dirty">
+      </p>
+    </div>
+
+    <div class="custom-input">
+      <div class="label-container">
+        <label>Password</label>
+      </div>
+      <div class="input-container">
+        <input type="text" formControlName="password" />
+      </div>
+      <p class="error-message"
+        *ngIf="loginFormControls.password.hasError('required') && loginFormControls.password.dirty">
         Please enter password
-      </mat-error>
-    </mat-form-field>
-    <app-custom-button [buttonLabel]="loginButtonText" [isDisabled]="loggingIn" [isLoading]="loggingIn"></app-custom-button>
+      </p>
+    </div>
+
+    <app-custom-button [buttonLabel]="loginButtonText" [isDisabled]="loggingIn" [isLoading]="loggingIn">
+    </app-custom-button>
   </form>
 </div>
 

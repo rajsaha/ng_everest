@@ -73,4 +73,8 @@ export class SignupComponent implements OnInit {
     }, { validator: [this.validationService.matchingConfirmPasswords] });
   }
 
+  get signUpFormControls() {
+    return this.signUpForm.controls;
+  }
+
 }
