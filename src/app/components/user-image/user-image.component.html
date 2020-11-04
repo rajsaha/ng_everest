@@ -5,7 +5,7 @@
   [ngClass]="[imageSizeClass, clickableClass]"
   [ngStyle]="url"
 >
-  <span *ngIf="!userData.image && placeholder">
+  <p *ngIf="!userData.image && placeholder">
     {{ placeholder }}
-  </span>
+  </p>
 </div>

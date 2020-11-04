@@ -234,8 +234,9 @@ app-root {
 }
 
 .custom-input {
+  position: relative;
   width: 100%;
-  margin-bottom: 15px;
+  margin-bottom: 20px;
   .label-container {
     margin-bottom: 5px;
     label {
@@ -278,8 +279,23 @@ app-root {
   }
 
   .error-message {
+    position: absolute;
     font-size: 12px;
     color: red;
+    top: 75px;
+    animation: float-down 0.2s ease-in-out;
+  }
+}
+
+@keyframes float-down {
+  0% {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0px);
   }
 }
 

@@ -1,69 +1,101 @@
 <div class="form">
   <p class="form-title">Sign Up</p>
   <form [formGroup]="signUpForm" (ngSubmit)="onSubmit()">
-    <mat-form-field appearance="outline">
-      <mat-label>E-mail</mat-label>
-      <input matInput formControlName="email" />
-      <mat-error
+    <div class="custom-input">
+      <div class="label-container">
+        <label>Email</label>
+      </div>
+      <div class="input-container">
+        <input type="text" formControlName="email" />
+      </div>
+      <p class="error-message"
         *ngIf="signUpForm.controls['email'].hasError('email') && !signUpForm.controls['email'].hasError('required')">
         Please enter a valid email address
-      </mat-error>
-      <mat-error *ngIf="signUpForm.controls['email'].hasError('required')">
-        Email is <strong>required</strong>
-      </mat-error>
-    </mat-form-field>
+      </p>
+      <p class="error-message" *ngIf="signUpForm.controls['email'].hasError('required') && signUpFormControls.email.dirty">
+        Email is required
+      </p>
+    </div>
 
-    <mat-form-field appearance="outline">
-      <mat-label>Username</mat-label>
-      <input matInput formControlName="username" />
-      <mat-error
+    <div class="custom-input">
+      <div class="label-container">
+        <label>Username</label>
+      </div>
+      <div class="input-container">
+        <input type="text" formControlName="username" />
+      </div>
+      <p class="error-message"
         *ngIf="signUpForm.controls['username'].hasError('minlength') && !signUpForm.controls['username'].hasError('required')">
-        Username must be <strong>4</strong> letters or more
-      </mat-error>
-      <mat-error *ngIf="signUpForm.controls['username'].hasError('required')">
-        Username is <strong>required</strong>
-      </mat-error>
-    </mat-form-field>
+        Username must be 4 letters or more
+      </p>
+      <p class="error-message" *ngIf="signUpForm.controls['username'].hasError('required') && signUpFormControls.username.dirty">
+        Username is required
+      </p>
+    </div>
 
-    <mat-form-field appearance="outline">
-      <mat-label>First Name</mat-label>
-      <input matInput formControlName="firstName" />
-      <mat-error
+    <div class="custom-input">
+      <div class="label-container">
+        <label>First name</label>
+      </div>
+      <div class="input-container">
+        <input type="text" formControlName="firstName" />
+      </div>
+      <p class="error-message"
         *ngIf="signUpForm.controls['firstName'].hasError('minlength') && !signUpForm.controls['firstName'].hasError('required')">
-        First name must be <strong>2</strong> letters or more
-      </mat-error>
-      <mat-error *ngIf="signUpForm.controls['firstName'].hasError('required')">
-        First name is <strong>required</strong>
-      </mat-error>
-    </mat-form-field>
+        First name must be 2 letters or more
+      </p>
+      <p class="error-message" *ngIf="signUpForm.controls['firstName'].hasError('required') && signUpFormControls.firstName.dirty">
+        First name is required
+      </p>
+    </div>
 
-    <mat-form-field appearance="outline">
-      <mat-label>Last Name</mat-label>
-      <input matInput formControlName="lastName" />
-      <mat-error
+    <div class="custom-input">
+      <div class="label-container">
+        <label>Last name</label>
+      </div>
+      <div class="input-container">
+        <input type="text" formControlName="lastName" />
+      </div>
+      <p class="error-message"
         *ngIf="signUpForm.controls['lastName'].hasError('minlength') && !signUpForm.controls['lastName'].hasError('required')">
-        Last name must be <strong>2</strong> letters or more
-      </mat-error>
-      <mat-error *ngIf="signUpForm.controls['lastName'].hasError('required')">
-        Last name is <strong>required</strong>
-      </mat-error>
-    </mat-form-field>
+        Last name must be 2 letters or more
+      </p>
+      <p class="error-message" *ngIf="signUpForm.controls['lastName'].hasError('required') && signUpFormControls.lastName.dirty">
+        Last name is required
+      </p>
+    </div>
 
-    <mat-form-field appearance="outline">
-      <mat-label>Password</mat-label>
-      <input matInput type="password" formControlName="password" />
-      <mat-error *ngIf="signUpForm.controls['password'].hasError('minlength')">
+    <div class="custom-input">
+      <div class="label-container">
+        <label>Password</label>
+      </div>
+      <div class="input-container">
+        <input type="password" formControlName="password" />
+      </div>
+      <p class="error-message"
+        *ngIf="signUpForm.controls['password'].hasError('minlength')">
         Password must be at least 4 characters
-      </mat-error>
-    </mat-form-field>
+      </p>
+      <p class="error-message" *ngIf="signUpForm.controls['password'].hasError('required') && signUpFormControls.password.dirty">
+        Password is required
+      </p>
+    </div>
 
-    <mat-form-field appearance="outline">
-      <mat-label>Re-type password</mat-label>
-      <input matInput type="password" formControlName="confirm_password" />
-      <mat-error *ngIf="signUpForm.controls['confirm_password'].hasError('passwordNotEquivalent')">
+    <div class="custom-input">
+      <div class="label-container">
+        <label>Re-type password</label>
+      </div>
+      <div class="input-container">
+        <input type="password" formControlName="confirm_password" />
+      </div>
+      <p class="error-message"
+        *ngIf="signUpForm.controls['confirm_password'].hasError('passwordNotEquivalent')">
         Passwords don't match
-      </mat-error>
-    </mat-form-field>
+      </p>
+      <p class="error-message" *ngIf="signUpForm.controls['confirm_password'].hasError('required') && signUpFormControls.confirm_password.dirty">
+        Password is required
+      </p>
+    </div>
 
     <app-custom-button buttonLabel="Sign Up" [isDisabled]="signingUp"></app-custom-button>
   </form>
