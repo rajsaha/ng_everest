@@ -1,6 +1,9 @@
 <div class="public-view" *ngIf="!isLoading">
   <div class="section-container">
-    <div class="section">
+    <div class="section" *ngIf="isLoading">
+      <app-loading type="profile"></app-loading>
+    </div>
+    <div class="section" *ngIf="!isLoading">
       <div class="profile-picture">
         <div
           class="image-container"
@@ -64,14 +67,6 @@
           <strong>{{ following.length }}</strong> following
         </div>
       </div>
-    </div>
-  </div>
-</div>
-
-<div class="public-view" *ngIf="isLoading">
-  <div class="section-container">
-    <div class="section">
-      <app-loading type="profile"></app-loading>
     </div>
   </div>
 </div>
