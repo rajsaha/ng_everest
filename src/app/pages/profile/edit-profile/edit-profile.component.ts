@@ -85,7 +85,6 @@ export class EditProfileComponent implements OnInit {
   }
 
   async getUserData() {
-    this.isLoading = true;
     const res: any = await this.userService.getProfileData({ userId: this.userId });
 
     this.isProfileSaveButtonDisabled = true;
@@ -114,11 +113,9 @@ export class EditProfileComponent implements OnInit {
     // Calculate profile progress
     this.profileProgress = 0;
     this.calculateProgress();
-    this.isLoading = false;
   }
 
   initFormData(data: any) {
-    this.isLoading = false;
     this.isProfileSaveButtonDisabled = false;
 
     this.username = data.username;

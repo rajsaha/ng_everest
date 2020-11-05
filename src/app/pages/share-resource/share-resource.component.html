@@ -7,16 +7,19 @@
       </div>
 
       <div class="section-content">
-        <mat-form-field appearance="fill">
-          <mat-label>Link</mat-label>
-          <input matInput placeholder="Paste your link here" formControlName="url" />
-          <mat-error *ngIf="
-              shareResourceFormControls.url.hasError('urlInvalid') &&
-              shareResourceFormControls.url.dirty
-            ">
+        <div class="custom-input">
+          <div class="label-container">
+            <label>Link</label>
+          </div>
+          <div class="input-container">
+            <input type="text" formControlName="url" placeholder="Paste your link here" />
+          </div>
+          <p class="error-message" *ngIf="shareResourceFormControls.url.hasError('urlInvalid') &&
+            shareResourceFormControls.url.dirty">
             Invalid link
-          </mat-error>
-        </mat-form-field>
+          </p>
+        </div>
+
         <div class="custom-image" (click)="imageInput.click()" matRipple
           *ngIf="shareResourceForm.controls.isCustomImage.value" [style.background-image]="
             'url(' + shareResourceForm.controls.customImage.value + ')'
@@ -48,7 +51,7 @@
               <div class="icon-container">
                 <fa-icon [icon]="faGlobe" class="globe"></fa-icon>
               </div>
-  
+
               <p>
                 If your link has an image, it'll appear here
               </p>
@@ -66,43 +69,50 @@
           <mat-checkbox formControlName="noImage">No Image</mat-checkbox>
         </div>
 
-        <mat-form-field appearance="fill">
-          <mat-label>Title</mat-label>
-          <input matInput placeholder="Give it a title" formControlName="title" />
-
-          <mat-error *ngIf="
-              shareResourceFormControls.title.hasError('required') &&
-              shareResourceFormControls.title.dirty
-            ">
+        <div class="custom-input">
+          <div class="label-container">
+            <label>Title</label>
+          </div>
+          <div class="input-container">
+            <input type="text" formControlName="title" placeholder="Give it a title" />
+          </div>
+          <p class="error-message" *ngIf="shareResourceFormControls.title.hasError('required') &&
+          shareResourceFormControls.title.dirty">
             Title required
-          </mat-error>
-        </mat-form-field>
+          </p>
+        </div>
 
-        <mat-form-field appearance="fill">
-          <mat-label>Description</mat-label>
-          <textarea matInput placeholder="Say something about it" formControlName="description"></textarea>
-
-          <mat-error *ngIf="
-              shareResourceFormControls.description.hasError('required') &&
-              shareResourceFormControls.description.dirty
-            ">
+        <div class="custom-input">
+          <div class="label-container">
+            <label>Description</label>
+          </div>
+          <div class="input-container">
+            <textarea cdkTextareaAutosize #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="3" cdkAutosizeMaxRows="5"
+              type="text" formControlName="description" placeholder="Say something about it"></textarea>
+          </div>
+          <p class="error-message" *ngIf="shareResourceFormControls.description.hasError('required') &&
+          shareResourceFormControls.description.dirty">
             Description required
-          </mat-error>
-        </mat-form-field>
+          </p>
+        </div>
 
-        <mat-form-field appearance="fill">
-          <mat-label>Tags</mat-label>
-          <mat-chip-list #chipList aria-label="Tags">
-            <mat-chip *ngFor="let tag of tags" [selectable]="selectable" [removable]="removable"
-              (removed)="removeTag(tag)">
-              {{ tag }}
-              <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
-            </mat-chip>
-            <input placeholder="Add tags that best fit" [matChipInputFor]="chipList"
-              [matChipInputSeparatorKeyCodes]="separatorKeysCodes" [matChipInputAddOnBlur]="addOnBlur"
-              (matChipInputTokenEnd)="addTag($event)" />
-          </mat-chip-list>
-        </mat-form-field>
+        <div class="custom-input">
+          <div class="label-container">
+            <label>Tags</label>
+          </div>
+          <div class="input-container">
+            <mat-chip-list #chipList aria-label="Tags">
+              <mat-chip *ngFor="let tag of tags" [selectable]="selectable" [removable]="removable"
+                (removed)="removeTag(tag)">
+                {{ tag }}
+                <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+              </mat-chip>
+              <input placeholder="Add tags that best fit" [matChipInputFor]="chipList"
+                [matChipInputSeparatorKeyCodes]="separatorKeysCodes" [matChipInputAddOnBlur]="addOnBlur"
+                (matChipInputTokenEnd)="addTag($event)" />
+            </mat-chip-list>
+          </div>
+        </div>
 
         <app-add-to-collection (message)="receiveAtcData($event)"></app-add-to-collection>
 

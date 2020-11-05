@@ -90,9 +90,7 @@ export class ManageCollectionsComponent implements OnInit {
         if (data.collectionsRefreshState) {
           await this.getAllCollections();
           this.store.dispatch(setRefreshCollectionsToFalse());
-        }
-
-        if (data.searchQueriesState.collectionQuery) {
+        } else if (data.searchQueriesState.collectionQuery) {
           await this.onCollectionSearch(
             data.searchQueriesState.collectionQuery
           );
