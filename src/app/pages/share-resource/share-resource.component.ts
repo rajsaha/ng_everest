@@ -87,7 +87,7 @@ export class ShareResourceComponent implements OnInit {
         isCustomImage: [false],
         noImage: [false],
         url: ["", Validators.required],
-        title: ["", [Validators.required]],
+        title: ["", [Validators.required, Validators.maxLength(250)]],
         description: ["", [Validators.required]],
         ogImage: [""],
         customImage: [""],
