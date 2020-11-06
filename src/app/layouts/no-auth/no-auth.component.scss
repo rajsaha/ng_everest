@@ -3,7 +3,7 @@ $image-width-425: 400px;
 $image-height: 300px;
 
 .no-auth-layout {
-    background-color: white;
+    background-color: var(--section-color);
 	display: grid;
 	grid-template-columns: 1fr;
 	width: 100%;
