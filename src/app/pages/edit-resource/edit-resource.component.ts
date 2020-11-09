@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild, ElementRef, Input } from "@angular/core";
 import { Router, ActivatedRoute } from "@angular/router";
 import { FormBuilder, Validators, FormGroup } from "@angular/forms";
-import { faUpload, faPlusCircle } from "@fortawesome/free-solid-svg-icons";
+import { faUpload, faPlusCircle, faGlobe } from "@fortawesome/free-solid-svg-icons";
 import { COMMA, ENTER } from "@angular/cdk/keycodes";
 import { MatChipInputEvent } from "@angular/material/chips";
 import { ValidationService } from "@services/forms/validation.service";
@@ -34,6 +34,7 @@ export class EditResourceComponent implements OnInit {
   // Icons
   faUpload = faUpload;
   faPlusCircle = faPlusCircle;
+  faGlobe = faGlobe;
 
   // Toggles
   isLoading = false;
