@@ -37,10 +37,6 @@ const routes: Routes = [
         path: 'profile',
         loadChildren: () => import('src/app/modules/profile/profile.module').then(m => m.ProfileModule)
       },
-      {
-        path: 'write',
-        loadChildren: () => import('src/app/modules/write/write.module').then(m => m.WriteModule)
-      }
     ]
   },
   {
