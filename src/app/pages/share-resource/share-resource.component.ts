@@ -127,6 +127,9 @@ export class ShareResourceComponent implements OnInit {
 
   async submitShareResourceForm() {
     if (!this.shareResourceForm.valid) {
+      this.shareResourceFormControls.url.markAsDirty();
+      this.shareResourceFormControls.title.markAsDirty();
+      this.shareResourceFormControls.description.markAsDirty();
       return;
     }
 

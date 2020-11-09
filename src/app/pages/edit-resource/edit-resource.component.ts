@@ -167,6 +167,8 @@ export class EditResourceComponent implements OnInit {
 
   async submitEditResourceForm() {
     if (!this.editResourceForm.valid) {
+      this.editResourceFormControls.title.markAsDirty();
+      this.editResourceFormControls.description.markAsDirty();
       return;
     }
 
