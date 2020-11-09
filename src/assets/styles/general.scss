@@ -283,7 +283,7 @@ app-root {
     position: absolute;
     font-size: 12px;
     color: red;
-    top: 75px;
+    transform: translateY(-50%);
     animation: float-down 0.2s ease-in-out;
   }
 }
@@ -291,12 +291,12 @@ app-root {
 @keyframes float-down {
   0% {
     opacity: 0;
-    transform: translateY(-10px);
+    transform: translateY(-100%);
   }
 
   100% {
     opacity: 1;
-    transform: translateY(0px);
+    transform: translateY(-50%);
   }
 }
 
