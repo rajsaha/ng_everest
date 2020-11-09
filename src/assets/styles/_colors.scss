@@ -14,6 +14,12 @@ $section-color-dark: #212121;
 $section-box-shadow: 0 8px 20px 0 rgba(218, 224, 235, 0.6);
 $section-box-shadow-dark: none;
 
+// * No auth colors
+$no-auth-layout-left-background-color: white;
+$no-auth-layout-left-background-color-dark: #212121;
+$no-auth-component-text-color: inherit;
+$no-auth-component-text-color-dark: white;
+
 // * Post component
 $post-background-color: white;
 $post-background-color-dark: #212121;
@@ -205,6 +211,8 @@ $colors: (--navigation-background-color: ($navigation-background-color,
   --section-box-shadow: ($section-box-shadow,
     $section-box-shadow-dark,
   ),
+  --no-auth-layout-left-background-color: ($no-auth-layout-left-background-color, $no-auth-layout-left-background-color-dark),
+  --no-auth-component-text-color: ($no-auth-component-text-color, $no-auth-component-text-color-dark),
   --post-background-color: ($post-background-color,
     $post-background-color-dark,
   ),
