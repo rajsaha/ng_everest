@@ -2,30 +2,23 @@
   <div class="section-container">
     <div class="section">
       <div class="profile-picture">
-        <div
-          class="image-container"
-          [ngStyle]="{
+        <!-- <div class="image-container" [ngStyle]="{
             'background-image': 'url(' + image + ')',
             cursor: 'inherit'
-          }"
-        ></div>
+          }"></div> -->
+        <app-user-image *ngIf="!isLoading" size="md"
+          [userData]="{ firstName: firstName, lastName: lastName, username: username, image: image }"
+          [clickable]="false">
+        </app-user-image>
         <div class="text">
           <p>{{ username }}</p>
           <p>{{ email }}</p>
         </div>
-        <button
-          class="toggle-profile-view"
-          mat-stroked-button
-          (click)="isPublicView = false"
-        >
+        <button class="toggle-profile-view" mat-stroked-button (click)="isPublicView = false">
           Edit Profile
         </button>
       </div>
-      <button
-        class="toggle-profile-view-sm"
-        mat-stroked-button
-        (click)="isPublicView = false"
-      >
+      <button class="toggle-profile-view-sm" mat-stroked-button (click)="isPublicView = false">
         Edit Profile
       </button>
 
@@ -39,33 +32,19 @@
         </a>
         <p class="bio" *ngIf="bio">{{ bio }}</p>
         <mat-chip-list *ngIf="interests">
-          <mat-chip
-            *ngFor="let interest of interests"
-            (click)="goToSearch(interest)"
-            >{{ interest }}</mat-chip
-          >
+          <mat-chip *ngFor="let interest of interests" (click)="goToSearch(interest)">{{ interest }}</mat-chip>
         </mat-chip-list>
-        <div
-          class="followers-following"
-          *ngIf="followers && following"
-          matRipple
-          (click)="openFollowDialog()"
-        >
+        <div class="followers-following" *ngIf="followers && following" matRipple (click)="openFollowDialog()">
           <strong>{{ followers.length }}</strong> followers |
           <strong>{{ following.length }}</strong> following
         </div>
       </div>
 
       <!-- * Progress Bar -->
-      <mat-progress-bar
-        *ngIf="profileProgress < 100"
-        mode="determinate"
-        [value]="profileProgress"
-      >
+      <mat-progress-bar *ngIf="profileProgress < 100" mode="determinate" [value]="profileProgress">
       </mat-progress-bar>
-      <small *ngIf="profileProgress < 100" class="complete-profile-label"
-        >Profile Completion: {{ profileProgress }}%</small
-      >
+      <small *ngIf="profileProgress < 100" class="complete-profile-label">Profile Completion:
+        {{ profileProgress }}%</small>
     </div>
   </div>
 </div>
@@ -82,28 +61,19 @@
   <div class="section-container">
     <div class="section">
       <div class="profile-picture">
-        <div
-          class="image-container"
-          [ngStyle]="{ 'background-image': 'url(' + image + ')' }"
-          (click)="openCpiDialog()"
-        ></div>
+        <app-user-image *ngIf="!isLoading" size="md"
+          [userData]="{ firstName: firstName, lastName: lastName, username: username, image: image }"
+          [clickable]="false" [hoverable]="true" (click)="openCpiDialog()">
+        </app-user-image>
         <div class="text">
           <p>{{ profileForm.controls.username.value }}</p>
           <p>{{ profileForm.controls.email.value }}</p>
         </div>
-        <button
-          class="toggle-profile-view"
-          mat-stroked-button
-          (click)="isPublicView = true; getUserData()"
-        >
+        <button class="toggle-profile-view" mat-stroked-button (click)="isPublicView = true; getUserData()">
           View Profile
         </button>
       </div>
-      <button
-        class="toggle-profile-view-sm"
-        mat-stroked-button
-        (click)="isPublicView = true; getUserData()"
-      >
+      <button class="toggle-profile-view-sm" mat-stroked-button (click)="isPublicView = true; getUserData()">
         View Profile
       </button>
       <mat-divider></mat-divider>
@@ -112,80 +82,86 @@
       </div>
 
       <div class="section-content">
-        <h6>Public Information</h6>
+        <form *ngIf="profileForm" [formGroup]="profileForm" (ngSubmit)="saveProfileForm()">
+          <div class="custom-input">
+            <div class="label-container">
+              <label>First Name</label>
+            </div>
+            <div class="input-container">
+              <input type="text" formControlName="firstName" placeholder="First Name" />
+            </div>
+            <p class="error-message" *ngIf="profileFormControls.firstName.hasError('required') &&
+            profileFormControls.firstName.dirty">
+              First Name required
+            </p>
+          </div>
 
-        <form [formGroup]="profileForm" (ngSubmit)="saveProfileForm()">
-          <mat-form-field appearance="outline">
-            <mat-label>First Name</mat-label>
-            <input
-              matInput
-              placeholder="First Name"
-              formControlName="firstName"
-            />
-          </mat-form-field>
+          <div class="custom-input">
+            <div class="label-container">
+              <label>Last Name</label>
+            </div>
+            <div class="input-container">
+              <input type="text" formControlName="lastName" placeholder="Last Name" />
+            </div>
+            <p class="error-message" *ngIf="profileFormControls.lastName.hasError('required') &&
+            profileFormControls.lastName.dirty">
+              Last Name required
+            </p>
+          </div>
 
-          <mat-form-field appearance="outline">
-            <mat-label>Last Name</mat-label>
-            <input
-              matInput
-              placeholder="Last Name"
-              formControlName="lastName"
-            />
-          </mat-form-field>
+          <div class="custom-input">
+            <div class="label-container">
+              <label>Website</label>
+            </div>
+            <div class="input-container">
+              <input type="text" formControlName="website" placeholder="http://www.website.com" />
+            </div>
+          </div>
 
-          <mat-form-field appearance="outline">
-            <mat-label>Website</mat-label>
-            <input
-              matInput
-              placeholder="http://www.website.com"
-              formControlName="website"
-            />
-          </mat-form-field>
+          <div class="custom-input">
+            <div class="label-container">
+              <label>Bio</label>
+            </div>
+            <div class="input-container">
+              <textarea cdkTextareaAutosize #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="3" cdkAutosizeMaxRows="5"
+              type="text" formControlName="bio" placeholder="Say something about yourself"></textarea>
+            </div>
+          </div>
 
-          <mat-form-field appearance="outline">
-            <mat-label>Bio</mat-label>
-            <textarea
-              matInput
-              placeholder="Tell us something about yourself"
-              formControlName="bio"
-            ></textarea>
-          </mat-form-field>
+          <div class="custom-input">
+            <div class="label-container">
+              <label>Interests</label>
+            </div>
+            <div class="input-container">
+              <mat-chip-list #chipList aria-label="Interest selection">
+                <mat-chip *ngFor="let interest of interests" [selectable]="selectable" [removable]="removable"
+                  (removed)="removeInterest(interest)">
+                  {{ interest }}
+                  <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+                </mat-chip>
+                <input placeholder="Add an Interest" [matChipInputFor]="chipList"
+                  [matChipInputSeparatorKeyCodes]="separatorKeysCodes" [matChipInputAddOnBlur]="addOnBlur"
+                  (matChipInputTokenEnd)="addInterest($event)" />
+              </mat-chip-list>
+            </div>
+          </div>
 
-          <mat-form-field appearance="outline">
-            <mat-label>Interests</mat-label>
-            <mat-chip-list #chipList aria-label="Interest selection">
-              <mat-chip
-                *ngFor="let interest of interests"
-                [selectable]="selectable"
-                [removable]="removable"
-                (removed)="removeInterest(interest)"
-              >
-                {{ interest }}
-                <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
-              </mat-chip>
-              <input
-                placeholder="Add an Interest"
-                [matChipInputFor]="chipList"
-                [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
-                [matChipInputAddOnBlur]="addOnBlur"
-                (matChipInputTokenEnd)="addInterest($event)"
-              />
-            </mat-chip-list>
-          </mat-form-field>
-
-          <h6>Private Information</h6>
-          <mat-form-field appearance="outline">
-            <mat-label>Email</mat-label>
-            <input matInput placeholder="Email" formControlName="email" />
-          </mat-form-field>
+          <div class="custom-input">
+            <div class="label-container">
+              <label>Email</label>
+            </div>
+            <div class="input-container">
+              <input type="text" formControlName="email" placeholder="email@domain.com" />
+            </div>
+            <p class="error-message" *ngIf="profileFormControls.email.hasError('required') &&
+            profileFormControls.email.dirty">
+              Email required
+            </p>
+          </div>
 
           <div class="form-button-container">
-            <app-custom-button
-              [buttonLabel]="submitButtonText"
-              [isLoading]="isLoading"
-              [isDisabled]="isProfileSaveButtonDisabled"
-              size="small"
-            >
+            <app-custom-button [buttonLabel]="submitButtonText" [isLoading]="isLoading"
+              [isDisabled]="isProfileSaveButtonDisabled" size="small">
             </app-custom-button>
           </div>
         </form>

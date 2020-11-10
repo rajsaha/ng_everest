@@ -73,9 +73,6 @@ export class PostComponent implements OnInit {
   isSeeMore = false;
   truncateValue = 150;
 
-  // Empty states
-  noPhoto = `${ENV.SITE_URL}/assets/images/portrait.jpg`;
-
   constructor(
     private fb: FormBuilder,
     public dialog: MatDialog,
@@ -111,7 +108,7 @@ export class PostComponent implements OnInit {
     this.tags = this.data.tags;
     this.description = this.data.description;
     this.image = this.data.lgImage.link ? this.data.lgImage.link : "";
-    this.userImage = this.data.userImage ? this.data.userImage : this.noPhoto;
+    this.userImage = this.data.userImage;
     this.timestamp = moment(this.data.timestamp).fromNow();
     this.recommendedByCount = this.data.recommended_by_count;
     this.noImage = this.data.noImage;

@@ -25,7 +25,6 @@ export class ProfileSummaryComponent implements OnInit {
   articleCount = 0;
   collectionCount = 0;
   extContentCount = 0;
-  defaultProfileImage = `${ENV.SITE_URL}/assets/images/portrait.jpg`;
   isLoggedInUserFollowingParamUser: number;
 
   constructor(private userService: UserService) { }

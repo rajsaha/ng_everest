@@ -3,7 +3,6 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { SnackbarService } from '@services/general/snackbar.service';
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
 import { UserService } from '@services/user/user.service';
-import { environment as ENV } from '@environments/environment';
 
 class ImageSnippet {
   constructor(public src: string, public file: File) { }
@@ -15,11 +14,12 @@ class ImageSnippet {
   styleUrls: ['./cpi.component.scss']
 })
 export class CpiComponent implements OnInit {
-  defaultProfileImage = `${ENV.SITE_URL}/assets/images/portrait.jpg`;
   userImage: any;
   isNewImage = false;
   imageFromDB = false;
   isSavingPhoto = false;
+  isReady = false;
+  isLocalImage = false;
 
   // Icons
   faTrash = faTrash;
@@ -38,13 +38,18 @@ export class CpiComponent implements OnInit {
 
   ngOnInit() {
     this.userId = localStorage.getItem('userId');
-    this.getProfilePhoto();
+    if (this.data.image instanceof Object) {
+      this.userImage = this.data.image.mdImage.link;
+      this.imageFromDB = this.data.image.mdImage.link ? true : false;
+    }
+    this.isReady = true;
+    // this.getProfilePhoto();
   }
 
   getProfilePhoto() {
     this.userService.getProfilePhoto(this.data.username).then((res: any) => {
       if (res.mdImage) {
-        this.userImage = res.mdImage.link ? res.mdImage.link : this.defaultProfileImage;
+        this.userImage = res.mdImage.link;
         this.imageFromDB = res.mdImage.link ? true : false;
       }
     });
@@ -56,15 +61,18 @@ export class CpiComponent implements OnInit {
     const reader: FileReader = new FileReader();
 
     reader.addEventListener('load', (event: any) => {
+      this.isReady = false;
       this.selectedFile = new ImageSnippet(event.target.result, file);
       this.userImage = event.target.result;
+      this.isLocalImage = true;
+      this.isReady = true;
     });
-
     reader.readAsDataURL(file);
   }
 
   clearImage() {
     if (this.isNewImage) {
+      this.isLocalImage = false;
       this.isNewImage = false;
       this.userImage = null;
       this.imageInput.nativeElement.value = '';

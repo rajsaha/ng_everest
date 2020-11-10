@@ -1,7 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { faExternalLinkAlt } from "@fortawesome/free-solid-svg-icons";
 import { COMMA, ENTER } from "@angular/cdk/keycodes";
-import { FormBuilder, FormGroup } from "@angular/forms";
+import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { UserService } from "@services/user/user.service";
 import { SnackbarService } from "@services/general/snackbar.service";
 import { MatChipInputEvent } from "@angular/material/chips";
@@ -27,12 +27,11 @@ export class EditProfileComponent implements OnInit {
   email: string;
   followers = [];
   following = [];
-  image = `${ENV.SITE_URL}/assets/images/portrait.jpg`;
+  image: string;
   uploadedImage: string;
   imageId: string;
   deleteHash: string;
   interests = [];
-  defaultProfileImage = `${ENV.SITE_URL}/assets/images/portrait.jpg`;
   submitButtonText = "Save";
 
   // Toggles
@@ -75,30 +74,33 @@ export class EditProfileComponent implements OnInit {
 
   initProfileForm() {
     this.profileForm = this.fb.group({
-      firstName: [""],
-      lastName: [""],
+      firstName: ["", Validators.required],
+      lastName: ["", Validators.required],
       username: [{ value: "", disabled: true }],
       website: [""],
       bio: [""],
-      email: [""]
+      email: ["", Validators.required]
     });
   }
 
+  get profileFormControls() {
+    return this.profileForm.controls;
+  }
+
   async getUserData() {
+    this.isLoading = true;
     const res: any = await this.userService.getProfileData({ userId: this.userId });
 
     this.isProfileSaveButtonDisabled = true;
     this.interests = res.userData.interests ? res.userData.interests : [];
     this.followers = res.userData.followers ? res.userData.followers : [];
     this.following = res.userData.following ? res.userData.following : [];
-    
-    if (res.userData.mdImage.link) {
-      this.image = res.userData.mdImage.link;
+
+    if (res.userData.mdImage instanceof Object) {
+      this.image = res.userData.mdImage.link ? res.userData.mdImage.link : "";
       this.uploadedImage = res.userData.mdImage.link;
       this.imageId = res.userData.mdImage.id;
       this.deleteHash = res.userData.mdImage.deleteHash;
-    } else {
-      this.image = this.defaultProfileImage;
     }
 
     this.initFormData({
@@ -113,6 +115,7 @@ export class EditProfileComponent implements OnInit {
     // Calculate profile progress
     this.profileProgress = 0;
     this.calculateProgress();
+    this.isLoading = false;
   }
 
   initFormData(data: any) {
@@ -137,15 +140,16 @@ export class EditProfileComponent implements OnInit {
   openCpiDialog() {
     const dialogRef = this.dialog.open(CpiComponent, {
       data: {
-        username: this.username
+        username: this.username,
+        firstName: this.firstName,
+        lastName: this.lastName,
+        image: this.image
       }
     });
 
     dialogRef.afterClosed().subscribe(async result => {
       if (result.newImage) {
-        this.image = result.image
-          ? result.image
-          : this.defaultProfileImage;
+        this.image = result.image;
       }
     });
   }
@@ -224,6 +228,13 @@ export class EditProfileComponent implements OnInit {
   }
 
   async saveProfileForm() {
+    if (this.profileForm.invalid) {
+      this.profileFormControls.firstName.markAsDirty();
+      this.profileFormControls.lastName.markAsDirty();
+      this.profileFormControls.email.markAsDirty();
+      return;
+    }
+
     const data = {
       id: this.userId,
       firstName: this.profileForm.controls.firstName.value,
