@@ -66,6 +66,7 @@ export class ManageComponent implements OnInit {
     this.username = localStorage.getItem("username");
     this.loggedInUserId = localStorage.getItem("userId");
     this.checkIfSelf();
+    this.store.dispatch(setCollectionQuery({ query: { collectionQuery: "", resourceQuery: "" }}))
   }
 
   initForm() {
@@ -90,7 +91,7 @@ export class ManageComponent implements OnInit {
 
       if (val.posts) {
         this.store.dispatch(
-          setCollectionQuery({
+          setResourceQuery({
             query: { collectionQuery: "", resourceQuery: val.searchQuery },
           })
         );

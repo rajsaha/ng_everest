@@ -1,21 +1,20 @@
-import { Component, OnInit, Input } from "@angular/core";
+import { Component, OnInit, Input, OnDestroy } from "@angular/core";
 import { FormGroup } from "@angular/forms";
 import { ResourceService } from "@services/resource/resource.service";
 import { UtilityService } from "@services/general/utility.service";
-import { faSearch, faFilter } from "@fortawesome/free-solid-svg-icons";
-import { debounceTime } from "rxjs/operators";
-import { Store, select } from "@ngrx/store";
-import { Observable } from "rxjs";
-import {
-  unsetResourceQuery,
-} from "@services/ngrx/searchQueries/searchQueries.actions";
+import { faSearch, faFilter, faArrowDown } from "@fortawesome/free-solid-svg-icons";
+import { debounceTime, takeUntil } from "rxjs/operators";
+import { ActionsSubject } from "@ngrx/store";
+import { Observable, Subject } from "rxjs";
+import { ofType } from "@ngrx/effects";
+import { setResourceQuery } from "@services/ngrx/searchQueries/searchQueries.actions";
 
 @Component({
   selector: "app-manage-resources",
   templateUrl: "./manage-resources.component.html",
   styleUrls: ["./manage-resources.component.scss"],
 })
-export class ManageResourcesComponent implements OnInit {
+export class ManageResourcesComponent implements OnInit, OnDestroy {
   @Input() userData: any;
   resources = [];
   resourcesCount = 0;
@@ -24,6 +23,7 @@ export class ManageResourcesComponent implements OnInit {
   // Icons
   faSearch = faSearch;
   faFilter = faFilter;
+  faArrowDown = faArrowDown;
 
   // Toggles
   isLoading = false;
@@ -42,17 +42,33 @@ export class ManageResourcesComponent implements OnInit {
   // Store
   searchQueriesState$: Observable<any>;
   resourceSearchQuery: string;
+  destroy$ = new Subject<boolean>();
 
   constructor(
     private resourceService: ResourceService,
     private utilityService: UtilityService,
-    private store: Store<{ searchQueriesState: any }>
+    private actionsListener$: ActionsSubject
   ) {
-    this.searchQueriesState$ = store.pipe(select("searchQueriesState"));
+    this.actionsListener$
+      .pipe(ofType(setResourceQuery))
+      .pipe(takeUntil(this.destroy$))
+      .pipe(debounceTime(1000))
+      .subscribe(async (data: any) => {
+        if (data.query.resourceQuery) {
+          await this.onResourceSearch(data.query.resourceQuery);
+          this.resourceSearchQuery = data.query.resourceQuery;
+        } else {
+          this.resources = [];
+          await this.getUserResources();
+        }
+      });
   }
 
-  async ngOnInit() {
-    this.monitorNgrxState();
+  ngOnInit() { }
+
+  ngOnDestroy() {
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 
   async getUserResources() {
@@ -76,10 +92,7 @@ export class ManageResourcesComponent implements OnInit {
     }
   }
 
-  onScrollDown() {
-    console.log("end");
-    // await this.loadMorePosts();
-  }
+  onScrollDown() { }
 
   async loadMorePosts() {
     this.pageNo++;
@@ -112,20 +125,5 @@ export class ManageResourcesComponent implements OnInit {
       }
     }
     this.isLoading = false;
-  }
-
-  monitorNgrxState() {
-    this.store
-      .select((state) => state)
-      .pipe(debounceTime(1000))
-      .subscribe(async (data: any) => {
-        if (data.searchQueriesState.resourceQuery) {
-          await this.onResourceSearch(data.searchQueriesState.resourceQuery);
-          this.resourceSearchQuery = data.searchQueriesState.resourceQuery;
-        } else {
-          this.resources = [];
-          await this.getUserResources();
-        }
-      });
   }
 }

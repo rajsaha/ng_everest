@@ -1,21 +1,22 @@
-import { Component, OnInit, Input } from "@angular/core";
+import { Component, OnInit, Input, OnDestroy } from "@angular/core";
 import { CollectionService } from "@services/collection/collection.service";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import { Router } from "@angular/router";
-import { debounceTime } from "rxjs/operators";
-import { Store, select } from "@ngrx/store";
-import { Observable } from "rxjs";
-import { setRefreshCollectionsToFalse } from "@services/ngrx/refreshCollections/refreshCollections.actions";
-import { unsetCollectionQuery } from "@services/ngrx/searchQueries/searchQueries.actions";
+import { debounceTime, takeUntil } from "rxjs/operators";
+import { ActionsSubject, Store } from "@ngrx/store";
+import { Observable, Subject, Subscriber } from "rxjs";
+import { setRefreshCollectionsToFalse, setRefreshCollectionsToTrue } from "@services/ngrx/refreshCollections/refreshCollections.actions";
+import { setCollectionQuery } from "@services/ngrx/searchQueries/searchQueries.actions";
+import { ofType } from '@ngrx/effects';
 
 @Component({
   selector: "app-manage-collections",
   templateUrl: "./manage-collections.component.html",
   styleUrls: ["./manage-collections.component.scss"],
 })
-export class ManageCollectionsComponent implements OnInit {
+export class ManageCollectionsComponent implements OnInit, OnDestroy {
   @Input() userData: any;
-  collections: any;
+  collections = [];
   collectionUrl = "collection/";
   collectionQuery: string;
 
@@ -27,20 +28,45 @@ export class ManageCollectionsComponent implements OnInit {
 
   // Store
   refreshCollectionsState$: Observable<boolean>;
+  destroy$ = new Subject<boolean>();
 
   constructor(
     private router: Router,
     private collectionService: CollectionService,
-    private store: Store<{ refreshCollectionsState: boolean }>
-  ) {
-    this.refreshCollectionsState$ = store.pipe(
-      select("refreshCollectionsState")
-    );
-  }
+    private actionsListener$: ActionsSubject,
+    private store: Store<{ searchQueriesState: any }>
+  ) { }
 
   async ngOnInit() {
     this.setCollectionUrl();
-    this.monitorNgrxState();
+    this.listenToState();
+    // await this.getAllCollections();
+  }
+
+  ngOnDestroy() {
+    this.destroy$.next();
+    this.destroy$.complete();
+  }
+
+  listenToState() {
+    this.actionsListener$
+      .pipe(ofType(setCollectionQuery, setRefreshCollectionsToTrue))
+      .pipe(takeUntil(this.destroy$))
+      .pipe(debounceTime(1000))
+      .subscribe(async (data: any) => {
+        if (data.type == "[View Collections Component] Refresh - set to TRUE") {
+          this.collections = [];
+          await this.getAllCollections();
+          this.store.dispatch(setRefreshCollectionsToFalse());
+        } else if (data.query.collectionQuery) {
+          await this.onCollectionSearch(
+            data.query.collectionQuery
+          );
+        } else {
+          this.collections = [];
+          await this.getAllCollections();
+        }
+      }); 
   }
 
   async getAllCollections() {
@@ -80,24 +106,5 @@ export class ManageCollectionsComponent implements OnInit {
     if (url === "/manage/collection") {
       this.collectionUrl = "../collection";
     }
-  }
-
-  monitorNgrxState() {
-    this.store
-      .select((state) => state)
-      .pipe(debounceTime(1000))
-      .subscribe(async (data: any) => {
-        if (data.collectionsRefreshState) {
-          await this.getAllCollections();
-          this.store.dispatch(setRefreshCollectionsToFalse());
-        } else if (data.searchQueriesState.collectionQuery) {
-          await this.onCollectionSearch(
-            data.searchQueriesState.collectionQuery
-          );
-        } else {
-          this.collections = [];
-          await this.getAllCollections();
-        }
-      });
   }
 }
