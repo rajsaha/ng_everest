@@ -1,8 +1,6 @@
 // * Navigation
 $navigation-background-color: white;
 $navigation-background-color-dark: #212121;
-$navigation-logo: url(../../../src/assets/images/logo-light.png);
-$navigation-logo-dark: url(../../../src/assets/images/logo-dark.svg); 
 
 // * Mat drawer
 $mat-drawer-content-color: #dee8ff;
@@ -95,10 +93,14 @@ $custom-input-input-container: #f6f8fa;
 $custom-input-input-container-dark: rgba(255, 255, 255, 0.1);
 $custom-input-label-container: rgb(184, 184, 184);
 $custom-input-label-container-dark: white;
-$custom-input-placeholder: inherit;
-$custom-input-placeholder-dark: white;
+$custom-input-placeholder: rgba(0, 0, 0, 0.3);
+$custom-input-placeholder-dark: rgba(255, 255, 255, 0.5);
 $custom-input-color: inherit;
 $custom-input-color-dark: white;
+
+// * Custom button
+$custom-button-border: inherit;
+$custom-button-border-dark: 1px solid rgba(255, 255, 255, 0.3);
 
 // * Divider
 $atc-divider: #dee8ff;
@@ -205,7 +207,6 @@ $empty-state-container-action-icon-dark: white;
 $colors: (--navigation-background-color: ($navigation-background-color,
     $navigation-background-color-dark,
   ),
-  --navigation-logo: ($navigation-logo, $navigation-logo-dark),
   --mat-drawer-content-color: ($mat-drawer-content-color,
     $mat-drawer-content-color-dark,
   ),
@@ -261,6 +262,7 @@ $colors: (--navigation-background-color: ($navigation-background-color,
   --custom-input-label-container: ($custom-input-label-container, $custom-input-label-container-dark),
   --custom-input-placeholder: ($custom-input-placeholder, $custom-input-placeholder-dark),
   --custom-input-color: ($custom-input-color, $custom-input-color-dark),
+  --custom-button-border: ($custom-button-border, $custom-button-border-dark),
 
   --atc-divider: ($atc-divider, $atc-divider-dark), 
 

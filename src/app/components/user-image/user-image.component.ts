@@ -10,6 +10,7 @@ export class UserImageComponent implements OnInit {
   @Input() size: string;
   @Input() userData: any;
   @Input() clickable = true;
+  @Input() hoverable = true;
   imageSizeClass: string;
   url = {};
   clickableClass = "";
@@ -48,7 +49,7 @@ export class UserImageComponent implements OnInit {
     }
 
     // * Set clickable
-    if (this.clickable) {
+    if (this.clickable || this.hoverable) {
       this.clickableClass = "clickable";
     }
 

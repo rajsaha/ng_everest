@@ -8,8 +8,6 @@ import * as moment from 'moment';
   providedIn: 'root'
 })
 export class LoginService {
-  noPhoto = `${ENV.SITE_URL}/assets/images/portrait.jpg`;
-
   constructor(private http: HttpClient, private router: Router) { }
 
   login(loginCred: object): Promise<any> {

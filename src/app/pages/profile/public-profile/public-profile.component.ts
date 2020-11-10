@@ -27,9 +27,8 @@ export class PublicProfileComponent implements OnInit {
   email: string;
   following = [];
   followers = [];
-  image = `${ENV.SITE_URL}/assets/images/portrait.jpg`;
+  image = ``;
   interests = [];
-  defaultProfileImage = `${ENV.SITE_URL}/assets/images/portrait.jpg`;
 
   // Resources
   resources = [];

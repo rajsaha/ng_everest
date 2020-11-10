@@ -53,6 +53,15 @@
   }
 }
 
+.lg {
+  width: 200px;
+  height: 200px;
+
+  p {
+    font-size: 4rem;
+  }
+}
+
 .clickable {
   cursor: pointer;
   &:hover {

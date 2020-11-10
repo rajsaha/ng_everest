@@ -37,7 +37,6 @@ export class MainComponent implements OnInit, OnDestroy {
   mobileQuery: MediaQueryList;
   image: string;
   localStorageImage: string;
-  defaultProfileImage = `${ENV.SITE_URL}/assets/images/portrait.jpg`;
   localStorageTheme: string;
   checked = false;
 

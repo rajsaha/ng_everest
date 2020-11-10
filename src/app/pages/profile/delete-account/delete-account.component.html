@@ -20,15 +20,14 @@
         [formGroup]="deleteAccountForm"
         (ngSubmit)="openConfirmAccountDeletionDialog()"
       >
-        <mat-form-field appearance="outline">
-          <mat-label>Username</mat-label>
-          <input
-            matInput
-            placeholder="Write your username"
-            formControlName="username"
-          />
-          <mat-hint>Write your username to confirm account deletion</mat-hint>
-        </mat-form-field>
+        <div class="custom-input">
+          <div class="label-container">
+            <label>Username</label>
+          </div>
+          <div class="input-container">
+            <input type="text" formControlName="username" placeholder="Write your username" />
+          </div>
+        </div>
         <div class="form-button-container clearfix">
           <app-custom-button
             buttonLabel="Delete"

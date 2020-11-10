@@ -39,7 +39,7 @@ export class ChangePasswordComponent implements OnInit {
   initPasswordForm() {
     this.passwordForm = this.fb.group(
       {
-        currentPass: [""],
+        currentPass: ["", Validators.required],
         password: ["", [Validators.required, Validators.minLength(4)]],
         confirm_password: [""],
         username: [this.username],
@@ -54,28 +54,32 @@ export class ChangePasswordComponent implements OnInit {
   }
 
   async changePasswordForm() {
-    if (this.passwordForm.valid) {
-      const response: any = await this.userService.updatePassword(
-        this.passwordForm.value
-      );
+    if (this.passwordForm.invalid) {
+      this.passwordForm.controls.currentPass.markAsDirty();
+      this.passwordForm.controls.password.markAsDirty();
+      return;
+    }
 
-      if (!response.error) {
-        this.snackbarService.openSnackBar({
-          message: {
-            message: "Password updated!",
-            error: false,
-          },
-          class: "green-snackbar",
-        });
-      } else {
-        this.snackbarService.openSnackBar({
-          message: {
-            message: `Error: ${response.error}!`,
-            error: true,
-          },
-          class: "red-snackbar",
-        });
-      }
+    const response: any = await this.userService.updatePassword(
+      this.passwordForm.value
+    );
+
+    if (!response.error) {
+      this.snackbarService.openSnackBar({
+        message: {
+          message: "Password updated!",
+          error: false,
+        },
+        class: "green-snackbar",
+      });
+    } else {
+      this.snackbarService.openSnackBar({
+        message: {
+          message: `Error: ${response.error}!`,
+          error: true,
+        },
+        class: "red-snackbar",
+      });
     }
   }
 }
