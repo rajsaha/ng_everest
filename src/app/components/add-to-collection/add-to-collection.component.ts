@@ -89,7 +89,6 @@ export class AddToCollectionComponent implements OnInit {
 
   registerScrollEvent() {
     console.log('scrolling');
-    return;
     const selectPanel = this.selectCollection.panel.nativeElement;
     selectPanel.addEventListener('scroll', async () => {
       this.pageNo++;

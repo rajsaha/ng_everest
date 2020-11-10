@@ -151,6 +151,10 @@ $manage-header-control-selected: #481a89;
 $manage-header-control-selected-dark:white;
 $manage-header-control-icon-color: #481a89;
 $manage-header-control-icon-color-dark: #7a47ba;
+$see-more-background-color: white;
+$see-more-background-color-dark: #212121;
+$see-more-color: #481a89;
+$see-more-color-dark: white;
 
 // * Resource component
 $resource-background-color: white;
@@ -283,6 +287,8 @@ $colors: (--navigation-background-color: ($navigation-background-color,
   --manage-header-control-input-color: ($manage-header-control-input-color, $manage-header-control-input-color-dark),
   --manage-header-control-selected: ($manage-header-control-selected, $manage-header-control-selected-dark),
   --manage-header-control-icon-color: ($manage-header-control-icon-color, $manage-header-control-icon-color-dark),
+  --see-more-background-color: ($see-more-background-color, $see-more-background-color-dark),
+  --see-more-color: ($see-more-color, $see-more-color-dark),
 
   --resource-background-color: ($resource-background-color, $resource-background-color-dark),
   --resource-header-text-color: ($resource-header-text-color, $resource-header-text-color-dark),
