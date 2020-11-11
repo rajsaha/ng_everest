@@ -230,7 +230,7 @@ export class ShareResourceComponent implements OnInit {
             this.shareResourceForm.controls.description.patchValue(
               this.ogDescription
             );
-            this.shareResourceForm.controls.ogImage.patchValue(this.ogImage);
+            this.shareResourceForm.controls.ogImage.patchValue(this.regexTestOgImage(this.ogImage));
 
             if (!this.ogImage) {
               this.snackbarService.openSnackBar({
@@ -271,5 +271,17 @@ export class ShareResourceComponent implements OnInit {
       .subscribe((data: any) => {
         this.noImageData = data.noImageComponentState;
       });
+  }
+
+  regexTestOgImage(url: string) {
+    let regex = new RegExp(/(http(s?):)([/|.|\w|\s|-])*\.(?:jpg|jpeg|gif|png|webm)/);
+    let result = regex.test(url);
+    if (result) {
+      this.shareResourceForm.controls.noImage.patchValue(false);   
+      return url;
+    }
+
+    this.shareResourceForm.controls.noImage.patchValue(true);
+    return 'none';
   }
 }
