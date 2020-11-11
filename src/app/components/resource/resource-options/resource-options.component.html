@@ -13,7 +13,7 @@
   </div>
 </div>
 
-<div class="popover-item" (click)="goToEdit()" matRipple>
+<div class="popover-item" *ngIf="loggedInUser == resourceUser" (click)="goToEdit()" matRipple>
   <div class="top">
     <fa-icon [icon]="faPen"></fa-icon>
     <span>Edit</span>
@@ -24,7 +24,7 @@
   </div>
 </div>
 
-<div class="popover-item" (click)="openDeleteResourceDialog()" matRipple>
+<div class="popover-item" *ngIf="loggedInUser == resourceUser" (click)="openDeleteResourceDialog()" matRipple>
   <div class="top">
     <fa-icon [icon]="faTrashAlt"></fa-icon>
     <span>Delete</span>
