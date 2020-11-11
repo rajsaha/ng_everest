@@ -43,6 +43,8 @@ $post-btn-count-bubble-color: #dee8ff;
 $post-btn-count-bubble-color-dark: #303030;
 $post-btn-count-bubble-text-color: #481a89;
 $post-btn-count-bubble-text-color-dark: white;
+$post-see-more-description-color: #481a89;
+$post-see-more-description-color-dark: #7a47ba;
 
 // * Search component
 $search-background-color: #f6f8fa;
@@ -245,6 +247,7 @@ $colors: (--navigation-background-color: ($navigation-background-color,
   --post-btn-comment-color: ($post-btn-comment-color, $post-btn-comment-color-dark),
   --post-btn-count-bubble-color: ($post-btn-count-bubble-color, $post-btn-count-bubble-color-dark),
   --post-btn-count-bubble-text-color: ($post-btn-count-bubble-text-color, $post-btn-count-bubble-text-color-dark),
+  --post-see-more-description-color: ($post-see-more-description-color, $post-see-more-description-color-dark),
 
   --search-background-color: ($search-background-color, $search-background-color-dark),
   --search-search-icon-color: ($search-search-icon-color, $search-search-icon-color-dark),

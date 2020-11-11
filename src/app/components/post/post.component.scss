@@ -153,13 +153,13 @@
 			margin-bottom: 5px;
 		}
 
-		span {
+		span.see-more-description {
 			text-align: center;
 			display: block;
 			font-weight: bold;
 			font-family: "Montserrat", sans-serif;
 			cursor: pointer;
-			color: #481a89;
+			color: var(--post-see-more-description-color);
 			font-size: 12px;
 		}
 	}

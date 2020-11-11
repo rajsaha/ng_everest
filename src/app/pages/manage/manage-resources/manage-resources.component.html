@@ -5,11 +5,15 @@
     <app-loading type="resource" *ngIf="isLoading"></app-loading>
 
     <!-- * No Data -->
-    <div *ngIf="resources && resources.length === 0 && !isLoading">
-      <app-empty-state [data]="{ type: 'resource', isSelf: userData.isSelf }"></app-empty-state>
+    <div *ngIf="!isLoading && resources.length === 0; then thenBlock else elseBlock">
     </div>
-    <app-resource *ngFor="let resource of resources" [data]="resource" (deleteEvent)="drResponseHandler($event)">
-    </app-resource>
+    <ng-template #thenBlock>
+      <app-empty-state [data]="{ type: 'resource', isSelf: userData.isSelf }"></app-empty-state>
+    </ng-template>
+    <ng-template #elseBlock>
+      <app-resource *ngFor="let resource of resources" [data]="resource" (deleteEvent)="drResponseHandler($event)">
+      </app-resource>
+    </ng-template>
   </div>
 </div>
 
