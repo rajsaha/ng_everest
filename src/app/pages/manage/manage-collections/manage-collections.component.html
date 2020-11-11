@@ -7,9 +7,15 @@
   <app-loading type="collection" *ngIf="isLoading"></app-loading>
 
   <!-- * No Data -->
-  <div *ngIf="collections && collections.length === 0 && !isLoading">
-    <app-empty-state [data]="{ type: 'collection', isSelf: userData.isSelf }"></app-empty-state>
+  <div *ngIf="collections && collections.length === 0 && !isLoading; then thenBlock else elseBlock">
+
   </div>
 
-  <app-collection *ngFor="let collection of collections" [data]="collection"></app-collection>
+  <ng-template #thenBlock>
+    <app-empty-state [data]="{ type: 'collection', isSelf: userData.isSelf }"></app-empty-state>
+  </ng-template>
+
+  <ng-template #elseBlock>
+    <app-collection *ngFor="let collection of collections" [data]="collection"></app-collection>
+  </ng-template>
 </div>

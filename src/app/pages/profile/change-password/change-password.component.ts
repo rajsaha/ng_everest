@@ -47,7 +47,6 @@ export class ChangePasswordComponent implements OnInit {
       {
         validator: [
           this.validationService.matchingConfirmPasswords,
-          this.validationService.checkPasswordStrength,
         ],
       }
     );

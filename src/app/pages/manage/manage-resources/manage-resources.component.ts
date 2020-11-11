@@ -81,10 +81,13 @@ export class ManageResourcesComponent implements OnInit, OnDestroy {
         username: this.userData.username,
         userId: this.userData.userId,
       });
-      this.resourcesCount = response.count;
-      
-      for (const resource of response.resources) {
-        this.resources.push(resource);
+
+      if (!response.error) {
+        this.resourcesCount = response.count;
+
+        for (const resource of response.resources) {
+          this.resources.push(resource);
+        }
       }
       this.isLoading = false;
     } catch (err) {

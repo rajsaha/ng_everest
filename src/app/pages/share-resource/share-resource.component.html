@@ -40,11 +40,6 @@
             !shareResourceForm.controls.isCustomImage.value &&
             !shareResourceForm.controls.noImage.value
           " [ngStyle]="{ 'background-image': 'url(' + ogImage + ')' }">
-          <!-- <p *ngIf="!ogImage">
-            If your link has an
-            <a href="http://ogp.me/" target="_blank">Open Graph</a> image, it'll
-            appear here
-          </p> -->
 
           <div class="custom-image" *ngIf="!ogImage">
             <div class="icon-text">
@@ -74,7 +69,7 @@
             <label>Title</label>
           </div>
           <div class="input-container">
-            <input type="text" formControlName="title" placeholder="Give it a title" maxlength="250"/>
+            <input type="text" formControlName="title" placeholder="Give it a title" maxlength="250" />
           </div>
           <p class="error-message" *ngIf="shareResourceFormControls.title.hasError('required') &&
           shareResourceFormControls.title.dirty">
