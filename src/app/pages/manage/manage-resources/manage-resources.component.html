@@ -1,8 +1,11 @@
 <div class="parent" infiniteScroll [infiniteScrollDistance]="2" [infiniteScrollThrottle]="50"
   (scrolled)="onScrollDown()" [scrollWindow]="false">
   <div class="resource-grid">
+    <!-- * Loading -->
+    <app-loading type="resource" *ngIf="isLoading"></app-loading>
 
-    <div *ngIf="resources && resources.length === 0">
+    <!-- * No Data -->
+    <div *ngIf="resources && resources.length === 0 && !isLoading">
       <app-empty-state [data]="{ type: 'resource', isSelf: userData.isSelf }"></app-empty-state>
     </div>
     <app-resource *ngFor="let resource of resources" [data]="resource" (deleteEvent)="drResponseHandler($event)">
