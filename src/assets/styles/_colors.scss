@@ -204,6 +204,16 @@ $empty-state-container-background-dark: #212121;
 $empty-state-container-action-icon: white;
 $empty-state-container-action-icon-dark: white;
 
+// * Loading component
+$loading-background: white;
+$loading-background-dark: #212121;
+$loading-border-bottom: 1px solid #eee;
+$loading-border-bottom-dark: 1px solid rgba(255, 255, 255, 0.5);
+$loading-animate: linear-gradient(to right, #eff1f3 4%, #e2e2e2 25%, #eff1f3 36%);
+$loading-animate-dark: linear-gradient(to right, #525252 4%, #757575 25%, #525252 36%);
+$loading-content-background: rgba(255, 255, 255, 0.7);
+$loading-content-background-dark: #777;
+
 $colors: (--navigation-background-color: ($navigation-background-color,
     $navigation-background-color-dark,
   ),
@@ -311,4 +321,9 @@ $colors: (--navigation-background-color: ($navigation-background-color,
   --user-box-box-shadow: ($user-box-box-shadow, $user-box-box-shadow-dark),
   --user-box-box-shadow-hover: ($user-box-box-shadow-hover, $user-box-box-shadow-hover-dark),
   --empty-state-container-background: ($empty-state-container-background, $empty-state-container-background-dark),
-  --empty-state-container-action-icon: ($empty-state-container-action-icon, $empty-state-container-action-icon-dark));
+  --empty-state-container-action-icon: ($empty-state-container-action-icon, $empty-state-container-action-icon-dark),
+
+  --loading-background: ($loading-background, $loading-background-dark),
+  --loading-border-bottom: ($loading-border-bottom, $loading-border-bottom-dark),
+  --loading-animate: ($loading-animate, $loading-animate-dark),
+  --loading-content-background: ($loading-content-background, $loading-content-background-dark));

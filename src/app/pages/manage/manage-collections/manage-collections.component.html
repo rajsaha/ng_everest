@@ -2,9 +2,14 @@
   
 </div> -->
 
-<div class="list-of-collections" *ngIf="!isLoading">
-  <div *ngIf="collections && collections.length === 0">
+<div class="list-of-collections">
+  <!-- * Loading -->
+  <app-loading type="collection" *ngIf="isLoading"></app-loading>
+
+  <!-- * No Data -->
+  <div *ngIf="collections && collections.length === 0 && !isLoading">
     <app-empty-state [data]="{ type: 'collection', isSelf: userData.isSelf }"></app-empty-state>
   </div>
+
   <app-collection *ngFor="let collection of collections" [data]="collection"></app-collection>
 </div>

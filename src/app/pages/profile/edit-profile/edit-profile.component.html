@@ -1,11 +1,7 @@
-<div class="public-view" *ngIf="isPublicView">
+<div class="public-view" *ngIf="isPublicView && !isLoading">
   <div class="section-container">
     <div class="section">
       <div class="profile-picture">
-        <!-- <div class="image-container" [ngStyle]="{
-            'background-image': 'url(' + image + ')',
-            cursor: 'inherit'
-          }"></div> -->
         <app-user-image *ngIf="!isLoading" size="md"
           [userData]="{ firstName: firstName, lastName: lastName, username: username, image: image }"
           [clickable]="false">

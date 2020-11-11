@@ -1,5 +1,5 @@
 .post {
-    background-color: white;
+    background-color: var(--loading-background);
     border-radius: 5px;
     margin-left: auto;
     margin-right: auto;
@@ -10,7 +10,7 @@
         display: grid;
         grid-template-columns: 50px 1fr 1fr;
         padding: 10px 15px;
-        border-bottom: 1px solid #eee;
+        border-bottom: var(--loading-border-bottom);
 
         .user-image {
             width: 40px;
@@ -49,7 +49,7 @@
 
     .image {
         height: 250px;
-        border-bottom: 1px solid white;
+        border-bottom: var(--loading-border-bottom);
     }
 
     .title {
@@ -66,15 +66,15 @@
 }
 
 .resource {
-    background-color: white;
+    background-color: var(--loading-background);
     border-radius: 5px;
     width: 275px;
-	max-width: 300px;
+    max-width: 300px;
     margin-bottom: 25px;
 
     .image {
         height: 200px;
-        border-bottom: 1px solid white;
+        border-bottom: var(--loading-border-bottom);
     }
 
     .title {
@@ -91,15 +91,15 @@
 }
 
 .collection {
-    background-color: white;
+    background-color: var(--loading-background);
     border-radius: 5px;
     width: 200px;
-	max-width: 300px;
+    max-width: 300px;
     margin-bottom: 25px;
 
     .image {
         height: 200px;
-        border-bottom: 1px solid white;
+        border-bottom: var(--loading-border-bottom);
     }
 
     .title {
@@ -145,6 +145,73 @@
     border-radius: 5px;
 }
 
+.profile-summary {
+    background-color: var(--loading-background);
+    border-radius: 5px;
+    padding: 5px;
+
+    .profile-picture {
+        display: grid;
+        grid-template-columns: 75px 2fr;
+        grid-gap: 15px;
+        padding: 15px;
+
+        .image-container {
+            background-color: lightgrey;
+            background-size: cover;
+            background-repeat: no-repeat;
+            width: 75px;
+            height: 75px;
+            border-radius: 50%;
+            align-self: center;
+            justify-self: center;
+        }
+
+        .text {
+            p {
+                margin-bottom: 0;
+            }
+        }
+    }
+
+    .boxes {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        grid-gap: 15px;
+        text-align: center;
+        align-content: center;
+        padding: 15px 15px 15px 15px;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+        margin-bottom: 25px;
+
+        .box {
+            border-radius: 5px;
+            padding: 25px;
+            height: 35px;
+        }
+    }
+
+    .section {
+        padding: 0 15px;
+        margin-bottom: 25px;
+
+        .header {
+            height: 20px;
+            background: var(--loading-content-background);
+            margin-bottom: 15px;
+            border-radius: 10px;
+            width: 100px;
+        }
+
+        .content {
+            height: 15px;
+            background: var(--loading-content-background);
+            margin-bottom: 15px;
+            border-radius: 10px;
+        }
+    }
+}
+
 @keyframes fullView {
     100% {
         width: 100%;
@@ -154,7 +221,7 @@
 
 .animate {
     animation: shimmer 2s infinite linear;
-    background: linear-gradient(to right, #eff1f3 4%, #e2e2e2 25%, #eff1f3 36%);
+    background: var(--loading-animate);
     background-size: 1000px 100%;
 }
 

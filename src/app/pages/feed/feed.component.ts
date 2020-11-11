@@ -10,6 +10,7 @@ import { ResourceService } from '@services/resource/resource.service';
 export class FeedComponent implements OnInit {
   posts = [];
   isFabActive = false;
+  isLoading = false;
   username: string;
   userId: string;
 
@@ -38,15 +39,16 @@ export class FeedComponent implements OnInit {
 
   async getAllResources() {
     try {
+      this.isLoading = true;
       const response: any = await this.resourceService.getAllResources({
         pageNo: this.pageNo,
         size: this.size,
         userId: this.userId
       });
-
       for (const resource of response.resources) {
         this.posts.push(resource);
       }
+      this.isLoading = false;
     } catch (err) {
       console.error(err);
     }
