@@ -8,7 +8,7 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "postinstall": "ng build --aot --prod"
+    "postinstall": "ng build --aot --prod --build-optimizer && gzipper compress ./dist"
   },
   "private": true,
   "dependencies": {
@@ -53,6 +53,7 @@
     "@types/jasminewd2": "^2.0.8",
     "@types/node": "^12.12.62",
     "codelyzer": "^5.2.2",
+    "gzipper": "^4.3.0",
     "jasmine-core": "~2.99.1",
     "jasmine-spec-reporter": "~4.2.1",
     "karma": "~4.0.0",
