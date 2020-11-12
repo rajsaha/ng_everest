@@ -38,9 +38,9 @@ export class CpiComponent implements OnInit {
 
   ngOnInit() {
     this.userId = localStorage.getItem('userId');
-    if (this.data.image instanceof Object) {
-      this.userImage = this.data.image.mdImage.link;
-      this.imageFromDB = this.data.image.mdImage.link ? true : false;
+    if (this.data.image) {
+      this.userImage = this.data.image;
+      this.imageFromDB = this.data.image ? true : false;
     }
     this.isReady = true;
     // this.getProfilePhoto();
