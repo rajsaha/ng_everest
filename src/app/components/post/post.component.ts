@@ -86,10 +86,10 @@ export class PostComponent implements OnInit {
 
   async ngOnInit() {
     try {
+      this.isLoading = true;
       this.populatePost();
       this.init_comment_form();
       this.checkIfDescriptionTooLong(this.description)
-      this.isLoading = true;
       this.isLoading = false;
     } catch (err) {
       throw new Error(err);

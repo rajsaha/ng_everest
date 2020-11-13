@@ -216,6 +216,10 @@ $loading-animate-dark: linear-gradient(to right, #525252 4%, #757575 25%, #52525
 $loading-content-background: rgba(255, 255, 255, 0.7);
 $loading-content-background-dark: #777;
 
+// * View Collection
+$view-collection-header: white;
+$view-collection-header-dark: #212121;
+
 $colors: (--navigation-background-color: ($navigation-background-color,
     $navigation-background-color-dark,
   ),
@@ -329,4 +333,6 @@ $colors: (--navigation-background-color: ($navigation-background-color,
   --loading-background: ($loading-background, $loading-background-dark),
   --loading-border-bottom: ($loading-border-bottom, $loading-border-bottom-dark),
   --loading-animate: ($loading-animate, $loading-animate-dark),
-  --loading-content-background: ($loading-content-background, $loading-content-background-dark));
+  --loading-content-background: ($loading-content-background, $loading-content-background-dark),
+  
+  --view-collection-header: ($view-collection-header, $view-collection-header-dark));

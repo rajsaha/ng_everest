@@ -7,7 +7,8 @@ import {
   faTimes,
   faFolderMinus,
   faEllipsisV,
-  faThumbsUp
+  faThumbsUp,
+  faComment
 } from "@fortawesome/free-solid-svg-icons";
 import * as moment from "moment";
 import { Router, ActivatedRoute } from "@angular/router";
@@ -36,6 +37,7 @@ export class ResourceComponent implements OnInit {
   allComments = [];
   resourceUser: string;
   recommended_by_count: number;
+  commentCount: number;
   noImage = false;
   backgroundColor: string;
   textColor: string;
@@ -55,6 +57,7 @@ export class ResourceComponent implements OnInit {
   faFolderMinus = faFolderMinus;
   faEllipsesV = faEllipsisV;
   faThumbsUp = faThumbsUp;
+  faComment = faComment;
 
   // Toggles
   isLoading = false;
@@ -93,6 +96,12 @@ export class ResourceComponent implements OnInit {
     this.image = this.data.mdImage.link;
     this.timestamp = moment(this.data.timestamp.$date).fromNow();
     this.recommended_by_count = this.data.recommended_by_count;
+
+    if (Number.isInteger(this.data.commentCount)) {
+      this.commentCount = this.data.commentCount;
+    } else if (this.data.commentCount instanceof Array) {
+      this.commentCount = this.data.commentCount.length;
+    }
     this.noImage = this.data.noImage;
     this.backgroundColor = this.data.backgroundColor;
     this.textColor = this.data.textColor;

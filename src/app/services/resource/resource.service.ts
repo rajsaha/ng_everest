@@ -57,7 +57,7 @@ export class ResourceService {
 
   getResource(data: any) {
     const response = this.http
-      .get(`${ENV.API_URL}/resource/get/one/${data.id}`)
+      .post(`${ENV.API_URL}/resource/get/one`, data)
       .toPromise();
     return response;
   }
