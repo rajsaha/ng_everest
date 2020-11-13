@@ -14,10 +14,12 @@
 
       h2 {
         margin-bottom: 10px;
+        font-size: 16px;
       }
       
       p {
         font-weight: 300;
+        font-size: 12px;
       }
     }
 
@@ -32,7 +34,7 @@
     .collection-data {
       .collection-header {
         h2, p {
-          text-align: inherit;
+          font-size: inherit;
         }
       }
     }
