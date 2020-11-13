@@ -1,8 +1,10 @@
 <div class="section-container">
   <div class="collection-data" *ngIf="collection">
-    <h2>{{ collection.title }}</h2>
-    <p>{{ collection.description }}</p>
-    <div class="general-divider"></div>
+    <div class="collection-header">
+      <h2>{{ collection.title }}</h2>
+      <p>{{ collection.description }}</p>
+    </div>
+    
     <div class="resource-grid">
       <app-resource
         *ngFor="let resource of resources"
@@ -22,14 +24,5 @@
     <div *ngIf="resources.length === 0">
       <p>This collection is empty</p>
     </div>
-
-    <!-- <div class="delete" (click)="openDcDialog()" *ngIf="isMine">
-      <app-custom-button
-        buttonLabel="Delete Collection"
-        size="small"
-        backgroundColor="delete"
-      >
-      </app-custom-button>
-    </div> -->
   </div>
 </div>

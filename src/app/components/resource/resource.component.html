@@ -32,6 +32,11 @@
       <fa-icon [icon]="faThumbsUp"></fa-icon>
       <span class="count">{{ recommended_by_count }}</span>
     </div>
+
+    <div class="like" [ngClass]="commentCount > 0 ? 'is-liked' : ''">
+      <fa-icon [icon]="faComment"></fa-icon>
+      <span class="count">{{ commentCount }}</span>
+    </div>
   </div>
 </div>
 

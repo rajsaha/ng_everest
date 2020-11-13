@@ -1,58 +1,40 @@
 .section-container {
   .collection-data {
     margin-bottom: 25px;
+
     .collection-header {
-      display: grid;
-      grid-template-areas: "left right"
-                           "center center";
-      grid-template-columns: 1fr 100px;
-      column-gap: 15px;
-      row-gap: 15px;                     
-      margin-bottom: 15px;
-
-      .left {
-        grid-area: "left";
+      padding: 15px;
+      background-color: var(--view-collection-header);
+      margin: 15px 0;
+      border-radius: 5px;
+      h2, p {
+        font-family: "Montserrat", sans-serif;
+        margin: 0;
       }
 
-      .right {
-        grid-area: "right";
-        align-self: center;
-        padding: 15px;
-
-        span {
-          font-size: 25px;
-          margin-right: 5px;
-        }
+      h2 {
+        margin-bottom: 10px;
       }
-
-      .bottom {
-        grid-area: "bottom";
-        grid-column: span 2;
-
-        font-size: 12px;
-      }
-
-      .username {
-        color: rgba(0, 0, 0, .5);
-        cursor: pointer;
-      }
-
-      mat-form-field {
-        width: 100%;
-        
-        input {
-          font-size: 25px;
-        }
-
-        mat-icon {
-          font-size: 100%;
-          color: rgba(0, 0, 0, .7);
-        }
+      
+      p {
+        font-weight: 300;
       }
     }
 
     .delete {
       width: 250px;
+    }
+  }
+}
+
+@media(min-width: 768px) {
+  .section-container {
+    .collection-data {
+      .collection-header {
+        h2, p {
+          text-align: inherit;
+        }
+      }
     }
   }
 }
