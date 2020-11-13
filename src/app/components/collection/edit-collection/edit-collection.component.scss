@@ -39,6 +39,10 @@ mat-form-field {
       -moz-box-shadow: inset 0px 0px 24px 2px rgba(0,0,0,0.12);
       box-shadow: inset 0px 0px 24px 2px rgba(0,0,0,0.12);
       border-radius: 10px;
+
+      &:hover, &:focus {
+        overflow-y: auto;
+      }
     }
   }
 }
