@@ -28,6 +28,7 @@ export class EditResourceComponent implements OnInit {
   @ViewChild("imageInput") imageInput: ElementRef;
   image: any;
   username: string;
+  userId: string;
   collectionNames = [];
   submitButtonText = "Done";
 
@@ -77,9 +78,10 @@ export class EditResourceComponent implements OnInit {
     this.onNoImageChange();
     this.onIsCustomImageChange();
     this.username = localStorage.getItem("username");
+    this.userId = localStorage.getItem("userId");
     this.route.params.subscribe(async (params) => {
       await Promise.all([
-        this.getResource(params.resourceId),
+        this.getResource({ resourceId: params.resourceId, userId: this.userId }),
         this.getCollectionNames(),
       ]);
     });
@@ -287,10 +289,10 @@ export class EditResourceComponent implements OnInit {
     }
   }
 
-  async getResource(id: string) {
+  async getResource(data: any) {
     try {
       this.isLoading = true;
-      const response: any = await this.resourceService.getResource({ id });
+      const response: any = await this.resourceService.getResource({ resourceId: data.resourceId, userId: data.userId });
 
       // * Redirect if resource belongs to someone else
       if (this.username !== response.resource.username[0]) {

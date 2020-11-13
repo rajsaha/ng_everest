@@ -37,14 +37,11 @@ mat-form-field {
         height: 225px;
         max-height: 500px;
         margin-bottom: 45px;
-        overflow: hidden;
+        overflow-x: hidden;
+        overflow-y: auto;
         transition: max-height 0.15s ease-in-out;
         animation: fadeIn 0.2s ease-in-out;
         animation-fill-mode: forwards;
-
-        &:hover {
-          overflow-y: scroll;
-        }
 
         // width
         &::-webkit-scrollbar {
