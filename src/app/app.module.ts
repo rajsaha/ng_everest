@@ -50,8 +50,8 @@ export function metaFactory(): MetaLoader {
     applicationName: 'Everest',
     defaults: {
       title: 'Login',
-      description: 'Social network lite for sharing and collecting resources off the net',
-      'og:image': 'https://i.imgur.com/0U9tDfX.png',
+      'og:description': 'Social network lite for sharing and collecting resources off the net',
+      'og:image:secure_url': 'https://i.imgur.com/0U9tDfX.png',
     }
   });
 }
