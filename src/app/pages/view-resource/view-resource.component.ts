@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ResourceService } from '@services/resource/resource.service';
 import { faPen } from '@fortawesome/free-solid-svg-icons';
+import { MetaService } from '@ngx-meta/core';
 
 @Component({
   selector: 'app-view-resource',
@@ -24,7 +25,8 @@ export class ViewResourceComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private resourceService: ResourceService,
-    private router: Router) {}
+    private router: Router,
+    private readonly meta: MetaService) {}
 
   ngOnInit() {
     this.currentUser = localStorage.getItem('username');
@@ -42,6 +44,9 @@ export class ViewResourceComponent implements OnInit {
       const response: any = await this.resourceService.getResource({resourceId: id, userId: this.currentUserId});
       this.isLoading = false;
       this.resource = response.resource;
+      // * Set meta tags
+      this.meta.setTitle(`${this.resource.title}`);
+      this.meta.setTag('og:description', "View resource");
       this.checkIfEditable(this.resource.username);
     } catch (err) {
       console.error(err);

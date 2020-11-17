@@ -7,15 +7,10 @@ import { MatChipInputEvent } from "@angular/material/chips";
 import { ValidationService } from "@services/forms/validation.service";
 import { ResourceService } from "@services/resource/resource.service";
 import { SnackbarService } from "@services/general/snackbar.service";
-import { CollectionService } from "@services/collection/collection.service";
 import { debounceTime } from "rxjs/operators";
-import { DomSanitizer } from "@angular/platform-browser";
 import { Observable } from "rxjs";
 import { select, Store } from "@ngrx/store";
-
-class ImageSnippet {
-  constructor(public src: string, public file: File) {}
-}
+import { MetaService } from '@ngx-meta/core';
 
 @Component({
   selector: "app-share-resource",
@@ -62,10 +57,10 @@ export class ShareResourceComponent implements OnInit {
     private fb: FormBuilder,
     private validationService: ValidationService,
     private resourceService: ResourceService,
-    private collectionService: CollectionService,
     private snackbarService: SnackbarService,
     private router: Router,
-    private store: Store<{ noImageComponentFormState: any }>
+    private store: Store<{ noImageComponentFormState: any }>,
+    private readonly meta: MetaService
   ) {
     this.noImageComponentFormState$ = store.pipe(
       select("noImageComponentFormState")
@@ -73,6 +68,9 @@ export class ShareResourceComponent implements OnInit {
   }
 
   ngOnInit() {
+    // * Set meta tags
+    this.meta.setTitle("Share Resource");
+    this.meta.setTag('og:description', "Share a resource");
     this.username = localStorage.getItem("username");
     this.userId = localStorage.getItem("userId");
     this.initShareResourceForm();

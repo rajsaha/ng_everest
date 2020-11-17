@@ -5,7 +5,7 @@ import { LoginService } from '@services/auth/login.service';
 import { CommunicationService } from '@services/general/communication.service';
 import { SnackbarService } from '@services/general/snackbar.service';
 import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
-import { SeoServiceService } from '@services/seo-service/seo-service.service';
+import { MetaService } from '@ngx-meta/core';
 
 @Component({
   selector: 'app-login',
@@ -25,13 +25,12 @@ export class LoginComponent implements OnInit {
               private loginService: LoginService,
               private communicationService: CommunicationService,
               private snackbarService: SnackbarService,
-              private seoService: SeoServiceService) { }
+              private readonly meta: MetaService) { }
 
   ngOnInit() {
-    this.seoService.setFacebookTags(
-      "/login",
-      "Login",
-      "Login to Everest");
+    // * Set meta tags
+    this.meta.setTitle("Login");
+    this.meta.setTag('og:description', "Login to Everest");
     this.loginService.redirectIfLoggedIn();
     this.init_login_form();
   }

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { MetaService } from '@ngx-meta/core';
 
 @Component({
   selector: 'app-profile',
@@ -10,9 +11,12 @@ export class ProfileComponent implements OnInit {
   paramUsername: string;
   isSelf = false;
 
-  constructor() {}
+  constructor(private readonly meta: MetaService) {}
 
   ngOnInit() {
+    // * Set meta tags
+    this.meta.setTitle("Settings");
+    this.meta.setTag('og:description', "Settings");
     this.username = localStorage.getItem('username');
   }
 }

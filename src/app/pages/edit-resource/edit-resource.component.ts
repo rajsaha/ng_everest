@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ElementRef, Input } from "@angular/core";
+import { Component, OnInit, ViewChild, ElementRef } from "@angular/core";
 import { Router, ActivatedRoute } from "@angular/router";
 import { FormBuilder, Validators, FormGroup } from "@angular/forms";
 import { faUpload, faPlusCircle, faGlobe } from "@fortawesome/free-solid-svg-icons";
@@ -11,10 +11,6 @@ import { SnackbarService } from "@services/general/snackbar.service";
 import { CollectionService } from "@services/collection/collection.service";
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-
-class ImageSnippet {
-  constructor(public src: string, public file: File) {}
-}
 
 @Component({
   selector: "app-edit-resource",

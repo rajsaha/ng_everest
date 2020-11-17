@@ -14,12 +14,12 @@ import { ActivatedRoute } from "@angular/router";
 import { UserService } from "@services/user/user.service";
 import { Observable } from "rxjs";
 import { select, Store } from "@ngrx/store";
-import { delay } from "rxjs/operators";
 import {
   setResourceQuery,
   setCollectionQuery,
 } from "@services/ngrx/searchQueries/searchQueries.actions";
-import { SeoServiceService } from '@services/seo-service/seo-service.service';
+import { MetaService } from '@ngx-meta/core';
+
 
 @Component({
   selector: "app-manage",
@@ -57,7 +57,7 @@ export class ManageComponent implements OnInit {
     private route: ActivatedRoute,
     private userService: UserService,
     private store: Store<{ searchQueriesState: any }>,
-    private seoService: SeoServiceService
+    private readonly meta: MetaService
   ) {
     this.searchQueriesState$ = store.pipe(select("searchQueriesState"));
   }
@@ -70,10 +70,9 @@ export class ManageComponent implements OnInit {
     this.checkIfSelf();
     this.store.dispatch(setCollectionQuery({ query: { collectionQuery: "", resourceQuery: "" }}))
 
-    this.seoService.setFacebookTags(
-      "/profile",
-      "Profile",
-      `${this.username}'s profile`);
+    // * Set meta tags
+    this.meta.setTitle("Profile");
+    this.meta.setTag('og:description', "See your posts and collections");
   }
 
   initForm() {
