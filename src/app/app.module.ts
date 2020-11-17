@@ -2,6 +2,7 @@ import { BrowserModule } from "@angular/platform-browser";
 import { NgModule, enableProdMode } from "@angular/core";
 import { HTTP_INTERCEPTORS } from "@angular/common/http";
 import { AuthInterceptorService } from "@services/auth/auth-interceptor.service";
+import { MetaModule, MetaLoader, MetaStaticLoader, PageTitlePositioning } from '@ngx-meta/core';
 
 import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
@@ -42,6 +43,19 @@ import { EditCollectionComponent } from "./components/collection/edit-collection
 import { DeleteResourceFromCollectionComponent } from "./components/collection/delete-resource-from-collection/delete-resource-from-collection.component";
 import { UiModule } from './modules/ui/ui.module';
 
+export function metaFactory(): MetaLoader {
+  return new MetaStaticLoader({
+    pageTitlePositioning: PageTitlePositioning.PrependPageTitle,
+    pageTitleSeparator: ' - ',
+    applicationName: 'Everest',
+    defaults: {
+      title: 'Login',
+      description: 'Social network lite for sharing and collecting resources off the net',
+      'og:image': 'https://i.imgur.com/0U9tDfX.png',
+    }
+  });
+}
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -79,7 +93,11 @@ import { UiModule } from './modules/ui/ui.module';
     ManageModule,
     DialogsModule,
     GeneralModule,
-    UiModule
+    UiModule,
+    MetaModule.forRoot({
+      provide: MetaLoader,
+      useFactory: (metaFactory)
+    }),
   ],
   providers: [
     {

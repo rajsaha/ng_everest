@@ -5,6 +5,7 @@ import { faPen, faEdit } from "@fortawesome/free-solid-svg-icons";
 import { UtilityService } from "@services/general/utility.service";
 import { MatDialog } from "@angular/material/dialog";
 import { DcComponent } from "src/app/components/dialogs/dc/dc.component";
+import { MetaService } from '@ngx-meta/core';
 
 @Component({
   selector: "app-view-collection",
@@ -35,7 +36,8 @@ export class ViewCollectionComponent implements OnInit {
     private route: ActivatedRoute,
     private collectionService: CollectionService,
     private utilityService: UtilityService,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private readonly meta: MetaService
   ) {}
 
   ngOnInit() {
@@ -58,6 +60,9 @@ export class ViewCollectionComponent implements OnInit {
       id: this.id,
     });
     this.collection = result.collection;
+    // * Set meta tags
+    this.meta.setTitle(`${this.collection.title}`);
+    this.meta.setTag('og:description', `${this.collection.description ? this.collection.description : 'Collection description'}`);
     this.numOfResources = result.collection.count;
     for (let item of this.collection.resources) {
       this.resources.push(item);

@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { faPlus, faLink, faFile } from '@fortawesome/free-solid-svg-icons';
 import { ResourceService } from '@services/resource/resource.service';
-import { SeoServiceService } from '@services/seo-service/seo-service.service';
+import { MetaService } from '@ngx-meta/core';
+
 
 @Component({
   selector: 'app-feed',
@@ -30,16 +31,16 @@ export class FeedComponent implements OnInit {
   pageNo = 1;
   size = 3;
 
-  constructor(private resourceService: ResourceService, private seoService: SeoServiceService) { }
+  constructor(private resourceService: ResourceService, private readonly meta: MetaService) { }
 
   async ngOnInit() {
-    this.seoService.setFacebookTags(
-      "/feed",
-      "Feed",
-      "Discover new resources");
     this.username = localStorage.getItem('username');
     this.userId = localStorage.getItem("userId");
     await this.getAllResources();
+
+    // * Set meta tags
+    this.meta.setTitle("Feed");
+    this.meta.setTag('og:description', "Discover something new");
   }
 
   async getAllResources() {
