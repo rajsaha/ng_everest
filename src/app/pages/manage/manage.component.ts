@@ -19,6 +19,7 @@ import {
   setResourceQuery,
   setCollectionQuery,
 } from "@services/ngrx/searchQueries/searchQueries.actions";
+import { SeoServiceService } from '@services/seo-service/seo-service.service';
 
 @Component({
   selector: "app-manage",
@@ -55,7 +56,8 @@ export class ManageComponent implements OnInit {
     private popper: PopoverService,
     private route: ActivatedRoute,
     private userService: UserService,
-    private store: Store<{ searchQueriesState: any }>
+    private store: Store<{ searchQueriesState: any }>,
+    private seoService: SeoServiceService
   ) {
     this.searchQueriesState$ = store.pipe(select("searchQueriesState"));
   }
@@ -67,6 +69,11 @@ export class ManageComponent implements OnInit {
     this.loggedInUserId = localStorage.getItem("userId");
     this.checkIfSelf();
     this.store.dispatch(setCollectionQuery({ query: { collectionQuery: "", resourceQuery: "" }}))
+
+    this.seoService.setFacebookTags(
+      "/profile",
+      "Profile",
+      `${this.username}'s profile`);
   }
 
   initForm() {
