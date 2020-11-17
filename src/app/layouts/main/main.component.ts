@@ -22,7 +22,6 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { LoginService } from "@services/auth/login.service";
 import { CommunicationService } from "@services/general/communication.service";
-import { environment as ENV } from "@environments/environment";
 import { MatSidenav } from "@angular/material/sidenav";
 import { filter } from "rxjs/operators";
 import { ColorSchemeService } from '@services/color-scheme/color-scheme.service';
