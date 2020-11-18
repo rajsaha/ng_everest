@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { DeleteResourceFromCollectionComponent } from './delete-resource-from-collection.component';
 
@@ -6,7 +6,7 @@ describe('DeleteResourceFromCollectionComponent', () => {
   let component: DeleteResourceFromCollectionComponent;
   let fixture: ComponentFixture<DeleteResourceFromCollectionComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ DeleteResourceFromCollectionComponent ]
     })
