@@ -2,6 +2,7 @@ import { Component, OnInit, Input, Output, EventEmitter, ViewChild } from '@angu
 import { CollectionService } from '@services/collection/collection.service';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { MatSelect } from '@angular/material/select';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-add-to-collection',
@@ -26,18 +27,19 @@ export class AddToCollectionComponent implements OnInit {
 
   constructor(
     private collectionService: CollectionService,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private route: ActivatedRoute
   ) {}
 
   async ngOnInit() {
     this.username = localStorage.getItem('username');
     this.initAtcForm();
     this.onFormChanges();
-    this.onSelectChanges();
     await this.getCollectionTitles();
     if (this.resourceId) {
       await this.getCollectionTitle(this.resourceId);
     }
+    this.getQueryParams();
   }
 
   initAtcForm() {
@@ -83,16 +85,20 @@ export class AddToCollectionComponent implements OnInit {
     });
   }
 
-  onSelectChanges() {
-    // this.selectCollection.selectionChange.subscribe(() => this.registerScrollEvent());
-  }
-
   registerScrollEvent() {
     console.log('scrolling');
     const selectPanel = this.selectCollection.panel.nativeElement;
     selectPanel.addEventListener('scroll', async () => {
       this.pageNo++;
       await this.getCollectionTitles();
+    });
+  }
+
+  getQueryParams() {
+    this.route.queryParams.subscribe((val) => {
+      if (val.collectionId) {
+        this.atcForm.controls.collectionId.patchValue(val.collectionId);
+      }
     });
   }
 }

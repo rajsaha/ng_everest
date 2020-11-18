@@ -60,6 +60,14 @@ export class CollectionOptionsComponent implements OnInit {
     dialogRef.afterClosed().subscribe(async (result: any) => {});
   }
 
+  goToShareResource() {
+    this.close();
+    this.router.navigate(
+      [`/share-resource`],
+      { relativeTo: this.route.parent, queryParams: { collectionId: this.popoverRef.data.collectionData._id } }
+    );
+  }
+
   close() {
     this.popoverRef.close();
   }
