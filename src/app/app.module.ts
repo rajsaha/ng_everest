@@ -51,7 +51,7 @@ export function metaFactory(): MetaLoader {
     defaults: {
       title: 'Login',
       'og:description': 'Social network lite for sharing and collecting resources off the net',
-      'og:image:secure_url': 'https://i.imgur.com/0U9tDfX.png',
+      'og:image': 'https://i.imgur.com/0U9tDfX.png',
     }
   });
 }
