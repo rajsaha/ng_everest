@@ -2,15 +2,8 @@
   <mat-tab label="Followers">
     <div class="parent">
       <div class="followers" *ngIf="followers.length > 0">
-        <div
-          class="user"
-          *ngFor="let user of followers"
-          infiniteScroll
-          [infiniteScrollDistance]="2"
-          [infiniteScrollThrottle]="50"
-          [fromRoot]="true"
-          (scrolled)="onScrollDown()"
-        >
+        <div class="user" *ngFor="let user of followers" infiniteScroll [infiniteScrollDistance]="2"
+          [infiniteScrollThrottle]="50" [fromRoot]="true" (scrolled)="onScrollDown()">
           <app-user-image [userData]="user" [clickable]="false"></app-user-image>
           <div class="details">
             <span>{{ user.firstName }} {{ user.lastName }}</span>
@@ -20,10 +13,7 @@
       </div>
 
       <div class="no-data" *ngIf="isLoading">
-        <mat-progress-spinner
-          mode="indeterminate"
-          diameter="25"
-        ></mat-progress-spinner>
+        <mat-progress-spinner mode="indeterminate" diameter="25"></mat-progress-spinner>
       </div>
 
       <div class="no-data" *ngIf="!isLoading && followers.length === 0">
@@ -34,31 +24,23 @@
   <mat-tab label="Following">
     <div class="parent">
       <div class="following" *ngIf="following.length > 0">
-        <div
-          class="user"
-          *ngFor="let user of following"
-          infiniteScroll
-          [infiniteScrollDistance]="2"
-          [infiniteScrollThrottle]="50"
-          (scrolled)="onScrollDown()"
-          [fromRoot]="true"
-        >
-          <app-user-image [userData]="user" [clickable]="false"></app-user-image>
-          <div class="details">
-            <span class="name">{{ user.name }}</span>
-            <span class="username">{{ user.username }}</span>
-          </div>
-          <div>
-            <button mat-stroked-button (click)="unfollow(user.id)">Unfollow</button>
+        <div class="user" *ngFor="let user of following" infiniteScroll [infiniteScrollDistance]="2"
+          [infiniteScrollThrottle]="50" (scrolled)="onScrollDown()" [fromRoot]="true">
+          <div class="user-row" *ngIf="user.username !== username">
+            <app-user-image [userData]="user" [clickable]="false"></app-user-image>
+            <div class="details">
+              <span class="name">{{ user.name }}</span>
+              <span class="username">{{ user.username }}</span>
+            </div>
+            <div class="button-container">
+              <button mat-stroked-button (click)="unfollow(user.id)">Unfollow</button>
+            </div>
           </div>
         </div>
       </div>
 
       <div class="no-data" *ngIf="isLoading">
-        <mat-progress-spinner
-          mode="indeterminate"
-          diameter="25"
-        ></mat-progress-spinner>
+        <mat-progress-spinner mode="indeterminate" diameter="25"></mat-progress-spinner>
       </div>
 
       <div class="no-data" *ngIf="isLoading && following.length > 0">

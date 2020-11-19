@@ -31,8 +31,8 @@
           <mat-chip *ngFor="let interest of interests" (click)="goToSearch(interest)">{{ interest }}</mat-chip>
         </mat-chip-list>
         <div class="followers-following" *ngIf="followers && following" matRipple (click)="openFollowDialog()">
-          <strong>{{ followers.length }}</strong> followers |
-          <strong>{{ following.length }}</strong> following
+          <strong>{{ followers }}</strong> followers |
+          <strong>{{ following - 1 }}</strong> following
         </div>
       </div>
 

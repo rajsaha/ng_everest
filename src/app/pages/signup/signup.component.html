@@ -12,7 +12,8 @@
         *ngIf="signUpForm.controls['email'].hasError('email') && !signUpForm.controls['email'].hasError('required')">
         Please enter a valid email address
       </p>
-      <p class="error-message" *ngIf="signUpForm.controls['email'].hasError('required') && signUpFormControls.email.dirty">
+      <p class="error-message"
+        *ngIf="signUpForm.controls['email'].hasError('required') && signUpFormControls.email.dirty">
         Email is required
       </p>
     </div>
@@ -28,7 +29,8 @@
         *ngIf="signUpForm.controls['username'].hasError('minlength') && !signUpForm.controls['username'].hasError('required')">
         Username must be 4 letters or more
       </p>
-      <p class="error-message" *ngIf="signUpForm.controls['username'].hasError('required') && signUpFormControls.username.dirty">
+      <p class="error-message"
+        *ngIf="signUpForm.controls['username'].hasError('required') && signUpFormControls.username.dirty">
         Username is required
       </p>
     </div>
@@ -44,7 +46,8 @@
         *ngIf="signUpForm.controls['firstName'].hasError('minlength') && !signUpForm.controls['firstName'].hasError('required')">
         First name must be 2 letters or more
       </p>
-      <p class="error-message" *ngIf="signUpForm.controls['firstName'].hasError('required') && signUpFormControls.firstName.dirty">
+      <p class="error-message"
+        *ngIf="signUpForm.controls['firstName'].hasError('required') && signUpFormControls.firstName.dirty">
         First name is required
       </p>
     </div>
@@ -60,7 +63,8 @@
         *ngIf="signUpForm.controls['lastName'].hasError('minlength') && !signUpForm.controls['lastName'].hasError('required')">
         Last name must be 2 letters or more
       </p>
-      <p class="error-message" *ngIf="signUpForm.controls['lastName'].hasError('required') && signUpFormControls.lastName.dirty">
+      <p class="error-message"
+        *ngIf="signUpForm.controls['lastName'].hasError('required') && signUpFormControls.lastName.dirty">
         Last name is required
       </p>
     </div>
@@ -72,32 +76,33 @@
       <div class="input-container">
         <input type="password" formControlName="password" />
       </div>
-      <p class="error-message"
-        *ngIf="signUpForm.controls['password'].hasError('minlength')">
+      <p class="error-message" *ngIf="signUpForm.controls['password'].hasError('minlength')">
         Password must be at least 4 characters
       </p>
-      <p class="error-message" *ngIf="signUpForm.controls['password'].hasError('required') && signUpFormControls.password.dirty">
+      <p class="error-message"
+        *ngIf="signUpForm.controls['password'].hasError('required') && signUpFormControls.password.dirty">
         Password is required
       </p>
     </div>
 
-    <div class="custom-input">
+    <div class="custom-input" style="margin-bottom: 35px;">
       <div class="label-container">
         <label>Re-type password</label>
       </div>
       <div class="input-container">
         <input type="password" formControlName="confirm_password" />
       </div>
-      <p class="error-message"
-        *ngIf="signUpForm.controls['confirm_password'].hasError('passwordNotEquivalent')">
+      <p class="error-message" *ngIf="signUpForm.controls['confirm_password'].hasError('passwordNotEquivalent')">
         Passwords don't match
       </p>
-      <p class="error-message" *ngIf="signUpForm.controls['confirm_password'].hasError('required') && signUpFormControls.confirm_password.dirty">
+      <p class="error-message"
+        *ngIf="signUpForm.controls['confirm_password'].hasError('required') && signUpFormControls.confirm_password.dirty">
         Password is required
       </p>
     </div>
 
-    <app-custom-button buttonLabel="Sign Up" [isDisabled]="signingUp"></app-custom-button>
+    <app-custom-button [buttonLabel]="signUpButtonText" [isDisabled]="signingUp" [isLoading]="signingUp">
+    </app-custom-button>
   </form>
 </div>
 

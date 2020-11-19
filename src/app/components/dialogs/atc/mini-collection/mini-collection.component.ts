@@ -10,6 +10,7 @@ export class MiniCollectionComponent implements OnInit {
   @Input() data: any;
   currentCollectionId: string;
   @Input() resourceId: string;
+  @Input() clickable = true;
 
   showPlaceholder = false;
   placeholderText = "";

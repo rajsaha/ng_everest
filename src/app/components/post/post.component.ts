@@ -142,9 +142,11 @@ export class PostComponent implements OnInit {
 
   async addComment() {
     this.showComments = true;
+    this.commentForm.controls.comment.disable();
     const result: any = await this.resourceService.addComment(
-      this.commentForm.value
+      this.commentForm.getRawValue()
     );
+    this.commentForm.controls.comment.enable();
 
     if (!result.error) {
       // * Add comment to array
@@ -226,13 +228,11 @@ export class PostComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(async (result: any) => {
-      if (result && result.added) {
-        const res = await this.collectionService.checkForResourceInCollection({
-          id: this.id
-        });
-        if (res) {
-          this.isInCollection = true;
-        }
+      const res = await this.collectionService.checkForResourceInCollection({
+        id: this.id
+      });
+      if (res) {
+        this.isInCollection = true;
       }
     });
   }

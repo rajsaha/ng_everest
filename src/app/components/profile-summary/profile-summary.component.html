@@ -57,7 +57,7 @@
 
   <div class="followers">
     <h4>Followers</h4>
-    <p *ngIf="followerCount === 0">Add posts and articles to get followers</p>
+    <p *ngIf="followerCount === 1">Add posts to get followers</p>
     <div *ngIf="followerCount > 0" class="follower-images-array">
       <app-user-image
         *ngFor="let follower of followers"
@@ -69,7 +69,7 @@
         }"
         size="xs"
       ></app-user-image>
-      <div *ngIf="followerCount > 4" class="remaining-followers">
+      <div *ngIf="followerCount > 4" class="remaining-followers" (click)="openFollowDialog()">
         <span>
           +{{ followerCount - 4 }}
         </span>

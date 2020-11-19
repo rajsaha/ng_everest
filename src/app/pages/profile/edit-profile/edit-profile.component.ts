@@ -7,7 +7,6 @@ import { SnackbarService } from "@services/general/snackbar.service";
 import { MatChipInputEvent } from "@angular/material/chips";
 import { MatDialog } from "@angular/material/dialog";
 import { CpiComponent } from "src/app/components/dialogs/cpi/cpi.component";
-import { environment as ENV } from "@environments/environment";
 import { FfComponent } from "src/app/components/dialogs/ff/ff.component";
 import { ActivatedRoute, Router } from "@angular/router";
 
@@ -25,8 +24,8 @@ export class EditProfileComponent implements OnInit {
   website: string;
   bio: string;
   email: string;
-  followers = [];
-  following = [];
+  followers = 0;
+  following = 0;
   image: string;
   uploadedImage: string;
   imageId: string;
@@ -93,8 +92,8 @@ export class EditProfileComponent implements OnInit {
 
     this.isProfileSaveButtonDisabled = true;
     this.interests = res.userData.interests ? res.userData.interests : [];
-    this.followers = res.userData.followers ? res.userData.followers : [];
-    this.following = res.userData.following ? res.userData.following : [];
+    this.followers = res.userData.followerCount;
+    this.following = res.userData.followingCount;
 
     if (res.userData.mdImage instanceof Object) {
       this.image = res.userData.mdImage.link ? res.userData.mdImage.link : "";

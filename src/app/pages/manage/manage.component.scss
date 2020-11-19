@@ -112,7 +112,7 @@ $temp: var(--manage-header-control-background-color);
 
 .selected {
   fa-icon {
-    color: var(--manage-header-control-icon-color) !important;
+    color: var(--manage-header-control-selected) !important;
   }
 
   span {
