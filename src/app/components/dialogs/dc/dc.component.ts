@@ -16,6 +16,9 @@ export class DcComponent implements OnInit {
   // Icon
   faTrash = faTrash;
 
+  // Toggles
+  isLoading = false;
+
   constructor(
     public dialogRef: MatDialogRef<DcComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
@@ -32,6 +35,7 @@ export class DcComponent implements OnInit {
   }
 
   async onYesClick() {
+    this.isLoading = true;
     const response: any = await this.collectionService.deleteCollection({
       id: this.data.collectionData._id,
     });

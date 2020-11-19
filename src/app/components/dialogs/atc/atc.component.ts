@@ -164,6 +164,7 @@ export class AtcComponent implements OnInit {
       return;
     }
 
+    this.dialogRef.close();
     let collectionId = collection._id;
     const response: any = await this.resourceService.addResourceToCollection({
       collectionId,
@@ -174,7 +175,7 @@ export class AtcComponent implements OnInit {
         : null,
       userId: this.userId  
     });
-
+    
     if (!response.error) {
       this.snackbarService.openSnackBar({
         message: {
@@ -183,7 +184,7 @@ export class AtcComponent implements OnInit {
         },
         class: "green-snackbar",
       });
-      this.dialogRef.close({ added: true });
+      this.dialogRef.close();
     } else {
       this.snackbarService.openSnackBar({
         message: {
@@ -197,6 +198,7 @@ export class AtcComponent implements OnInit {
 
   async submitCreateCollectionForm() {
     if (this.createCollectionForm.valid) {
+      this.isLoading = true;
       const response: any = await this.collectionService.createCollectionAndPushResource(
         {
           currentCollectionId: this.currentCollectionId
@@ -228,6 +230,7 @@ export class AtcComponent implements OnInit {
           },
           class: "red-snackbar",
         });
+        this.isLoading = false;
       }
     }
   }

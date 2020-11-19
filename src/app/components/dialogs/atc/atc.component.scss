@@ -34,14 +34,16 @@ mat-form-field {
 
       .existing-collections {
         border-radius: 5px;
-        height: 225px;
-        max-height: 500px;
+        height: auto;
+        min-height: 85px;
+        max-height: 250px;
         margin-bottom: 45px;
         overflow-x: hidden;
         overflow-y: auto;
         transition: max-height 0.15s ease-in-out;
         animation: fadeIn 0.2s ease-in-out;
         animation-fill-mode: forwards;
+        position: relative;
 
         // width
         &::-webkit-scrollbar {

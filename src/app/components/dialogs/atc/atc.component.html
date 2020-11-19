@@ -6,6 +6,7 @@
     <div class="left">
       <div class="parent">
         <div
+          *ngIf="collections.length > 0"
           class="existing-collections"
           infiniteScroll
           [infiniteScrollDistance]="2"
@@ -97,6 +98,7 @@
     color="primary"
     (click)="submitCreateCollectionForm()"
     cdkFocusInitial
+    [disabled]="isLoading"
   >
     Save
   </button>

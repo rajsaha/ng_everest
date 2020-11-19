@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { UserService } from '@services/user/user.service';
-import { environment as ENV } from "@environments/environment";
+import { FfComponent } from '../dialogs/ff/ff.component';
 
 @Component({
   selector: 'app-profile-summary',
@@ -27,7 +28,7 @@ export class ProfileSummaryComponent implements OnInit {
   extContentCount = 0;
   isLoggedInUserFollowingParamUser: number;
 
-  constructor(private userService: UserService) { }
+  constructor(private userService: UserService, public dialog: MatDialog) { }
 
   async ngOnInit() {
     await this.getProfileData();
@@ -81,6 +82,16 @@ export class ProfileSummaryComponent implements OnInit {
     if (result) {
       this.isLoggedInUserFollowingParamUser = 0;
     }
+  }
+
+  openFollowDialog() {
+    const dialogRef = this.dialog.open(FfComponent, {
+      data: {
+        userId: this.userData.loggedInUserId
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(async (result: any) => {});
   }
 
 }

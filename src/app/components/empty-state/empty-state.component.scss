@@ -1,11 +1,12 @@
 .empty-state-container {
-    min-width: 300px;
+    min-width: 250px;
     padding: 15px;
     background-color: var(--empty-state-container-background);
     border-radius: 5px;
     min-height: 300px;
     display: grid;
     place-items: center;
+    margin-bottom: 25px;
 
     .content {
         .image {

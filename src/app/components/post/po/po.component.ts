@@ -70,7 +70,8 @@ export class PoComponent implements OnInit {
   }
 
   copyLink() {
-    this.clipboard.copy(this.router.url);
+    this.clipboard.copy(`${location.href}profile/user/${this.username}/resource/${this.id}`);
+    this.close();
     this.snackbarService.openSnackBar({
       message: {
         message: `Link copied to clipboard`,

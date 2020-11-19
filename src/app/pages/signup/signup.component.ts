@@ -16,6 +16,7 @@ export class SignupComponent implements OnInit {
   signUpForm: FormGroup;
   isDisabled = true;
   signingUp = false;
+  signUpButtonText = "Sign Up";
   passwordStrength: any;
 
   // Icons
@@ -35,30 +36,31 @@ export class SignupComponent implements OnInit {
     this.init_signup_form();
   }
 
-  onSubmit() {
-    this.signingUp = true;
+  async onSubmit() {
     if (this.signUpForm.valid) {
-      this.signUpService.signUp(this.signUpForm.value).then((res: any) => {
-        this.signingUp = false;
-        if (!res.error) {
-          this.snackbarService.openSnackBar({
-            message: {
-              message: `Hello, ${res.username}. You can login now.`,
-              error: false
-            },
-            class: 'green-snackbar',
-          });
-          this.router.navigate(['/login']);
-        } else {
-          this.snackbarService.openSnackBar({
-            message: {
-              message: `Error: ${res.error}!`,
-              error: true
-            },
-            class: 'red-snackbar',
-          });
-        }
-      });
+      this.signingUp = true;
+      this.signUpButtonText = 'Signing up...';
+      const res: any = await this.signUpService.signUp(this.signUpForm.value);
+      this.signingUp = false;
+      this.signUpButtonText = "Sign Up";
+      if (!res.error) {
+        this.snackbarService.openSnackBar({
+          message: {
+            message: `Hello, ${res.username}. You can login now.`,
+            error: false
+          },
+          class: 'green-snackbar',
+        });
+        this.router.navigate(['/login']);
+      } else {
+        this.snackbarService.openSnackBar({
+          message: {
+            message: `Error: ${res.error}!`,
+            error: true
+          },
+          class: 'red-snackbar',
+        });
+      }
     }
   }
 
