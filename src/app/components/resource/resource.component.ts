@@ -10,7 +10,6 @@ import {
   faThumbsUp,
   faComment
 } from "@fortawesome/free-solid-svg-icons";
-import * as moment from "moment";
 import { Router, ActivatedRoute } from "@angular/router";
 import { PopoverService } from '@services/popover/popover.service';
 import { ResourceOptionsComponent } from './resource-options/resource-options.component';
@@ -33,7 +32,6 @@ export class ResourceComponent implements OnInit {
   type: string;
   description: string;
   image = "";
-  timestamp: any;
   allComments = [];
   resourceUser: string;
   recommended_by_count: number;
@@ -94,7 +92,6 @@ export class ResourceComponent implements OnInit {
     this.type = this.data.type;
     this.description = this.data.description;
     this.image = this.data.mdImage.link;
-    this.timestamp = moment(this.data.timestamp.$date).fromNow();
     this.recommended_by_count = this.data.recommended_by_count;
 
     if (Number.isInteger(this.data.commentCount)) {

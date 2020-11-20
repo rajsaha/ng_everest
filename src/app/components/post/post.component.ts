@@ -8,16 +8,17 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
-import * as moment from 'moment';
 import { AtcComponent } from '../dialogs/atc/atc.component';
 import { PoComponent } from './po/po.component';
 import { ResourceService } from '@services/resource/resource.service';
 import { CollectionService } from '@services/collection/collection.service';
 import { UserService } from '@services/user/user.service';
 import { CommentComponent } from './comment/comment.component';
-import { environment as ENV } from '@environments/environment';
 import { Router, ActivatedRoute } from '@angular/router';
 import { PopoverService } from '@services/popover/popover.service';
+import * as dayjs from 'dayjs';
+import * as relativeTime from 'dayjs/plugin/relativeTime';
+dayjs.extend(relativeTime);
 
 @Component({
   selector: 'app-post',
@@ -109,7 +110,7 @@ export class PostComponent implements OnInit {
     this.description = this.data.description;
     this.image = this.data.lgImage.link ? this.data.lgImage.link : "";
     this.userImage = this.data.userImage;
-    this.timestamp = moment(this.data.timestamp).fromNow();
+    this.timestamp = dayjs(this.data.timestamp).fromNow();
     this.recommendedByCount = this.data.recommended_by_count;
     this.noImage = this.data.noImage;
     this.backgroundColor = this.data.backgroundColor;
@@ -168,10 +169,6 @@ export class PostComponent implements OnInit {
 
   get commentFormControls() {
     return this.commentForm.controls;
-  }
-
-  formatTime(date: Date) {
-    return moment(date).fromNow();
   }
 
   async textareaEnterPressed($event: KeyboardEvent) {
