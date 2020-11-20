@@ -187,6 +187,12 @@ $custom-image-p-a-dark: white;
 // * Profile - toggle profile view
 $profile-toggle-profile-view: rgba(0, 0, 0, 0.8);
 $profile-toggle-profile-view-dark: white;
+$profile-followers-following-bg-hover: rgba(0, 0, 0,.1);
+$profile-followers-following-bg-hover-dark: rgba(255, 255, 255, 0.1);
+$profile-followers-following-border: 1px solid rgba(0, 0, 0, .1);
+$profile-followers-following-border-dark: 1px solid white;
+$profile-followers-following-icon-color: rgba(0, 0, 0, .7);
+$profile-followers-following-icon-color-dark: white;
 
 // * Search container
 $search-page-tool-background-color:  rgba(255, 255, 255, 1);
@@ -320,7 +326,9 @@ $colors: (--navigation-background-color: ($navigation-background-color,
   --custom-image-background-color: ($custom-image-background-color, $custom-image-background-color-dark),
   --custom-image-p: ($custom-image-p, $custom-image-p-dark),
   --custom-image-p-a: ($custom-image-p-a, $custom-image-p-a-dark),
+  --profile-followers-following-bg-hover: ($profile-followers-following-bg-hover, $profile-followers-following-bg-hover-dark),
   --profile-toggle-profile-view: ($profile-toggle-profile-view, $profile-toggle-profile-view-dark),
+  --profile-followers-following-border: ($profile-followers-following-border, $profile-followers-following-border-dark),
   
   --search-page-tool-background-color: ($search-page-tool-background-color, $search-page-tool-background-color-dark),
   

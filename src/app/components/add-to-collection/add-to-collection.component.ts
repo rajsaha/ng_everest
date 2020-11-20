@@ -65,6 +65,10 @@ export class AddToCollectionComponent implements OnInit {
       for (const collection of response.data) {
         this.collections.push(collection);
       }
+
+      if (this.collections.length === 0) {
+        this.atcForm.controls.collectionId.disable();
+      }
     }
   }
 

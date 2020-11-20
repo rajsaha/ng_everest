@@ -1,4 +1,5 @@
 <div
+  (click)="toggleResourceFromCollection()"
   class="collection"
   matRipple
   [ngClass]="{
@@ -33,12 +34,15 @@
 
   <p>
     {{ data.title ? data.title : "Unset" }}
-    <!-- <span class="in-this-collection" *ngIf="data.inThisCollection.length > 0">
-      In this collection
-    </span> -->
   </p>
 
-  <div class="in-this-collection" *ngIf="data.inThisCollection.length > 0">
-    <fa-icon [icon]="faCheckCircle"></fa-icon>
+  <div class="tick-container">
+    <div class="itc" *ngIf="inThisCollection">
+      <fa-icon [icon]="faCheckCircle"></fa-icon>
+    </div>
+  
+    <div class="nitc" *ngIf="!inThisCollection">
+      <fa-icon [icon]="faCheckCircle"></fa-icon>
+    </div>
   </div>
 </div>

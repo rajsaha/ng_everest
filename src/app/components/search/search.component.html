@@ -42,7 +42,7 @@
         </div>
       </div>
 
-      <div class="see-more" *ngIf="users.length > 3" (mousedown)="goToSearch()">
+      <div class="go-to-search-page" *ngIf="users.length > 3" (mousedown)="goToSearch()">
         <span>See More</span>
         <span>{{ users.length }}</span>
       </div>
@@ -79,7 +79,7 @@
       </div>
 
       <div
-        class="see-more"
+        class="go-to-search-page"
         *ngIf="resources.length > 3"
         (mousedown)="goToSearch()"
       >
@@ -107,7 +107,7 @@
       </div>
 
       <div
-        class="see-more"
+        class="go-to-search-page"
         *ngIf="collections.length > 3"
         (mousedown)="goToSearch()"
       >

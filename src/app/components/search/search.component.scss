@@ -81,6 +81,7 @@ $image-height: 38px;
         padding: 10px 15px;
         font-size: 14px;
         font-family: "Montserrat", sans-serif;
+        font-weight: 700;
         text-align: left;
         border-bottom: var(--search-result-box-section-border);
         margin-bottom: 5px;
@@ -154,11 +155,12 @@ $image-height: 38px;
         }
       }
 
-      .see-more {
+      .go-to-search-page {
         font-family: 'Montserrat', sans-serif;
         color: var(--search-result-see-more);
 
         span:nth-of-type(1) {
+          font-size: 12px;
           margin-right: 10px;
         }
 
