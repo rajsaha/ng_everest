@@ -1,5 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-import { faExternalLinkAlt } from "@fortawesome/free-solid-svg-icons";
+import { faExternalLinkAlt, faUserFriends } from "@fortawesome/free-solid-svg-icons";
 import { COMMA, ENTER } from "@angular/cdk/keycodes";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { UserService } from "@services/user/user.service";
@@ -42,6 +42,7 @@ export class EditProfileComponent implements OnInit {
 
   // Icons
   faExternalLinkAlt = faExternalLinkAlt;
+  faUserFriends = faUserFriends;
 
   readonly separatorKeysCodes: number[] = [ENTER, COMMA];
   visible = true;
