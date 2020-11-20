@@ -2,7 +2,9 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment as ENV } from '@environments/environment';
 import { Router } from '@angular/router';
-import * as moment from 'moment';
+import * as dayjs from 'dayjs';
+import * as relativeTime from 'dayjs/plugin/relativeTime';
+dayjs.extend(relativeTime);
 
 @Injectable({
   providedIn: 'root'
@@ -32,7 +34,7 @@ export class LoginService {
   }
 
   private setSession(data: any) {
-    const expiresAt = moment().add(data.expiresIn, 'milliseconds');
+    const expiresAt = dayjs().add(data.expiresIn, 'millisecond');
 
     localStorage.setItem('token', data.token);
     localStorage.setItem('expires_at', JSON.stringify(expiresAt.valueOf()));
@@ -54,7 +56,7 @@ export class LoginService {
   }
 
   public isLoggedIn() {
-    return moment().isBefore(this.getExpiration());
+    return dayjs().isBefore(this.getExpiration());
   }
 
   isLoggedOut() {
@@ -64,7 +66,7 @@ export class LoginService {
   getExpiration() {
     const expiration = localStorage.getItem('expires_at');
     const expiresAt = JSON.parse(expiration);
-    return moment(expiresAt);
+    return dayjs(expiresAt);
   }
 
   redirectIfLoggedIn() {
