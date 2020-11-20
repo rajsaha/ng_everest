@@ -9,6 +9,7 @@ import { SnackbarService } from '@services/general/snackbar.service';
   styleUrls: ['./dr.component.scss']
 })
 export class DrComponent implements OnInit {
+  isLoading = false;
 
   constructor(
     public dialogRef: MatDialogRef<DrComponent>,
@@ -23,6 +24,7 @@ export class DrComponent implements OnInit {
   }
 
   async onYesClick() {
+    this.isLoading = true;
     const response: any = await this.resourceService.deleteResource({id: this.data.id});
     if (!response.error) {
       this.snackbarService.openSnackBar({
@@ -41,8 +43,9 @@ export class DrComponent implements OnInit {
         },
         class: 'red-snackbar',
       });
-
+      
       this.dialogRef.close(false);
+      this.isLoading = false;
     }
   }
 
