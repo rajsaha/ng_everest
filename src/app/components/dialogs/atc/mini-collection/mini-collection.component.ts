@@ -1,5 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { faCheckCircle } from "@fortawesome/free-solid-svg-icons";
+import { CollectionService } from '@services/collection/collection.service';
+import { SnackbarService } from '@services/general/snackbar.service';
+import { ResourceService } from '@services/resource/resource.service';
 
 @Component({
   selector: 'app-mini-collection',
@@ -8,6 +11,7 @@ import { faCheckCircle } from "@fortawesome/free-solid-svg-icons";
 })
 export class MiniCollectionComponent implements OnInit {
   @Input() data: any;
+  @Input() userId: string;
   currentCollectionId: string;
   @Input() resourceId: string;
   @Input() clickable = true;
@@ -15,14 +19,16 @@ export class MiniCollectionComponent implements OnInit {
   showPlaceholder = false;
   placeholderText = "";
   image: string;
+  inThisCollection = false;
 
   // Icons
   faCheckCircle = faCheckCircle;
 
-  constructor() { }
+  constructor(private resourceService: ResourceService, private snackbarService: SnackbarService, private collectionService: CollectionService) { }
 
   ngOnInit() {
     this.setImage();
+    this.inThisCollection = this.data.inThisCollection.length > 0 ? true : false;
   }
 
   setImage() {
@@ -50,5 +56,70 @@ export class MiniCollectionComponent implements OnInit {
     }
 
     return output;
+  }
+
+  async toggleResourceFromCollection() {
+    switch (this.inThisCollection) {
+      case true:
+        await this.deleteResourceFromCollection();
+        break;
+      case false:
+        await this.addResourceToCollection();
+        break;
+      default:
+        break;
+    }
+  }
+
+  async addResourceToCollection() {
+    this.inThisCollection = true;
+    let collectionId = this.data._id;
+    const response: any = await this.resourceService.addResourceToCollection({
+      collectionId,
+      resourceId: this.resourceId,
+      username: this.data.username,
+      userId: this.userId
+    });
+
+    if (!response.error) {
+      this.snackbarService.openSnackBar({
+        message: {
+          message: 'Resource added to collection',
+          error: false,
+        },
+        class: "green-snackbar",
+      });
+      this.inThisCollection = true;
+    } else {
+      this.snackbarService.openSnackBar({
+        message: {
+          message: 'Something went wrong!',
+          error: true,
+        },
+        class: "red-snackbar",
+      });
+      this.inThisCollection = false;
+    }
+  }
+
+  async deleteResourceFromCollection() {
+    this.inThisCollection = false;
+    const result: any = await this.collectionService.deleteResourceFromCollection({
+      collectionId: this.data._id,
+      resourceId: this.resourceId,
+    });
+
+    if (!result.error) {
+      this.snackbarService.openSnackBar({
+        message: {
+          message: 'Resource removed from collection',
+          error: false,
+        },
+        class: "green-snackbar",
+      });
+      this.inThisCollection = false;
+    } else {
+      this.inThisCollection = true;
+    }
   }
 }

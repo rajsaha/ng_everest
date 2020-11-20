@@ -20,9 +20,9 @@
 
           <app-mini-collection
             *ngFor="let collection of collections"
-            (click)="addResourceToCollection(collection)"
             [data]="collection"
             [resourceId]="data.id"
+            [userId]="userId"
           ></app-mini-collection>
 
           <p
