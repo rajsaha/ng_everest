@@ -84,7 +84,7 @@
   .tick-container {
     align-self: center;
     .nitc {
-      color: #626262;
+      color: var(--atc-nitc);
       @extend %tick-mark;
     }
   

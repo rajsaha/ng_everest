@@ -24,7 +24,6 @@ import { GeneralModule } from "./modules/general/general.module";
 import { DialogsModule } from "./modules/dialogs/dialogs.module";
 
 import { LoginComponent } from "./pages/login/login.component";
-import { WelcomeComponent } from "./pages/welcome/welcome.component";
 import { SignupComponent } from "./pages/signup/signup.component";
 import { FeedComponent } from "./pages/feed/feed.component";
 import { AtcComponent } from "./components/dialogs/atc/atc.component";
@@ -60,7 +59,6 @@ export function metaFactory(): MetaLoader {
   declarations: [
     AppComponent,
     LoginComponent,
-    WelcomeComponent,
     SignupComponent,
     FeedComponent,
     PoComponent,
