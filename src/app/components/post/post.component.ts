@@ -226,7 +226,8 @@ export class PostComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(async (result: any) => {
       const res: any = await this.collectionService.checkForResourceInCollection({
-        id: this.id
+        id: this.id,
+        userId: this.currentUserId,
       });
 
       if (res.isInCollection) {
