@@ -15,6 +15,8 @@ import { CollectionOptionsComponent } from 'src/app/components/collection/collec
 import { FilterOptionsComponent } from 'src/app/pages/manage/filter-options/filter-options.component';
 import { ProfileSummaryComponent } from 'src/app/components/profile-summary/profile-summary.component';
 import { ProfileComponent } from 'src/app/pages/profile/profile.component';
+import { EditCollectionComponent } from 'src/app/components/collection/edit-collection/edit-collection.component';
+import { DeleteResourceFromCollectionComponent } from 'src/app/components/collection/delete-resource-from-collection/delete-resource-from-collection.component';
 
 const routes: Routes = [
   {
@@ -44,7 +46,9 @@ const routes: Routes = [
     ProfileSummaryComponent,
     ResourceOptionsComponent,
     CollectionOptionsComponent,
-    FilterOptionsComponent
+    FilterOptionsComponent,
+    EditCollectionComponent,
+    DeleteResourceFromCollectionComponent
   ],
   imports: [
     CommonModule,

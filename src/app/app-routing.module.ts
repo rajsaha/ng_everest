@@ -1,12 +1,9 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { FeedComponent } from './pages/feed/feed.component';
 import { AuthGuardService } from './services/auth/auth-guard.service';
 import { PageNotFoundComponent } from './pages/page-not-found/page-not-found.component';
-import { ShareResourceComponent } from './pages/share-resource/share-resource.component';
 import { MainComponent } from './layouts/main/main.component';
 import { NoAuthComponent } from './layouts/no-auth/no-auth.component';
-import { SearchPageComponent } from './pages/search-page/search-page.component';
 
 const routes: Routes = [
   {
@@ -16,16 +13,7 @@ const routes: Routes = [
     children: [
       {
         path: '',
-        component: FeedComponent,
-        pathMatch: "full"
-      },
-      {
-        path: 'search',
-        component: SearchPageComponent
-      },
-      {
-        path: 'share-resource',
-        component: ShareResourceComponent,
+        loadChildren: () => import('src/app/modules/content/content.module').then(m => m.ContentModule)
       },
       {
         path: 'manage',
