@@ -1,14 +1,9 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { LoginComponent } from './pages/login/login.component';
-import { SignupComponent } from './pages/signup/signup.component';
-import { FeedComponent } from './pages/feed/feed.component';
 import { AuthGuardService } from './services/auth/auth-guard.service';
 import { PageNotFoundComponent } from './pages/page-not-found/page-not-found.component';
-import { ShareResourceComponent } from './pages/share-resource/share-resource.component';
 import { MainComponent } from './layouts/main/main.component';
 import { NoAuthComponent } from './layouts/no-auth/no-auth.component';
-import { SearchPageComponent } from './pages/search-page/search-page.component';
 
 const routes: Routes = [
   {
@@ -18,16 +13,7 @@ const routes: Routes = [
     children: [
       {
         path: '',
-        component: FeedComponent,
-        pathMatch: "full"
-      },
-      {
-        path: 'search',
-        component: SearchPageComponent
-      },
-      {
-        path: 'share-resource',
-        component: ShareResourceComponent,
+        loadChildren: () => import('src/app/modules/content/content.module').then(m => m.ContentModule)
       },
       {
         path: 'manage',
@@ -49,13 +35,9 @@ const routes: Routes = [
     component: NoAuthComponent,
     children: [
       {
-        path: 'login',
-        component: LoginComponent
+        path: '',
+        loadChildren: () => import('src/app/modules/no-auth/no-auth.module').then(m => m.NoAuthModule)
       },
-      {
-        path: 'signup',
-        component: SignupComponent
-      }
     ]
   },
   {

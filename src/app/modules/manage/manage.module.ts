@@ -4,10 +4,6 @@ import { ManageComponent } from "../../pages/manage/manage.component";
 import { ManageResourcesComponent } from "../../pages/manage/manage-resources/manage-resources.component";
 import { ManageCollectionsComponent } from "../../pages/manage/manage-collections/manage-collections.component";
 import { EditResourceComponent } from "../../pages/edit-resource/edit-resource.component";
-import { AtcComponent } from "src/app/components/dialogs/atc/atc.component";
-import { SnackbarComponent } from "src/app/components/snackbar/snackbar.component";
-import { DrComponent } from "src/app/components/dialogs/dr/dr.component";
-import { DcComponent } from "src/app/components/dialogs/dc/dc.component";
 import { CommonModule } from "@angular/common";
 import { MaterialModule } from "src/app/modules/material/material.module";
 import { ReactiveFormsModule } from "@angular/forms";
@@ -19,6 +15,8 @@ import { CollectionOptionsComponent } from 'src/app/components/collection/collec
 import { FilterOptionsComponent } from 'src/app/pages/manage/filter-options/filter-options.component';
 import { ProfileSummaryComponent } from 'src/app/components/profile-summary/profile-summary.component';
 import { ProfileComponent } from 'src/app/pages/profile/profile.component';
+import { EditCollectionComponent } from 'src/app/components/collection/edit-collection/edit-collection.component';
+import { DeleteResourceFromCollectionComponent } from 'src/app/components/collection/delete-resource-from-collection/delete-resource-from-collection.component';
 
 const routes: Routes = [
   {
@@ -48,7 +46,9 @@ const routes: Routes = [
     ProfileSummaryComponent,
     ResourceOptionsComponent,
     CollectionOptionsComponent,
-    FilterOptionsComponent
+    FilterOptionsComponent,
+    EditCollectionComponent,
+    DeleteResourceFromCollectionComponent
   ],
   imports: [
     CommonModule,
@@ -58,12 +58,6 @@ const routes: Routes = [
     GeneralModule,
     DialogsModule,
     RouterModule.forChild(routes)
-  ],
-  entryComponents: [
-    AtcComponent,
-    SnackbarComponent,
-    DrComponent,
-    DcComponent
   ],
   exports: [RouterModule]
 })
