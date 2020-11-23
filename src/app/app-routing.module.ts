@@ -49,13 +49,9 @@ const routes: Routes = [
     component: NoAuthComponent,
     children: [
       {
-        path: 'login',
-        component: LoginComponent
+        path: '',
+        loadChildren: () => import('src/app/modules/no-auth/no-auth.module').then(m => m.NoAuthModule)
       },
-      {
-        path: 'signup',
-        component: SignupComponent
-      }
     ]
   },
   {
