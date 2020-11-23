@@ -44,6 +44,5 @@ import { GeneralModule } from '../general/general.module';
     MatTabsModule,
   ],
   exports: [AtcComponent, DcComponent, DrComponent, FfComponent],
-  entryComponents: [FfComponent],
 })
 export class DialogsModule {}

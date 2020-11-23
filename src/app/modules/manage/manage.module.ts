@@ -4,10 +4,6 @@ import { ManageComponent } from "../../pages/manage/manage.component";
 import { ManageResourcesComponent } from "../../pages/manage/manage-resources/manage-resources.component";
 import { ManageCollectionsComponent } from "../../pages/manage/manage-collections/manage-collections.component";
 import { EditResourceComponent } from "../../pages/edit-resource/edit-resource.component";
-import { AtcComponent } from "src/app/components/dialogs/atc/atc.component";
-import { SnackbarComponent } from "src/app/components/snackbar/snackbar.component";
-import { DrComponent } from "src/app/components/dialogs/dr/dr.component";
-import { DcComponent } from "src/app/components/dialogs/dc/dc.component";
 import { CommonModule } from "@angular/common";
 import { MaterialModule } from "src/app/modules/material/material.module";
 import { ReactiveFormsModule } from "@angular/forms";
@@ -58,12 +54,6 @@ const routes: Routes = [
     GeneralModule,
     DialogsModule,
     RouterModule.forChild(routes)
-  ],
-  entryComponents: [
-    AtcComponent,
-    SnackbarComponent,
-    DrComponent,
-    DcComponent
   ],
   exports: [RouterModule]
 })

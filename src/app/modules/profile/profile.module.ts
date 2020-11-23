@@ -58,6 +58,5 @@ const routes: Routes = [
     RouterModule.forChild(routes),
   ],
   exports: [RouterModule],
-  entryComponents: [CpiComponent],
 })
 export class ProfileModule {}

@@ -102,12 +102,6 @@ export function metaFactory(): MetaLoader {
     },
   ],
   bootstrap: [AppComponent],
-  entryComponents: [
-    AtcComponent,
-    PoComponent,
-    SnackbarComponent,
-    PopoverComponent,
-  ],
 })
 export class AppModule {}
 
