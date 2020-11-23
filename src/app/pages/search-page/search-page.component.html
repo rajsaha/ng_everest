@@ -10,28 +10,23 @@
         </div>
       </div>
 
-      <div class="dropdowns">
-        <div class="order-by-container">
-          <div class="custom-input">
-            <div class="label-container">
-              <label>Order By</label>
-            </div>
-            <div class="input-container">
-              <mat-select formControlName="orderBy">
-                <mat-option value="recommend">Recommend Count</mat-option>
-                <mat-option value="recent">Recent First</mat-option>
-              </mat-select>
-            </div>
-          </div>
+      <div class="custom-input">
+        <div class="label-container">
+          <label>Order By</label>
         </div>
+        <div class="input-container" style="padding: 16px 20px 20px 20px;">
+          <mat-select formControlName="orderBy">
+            <mat-option value="recommend">Recommend Count</mat-option>
+            <mat-option value="recent">Recent First</mat-option>
+          </mat-select>
+        </div>
+      </div>
 
-        <div class="checkboxes-container">
-          <p>Include</p>
-          <div class="checkboxes">
-            <mat-checkbox formControlName="resource">Resources</mat-checkbox>
-            <mat-checkbox formControlName="collection">Collections</mat-checkbox>
-            <mat-checkbox formControlName="user">Users</mat-checkbox>
-          </div>
+      <div class="checkboxes-container">
+        <div class="checkboxes">
+          <mat-checkbox formControlName="resource">Resources</mat-checkbox>
+          <mat-checkbox formControlName="collection">Collections</mat-checkbox>
+          <mat-checkbox formControlName="user">Users</mat-checkbox>
         </div>
       </div>
     </form>
