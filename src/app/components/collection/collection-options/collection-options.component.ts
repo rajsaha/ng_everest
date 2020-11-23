@@ -33,7 +33,7 @@ export class CollectionOptionsComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private dialog: MatDialog
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.username = this.popoverRef.data.collectionData.username;
@@ -51,7 +51,7 @@ export class CollectionOptionsComponent implements OnInit {
 
     this.close();
 
-    dialogRef.afterClosed().subscribe(async (result: any) => {});
+    dialogRef.afterClosed().subscribe(async (result: any) => { });
   }
 
   openDeleteCollectionDialog() {
@@ -63,7 +63,15 @@ export class CollectionOptionsComponent implements OnInit {
 
     this.close();
 
-    dialogRef.afterClosed().subscribe(async (result: any) => {});
+    dialogRef.afterClosed().subscribe(async (result: any) => { });
+  }
+
+  goToCollection() {
+    this.close();
+    this.router.navigate(
+      [`/profile/user/${this.username}/collection/${this.popoverRef.data.collectionData._id}`],
+      { relativeTo: this.route.parent }
+    );
   }
 
   goToShareResource() {

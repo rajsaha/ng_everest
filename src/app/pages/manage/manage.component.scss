@@ -167,7 +167,7 @@ $temp: var(--manage-header-control-background-color);
     }
 
     .columns {
-      grid-template-columns: auto 1fr;
+      grid-template-columns: minmax(auto, 350px) 1fr;
       grid-gap: 15px;
       padding: 0 30px;
     }

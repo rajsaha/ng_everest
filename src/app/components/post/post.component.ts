@@ -182,13 +182,17 @@ export class PostComponent implements OnInit {
 
   async like() {
     try {
+      this.isLiked = true;
       const result = await this.userService.likePost({
         userId: this.currentUserId,
         resourceId: this.id
       });
+      
       if (result) {
         this.isLiked = true;
         this.recommendedByCount++;
+      } else {
+        this.isLiked = false;
       }
     } catch (err) {
       console.error(err);
@@ -197,6 +201,7 @@ export class PostComponent implements OnInit {
 
   async unlike() {
     try {
+      this.isLiked = false;
       const result = await this.userService.unLikePost({
         userId: this.currentUserId,
         resourceId: this.id
@@ -204,6 +209,8 @@ export class PostComponent implements OnInit {
       if (result) {
         this.isLiked = false;
         this.recommendedByCount--;
+      } else {
+        this.isLiked = true;
       }
     } catch (err) {
       console.error(err);
