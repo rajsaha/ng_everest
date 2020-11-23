@@ -18,6 +18,9 @@ import { DcComponent } from '../../dialogs/dc/dc.component';
   styleUrls: ["./collection-options.component.scss"],
 })
 export class CollectionOptionsComponent implements OnInit {
+  username: string;
+  loggedInUser: string;
+
   // Icons
   faPlusCircle = faPlusCircle;
   faEdit = faEdit;
@@ -32,7 +35,10 @@ export class CollectionOptionsComponent implements OnInit {
     private dialog: MatDialog
   ) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.username = this.popoverRef.data.collectionData.username;
+    this.loggedInUser = localStorage.getItem("username");
+  }
 
   openEditCollectionDialog() {
     const dialogRef = this.dialog.open(EditCollectionComponent, {
