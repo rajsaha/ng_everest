@@ -93,9 +93,9 @@ $popover-item-border-bottom-dark: 1px solid black;
 // * Custom input
 $custom-input-input-container: #f6f8fa;
 $custom-input-input-container-dark: rgba(255, 255, 255, 0.1);
-$custom-input-label-container: rgb(184, 184, 184);
+$custom-input-label-container: #646464;
 $custom-input-label-container-dark: white;
-$custom-input-placeholder: rgba(0, 0, 0, 0.3);
+$custom-input-placeholder: #646464;
 $custom-input-placeholder-dark: rgba(255, 255, 255, 0.5);
 $custom-input-color: inherit;
 $custom-input-color-dark: white;
@@ -226,6 +226,10 @@ $loading-content-background-dark: #777;
 $view-collection-header: white;
 $view-collection-header-dark: #212121;
 
+// * Mini Collection Component
+$atc-nitc: #eaeaea;
+$atc-nitc-dark: #626262;
+
 $colors: (--navigation-background-color: ($navigation-background-color,
     $navigation-background-color-dark,
   ),
@@ -343,4 +347,5 @@ $colors: (--navigation-background-color: ($navigation-background-color,
   --loading-animate: ($loading-animate, $loading-animate-dark),
   --loading-content-background: ($loading-content-background, $loading-content-background-dark),
   
-  --view-collection-header: ($view-collection-header, $view-collection-header-dark));
+  --view-collection-header: ($view-collection-header, $view-collection-header-dark),
+  --atc-nitc: ($atc-nitc, $atc-nitc-dark));

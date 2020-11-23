@@ -2,7 +2,7 @@
   <span>Collection Options</span>
 </div>
 
-<div class="popover-item" matRipple (click)="goToShareResource()">
+<div class="popover-item" matRipple (click)="goToShareResource()" *ngIf="loggedInUser == username">
   <div class="top">
     <fa-icon [icon]="faPlusCircle"></fa-icon>
     <span>Add new post</span>
@@ -13,7 +13,7 @@
   </div>
 </div>
 
-<div class="popover-item" matRipple (click)="openEditCollectionDialog()">
+<div class="popover-item" matRipple (click)="openEditCollectionDialog()" *ngIf="loggedInUser == username">
   <div class="top">
     <fa-icon [icon]="faEdit"></fa-icon>
     <span>Edit Collection</span>
@@ -24,7 +24,7 @@
   </div>
 </div>
 
-<div class="popover-item" matRipple (click)="openDeleteCollectionDialog()">
+<div class="popover-item" matRipple (click)="openDeleteCollectionDialog()" *ngIf="loggedInUser == username">
   <div class="top">
     <fa-icon [icon]="faTrash"></fa-icon>
     <span>Delete Collection</span>

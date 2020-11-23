@@ -66,11 +66,11 @@ export class AtcComponent implements OnInit {
   }
 
   onNoClick() {
-    this.dialogRef.close();
+    this.dialogRef.close(false);
   }
 
   onYesClick() {
-    this.dialogRef.close();
+    this.dialogRef.close(true);
   }
 
   async onScrollDown() {
