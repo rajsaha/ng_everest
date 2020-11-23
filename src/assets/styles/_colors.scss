@@ -35,6 +35,8 @@ $post-textarea-background-color: white;
 $post-textarea-background-color-dark: #212121;
 $post-textarea-color: inherit;
 $post-textarea-color-dark: white;
+$post-textarea-caret-color: inherit;
+$post-textarea-caret-color-dark: white;
 $post-btn-like-color: rgba(0, 0, 0, 0.2);
 $post-btn-like-color-dark: white;
 $post-btn-comment-color: #c8c4d1;
@@ -257,6 +259,7 @@ $colors: (--navigation-background-color: ($navigation-background-color,
   --post-menu-color: ($post-menu-color, $post-menu-color-dark),
   --post-textarea-background-color: ($post-textarea-background-color, $post-textarea-background-color-dark),
   --post-textarea-color: ($post-textarea-color, $post-textarea-color-dark),
+  --post-textarea-caret-color: ($post-textarea-caret-color, $post-textarea-caret-color-dark),
   --post-btn-like-color: ($post-btn-like-color, $post-btn-like-color-dark),
   --post-btn-comment-color: ($post-btn-comment-color, $post-btn-comment-color-dark),
   --post-btn-count-bubble-color: ($post-btn-count-bubble-color, $post-btn-count-bubble-color-dark),

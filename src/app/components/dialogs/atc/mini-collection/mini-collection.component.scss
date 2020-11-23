@@ -67,6 +67,7 @@
       position: absolute;
       @extend %noImageBox;
       display: grid;
+      background-color: #dee8ff;
 
       span {
         align-self: center;

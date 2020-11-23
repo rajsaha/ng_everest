@@ -101,7 +101,6 @@
 		strong {
 			font-family: "Montserrat", sans-serif;
 			font-size: 16px;
-			text-transform: uppercase;
 		}
 
 		.collection-badge-false {
@@ -294,6 +293,7 @@ textarea {
 	background-color: var(--post-textarea-background-color);
 	color: var(--post-textarea-color);
 	cursor: text;
+	caret-color: var(--post-textarea-caret-color);
 }
 
 @keyframes buttonAppear {

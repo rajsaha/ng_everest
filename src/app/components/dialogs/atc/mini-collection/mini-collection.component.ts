@@ -20,6 +20,7 @@ export class MiniCollectionComponent implements OnInit {
   placeholderText = "";
   image: string;
   inThisCollection = false;
+  hasResource = false;
 
   // Icons
   faCheckCircle = faCheckCircle;
@@ -32,12 +33,12 @@ export class MiniCollectionComponent implements OnInit {
   }
 
   setImage() {
-    if (!this.data.resource1) {
+    if (!('resource1' in this.data)) {
       this.showPlaceholder = true;
       this.placeholderText = this.generatePlaceholderText(this.data.title);
-    } else {
+    } else if ('resource1' in this.data) {
       this.image = this.data.resource1.smImage.link;
-
+      this.hasResource = true;
       // * Handle no image situation
       if (this.data.resource1.noImage) {
         this.showPlaceholder = true;
