@@ -1,9 +1,5 @@
 .section-container {
   margin-top: 25px;
-  h1 {
-    font-weight: 400;
-    margin-bottom: 0;
-  }
   .search-container {
     background-color: var(--search-page-tool-background-color);
     padding: 10px 10px 15px 15px;
@@ -14,23 +10,11 @@
 
       .checkboxes-container {
         align-self: center;
-        p {
-          margin-bottom: 5px;
-          color: var(--custom-input-label-container);
-        }
         .checkboxes {
           display: inline;
           font-size: 12px;
           mat-checkbox:not(:last-child) {
             margin-right: 15px;
-          }
-
-          mat-checkbox {
-            label {
-              span {
-                font-size: 12px;
-              }
-            }
           }
         }
       }

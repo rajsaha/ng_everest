@@ -1,37 +1,8 @@
-$block-width: 6.2rem;
-$block-height: 6.2rem;
-
-.create-new-collection {
-  background-color: transparent;
-  border: 3px solid rbga(0, 0, 0, .2);
-  border-radius: 10px;
-  width: $block-width;
-  height: $block-height;
-}
-
-.search {
-  mat-form-field {
-    margin-top: 15px;
-    width: 100%;
-  }
-
-  mat-icon {
-    font-size: 16px;
-    color: rgba(0, 0, 0, .8);
-
-    fa-icon {
-      position: absolute;
-      top: 2px;
-    }
-  }
-}
-
 .list-of-collections {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   grid-auto-flow: dense;
   grid-column-gap: 15px;
-  // justify-items: center;
 }
 
 @media (min-width: 768px) {

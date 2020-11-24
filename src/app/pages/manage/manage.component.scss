@@ -126,10 +126,6 @@ $temp: var(--manage-header-control-background-color);
   width: inherit;
 }
 
-.two-columns {
-  grid-template-columns: repeat(2, 1fr);
-}
-
 .one-column {
   grid-template-columns: repeat(1, 1fr);
 }
