@@ -22,28 +22,6 @@
         .uploader-info {
             align-self: center;
             height: 100%;
-
-            .username {
-                width: 100px;
-                height: 10px;
-                background: #777;
-                margin-bottom: 15px;
-            }
-
-            .date {
-                width: 50px;
-                height: 10px;
-                background: #777;
-            }
-        }
-
-        .post-menu {
-            align-self: center;
-
-            fa-icon {
-                float: right;
-                color: rgba(0, 0, 0, 0.5);
-            }
         }
     }
 

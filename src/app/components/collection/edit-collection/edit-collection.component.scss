@@ -1,23 +1,8 @@
-h6 {
-  margin-top: 0;
-  margin-bottom: 10px;
-}
-
-mat-form-field {
-  width: 100% !important;
-}
-
 .columns {
   .left {
     .parent {
       height: 100%;
       overflow: hidden;
-
-      h6 {
-        color: #7e7e7e;
-        font-size: 14px;
-        font-weight: 400;
-      }
     }
   }
 
@@ -44,12 +29,6 @@ mat-form-field {
         overflow-y: auto;
       }
     }
-  }
-}
-
-.mat-form-field-appearance-outline {
-  .mat-form-field-outline {
-    box-shadow: none !important;
   }
 }
 

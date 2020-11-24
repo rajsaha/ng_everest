@@ -16,7 +16,6 @@ import {
   faSearch,
   faPenAlt,
   faCog,
-  faPowerOff,
   faPlus,
   faUserAlt
 } from "@fortawesome/free-solid-svg-icons";
@@ -57,7 +56,6 @@ export class MainComponent implements OnInit, OnDestroy {
   faSearch = faSearch;
   faPenAlt = faPenAlt;
   faCog = faCog;
-  faPowerOff = faPowerOff;
   faPlus = faPlus;
   faUserAlt = faUserAlt;
 

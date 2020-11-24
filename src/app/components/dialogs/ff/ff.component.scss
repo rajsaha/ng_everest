@@ -17,15 +17,6 @@
       grid-column-gap: 15px;
       margin: 15px 0;
 
-      .image {
-        width: 50px;
-        height: 50px;
-        border-radius: 50%;
-        background-color: grey;
-        background-size: cover;
-        background-position: center center;
-      }
-
       .details {
         align-self: center;
 
@@ -59,15 +50,6 @@
         grid-template-columns: 50px 1fr 1fr;
         grid-column-gap: 15px;
         margin: 15px 0;
-
-        .image {
-          width: 50px;
-          height: 50px;
-          border-radius: 50%;
-          background-color: grey;
-          background-size: cover;
-          background-position: center center;
-        }
 
         .details {
           align-self: center;

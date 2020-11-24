@@ -29,6 +29,15 @@
           Unfollow
         </button>
       </div>
+
+      <div class="follow-unfollow-container" *ngIf="userData.isSelf">
+        <button
+          class="unfollow"
+          (click)="goToSettings()"
+        >
+          Settings
+        </button>
+      </div>
     </div>
   </div>
 

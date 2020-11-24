@@ -12,10 +12,6 @@ h6 {
   margin-bottom: 10px;
 }
 
-mat-form-field {
-  width: 100% !important;
-}
-
 .columns {
   display: grid;
   grid-template-columns: 1fr;
@@ -62,14 +58,6 @@ mat-form-field {
           &:hover {
             background: rgb(175, 87, 5);
           }
-        }
-
-        .loading {
-          display: grid;
-          justify-content: center;
-          align-content: center;
-          width: 100%;
-          height: 100px;
         }
 
         .no-collection {
@@ -123,12 +111,6 @@ mat-form-field {
     h4 {
       font-family: "Montserrat", sans-serif;
     }
-  }
-}
-
-.mat-form-field-appearance-outline {
-  .mat-form-field-outline {
-    box-shadow: none !important;
   }
 }
 

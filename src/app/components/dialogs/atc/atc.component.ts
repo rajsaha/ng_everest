@@ -32,6 +32,7 @@ export class AtcComponent implements OnInit {
 
   // Toggles
   isLoading = false;
+  isDisabled = false;
 
   @ViewChild("autosize") autosize: CdkTextareaAutosize;
 
@@ -163,6 +164,7 @@ export class AtcComponent implements OnInit {
   async submitCreateCollectionForm() {
     if (this.createCollectionForm.valid) {
       this.isLoading = true;
+      this.isDisabled = true;
       const response: any = await this.collectionService.createCollectionAndPushResource(
         {
           currentCollectionId: this.currentCollectionId
@@ -195,6 +197,7 @@ export class AtcComponent implements OnInit {
           class: "red-snackbar",
         });
         this.isLoading = false;
+        this.isDisabled = false;
       }
     }
   }

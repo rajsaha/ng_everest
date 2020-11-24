@@ -132,11 +132,14 @@ export class CpiComponent implements OnInit {
     // * Pre api call
     this.isSavingPhoto = true;
     this.dialogRef.disableClose = true;
+    this.isReady = false;
     const response: any = await this.userService.deleteProfilePhoto({ id: this.userId });
 
     // * Post api call
     this.dialogRef.disableClose = false;
     this.isSavingPhoto = false;
+    this.isReady = true;
+    this.userImage = null;
 
     if (!response.error) {
       this.snackbarService.openSnackBar({
@@ -148,7 +151,6 @@ export class CpiComponent implements OnInit {
       });
 
       localStorage.removeItem('profileImage');
-      this.dialogRef.close();
     } else {
       this.snackbarService.openSnackBar({
         message: {

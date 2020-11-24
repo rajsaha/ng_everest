@@ -5,20 +5,17 @@
 <mat-dialog-content>
   <p>
     Are you sure you want to delete
-    <strong>{{ data.collectionData.title }}</strong
-    >?
+    <strong>{{ data.collectionData.title }}</strong>?
   </p>
 </mat-dialog-content>
 
 <mat-dialog-actions align="end">
-  <button
-    mat-flat-button
-    color="warn"
-    (click)="onYesClick()"
-    cdkFocusInitial
-    [disabled]="isLoading"
-  >
-    Ok
+  <button mat-flat-button color="warn" (click)="onYesClick()" cdkFocusInitial [disabled]="isLoading">
+    <div class="mat-dialog-button-with-spinner">
+      <mat-progress-spinner *ngIf="isDisabled" color="accent" mode="indeterminate" value="50" diameter="15">
+      </mat-progress-spinner>
+      <span>{{ isDisabled ? 'Deleting' : 'Delete' }}</span>
+    </div>
   </button>
   <button mat-stroked-button (click)="onNoClick()">Cancel</button>
 </mat-dialog-actions>

@@ -3,9 +3,6 @@
 </div> -->
 
 <div class="list-of-collections">
-  <!-- * Loading -->
-  <app-loading type="collection" *ngIf="isLoading"></app-loading>
-
   <!-- * No Data -->
   <div *ngIf="collections && collections.length === 0 && !isLoading; then thenBlock else elseBlock">
 
@@ -18,4 +15,7 @@
   <ng-template #elseBlock>
     <app-collection *ngFor="let collection of collections" [data]="collection"></app-collection>
   </ng-template>
+
+  <!-- * Loading -->
+  <app-loading type="collection" *ngIf="isLoading"></app-loading>
 </div>

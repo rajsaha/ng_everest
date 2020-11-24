@@ -149,7 +149,9 @@ export class EditProfileComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(async result => {
       if (result.newImage) {
+        this.isLoading = true;
         this.image = result.image;
+        this.isLoading = false;
       }
     });
   }
