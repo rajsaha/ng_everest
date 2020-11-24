@@ -17,7 +17,7 @@ export class UserImageComponent implements OnInit {
   placeholder: string;
   ready = false;
 
-  constructor(private router: Router, private route: ActivatedRoute) {}
+  constructor(private router: Router, private route: ActivatedRoute) { }
 
   ngOnInit() {
     if (!this.userData.image) {
@@ -61,11 +61,10 @@ export class UserImageComponent implements OnInit {
   }
 
   goToUser(username: string) {
-    if (!this.clickable) {
-      return;
+    if (this.clickable) {
+      this.router.navigate([`/profile/user/${username}`], {
+        relativeTo: this.route.parent,
+      });
     }
-    this.router.navigate([`/profile/user/${username}`], {
-      relativeTo: this.route.parent,
-    });
   }
 }
