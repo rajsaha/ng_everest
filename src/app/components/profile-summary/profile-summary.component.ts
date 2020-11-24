@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { ActivatedRoute, Router } from '@angular/router';
 import { UserService } from '@services/user/user.service';
 import { FfComponent } from '../dialogs/ff/ff.component';
 
@@ -10,7 +11,7 @@ import { FfComponent } from '../dialogs/ff/ff.component';
 })
 export class ProfileSummaryComponent implements OnInit {
   @Input() userData: any;
-  
+
   loading = false;
 
   // Profile Data
@@ -28,7 +29,7 @@ export class ProfileSummaryComponent implements OnInit {
   extContentCount = 0;
   isLoggedInUserFollowingParamUser: number;
 
-  constructor(private userService: UserService, public dialog: MatDialog) { }
+  constructor(private userService: UserService, public dialog: MatDialog, private route: ActivatedRoute, private router: Router) { }
 
   async ngOnInit() {
     await this.getProfileData();
@@ -37,17 +38,17 @@ export class ProfileSummaryComponent implements OnInit {
   async getProfileData() {
     this.loading = true;
     const result: any = await this.userService.getProfileData(
-      { 
+      {
         userId: this.userData.userId,
-        loggedInUserId: this.userData.loggedInUserId 
+        loggedInUserId: this.userData.loggedInUserId
       });
     if (result.userData.mdImage) {
       this.profileImage = result.userData.mdImage.link;
     } else {
       this.profileImage = "";
     }
-    
-    this.username= result.userData.username;
+
+    this.username = result.userData.username;
     this.firstName = result.userData.firstName;
     this.lastName = result.userData.lastName;
     this.bio = result.userData.bio;
@@ -63,9 +64,9 @@ export class ProfileSummaryComponent implements OnInit {
   }
 
   followUser() {
-    const result = this.userService.followUser({ 
+    const result = this.userService.followUser({
       anchorUserId: this.userData.loggedInUserId,
-      userId: this.userData.userId 
+      userId: this.userData.userId
     });
 
     if (result) {
@@ -74,9 +75,9 @@ export class ProfileSummaryComponent implements OnInit {
   }
 
   unfollowUser() {
-    const result = this.userService.unfollowUser({ 
+    const result = this.userService.unfollowUser({
       anchorUserId: this.userData.loggedInUserId,
-      userId: this.userData.userId 
+      userId: this.userData.userId
     });
 
     if (result) {
@@ -91,7 +92,14 @@ export class ProfileSummaryComponent implements OnInit {
       }
     });
 
-    dialogRef.afterClosed().subscribe(async (result: any) => {});
+    dialogRef.afterClosed().subscribe(async (result: any) => { });
+  }
+
+  goToSettings() {
+    this.router.navigate(
+      [`/profile/settings`],
+      { relativeTo: this.route.parent }
+    );
   }
 
 }

@@ -266,6 +266,15 @@ app-root {
   }
 }
 
+.mat-dialog-button-with-spinner {
+  display: flex;
+
+  mat-progress-spinner {
+    margin-right: 5px;
+    align-self: center;
+  }
+}
+
 .custom-input {
   position: relative;
   width: 100%;

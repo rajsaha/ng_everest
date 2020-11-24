@@ -10,6 +10,7 @@ import { SnackbarService } from '@services/general/snackbar.service';
 })
 export class DrComponent implements OnInit {
   isLoading = false;
+  isDisabled = false;
 
   constructor(
     public dialogRef: MatDialogRef<DrComponent>,
@@ -25,6 +26,7 @@ export class DrComponent implements OnInit {
 
   async onYesClick() {
     this.isLoading = true;
+    this.isDisabled = true;
     const response: any = await this.resourceService.deleteResource({id: this.data.id});
     if (!response.error) {
       this.snackbarService.openSnackBar({
@@ -46,6 +48,7 @@ export class DrComponent implements OnInit {
       
       this.dialogRef.close(false);
       this.isLoading = false;
+      this.isDisabled = false;
     }
   }
 
