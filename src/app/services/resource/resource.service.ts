@@ -39,6 +39,13 @@ export class ResourceService {
     return response;
   }
 
+  getExploreFeed(data: any) {
+    const response = this.http
+      .post(`${ENV.API_URL}/resource/get/explore-feed`, data)
+      .toPromise();
+    return response;
+  }
+
   getResourceComments(data: any) {
     const response = this.http
       .post(`${ENV.API_URL}/resource/get/resource-comments`, data)

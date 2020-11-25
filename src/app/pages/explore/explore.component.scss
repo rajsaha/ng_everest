@@ -1,0 +1,10 @@
+.parent {
+    height: 100%;
+    overflow: hidden;
+
+    .feed-container {
+        height: 100%;
+        padding: 15px;
+        overflow-y: scroll;
+    }
+}

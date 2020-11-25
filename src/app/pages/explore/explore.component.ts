@@ -1,15 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-import { ResourceService } from '@services/resource/resource.service';
 import { MetaService } from '@ngx-meta/core';
+import { ResourceService } from '@services/resource/resource.service';
 import { UserService } from '@services/user/user.service';
 
-
 @Component({
-  selector: 'app-feed',
-  templateUrl: './feed.component.html',
-  styleUrls: ['./feed.component.scss'],
+  selector: 'app-explore',
+  templateUrl: './explore.component.html',
+  styleUrls: ['./explore.component.scss']
 })
-export class FeedComponent implements OnInit {
+export class ExploreComponent implements OnInit {
   posts = [];
   isLoading = false;
   username: string;
@@ -25,22 +24,23 @@ export class FeedComponent implements OnInit {
   pageNo = 1;
   size = 3;
 
-  constructor(private resourceService: ResourceService, private readonly meta: MetaService) { }
+  constructor(private resourceService: ResourceService, private readonly meta: MetaService, private userService: UserService) { }
 
   async ngOnInit() {
     this.username = localStorage.getItem('username');
     this.userId = localStorage.getItem("userId");
-    await this.getAllResources();
+    await this.getExploreFeed();
+    await this.getUserInterests();
 
     // * Set meta tags
     this.meta.setTitle("Feed");
     this.meta.setTag('og:description', "Discover something new");
   }
 
-  async getAllResources() {
+  async getExploreFeed() {
     try {
       this.isLoading = true;
-      const response: any = await this.resourceService.getAllResources({
+      const response: any = await this.resourceService.getExploreFeed({
         pageNo: this.pageNo,
         size: this.size,
         userId: this.userId
@@ -64,6 +64,11 @@ export class FeedComponent implements OnInit {
 
   async loadMorePosts() {
     this.pageNo++;
-    await this.getAllResources();
+    await this.getExploreFeed();
   }
+
+  async getUserInterests() {
+    await this.userService.getUserInterests({ userId: this.userId });
+  }
+
 }
