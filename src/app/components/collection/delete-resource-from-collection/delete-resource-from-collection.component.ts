@@ -10,8 +10,9 @@ import { CollectionService } from '@services/collection/collection.service';
 export class DeleteResourceFromCollectionComponent implements OnInit {
   @Input() data: any;
   @Input() collectionId: any;
-  isActive = false;
   @Output() deleteEvent = new EventEmitter();
+  isActive = false;
+  isLoading = false;
   // Icons
   faTimesCircle = faTimesCircle;
   constructor(private collectionService: CollectionService) { }
@@ -23,11 +24,12 @@ export class DeleteResourceFromCollectionComponent implements OnInit {
   }
 
   async deleteResourceFromCollection() {
+    this.isLoading = true;
     const result: any = await this.collectionService.deleteResourceFromCollection({
       collectionId: this.collectionId,
       resourceId: this.data._id,
     });
-
+    this.isLoading = false;
     if (!result.error) {
       this.deleteEvent.emit({
         isDeleted: true,

@@ -65,7 +65,7 @@
 
 <div mat-dialog-actions>
   <button mat-stroked-button (click)="onNoClick()">Cancel</button>
-  <button mat-flat-button color="primary" (click)="submitCreateCollectionForm()" cdkFocusInitial [disabled]="isLoading">
+  <button mat-flat-button color="primary" (click)="submitCreateCollectionForm()" cdkFocusInitial [disabled]="isLoading || createCollectionForm.invalid">
     <div class="mat-dialog-button-with-spinner">
       <mat-progress-spinner *ngIf="isDisabled" color="accent" mode="indeterminate" value="50" diameter="15">
       </mat-progress-spinner>
