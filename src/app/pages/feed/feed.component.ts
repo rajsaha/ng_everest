@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ResourceService } from '@services/resource/resource.service';
 import { MetaService } from '@ngx-meta/core';
-import { UserService } from '@services/user/user.service';
-
 
 @Component({
   selector: 'app-feed',

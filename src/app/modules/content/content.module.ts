@@ -40,7 +40,8 @@ const routes: Routes = [
     ShareResourceComponent,
     UserComponent,
     AddToCollectionComponent,
-    SearchPageComponent
+    SearchPageComponent,
+    ExploreComponent
   ],
   imports: [
     CommonModule,
@@ -53,6 +54,7 @@ const routes: Routes = [
   exports: [
     RouterModule,
     FeedComponent,
+    ExploreComponent,
     PoComponent,
     ShareResourceComponent,
     UserComponent,
