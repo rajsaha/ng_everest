@@ -34,7 +34,7 @@ export class ExploreComponent implements OnInit {
     await this.getExploreFeed();
 
     // * Set meta tags
-    this.meta.setTitle("Feed");
+    this.meta.setTitle("Explore");
     this.meta.setTag('og:description', "Discover something new");
   }
 
@@ -74,6 +74,7 @@ export class ExploreComponent implements OnInit {
   async refresh($event) {
     if ($event) {
       await this.getExploreFeed();
+      await this.getUserInterests();
     }
   }
 

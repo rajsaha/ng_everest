@@ -32,7 +32,7 @@ export class FeedComponent implements OnInit {
 
     // * Set meta tags
     this.meta.setTitle("Feed");
-    this.meta.setTag('og:description', "Discover something new");
+    this.meta.setTag('og:description', "See what your friends are sharing");
   }
 
   async getAllResources() {

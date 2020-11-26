@@ -238,6 +238,10 @@ $view-collection-header-dark: #212121;
 $atc-nitc: #eaeaea;
 $atc-nitc-dark: #626262;
 
+// * Your interests
+$your-list-of-interests-background-color: white;
+$your-list-of-interests-background-color-dark: #616161;
+
 $colors: (--navigation-background-color: ($navigation-background-color,
     $navigation-background-color-dark,
   ),
@@ -359,4 +363,6 @@ $colors: (--navigation-background-color: ($navigation-background-color,
   --loading-content-background: ($loading-content-background, $loading-content-background-dark),
   
   --view-collection-header: ($view-collection-header, $view-collection-header-dark),
-  --atc-nitc: ($atc-nitc, $atc-nitc-dark));
+  --atc-nitc: ($atc-nitc, $atc-nitc-dark),
+  
+  --your-list-of-interests-background-color: ($your-list-of-interests-background-color, $your-list-of-interests-background-color-dark));

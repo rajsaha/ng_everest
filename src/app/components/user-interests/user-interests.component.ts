@@ -78,6 +78,10 @@ export class UserInterestsComponent implements OnInit {
   }
 
   async save() {
+    if (this.interests.length === 0) {
+      return;
+    }
+    
     const data = {
       id: this.userId,
       interests: this.interests,
