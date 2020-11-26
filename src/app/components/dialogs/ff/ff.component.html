@@ -29,7 +29,7 @@
           <div class="user-row" *ngIf="user.username !== username">
             <app-user-image [userData]="user" [clickable]="false"></app-user-image>
             <div class="details">
-              <span class="name">{{ user.name }}</span>
+              <span>{{ user.firstName }} {{ user.lastName }}</span>
               <span class="username">{{ user.username }}</span>
             </div>
             <div class="button-container">

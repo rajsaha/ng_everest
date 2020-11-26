@@ -1,12 +1,13 @@
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 import { MatChipInputEvent } from '@angular/material/chips';
 import { SnackbarService } from '@services/general/snackbar.service';
 import { ResourceService } from '@services/resource/resource.service';
 import { UserService } from '@services/user/user.service';
 import { debounceTime } from 'rxjs/operators';
+import { faPlus, faTimes } from "@fortawesome/free-solid-svg-icons";
 
 @Component({
   selector: 'app-user-interests',
@@ -30,8 +31,14 @@ export class UserInterestsComponent implements OnInit {
 
   // Toggles
   isLoading = false;
+  isDisabled = false;
   submitButtonText = "Save";
   showEditInterests = false;
+  isAddMore = false;
+
+  // Icons
+  faPlus = faPlus;
+  faTimes = faTimes;
 
   form: FormGroup;
 
@@ -47,7 +54,7 @@ export class UserInterestsComponent implements OnInit {
 
   initForm() {
     this.form = this.fb.group({
-      interests: [""]
+      interests: ["", Validators.required]
     });
   }
 
@@ -123,11 +130,13 @@ export class UserInterestsComponent implements OnInit {
     };
 
     this.isLoading = true;
+    this.isDisabled = true;
     this.submitButtonText = "Saving...";
 
     const res: any = await this.userService.setUserInterests(data);
 
     this.isLoading = false;
+    this.isDisabled = false;
     this.submitButtonText = "Save";
     this.refreshExplorePage();
 
@@ -148,6 +157,14 @@ export class UserInterestsComponent implements OnInit {
         class: "red-snackbar"
       });
     }
+  }
+
+  addMore() {
+    this.isAddMore = true;
+  }
+
+  cancel() {
+    this.isAddMore = false;
   }
 
   refreshExplorePage() {

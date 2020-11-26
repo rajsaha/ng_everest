@@ -73,6 +73,8 @@ export class ExploreComponent implements OnInit {
 
   async refresh($event) {
     if ($event) {
+      this.posts = [];
+      this.pageNo = 1;
       await this.getExploreFeed();
       await this.getUserInterests();
     }
