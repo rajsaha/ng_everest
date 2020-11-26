@@ -135,4 +135,11 @@ export class UserService {
       .toPromise();
     return response;
   }
+
+  setUserInterests(data: any) {
+    const response = this.http
+      .post(`${ENV.API_URL}/user/set-user-interests`, data)
+      .toPromise();
+    return response;
+  }
 }

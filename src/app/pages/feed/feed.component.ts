@@ -43,8 +43,10 @@ export class FeedComponent implements OnInit {
         size: this.size,
         userId: this.userId
       });
-      for (const resource of response.resources) {
-        this.posts.push(resource);
+      if ('resources' in response) {
+        for (const resource of response.resources) {
+          this.posts.push(resource);
+        }
       }
       this.isLoading = false;
     } catch (err) {

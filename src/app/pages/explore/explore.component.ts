@@ -13,6 +13,7 @@ export class ExploreComponent implements OnInit {
   isLoading = false;
   username: string;
   userId: string;
+  interests = [];
 
   // Infinite Scroll
   sum = 2;
@@ -29,8 +30,8 @@ export class ExploreComponent implements OnInit {
   async ngOnInit() {
     this.username = localStorage.getItem('username');
     this.userId = localStorage.getItem("userId");
-    await this.getExploreFeed();
     await this.getUserInterests();
+    await this.getExploreFeed();
 
     // * Set meta tags
     this.meta.setTitle("Feed");
@@ -45,8 +46,11 @@ export class ExploreComponent implements OnInit {
         size: this.size,
         userId: this.userId
       });
-      for (const resource of response.resources) {
-        this.posts.push(resource);
+
+      if ('resources' in response) {
+        for (const resource of response.resources) {
+          this.posts.push(resource);
+        }
       }
       this.isLoading = false;
     } catch (err) {
@@ -67,8 +71,15 @@ export class ExploreComponent implements OnInit {
     await this.getExploreFeed();
   }
 
+  async refresh($event) {
+    if ($event) {
+      await this.getExploreFeed();
+    }
+  }
+
   async getUserInterests() {
-    await this.userService.getUserInterests({ userId: this.userId });
+    const result: any = await this.userService.getUserInterests({ userId: this.userId });
+    this.interests = result.user.interests;
   }
 
 }

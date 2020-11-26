@@ -1,19 +1,12 @@
-<button mat-button matRipple class="custom-button" [ngClass]="{
-  'not-disabled': isDisabled, 
+<button matRipple class="custom-button" [ngClass]="{
+  'not-disabled': !isDisabled, 
+  'disabled': isDisabled,
   'delete-button': isDelete,
   'is-loading': isLoading,
   'hover': !isLoading
-}" [disabled]="isDisabled" [ngStyle]="
-{
-  'background-color': bgColor, 
-  'padding': padding, 
-  'font-size': fontSize,
-  'color': color, 
-  'border': border,
-  'box-shadow': boxShadow,
-  'font-family': fontFamily
-}">
-  <mat-progress-spinner *ngIf="isLoading" color="accent" mode="indeterminate" value="25" diameter="15" style="margin-right: 5px;">
+}" [disabled]="isDisabled" [ngStyle]="{'padding': padding,'font-size': fontSize}">
+  <mat-progress-spinner *ngIf="isLoading" color="accent" mode="indeterminate" value="25" diameter="15"
+    style="margin-right: 5px;">
   </mat-progress-spinner>
   {{ buttonLabel }}
 </button>

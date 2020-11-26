@@ -103,12 +103,18 @@ $custom-input-color: inherit;
 $custom-input-color-dark: white;
 
 // * Custom button
-$custom-button-border: inherit;
+$custom-button-border: 1px solid rgba(0, 0, 0, 0.12);
 $custom-button-border-dark: 1px solid rgba(255, 255, 255, 0.3);
+$button-text-color-disabled: inherit;
+$button-text-color-disabled-dark: white;
 
 // * Divider
 $atc-divider: #dee8ff;
 $atc-divider-dark: #212121;
+
+// * Generate Divider
+$general-divider: rgba(0, 0, 0, 0.12);
+$general-divider-dark: rgba(255, 255, 255, 0.12);
 
 // * Collection component
 $collection-container-background-color: white;
@@ -293,8 +299,10 @@ $colors: (--navigation-background-color: ($navigation-background-color,
   --custom-input-placeholder: ($custom-input-placeholder, $custom-input-placeholder-dark),
   --custom-input-color: ($custom-input-color, $custom-input-color-dark),
   --custom-button-border: ($custom-button-border, $custom-button-border-dark),
+  --button-text-color-disabled: ($button-text-color-disabled, $button-text-color-disabled-dark),
 
-  --atc-divider: ($atc-divider, $atc-divider-dark), 
+  --atc-divider: ($atc-divider, $atc-divider-dark),
+  --general-divider: ($general-divider, $general-divider), 
 
   --collection-container-background-color: ($collection-container-background-color, $collection-container-background-color-dark),
   --collection-container-border: ($collection-container-border, $collection-container-border-dark),

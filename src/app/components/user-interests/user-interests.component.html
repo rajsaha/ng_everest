@@ -1,0 +1,27 @@
+<div class="user-interests-container">
+    <div class="text-container">
+        <h1>{{ headerText }}</h1>
+        <small>Your 'interests' determine what you see in 'Explore'</small>
+    </div>
+    <div class="custom-input">
+        <div class="label-container">
+            <label>Interests</label>
+        </div>
+        <div class="input-container">
+            <mat-chip-list #chipList aria-label="Interest selection">
+                <mat-chip *ngFor="let interest of interests" [selectable]="selectable" [removable]="removable"
+                    (removed)="removeInterest(interest)">
+                    {{ interest }}
+                    <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+                </mat-chip>
+                <input placeholder="Add an Interest" [matChipInputFor]="chipList"
+                    [matChipInputSeparatorKeyCodes]="separatorKeysCodes" [matChipInputAddOnBlur]="addOnBlur"
+                    (matChipInputTokenEnd)="addInterest($event)" />
+            </mat-chip-list>
+        </div>
+    </div>
+    
+    <app-custom-button (click)="save()" [buttonLabel]="submitButtonText" [isDisabled]="interests.length === 0 || isLoading" size="small"></app-custom-button>    
+</div>
+
+<div class="general-divider"></div>

@@ -12,6 +12,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { UserComponent } from 'src/app/components/user/user.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ExploreComponent } from 'src/app/pages/explore/explore.component';
+import { UserInterestsComponent } from 'src/app/components/user-interests/user-interests.component';
 
 const routes: Routes = [
   {
@@ -41,7 +42,8 @@ const routes: Routes = [
     UserComponent,
     AddToCollectionComponent,
     SearchPageComponent,
-    ExploreComponent
+    ExploreComponent,
+    UserInterestsComponent
   ],
   imports: [
     CommonModule,
@@ -59,7 +61,8 @@ const routes: Routes = [
     ShareResourceComponent,
     UserComponent,
     AddToCollectionComponent,
-    SearchPageComponent
+    SearchPageComponent,
+    UserInterestsComponent
   ]
 })
 export class ContentModule { }

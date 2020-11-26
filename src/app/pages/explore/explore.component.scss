@@ -1,10 +1,43 @@
 .parent {
-    height: 100%;
-    overflow: hidden;
+  height: 100%;
+  overflow: hidden;
 
-    .feed-container {
-        height: 100%;
-        padding: 15px;
-        overflow-y: scroll;
+  .feed-container {
+    height: 100%;
+    padding: 15px;
+    overflow-y: scroll;
+
+    .interests {
+      padding: 15px;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+      margin-bottom: 25px;
+
+      h4 {
+        margin-top: 0;
+        margin-bottom: 0;
+      }
+
+      .list-of-interests {
+
+        // display: grid;
+        // grid-template-columns: repeat(4, 1fr);
+        // grid-gap: 5px;
+        p {
+          display: inline-block;
+          background-color: var(--profile-summary-list-of-interests-background-color);
+          color: var(--profile-summary-list-of-interests-p);
+          padding: 5px 15px;
+          border-radius: 15px;
+          text-align: center;
+          margin-bottom: 0;
+
+          &:not(:last-of-type) {
+            margin-right: 5px;
+          }
+        }
+      }
     }
+  }
 }
