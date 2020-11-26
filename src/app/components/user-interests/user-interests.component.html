@@ -1,4 +1,15 @@
-<div class="user-interests-container">
+<!-- * Interests -->
+<div class="interests" *ngIf="!showEditInterests">
+    <h4>Your Interests</h4>
+    <!-- <p *ngIf="interests.length === 0">You haven't set any interests.</p> -->
+    <div class="list-of-interests" *ngIf="interests">
+        <p *ngFor="let interest of interests">
+            {{ interest }}
+        </p>
+    </div>
+</div>
+
+<div class="user-interests-container" *ngIf="showEditInterests">
     <div class="text-container">
         <h1>{{ headerText }}</h1>
         <small>Your 'interests' determine what you see in 'Explore'</small>
@@ -7,21 +18,26 @@
         <div class="label-container">
             <label>Interests</label>
         </div>
-        <div class="input-container">
+        <div class="input-container" [formGroup]="form">
             <mat-chip-list #chipList aria-label="Interest selection">
                 <mat-chip *ngFor="let interest of interests" [selectable]="selectable" [removable]="removable"
                     (removed)="removeInterest(interest)">
                     {{ interest }}
                     <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
                 </mat-chip>
-                <input placeholder="Add an Interest" [matChipInputFor]="chipList"
-                    [matChipInputSeparatorKeyCodes]="separatorKeysCodes" [matChipInputAddOnBlur]="addOnBlur"
-                    (matChipInputTokenEnd)="addInterest($event)" />
+                <input formControlName="interests" placeholder="Add an Interest" [matChipInputFor]="chipList"
+                    [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                    (matChipInputTokenEnd)="addInterest($event)" [matAutocomplete]="auto" />
+                <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selectInterest($event)">
+                    <mat-option *ngFor="let item of options" [value]="item">
+                        {{ item }}
+                    </mat-option>
+                </mat-autocomplete>
             </mat-chip-list>
         </div>
     </div>
-    
-    <app-custom-button (click)="save()" [buttonLabel]="submitButtonText" size="small"></app-custom-button>    
+
+    <app-custom-button (click)="save()" [buttonLabel]="submitButtonText" size="small"></app-custom-button>
 </div>
 
-<div class="general-divider"></div>
+<div class="general-divider" *ngIf="showEditInterests"></div>

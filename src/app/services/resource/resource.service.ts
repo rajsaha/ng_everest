@@ -138,4 +138,11 @@ export class ResourceService {
       .toPromise();
     return response;
   }
+
+  searchTags(data: any) {
+    const response = this.http
+      .post(`${ENV.API_URL}/resource/search-tags`, data)
+      .toPromise();
+    return response;
+  }
 }

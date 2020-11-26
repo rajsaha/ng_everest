@@ -1,8 +1,12 @@
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
+import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 import { MatChipInputEvent } from '@angular/material/chips';
 import { SnackbarService } from '@services/general/snackbar.service';
+import { ResourceService } from '@services/resource/resource.service';
 import { UserService } from '@services/user/user.service';
+import { debounceTime } from 'rxjs/operators';
 
 @Component({
   selector: 'app-user-interests',
@@ -14,6 +18,7 @@ export class UserInterestsComponent implements OnInit {
   @Input() postCount: number;
   @Output() refresh = new EventEmitter<boolean>();
   interests = [];
+  options = [];
 
   readonly separatorKeysCodes: number[] = [ENTER, COMMA];
   visible = true;
@@ -26,22 +31,52 @@ export class UserInterestsComponent implements OnInit {
   // Toggles
   isLoading = false;
   submitButtonText = "Save";
+  showEditInterests = false;
 
-  constructor(private snackbarService: SnackbarService, private userService: UserService) { }
+  form: FormGroup;
+
+  constructor(private snackbarService: SnackbarService, private userService: UserService, private resourceService: ResourceService, private fb: FormBuilder) { }
 
 
   async ngOnInit() {
     await this.getUserInterests();
     this.setHeader();
+    this.initForm();
+    this.onFormChange();
+  }
+
+  initForm() {
+    this.form = this.fb.group({
+      interests: [""]
+    });
+  }
+
+  onFormChange() {
+    this.form.controls.interests.valueChanges.pipe(debounceTime(500)).subscribe(async (val) => {
+      if (val.length >= 3) {
+        const result: any = await this.resourceService.searchTags({ query: val });
+
+        if (!result.error) {
+          this.options = result.resources;
+        }
+      }
+    });
+  }
+
+  selectInterest($event: MatAutocompleteSelectedEvent) {
+    this.interests.push($event.option.value);
+    this.form.controls.interests.patchValue("");
   }
 
   setHeader() {
     if (this.interests.length === 0) {
       this.headerText = "It looks like you haven't set any interests yet! Please add in a few."
+      this.showEditInterests = true;
     }
 
     if (this.interests.length > 0 && this.postCount === 0) {
       this.headerText = "We couldn't find any posts with the given interests. Try adding more!";
+      this.showEditInterests = true;
     }
   }
 
@@ -51,7 +86,7 @@ export class UserInterestsComponent implements OnInit {
 
     // Add our fruit
     if ((value || "").trim()) {
-      this.interests.push(value);
+      this.interests.push(value.toLocaleLowerCase());
     }
 
     // Reset the input value
@@ -81,7 +116,7 @@ export class UserInterestsComponent implements OnInit {
     if (this.interests.length === 0) {
       return;
     }
-    
+
     const data = {
       id: this.userId,
       interests: this.interests,
