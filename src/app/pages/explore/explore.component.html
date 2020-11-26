@@ -1,18 +1,7 @@
 <div class="parent">
     <div class="feed-container" infiniteScroll [infiniteScrollDistance]="2" [infiniteScrollThrottle]="50"
         (scrolled)="onScrollDown()" [scrollWindow]="false">
-        <!-- * Interests -->
-        <div class="interests" *ngIf="interests.length > 0">
-            <h4>Your Interests</h4>
-            <!-- <p *ngIf="interests.length === 0">You haven't set any interests.</p> -->
-            <div class="list-of-interests" *ngIf="interests">
-                <p *ngFor="let interest of interests">
-                    {{ interest }}
-                </p>
-            </div>
-        </div>
-
-        <app-user-interests *ngIf="!isLoading && posts.length === 0" [userId]="userId" [postCount]="posts.length"
+        <app-user-interests *ngIf="!isLoading" [userId]="userId" [postCount]="posts.length"
             (refresh)="refresh($event)">
         </app-user-interests>
         <app-post *ngFor="let post of posts" [data]="post" [currentUser]="username" [currentUserId]="userId"></app-post>

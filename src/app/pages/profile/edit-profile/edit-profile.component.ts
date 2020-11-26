@@ -162,7 +162,7 @@ export class EditProfileComponent implements OnInit {
 
     // Add our fruit
     if ((value || "").trim()) {
-      this.interests.push(value);
+      this.interests.push(value.toLocaleLowerCase());
     }
 
     // Reset the input value

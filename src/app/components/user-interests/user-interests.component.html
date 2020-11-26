@@ -1,4 +1,15 @@
-<div class="user-interests-container">
+<!-- * Interests -->
+<div class="interests" *ngIf="!showEditInterests">
+    <h4>Your Interests</h4>
+    <!-- <p *ngIf="interests.length === 0">You haven't set any interests.</p> -->
+    <div class="list-of-interests" *ngIf="interests">
+        <p *ngFor="let interest of interests">
+            {{ interest }}
+        </p>
+    </div>
+</div>
+
+<div class="user-interests-container" *ngIf="showEditInterests">
     <div class="text-container">
         <h1>{{ headerText }}</h1>
         <small>Your 'interests' determine what you see in 'Explore'</small>
@@ -24,4 +35,4 @@
     <app-custom-button (click)="save()" [buttonLabel]="submitButtonText" size="small"></app-custom-button>    
 </div>
 
-<div class="general-divider"></div>
+<div class="general-divider" *ngIf="showEditInterests"></div>

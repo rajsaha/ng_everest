@@ -107,7 +107,7 @@ export class ShareResourceComponent implements OnInit {
 
     // Add our fruit
     if ((value || "").trim()) {
-      this.tags.push(value);
+      this.tags.push(value.toLocaleLowerCase());
     }
 
     // Reset the input value

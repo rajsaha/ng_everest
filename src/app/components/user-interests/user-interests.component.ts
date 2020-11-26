@@ -26,6 +26,7 @@ export class UserInterestsComponent implements OnInit {
   // Toggles
   isLoading = false;
   submitButtonText = "Save";
+  showEditInterests = false;
 
   constructor(private snackbarService: SnackbarService, private userService: UserService) { }
 
@@ -38,10 +39,12 @@ export class UserInterestsComponent implements OnInit {
   setHeader() {
     if (this.interests.length === 0) {
       this.headerText = "It looks like you haven't set any interests yet! Please add in a few."
+      this.showEditInterests = true;
     }
 
     if (this.interests.length > 0 && this.postCount === 0) {
       this.headerText = "We couldn't find any posts with the given interests. Try adding more!";
+      this.showEditInterests = true;
     }
   }
 
@@ -51,7 +54,7 @@ export class UserInterestsComponent implements OnInit {
 
     // Add our fruit
     if ((value || "").trim()) {
-      this.interests.push(value);
+      this.interests.push(value.toLocaleLowerCase());
     }
 
     // Reset the input value
