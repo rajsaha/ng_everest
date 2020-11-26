@@ -51,7 +51,7 @@ export function metaFactory(): MetaLoader {
     MainComponent,
     NoAuthComponent,
     PopoverComponent,
-    SearchComponent
+    SearchComponent,
   ],
   imports: [
     CommonModule,

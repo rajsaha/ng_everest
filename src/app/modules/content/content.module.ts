@@ -11,12 +11,18 @@ import { MaterialModule } from '../material/material.module';
 import { RouterModule, Routes } from '@angular/router';
 import { UserComponent } from 'src/app/components/user/user.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { ExploreComponent } from 'src/app/pages/explore/explore.component';
+import { UserInterestsComponent } from 'src/app/components/user-interests/user-interests.component';
 
 const routes: Routes = [
   {
     path: '',
     component: FeedComponent,
     pathMatch: "full"
+  },
+  {
+    path: 'explore',
+    component: ExploreComponent,
   },
   {
     path: 'search',
@@ -35,7 +41,9 @@ const routes: Routes = [
     ShareResourceComponent,
     UserComponent,
     AddToCollectionComponent,
-    SearchPageComponent
+    SearchPageComponent,
+    ExploreComponent,
+    UserInterestsComponent
   ],
   imports: [
     CommonModule,
@@ -48,11 +56,13 @@ const routes: Routes = [
   exports: [
     RouterModule,
     FeedComponent,
+    ExploreComponent,
     PoComponent,
     ShareResourceComponent,
     UserComponent,
     AddToCollectionComponent,
-    SearchPageComponent
+    SearchPageComponent,
+    UserInterestsComponent
   ]
 })
 export class ContentModule { }

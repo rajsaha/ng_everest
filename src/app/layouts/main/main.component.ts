@@ -17,7 +17,8 @@ import {
   faPenAlt,
   faCog,
   faPlus,
-  faUserAlt
+  faUserAlt,
+  faCompass
 } from "@fortawesome/free-solid-svg-icons";
 import { LoginService } from "@services/auth/login.service";
 import { CommunicationService } from "@services/general/communication.service";
@@ -58,6 +59,7 @@ export class MainComponent implements OnInit, OnDestroy {
   faCog = faCog;
   faPlus = faPlus;
   faUserAlt = faUserAlt;
+  faCompass = faCompass;
 
   // Links
   links = [];
@@ -114,6 +116,10 @@ export class MainComponent implements OnInit, OnDestroy {
       routerLink: "/",
       icon: this.faStream,
       text: "Feed"
+    }, {
+      routerLink: "/explore",
+      icon: this.faCompass,
+      text: "Explore"
     }, {
       routerLink: "/share-resource",
       icon: this.faPlus,

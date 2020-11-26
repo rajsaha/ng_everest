@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { faPlus, faLink, faFile } from '@fortawesome/free-solid-svg-icons';
 import { ResourceService } from '@services/resource/resource.service';
 import { MetaService } from '@ngx-meta/core';
-
 
 @Component({
   selector: 'app-feed',
@@ -11,15 +9,9 @@ import { MetaService } from '@ngx-meta/core';
 })
 export class FeedComponent implements OnInit {
   posts = [];
-  isFabActive = false;
   isLoading = false;
   username: string;
   userId: string;
-
-  // Icons
-  faPlus = faPlus;
-  faLink = faLink;
-  faFile = faFile;
 
   // Infinite Scroll
   sum = 2;
@@ -40,7 +32,7 @@ export class FeedComponent implements OnInit {
 
     // * Set meta tags
     this.meta.setTitle("Feed");
-    this.meta.setTag('og:description', "Discover something new");
+    this.meta.setTag('og:description', "See what your friends are sharing");
   }
 
   async getAllResources() {
@@ -51,8 +43,10 @@ export class FeedComponent implements OnInit {
         size: this.size,
         userId: this.userId
       });
-      for (const resource of response.resources) {
-        this.posts.push(resource);
+      if ('resources' in response) {
+        for (const resource of response.resources) {
+          this.posts.push(resource);
+        }
       }
       this.isLoading = false;
     } catch (err) {
@@ -72,5 +66,4 @@ export class FeedComponent implements OnInit {
     this.pageNo++;
     await this.getAllResources();
   }
-
 }

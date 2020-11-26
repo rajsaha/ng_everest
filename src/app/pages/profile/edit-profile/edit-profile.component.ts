@@ -173,25 +173,8 @@ export class EditProfileComponent implements OnInit {
 
   async removeInterest(interest) {
     const index = this.interests.indexOf(interest);
-    const data = {
-      id: this.userId,
-      interest
-    };
-
-    const res: any = await this.userService.removeInterest(data);
-
-    if (res.error) {
-      this.snackbarService.openSnackBar({
-        message: {
-          message: "Something went wrong!",
-          error: true
-        },
-        class: "red-snackbar"
-      });
-    } else {
-      if (index >= 0) {
-        this.interests.splice(index, 1);
-      }
+    if (index >= 0) {
+      this.interests.splice(index, 1);
     }
   }
 
