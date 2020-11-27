@@ -219,6 +219,7 @@ export class PostComponent implements OnInit {
 
   openCollectionsDialog() {
     const dialogRef = this.dialog.open(AtcComponent, {
+      minWidth: "300px",
       data: {
         id: this.id,
         url: this.url,
@@ -228,7 +229,7 @@ export class PostComponent implements OnInit {
         backgroundColor: this.backgroundColor,
         textColor: this.textColor,
         noImage: this.noImage
-      }
+      },
     });
 
     dialogRef.afterClosed().subscribe(async (result: any) => {
