@@ -19,6 +19,7 @@ export class UserInterestsComponent implements OnInit {
   @Input() postCount: number;
   @Output() refresh = new EventEmitter<boolean>();
   interests = [];
+  interestsBackup = [];
   options = [];
 
   readonly separatorKeysCodes: number[] = [ENTER, COMMA];
@@ -117,6 +118,7 @@ export class UserInterestsComponent implements OnInit {
   async getUserInterests() {
     const result: any = await this.userService.getUserInterests({ userId: this.userId });
     this.interests = result.user.interests;
+    this.interestsBackup = JSON.parse(JSON.stringify(result.user.interests));
   }
 
   async save() {
@@ -164,6 +166,7 @@ export class UserInterestsComponent implements OnInit {
   }
 
   cancel() {
+    this.interests = this.interestsBackup;
     this.isAddMore = false;
   }
 

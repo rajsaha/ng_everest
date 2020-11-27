@@ -51,6 +51,7 @@
     .buttons-container {
         padding-bottom: 35px;
         .inner {
+            display: flex;
             float: right;
 
             button:nth-of-type(2) {
