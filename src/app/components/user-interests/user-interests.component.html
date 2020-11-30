@@ -39,7 +39,7 @@
     <div class="buttons-container">
         <div class="inner">
             <button mat-stroked-button (click)="cancel()">Cancel</button>
-            <button mat-flat-button color="primary" (click)="save()" cdkFocusInitial [disabled]="isLoading">
+            <button mat-flat-button color="primary" (click)="save()" cdkFocusInitial [disabled]="isLoading || interests.length === 0">
                 <div class="mat-dialog-button-with-spinner">
                     <mat-progress-spinner *ngIf="isLoading" color="accent" mode="indeterminate" value="50"
                         diameter="15">
@@ -81,7 +81,7 @@
 
     <div class="buttons-container">
         <div class="inner">
-            <button mat-flat-button color="primary" (click)="save()" cdkFocusInitial [disabled]="isLoading">
+            <button mat-flat-button color="primary" (click)="save()" cdkFocusInitial [disabled]="isLoading || interests.length === 0">
                 <div class="mat-dialog-button-with-spinner">
                     <mat-progress-spinner *ngIf="isLoading" color="accent" mode="indeterminate" value="50"
                         diameter="15">
