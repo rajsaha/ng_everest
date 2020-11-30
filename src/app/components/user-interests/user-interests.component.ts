@@ -105,10 +105,6 @@ export class UserInterestsComponent implements OnInit {
 
   async removeInterest(interest) {
     const index = this.interests.indexOf(interest);
-    const data = {
-      id: this.userId,
-      interest
-    };
 
     if (index >= 0) {
       this.interests.splice(index, 1);
@@ -122,10 +118,6 @@ export class UserInterestsComponent implements OnInit {
   }
 
   async save() {
-    if (this.interests.length === 0) {
-      return;
-    }
-
     const data = {
       id: this.userId,
       interests: this.interests,
@@ -166,7 +158,7 @@ export class UserInterestsComponent implements OnInit {
   }
 
   cancel() {
-    this.interests = this.interestsBackup;
+    this.interests = JSON.parse(JSON.stringify(this.interestsBackup));
     this.isAddMore = false;
   }
 
