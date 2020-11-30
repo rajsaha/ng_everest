@@ -11,7 +11,7 @@
       <app-empty-state [data]="{ type: 'resource', isSelf: userData.isSelf }"></app-empty-state>
     </ng-template>
     <ng-template #elseBlock>
-      <app-resource *ngFor="let resource of resources" [data]="resource" (deleteEvent)="drResponseHandler($event)">
+      <app-resource @fadeIn *ngFor="let resource of resources" [data]="resource" (deleteEvent)="drResponseHandler($event)">
       </app-resource>
     </ng-template>
   </div>

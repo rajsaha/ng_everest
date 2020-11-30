@@ -6,7 +6,7 @@ import {
   ViewChild,
 } from "@angular/core";
 import { MediaMatcher } from "@angular/cdk/layout";
-import { ActivatedRoute, NavigationStart, Router } from "@angular/router";
+import { ActivatedRoute, NavigationStart, Router, RouterOutlet } from "@angular/router";
 import {
   faUser,
   faSignOutAlt,
@@ -26,11 +26,51 @@ import { MatSidenav } from "@angular/material/sidenav";
 import { filter } from "rxjs/operators";
 import { ColorSchemeService } from '@services/color-scheme/color-scheme.service';
 import { CustomColorSchemeService } from '@services/custom-color-scheme/custom-color-scheme.service';
+import { animate, group, query, style, transition, trigger } from '@angular/animations';
+
+const resetRoute = [
+  style({ position: 'relative' }),
+  query(
+    ':enter, :leave',
+    [
+      style({
+        position: 'fixed', // using absolute makes the scroll get stuck in the previous page's scroll position on the new page
+        top: 64, // adjust this if you have a header so it factors in the height and not cause the router outlet to jump as it animates
+        left: 0,
+        width: '100%',
+        opacity: 0,
+      }),
+    ],
+    { optional: true }
+  ),
+];
 
 @Component({
   selector: "app-main",
   templateUrl: "./main.component.html",
   styleUrls: ["./main.component.scss"],
+  animations: [
+    trigger('routeFadeAnimation', [
+      transition('* => *', [
+        ...resetRoute,
+        query(':enter', [style({ opacity: 0 })], {
+          optional: true,
+        }),
+        group([
+          query(
+            ':leave',
+            [style({ opacity: 1 }), animate('75ms', style({ opacity: 0 }))],
+            { optional: true }
+          ),
+          query(
+            ':enter',
+            [style({ opacity: 0 }), animate('150ms', style({ opacity: 1 }))],
+            { optional: true }
+          ),
+        ]),
+      ]),
+    ])
+  ]
 })
 export class MainComponent implements OnInit, OnDestroy {
   mobileQuery: MediaQueryList;
@@ -160,5 +200,9 @@ export class MainComponent implements OnInit, OnDestroy {
     } else {
       this.customColorSchemeService.setLightTheme();
     }
+  }
+
+  prepareRoute(outlet: RouterOutlet) {
+    return outlet.isActivated ? outlet.activatedRoute : '';
   }
 }

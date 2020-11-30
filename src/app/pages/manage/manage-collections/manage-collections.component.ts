@@ -4,15 +4,17 @@ import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import { Router } from "@angular/router";
 import { debounceTime, takeUntil } from "rxjs/operators";
 import { ActionsSubject, Store } from "@ngrx/store";
-import { Observable, Subject, Subscriber } from "rxjs";
+import { Observable, Subject } from "rxjs";
 import { setRefreshCollectionsToFalse, setRefreshCollectionsToTrue } from "@services/ngrx/refreshCollections/refreshCollections.actions";
 import { setCollectionQuery } from "@services/ngrx/searchQueries/searchQueries.actions";
 import { ofType } from '@ngrx/effects';
+import { FadeIn } from 'src/app/animations/fade-in/fade-in';
 
 @Component({
   selector: "app-manage-collections",
   templateUrl: "./manage-collections.component.html",
   styleUrls: ["./manage-collections.component.scss"],
+  animations: [FadeIn]
 })
 export class ManageCollectionsComponent implements OnInit, OnDestroy {
   @Input() userData: any;
