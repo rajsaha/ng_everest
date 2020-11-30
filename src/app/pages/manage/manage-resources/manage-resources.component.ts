@@ -8,11 +8,13 @@ import { ActionsSubject } from "@ngrx/store";
 import { Observable, Subject } from "rxjs";
 import { ofType } from "@ngrx/effects";
 import { setResourceQuery } from "@services/ngrx/searchQueries/searchQueries.actions";
+import { FadeIn } from 'src/app/animations/fade-in/fade-in';
 
 @Component({
   selector: "app-manage-resources",
   templateUrl: "./manage-resources.component.html",
   styleUrls: ["./manage-resources.component.scss"],
+  animations: [FadeIn]
 })
 export class ManageResourcesComponent implements OnInit, OnDestroy {
   @Input() userData: any;
