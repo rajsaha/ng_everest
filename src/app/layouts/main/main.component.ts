@@ -28,23 +28,6 @@ import { ColorSchemeService } from '@services/color-scheme/color-scheme.service'
 import { CustomColorSchemeService } from '@services/custom-color-scheme/custom-color-scheme.service';
 import { animate, group, query, style, transition, trigger } from '@angular/animations';
 
-const resetRoute = [
-  style({ position: 'relative' }),
-  query(
-    ':enter, :leave',
-    [
-      style({
-        position: 'fixed', // using absolute makes the scroll get stuck in the previous page's scroll position on the new page
-        top: 64, // adjust this if you have a header so it factors in the height and not cause the router outlet to jump as it animates
-        left: 0,
-        width: '100%',
-        opacity: 0,
-      }),
-    ],
-    { optional: true }
-  ),
-];
-
 @Component({
   selector: "app-main",
   templateUrl: "./main.component.html",
@@ -52,7 +35,6 @@ const resetRoute = [
   animations: [
     trigger('routeFadeAnimation', [
       transition('* => *', [
-        ...resetRoute,
         query(':enter', [style({ opacity: 0 })], {
           optional: true,
         }),
