@@ -267,7 +267,11 @@ export class PostComponent implements OnInit {
 
   openResource() {
     if (this.type === 'ext-content') {
-      window.open(this.url, '_blank');
+      if (this.url.startsWith("http")) {
+        window.open(this.url, '_blank');
+      } else {
+        window.open('http://' + this.url, '_blank');
+      }
     } else {
       this.router.navigate([`/profile/user/${this.username}/resource/${this.id}`], { relativeTo: this.route.parent });
     }

@@ -71,7 +71,7 @@
   </div>
 
   <div class="columns" *ngIf="!isLoading && userData">
-    <app-profile-summary [userData]="userData"></app-profile-summary>
+    <app-profile-summary [userData]="userData" (message)="doBoxAction($event)"></app-profile-summary>
     <div>
       <app-manage-resources
         [userData]="userData"

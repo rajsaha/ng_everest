@@ -30,6 +30,8 @@ import { PopoverComponent } from "./components/popover/popover.component";
 import { UiModule } from './modules/ui/ui.module';
 import { NoAuthModule } from './modules/no-auth/no-auth.module';
 import { ContentModule } from './modules/content/content.module';
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { environment } from '../environments/environment';
 
 export function metaFactory(): MetaLoader {
   return new MetaStaticLoader({
@@ -77,6 +79,7 @@ export function metaFactory(): MetaLoader {
       provide: MetaLoader,
       useFactory: (metaFactory)
     }),
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
   ],
   providers: [
     {
