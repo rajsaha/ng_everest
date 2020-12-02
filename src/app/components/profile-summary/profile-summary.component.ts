@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UserService } from '@services/user/user.service';
@@ -11,6 +11,7 @@ import { FfComponent } from '../dialogs/ff/ff.component';
 })
 export class ProfileSummaryComponent implements OnInit {
   @Input() userData: any;
+  @Output() message = new EventEmitter<string>();
 
   loading = false;
 
@@ -100,6 +101,22 @@ export class ProfileSummaryComponent implements OnInit {
       [`/profile/settings`],
       { relativeTo: this.route.parent }
     );
+  }
+
+  doBoxAction(action: string) {
+    switch (action) {
+      case "collection":
+        this.message.emit("collection");
+        break;
+      case "posts":
+        this.message.emit("posts");
+        break;
+      case "following":
+        this.message.emit("following");
+        break;
+      default:
+        break;
+    }
   }
 
 }

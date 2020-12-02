@@ -12,10 +12,6 @@ import { CollectionComponent } from 'src/app/components/collection/collection.co
 import { ViewCollectionComponent } from 'src/app/pages/view-collection/view-collection.component';
 import { RouterModule } from '@angular/router';
 import { MatButtonModule } from '@angular/material/button';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatIconModule } from '@angular/material/icon';
-import { MatInputModule } from '@angular/material/input';
-import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ViewResourceComponent } from 'src/app/pages/view-resource/view-resource.component';
 import { PostComponent } from 'src/app/components/post/post.component';
@@ -48,10 +44,6 @@ import { EmptyStateComponent } from 'src/app/components/empty-state/empty-state.
     InfiniteScrollModule,
     RouterModule,
     MatButtonModule,
-    MatIconModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatProgressSpinnerModule,
     ReactiveFormsModule,
     ColorPickerModule
   ],

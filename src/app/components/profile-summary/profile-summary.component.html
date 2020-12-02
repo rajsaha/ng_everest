@@ -42,21 +42,21 @@
   </div>
 
   <div class="boxes">
-    <div class="box articles">
+    <div class="box articles" (click)="doBoxAction('collection')" matRipple>
       <div>
         <h3>{{ collectionCount }}</h3>
         <span>Collections</span>
       </div>
     </div>
 
-    <div class="box posts">
+    <div class="box posts" (click)="doBoxAction('posts')" matRipple>
       <div>
         <h3>{{ extContentCount }}</h3>
         <span>Posts</span>
       </div>
     </div>
 
-    <div class="box following">
+    <div class="box following" (click)="doBoxAction('following')" matRipple>
       <div>
         <h3>{{ followingCount - 1 }}</h3>
         <span>Following</span>
