@@ -68,12 +68,12 @@ export function metaFactory(): MetaLoader {
     AppRoutingModule,
     ReactiveFormsModule,
     HttpClientModule,
+    GeneralModule,
     MaterialModule,
     NoAuthModule,
     ContentModule,
     ManageModule,
     DialogsModule,
-    GeneralModule,
     UiModule,
     MetaModule.forRoot({
       provide: MetaLoader,

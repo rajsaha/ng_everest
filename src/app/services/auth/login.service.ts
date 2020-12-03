@@ -70,7 +70,8 @@ export class LoginService {
   }
 
   redirectIfLoggedIn() {
-    if (localStorage.getItem('token')) {
+    let token = localStorage.getItem('token');
+    if (token) {
       this.router.navigate(['']);
     }
   }
