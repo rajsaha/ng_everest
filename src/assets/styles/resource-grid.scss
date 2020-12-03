@@ -1,9 +1,8 @@
 .resource-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(265px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   grid-auto-flow: dense;
-  grid-column-gap: 25px;
-  justify-items: center;
+  grid-column-gap: 15px;
 }
 
 .user-grid {
@@ -37,8 +36,8 @@
 
 @media (min-width: 768px) {
   .resource-grid {
-    justify-items: start;
-    grid-template-columns: repeat(auto-fit, 265px);
+    justify-items: inherit;
+    grid-template-columns: repeat(auto-fit, 278px);
   }
 
   .user-grid {
