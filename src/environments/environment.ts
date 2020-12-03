@@ -6,6 +6,7 @@ export const environment = {
   production: false,
   API_URL: 'http://localhost:4000',
   SITE_URL: 'http://localhost:4444',
+  RECAPTCHA_SITE_KEY: '6Lc9U_cZAAAAAOs9DY9ZMpvZYL465o5jM1KWpcLm'
 };
 
 /*

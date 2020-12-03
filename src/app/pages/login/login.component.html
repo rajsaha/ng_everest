@@ -1,6 +1,6 @@
 <div class="form">
   <p class="form-title">Sign In</p>
-  <form [formGroup]="loginForm" (ngSubmit)="login()">
+  <form [formGroup]="loginForm" (ngSubmit)="executeAction('login')">
     <div class="custom-input">
       <div class="label-container">
         <label>Username</label>
@@ -29,6 +29,12 @@
 
     <app-custom-button [buttonLabel]="loginButtonText" [isDisabled]="loggingIn" [isLoading]="loggingIn">
     </app-custom-button>
+
+    <div class="recaptcha-protection">
+      This site is protected by reCAPTCHA and the Google
+      <a href="https://policies.google.com/privacy">Privacy Policy</a> and
+      <a href="https://policies.google.com/terms">Terms of Service</a> apply.
+    </div>
   </form>
 </div>
 
