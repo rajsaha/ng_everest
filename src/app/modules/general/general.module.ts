@@ -20,6 +20,7 @@ import { UserImageComponent } from 'src/app/components/user-image/user-image.com
 import { ResourceNoImageComponent } from 'src/app/components/resource-no-image/resource-no-image.component';
 import { ColorPickerModule } from 'ngx-color-picker';
 import { EmptyStateComponent } from 'src/app/components/empty-state/empty-state.component';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @NgModule({
   declarations: [
@@ -44,6 +45,7 @@ import { EmptyStateComponent } from 'src/app/components/empty-state/empty-state.
     InfiniteScrollModule,
     RouterModule,
     MatButtonModule,
+    MatProgressSpinnerModule,
     ReactiveFormsModule,
     ColorPickerModule
   ],
