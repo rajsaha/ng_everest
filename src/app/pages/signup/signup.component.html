@@ -1,6 +1,6 @@
 <div class="form">
   <p class="form-title">Sign Up</p>
-  <form [formGroup]="signUpForm" (ngSubmit)="onSubmit()">
+  <form [formGroup]="signUpForm" (ngSubmit)="executeAction('signup')">
     <div class="custom-input">
       <div class="label-container">
         <label>Email</label>
@@ -103,6 +103,12 @@
 
     <app-custom-button [buttonLabel]="signUpButtonText" [isDisabled]="signingUp" [isLoading]="signingUp">
     </app-custom-button>
+
+    <div class="recaptcha-protection">
+      This site is protected by reCAPTCHA and the Google
+      <a href="https://policies.google.com/privacy">Privacy Policy</a> and
+      <a href="https://policies.google.com/terms">Terms of Service</a> apply.
+    </div>
   </form>
 </div>
 
