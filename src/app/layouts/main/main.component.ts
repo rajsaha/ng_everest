@@ -66,6 +66,7 @@ export class MainComponent implements OnInit, OnDestroy {
   username: string;
   firstName: string;
   lastName: string;
+  logo: string;
 
   // Toggles
   isLoggedIn = false;
@@ -107,9 +108,11 @@ export class MainComponent implements OnInit, OnDestroy {
     if (this.localStorageTheme == 'dark') {
       this.checked = true;
       this.customColorSchemeService.setDarkTheme();
+      this.logo = "../../../assets/images/everest-logo-dark.svg";
     } else {
       this.checked = false;
       this.customColorSchemeService.setLightTheme();
+      this.logo = "../../../assets/images/everest-logo.svg";
     }
     this.mobileQuery = media.matchMedia("(max-width: 600px)");
     this.mobileQueryListener = () => changeDetectorRef.detectChanges();
@@ -182,8 +185,10 @@ export class MainComponent implements OnInit, OnDestroy {
   onToggleChange($event: any) {
     if ($event.checked) {
       this.customColorSchemeService.setDarkTheme();
+      this.logo = "../../../assets/images/everest-logo-dark.svg";
     } else {
       this.customColorSchemeService.setLightTheme();
+      this.logo = "../../../assets/images/everest-logo.svg";
     }
   }
 

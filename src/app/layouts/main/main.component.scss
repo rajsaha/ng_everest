@@ -38,9 +38,7 @@
 
 			.branding-container {
 				text-decoration: none;
-				display: grid;
-				grid-template-columns: 40px 1fr;
-				align-items: center;
+				display: inline-grid;
 
 				&:visited {
 					color: inherit;
@@ -48,16 +46,10 @@
 
 				.app-name {
 					align-self: center;
-					// color: #3C3C3C;
 
-					p {
-						margin: 0;
-						// color: white;
-						font-family: "Raleway", sans-serif;
-						font-weight: 200;
-						text-transform: uppercase;
-						letter-spacing: 8px;
-						font-size: 14px;
+					img {
+						width: 100%;
+						max-width: 125px;
 					}
 				}
 			}
@@ -157,18 +149,6 @@
 
 	mat-sidenav-container {
 		margin-top: 0 !important;
-	}
-}
-
-.menu-item {
-	fa-icon {
-		font-size: 12px;
-		margin-right: 10px;
-	}
-
-	span {
-		font-size: 14px;
-		font-weight: 300;
 	}
 }
 
