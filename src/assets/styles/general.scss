@@ -1,7 +1,10 @@
 * {
   font-family: "Hind", sans-serif;
 
-  // width
+  scrollbar-color: rgb(119, 119, 119) transparent;
+  scrollbar-width: thin;
+
+  // scrollbar width
   &::-webkit-scrollbar {
     width: 5px;
 
@@ -10,7 +13,7 @@
     }
   }
 
-  // Handle
+  // scrollbar Handle
   &::-webkit-scrollbar-thumb {
     border-radius: 5px;
     background: rgb(119, 119, 119);

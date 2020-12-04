@@ -27,6 +27,8 @@ import { filter } from "rxjs/operators";
 import { ColorSchemeService } from '@services/color-scheme/color-scheme.service';
 import { CustomColorSchemeService } from '@services/custom-color-scheme/custom-color-scheme.service';
 import { animate, group, query, style, transition, trigger } from '@angular/animations';
+import { MoComponent } from './mo/mo.component';
+import { PopoverService } from '@services/popover/popover.service';
 
 @Component({
   selector: "app-main",
@@ -64,6 +66,7 @@ export class MainComponent implements OnInit, OnDestroy {
   username: string;
   firstName: string;
   lastName: string;
+  logo: string;
 
   // Toggles
   isLoggedIn = false;
@@ -96,7 +99,8 @@ export class MainComponent implements OnInit, OnDestroy {
     private loginService: LoginService,
     private communicationService: CommunicationService,
     private colorSchemeService: ColorSchemeService,
-    private customColorSchemeService: CustomColorSchemeService
+    private customColorSchemeService: CustomColorSchemeService,
+    private popper: PopoverService
   ) {
     // Load Color Scheme
     this.colorSchemeService.load();
@@ -104,9 +108,11 @@ export class MainComponent implements OnInit, OnDestroy {
     if (this.localStorageTheme == 'dark') {
       this.checked = true;
       this.customColorSchemeService.setDarkTheme();
+      this.logo = "../../../assets/images/everest-logo-dark.svg";
     } else {
       this.checked = false;
       this.customColorSchemeService.setLightTheme();
+      this.logo = "../../../assets/images/everest-logo.svg";
     }
     this.mobileQuery = media.matchMedia("(max-width: 600px)");
     this.mobileQueryListener = () => changeDetectorRef.detectChanges();
@@ -179,12 +185,28 @@ export class MainComponent implements OnInit, OnDestroy {
   onToggleChange($event: any) {
     if ($event.checked) {
       this.customColorSchemeService.setDarkTheme();
+      this.logo = "../../../assets/images/everest-logo-dark.svg";
     } else {
       this.customColorSchemeService.setLightTheme();
+      this.logo = "../../../assets/images/everest-logo.svg";
     }
   }
 
   prepareRoute(outlet: RouterOutlet) {
     return outlet.isActivated ? outlet.activatedRoute : '';
+  }
+
+  show(origin: HTMLElement) {
+    const ref = this.popper.open<{}>({
+      content: MoComponent,
+      origin,
+      data: {
+        username: this.username
+      },
+    }, "vertical");
+
+    ref.afterClosed$.subscribe(res => {
+        //
+    })
   }
 }

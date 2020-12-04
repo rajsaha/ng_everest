@@ -4,13 +4,16 @@ import { environment as ENV } from '@environments/environment';
 import { Router } from '@angular/router';
 import * as dayjs from 'dayjs';
 import * as relativeTime from 'dayjs/plugin/relativeTime';
+import { CustomColorSchemeService } from '@services/custom-color-scheme/custom-color-scheme.service';
+import { ColorSchemeService } from '@services/color-scheme/color-scheme.service';
 dayjs.extend(relativeTime);
 
 @Injectable({
   providedIn: 'root'
 })
 export class LoginService {
-  constructor(private http: HttpClient, private router: Router) { }
+  constructor(private http: HttpClient, private router: Router, private colorSchemeService: ColorSchemeService,
+    private customColorSchemeService: CustomColorSchemeService) { }
 
   login(loginCred: object): Promise<any> {
     return new Promise(resolve => {
@@ -19,10 +22,10 @@ export class LoginService {
         .subscribe((response: any) => {
           if (!response.error) {
             this.setSession({
-              token: response.token, 
-              expiresIn: response.expiresIn, 
-              username: response.username, 
-              userId: response.userId, 
+              token: response.token,
+              expiresIn: response.expiresIn,
+              username: response.username,
+              userId: response.userId,
               image: response.image,
               firstName: response.firstName,
               lastName: response.lastName
@@ -53,6 +56,7 @@ export class LoginService {
     localStorage.removeItem('username');
     localStorage.removeItem('userId');
     localStorage.removeItem('profileImage');
+
   }
 
   public isLoggedIn() {
@@ -73,6 +77,9 @@ export class LoginService {
     let token = localStorage.getItem('token');
     if (token) {
       this.router.navigate(['']);
+    } else {
+      this.colorSchemeService.update("light");
+      this.customColorSchemeService.setLightTheme();
     }
   }
 }

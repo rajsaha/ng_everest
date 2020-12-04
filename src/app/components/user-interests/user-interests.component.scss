@@ -1,61 +1,72 @@
-.interests {
-    padding: 15px;
+.parent {
+    background-color: var(--profile-summary-background-color);
+    border-radius: 5px;
+    width: 100%;
     max-width: 600px;
     margin-left: auto;
     margin-right: auto;
-    margin-bottom: 25px;
 
-    h4 {
-        margin-top: 0;
-        margin-bottom: 0;
-    }
+    .interests {
+        padding: 15px;
+        max-width: 600px;
+        margin-left: auto;
+        margin-right: auto;
+        margin-bottom: 25px;
 
-    .list-of-interests {
-
-        // display: grid;
-        // grid-template-columns: repeat(4, 1fr);
-        // grid-gap: 5px;
-        p {
-            display: inline-block;
-            background-color: var(--your-list-of-interests-background-color);
-            color: var(--profile-summary-list-of-interests-p);
-            padding: 5px 15px;
-            border-radius: 15px;
-            text-align: center;
+        h6 {
+            font-family: "Montserrat", sans-serif;
+            text-transform: uppercase;
+            margin-top: 0;
             margin-bottom: 0;
-            text-transform: lowercase;
+        }
 
-            &:not(:last-of-type) {
-                margin-right: 5px;
+        .list-of-interests {
+            p {
+                display: inline-block;
+                background-color: var(--profile-summary-list-of-interests-background-color);
+                color: var(--profile-summary-list-of-interests-p);
+                padding: 5px 15px;
+                border-radius: 15px;
+                text-align: center;
+                margin-bottom: 0;
+                text-transform: lowercase;
+
+                &:not(:last-of-type) {
+                    margin-right: 5px;
+                }
             }
         }
     }
-}
 
-.user-interests-container {
-    max-width: 600px;
-    margin-bottom: 25px;
-    margin-left: auto;
-    margin-right: auto;
-    animation: slideDownFadeIn 75ms ease-in-out;
-    animation-fill-mode: forwards;
-
-    .text-container {
+    .user-interests-container {
+        max-width: 600px;
         margin-bottom: 25px;
+        margin-left: auto;
+        margin-right: auto;
+        animation: slideDownFadeIn 75ms ease-in-out;
+        animation-fill-mode: forwards;
+        padding: 0 15px 15px 15px;
 
-        h1 {
-            font-family: "Montserrat", sans-serif;
+        .text-container {
+            margin-bottom: 25px;
+
+            h1 {
+                margin: 0 0 15px 0;
+                font-family: "Montserrat", sans-serif;
+                padding-top: 15px;
+            }
         }
-    }
 
-    .buttons-container {
-        padding-bottom: 35px;
-        .inner {
-            display: flex;
-            float: right;
+        .buttons-container {
+            padding-bottom: 35px;
 
-            button:nth-of-type(2) {
-                margin-left: 10px;
+            .inner {
+                display: flex;
+                float: right;
+
+                button:nth-of-type(2) {
+                    margin-left: 10px;
+                }
             }
         }
     }

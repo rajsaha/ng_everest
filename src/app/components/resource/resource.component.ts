@@ -39,8 +39,6 @@ export class ResourceComponent implements OnInit {
   noImage = false;
   backgroundColor: string;
   textColor: string;
-  topText: string;
-  bottomText: string;
 
   // For permissions
   loggedInUser: string;
@@ -102,10 +100,6 @@ export class ResourceComponent implements OnInit {
     this.noImage = this.data.noImage;
     this.backgroundColor = this.data.backgroundColor;
     this.textColor = this.data.textColor;
-    let stringArray = this.title.split(" ");
-    let halfLength = Math.ceil(stringArray.length / 2);
-    this.topText = stringArray.splice(0, halfLength).join(" ");
-    this.bottomText = stringArray.join(" ");
     this.isLoading = false;
   }
 
