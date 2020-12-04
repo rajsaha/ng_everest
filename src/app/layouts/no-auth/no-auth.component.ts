@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { CustomColorSchemeService } from '@services/custom-color-scheme/custom-color-scheme.service';
 
 @Component({
   selector: 'app-no-auth',
@@ -6,8 +7,17 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./no-auth.component.scss']
 })
 export class NoAuthComponent implements OnInit {
-  constructor() {}
+  localStorageTheme: string;
+  logo: string;
+  constructor(private customColorSchemeService: CustomColorSchemeService) {}
 
-  ngOnInit() { }
+  ngOnInit() {
+    this.localStorageTheme = this.customColorSchemeService.getCurrentTheme();
+    if (this.localStorageTheme == 'dark') {
+      this.logo = "../../../assets/images/everest-logo-dark.svg";
+    } else {
+      this.logo = "../../../assets/images/everest-logo.svg";
+    }
+  }
 
 }
