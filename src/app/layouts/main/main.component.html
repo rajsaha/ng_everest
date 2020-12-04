@@ -3,7 +3,8 @@
     <div class="toolbar">
       <div class="left">
         <button mat-icon-button (click)="snav.toggle(); isMenuActive = !isMenuActive">
-          <mat-icon class="burger-menu">{{ isMenuActive ? "clear" : "menu" }}</mat-icon>
+          <!-- <mat-icon class="burger-menu">{{ isMenuActive ? "clear" : "menu" }}</mat-icon> -->
+          <fa-icon [icon]="isMenuActive ? faTimes : faBars"></fa-icon>
         </button>
         <a class="branding-container" routerLink="/">
           <div class="app-name">
