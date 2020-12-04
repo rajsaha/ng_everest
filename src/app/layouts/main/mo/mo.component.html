@@ -1,0 +1,41 @@
+<div class="popover-header">
+    <span>Options</span>
+  </div>
+  
+  <div class="popover-item" matRipple (click)="viewProfile()">
+    <div class="top">
+      <fa-icon [icon]="faUser"></fa-icon>
+      <span>Profile</span>
+    </div>
+  
+    <div class="bottom">
+      <small>Manage content you've posted</small>
+    </div>
+  </div>
+  
+  <div class="popover-item" matRipple (click)="viewSettings()">
+    <div class="top">
+      <fa-icon [icon]="faCog"></fa-icon>
+      <span>Settings</span>
+    </div>
+  
+    <div class="bottom">
+      <small>Manage profile settings</small>
+    </div>
+  </div>
+  
+  <div
+    (click)="logout()"
+    class="popover-item"
+    matRipple
+  >
+    <div class="top">
+      <fa-icon [icon]="faSignOutAlt"></fa-icon>
+      <span>Logout</span>
+    </div>
+  
+    <div class="bottom">
+      <small>Leave the system</small>
+    </div>
+  </div>
+  

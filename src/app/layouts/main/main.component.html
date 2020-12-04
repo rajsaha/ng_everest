@@ -21,7 +21,7 @@
           <fa-icon [icon]="faPlus"></fa-icon>
         </div>
 
-        <div class="profile-container" [matMenuTriggerFor]="menu">
+        <div class="profile-container" #origin (click)="show(origin)">
           <app-user-image class="profile-image" [userData]="{
               image: image,
               firstName: firstName,
@@ -29,25 +29,6 @@
               username: username
             }" [clickable]="false" [size]="mobileQuery.matches ? 'xxs' : 'xs'">
           </app-user-image>
-
-          <mat-menu #menu="matMenu">
-            <button mat-menu-item [routerLink]="'/profile/user/' + username">
-              <div class="menu-item">
-                <fa-icon [icon]="faUserAlt"></fa-icon><span>Profile</span>
-              </div>
-            </button>
-            <button mat-menu-item [routerLink]="'/profile/settings/'">
-              <div class="menu-item">
-                <fa-icon [icon]="faCog"></fa-icon><span>Settings</span>
-              </div>
-            </button>
-            <mat-divider></mat-divider>
-            <button mat-menu-item (click)="logout()">
-              <div class="menu-item">
-                <fa-icon [icon]="faSignOutAlt"></fa-icon><span>Logout</span>
-              </div>
-            </button>
-          </mat-menu>
         </div>
       </div>
     </div>

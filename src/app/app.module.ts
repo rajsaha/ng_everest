@@ -32,6 +32,7 @@ import { NoAuthModule } from './modules/no-auth/no-auth.module';
 import { ContentModule } from './modules/content/content.module';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
+import { MoComponent } from './layouts/main/mo/mo.component';
 
 export function metaFactory(): MetaLoader {
   return new MetaStaticLoader({
@@ -54,6 +55,7 @@ export function metaFactory(): MetaLoader {
     NoAuthComponent,
     PopoverComponent,
     SearchComponent,
+    MoComponent,
   ],
   imports: [
     CommonModule,

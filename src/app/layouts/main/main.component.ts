@@ -27,6 +27,8 @@ import { filter } from "rxjs/operators";
 import { ColorSchemeService } from '@services/color-scheme/color-scheme.service';
 import { CustomColorSchemeService } from '@services/custom-color-scheme/custom-color-scheme.service';
 import { animate, group, query, style, transition, trigger } from '@angular/animations';
+import { MoComponent } from './mo/mo.component';
+import { PopoverService } from '@services/popover/popover.service';
 
 @Component({
   selector: "app-main",
@@ -96,7 +98,8 @@ export class MainComponent implements OnInit, OnDestroy {
     private loginService: LoginService,
     private communicationService: CommunicationService,
     private colorSchemeService: ColorSchemeService,
-    private customColorSchemeService: CustomColorSchemeService
+    private customColorSchemeService: CustomColorSchemeService,
+    private popper: PopoverService
   ) {
     // Load Color Scheme
     this.colorSchemeService.load();
@@ -186,5 +189,19 @@ export class MainComponent implements OnInit, OnDestroy {
 
   prepareRoute(outlet: RouterOutlet) {
     return outlet.isActivated ? outlet.activatedRoute : '';
+  }
+
+  show(origin: HTMLElement) {
+    const ref = this.popper.open<{}>({
+      content: MoComponent,
+      origin,
+      data: {
+        username: this.username
+      },
+    }, "vertical");
+
+    ref.afterClosed$.subscribe(res => {
+        //
+    })
   }
 }
