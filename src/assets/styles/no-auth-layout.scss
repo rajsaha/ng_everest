@@ -14,7 +14,11 @@
 		align-self: center;
 		justify-self: center;
 		background-color: var(--no-auth-layout-left-background-color);
-		padding: 25px;
+		padding: 50px 25px;
+
+		img {
+			width: 250px;
+		}
 
 		.form {
 			max-width: 100%;
