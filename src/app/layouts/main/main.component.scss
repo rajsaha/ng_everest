@@ -12,12 +12,6 @@
 	grid-template-columns: auto;
 	grid-template-rows: 56px;
 
-	h1 {
-		.app-name {
-			margin-left: 8px;
-		}
-	}
-
 	.toolbar {
 		width: 100%;
 		display: inline-grid;
@@ -46,6 +40,7 @@
 
 				.app-name {
 					align-self: center;
+					margin-top: -4px;
 
 					img {
 						width: 100%;
@@ -161,6 +156,7 @@
 
 				.branding-container {
 					.app-name {
+						margin-top: 0;
 						p {
 							display: inherit;
 							font-size: inherit;
