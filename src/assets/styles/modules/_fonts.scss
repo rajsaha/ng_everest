@@ -8,28 +8,19 @@
 }
 
 @font-face {
-    font-family: 'Hind';
-    src: url('../../fonts/Bold/Hind-Bold.woff2') format('woff2'),
-        url('../../fonts/Bold/Hind-Bold.woff') format('woff');
+    font-family: 'Nunito Sans';
+    src: url('../../fonts/Bold/NunitoSans-Bold.woff2') format('woff2'),
+        url('../../fonts/Bold/NunitoSans-Bold.woff') format('woff');
     font-weight: bold;
     font-style: normal;
     font-display: swap;
 }
 
 @font-face {
-    font-family: 'Hind';
-    src: url('../../fonts/Regular/Hind-Regular.woff2') format('woff2'),
-        url('../../fonts/Regular/Hind-Regular.woff') format('woff');
+    font-family: 'Nunito Sans';
+    src: url('../../fonts/Regular/NunitoSans-Regular.woff2') format('woff2'),
+        url('../../fonts/Regular/NunitoSans-Regular.woff') format('woff');
     font-weight: normal;
-    font-style: normal;
-    font-display: swap;
-}
-
-@font-face {
-    font-family: 'Hind';
-    src: url('../../fonts/Medium/Hind-Medium.woff2') format('woff2'),
-        url('../../fonts/Medium/Hind-Medium.woff') format('woff');
-    font-weight: 500;
     font-style: normal;
     font-display: swap;
 }
