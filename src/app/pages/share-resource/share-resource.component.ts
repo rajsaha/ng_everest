@@ -33,6 +33,7 @@ export class ShareResourceComponent implements OnInit {
   faImage = faImage;
 
   // Toggles
+  isLoadingOG = false;
   isLoading = false;
   isDisabled = false;
 
@@ -45,9 +46,9 @@ export class ShareResourceComponent implements OnInit {
   addOnBlur = true;
 
   // Open graph variables
-  ogTitle: string;
-  ogDescription: string;
-  ogImage: string;
+  ogTitle = "";
+  ogDescription = "";
+  ogImage = "";
 
   // Store
   noImageComponentFormState$: Observable<boolean>;
@@ -191,7 +192,7 @@ export class ShareResourceComponent implements OnInit {
     this.shareResourceForm.controls.url.valueChanges
       .pipe(debounceTime(1500))
       .subscribe(async (val) => {
-        this.isLoading = true;
+        this.isLoadingOG = true;
         this.shareResourceForm.get("title").disable;
         this.shareResourceForm.get("description").disable;
 
@@ -200,11 +201,11 @@ export class ShareResourceComponent implements OnInit {
             url: val,
           });
 
-          this.isLoading = false;
+          this.isLoadingOG = false;
           this.shareResourceForm.get("title").enable;
           this.shareResourceForm.get("description").enable;
 
-          if (!response) {
+          if (response.error) {
             this.snackbarService.openSnackBar({
               message: {
                 message: "No metadata returned!",
@@ -213,22 +214,28 @@ export class ShareResourceComponent implements OnInit {
               class: "red-snackbar",
             });
           } else {
-            this.ogTitle = response.message.data.data.ogTitle;
-            this.ogDescription = response.message.data.data.ogDescription;
+            if ('ogTitle' in response.data) {
+              this.ogTitle = response.data.ogTitle;
+            }
+
+            if ('ogDescription' in response.data) {
+              this.ogDescription = response.data.ogDescription;
+            }
+
             if (
-              Array.isArray(response.message.data.data.ogImage) &&
-              response.message.data.data.ogImage.length > 0
+              Array.isArray(response.data.ogImage) &&
+              response.ogImage.length > 0
             ) {
-              this.ogImage = response.message.data.data.ogImage[0].url;
+              this.ogImage = response.ogImage[0].url;
             } else {
-              this.ogImage = response.message.data.data.ogImage.url;
+              this.ogImage = response.data.ogImage.url;
             }
 
             this.shareResourceForm.controls.title.patchValue(this.ogTitle);
             this.shareResourceForm.controls.description.patchValue(
               this.ogDescription
             );
-            this.shareResourceForm.controls.ogImage.patchValue(this.regexTestOgImage(this.ogImage));
+            this.shareResourceForm.controls.ogImage.patchValue(this.ogImage);
 
             if (!this.ogImage) {
               this.snackbarService.openSnackBar({
@@ -241,7 +248,7 @@ export class ShareResourceComponent implements OnInit {
             }
           }
         } else {
-          this.isLoading = false;
+          this.isLoadingOG = false;
           this.shareResourceForm.get("title").enable;
           this.shareResourceForm.get("description").enable;
         }
@@ -275,11 +282,11 @@ export class ShareResourceComponent implements OnInit {
     let regex = new RegExp(/(http(s?):)([/|.|\w|\s|-])*\.(?:jpg|jpeg|gif|png|webm)/);
     let result = regex.test(url);
     if (result) {
-      this.shareResourceForm.controls.noImage.patchValue(false);   
+      this.shareResourceForm.controls.noImage.patchValue(false);
       return url;
     }
 
     this.shareResourceForm.controls.noImage.patchValue(true);
-    return 'none';
+    return "";
   }
 }

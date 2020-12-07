@@ -59,7 +59,7 @@
 			justify-content: center;
 			justify-self: end;
 			justify-items: center;
-			grid-gap: 5px;
+			grid-gap: 10px;
 
 			.app-search {
 				cursor: pointer;
@@ -68,6 +68,10 @@
 
 			.share-resource {
 				cursor: pointer;
+				width: 35px;
+				height: 35px;
+				text-align: center;
+				border-radius: 50%;
 				fa-icon {
 					font-size: 14px;
 				}
