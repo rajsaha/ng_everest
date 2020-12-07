@@ -46,35 +46,44 @@
 		}
 
 		.alternative {
-			cursor: pointer;
-			font-size: 12px;
-			display: grid;
-			grid-template-columns: 1fr 25px;
-			width: 215px;
-			margin-left: auto;
-			margin-right: auto;
-			grid-gap: 15px;
-
-			span:nth-of-type(1) {
+			display: inline-grid;
+			grid-template-columns: max-content auto;
+			width: 100%;
+			.fp {
+				font-size: 12px;
 				align-self: center;
-				justify-self: end;
 				color: var(--no-auth-component-text-color);
 			}
 
-			.go-to-signup {
-				background-color: rgba(72, 26, 137, 1);
-				border-radius: 50%;
-				box-shadow: 0 13px 26px rgba(72, 26, 137, 0.5);
-				color: white;
-				display: inline-block;
-				width: 25px;
-				height: 25px;
-				position: relative;
+			.main {
+				cursor: pointer;
+				font-size: 12px;
+				display: grid;
+				grid-template-columns: 1fr 25px;
+				margin-left: auto;
+				grid-gap: 15px;
 
-				fa-icon {
-					position: absolute;
-					top: 6px;
-					left: 8px;
+				span:nth-of-type(1) {
+					align-self: center;
+					justify-self: end;
+					color: var(--no-auth-component-text-color);
+				}
+
+				.go-to-signup {
+					background-color: rgba(72, 26, 137, 1);
+					border-radius: 50%;
+					box-shadow: 0 13px 26px rgba(72, 26, 137, 0.5);
+					color: white;
+					display: inline-block;
+					width: 25px;
+					height: 25px;
+					position: relative;
+
+					fa-icon {
+						position: absolute;
+						top: 6px;
+						left: 8px;
+					}
 				}
 			}
 		}
