@@ -54,6 +54,9 @@ $image-height: 38px;
 
   .search-compact {
     display: inherit;
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
     fa-icon {
       font-size: 14px;
     }
