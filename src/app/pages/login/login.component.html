@@ -1,6 +1,6 @@
 <div class="form">
   <p class="form-title">Sign In</p>
-  <form [formGroup]="loginForm" (ngSubmit)="executeAction('login')">
+  <form [formGroup]="loginForm" (submit)="login()">
     <div class="custom-input">
       <div class="label-container">
         <label>Username</label>

@@ -17,6 +17,8 @@ export class AuthGuardService implements CanActivate {
 
     // Navigate to login page
     this.router.navigate(['login']);
+    localStorage.removeItem("token");
+    localStorage.removeItem("expires_at");
     return false;
   }
 }

@@ -49,8 +49,10 @@
 			cursor: pointer;
 			font-size: 12px;
 			display: grid;
-			grid-template-columns: 1fr 25px;
-			width: 215px;
+			grid-template-columns: max-content 1fr;
+			align-self: center;
+			justify-self: center;
+			width: max-content;
 			margin-left: auto;
 			margin-right: auto;
 			grid-gap: 15px;
