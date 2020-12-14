@@ -1,6 +1,6 @@
 <div class="form">
   <p class="form-title">Sign In</p>
-  <form [formGroup]="loginForm" (ngSubmit)="executeAction('login')">
+  <form [formGroup]="loginForm" (submit)="login()">
     <div class="custom-input">
       <div class="label-container">
         <label>Username</label>
@@ -33,13 +33,8 @@
 </div>
 
 <div class="alternative" routerLink="/signup">
-  <div class="fp">
-    <span>Forgot Password?</span>
-  </div>
-  <div class="main">
-    <span>Sign up here</span>
-    <div class="go-to-signup" matRipple>
-      <fa-icon [icon]="faArrowRight"></fa-icon>
-    </div>
+  <span>Not a member yet? Sign up here</span>
+  <div class="go-to-signup" matRipple>
+    <fa-icon [icon]="faArrowRight"></fa-icon>
   </div>
 </div>
