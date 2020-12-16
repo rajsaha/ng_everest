@@ -38,6 +38,10 @@ const routes: Routes = [
         path: '',
         loadChildren: () => import('src/app/modules/no-auth/no-auth.module').then(m => m.NoAuthModule)
       },
+      {
+        path: 'forgot-password',
+        loadChildren: () => import('src/app/modules/forgot-password/forgot-password.module').then(m => m.ForgotPasswordModule)
+      }
     ]
   },
   {

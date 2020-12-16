@@ -25,6 +25,10 @@
         *ngIf="loginFormControls.password.hasError('required') && loginFormControls.password.dirty">
         Please enter password
       </p>
+
+      <div class="forgot-password" routerLink="/forgot-password">
+        Forgot Password?
+      </div>
     </div>
 
     <app-custom-button [buttonLabel]="loginButtonText" [isDisabled]="loggingIn" [isLoading]="loggingIn">
