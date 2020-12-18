@@ -5,6 +5,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { MatStepperModule } from '@angular/material/stepper';
 import { MatButtonModule } from '@angular/material/button';
 import { ReactiveFormsModule } from '@angular/forms';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 
 const routes: Routes = [
@@ -21,7 +22,8 @@ const routes: Routes = [
     RouterModule.forChild(routes),
     ReactiveFormsModule,
     MatStepperModule,
-    MatButtonModule
+    MatButtonModule,
+    FontAwesomeModule
   ],
   exports: [RouterModule, MatStepperModule, MatButtonModule, ForgotPasswordComponent]
 })
