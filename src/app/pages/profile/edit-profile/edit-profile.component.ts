@@ -9,6 +9,7 @@ import { MatDialog } from "@angular/material/dialog";
 import { CpiComponent } from "src/app/components/dialogs/cpi/cpi.component";
 import { FfComponent } from "src/app/components/dialogs/ff/ff.component";
 import { ActivatedRoute, Router } from "@angular/router";
+import { debounceTime, distinctUntilChanged } from "rxjs/operators";
 
 @Component({
   selector: "app-edit-profile",
@@ -67,6 +68,7 @@ export class EditProfileComponent implements OnInit {
 
     // Init Forms
     this.initProfileForm();
+    this.onEmailChange();
 
     // Get User Data
     await this.getUserData();
@@ -79,7 +81,28 @@ export class EditProfileComponent implements OnInit {
       username: [{ value: "", disabled: true }],
       website: [""],
       bio: [""],
-      email: ["", Validators.required]
+      email: ["", [Validators.required, Validators.email]]
+    });
+  }
+
+  onEmailChange() {
+    this.profileForm.controls.email.valueChanges.pipe(distinctUntilChanged(), debounceTime(300)).subscribe(async (val) => {
+      if (val && !this.profileForm.controls.email.invalid) {
+        const result: any = await this.userService.checkEmail({ email: val });
+        
+        // * Email exists
+        if (result.data) {
+          // ! Email belongs to someone else
+          if (result.data._id !== this.userId) {
+            this.profileForm.controls.email.setErrors({ canUseEmail: false });
+          } else {
+            this.profileForm.controls.email.setErrors({ canUseEmail: null });
+            this.profileForm.controls.email.updateValueAndValidity();
+          }
+        }
+
+        console.log(this.profileForm);
+      }
     });
   }
 

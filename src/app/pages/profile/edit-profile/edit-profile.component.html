@@ -160,6 +160,10 @@
             profileFormControls.email.dirty">
               Email required
             </p>
+            <p class="error-message" *ngIf="profileFormControls.email.hasError('canUseEmail') &&
+            profileFormControls.email.dirty">
+              Can't use this email
+            </p>
           </div>
 
           <div class="form-button-container">
