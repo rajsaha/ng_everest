@@ -3,7 +3,7 @@
   'disabled': isDisabled,
   'delete-button': isDelete,
   'is-loading': isLoading,
-  'hover': !isLoading
+  'hover': (!isLoading && !isDisabled)
 }" [disabled]="isDisabled" [ngStyle]="{'padding': padding,'font-size': fontSize}">
   <mat-progress-spinner *ngIf="isLoading" color="accent" mode="indeterminate" value="25" diameter="15"
     style="margin-right: 5px;">
