@@ -267,7 +267,7 @@ export class EditProfileComponent implements OnInit {
     } else {
       this.snackbarService.openSnackBar({
         message: {
-          message: `Error: ${res.error}!`,
+          message: `Error: ${res.message}!`,
           error: true
         },
         class: "red-snackbar"
