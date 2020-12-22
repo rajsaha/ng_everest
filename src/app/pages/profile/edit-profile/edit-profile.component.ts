@@ -72,6 +72,7 @@ export class EditProfileComponent implements OnInit {
 
     // Get User Data
     await this.getUserData();
+    this.isPublicView = false;
   }
 
   initProfileForm() {
