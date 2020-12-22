@@ -10,6 +10,7 @@
 </mat-dialog-content>
 
 <mat-dialog-actions align="end">
+  <button mat-stroked-button (click)="onNoClick()">Cancel</button>
   <button mat-flat-button color="warn" (click)="onYesClick()" cdkFocusInitial [disabled]="isLoading">
     <div class="mat-dialog-button-with-spinner">
       <mat-progress-spinner *ngIf="isDisabled" color="accent" mode="indeterminate" value="50" diameter="15">
@@ -17,5 +18,4 @@
       <span>{{ isDisabled ? 'Deleting' : 'Delete' }}</span>
     </div>
   </button>
-  <button mat-stroked-button (click)="onNoClick()">Cancel</button>
 </mat-dialog-actions>
