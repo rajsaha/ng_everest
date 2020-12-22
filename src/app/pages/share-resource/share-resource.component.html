@@ -117,7 +117,7 @@
 
         <div class="form-button-container clearfix">
           <app-custom-button (click)="submitShareResourceForm()" [buttonLabel]="submitButtonText"
-            [isDisabled]="isDisabled" [isLoading]="isLoading" size="small"></app-custom-button>
+            [isDisabled]="shareResourceForm.invalid" [isLoading]="isLoading" size="small"></app-custom-button>
         </div>
       </div>
     </div>

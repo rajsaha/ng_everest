@@ -9,6 +9,7 @@ import { MatDialog } from "@angular/material/dialog";
 import { CpiComponent } from "src/app/components/dialogs/cpi/cpi.component";
 import { FfComponent } from "src/app/components/dialogs/ff/ff.component";
 import { ActivatedRoute, Router } from "@angular/router";
+import { debounceTime, distinctUntilChanged } from "rxjs/operators";
 
 @Component({
   selector: "app-edit-profile",
@@ -35,7 +36,6 @@ export class EditProfileComponent implements OnInit {
 
   // Toggles
   isLoading = false;
-  isProfileSaveButtonDisabled = false;
   isPublicView = true;
 
   profileProgress = 0;
@@ -67,9 +67,11 @@ export class EditProfileComponent implements OnInit {
 
     // Init Forms
     this.initProfileForm();
+    this.onEmailChange();
 
     // Get User Data
     await this.getUserData();
+    this.isPublicView = false;
   }
 
   initProfileForm() {
@@ -79,7 +81,26 @@ export class EditProfileComponent implements OnInit {
       username: [{ value: "", disabled: true }],
       website: [""],
       bio: [""],
-      email: ["", Validators.required]
+      email: ["", [Validators.required, Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$")]]
+    });
+  }
+
+  onEmailChange() {
+    this.profileForm.controls.email.valueChanges.pipe(distinctUntilChanged(), debounceTime(300)).subscribe(async (val) => {
+      if (val && !this.profileFormControls.email.invalid) {
+        const result: any = await this.userService.checkEmail({ email: val });
+        
+        // * Email exists
+        if (result.data) {
+          // ! Email belongs to someone else
+          if (result.data._id !== this.userId) {
+            this.profileFormControls.email.setErrors({ canUseEmail: true });
+          } else {
+            this.profileFormControls.email.setErrors({ canUseEmail: null });
+            this.profileFormControls.email.updateValueAndValidity();
+          }
+        }
+      }
     });
   }
 
@@ -91,7 +112,6 @@ export class EditProfileComponent implements OnInit {
     this.isLoading = true;
     const res: any = await this.userService.getProfileData({ userId: this.userId });
 
-    this.isProfileSaveButtonDisabled = true;
     this.interests = res.userData.interests ? res.userData.interests : [];
     this.followers = res.userData.followerCount;
     this.following = res.userData.followingCount;
@@ -119,8 +139,6 @@ export class EditProfileComponent implements OnInit {
   }
 
   initFormData(data: any) {
-    this.isProfileSaveButtonDisabled = false;
-
     this.username = data.username;
     this.firstName = data.firstName;
     this.lastName = data.lastName;
@@ -249,7 +267,7 @@ export class EditProfileComponent implements OnInit {
     } else {
       this.snackbarService.openSnackBar({
         message: {
-          message: `Error: ${res.error}!`,
+          message: `Error: ${res.message}!`,
           error: true
         },
         class: "red-snackbar"
