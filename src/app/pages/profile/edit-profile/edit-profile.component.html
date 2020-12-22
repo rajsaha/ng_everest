@@ -164,11 +164,15 @@
             profileFormControls.email.dirty">
               Can't use this email
             </p>
+            <p class="error-message" *ngIf="profileFormControls.email.hasError('pattern') &&
+            profileFormControls.email.dirty">
+              Invalid email format
+            </p>
           </div>
 
           <div class="form-button-container">
             <app-custom-button [buttonLabel]="submitButtonText" [isLoading]="isLoading"
-              [isDisabled]="isProfileSaveButtonDisabled" size="small">
+              [isDisabled]="profileForm.invalid" size="small">
             </app-custom-button>
           </div>
         </form>
