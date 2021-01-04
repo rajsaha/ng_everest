@@ -191,7 +191,7 @@ export class ManageComponent implements OnInit {
   openFollowDialog() {
     const dialogRef = this.dialog.open(FfComponent, {
       data: {
-        userId: this.loggedInUserId
+        userId: this.userId
       }
     });
 
