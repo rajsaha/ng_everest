@@ -59,6 +59,10 @@
     line-height: 20px;
     height: 100px;
 
+    p {
+      overflow-x: hidden;
+    }
+
     .type {
       margin-left: 0;
     }
