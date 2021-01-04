@@ -89,7 +89,7 @@ export class ProfileSummaryComponent implements OnInit {
   openFollowDialog() {
     const dialogRef = this.dialog.open(FfComponent, {
       data: {
-        userId: this.userData.loggedInUserId
+        userId: this.userData.userId
       }
     });
 

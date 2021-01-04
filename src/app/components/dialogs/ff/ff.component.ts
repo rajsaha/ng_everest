@@ -19,7 +19,7 @@ export class FfComponent implements OnInit {
   constructor(
     private userService: UserService,
     @Inject(MAT_DIALOG_DATA) public data: any
-  ) {}
+  ) { }
 
   async ngOnInit() {
     this.username = localStorage.getItem("username");
@@ -33,11 +33,15 @@ export class FfComponent implements OnInit {
       userId: this.data.userId,
     });
     for (const user of response.data.followers) {
-      this.followers.push(user.followers[0]);
+      if (user.followers[0].id !== this.data.userId) {
+        this.followers.push(user.followers[0]);
+      }
     }
 
     for (const user of response.data.followings) {
-      this.following.push(user.followings[0]);
+      if (user.followings[0].id != this.data.userId) {
+        this.following.push(user.followings[0]);
+      }
     }
     this.isLoading = false;
   }
