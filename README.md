@@ -1,5 +1,9 @@
 # Everest
 
+Everest is a social network lite that's all about resource aggregation. You share and collect stuff off the net.
+
+---
+
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.3.8.
 
 ## Development server
