@@ -1,3 +1,4 @@
+import { Clipboard } from '@angular/cdk/clipboard';
 import { Component, OnInit } from "@angular/core";
 import { MatSnackBar } from "@angular/material/snack-bar";
 import { Router, ActivatedRoute } from "@angular/router";
@@ -8,6 +9,7 @@ import {
   faBackspace,
   faEdit,
 } from "@fortawesome/free-solid-svg-icons";
+import { SnackbarService } from '@services/general/snackbar.service';
 import { PopoverRef } from "src/app/components/popover/popover-ref";
 
 @Component({
@@ -31,7 +33,9 @@ export class PoComponent implements OnInit {
     private snackBar: MatSnackBar,
     private router: Router,
     private route: ActivatedRoute,
-    private popoverRef: PopoverRef
+    private popoverRef: PopoverRef,
+    private clipboard: Clipboard,
+    private snackbarService: SnackbarService
   ) {}
 
   ngOnInit() {
@@ -63,5 +67,17 @@ export class PoComponent implements OnInit {
 
   close() {
     this.popoverRef.close();
+  }
+
+  copyLink() {
+    this.clipboard.copy(`${location.href}profile/user/${this.username}/resource/${this.id}`);
+    this.close();
+    this.snackbarService.openSnackBar({
+      message: {
+        message: `Link copied to clipboard`,
+        error: false
+      },
+      class: 'green-snackbar',
+    });
   }
 }

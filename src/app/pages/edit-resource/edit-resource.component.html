@@ -7,57 +7,56 @@
       </div>
 
       <div class="section-content">
-        <mat-form-field appearance="fill">
-          <mat-label>Link</mat-label>
-          <input
-            matInput
-            placeholder="Paste your link here"
-            formControlName="url"
-          />
-          <mat-error
-            *ngIf="
-              editResourceFormControls.url.hasError('urlInvalid') &&
-              editResourceFormControls.url.dirty
-            "
-          >
+        <div class="custom-input">
+          <div class="label-container">
+            <label>Link</label>
+          </div>
+          <div class="input-container">
+            <input type="text" formControlName="url" placeholder="Paste your link here" />
+          </div>
+          <p class="error-message" *ngIf="editResourceFormControls.url.hasError('urlInvalid') &&
+          editResourceFormControls.url.dirty">
             Invalid link
-          </mat-error>
-        </mat-form-field>
-        <div
-          class="custom-image"
-          (click)="imageInput.click()"
-          matRipple
-          *ngIf="editResourceForm.controls.isCustomImage.value"
-          [style.background-image]="
-            'url(' + editResourceForm.controls.customImage.value + ')'
-          "
-        >
-          <p *ngIf="!editResourceForm.controls.customImage.value">
-            <fa-icon [icon]="faUpload"></fa-icon>&nbsp;Click here to upload a
-            custom image
           </p>
-          <input
-            hidden
-            (change)="onFileSelected(imageInput.files[0])"
-            #imageInput
-            type="file"
-            accept="image/*"
-          />
+        </div>
+        
+        <div class="custom-image" (click)="imageInput.click()" matRipple
+          *ngIf="editResourceForm.controls.isCustomImage.value" [style.background-image]="
+            'url(' + editResourceForm.controls.customImage.value + ')'
+          ">
+          <div class="icon-text" *ngIf="!editResourceForm.controls.customImage.value">
+            <div class="icon-container">
+              <fa-icon [icon]="faUpload"></fa-icon>
+            </div>
+            <p>
+              Click here to upload a
+              custom image
+            </p>
+          </div>
+          <input hidden (change)="onFileSelected(imageInput.files[0])" #imageInput type="file" accept="image/*" />
         </div>
 
-        <div
-          class="resource-image"
-          *ngIf="
+        <div class="resource-image" *ngIf="
             !editResourceForm.controls.isCustomImage.value &&
             !editResourceForm.controls.noImage.value
-          "
-          [ngStyle]="{ 'background-image': 'url(' + ogImage + ')' }"
-        >
-          <p *ngIf="!ogImage">
+          " [ngStyle]="{ 'background-image': 'url(' + ogImage + ')' }">
+          <!-- <p *ngIf="!ogImage">
             If your link has an
             <a href="http://ogp.me/" target="_blank">Open Graph</a> image, it'll
             appear here
-          </p>
+          </p> -->
+
+          <div class="custom-image" *ngIf="!ogImage">
+            <div class="icon-text">
+              <div class="icon-container">
+                <fa-icon [icon]="faGlobe" class="globe"></fa-icon>
+              </div>
+
+              <p>
+                If your link has an image, it'll appear here
+              </p>
+            </div>
+          </div>
         </div>
 
         <app-resource-no-image
@@ -79,63 +78,54 @@
           <mat-checkbox formControlName="noImage">No Image</mat-checkbox>
         </div>
 
-        <mat-form-field appearance="fill">
-          <mat-label>Title</mat-label>
-          <input
-            matInput
-            placeholder="Give it a title"
-            formControlName="title"
-          />
-
-          <mat-error
-            *ngIf="
-              editResourceFormControls.title.hasError('required') &&
-              editResourceFormControls.title.dirty
-            "
-          >
+        <div class="custom-input">
+          <div class="label-container">
+            <label>Title</label>
+          </div>
+          <div class="input-container">
+            <input type="text" formControlName="title" placeholder="Give it a title" maxlength="250"/>
+          </div>
+          <p class="error-message" *ngIf="editResourceFormControls.title.hasError('required') &&
+          editResourceFormControls.title.dirty">
             Title required
-          </mat-error>
-        </mat-form-field>
+          </p>
+          <p class="error-message" *ngIf="editResourceFormControls.title.hasError('maxLength') &&
+          editResourceFormControls.title.dirty">
+            Title cannot be longer than 250 characters
+          </p>
+        </div>
 
-        <mat-form-field appearance="fill">
-          <mat-label>Description</mat-label>
-          <textarea
-            matInput
-            placeholder="Say something about it"
-            formControlName="description"
-          ></textarea>
-
-          <mat-error
-            *ngIf="
-              editResourceFormControls.description.hasError('required') &&
-              editResourceFormControls.description.dirty
-            "
-          >
+        <div class="custom-input">
+          <div class="label-container">
+            <label>Description</label>
+          </div>
+          <div class="input-container">
+            <textarea cdkTextareaAutosize #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="3" cdkAutosizeMaxRows="5"
+              type="text" formControlName="description" placeholder="Say something about it"></textarea>
+          </div>
+          <p class="error-message" *ngIf="editResourceFormControls.description.hasError('required') &&
+          editResourceFormControls.description.dirty">
             Description required
-          </mat-error>
-        </mat-form-field>
+          </p>
+        </div>
 
-        <mat-form-field appearance="fill">
-          <mat-label>Tags</mat-label>
-          <mat-chip-list #chipList aria-label="Tags">
-            <mat-chip
-              *ngFor="let tag of tags"
-              [selectable]="selectable"
-              [removable]="removable"
-              (removed)="removeTag(tag)"
-            >
-              {{ tag }}
-              <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
-            </mat-chip>
-            <input
-              placeholder="Add tags that best fit"
-              [matChipInputFor]="chipList"
-              [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
-              [matChipInputAddOnBlur]="addOnBlur"
-              (matChipInputTokenEnd)="addTag($event)"
-            />
-          </mat-chip-list>
-        </mat-form-field>
+        <div class="custom-input">
+          <div class="label-container">
+            <label>Tags</label>
+          </div>
+          <div class="input-container">
+            <mat-chip-list #chipList aria-label="Tags">
+              <mat-chip *ngFor="let tag of tags" [selectable]="selectable" [removable]="removable"
+                (removed)="removeTag(tag)">
+                {{ tag }}
+                <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+              </mat-chip>
+              <input placeholder="Add tags that best fit" [matChipInputFor]="chipList"
+                [matChipInputSeparatorKeyCodes]="separatorKeysCodes" [matChipInputAddOnBlur]="addOnBlur"
+                (matChipInputTokenEnd)="addTag($event)" />
+            </mat-chip-list>
+          </div>
+        </div>
 
         <div class="form-button-container clearfix">
           <app-custom-button

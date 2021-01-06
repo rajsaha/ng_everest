@@ -39,6 +39,13 @@ export class ResourceService {
     return response;
   }
 
+  getExploreFeed(data: any) {
+    const response = this.http
+      .post(`${ENV.API_URL}/resource/get/explore-feed`, data)
+      .toPromise();
+    return response;
+  }
+
   getResourceComments(data: any) {
     const response = this.http
       .post(`${ENV.API_URL}/resource/get/resource-comments`, data)
@@ -57,7 +64,7 @@ export class ResourceService {
 
   getResource(data: any) {
     const response = this.http
-      .get(`${ENV.API_URL}/resource/get/one/${data.id}`)
+      .post(`${ENV.API_URL}/resource/get/one`, data)
       .toPromise();
     return response;
   }
@@ -128,6 +135,13 @@ export class ResourceService {
   searchForUserResources(data: any) {
     const response = this.http
       .post(`${ENV.API_URL}/resource/search-for-user-resources`, data)
+      .toPromise();
+    return response;
+  }
+
+  searchTags(data: any) {
+    const response = this.http
+      .post(`${ENV.API_URL}/resource/search-tags`, data)
       .toPromise();
     return response;
   }

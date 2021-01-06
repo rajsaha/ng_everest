@@ -7,11 +7,23 @@
   background-position: center;
   background-repeat: no-repeat;
   transition: border 0.2s ease-in-out;
+  place-items: center;
 
-  span {
+  p {
+    margin: 0;
     font-family: "Montserrat", sans-serif;
+    font-weight: 700;
     color: #4a4a4a;
-    place-self: center;
+  }
+}
+
+.xxs {
+  width: 25px;
+  height: 25px;
+
+  p {
+    margin-top: -4px;
+    font-size: 0.5rem;
   }
 }
 
@@ -19,7 +31,7 @@
   width: 35px;
   height: 35px;
 
-  span {
+  p {
     font-size: 0.6rem;
   }
 }
@@ -28,7 +40,7 @@
   width: 40px;
   height: 40px;
 
-  span {
+  p {
     font-size: 0.9rem;
   }
 }
@@ -37,8 +49,17 @@
   width: 75px;
   height: 75px;
 
-  span {
+  p {
     font-size: 1.4rem;
+  }
+}
+
+.lg {
+  width: 200px;
+  height: 200px;
+
+  p {
+    font-size: 4rem;
   }
 }
 

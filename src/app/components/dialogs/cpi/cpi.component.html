@@ -1,7 +1,11 @@
 <h1 mat-dialog-title>Change Profile Image</h1>
 
-<div class="image" [ngStyle]="{ 'background-image': 'url(' + (userImage ? userImage : defaultProfileImage)  +')' }">
-  <div class="delete-user-image" matRipple *ngIf="imageFromDB || isNewImage" (click)="clearImage()">
+<div class="image">
+  <div class="local-image" [ngStyle]="{ 'background-image': 'url(' + (isLocalImage ? userImage : 'none')  +')' }"></div>
+  <app-user-image *ngIf="isReady" [clickable]="false" size="lg"
+    [userData]="{ firstName: data.firstName, lastName: data.lastName, image: isReady ? userImage : '', username: data.username }">
+  </app-user-image>
+  <div class="delete-user-image" matRipple *ngIf="imageFromDB || isNewImage || userImage" (click)="clearImage()">
     <fa-icon [icon]="faTrash"></fa-icon>
   </div>
 </div>
@@ -10,12 +14,7 @@
   <input hidden (change)="onFileSelected(imageInput)" #imageInput type="file" id="file" accept="image/*">
   <button mat-flat-button (click)="imageInput.click()" *ngIf="!isNewImage">Upload</button>
   <button mat-flat-button color="primary" *ngIf="isNewImage" (click)="saveProfilePhoto()">
-    <mat-progress-spinner 
-    *ngIf="isSavingPhoto" 
-    color="accent" 
-    mode="indeterminate" 
-    value="50"
-    diameter="25">
+    <mat-progress-spinner *ngIf="isSavingPhoto" color="accent" mode="indeterminate" value="50" diameter="25">
     </mat-progress-spinner>
     <span *ngIf="!isSavingPhoto">Save</span>
   </button>

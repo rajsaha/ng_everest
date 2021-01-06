@@ -1,34 +1,32 @@
 <div class="section-container">
   <div class="search-container">
     <form [formGroup]="searchForm">
-      <div class="search">
-        <mat-form-field appearance="outline">
-          <mat-label>Search</mat-label>
-          <mat-icon matPrefix>
-            <fa-icon [icon]="faSearch"></fa-icon>
-          </mat-icon>
-          <input matInput placeholder="Search" formControlName="query" />
-        </mat-form-field>
+      <div class="custom-input">
+        <div class="label-container">
+          <label>Search</label>
+        </div>
+        <div class="input-container">
+          <input type="text" placeholder="Search" formControlName="query" />
+        </div>
       </div>
 
-      <mat-divider></mat-divider>
-
-      <div class="dropdowns">
-        <mat-form-field appearance="outline">
-          <mat-label>Order By</mat-label>
+      <div class="custom-input">
+        <div class="label-container">
+          <label>Order By</label>
+        </div>
+        <div class="input-container" style="padding: 16px 20px 15px 20px;">
           <mat-select formControlName="orderBy">
             <mat-option value="recommend">Recommend Count</mat-option>
             <mat-option value="recent">Recent First</mat-option>
           </mat-select>
-        </mat-form-field>
+        </div>
+      </div>
 
-        <div class="checkboxes-container">
-          <p>Include</p>
-          <div class="checkboxes">
-            <mat-checkbox formControlName="resource">Resources</mat-checkbox>
-            <mat-checkbox formControlName="collection">Collections</mat-checkbox>
-            <mat-checkbox formControlName="user">Users</mat-checkbox>
-          </div>
+      <div class="checkboxes-container">
+        <div class="checkboxes">
+          <mat-checkbox formControlName="resource">Resources</mat-checkbox>
+          <mat-checkbox formControlName="collection">Collections</mat-checkbox>
+          <mat-checkbox formControlName="user">Users</mat-checkbox>
         </div>
       </div>
     </form>
@@ -44,10 +42,7 @@
   <div class="search-section" *ngIf="resources.length > 0">
     <h3>Resources</h3>
     <div class="resource-grid">
-      <app-resource
-        *ngFor="let resource of resources"
-        [data]="resource"
-      >
+      <app-resource *ngFor="let resource of resources" [data]="resource">
       </app-resource>
       <app-loading type="resource" *ngIf="isLoading"></app-loading>
     </div>
@@ -56,10 +51,7 @@
   <div class="search-section" *ngIf="collections.length > 0">
     <h3>Collections</h3>
     <div class="list-of-collections" *ngIf="!isLoading">
-      <app-collection
-        *ngFor="let collection of collections"
-        [data]="collection"
-      ></app-collection>
+      <app-collection *ngFor="let collection of collections" [data]="collection"></app-collection>
       <app-loading type="collection" *ngIf="isLoading"></app-loading>
     </div>
   </div>

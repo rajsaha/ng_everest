@@ -14,11 +14,14 @@ import { ActivatedRoute } from "@angular/router";
 import { UserService } from "@services/user/user.service";
 import { Observable } from "rxjs";
 import { select, Store } from "@ngrx/store";
-import { delay } from "rxjs/operators";
 import {
   setResourceQuery,
   setCollectionQuery,
 } from "@services/ngrx/searchQueries/searchQueries.actions";
+import { MetaService } from '@ngx-meta/core';
+import { FfComponent } from 'src/app/components/dialogs/ff/ff.component';
+import { MatDialog } from '@angular/material/dialog';
+
 
 @Component({
   selector: "app-manage",
@@ -55,7 +58,9 @@ export class ManageComponent implements OnInit {
     private popper: PopoverService,
     private route: ActivatedRoute,
     private userService: UserService,
-    private store: Store<{ searchQueriesState: any }>
+    private store: Store<{ searchQueriesState: any }>,
+    private dialog: MatDialog,
+    private readonly meta: MetaService
   ) {
     this.searchQueriesState$ = store.pipe(select("searchQueriesState"));
   }
@@ -66,6 +71,11 @@ export class ManageComponent implements OnInit {
     this.username = localStorage.getItem("username");
     this.loggedInUserId = localStorage.getItem("userId");
     this.checkIfSelf();
+    this.store.dispatch(setCollectionQuery({ query: { collectionQuery: "", resourceQuery: "" }}))
+
+    // * Set meta tags
+    this.meta.setTitle("Profile");
+    this.meta.setTag('og:description', "See your posts and collections");
   }
 
   initForm() {
@@ -90,7 +100,7 @@ export class ManageComponent implements OnInit {
 
       if (val.posts) {
         this.store.dispatch(
-          setCollectionQuery({
+          setResourceQuery({
             query: { collectionQuery: "", resourceQuery: val.searchQuery },
           })
         );
@@ -158,5 +168,33 @@ export class ManageComponent implements OnInit {
       if (res.data && res.data["isDeleted"]) {
       }
     });
+  }
+
+  doBoxAction($event) {
+    switch ($event) {
+      case "collection":
+        this.form.get("collections").patchValue(true);
+        this.form.get("posts").patchValue(false);
+        break;
+      case "posts":
+        this.form.get("collections").patchValue(false);
+        this.form.get("posts").patchValue(true);
+        break;
+      case "following":
+        this.openFollowDialog();
+        break;
+      default:
+        break;
+    }
+  }
+
+  openFollowDialog() {
+    const dialogRef = this.dialog.open(FfComponent, {
+      data: {
+        userId: this.userId
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(async (result: any) => { });
   }
 }

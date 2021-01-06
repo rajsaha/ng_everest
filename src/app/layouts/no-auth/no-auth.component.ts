@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { CustomColorSchemeService } from '@services/custom-color-scheme/custom-color-scheme.service';
 
 @Component({
   selector: 'app-no-auth',
@@ -7,33 +7,16 @@ import { Router } from '@angular/router';
   styleUrls: ['./no-auth.component.scss']
 })
 export class NoAuthComponent implements OnInit {
+  localStorageTheme: string;
+  logo: string;
+  constructor(private customColorSchemeService: CustomColorSchemeService) {}
 
-  isLoading = false;
-  currentUrl: string;
-
-  // Bg image
-  image: string;
-  constructor(private router: Router) {
-    router.events.subscribe((val) => {
-      this.setBgImage();
-    });
-  }
-
-  ngOnInit() {}
-
-  setBgImage() {
-    this.currentUrl = this.router.url;
-
-    switch (this.currentUrl) {
-      case '/signup':
-        this.image = '../../../../assets/mountains-circle-transparent.webp';
-        break;
-      case '/login':
-        this.image = '../../../assets/mountains-circle-bottom.webp';
-        break;
-      default:
-        this.image = '';
-        break;
+  ngOnInit() {
+    this.localStorageTheme = this.customColorSchemeService.getCurrentTheme();
+    if (this.localStorageTheme == 'dark') {
+      this.logo = "../../../assets/images/everest-logo-dark.svg";
+    } else {
+      this.logo = "../../../assets/images/everest-logo.svg";
     }
   }
 

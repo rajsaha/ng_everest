@@ -1,4 +1,5 @@
-/* You can add global styles to this file, and also import other style files */
+@import "https://fonts.googleapis.com/icon?family=Material+Icons";
+@import "./assets/styles/modules/fonts";
 @import "~normalize.css/normalize.css";
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
 @import "./assets/styles/material-overrides.scss";
@@ -21,7 +22,9 @@
 }
 
 .active-sidenav {
-  font-weight: bold;
+  background-color: rgba(0,0,0,.1);
+  border-radius: 5px;
+  padding-left: 10px;
 }
 
 .float-right {
@@ -40,16 +43,22 @@
 
 .green-snackbar {
   background-color: #09af00;
-  color: white;
 }
 
 .red-snackbar {
   background-color: #f44336 !important;
-  color: white;
 }
 
 .padding-15 {
   padding: 15px;
+}
+
+.mb-25 {
+  margin-bottom: 25px;
+}
+
+.mb-50 {
+  margin-bottom: 50px;
 }
 
 .w-100 {

@@ -5,33 +5,41 @@ $button-text-color: white;
 
 .custom-button {
     border-radius: 50px;
-    border: 0;
-    color: $button-text-color;
+    border: var(--custom-button-border);
     cursor: pointer;
     transition: all 0.2s ease-in;
     width: 100%;
+    padding: 10px;
 }
 
 .hover {
     &:hover {
-        background-color: $button-bg-color-hover !important;
+        background-color: $button-bg-color-hover;
     }
 }
 
 .not-disabled {
+    background-color: $button-bg-color;
+    color: $button-text-color;
     box-shadow: 0 13px 26px rgba(255, 121, 90, 0.5);
     cursor: pointer;
 }
 
+.disabled {
+    background-color: transparent;
+    border: var(--custom-button-border);
+    color: var(--button-text-color-disabled);
+}
+
 .is-loading {
-    background-color: transparent !important;
-    border: 1px solid $button-bg-color !important;
-    color: $button-bg-color !important;
+    background-color: transparent;
+    border: 1px solid $button-bg-color;
+    color: $button-bg-color;
 }
 
 .delete-button {
     &:hover {
-        background-color: $button-delete-bg-color-hover !important;
+        background-color: $button-delete-bg-color-hover;
         color: white !important;
     }
 }

@@ -10,13 +10,14 @@ export class UserImageComponent implements OnInit {
   @Input() size: string;
   @Input() userData: any;
   @Input() clickable = true;
+  @Input() hoverable = true;
   imageSizeClass: string;
   url = {};
   clickableClass = "";
   placeholder: string;
   ready = false;
 
-  constructor(private router: Router, private route: ActivatedRoute) {}
+  constructor(private router: Router, private route: ActivatedRoute) { }
 
   ngOnInit() {
     if (!this.userData.image) {
@@ -27,6 +28,9 @@ export class UserImageComponent implements OnInit {
 
     // * Set image container size
     switch (this.size) {
+      case "xxs":
+        this.imageSizeClass = "xxs";
+        break;
       case "xs":
         this.imageSizeClass = "xs";
         break;
@@ -45,7 +49,7 @@ export class UserImageComponent implements OnInit {
     }
 
     // * Set clickable
-    if (this.clickable) {
+    if (this.clickable || this.hoverable) {
       this.clickableClass = "clickable";
     }
 
@@ -57,11 +61,10 @@ export class UserImageComponent implements OnInit {
   }
 
   goToUser(username: string) {
-    if (!this.clickable) {
-      return;
+    if (this.clickable) {
+      this.router.navigate([`/profile/user/${username}`], {
+        relativeTo: this.route.parent,
+      });
     }
-    this.router.navigate([`/profile/user/${username}`], {
-      relativeTo: this.route.parent,
-    });
   }
 }

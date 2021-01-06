@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { NoAuthComponent } from './no-auth.component';
 
@@ -6,7 +6,7 @@ describe('NoAuthComponent', () => {
   let component: NoAuthComponent;
   let fixture: ComponentFixture<NoAuthComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ NoAuthComponent ]
     })

@@ -13,7 +13,6 @@ import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatIconModule } from "@angular/material/icon";
 import { MatInputModule } from "@angular/material/input";
 import { MatListModule } from "@angular/material/list";
-import { MatMenuModule } from "@angular/material/menu";
 import { MatProgressBarModule } from "@angular/material/progress-bar";
 import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
 import { MatSelectModule } from "@angular/material/select";
@@ -23,6 +22,8 @@ import { MatTabsModule } from "@angular/material/tabs";
 import { MatToolbarModule } from "@angular/material/toolbar";
 import { MatTooltipModule } from "@angular/material/tooltip";
 import { MatRadioModule } from "@angular/material/radio";
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { ClipboardModule } from '@angular/cdk/clipboard';
 
 @NgModule({
   declarations: [],
@@ -37,7 +38,6 @@ import { MatRadioModule } from "@angular/material/radio";
     MatFormFieldModule,
     MatInputModule,
     MatCheckboxModule,
-    MatMenuModule,
     MatSelectModule,
     MatTabsModule,
     MatBadgeModule,
@@ -51,6 +51,8 @@ import { MatRadioModule } from "@angular/material/radio";
     MatProgressSpinnerModule,
     MatAutocompleteModule,
     MatRadioModule,
+    MatSlideToggleModule,
+    ClipboardModule
     // ! End of Material Angular Modules
   ],
   exports: [
@@ -62,7 +64,6 @@ import { MatRadioModule } from "@angular/material/radio";
     MatFormFieldModule,
     MatInputModule,
     MatCheckboxModule,
-    MatMenuModule,
     MatSelectModule,
     MatTabsModule,
     MatBadgeModule,
@@ -76,6 +77,8 @@ import { MatRadioModule } from "@angular/material/radio";
     MatProgressSpinnerModule,
     MatAutocompleteModule,
     MatRadioModule,
+    MatSlideToggleModule,
+    ClipboardModule
   ],
 })
-export class MaterialModule {}
+export class MaterialModule { }

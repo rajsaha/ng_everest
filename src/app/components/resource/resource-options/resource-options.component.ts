@@ -15,6 +15,7 @@ export class ResourceOptionsComponent implements OnInit {
   resourceUser: string;
   type: string;
   title: string;
+  loggedInUser: string;
 
   // Icons
   faTrashAlt = faTrashAlt;
@@ -33,6 +34,7 @@ export class ResourceOptionsComponent implements OnInit {
     this.resourceUser = this.popoverRef.data.resourceUser;
     this.type = this.popoverRef.data.type;
     this.title = this.popoverRef.data.title;
+    this.loggedInUser = localStorage.getItem("username");
   }
 
   goToView() {

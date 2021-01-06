@@ -2,15 +2,18 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment as ENV } from '@environments/environment';
 import { Router } from '@angular/router';
-import * as moment from 'moment';
+import * as dayjs from 'dayjs';
+import * as relativeTime from 'dayjs/plugin/relativeTime';
+import { CustomColorSchemeService } from '@services/custom-color-scheme/custom-color-scheme.service';
+import { ColorSchemeService } from '@services/color-scheme/color-scheme.service';
+dayjs.extend(relativeTime);
 
 @Injectable({
   providedIn: 'root'
 })
 export class LoginService {
-  noPhoto = `${ENV.SITE_URL}/assets/images/portrait.jpg`;
-
-  constructor(private http: HttpClient, private router: Router) { }
+  constructor(private http: HttpClient, private router: Router, private colorSchemeService: ColorSchemeService,
+    private customColorSchemeService: CustomColorSchemeService) { }
 
   login(loginCred: object): Promise<any> {
     return new Promise(resolve => {
@@ -19,10 +22,10 @@ export class LoginService {
         .subscribe((response: any) => {
           if (!response.error) {
             this.setSession({
-              token: response.token, 
-              expiresIn: response.expiresIn, 
-              username: response.username, 
-              userId: response.userId, 
+              token: response.token,
+              expiresIn: response.expiresIn,
+              username: response.username,
+              userId: response.userId,
               image: response.image,
               firstName: response.firstName,
               lastName: response.lastName
@@ -34,7 +37,7 @@ export class LoginService {
   }
 
   private setSession(data: any) {
-    const expiresAt = moment().add(data.expiresIn, 'milliseconds');
+    const expiresAt = dayjs().add(data.expiresIn, 'millisecond');
 
     localStorage.setItem('token', data.token);
     localStorage.setItem('expires_at', JSON.stringify(expiresAt.valueOf()));
@@ -53,10 +56,11 @@ export class LoginService {
     localStorage.removeItem('username');
     localStorage.removeItem('userId');
     localStorage.removeItem('profileImage');
+
   }
 
   public isLoggedIn() {
-    return moment().isBefore(this.getExpiration());
+    return dayjs().isBefore(this.getExpiration());
   }
 
   isLoggedOut() {
@@ -66,12 +70,16 @@ export class LoginService {
   getExpiration() {
     const expiration = localStorage.getItem('expires_at');
     const expiresAt = JSON.parse(expiration);
-    return moment(expiresAt);
+    return dayjs(expiresAt);
   }
 
   redirectIfLoggedIn() {
-    if (localStorage.getItem('token')) {
+    let token = localStorage.getItem('token');
+    if (token) {
       this.router.navigate(['']);
+    } else {
+      this.colorSchemeService.update("light");
+      this.customColorSchemeService.setLightTheme();
     }
   }
 }

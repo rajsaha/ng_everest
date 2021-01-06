@@ -3,7 +3,7 @@ $image-width-425: 400px;
 $image-height: 300px;
 
 .no-auth-layout {
-    background-color: #F6F8FA;
+    background-color: var(--no-auth-layout-left-background-color);
 	display: grid;
 	grid-template-columns: 1fr;
 	width: 100%;
@@ -62,61 +62,11 @@ $image-height: 300px;
 			}
 		}
 
-		h1 {
-			font-family: 'Raleway', sans-serif;
-			font-size: 25px;
-			font-weight: 900;
-			text-transform: uppercase;
-			letter-spacing: 5px;
-		}
-
 		p {
 			font-size: 14px;
 			margin-bottom: 50px;
 			line-height: 20px;
-		}
-
-		.form {
-			max-width: 350px;
-			margin-bottom: 50px;
-			.form-title {
-				font-family: 'Montserrat', sans-serif;
-				margin-bottom: 25px;
-			}
-			mat-form-field {
-				width: 100%;
-			}
-
-			button {
-				width: 100% !important;
-			}
-		}
-
-		.not-a-member {
-			font-size: 12px;
-			text-align: center;
-
-			span:nth-of-type(1) {
-				margin-right: 15px;
-			}
-
-			.go-to-signup {
-				background-color: rgba(72, 26, 137, 1);
-				border-radius: 50%;
-				box-shadow: 0 13px 26px rgba(72, 26, 137, 0.5);
-				color: white;
-				display: inline-block;
-				width: 25px;
-				height: 25px;
-				position: relative;
-				vertical-align: middle;
-
-				fa-icon {
-					position: absolute;
-					top: 6px;
-					left: 8px;
-				}
-			}
+			color: var(--no-auth-component-text-color);
 		}
 	}
 

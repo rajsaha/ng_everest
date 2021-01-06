@@ -1,11 +1,11 @@
 <div *ngIf="data.error">
   <span class="snackbar red-snackbar">
-    <fa-icon [icon]="faCheckCircle"></fa-icon>{{ data.message }}
+    <fa-icon [icon]="faTimesCircle"></fa-icon>{{ data.message }}
   </span>
 </div>
 
 <div *ngIf="!data.error">
   <span class="snackbar">
-    <fa-icon [icon]="faTimesCircle"></fa-icon>{{ data.message }}
+    {{ data.message }}
   </span>
 </div>

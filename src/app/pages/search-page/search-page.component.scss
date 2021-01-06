@@ -1,56 +1,22 @@
 .section-container {
   margin-top: 25px;
-  h1 {
-    font-weight: 400;
-    margin-bottom: 0;
-  }
   .search-container {
     background-color: var(--search-page-tool-background-color);
-    padding: 0 15px;
+    padding: 10px 10px 15px 15px;
     border-radius: 5px;
-    .search {
-      mat-form-field {
-        margin-top: 15px;
-        width: 100%;
-      }
 
-      mat-icon {
-        font-size: 16px;
-        color: rgba(0, 0, 0, 0.8);
-
-        fa-icon {
-          position: absolute;
-          top: 2px;
-        }
-      }
-    }
-
-    .dropdowns {
-      display: grid;
-      font-size: 12px;
-      grid-template-columns: 1fr;
-      grid-column-gap: 15px;
-      padding-bottom: 15px;
-      align-content: center;
+    form {
+      display: inherit;
 
       .checkboxes-container {
         align-self: center;
-        p {
-          margin-bottom: 0;
-          margin-top: 0;
-          font-weight: bold;
-        }
         .checkboxes {
-          display: grid;
-          grid-auto-columns: auto;
+          display: inline;
+          font-size: 12px;
           mat-checkbox:not(:last-child) {
             margin-right: 15px;
           }
         }
-      }
-
-      mat-form-field {
-        font-size: 12px;
       }
     }
   }
@@ -78,14 +44,17 @@
 
   .section-container {
     .search-container {
-      .dropdowns {
-        grid-template-columns: 200px 1fr;
-        grid-auto-rows: 55px;
-        padding-bottom: 10px;
+      padding: 10px 10px 0px 15px;
+      form {
+        display: grid;
+        grid-template-columns: auto auto auto;
+        grid-gap: 15px;
 
         .checkboxes-container {
+          margin-top: -10px;
           .checkboxes {
             display: inline-block;
+            font-size: inherit;
           }
         }
       }

@@ -1,5 +1,6 @@
 $image-width: 38px;
 $image-height: 38px;
+
 %fixed-abs {
   position: absolute;
   left: 50%;
@@ -11,13 +12,11 @@ $image-height: 38px;
   position: relative;
 
   .form {
+    display: none;
     width: 100%;
     background-color: var(--search-background-color);
     border: 2px solid transparent;
     border-radius: 25px;
-    display: grid;
-    grid-template-columns: 15px auto;
-    grid-gap: 15px;
     padding: 2px 0 2px 15px;
     transition: border 0.2s ease-in-out;
 
@@ -26,7 +25,9 @@ $image-height: 38px;
     }
 
     .search-icon {
-      align-self: center;
+      display: inline-block;
+      margin-right: 15px;
+
       fa-icon {
         color: var(--search-search-icon-color);
         font-size: 16px;
@@ -34,18 +35,30 @@ $image-height: 38px;
     }
 
     form {
+      display: inline-block;
       margin: 0;
+
       input {
-        align-self: center;
         background-color: transparent;
         border: none;
         font-size: 15px;
         color: var(--search-form-input-color);
+
         &:focus {
           outline: 0;
           border: 0;
         }
       }
+    }
+  }
+
+  .search-compact {
+    display: inherit;
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    fa-icon {
+      font-size: 14px;
     }
   }
 
@@ -71,6 +84,8 @@ $image-height: 38px;
         padding: 10px 15px;
         font-size: 14px;
         font-family: "Montserrat", sans-serif;
+        font-weight: 700;
+        text-align: left;
         border-bottom: var(--search-result-box-section-border);
         margin-bottom: 5px;
       }
@@ -87,6 +102,7 @@ $image-height: 38px;
 
         p {
           margin: 0;
+          text-align: left;
         }
 
         &:hover {
@@ -138,14 +154,16 @@ $image-height: 38px;
           grid-area: username;
           font-size: 12px;
           color: #a2a2a2;
+          text-align: left;
         }
       }
 
-      .see-more {
+      .go-to-search-page {
         font-family: 'Montserrat', sans-serif;
         color: var(--search-result-see-more);
 
         span:nth-of-type(1) {
+          font-size: 12px;
           margin-right: 10px;
         }
 
@@ -201,5 +219,17 @@ $image-height: 38px;
   100% {
     opacity: 1;
     top: 50px;
+  }
+}
+
+@media (min-width: 768px) {
+  .search {
+    .form {
+      display: inherit;
+    }
+    
+    .search-compact {
+      display: none;
+    }
   }
 }

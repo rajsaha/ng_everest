@@ -2,11 +2,10 @@ import { Component, Inject, OnInit, NgZone, ViewChild } from "@angular/core";
 import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { CollectionService } from "@services/collection/collection.service";
-import { ResourceService } from "@services/resource/resource.service";
 import { SnackbarService } from "@services/general/snackbar.service";
 import { CdkTextareaAutosize } from "@angular/cdk/text-field";
 import { take, debounceTime } from "rxjs/operators";
-import { BreakpointObserver, Breakpoints } from "@angular/cdk/layout";
+import { BreakpointObserver } from "@angular/cdk/layout";
 
 @Component({
   selector: "app-atc",
@@ -33,13 +32,13 @@ export class AtcComponent implements OnInit {
 
   // Toggles
   isLoading = false;
+  isDisabled = false;
 
   @ViewChild("autosize") autosize: CdkTextareaAutosize;
 
   constructor(
     public dialogRef: MatDialogRef<AtcComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
-    private resourceService: ResourceService,
     private collectionService: CollectionService,
     private snackbarService: SnackbarService,
     private fb: FormBuilder,
@@ -61,17 +60,18 @@ export class AtcComponent implements OnInit {
     this.prepareText(this.data.title);
     this.userId = localStorage.getItem("userId");
     this.username = localStorage.getItem("username");
+    this.data.username = this.username;
     this.initAddToCollectionForm();
     this.onFormChange();
     await this.getCollections();
   }
 
   onNoClick() {
-    this.dialogRef.close();
+    this.dialogRef.close(false);
   }
 
   onYesClick() {
-    this.dialogRef.close();
+    this.dialogRef.close(true);
   }
 
   async onScrollDown() {
@@ -157,46 +157,14 @@ export class AtcComponent implements OnInit {
         }
       }
     }
-  }
 
-  async addResourceToCollection(collection: any) {
-    if (collection._id === this.currentCollectionId) {
-      return;
-    }
-
-    let collectionId = collection._id;
-    const response: any = await this.resourceService.addResourceToCollection({
-      collectionId,
-      resourceId: this.data.id,
-      username: this.username,
-      currentCollectionId: this.currentCollectionId
-        ? this.currentCollectionId
-        : null,
-      userId: this.userId  
-    });
-
-    if (!response.error) {
-      this.snackbarService.openSnackBar({
-        message: {
-          message: `Resource added to ${collection.title}`,
-          error: false,
-        },
-        class: "green-snackbar",
-      });
-      this.dialogRef.close({ added: true });
-    } else {
-      this.snackbarService.openSnackBar({
-        message: {
-          message: `Something went wrong!`,
-          error: true,
-        },
-        class: "red-snackbar",
-      });
-    }
+    this.data.currentCollectionId = this.currentCollectionId;
   }
 
   async submitCreateCollectionForm() {
     if (this.createCollectionForm.valid) {
+      this.isLoading = true;
+      this.isDisabled = true;
       const response: any = await this.collectionService.createCollectionAndPushResource(
         {
           currentCollectionId: this.currentCollectionId
@@ -228,6 +196,8 @@ export class AtcComponent implements OnInit {
           },
           class: "red-snackbar",
         });
+        this.isLoading = false;
+        this.isDisabled = false;
       }
     }
   }

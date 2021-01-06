@@ -2,7 +2,13 @@
 
 <p>Are you sure you want to delete <strong>{{ data.title }}</strong></p>
 
-<div mat-dialog-actions>
+<div mat-dialog-actions align="end">
+  <button mat-flat-button [disabled]="isLoading" color="warn" (click)="onYesClick()" cdkFocusInitial>
+    <div class="mat-dialog-button-with-spinner">
+      <mat-progress-spinner *ngIf="isDisabled" color="accent" mode="indeterminate" value="50" diameter="15">
+      </mat-progress-spinner>
+      <span>{{ isDisabled ? 'Deleting' : 'Delete' }}</span>
+    </div>
+  </button>
   <button mat-button (click)="onNoClick()">Cancel</button>
-  <button mat-raised-button color="warn" (click)="onYesClick()" cdkFocusInitial>Ok</button>
 </div>

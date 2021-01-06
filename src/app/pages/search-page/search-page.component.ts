@@ -4,6 +4,7 @@ import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 import { debounceTime } from "rxjs/operators";
 import { UserService } from "@services/user/user.service";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
+import { MetaService } from '@ngx-meta/core';
 
 @Component({
   selector: "app-search-page",
@@ -29,10 +30,14 @@ export class SearchPageComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private fb: FormBuilder,
-    private userService: UserService
+    private userService: UserService,
+    private readonly meta: MetaService
   ) {}
 
   ngOnInit() {
+    // * Set meta tags
+    this.meta.setTitle("Search");
+    this.meta.setTag('og:description', "Search for stuff");
     this.initSearchForm();
     this.getSearchQuery();
     this.onQueryChanges();

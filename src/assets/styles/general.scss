@@ -1,7 +1,10 @@
 * {
-  font-family: "Hind", sans-serif;
+  font-family: "Nunito Sans", sans-serif;
 
-  // width
+  scrollbar-color: rgb(119, 119, 119) transparent;
+  scrollbar-width: thin;
+
+  // scrollbar width
   &::-webkit-scrollbar {
     width: 5px;
 
@@ -10,7 +13,7 @@
     }
   }
 
-  // Handle
+  // scrollbar Handle
   &::-webkit-scrollbar-thumb {
     border-radius: 5px;
     background: rgb(119, 119, 119);
@@ -22,6 +25,7 @@
 }
 
 a {
+
   &:active,
   &:focus {
     outline: none;
@@ -55,6 +59,8 @@ app-root {
 
 .section-container {
   overflow-x: hidden;
+  margin-bottom: 25px;
+
   mat-divider {
     margin-bottom: 15px;
   }
@@ -152,12 +158,38 @@ app-root {
       }
 
       .followers-following {
-        border-radius: 5px;
-        display: inline-block;
+        display: inline-grid;
+        grid-template-columns: 25px 1fr 1fr;
+        grid-gap: 5px;
+        padding: 5px 10px;
+        border: var(--profile-followers-following-border);
+        border-radius: 25px;
         cursor: pointer;
-        padding: 10px;
-        font-size: 14px;
-        width: auto;
+        transition: background-color 0.3s ease-in-out;
+
+        &:hover {
+          background-color: var(--profile-followers-following-bg-hover);
+        }
+
+        fa-icon, span {
+          font-size: 14px;
+        }
+
+        fa-icon {
+          color: var(--profile-followers-following-icon-color);
+        }
+
+        div:nth-of-type(1) {
+          place-self: center;
+        }
+
+        div:nth-of-type(2) {
+          align-self: center;
+        }
+
+        div:nth-of-type(3) {
+          align-self: center;
+        }
       }
     }
 
@@ -168,7 +200,7 @@ app-root {
 
     .complete-profile-label {
       font-size: 12px;
-      color: rgba(0, 0, 0, 0.3);
+      color: inherit;
     }
   }
 
@@ -181,6 +213,7 @@ app-root {
   border-bottom: var(--popover-header-border-bottom);
   padding: 15px;
   font-size: 14px;
+
   span {
     color: #a2a2a2;
   }
@@ -204,9 +237,11 @@ app-root {
   &:hover {
     background-color: rgba(0, 0, 0, 0.1);
   }
+
   .top {
     font-size: 14px;
     margin-bottom: 5px;
+
     fa-icon {
       color: var(--popover-item-top-icon-color);
       margin-right: 10px;
@@ -228,16 +263,29 @@ app-root {
 .dialog-title {
   font-size: 16px;
   max-width: 400px;
+
   strong {
     font-family: "Montserrat", sans-serif;
   }
 }
 
+.mat-dialog-button-with-spinner {
+  display: flex;
+
+  mat-progress-spinner {
+    margin-right: 5px;
+    align-self: center;
+  }
+}
+
 .custom-input {
+  position: relative;
   width: 100%;
-  margin-bottom: 15px;
+  margin-bottom: 20px;
+
   .label-container {
     margin-bottom: 5px;
+
     label {
       color: var(--custom-input-label-container);
       font-size: 12px;
@@ -251,13 +299,16 @@ app-root {
     border-radius: 10px;
     padding: 15px 20px;
     transition: border 0.2s ease-in-out;
-    input, textarea {
+
+    input,
+    textarea {
       align-self: center;
       background-color: transparent;
       border: none;
       font-size: 15px;
       width: 100%;
       color: var(--custom-input-color);
+
       &:focus {
         outline: 0;
         border: 0;
@@ -278,15 +329,30 @@ app-root {
   }
 
   .error-message {
+    position: absolute;
     font-size: 12px;
     color: red;
+    transform: translateY(-50%);
+    animation: float-down 0.2s ease-in-out;
+  }
+}
+
+@keyframes float-down {
+  0% {
+    opacity: 0;
+    transform: translateY(-100%);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(-50%);
   }
 }
 
 .general-divider {
   width: 100%;
   height: 1px;
-  background-color: rgba(0, 0, 0, .1);
+  background-color: var(--general-divider);
   margin: 15px 0;
 }
 

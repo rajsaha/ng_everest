@@ -2,7 +2,6 @@ import { Component, OnInit, Inject } from "@angular/core";
 import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
 import { CollectionService } from "@services/collection/collection.service";
 import { SnackbarService } from "@services/general/snackbar.service";
-import { Router } from "@angular/router";
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
 import { setRefreshCollectionsToTrue } from "@services/ngrx/refreshCollections/refreshCollections.actions";
 import { Store } from '@ngrx/store';
@@ -16,12 +15,15 @@ export class DcComponent implements OnInit {
   // Icon
   faTrash = faTrash;
 
+  // Toggles
+  isLoading = false;
+  isDisabled = false;
+
   constructor(
     public dialogRef: MatDialogRef<DcComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
     private collectionService: CollectionService,
     private snackbarService: SnackbarService,
-    private router: Router,
     private store: Store<{ refreshCollectionsState: boolean }>
   ) {}
 
@@ -32,6 +34,8 @@ export class DcComponent implements OnInit {
   }
 
   async onYesClick() {
+    this.isLoading = true;
+    this.isDisabled = true;
     const response: any = await this.collectionService.deleteCollection({
       id: this.data.collectionData._id,
     });

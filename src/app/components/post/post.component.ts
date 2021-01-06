@@ -8,16 +8,17 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
-import * as moment from 'moment';
 import { AtcComponent } from '../dialogs/atc/atc.component';
 import { PoComponent } from './po/po.component';
 import { ResourceService } from '@services/resource/resource.service';
 import { CollectionService } from '@services/collection/collection.service';
 import { UserService } from '@services/user/user.service';
 import { CommentComponent } from './comment/comment.component';
-import { environment as ENV } from '@environments/environment';
 import { Router, ActivatedRoute } from '@angular/router';
 import { PopoverService } from '@services/popover/popover.service';
+import * as dayjs from 'dayjs';
+import * as relativeTime from 'dayjs/plugin/relativeTime';
+dayjs.extend(relativeTime);
 
 @Component({
   selector: 'app-post',
@@ -73,9 +74,6 @@ export class PostComponent implements OnInit {
   isSeeMore = false;
   truncateValue = 150;
 
-  // Empty states
-  noPhoto = `${ENV.SITE_URL}/assets/images/portrait.jpg`;
-
   constructor(
     private fb: FormBuilder,
     public dialog: MatDialog,
@@ -89,10 +87,10 @@ export class PostComponent implements OnInit {
 
   async ngOnInit() {
     try {
+      this.isLoading = true;
       this.populatePost();
       this.init_comment_form();
       this.checkIfDescriptionTooLong(this.description)
-      this.isLoading = true;
       this.isLoading = false;
     } catch (err) {
       throw new Error(err);
@@ -111,8 +109,8 @@ export class PostComponent implements OnInit {
     this.tags = this.data.tags;
     this.description = this.data.description;
     this.image = this.data.lgImage.link ? this.data.lgImage.link : "";
-    this.userImage = this.data.userImage ? this.data.userImage : this.noPhoto;
-    this.timestamp = moment(this.data.timestamp).fromNow();
+    this.userImage = this.data.userImage;
+    this.timestamp = dayjs(this.data.timestamp).fromNow();
     this.recommendedByCount = this.data.recommended_by_count;
     this.noImage = this.data.noImage;
     this.backgroundColor = this.data.backgroundColor;
@@ -145,9 +143,11 @@ export class PostComponent implements OnInit {
 
   async addComment() {
     this.showComments = true;
+    this.commentForm.controls.comment.disable();
     const result: any = await this.resourceService.addComment(
-      this.commentForm.value
+      this.commentForm.getRawValue()
     );
+    this.commentForm.controls.comment.enable();
 
     if (!result.error) {
       // * Add comment to array
@@ -171,10 +171,6 @@ export class PostComponent implements OnInit {
     return this.commentForm.controls;
   }
 
-  formatTime(date: Date) {
-    return moment(date).fromNow();
-  }
-
   async textareaEnterPressed($event: KeyboardEvent) {
     $event.preventDefault();
     $event.stopPropagation();
@@ -186,13 +182,17 @@ export class PostComponent implements OnInit {
 
   async like() {
     try {
+      this.isLiked = true;
       const result = await this.userService.likePost({
         userId: this.currentUserId,
         resourceId: this.id
       });
+      
       if (result) {
         this.isLiked = true;
         this.recommendedByCount++;
+      } else {
+        this.isLiked = false;
       }
     } catch (err) {
       console.error(err);
@@ -201,6 +201,7 @@ export class PostComponent implements OnInit {
 
   async unlike() {
     try {
+      this.isLiked = false;
       const result = await this.userService.unLikePost({
         userId: this.currentUserId,
         resourceId: this.id
@@ -208,6 +209,8 @@ export class PostComponent implements OnInit {
       if (result) {
         this.isLiked = false;
         this.recommendedByCount--;
+      } else {
+        this.isLiked = true;
       }
     } catch (err) {
       console.error(err);
@@ -216,6 +219,7 @@ export class PostComponent implements OnInit {
 
   openCollectionsDialog() {
     const dialogRef = this.dialog.open(AtcComponent, {
+      minWidth: "300px",
       data: {
         id: this.id,
         url: this.url,
@@ -225,17 +229,19 @@ export class PostComponent implements OnInit {
         backgroundColor: this.backgroundColor,
         textColor: this.textColor,
         noImage: this.noImage
-      }
+      },
     });
 
     dialogRef.afterClosed().subscribe(async (result: any) => {
-      if (result && result.added) {
-        const res = await this.collectionService.checkForResourceInCollection({
-          id: this.id
-        });
-        if (res) {
-          this.isInCollection = true;
-        }
+      const res: any = await this.collectionService.checkForResourceInCollection({
+        id: this.id,
+        userId: this.currentUserId,
+      });
+
+      if (res.isInCollection) {
+        this.isInCollection = true;
+      } else {
+        this.isInCollection = false;
       }
     });
   }
@@ -261,7 +267,11 @@ export class PostComponent implements OnInit {
 
   openResource() {
     if (this.type === 'ext-content') {
-      window.open(this.url, '_blank');
+      if (this.url.startsWith("http")) {
+        window.open(this.url, '_blank');
+      } else {
+        window.open('http://' + this.url, '_blank');
+      }
     } else {
       this.router.navigate([`/profile/user/${this.username}/resource/${this.id}`], { relativeTo: this.route.parent });
     }

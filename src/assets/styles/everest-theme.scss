@@ -1,23 +1,19 @@
-$primary-color: (
-    50: #481a89,
-    contrast: (
-        50: white
-    )
-);
+$primary-color: (50: #481a89,
+    contrast: (50: white));
 
-$accent-color: (
-    50: #FF795A,
-    contrast: (
-        50: white
-    )
-);
+$accent-color: (50: #FF795A,
+    contrast: (50: white));
 
 @import '~@angular/material/theming';
 
-@include mat-core();
+$custom-typography: mat-typography-config($font-family: 'Nunito Sans, monospace',
+    $headline: mat-typography-level(32px, 48px, 700),
+    $body-1: mat-typography-level(16px, 24px, 500));
+@include mat-core($custom-typography);
+
 $my-app-primary: mat-palette($primary-color, 50);
-$my-app-accent:  mat-palette($accent-color, 50);
-$my-app-warn:    mat-palette($mat-deep-orange);
+$my-app-accent: mat-palette($accent-color, 50);
+$my-app-warn: mat-palette($mat-deep-orange);
 
 $theme-light: mat-light-theme($my-app-primary, $my-app-accent, $my-app-warn);
 $theme-dark: mat-dark-theme($my-app-primary, $my-app-accent, $my-app-warn);
@@ -29,4 +25,3 @@ $theme-dark: mat-dark-theme($my-app-primary, $my-app-accent, $my-app-warn);
 .color-scheme-dark {
     @include angular-material-theme($theme-dark);
 }
-

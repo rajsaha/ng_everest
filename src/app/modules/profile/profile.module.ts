@@ -9,7 +9,6 @@ import { DeleteAccountComponent } from "src/app/pages/profile/delete-account/del
 import { Routes, RouterModule } from "@angular/router";
 import { ProfileComponent } from "src/app/pages/profile/profile.component";
 import { ReactiveFormsModule } from "@angular/forms";
-import { PublicProfileComponent } from "src/app/pages/profile/public-profile/public-profile.component";
 import { ViewCollectionComponent } from "src/app/pages/view-collection/view-collection.component";
 import { ViewResourceComponent } from "src/app/pages/view-resource/view-resource.component";
 import { ManageComponent } from "src/app/pages/manage/manage.component";
@@ -42,7 +41,6 @@ const routes: Routes = [
 
 @NgModule({
   declarations: [
-    PublicProfileComponent,
     ProfileComponent,
     EditProfileComponent,
     ChangePasswordComponent,
@@ -58,6 +56,5 @@ const routes: Routes = [
     RouterModule.forChild(routes),
   ],
   exports: [RouterModule],
-  entryComponents: [CpiComponent],
 })
 export class ProfileModule {}

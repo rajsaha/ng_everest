@@ -1,14 +1,9 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { LoginComponent } from './pages/login/login.component';
-import { SignupComponent } from './pages/signup/signup.component';
-import { FeedComponent } from './pages/feed/feed.component';
 import { AuthGuardService } from './services/auth/auth-guard.service';
 import { PageNotFoundComponent } from './pages/page-not-found/page-not-found.component';
-import { ShareResourceComponent } from './pages/share-resource/share-resource.component';
 import { MainComponent } from './layouts/main/main.component';
 import { NoAuthComponent } from './layouts/no-auth/no-auth.component';
-import { SearchPageComponent } from './pages/search-page/search-page.component';
 
 const routes: Routes = [
   {
@@ -18,15 +13,7 @@ const routes: Routes = [
     children: [
       {
         path: '',
-        component: FeedComponent,
-      },
-      {
-        path: 'search',
-        component: SearchPageComponent
-      },
-      {
-        path: 'share-resource',
-        component: ShareResourceComponent,
+        loadChildren: () => import('src/app/modules/content/content.module').then(m => m.ContentModule)
       },
       {
         path: 'manage',
@@ -36,10 +23,6 @@ const routes: Routes = [
         path: 'profile',
         loadChildren: () => import('src/app/modules/profile/profile.module').then(m => m.ProfileModule)
       },
-      {
-        path: 'write',
-        loadChildren: () => import('src/app/modules/write/write.module').then(m => m.WriteModule)
-      }
     ]
   },
   {
@@ -52,12 +35,12 @@ const routes: Routes = [
     component: NoAuthComponent,
     children: [
       {
-        path: 'login',
-        component: LoginComponent
+        path: '',
+        loadChildren: () => import('src/app/modules/no-auth/no-auth.module').then(m => m.NoAuthModule)
       },
       {
-        path: 'signup',
-        component: SignupComponent
+        path: 'forgot-password',
+        loadChildren: () => import('src/app/modules/forgot-password/forgot-password.module').then(m => m.ForgotPasswordModule)
       }
     ]
   },
@@ -73,7 +56,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes, { relativeLinkResolution: 'legacy' })],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

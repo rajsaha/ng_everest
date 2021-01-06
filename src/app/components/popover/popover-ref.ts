@@ -1,6 +1,5 @@
 import { OverlayRef } from "@angular/cdk/overlay";
 import { Subject } from "rxjs";
-import { PopoverParams } from "@services/popover/popover.service";
 import { TemplateRef, Type } from "@angular/core";
 
 export type PopoverCloseEvent<T = any> = {

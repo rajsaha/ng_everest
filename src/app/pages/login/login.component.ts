@@ -5,6 +5,7 @@ import { LoginService } from '@services/auth/login.service';
 import { CommunicationService } from '@services/general/communication.service';
 import { SnackbarService } from '@services/general/snackbar.service';
 import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
+import { MetaService } from '@ngx-meta/core';
 
 @Component({
   selector: 'app-login',
@@ -20,12 +21,16 @@ export class LoginComponent implements OnInit {
   faArrowRight = faArrowRight;
 
   constructor(private router: Router,
-              private fb: FormBuilder,
-              private loginService: LoginService,
-              private communicationService: CommunicationService,
-              private snackbarService: SnackbarService) { }
+    private fb: FormBuilder,
+    private loginService: LoginService,
+    private communicationService: CommunicationService,
+    private snackbarService: SnackbarService,
+    private readonly meta: MetaService) { }
 
   ngOnInit() {
+    // * Set meta tags
+    this.meta.setTitle("Login");
+    this.meta.setTag('og:description', "Login to Everest");
     this.loginService.redirectIfLoggedIn();
     this.init_login_form();
   }
@@ -33,7 +38,7 @@ export class LoginComponent implements OnInit {
   init_login_form() {
     this.loginForm = this.fb.group({
       username: ['', Validators.required],
-      password: ['', Validators.required]
+      password: ['', Validators.required],
     });
   }
 
@@ -43,10 +48,9 @@ export class LoginComponent implements OnInit {
 
   async login() {
     // Handle empty fields
-    if (!this.loginForm.get('username').value && !this.loginForm.get('password').value) {
+    if (this.loginForm.invalid) {
       return;
     }
-
     this.loggingIn = true;
     this.loginButtonText = 'Logging in...';
     const response = await this.loginService.login(this.loginForm.value);

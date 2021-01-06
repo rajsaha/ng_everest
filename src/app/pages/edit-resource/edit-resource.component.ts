@@ -1,7 +1,7 @@
-import { Component, OnInit, ViewChild, ElementRef, Input } from "@angular/core";
+import { Component, OnInit, ViewChild, ElementRef } from "@angular/core";
 import { Router, ActivatedRoute } from "@angular/router";
 import { FormBuilder, Validators, FormGroup } from "@angular/forms";
-import { faUpload, faPlusCircle } from "@fortawesome/free-solid-svg-icons";
+import { faUpload, faPlusCircle, faGlobe } from "@fortawesome/free-solid-svg-icons";
 import { COMMA, ENTER } from "@angular/cdk/keycodes";
 import { MatChipInputEvent } from "@angular/material/chips";
 import { ValidationService } from "@services/forms/validation.service";
@@ -11,10 +11,6 @@ import { SnackbarService } from "@services/general/snackbar.service";
 import { CollectionService } from "@services/collection/collection.service";
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-
-class ImageSnippet {
-  constructor(public src: string, public file: File) {}
-}
 
 @Component({
   selector: "app-edit-resource",
@@ -28,12 +24,14 @@ export class EditResourceComponent implements OnInit {
   @ViewChild("imageInput") imageInput: ElementRef;
   image: any;
   username: string;
+  userId: string;
   collectionNames = [];
   submitButtonText = "Done";
 
   // Icons
   faUpload = faUpload;
   faPlusCircle = faPlusCircle;
+  faGlobe = faGlobe;
 
   // Toggles
   isLoading = false;
@@ -76,9 +74,10 @@ export class EditResourceComponent implements OnInit {
     this.onNoImageChange();
     this.onIsCustomImageChange();
     this.username = localStorage.getItem("username");
+    this.userId = localStorage.getItem("userId");
     this.route.params.subscribe(async (params) => {
       await Promise.all([
-        this.getResource(params.resourceId),
+        this.getResource({ resourceId: params.resourceId, userId: this.userId }),
         this.getCollectionNames(),
       ]);
     });
@@ -166,6 +165,8 @@ export class EditResourceComponent implements OnInit {
 
   async submitEditResourceForm() {
     if (!this.editResourceForm.valid) {
+      this.editResourceFormControls.title.markAsDirty();
+      this.editResourceFormControls.description.markAsDirty();
       return;
     }
 
@@ -284,10 +285,10 @@ export class EditResourceComponent implements OnInit {
     }
   }
 
-  async getResource(id: string) {
+  async getResource(data: any) {
     try {
       this.isLoading = true;
-      const response: any = await this.resourceService.getResource({ id });
+      const response: any = await this.resourceService.getResource({ resourceId: data.resourceId, userId: data.userId });
 
       // * Redirect if resource belongs to someone else
       if (this.username !== response.resource.username[0]) {

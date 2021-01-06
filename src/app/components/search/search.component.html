@@ -1,4 +1,5 @@
 <div class="search">
+  <!-- * Desktop view -->
   <div class="form">
     <div class="search-icon">
       <fa-icon [icon]="faSearch"></fa-icon>
@@ -13,6 +14,10 @@
         (keyup.enter)="goToSearch()"
       />
     </form>
+  </div>
+
+  <div class="search-compact" (click)="goToSearch(true)" matRipple>
+    <fa-icon [icon]="faSearch"></fa-icon>
   </div>
 
   <div
@@ -30,12 +35,6 @@
           <div class="item-a">
             <app-user-image class="item-a" [userData]="user" [clickable]="false" size="xs"></app-user-image>
           </div>
-          <!-- <div
-            class="item-a"
-            [ngStyle]="{
-              'background-image': 'url(' + user.image + ')'
-            }"
-          ></div> -->
           <p class="item-b">{{ user.firstName }} {{ user.lastName }}</p>
           <small class="item-c"
             >@{{ user.username ? user.username : "..." }}</small
@@ -43,7 +42,7 @@
         </div>
       </div>
 
-      <div class="see-more" *ngIf="users.length > 3" (mousedown)="goToSearch()">
+      <div class="go-to-search-page" *ngIf="users.length > 3" (mousedown)="goToSearch()">
         <span>See More</span>
         <span>{{ users.length }}</span>
       </div>
@@ -80,7 +79,7 @@
       </div>
 
       <div
-        class="see-more"
+        class="go-to-search-page"
         *ngIf="resources.length > 3"
         (mousedown)="goToSearch()"
       >
@@ -108,7 +107,7 @@
       </div>
 
       <div
-        class="see-more"
+        class="go-to-search-page"
         *ngIf="collections.length > 3"
         (mousedown)="goToSearch()"
       >

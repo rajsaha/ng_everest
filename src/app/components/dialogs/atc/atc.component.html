@@ -5,30 +5,16 @@
   <div class="columns">
     <div class="left">
       <div class="parent">
-        <div
-          *ngIf="!isLoading"
-          class="existing-collections"
-          infiniteScroll
-          [infiniteScrollDistance]="2"
-          [infiniteScrollThrottle]="50"
-          (scrolled)="onScrollDown()"
-          [scrollWindow]="false"
-        >
+        <div *ngIf="collections.length > 0" class="existing-collections" infiniteScroll [infiniteScrollDistance]="2"
+          [infiniteScrollThrottle]="50" (scrolled)="onScrollDown()" [scrollWindow]="false">
           <h6>Add to existing collections</h6>
           <mat-progress-bar mode="indeterminate" *ngIf="isLoading">
           </mat-progress-bar>
 
-          <app-mini-collection
-            *ngFor="let collection of collections"
-            (click)="addResourceToCollection(collection)"
-            [data]="collection"
-            [resourceId]="data.id"
-          ></app-mini-collection>
+          <app-mini-collection *ngFor="let collection of collections" [data]="collection" [resourceId]="data.id"
+            [userId]="userId"></app-mini-collection>
 
-          <p
-            *ngIf="!isLoading && collections.length === 0"
-            class="no-collection"
-          >
+          <p *ngIf="!isLoading && collections.length === 0" class="no-collection">
             You haven't made a collection yet!
           </p>
         </div>
@@ -40,11 +26,7 @@
               <label>Collection Name</label>
             </div>
             <div class="input-container">
-              <input
-                type="text"
-                formControlName="collectionTitle"
-                placeholder="Name your collection"
-              />
+              <input type="text" formControlName="collectionTitle" placeholder="Name your collection" />
             </div>
           </div>
 
@@ -53,15 +35,9 @@
               <label>Collection Description</label>
             </div>
             <div class="input-container">
-              <textarea
-                cdkTextareaAutosize
-                #autosize="cdkTextareaAutosize"
-                cdkAutosizeMinRows="3"
-                cdkAutosizeMaxRows="5"
-                type="text"
-                formControlName="description"
-                placeholder="Describe this collection..."
-              ></textarea>
+              <textarea cdkTextareaAutosize #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="3"
+                cdkAutosizeMaxRows="5" type="text" formControlName="description"
+                placeholder="Describe this collection..."></textarea>
             </div>
           </div>
         </form>
@@ -72,14 +48,10 @@
 
     <div class="right" *ngIf="!isMobileViewport">
       <img *ngIf="!data.noImage" [src]="data.image" />
-      <div
-        *ngIf="data.noImage"
-        class="no-image-text"
-        [ngStyle]="{
+      <div *ngIf="data.noImage" class="no-image-text" [ngStyle]="{
           'background-color': data.backgroundColor,
           color: data.textColor
-        }"
-      >
+        }">
         <div class="text-container">
           <p>{{ topText }}</p>
           <p>{{ bottomText }}</p>
@@ -93,12 +65,11 @@
 
 <div mat-dialog-actions>
   <button mat-stroked-button (click)="onNoClick()">Cancel</button>
-  <button
-    mat-flat-button
-    color="primary"
-    (click)="submitCreateCollectionForm()"
-    cdkFocusInitial
-  >
-    Save
+  <button mat-flat-button color="primary" (click)="submitCreateCollectionForm()" cdkFocusInitial [disabled]="isLoading || createCollectionForm.invalid">
+    <div class="mat-dialog-button-with-spinner">
+      <mat-progress-spinner *ngIf="isDisabled" color="accent" mode="indeterminate" value="50" diameter="15">
+      </mat-progress-spinner>
+      <span>{{ isDisabled ? 'Saving' : 'Save' }}</span>
+    </div>
   </button>
 </div>

@@ -79,6 +79,7 @@
 	}
 
 	.image {
+		cursor: pointer;
 		img {
 			max-width: 100%;
 			width: 100%;
@@ -101,7 +102,6 @@
 		strong {
 			font-family: "Montserrat", sans-serif;
 			font-size: 16px;
-			text-transform: uppercase;
 		}
 
 		.collection-badge-false {
@@ -151,15 +151,16 @@
 		p {
 			font-size: 14px;
 			margin-bottom: 5px;
+			overflow-x: hidden;
 		}
 
-		span {
+		span.see-more-description {
 			text-align: center;
 			display: block;
 			font-weight: bold;
 			font-family: "Montserrat", sans-serif;
 			cursor: pointer;
-			color: #481a89;
+			color: var(--post-see-more-description-color);
 			font-size: 12px;
 		}
 	}
@@ -200,37 +201,6 @@
 
 			.count {
 				@extend %count;
-			}
-		}
-
-		.btn-atc {
-			fa-icon {
-				color: rgba(0, 0, 0, 0.2);
-			}
-		}
-	}
-
-	.all-comments {
-		border-top: 1px solid rgba(0, 0, 0, 0.1);
-		margin-top: 10px;
-		padding: 15px 15px 0 15px;
-
-		.comment {
-			font-size: 14px;
-			margin-bottom: 15px;
-
-			.username {
-				margin-right: 5px;
-			}
-
-			.text {
-				margin-bottom: 0;
-			}
-
-			.comment-timestamp {
-				display: block;
-				margin-top: 2px;
-				font-size: 12px;
 			}
 		}
 	}
@@ -283,17 +253,12 @@
 	}
 }
 
-.show-comments {
-	fa-icon {
-		color: rgba(0, 0, 0, 0.5) !important;
-	}
-}
-
 textarea {
 	border: none !important;
 	background-color: var(--post-textarea-background-color);
 	color: var(--post-textarea-color);
 	cursor: text;
+	caret-color: var(--post-textarea-caret-color);
 }
 
 @keyframes buttonAppear {

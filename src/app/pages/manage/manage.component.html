@@ -1,12 +1,12 @@
 <div class="container">
   <div class="header">
-    <h3>{{ form.get("collections").value ? "Collections" : "Resources" }}</h3>
+    <h3>Profile</h3>
     <div
       class="controls one-column"
       [formGroup]="form"
     >
       <!-- Search -->
-      <div
+      <!-- <div
         class="control search"
         [ngClass]="{
           'search-in-focus': isSearchFocused
@@ -22,7 +22,7 @@
           (focus)="searchFocusIn()"
           (focusout)="searchFocusOut()"
         />
-      </div>
+      </div> -->
 
       <!-- Filter -->
       <!-- <div class="control filter" #origin *ngIf="form.get('posts').value">
@@ -71,7 +71,7 @@
   </div>
 
   <div class="columns" *ngIf="!isLoading && userData">
-    <app-profile-summary [userData]="userData"></app-profile-summary>
+    <app-profile-summary [userData]="userData" (message)="doBoxAction($event)"></app-profile-summary>
     <div>
       <app-manage-resources
         [userData]="userData"

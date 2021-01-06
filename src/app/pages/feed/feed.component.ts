@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { faPlus, faLink, faFile } from '@fortawesome/free-solid-svg-icons';
 import { ResourceService } from '@services/resource/resource.service';
+import { MetaService } from '@ngx-meta/core';
 
 @Component({
   selector: 'app-feed',
@@ -9,14 +9,9 @@ import { ResourceService } from '@services/resource/resource.service';
 })
 export class FeedComponent implements OnInit {
   posts = [];
-  isFabActive = false;
+  isLoading = false;
   username: string;
   userId: string;
-
-  // Icons
-  faPlus = faPlus;
-  faLink = faLink;
-  faFile = faFile;
 
   // Infinite Scroll
   sum = 2;
@@ -28,25 +23,32 @@ export class FeedComponent implements OnInit {
   pageNo = 1;
   size = 3;
 
-  constructor(private resourceService: ResourceService) { }
+  constructor(private resourceService: ResourceService, private readonly meta: MetaService) { }
 
   async ngOnInit() {
     this.username = localStorage.getItem('username');
     this.userId = localStorage.getItem("userId");
     await this.getAllResources();
+
+    // * Set meta tags
+    this.meta.setTitle("Feed");
+    this.meta.setTag('og:description', "See what your friends are sharing");
   }
 
   async getAllResources() {
     try {
+      this.isLoading = true;
       const response: any = await this.resourceService.getAllResources({
         pageNo: this.pageNo,
         size: this.size,
         userId: this.userId
       });
-
-      for (const resource of response.resources) {
-        this.posts.push(resource);
+      if ('resources' in response) {
+        for (const resource of response.resources) {
+          this.posts.push(resource);
+        }
       }
+      this.isLoading = false;
     } catch (err) {
       console.error(err);
     }
@@ -64,5 +66,4 @@ export class FeedComponent implements OnInit {
     this.pageNo++;
     await this.getAllResources();
   }
-
 }

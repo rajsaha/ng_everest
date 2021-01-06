@@ -2,10 +2,20 @@
   
 </div> -->
 
-<div class="list-of-collections" *ngIf="!isLoading">
-  <app-collection *ngFor="let collection of collections" [data]="collection"></app-collection>
-</div>
+<div class="list-of-collections">
+  <!-- * No Data -->
+  <div *ngIf="collections && collections.length === 0 && !isLoading; then thenBlock else elseBlock">
 
-<div *ngIf="collections && collections.length === 0">
-  You haven't made a collection yet
+  </div>
+
+  <ng-template #thenBlock>
+    <app-empty-state [data]="{ type: 'collection', isSelf: userData.isSelf }"></app-empty-state>
+  </ng-template>
+
+  <ng-template #elseBlock>
+    <app-collection @fadeIn *ngFor="let collection of collections" [data]="collection"></app-collection>
+  </ng-template>
+
+  <!-- * Loading -->
+  <app-loading type="collection" *ngIf="isLoading"></app-loading>
 </div>

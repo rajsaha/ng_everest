@@ -7,9 +7,9 @@ import {
   faTimes,
   faFolderMinus,
   faEllipsisV,
-  faThumbsUp
+  faThumbsUp,
+  faComment
 } from "@fortawesome/free-solid-svg-icons";
-import * as moment from "moment";
 import { Router, ActivatedRoute } from "@angular/router";
 import { PopoverService } from '@services/popover/popover.service';
 import { ResourceOptionsComponent } from './resource-options/resource-options.component';
@@ -32,15 +32,13 @@ export class ResourceComponent implements OnInit {
   type: string;
   description: string;
   image = "";
-  timestamp: any;
   allComments = [];
   resourceUser: string;
   recommended_by_count: number;
+  commentCount: number;
   noImage = false;
   backgroundColor: string;
   textColor: string;
-  topText: string;
-  bottomText: string;
 
   // For permissions
   loggedInUser: string;
@@ -55,6 +53,7 @@ export class ResourceComponent implements OnInit {
   faFolderMinus = faFolderMinus;
   faEllipsesV = faEllipsisV;
   faThumbsUp = faThumbsUp;
+  faComment = faComment;
 
   // Toggles
   isLoading = false;
@@ -91,15 +90,16 @@ export class ResourceComponent implements OnInit {
     this.type = this.data.type;
     this.description = this.data.description;
     this.image = this.data.mdImage.link;
-    this.timestamp = moment(this.data.timestamp.$date).fromNow();
     this.recommended_by_count = this.data.recommended_by_count;
+
+    if (Number.isInteger(this.data.commentCount)) {
+      this.commentCount = this.data.commentCount;
+    } else if (this.data.commentCount instanceof Array) {
+      this.commentCount = this.data.commentCount.length;
+    }
     this.noImage = this.data.noImage;
     this.backgroundColor = this.data.backgroundColor;
     this.textColor = this.data.textColor;
-    let stringArray = this.title.split(" ");
-    let halfLength = Math.ceil(stringArray.length / 2);
-    this.topText = stringArray.splice(0, halfLength).join(" ");
-    this.bottomText = stringArray.join(" ");
     this.isLoading = false;
   }
 

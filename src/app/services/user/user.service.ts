@@ -6,7 +6,7 @@ import { environment as ENV } from "@environments/environment";
   providedIn: "root"
 })
 export class UserService {
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   getUserId(username: string) {
     const response = this.http
@@ -125,6 +125,27 @@ export class UserService {
   getFollowersFollowing(data: any) {
     const response = this.http
       .post(`${ENV.API_URL}/user/get-followers-following`, data)
+      .toPromise();
+    return response;
+  }
+
+  getUserInterests(data: any) {
+    const response = this.http
+      .post(`${ENV.API_URL}/user/get-user-interests`, data)
+      .toPromise();
+    return response;
+  }
+
+  setUserInterests(data: any) {
+    const response = this.http
+      .post(`${ENV.API_URL}/user/set-user-interests`, data)
+      .toPromise();
+    return response;
+  }
+
+  checkEmail(data: any) {
+    const response = this.http
+      .post(`${ENV.API_URL}/user/check-email`, data)
       .toPromise();
     return response;
   }

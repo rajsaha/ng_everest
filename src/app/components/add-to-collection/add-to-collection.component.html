@@ -1,33 +1,34 @@
 <h6>Add to Collection</h6>
 <form [formGroup]="atcForm">
   <div *ngIf="collections">
-    <mat-form-field appearance="fill">
-      <mat-label>Existing collections</mat-label>
-      <mat-select formControlName="collectionId" #collectionSelect>
-        <mat-option
-          *ngFor="let collection of collections"
-          [value]="collection._id"
-        >
-          {{ collection.title }}
-        </mat-option>
-      </mat-select>
-    </mat-form-field>
+    <div class="custom-input">
+      <div class="label-container">
+        <label>Existing collections</label>
+      </div>
+      <div class="input-container">
+        <mat-select formControlName="collectionId" #collectionSelect placeholder="Put it in a collection">
+          <mat-option
+            *ngFor="let collection of collections"
+            [value]="collection._id"
+          >
+            {{ collection.title }}
+          </mat-option>
+        </mat-select>
+      </div>
+    </div>
   </div>
   <div class="mat-checkbox-container">
     <mat-checkbox formControlName="newCollection"
       >Create new Collection</mat-checkbox
     >
   </div>
-  <mat-form-field
-    appearance="outline"
-    *ngIf="atcFormControls.newCollection.value"
-  >
-    <mat-label>Collection Name</mat-label>
-    <input
-      type="text"
-      matInput
-      placeholder="Name"
-      formControlName="collectionName"
-    />
-  </mat-form-field>
+
+  <div class="custom-input" *ngIf="atcFormControls.newCollection.value">
+    <div class="label-container">
+      <label>Collection Name</label>
+    </div>
+    <div class="input-container">
+      <input type="text" formControlName="collectionName" placeholder="Name" />
+    </div>
+  </div>
 </form>

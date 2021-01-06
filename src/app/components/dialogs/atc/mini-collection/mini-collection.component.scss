@@ -23,6 +23,12 @@
   border-radius: 5px;
 }
 
+%tick-mark {
+  align-self: center;
+  justify-self: center;
+  font-size: 14px;
+}
+
 .collection {
   border-radius: 5px;
   cursor: pointer;
@@ -61,6 +67,7 @@
       position: absolute;
       @extend %noImageBox;
       display: grid;
+      background-color: #dee8ff;
 
       span {
         align-self: center;
@@ -75,11 +82,17 @@
     margin: 0;
   }
 
-  .in-this-collection {
-    color: rgb(42, 190, 42);
+  .tick-container {
     align-self: center;
-    justify-self: center;
-    font-size: 20px;
+    .nitc {
+      color: var(--atc-nitc);
+      @extend %tick-mark;
+    }
+  
+    .itc {
+      color: rgb(42, 190, 42);
+      @extend %tick-mark;
+    }
   }
 }
 

@@ -10,8 +10,6 @@
 
 .resource {
   cursor: pointer;
-  width: 275px;
-  max-width: 300px;
   box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
   background-color: var(--resource-background-color);
   border-radius: 5px;
@@ -20,7 +18,6 @@
   position: relative;
   animation: fadeUp 0.2s ease-in-out;
   animation-fill-mode: forwards;
-  margin-bottom: 40px;
 
   &:hover {
     box-shadow: 0 2px 40px rgba(0, 0, 0, 0.2);
@@ -34,7 +31,6 @@
     span {
       align-self: center;
       font-size: 14px;
-      font-weight: 500;
       color: var(--resource-header-text-color);
     }
 
@@ -45,10 +41,8 @@
   }
 
   .image {
-    width: 275px;
-    height: 150px;
-    max-width: 300px;
-    max-height: 300px;
+    width: 100%;
+    height: 175px;
     object-fit: cover;
 
     &::before {
@@ -59,10 +53,15 @@
   }
 
   .details {
-    padding: 0 20px 20px 20px;
+    padding: 0 20px;
     color: var(--resource-details-text-color);
     font-size: 12px;
     line-height: 20px;
+    height: 100px;
+
+    p {
+      overflow-x: hidden;
+    }
 
     .type {
       margin-left: 0;
@@ -70,6 +69,9 @@
   }
 
   .stats {
+    display: inline-grid;
+    grid-template-columns: 50px 50px;
+    grid-gap: 15px;
     padding: 0 15px 15px 15px;
 
     .like {
@@ -92,14 +94,12 @@
 }
 
 .no-image-text {    
-  padding: 15px;
-  border-radius: 5px;
   display: grid;
   place-items: center;
   margin-bottom: 15px;
-  min-height: 150px;
+  height: 145px;
   max-width: 600px;
-  max-height: 400px;
+  padding: 15px;
 
   .text-container {
       p {

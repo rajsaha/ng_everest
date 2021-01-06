@@ -12,10 +12,6 @@ import { CollectionComponent } from 'src/app/components/collection/collection.co
 import { ViewCollectionComponent } from 'src/app/pages/view-collection/view-collection.component';
 import { RouterModule } from '@angular/router';
 import { MatButtonModule } from '@angular/material/button';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatIconModule } from '@angular/material/icon';
-import { MatInputModule } from '@angular/material/input';
-import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ViewResourceComponent } from 'src/app/pages/view-resource/view-resource.component';
 import { PostComponent } from 'src/app/components/post/post.component';
@@ -23,6 +19,8 @@ import { CommentComponent } from 'src/app/components/post/comment/comment.compon
 import { UserImageComponent } from 'src/app/components/user-image/user-image.component';
 import { ResourceNoImageComponent } from 'src/app/components/resource-no-image/resource-no-image.component';
 import { ColorPickerModule } from 'ngx-color-picker';
+import { EmptyStateComponent } from 'src/app/components/empty-state/empty-state.component';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @NgModule({
   declarations: [
@@ -37,7 +35,8 @@ import { ColorPickerModule } from 'ngx-color-picker';
     ViewCollectionComponent,
     ViewResourceComponent,
     UserImageComponent,
-    ResourceNoImageComponent
+    ResourceNoImageComponent,
+    EmptyStateComponent
   ],
   imports: [
     CommonModule,
@@ -46,9 +45,6 @@ import { ColorPickerModule } from 'ngx-color-picker';
     InfiniteScrollModule,
     RouterModule,
     MatButtonModule,
-    MatIconModule,
-    MatFormFieldModule,
-    MatInputModule,
     MatProgressSpinnerModule,
     ReactiveFormsModule,
     ColorPickerModule
@@ -68,7 +64,8 @@ import { ColorPickerModule } from 'ngx-color-picker';
     ViewResourceComponent,
     UserImageComponent,
     ResourceNoImageComponent,
-    ColorPickerModule
+    ColorPickerModule,
+    EmptyStateComponent
   ]
 })
 export class GeneralModule { }

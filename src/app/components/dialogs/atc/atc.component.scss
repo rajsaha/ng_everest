@@ -12,10 +12,6 @@ h6 {
   margin-bottom: 10px;
 }
 
-mat-form-field {
-  width: 100% !important;
-}
-
 .columns {
   display: grid;
   grid-template-columns: 1fr;
@@ -34,17 +30,16 @@ mat-form-field {
 
       .existing-collections {
         border-radius: 5px;
-        height: 225px;
-        max-height: 500px;
+        height: auto;
+        min-height: 85px;
+        max-height: 250px;
         margin-bottom: 45px;
-        overflow: hidden;
+        overflow-x: hidden;
+        overflow-y: auto;
         transition: max-height 0.15s ease-in-out;
         animation: fadeIn 0.2s ease-in-out;
         animation-fill-mode: forwards;
-
-        &:hover {
-          overflow-y: scroll;
-        }
+        position: relative;
 
         // width
         &::-webkit-scrollbar {
@@ -63,14 +58,6 @@ mat-form-field {
           &:hover {
             background: rgb(175, 87, 5);
           }
-        }
-
-        .loading {
-          display: grid;
-          justify-content: center;
-          align-content: center;
-          width: 100%;
-          height: 100px;
         }
 
         .no-collection {
@@ -124,12 +111,6 @@ mat-form-field {
     h4 {
       font-family: "Montserrat", sans-serif;
     }
-  }
-}
-
-.mat-form-field-appearance-outline {
-  .mat-form-field-outline {
-    box-shadow: none !important;
   }
 }
 

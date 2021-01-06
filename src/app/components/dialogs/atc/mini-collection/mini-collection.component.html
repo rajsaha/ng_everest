@@ -1,31 +1,25 @@
-<div
-  class="collection"
-  matRipple
-  [ngClass]="{
+<div (click)="toggleResourceFromCollection()" class="collection" matRipple [ngClass]="{
     'two-columns': !data.inThisCollection,
     'three-columns': data.inThisCollection
-  }"
->
-  <div
-    *ngIf="!data.resource1.noImage"
-    class="image"
-    [ngStyle]="{
+  }">
+  <div *ngIf="!showPlaceholder" class="image" [ngStyle]="{
       'background-image': 'url(' + image + ')'
-    }"
-  >
+    }">
     <div class="placeholder" *ngIf="showPlaceholder">
       <span>{{ placeholderText }}</span>
     </div>
   </div>
 
-  <div
-    *ngIf="data.resource1.noImage"
-    class="no-image"
-    [ngStyle]="{
+  <div *ngIf="showPlaceholder && hasResource" class="no-image" [ngStyle]="{
       'background-color': data.resource1.backgroundColor,
       'color': data.resource1.textColor
-    }"
-  >
+    }">
+    <div class="placeholder" *ngIf="showPlaceholder">
+      <span>{{ placeholderText }}</span>
+    </div>
+  </div>
+
+  <div *ngIf="showPlaceholder && !hasResource" class="no-image">
     <div class="placeholder" *ngIf="showPlaceholder">
       <span>{{ placeholderText }}</span>
     </div>
@@ -33,12 +27,15 @@
 
   <p>
     {{ data.title ? data.title : "Unset" }}
-    <!-- <span class="in-this-collection" *ngIf="data.inThisCollection.length > 0">
-      In this collection
-    </span> -->
   </p>
 
-  <div class="in-this-collection" *ngIf="data.inThisCollection.length > 0">
-    <fa-icon [icon]="faCheckCircle"></fa-icon>
+  <div class="tick-container">
+    <div class="itc" *ngIf="inThisCollection">
+      <fa-icon [icon]="faCheckCircle"></fa-icon>
+    </div>
+
+    <div class="nitc" *ngIf="!inThisCollection">
+      <fa-icon [icon]="faCheckCircle"></fa-icon>
+    </div>
   </div>
 </div>

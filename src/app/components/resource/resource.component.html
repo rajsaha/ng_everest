@@ -12,25 +12,21 @@
     [style.background]="backgroundColor"
   >
     <div class="text-container" [style.color]="textColor" (click)="goToView()">
-      <p>{{ topText }}</p>
-      <p>{{ bottomText }}</p>
+      <p>{{ title | truncate: [40] }}</p>
     </div>
   </div>
   <div class="details">
-    <!-- * Type -->
-    <div class="type" *ngIf="type === 'article'">
-      {{ type }}
-    </div>
-    <p  *ngIf="type === 'ext-content'">{{ description | truncate: [150] }}</p>
-    <div
-      *ngIf="type === 'article'"
-      [innerHtml]="description | truncate: [40]"
-    ></div>
+    <p  *ngIf="type === 'ext-content'">{{ description | truncate: [125] }}</p>
   </div>
   <div class="stats">
     <div class="like" [ngClass]="recommended_by_count > 0 ? 'is-liked' : ''">
       <fa-icon [icon]="faThumbsUp"></fa-icon>
       <span class="count">{{ recommended_by_count }}</span>
+    </div>
+
+    <div class="like" [ngClass]="commentCount > 0 ? 'is-liked' : ''">
+      <fa-icon [icon]="faComment"></fa-icon>
+      <span class="count">{{ commentCount }}</span>
     </div>
   </div>
 </div>

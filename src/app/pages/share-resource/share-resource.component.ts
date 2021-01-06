@@ -1,21 +1,16 @@
 import { Component, OnInit, ViewChild, ElementRef } from "@angular/core";
 import { Router } from "@angular/router";
 import { FormBuilder, Validators, FormGroup } from "@angular/forms";
-import { faUpload, faPlusCircle } from "@fortawesome/free-solid-svg-icons";
+import { faUpload, faPlusCircle, faImage } from "@fortawesome/free-solid-svg-icons";
 import { COMMA, ENTER } from "@angular/cdk/keycodes";
 import { MatChipInputEvent } from "@angular/material/chips";
 import { ValidationService } from "@services/forms/validation.service";
 import { ResourceService } from "@services/resource/resource.service";
 import { SnackbarService } from "@services/general/snackbar.service";
-import { CollectionService } from "@services/collection/collection.service";
 import { debounceTime } from "rxjs/operators";
-import { DomSanitizer } from "@angular/platform-browser";
 import { Observable } from "rxjs";
 import { select, Store } from "@ngrx/store";
-
-class ImageSnippet {
-  constructor(public src: string, public file: File) {}
-}
+import { MetaService } from '@ngx-meta/core';
 
 @Component({
   selector: "app-share-resource",
@@ -35,8 +30,10 @@ export class ShareResourceComponent implements OnInit {
   // Icons
   faUpload = faUpload;
   faPlusCircle = faPlusCircle;
+  faImage = faImage;
 
   // Toggles
+  isLoadingOG = false;
   isLoading = false;
   isDisabled = false;
 
@@ -49,9 +46,9 @@ export class ShareResourceComponent implements OnInit {
   addOnBlur = true;
 
   // Open graph variables
-  ogTitle: string;
-  ogDescription: string;
-  ogImage: string;
+  ogTitle = "";
+  ogDescription = "";
+  ogImage = "";
 
   // Store
   noImageComponentFormState$: Observable<boolean>;
@@ -61,10 +58,10 @@ export class ShareResourceComponent implements OnInit {
     private fb: FormBuilder,
     private validationService: ValidationService,
     private resourceService: ResourceService,
-    private collectionService: CollectionService,
     private snackbarService: SnackbarService,
     private router: Router,
-    private store: Store<{ noImageComponentFormState: any }>
+    private store: Store<{ noImageComponentFormState: any }>,
+    private readonly meta: MetaService
   ) {
     this.noImageComponentFormState$ = store.pipe(
       select("noImageComponentFormState")
@@ -72,6 +69,9 @@ export class ShareResourceComponent implements OnInit {
   }
 
   ngOnInit() {
+    // * Set meta tags
+    this.meta.setTitle("Share Resource");
+    this.meta.setTag('og:description', "Share a resource");
     this.username = localStorage.getItem("username");
     this.userId = localStorage.getItem("userId");
     this.initShareResourceForm();
@@ -86,7 +86,7 @@ export class ShareResourceComponent implements OnInit {
         isCustomImage: [false],
         noImage: [false],
         url: ["", Validators.required],
-        title: ["", [Validators.required]],
+        title: ["", [Validators.required, Validators.maxLength(250)]],
         description: ["", [Validators.required]],
         ogImage: [""],
         customImage: [""],
@@ -108,7 +108,7 @@ export class ShareResourceComponent implements OnInit {
 
     // Add our fruit
     if ((value || "").trim()) {
-      this.tags.push(value);
+      this.tags.push(value.toLocaleLowerCase());
     }
 
     // Reset the input value
@@ -126,6 +126,9 @@ export class ShareResourceComponent implements OnInit {
 
   async submitShareResourceForm() {
     if (!this.shareResourceForm.valid) {
+      this.shareResourceFormControls.url.markAsDirty();
+      this.shareResourceFormControls.title.markAsDirty();
+      this.shareResourceFormControls.description.markAsDirty();
       return;
     }
 
@@ -189,7 +192,7 @@ export class ShareResourceComponent implements OnInit {
     this.shareResourceForm.controls.url.valueChanges
       .pipe(debounceTime(1500))
       .subscribe(async (val) => {
-        this.isLoading = true;
+        this.isLoadingOG = true;
         this.shareResourceForm.get("title").disable;
         this.shareResourceForm.get("description").disable;
 
@@ -198,11 +201,11 @@ export class ShareResourceComponent implements OnInit {
             url: val,
           });
 
-          this.isLoading = false;
+          this.isLoadingOG = false;
           this.shareResourceForm.get("title").enable;
           this.shareResourceForm.get("description").enable;
 
-          if (!response) {
+          if (response.error) {
             this.snackbarService.openSnackBar({
               message: {
                 message: "No metadata returned!",
@@ -211,15 +214,21 @@ export class ShareResourceComponent implements OnInit {
               class: "red-snackbar",
             });
           } else {
-            this.ogTitle = response.message.data.data.ogTitle;
-            this.ogDescription = response.message.data.data.ogDescription;
+            if ('ogTitle' in response.data) {
+              this.ogTitle = response.data.ogTitle;
+            }
+
+            if ('ogDescription' in response.data) {
+              this.ogDescription = response.data.ogDescription;
+            }
+
             if (
-              Array.isArray(response.message.data.data.ogImage) &&
-              response.message.data.data.ogImage.length > 0
+              Array.isArray(response.data.ogImage) &&
+              response.ogImage.length > 0
             ) {
-              this.ogImage = response.message.data.data.ogImage[0].url;
+              this.ogImage = response.ogImage[0].url;
             } else {
-              this.ogImage = response.message.data.data.ogImage.url;
+              this.ogImage = response.data.ogImage.url;
             }
 
             this.shareResourceForm.controls.title.patchValue(this.ogTitle);
@@ -239,7 +248,7 @@ export class ShareResourceComponent implements OnInit {
             }
           }
         } else {
-          this.isLoading = false;
+          this.isLoadingOG = false;
           this.shareResourceForm.get("title").enable;
           this.shareResourceForm.get("description").enable;
         }
@@ -267,5 +276,17 @@ export class ShareResourceComponent implements OnInit {
       .subscribe((data: any) => {
         this.noImageData = data.noImageComponentState;
       });
+  }
+
+  regexTestOgImage(url: string) {
+    let regex = new RegExp(/(http(s?):)([/|.|\w|\s|-])*\.(?:jpg|jpeg|gif|png|webm)/);
+    let result = regex.test(url);
+    if (result) {
+      this.shareResourceForm.controls.noImage.patchValue(false);
+      return url;
+    }
+
+    this.shareResourceForm.controls.noImage.patchValue(true);
+    return "";
   }
 }

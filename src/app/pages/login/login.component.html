@@ -1,27 +1,44 @@
 <div class="form">
   <p class="form-title">Sign In</p>
-  <form [formGroup]="loginForm" (ngSubmit)="login()">
-    <mat-form-field appearance="outline">
-      <mat-label>Username</mat-label>
-      <input matInput formControlName="username" />
-      <mat-error *ngIf="loginFormControls.username.hasError('required') && loginFormControls.username.dirty">
+  <form [formGroup]="loginForm" (submit)="login()">
+    <div class="custom-input">
+      <div class="label-container">
+        <label>Username</label>
+      </div>
+      <div class="input-container">
+        <input type="text" formControlName="username" />
+      </div>
+      <p class="error-message"
+        *ngIf="loginFormControls.username.hasError('required') && loginFormControls.username.dirty">
         Please enter username
-      </mat-error>
-    </mat-form-field>
-    <mat-form-field appearance="outline">
-      <mat-label>Password</mat-label>
-      <input matInput type="password" formControlName="password" />
-      <mat-error *ngIf="loginFormControls.password.hasError('required') && loginFormControls.password.dirty">
+      </p>
+    </div>
+
+    <div class="custom-input">
+      <div class="label-container">
+        <label>Password</label>
+      </div>
+      <div class="input-container">
+        <input type="password" formControlName="password" />
+      </div>
+      <p class="error-message"
+        *ngIf="loginFormControls.password.hasError('required') && loginFormControls.password.dirty">
         Please enter password
-      </mat-error>
-    </mat-form-field>
-    <app-custom-button [buttonLabel]="loginButtonText" [isDisabled]="loggingIn" [isLoading]="loggingIn"></app-custom-button>
+      </p>
+
+      <div class="forgot-password" routerLink="/forgot-password">
+        Forgot Password?
+      </div>
+    </div>
+
+    <app-custom-button [buttonLabel]="loginButtonText" [isDisabled]="loggingIn" [isLoading]="loggingIn">
+    </app-custom-button>
   </form>
 </div>
 
-<div class="alternative">
+<div class="alternative" routerLink="/signup">
   <span>Not a member yet? Sign up here</span>
-  <div class="go-to-signup" routerLink="/signup" matRipple>
+  <div class="go-to-signup" matRipple>
     <fa-icon [icon]="faArrowRight"></fa-icon>
   </div>
 </div>

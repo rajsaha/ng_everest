@@ -1,15 +1,15 @@
 import { Component, OnInit } from "@angular/core";
-import { faExternalLinkAlt } from "@fortawesome/free-solid-svg-icons";
+import { faExternalLinkAlt, faUserFriends } from "@fortawesome/free-solid-svg-icons";
 import { COMMA, ENTER } from "@angular/cdk/keycodes";
-import { FormBuilder, FormGroup } from "@angular/forms";
+import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { UserService } from "@services/user/user.service";
 import { SnackbarService } from "@services/general/snackbar.service";
 import { MatChipInputEvent } from "@angular/material/chips";
 import { MatDialog } from "@angular/material/dialog";
 import { CpiComponent } from "src/app/components/dialogs/cpi/cpi.component";
-import { environment as ENV } from "@environments/environment";
 import { FfComponent } from "src/app/components/dialogs/ff/ff.component";
 import { ActivatedRoute, Router } from "@angular/router";
+import { debounceTime, distinctUntilChanged } from "rxjs/operators";
 
 @Component({
   selector: "app-edit-profile",
@@ -25,25 +25,24 @@ export class EditProfileComponent implements OnInit {
   website: string;
   bio: string;
   email: string;
-  followers = [];
-  following = [];
-  image = `${ENV.SITE_URL}/assets/images/portrait.jpg`;
+  followers = 0;
+  following = 0;
+  image: string;
   uploadedImage: string;
   imageId: string;
   deleteHash: string;
   interests = [];
-  defaultProfileImage = `${ENV.SITE_URL}/assets/images/portrait.jpg`;
   submitButtonText = "Save";
 
   // Toggles
   isLoading = false;
-  isProfileSaveButtonDisabled = false;
   isPublicView = true;
 
   profileProgress = 0;
 
   // Icons
   faExternalLinkAlt = faExternalLinkAlt;
+  faUserFriends = faUserFriends;
 
   readonly separatorKeysCodes: number[] = [ENTER, COMMA];
   visible = true;
@@ -68,38 +67,60 @@ export class EditProfileComponent implements OnInit {
 
     // Init Forms
     this.initProfileForm();
+    this.onEmailChange();
 
     // Get User Data
     await this.getUserData();
+    this.isPublicView = false;
   }
 
   initProfileForm() {
     this.profileForm = this.fb.group({
-      firstName: [""],
-      lastName: [""],
+      firstName: ["", Validators.required],
+      lastName: ["", Validators.required],
       username: [{ value: "", disabled: true }],
       website: [""],
       bio: [""],
-      email: [""]
+      email: ["", [Validators.required, Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$")]]
     });
+  }
+
+  onEmailChange() {
+    this.profileForm.controls.email.valueChanges.pipe(distinctUntilChanged(), debounceTime(300)).subscribe(async (val) => {
+      if (val && !this.profileFormControls.email.invalid) {
+        const result: any = await this.userService.checkEmail({ email: val });
+        
+        // * Email exists
+        if (result.data) {
+          // ! Email belongs to someone else
+          if (result.data._id !== this.userId) {
+            this.profileFormControls.email.setErrors({ canUseEmail: true });
+          } else {
+            this.profileFormControls.email.setErrors({ canUseEmail: null });
+            this.profileFormControls.email.updateValueAndValidity();
+          }
+        }
+      }
+    });
+  }
+
+  get profileFormControls() {
+    return this.profileForm.controls;
   }
 
   async getUserData() {
     this.isLoading = true;
     const res: any = await this.userService.getProfileData({ userId: this.userId });
 
-    this.isProfileSaveButtonDisabled = true;
     this.interests = res.userData.interests ? res.userData.interests : [];
-    this.followers = res.userData.followers ? res.userData.followers : [];
-    this.following = res.userData.following ? res.userData.following : [];
-    
-    if (res.userData.mdImage.link) {
-      this.image = res.userData.mdImage.link;
+    this.followers = res.userData.followerCount;
+    this.following = res.userData.followingCount;
+
+    if (res.userData.mdImage instanceof Object) {
+      this.image = res.userData.mdImage.link ? res.userData.mdImage.link : "";
       this.uploadedImage = res.userData.mdImage.link;
       this.imageId = res.userData.mdImage.id;
       this.deleteHash = res.userData.mdImage.deleteHash;
-    } else {
-      this.image = this.defaultProfileImage;
     }
 
     this.initFormData({
@@ -118,9 +139,6 @@ export class EditProfileComponent implements OnInit {
   }
 
   initFormData(data: any) {
-    this.isLoading = false;
-    this.isProfileSaveButtonDisabled = false;
-
     this.username = data.username;
     this.firstName = data.firstName;
     this.lastName = data.lastName;
@@ -140,15 +158,18 @@ export class EditProfileComponent implements OnInit {
   openCpiDialog() {
     const dialogRef = this.dialog.open(CpiComponent, {
       data: {
-        username: this.username
+        username: this.username,
+        firstName: this.firstName,
+        lastName: this.lastName,
+        image: this.image
       }
     });
 
     dialogRef.afterClosed().subscribe(async result => {
       if (result.newImage) {
-        this.image = result.image
-          ? result.image
-          : this.defaultProfileImage;
+        this.isLoading = true;
+        this.image = result.image;
+        this.isLoading = false;
       }
     });
   }
@@ -159,7 +180,7 @@ export class EditProfileComponent implements OnInit {
 
     // Add our fruit
     if ((value || "").trim()) {
-      this.interests.push(value);
+      this.interests.push(value.toLocaleLowerCase());
     }
 
     // Reset the input value
@@ -170,25 +191,8 @@ export class EditProfileComponent implements OnInit {
 
   async removeInterest(interest) {
     const index = this.interests.indexOf(interest);
-    const data = {
-      id: this.userId,
-      interest
-    };
-
-    const res: any = await this.userService.removeInterest(data);
-
-    if (res.error) {
-      this.snackbarService.openSnackBar({
-        message: {
-          message: "Something went wrong!",
-          error: true
-        },
-        class: "red-snackbar"
-      });
-    } else {
-      if (index >= 0) {
-        this.interests.splice(index, 1);
-      }
+    if (index >= 0) {
+      this.interests.splice(index, 1);
     }
   }
 
@@ -227,6 +231,13 @@ export class EditProfileComponent implements OnInit {
   }
 
   async saveProfileForm() {
+    if (this.profileForm.invalid) {
+      this.profileFormControls.firstName.markAsDirty();
+      this.profileFormControls.lastName.markAsDirty();
+      this.profileFormControls.email.markAsDirty();
+      return;
+    }
+
     const data = {
       id: this.userId,
       firstName: this.profileForm.controls.firstName.value,
@@ -256,7 +267,7 @@ export class EditProfileComponent implements OnInit {
     } else {
       this.snackbarService.openSnackBar({
         message: {
-          message: `Error: ${res.error}!`,
+          message: `Error: ${res.message}!`,
           error: true
         },
         class: "red-snackbar"

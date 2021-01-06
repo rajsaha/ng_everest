@@ -54,10 +54,11 @@
         .unfollow {
           @extend %follow-button-base;
           background-color: transparent;
-          color: #2d2d2d;
+          border: var(--profile-summary-unfollow-button-border);
+          color: var(--profile-summary-unfollow-button-color);
 
           &:hover {
-            border-color: #481a89;
+            border-color: var(--profile-summary-unfollow-button-border-color-hover);
           }
 
           &:active {
@@ -78,6 +79,7 @@
     padding: 15px 15px 15px 15px;
     border-bottom: 1px solid rgba(0, 0, 0, 0.1);
     .box {
+      cursor: pointer;
       border-radius: 5px;
       color: white;
       padding: 25px;
@@ -110,12 +112,13 @@
       grid-gap: -15px;
 
       .remaining-followers {
+        cursor: pointer;
         width: 35px;
         height: 35px;
         display: grid;
         border-radius: 50%;
         border: var(--profile-summary-remaining-followers-border);
-        background-color: aliceblue;
+        background-color: #ffefb3;
         transition: border 0.2s ease-in-out;
         color: var(--profile-summary-remaining-followers-color);
 
@@ -127,6 +130,7 @@
           place-self: center;
           font-family: "Montserrat", sans-serif;
           font-size: 0.6rem;
+          font-weight: 700;
         }
       }
     }

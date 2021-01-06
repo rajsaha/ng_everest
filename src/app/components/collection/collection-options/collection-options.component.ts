@@ -18,6 +18,9 @@ import { DcComponent } from '../../dialogs/dc/dc.component';
   styleUrls: ["./collection-options.component.scss"],
 })
 export class CollectionOptionsComponent implements OnInit {
+  username: string;
+  loggedInUser: string;
+
   // Icons
   faPlusCircle = faPlusCircle;
   faEdit = faEdit;
@@ -30,9 +33,12 @@ export class CollectionOptionsComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private dialog: MatDialog
-  ) {}
+  ) { }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.username = this.popoverRef.data.collectionData.username;
+    this.loggedInUser = localStorage.getItem("username");
+  }
 
   openEditCollectionDialog() {
     const dialogRef = this.dialog.open(EditCollectionComponent, {
@@ -45,7 +51,7 @@ export class CollectionOptionsComponent implements OnInit {
 
     this.close();
 
-    dialogRef.afterClosed().subscribe(async (result: any) => {});
+    dialogRef.afterClosed().subscribe(async (result: any) => { });
   }
 
   openDeleteCollectionDialog() {
@@ -57,7 +63,23 @@ export class CollectionOptionsComponent implements OnInit {
 
     this.close();
 
-    dialogRef.afterClosed().subscribe(async (result: any) => {});
+    dialogRef.afterClosed().subscribe(async (result: any) => { });
+  }
+
+  goToCollection() {
+    this.close();
+    this.router.navigate(
+      [`/profile/user/${this.username}/collection/${this.popoverRef.data.collectionData._id}`],
+      { relativeTo: this.route.parent }
+    );
+  }
+
+  goToShareResource() {
+    this.close();
+    this.router.navigate(
+      [`/share-resource`],
+      { relativeTo: this.route.parent, queryParams: { collectionId: this.popoverRef.data.collectionData._id } }
+    );
   }
 
   close() {

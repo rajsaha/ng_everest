@@ -1,51 +1,81 @@
+.mat-toolbar-box-shadow {
+	box-shadow: 0 2px 16px rgba(167, 104, 104, 0.1);
+}
+
 .app-container {
-	background-color: #dee8ff;
-	display: flex;
-	flex-direction: column;
-	position: absolute;
-	top: 0;
-	bottom: 0;
-	left: 0;
-	right: 0;
+	background-color: var(--mat-drawer-content-color);
+	display: grid;
 	overflow-x: hidden;
 	width: 100%;
+	min-height: 100%;
 	height: 100%;
-
-	h1 {
-		.app-name {
-			margin-left: 8px;
-		}
-	}
+	grid-template-columns: auto;
+	grid-template-rows: 56px;
 
 	.toolbar {
+		width: 100%;
 		display: inline-grid;
-		grid-template-columns: 50px auto 20px;
-		background-color: var(--navigation-background-color);
-		box-shadow: 0 2px 16px rgba(167, 104, 104, 0.1);
+		grid-template-columns: 1fr 1fr;
 		z-index: 100;
 		position: relative;
+		align-content: center;
 
-		.app-name {
-			display: none;
+		.left {
+			display: grid;
+			grid-template-columns: 40px 1fr;
+			grid-template-rows: 42px;
+			grid-gap: 5px;
 
-			a {
-				color: #3C3C3C;
-				font-family: "Raleway", sans-serif;
-				font-weight: 200;
-				text-transform: uppercase;
-				letter-spacing: 8px;
+			.burger-menu {
+				font-size: 20px;
+			}
+
+			.branding-container {
 				text-decoration: none;
+				display: inline-grid;
 
 				&:visited {
 					color: inherit;
 				}
+
+				.app-name {
+					align-self: center;
+					margin-top: -4px;
+
+					img {
+						width: 100%;
+						max-width: 125px;
+					}
+				}
 			}
 		}
 
-		.app-search {
-			width: 100%;
-			justify-self: center;
+		.right {
+			display: inline-grid;
 			align-self: center;
+			align-content: center;
+			align-items: center;
+			grid-template-columns: 35px 35px;
+			justify-content: center;
+			justify-self: end;
+			justify-items: center;
+			grid-gap: 10px;
+
+			.app-search {
+				cursor: pointer;
+				text-align: center;
+			}
+
+			.share-resource {
+				cursor: pointer;
+				width: 35px;
+				height: 35px;
+				text-align: center;
+				border-radius: 50%;
+				fa-icon {
+					font-size: 14px;
+				}
+			}
 		}
 	}
 
@@ -72,13 +102,34 @@
 	.sidenav-container {
 		flex: 1;
 
-		.app-name {
-			font-family: "Raleway", sans-serif;
-			font-weight: 200;
-			text-transform: uppercase;
-			letter-spacing: 10px;
-			text-decoration: none;
-			display: none;
+		h4 {
+			font-size: 14px;
+		}
+
+		a {
+			font-size: 14px;
+			transition: all 0.3s ease-in-out;
+			margin-bottom: 15px;
+
+			&:hover {
+				background-color: rgba(0,0,0,.1);
+				border-radius: 5px;
+				padding-left: 10px;
+			}
+		}
+
+		.dark-theme-toggle {
+			display: grid;
+			grid-template-columns: 1fr 1fr;
+			p {
+				margin: 0;
+				font-size: 14px;
+				align-self: center;
+			}
+
+			mat-slide-toggle {
+				justify-self: end;
+			}
 		}
 	}
 
@@ -91,38 +142,45 @@
 	}
 }
 
-.thick-border {
-	border: 1px solid rgba(0, 0, 0, 1) !important;
-}
-
-@media (min-width: 320px) and (max-width: 420px) {
+@media (min-width: 600px) {
 	.app-container {
-		.toolbar {
-			.app-search {
-				width: 10rem;
-			}
-		}
+		grid-template-rows: 64px;
 	}
 }
 
 @media (min-width: 768px) {
 	.app-container {
-		.sidenav-container {
-			.app-name {
-				display: none;
-			}
-		}
-
 		.toolbar {
-			grid-template-columns: 50px 1fr 180px 70px;
+			grid-template-columns: 1fr 1fr;
 
-			.app-name {
-				display: inherit;
+			.left {
+				.burger-menu {
+					font-size: 24px;
+				}
+
+				.branding-container {
+					.app-name {
+						margin-top: 0;
+						p {
+							display: inherit;
+							font-size: inherit;
+						}
+					}
+				}
 			}
 
-			.app-search {
-				width: 15rem;
-				grid-column-start: auto;
+			.right {
+				grid-template-columns: 1fr 50px;
+				
+				.app-search {
+					margin-right: 15px;
+				}
+
+				.share-resource {
+					fa-icon {
+						font-size: 1rem;
+					}
+				}
 			}
 		}
 	}

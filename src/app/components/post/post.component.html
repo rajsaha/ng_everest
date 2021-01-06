@@ -1,11 +1,6 @@
 <div class="post" *ngIf="!isLoading" #origin>
   <!-- * Header -->
   <div class="header">
-    <!-- <div
-      class="user-image"
-      [routerLink]="['/profile/user', username]"
-      [ngStyle]="{ 'background-image': 'url(' + userImage + ')' }"
-    ></div> -->
     <app-user-image
       [userData]="{
         image: userImage[0],
@@ -47,7 +42,7 @@
   <div
     class="title"
     [ngStyle]="{
-      'grid-template-columns': isInCollection ? '1fr 45px' : '1fr 106px'
+      'grid-template-columns': isInCollection ? '1fr 45px' : '1fr 60px'
     }"
   >
     <strong>{{ title }}</strong>
@@ -57,7 +52,7 @@
       matRipple
       (click)="openCollectionsDialog()"
     >
-      <fa-icon [icon]="faPlus"></fa-icon> Add to Collection
+      <fa-icon [icon]="faPlus"></fa-icon> Collect
     </div>
 
     <div class="collection-badge-true-parent">
@@ -94,16 +89,7 @@
     <p>
       {{ description | truncate: [truncateValue] }}
     </p>
-    <span *ngIf="isSeeMore" (click)="seeMore()" class="see-more">See More</span>
-  </div>
-
-  <!-- * Description (Post) -->
-  <div class="description" *ngIf="type === 'article'">
-    <div [innerHTML]="description | truncate: [truncateValue]"></div>
-    <!-- <p>
-      {{ description | truncate:[truncateValue] }}
-    </p> -->
-    <span *ngIf="isSeeMore" (click)="seeMore()" class="see-more">See More</span>
+    <span *ngIf="isSeeMore" (click)="seeMore()" class="see-more-description">See More</span>
   </div>
 
   <!-- * Controls -->

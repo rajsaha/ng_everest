@@ -1,0 +1,99 @@
+<div class="parent">
+    <!-- * Interests -->
+    <div class="interests" *ngIf="!showEditInterests">
+        <h6>Your Interests</h6>
+        <!-- <p *ngIf="interests.length === 0">You haven't set any interests.</p> -->
+        <div class="list-of-interests" *ngIf="interests">
+            <p *ngFor="let interest of interests">
+                {{ interest }}
+            </p>
+            <p (click)="addMore()" [ngStyle]="{ 'color': isAddMore ? '#8a8a8a' : 'inherit' }">
+                <fa-icon [icon]="faPlus"></fa-icon>
+            </p>
+        </div>
+    </div>
+
+    <div class="user-interests-container" *ngIf="isAddMore">
+        <div class="custom-input">
+            <div class="label-container">
+                <label>Interests</label>
+            </div>
+            <div class="input-container" [formGroup]="form">
+                <mat-chip-list #chipList aria-label="Interest selection">
+                    <mat-chip *ngFor="let interest of interests" [selectable]="selectable" [removable]="removable"
+                        (removed)="removeInterest(interest)">
+                        {{ interest }}
+                        <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+                    </mat-chip>
+                    <input formControlName="interests" placeholder="Add an Interest" [matChipInputFor]="chipList"
+                        [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                        (matChipInputTokenEnd)="addInterest($event)" [matAutocomplete]="auto" />
+                    <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selectInterest($event)">
+                        <mat-option *ngFor="let item of options" [value]="item">
+                            {{ item }}
+                        </mat-option>
+                    </mat-autocomplete>
+                </mat-chip-list>
+            </div>
+        </div>
+
+        <div class="buttons-container">
+            <div class="inner">
+                <button mat-stroked-button (click)="cancel()">Cancel</button>
+                <button mat-flat-button color="primary" (click)="save()" cdkFocusInitial
+                    [disabled]="isLoading || interests.length === 0">
+                    <div class="mat-dialog-button-with-spinner">
+                        <mat-progress-spinner *ngIf="isLoading" color="accent" mode="indeterminate" value="50"
+                            diameter="15">
+                        </mat-progress-spinner>
+                        <span>{{ isDisabled ? 'Saving' : 'Save' }}</span>
+                    </div>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div class="user-interests-container" *ngIf="showEditInterests">
+        <div class="text-container">
+            <h1>{{ headerText }}</h1>
+            <small>Your 'interests' determine what you see in 'Explore'</small>
+        </div>
+        <div class="custom-input">
+            <div class="label-container">
+                <label>Interests</label>
+            </div>
+            <div class="input-container" [formGroup]="form">
+                <mat-chip-list #chipList aria-label="Interest selection">
+                    <mat-chip *ngFor="let interest of interests" [selectable]="selectable" [removable]="removable"
+                        (removed)="removeInterest(interest)">
+                        {{ interest }}
+                        <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+                    </mat-chip>
+                    <input formControlName="interests" placeholder="Add an Interest" [matChipInputFor]="chipList"
+                        [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                        (matChipInputTokenEnd)="addInterest($event)" [matAutocomplete]="auto" />
+                    <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selectInterest($event)">
+                        <mat-option *ngFor="let item of options" [value]="item">
+                            {{ item }}
+                        </mat-option>
+                    </mat-autocomplete>
+                </mat-chip-list>
+            </div>
+        </div>
+
+        <div class="buttons-container">
+            <div class="inner">
+                <button mat-flat-button color="primary" (click)="save()" cdkFocusInitial
+                    [disabled]="isLoading || interests.length === 0">
+                    <div class="mat-dialog-button-with-spinner">
+                        <mat-progress-spinner *ngIf="isLoading" color="accent" mode="indeterminate" value="50"
+                            diameter="15">
+                        </mat-progress-spinner>
+                        <span>{{ isDisabled ? 'Saving' : 'Save' }}</span>
+                    </div>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="general-divider" *ngIf="showEditInterests"></div>

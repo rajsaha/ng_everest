@@ -93,9 +93,9 @@ export class PopoverService {
         overlayY: "top"
       },
       {
-        originX: "center",
+        originX: "end",
         originY: "top",
-        overlayX: "center",
+        overlayX: "end",
         overlayY: "top"
       }
     ];

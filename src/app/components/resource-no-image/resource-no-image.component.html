@@ -10,25 +10,6 @@
   </div>
 
   <div class="controls" *ngIf="mode === 'edit'">
-    <!-- <div class="control">
-      <mat-form-field appearance="outline">
-        <mat-label>Presets</mat-label>
-        <mat-select (selectionChange)="setPreset($event)" formControlName="presetSelect">
-          <mat-option [value]="item" *ngFor="let item of presets">
-            <div class="preset">
-              <div
-                class="preview"
-                [style.background-color]="item.backgroundColor"
-                [style.color]="item.textColor"
-              >
-              </div>
-              <div class="text">{{ item.text }}</div>
-            </div>
-          </mat-option>
-        </mat-select>
-      </mat-form-field>
-    </div> -->
-
     <div class="control p-top-5">
       <mat-label>Background Color</mat-label>
       <div class="input-container">
@@ -50,6 +31,7 @@
           [colorPicker]="form.get('textColor').value"
           [value]="form.get('textColor').value"
           (colorPickerChange)="form.get('textColor').setValue($event)"
+          cpPosition="bottom"
           [style.background]="form.get('textColor').value"
         />
       </div>
