@@ -2,6 +2,8 @@
 
 Everest is a social network lite that's all about resource aggregation. It lets you share and collect stuff off the net.
 
+[Backend Repo](https://github.com/rajsaha/ng_everest_backend)
+
 ---
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.3.8.
