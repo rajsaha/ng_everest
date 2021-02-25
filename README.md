@@ -1,10 +1,16 @@
-# Everest
+![alt text](./src/assets/images/everest-logo.svg "Everest Logo")
+
+Everest is a social network lite that's all about resource aggregation. It lets you share and collect stuff off the net.
+
+[Backend Repo](https://github.com/rajsaha/ng_everest_backend)
+
+---
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.3.8.
 
 ## Development server
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+Run `ng serve` for a dev server. Navigate to `http://localhost:4444/`. The app will automatically reload if you change any of the source files.
 
 ## Code scaffolding
 
